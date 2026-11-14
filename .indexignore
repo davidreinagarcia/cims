@@ -1,0 +1,4 @@
+# Folders gen-index.mjs skips (no INDEX.md, no summary rules, no link check).
+# Raw uploads that are not part of the app go here, one folder per line.
+KendedaMaps      # reference images from the Kendeda building
+PortfolioPrompt  # prompt drafts for another project (BuzzPrint)
