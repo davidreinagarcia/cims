@@ -23,7 +23,7 @@ main() {
   local DYN="${CIMS_TRAEFIK_DYNAMIC:-/opt/docker/infra/traefik/dynamic}"
   local DOMAIN="queenalexandria.online"
   local RESERVED=" branches cims www auth "
-  mkdir -p "$WT" "$STATE" "$PREVIEWS" "$WEB_ROOT"
+  mkdir -p "$WT" "$STATE" "$PREVIEWS/branches" "$WEB_ROOT"
 
   exec 9>/tmp/cims-deploy.lock
   flock -n 9 || exit 0
