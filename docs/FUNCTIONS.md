@@ -18,26 +18,26 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Shared helpers (`src/lib`, `src/state`, `src/hooks`): reuse these first
 
-- `places` [src/lib/places.ts:7](../src/lib/places.ts#L7)
+- `places` [src/lib/places.ts:11](../src/lib/places.ts#L11): The places loaded from src/data/places.json.
 
 ### Types & contracts
 
-- `PlaceFeature` [src/lib/places.ts:4](../src/lib/places.ts#L4)
-- `PlaceCollection` [src/lib/places.ts:5](../src/lib/places.ts#L5)
-- `Category` [src/types.ts:1](../src/types.ts#L1)
-- `PlaceProperties` [src/types.ts:9](../src/types.ts#L9)
+- `PlaceFeature` [src/lib/places.ts:6](../src/lib/places.ts#L6): One place as a GeoJSON point feature.
+- `PlaceCollection` [src/lib/places.ts:8](../src/lib/places.ts#L8): All places as a GeoJSON feature collection.
+- `Category` [src/types.ts:3](../src/types.ts#L3): Kinds of place the map can show.
+- `PlaceProperties` [src/types.ts:12](../src/types.ts#L12): Properties of a place feature in src/data/places.json.
 
 ### Components
 
-- `App()` [src/App.tsx:5](../src/App.tsx#L5)
-- `MapView({ selectedId, onSelect })` [src/components/MapView.tsx:11](../src/components/MapView.tsx#L11)
-- `Sidebar({ selectedId, onSelect })` [src/components/Sidebar.tsx:9](../src/components/Sidebar.tsx#L9)
+- `App()` [src/App.tsx:7](../src/App.tsx#L7): Root component: sidebar plus map sharing one selection.
+- `MapView({ selectedId, onSelect })` [src/components/MapView.tsx:13](../src/components/MapView.tsx#L13): The interactive map; reports clicks on markers through onSelect.
+- `Sidebar({ selectedId, onSelect })` [src/components/Sidebar.tsx:11](../src/components/Sidebar.tsx#L11): Left panel with search box, selected-place card and the place list.
 
 ### Other exported functions & constants
 
 - `CAMPUS` [src/config.ts:2](../src/config.ts#L2): Central place for map settings. Change here, not inside components.
 - `TILE_URL` [src/config.ts:15](../src/config.ts#L15): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
-- `TILE_ATTRIBUTION` [src/config.ts:16](../src/config.ts#L16)
+- `TILE_ATTRIBUTION` [src/config.ts:17](../src/config.ts#L17): Attribution text OSM requires next to the tiles.
 
 ### Possible duplicates
 

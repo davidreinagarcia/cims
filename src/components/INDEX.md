@@ -6,7 +6,7 @@ React components for the current UI (map view, sidebar). T-01 moves these into `
 
 **Files**
 
-- [`MapView.tsx`](MapView.tsx): _no summary_ · exports `MapView`
-- [`Sidebar.tsx`](Sidebar.tsx): _no summary_ · exports `Sidebar`
+- [`MapView.tsx`](MapView.tsx): MapLibre map: draws place markers and labels, flies to the selected place. · exports `MapView`
+- [`Sidebar.tsx`](Sidebar.tsx): Sidebar: place search, detail card and list of places. · exports `Sidebar`
 
 <!-- AUTO:END -->

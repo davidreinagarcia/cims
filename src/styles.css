@@ -1,3 +1,4 @@
+/** @file Global styles: Georgia Tech navy and gold, layout of sidebar and map. */
 :root { --navy: #003057; --gold: #b3a369; --bg: #f6f4ee; --ink: #1c2733; }
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; margin: 0; }

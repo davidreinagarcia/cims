@@ -7,6 +7,6 @@ Auto-deploy of `main` to the live site on Alexandria (cron + Docker build + rsyn
 **Files**
 
 - [`README.md`](README.md): How Alexandria auto-deploys main (cron, Docker build, rsync, logs).
-- [`deploy.sh`](deploy.sh): Auto-deploy for Alexandria. Run from cron every minute.
+- [`deploy.sh`](deploy.sh): Auto-deploy for Alexandria. Run from cron every minute (see deploy/README.md).
 
 <!-- AUTO:END -->

@@ -1,3 +1,4 @@
+/** @file MapLibre map: draws place markers and labels, flies to the selected place. */
 import { useEffect, useRef } from "react";
 import maplibregl from "maplibre-gl";
 import { CAMPUS, TILE_ATTRIBUTION, TILE_URL } from "../config";
@@ -8,6 +9,7 @@ interface Props {
   onSelect: (id: string | null) => void;
 }
 
+/** The interactive map; reports clicks on markers through onSelect. */
 export default function MapView({ selectedId, onSelect }: Props) {
   const container = useRef<HTMLDivElement>(null);
   const mapRef = useRef<maplibregl.Map | null>(null);

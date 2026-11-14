@@ -12,10 +12,10 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 
 **Files**
 
-- [`App.tsx`](App.tsx): _no summary_ · exports `App`
+- [`App.tsx`](App.tsx): App shell: holds the selected place and wires the sidebar to the map. · exports `App`
 - [`config.ts`](config.ts): Central place for map settings. Change here, not inside components. · exports `CAMPUS`, `TILE_URL`, `TILE_ATTRIBUTION`
-- [`main.tsx`](main.tsx): _no summary_
-- [`styles.css`](styles.css): _no summary_
-- [`types.ts`](types.ts): _no summary_
+- [`main.tsx`](main.tsx): Entry point: mounts React and loads global styles.
+- [`styles.css`](styles.css): * @file Global styles: Georgia Tech navy and gold, layout of sidebar and map.
+- [`types.ts`](types.ts): Shared types for places shown on the map.
 
 <!-- AUTO:END -->

@@ -1,3 +1,4 @@
+/** @file Entry point: mounts React and loads global styles. */
 import React from "react";
 import { createRoot } from "react-dom/client";
 import "maplibre-gl/dist/maplibre-gl.css";

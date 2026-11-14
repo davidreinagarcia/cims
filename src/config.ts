@@ -13,4 +13,5 @@ export const CAMPUS = {
 // Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon;
 // swap for MapTiler/Mapbox/self-hosted vector tiles if traffic grows.
 export const TILE_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
+/** Attribution text OSM requires next to the tiles. */
 export const TILE_ATTRIBUTION = "© OpenStreetMap contributors";

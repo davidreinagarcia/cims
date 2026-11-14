@@ -6,6 +6,6 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 
 **Files**
 
-- [`places.ts`](places.ts): _no summary_ · exports `places`
+- [`places.ts`](places.ts): Typed access to the places GeoJSON in src/data/. · exports `places`
 
 <!-- AUTO:END -->
