@@ -1,0 +1,57 @@
+# Project: BuzzPrint (Georgia Tech Campus Action & Proof-of-Work Network)
+
+## Overview & Core Concept
+Build a responsive, web-first campus platform called **BuzzPrint** for Georgia Tech ("See what's happening on campus right now. Leave your BuzzPrint.")[cite: 1]. Instead of a passive campus directory, BuzzPrint is a live, spatial ecosystem connecting students, campus spaces, and alumni through real-time action and verified "Proof-of-Work" portfolios[cite: 1].
+
+We are building a polished, interactive vertical slice centered around **The Kendeda Building for Innovative Sustainable Design** (422 Ferst Dr NW, Atlanta, GA) for a pitch competition demo.
+
+---
+
+## Architecture & UI Layout (Strict 3-Column Desktop / Responsive Mobile)
+Use a clean, modern tech-forward UI (Georgia Tech Navy `#003057`, Tech Gold `#B3A369`, crisp white/slate cards, subtle shadows). Organize the main dashboard into **3 primary columns**:
+
+### 1. Left Column: Interactive Campus & Building Map
+- **Map View:** Interactive 2D/isometric campus map centered on **The Kendeda Building** (with nearby Eco-Commons and Instructional Center context).
+- **Layer Toggles (Top Bar):**
+  1. `Live Beacons & Bounties` (Study groups, club events, skill requests)
+  2. `Spaces & Crowd Density` (Floor-by-floor room availability & capacity)[cite: 2]
+  3. `Maintenance Triage` (Active facility/IT pins)[cite: 2]
+  4. `Built Here (BuzzPrint History)` (Verified student projects/milestones completed in the building)[cite: 2]
+- **Skill Filter Bar:** Allow alumni/recruiters or students to filter map pins and student builders by skill tags (e.g., `Python`, `CAD / 3D Printing`, `React`, `Sustainability`, `UI/UX`)[cite: 2].
+
+### 2. Middle Column: Action Dashboard & BuzzPrint Portfolio
+Include a clean tab switcher at the top of the middle column:
+- **Tab 1: Live Feed (Beacons, Bounties & Events)**
+  - Filterable feed of active study beacons (e.g., *"Working on CS 3510 Algo at Atrium North Table — 2 seats open"*), club meetups, and micro-bounties (e.g., *"SOS Club needs a Figma designer for Earth Day graphics"*)[cite: 2].
+  - **"Drop a Pin / Post Bounty" Button:** Opens a quick modal to drop a new beacon or bounty at a specific Kendeda floor/room with skill tags.
+  - **"Claim / Complete" Flow:** Clicking "Complete & Verify" on a bounty triggers a 1-click verification toast and immediately logs that item into the active user's **BuzzPrint Portfolio**[cite: 2].
+- **Tab 2: My BuzzPrint (Proof-of-Work Portfolio)**
+  - Auto-generated visual record of the user's GT campus involvement (tied to simulated GT SSO login)[cite: 1].
+  - **Stats Header:** Total BuzzPrint Score, Buildings Frequented, Bounties Completed, Maintenance Fixes Verified.
+  - **Verified Work Cards:** Displays completed projects, study milestones, and resolved tickets with location badges (`@ Kendeda Building`), skill tags, and verifier stamps (e.g., *"Verified by Students Organizing for Sustainability"*).
+- **Tab 3: Smart Maintenance Reporter**
+  - Single-entry form: Upload/select photo, auto-tagged GPS coordinates + building/floor selector, issue description, and category (or an `"I have no idea — broadcast to ops"` button).
+  - **5-Meter Auto-Merge Logic:** Simulate proximity detection! If a user submits a ticket within 5 meters of an existing active ticket (e.g., a broken water bottle refill sensor on Kendeda Floor 1), automatically merge it into the existing ticket, increment the `Report Count` badge, and show a confirmation banner instead of creating a duplicate.
+
+### 3. Right Column: Contextual Deep-Dive Drawer
+Dynamically updates based on what the user clicks in the Left or Middle column:
+- **Default / Building View (Kendeda Building):**
+  - Header with Kendeda Building photo, Living Building Challenge 3.1 badge, operating hours, BuzzCard access status, and live floor-by-floor crowd density meters (`Basement: Quiet 15%`, `Floor 1 Atrium: Lively 65%`, `Floor 2 Study Rooms: Moderate 40%`, `Rooftop Garden: Open 20%`).
+  - **Upgraded Room Reservations:** List of Kendeda spaces (`Atrium Open Tables`, `Breakout Room 212`, `Seminar Room 230`, `Rooftop Terrace`) showing real room preview photos, exact seating capacity, outlet density, whiteboard/AV specs, noise/privacy level, and a 1-click **Reserve Slot** button[cite: 2].
+  - **Active Builders & Alumni Bridge:** Shows students currently checked into Kendeda beacons and a "Scout Talent" preview showing how alumni/founders view verified student builders[cite: 2].
+- **Profile / Pin Detail View:** Clicking any user or bounty opens their full **BuzzPrint** card or bounty details with a direct "Connect / Message" action[cite: 2].
+
+---
+
+## Pre-Seeded Mock Data Requirements (Kendeda Vertical Slice)
+Populate the app with realistic Georgia Tech data so the demo feels 100% alive on load[cite: 2]:
+1. **Kendeda Building Spaces (4–5 rooms):** Include Floor 1 Atrium, Room 210, Breakout Room 212, and Rooftop Solar Canopy Terrace with realistic capacities, AV/outlet metadata, and image placeholders mapped to our local assets folder (`/assets/kendeda/...`).
+2. **Active Beacons & Bounties (6–8 items):** Mix of CS/Engineering study groups, sustainability club bounties, and research sensor testing in Kendeda.
+3. **Sample Student & Alumni Profiles (4 profiles):** Include the logged-in demo student (e.g., *Jordan Lee, CS '27*), 2 peer builders in Kendeda, and 1 GT Alum / Atlanta Founder scouting for `React` and `Sustainability` talent[cite: 2].
+4. **Pre-existing Maintenance Tickets (2 tickets):** Include an active ticket on Kendeda Floor 1 (e.g., *"Cistern water refill station sensor blinking red — 3 reports merged"*) so we can demonstrate the **5-meter duplicate merge** live on stage.
+
+---
+
+## Technical Preferences
+- Build as a clean, fast single-page web application (React + Tailwind CSS + Lucide icons) with local state/mock database so zero external API keys are required during the live pitch[cite: 2].
+- Ensure all state changes (claiming a bounty, reserving a room, submitting/merging a maintenance ticket, updating the BuzzPrint portfolio) persist smoothly during the session[cite: 2].
