@@ -3,6 +3,9 @@ import { useEffect, useRef } from "react";
 import maplibregl from "maplibre-gl";
 import { CAMPUS } from "../config";
 import { baseStyle } from "../map/baseStyle";
+import { NorthArrow } from "../map/furniture/NorthArrow";
+import { ScaleBox } from "../map/furniture/ScaleBox";
+import { ViewToggle } from "../map/furniture/ViewToggle";
 import { loadLayers } from "../map/loadLayers";
 import type { LayerHandle } from "../map/types";
 import { useLayerFilters } from "../state/layerFilters";
@@ -22,10 +25,15 @@ export default function MapView() {
       container: container.current!,
       center: CAMPUS.center,
       zoom: CAMPUS.zoom,
+      pitch: CAMPUS.pitch,
+      bearing: CAMPUS.bearing,
       maxBounds: CAMPUS.bounds,
       style: baseStyle,
     });
     map.addControl(new maplibregl.NavigationControl(), "top-right");
+    map.addControl(new ViewToggle(), "top-right");
+    map.addControl(new ScaleBox(), "bottom-right");
+    map.addControl(new NorthArrow(), "bottom-left");
 
     // style.load (not "load") so layers appear without waiting for every tile.
     map.on("style.load", () => {
