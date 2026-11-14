@@ -16,7 +16,7 @@ src/
     baseStyle.ts       base style (OSM raster tiles + glyphs); swap for a vector basemap here
     loadLayers.ts      finds every file in layers/ automatically (import.meta.glob)
     layers/
-      pois.ts          places: survey pins, labels (zoom 16+), gold selected pin, fly-to on select
+      pois.ts          places: filtered clusters and shared-location picker, survey pins/labels, independent gold selection
   components/
     MapView.tsx        host: creates the map, loads layers, passes them the selection
     Sidebar.tsx(+css)  shell: header + panels
