@@ -1,3 +1,4 @@
+/** @file Campus map settings and the base URL for correction issues. */
 // Central place for map settings. Change here, not inside components.
 export const CAMPUS = {
   name: "Georgia Tech",
@@ -15,3 +16,6 @@ export const CAMPUS = {
 export const TILE_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
 /** Attribution text OSM requires next to the tiles. */
 export const TILE_ATTRIBUTION = "© OpenStreetMap contributors";
+
+/** Base URL for prefilled place correction issues. */
+export const CORRECTION_URL = "https://github.com/davidreinagarcia/cims/issues/new";

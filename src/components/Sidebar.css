@@ -1,9 +1,10 @@
 /** @file Layout of the sidebar column. Header look comes from .cims-header (styles/cims-ui.css). */
-.sidebar { width: var(--panel-w); flex: none; display: flex; flex-direction: column; background: var(--paper); border-right: var(--hairline); z-index: 1; overflow: hidden; }
+/* The column scrolls as a whole, so an open detail card (photo block, table, actions) is always reachable;
+   the header stays pinned. */
+.sidebar { width: var(--panel-w); flex: none; display: flex; flex-direction: column; background: var(--paper); border-right: var(--hairline); z-index: 1; overflow-y: auto; }
+.sidebar .cims-header { position: sticky; top: 0; z-index: 2; flex: none; }
+.sidebar .list { flex: none; overflow: visible; }
 @media (max-width: 700px) {
   .sidebar { width: 100%; height: 42%; border-right: 0; border-top: var(--hairline); }
-  .sidebar .cims-header { min-height: 52px; flex: none; }
-  /* The sheet scrolls as a whole, so the list stays reachable under an open detail card. */
-  .sidebar { overflow-y: auto; }
-  .sidebar .list { flex: none; overflow: visible; }
+  .sidebar .cims-header { min-height: 52px; }
 }

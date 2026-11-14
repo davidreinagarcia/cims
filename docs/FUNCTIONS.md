@@ -18,6 +18,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Shared helpers (`src/lib`, `src/state`, `src/hooks`): reuse these first
 
+- `campusDay(now)` [src/lib/hours.ts:11](../src/lib/hours.ts#L11): Returns the hours-contract weekday for an instant in America/New_York.
+- `openStatus(hours, now)` [src/lib/hours.ts:21](../src/lib/hours.ts#L21): Computes campus-local opening status without guessing when today's hours are missing.
 - `LAYER_CATALOG` [src/lib/layerCatalog.ts:22](../src/lib/layerCatalog.ts#L22): The PRD layers plus Printing and Health (added 2026-11-14), in panel order.
 - `categoryColor(layer, fallback = "#1C2733")` [src/lib/layerCatalog.ts:45](../src/lib/layerCatalog.ts#L45): Resolved color of a layer (reads the design token, so the tokens stay the single source of truth).
 - `showDrafts` [src/lib/places.ts:13](../src/lib/places.ts#L13): True when the page was opened with ?drafts=1: unverified drafts become visible (for reviewers and previews).
@@ -56,7 +58,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:12](../src/components/MapView.tsx#L12): The interactive map. Knows nothing about what is drawn: layers do that.
 - `Sidebar()` [src/components/Sidebar.tsx:8](../src/components/Sidebar.tsx#L8): Left column (bottom sheet on phones) that hosts the panels.
-- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:7](../src/panels/building-card/PlaceCard.tsx#L7): Shows name, category and description of the selected place, with a Close button. Renders nothing if no place…
+- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:13](../src/panels/building-card/PlaceCard.tsx#L13): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `SearchPanel()` [src/panels/search/SearchPanel.tsx:20](../src/panels/search/SearchPanel.tsx#L20): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:32](../src/state/layerFilters.tsx#L32): Provides the layer filters to the app. Mount once, in App.
@@ -65,9 +67,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 ### Other exported functions & constants
 
 - `glyphPath(id)` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
-- `CAMPUS` [src/config.ts:2](../src/config.ts#L2): Central place for map settings. Change here, not inside components.
-- `TILE_URL` [src/config.ts:15](../src/config.ts#L15): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
-- `TILE_ATTRIBUTION` [src/config.ts:17](../src/config.ts#L17): Attribution text OSM requires next to the tiles.
+- `CAMPUS` [src/config.ts:3](../src/config.ts#L3): Central place for map settings. Change here, not inside components.
+- `TILE_URL` [src/config.ts:16](../src/config.ts#L16): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
+- `TILE_ATTRIBUTION` [src/config.ts:18](../src/config.ts#L18): Attribution text OSM requires next to the tiles.
+- `CORRECTION_URL` [src/config.ts:21](../src/config.ts#L21): Base URL for prefilled place correction issues.
 - `baseStyle` [src/map/baseStyle.ts:6](../src/map/baseStyle.ts#L6): Base style every layer is added on top of.
 - `OTHER_SUBTYPE` [src/map/layerFilters.ts:6](../src/map/layerFilters.ts#L6): Sub-type used for features that have none.
 - `isVisible(filters, category, subtype?)` [src/map/layerFilters.ts:9](../src/map/layerFilters.ts#L9): Is a feature of this category and sub-type currently shown? Categories nobody toggles are always shown.
