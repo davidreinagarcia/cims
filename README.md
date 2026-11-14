@@ -2,7 +2,7 @@
 
 Interactive map of the Georgia Tech campus. Hackathon project.
 
-**Live:** https://cims.queenalexandria.online (auto-updates from `main`)
+**Live:** https://cims.queenalexandria.online (auto-updates from `main`). Every branch gets its own preview at `https://<branch>-cims.queenalexandria.online`; list: https://branches-cims.queenalexandria.online
 
 ## Equipo
 
