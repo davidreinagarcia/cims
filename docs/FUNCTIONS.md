@@ -43,20 +43,35 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `IssueReport` [src/lib/reports.ts:27](../src/lib/reports.ts#L27): A reported issue as the UI sees it.
 - `NewIssueReport` [src/lib/reports.ts:46](../src/lib/reports.ts#L46): What the form submits; the service assigns id, team, status and timestamps.
 - `ReportsService` [src/lib/reports.ts:55](../src/lib/reports.ts#L55): Backend contract for reports. Implemented by the localStorage mock today (ADR-0005 still open).
+- `DuplicateListProps` [src/panels/report/DuplicateList.tsx:6](../src/panels/report/DuplicateList.tsx#L6): Props for the "Already reported?" step.
+- `ReportFlowProps` [src/panels/report/ReportFlow.tsx:10](../src/panels/report/ReportFlow.tsx#L10): Props for the report flow.
+- `ReportFormProps` [src/panels/report/ReportForm.tsx:9](../src/panels/report/ReportForm.tsx#L9): Props for the details step.
+- `ReportStatusViewProps` [src/panels/report/ReportStatusView.tsx:7](../src/panels/report/ReportStatusView.tsx#L7): Props for the status page.
+- `Navigate` [src/panels/report/index.tsx:11](../src/panels/report/index.tsx#L11): Changes the query string without reloading; pass null to close the panel.
 - `Category` [src/types.ts:3](../src/types.ts#L3): Kinds of place the map can show.
 - `PlaceProperties` [src/types.ts:12](../src/types.ts#L12): Properties of a place feature in src/data/places.json.
 
 ### Components
 
-- `App()` [src/App.tsx:7](../src/App.tsx#L7): Root component: sidebar plus map sharing one selection.
+- `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component: sidebar plus map sharing one selection.
 - `MapView({ selectedId, onSelect })` [src/components/MapView.tsx:13](../src/components/MapView.tsx#L13): The interactive map; reports clicks on markers through onSelect.
 - `Sidebar({ selectedId, onSelect })` [src/components/Sidebar.tsx:11](../src/components/Sidebar.tsx#L11): Left panel with search box, selected-place card and the place list.
+- `DuplicateList({ reports, busy, onPlusOne, onView, onSubmitNew, onBack })` [src/panels/report/DuplicateList.tsx:16](../src/panels/report/DuplicateList.tsx#L16): Lists matching open reports so the user can add a +1 instead of filing a duplicate (PRD US-10.2).
+- `ReportFlow({ location, reportId, navigate })` [src/panels/report/ReportFlow.tsx:22](../src/panels/report/ReportFlow.tsx#L22): Report-an-issue flow (PRD US-10.1 to US-10.3).
+- `ReportForm({ location, draft, busy, onContinue })` [src/panels/report/ReportForm.tsx:34](../src/panels/report/ReportForm.tsx#L34): The details form (PRD US-10.1). Safety hazard shows the emergency banner before everything else.
+- `ReportStatusView({ reportId, justFiled, onAnother })` [src/panels/report/ReportStatusView.tsx:15](../src/panels/report/ReportStatusView.tsx#L15): Status page of one report (PRD US-10.3), always carrying the "Prototype: not sent" label.
+- `ReportSummary({ report, showLocation = true })` [src/panels/report/ReportSummary.tsx:12](../src/panels/report/ReportSummary.tsx#L12): Category, place, description and tags of a report; used by the duplicates list, status page and staff queue.
+- `StaffQueue()` [src/panels/report/StaffQueue.tsx:23](../src/panels/report/StaffQueue.tsx#L23): Staff view of the report queue. Unlisted in the MVP: reached with ?panel=staff (optionally &team=IT).
+- `ReportPanelRoute()` [src/panels/report/index.tsx:14](../src/panels/report/index.tsx#L14): Renders nothing unless the URL has ?panel=report or ?panel=staff; the only piece App.tsx mounts.
 
 ### Other exported functions & constants
 
 - `CAMPUS` [src/config.ts:2](../src/config.ts#L2): Central place for map settings. Change here, not inside components.
 - `TILE_URL` [src/config.ts:15](../src/config.ts#L15): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
 - `TILE_ATTRIBUTION` [src/config.ts:17](../src/config.ts#L17): Attribution text OSM requires next to the tiles.
+- `formatWhen(iso)` [src/panels/report/ReportSummary.tsx:7](../src/panels/report/ReportSummary.tsx#L7): Formats an ISO timestamp for display in the viewer's locale.
+- `locationParts(location)` [src/panels/report/location.ts:6](../src/panels/report/location.ts#L6): Breadcrumb parts for a location: building › floor › room, or the outdoor pin coordinates.
+- `locationFromParams(params)` [src/panels/report/location.ts:18](../src/panels/report/location.ts#L18): Builds the prefilled location from ?building=&floor=&room= (or ?lng=&lat=); null when the URL has none.
 
 ### Possible duplicates
 

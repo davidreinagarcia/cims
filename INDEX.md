@@ -27,6 +27,8 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`src/components/`](src/components/INDEX.md): React components for the current UI (map view, sidebar). T-01 moves these into src/map/ and src/panels/.
   - [`src/data/`](src/data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
   - [`src/lib/`](src/lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
+  - [`src/panels/`](src/panels/INDEX.md): Side panels and full-screen flows, one folder per feature.
+    - [`src/panels/report/`](src/panels/report/INDEX.md): Report-an-issue flow (F-10) and staff queue; mounted from App.tsx via ?panel=report and ?panel=staff. Owner:…
   - [`src/styles/`](src/styles/INDEX.md): Design system CSS: tokens.css (variables) and cims-ui.css (all cims- components). Wired in by T-06.
 - [`templates/`](templates/INDEX.md): Copy-and-fill templates: meeting notes, weekly status.
 

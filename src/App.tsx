@@ -2,6 +2,7 @@
 import { useState } from "react";
 import MapView from "./components/MapView";
 import Sidebar from "./components/Sidebar";
+import ReportPanelRoute from "./panels/report";
 
 /** Root component: sidebar plus map sharing one selection. */
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
     <div className="app">
       <Sidebar selectedId={selectedId} onSelect={setSelectedId} />
       <MapView selectedId={selectedId} onSelect={setSelectedId} />
+      <ReportPanelRoute />
     </div>
   );
 }
