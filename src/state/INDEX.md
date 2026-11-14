@@ -6,6 +6,7 @@ Shared app state. Today only the current selection.
 
 **Files**
 
+- [`layerFilters.tsx`](layerFilters.tsx): Layer panel state (which categories and sub-types are on), remembered on this device. · exports `LayerFiltersProvider`, `useLayerFilters`
 - [`selection.tsx`](selection.tsx): Shared selection state: what the user picked on the map or in a panel (building, place, room, report). · exports `SelectionProvider`, `useSelection`
 
 <!-- AUTO:END -->

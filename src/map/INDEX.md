@@ -11,6 +11,7 @@ Everything about the map engine: contract for layers, base style, and the layer 
 **Files**
 
 - [`baseStyle.ts`](baseStyle.ts): The map's base style: raster OSM tiles plus the glyph server for labels. Swap here for a vector basemap (ADR-… · exports `baseStyle`
+- [`layerFilters.ts`](layerFilters.ts): Turns the layer panel's LayerFilters into a MapLibre filter and a plain visibility check. · exports `OTHER_SUBTYPE`, `isVisible`, `buildMapFilter`
 - [`loadLayers.ts`](loadLayers.ts): Discovers every layer module in src/map/layers/ and returns them in draw order. · exports `loadLayers`
 - [`types.ts`](types.ts): Contract for map layers: every file in src/map/layers/ default-exports one MapLayer.
 

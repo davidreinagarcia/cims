@@ -18,29 +18,40 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Shared helpers (`src/lib`, `src/state`, `src/hooks`): reuse these first
 
+- `LAYER_CATALOG` [src/lib/layerCatalog.ts:22](../src/lib/layerCatalog.ts#L22): The six layers of the PRD, in panel order.
+- `categoryColor(layer, fallback = "#1C2733")` [src/lib/layerCatalog.ts:42](../src/lib/layerCatalog.ts#L42): Resolved color of a layer (reads the design token, so the tokens stay the single source of truth).
 - `places` [src/lib/places.ts:11](../src/lib/places.ts#L11): The places loaded from src/data/places.json.
+- `useLayerFilters()` [src/state/layerFilters.tsx:71](../src/state/layerFilters.tsx#L71): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
 
 ### Types & contracts
 
+- `GlyphId` [src/components/Glyph.tsx:17](../src/components/Glyph.tsx#L17): Known glyph ids: the layer categories plus "building".
+- `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
+- `LayerCategory` [src/lib/layerCatalog.ts:11](../src/lib/layerCatalog.ts#L11): One entry of the layer panel.
 - `PlaceFeature` [src/lib/places.ts:6](../src/lib/places.ts#L6): One place as a GeoJSON point feature.
 - `PlaceCollection` [src/lib/places.ts:8](../src/lib/places.ts#L8): All places as a GeoJSON feature collection.
 - `LayerContext` [src/map/types.ts:6](../src/map/types.ts#L6): What the host gives a layer so it can talk back to the app.
-- `LayerHandle` [src/map/types.ts:12](../src/map/types.ts#L12): What a layer returns from addTo so the host can drive it.
-- `MapLayer` [src/map/types.ts:23](../src/map/types.ts#L23): A self-contained piece of the map. Drop a file in src/map/layers/ that default-exports one of
+- `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
+- `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
+- `MapLayer` [src/map/types.ts:36](../src/map/types.ts#L36): A self-contained piece of the map. Drop a file in src/map/layers/ that default-exports one of
+- `LayerFiltersApi` [src/state/layerFilters.tsx:19](../src/state/layerFilters.tsx#L19): What useLayerFilters() returns.
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): The kinds of thing that can be selected. Only "place" is used so far.
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
 - `SelectionApi` [src/state/selection.tsx:20](../src/state/selection.tsx#L20): What useSelection() returns.
-- `Category` [src/types.ts:3](../src/types.ts#L3): Kinds of place the map can show.
-- `PlaceProperties` [src/types.ts:12](../src/types.ts#L12): Properties of a place feature in src/data/places.json.
+- `Category` [src/types.ts:7](../src/types.ts#L7): Kinds of place the map can show. The first six are the toggleable layers of the layer panel
+- `PlaceProperties` [src/types.ts:20](../src/types.ts#L20): Properties of a place feature in src/data/places.json.
 
 ### Components
 
-- `App()` [src/App.tsx:7](../src/App.tsx#L7): Root component.
-- `MapView()` [src/components/MapView.tsx:11](../src/components/MapView.tsx#L11): The interactive map. Knows nothing about what is drawn: layers do that.
-- `Sidebar()` [src/components/Sidebar.tsx:7](../src/components/Sidebar.tsx#L7): Left column (bottom sheet on phones) that hosts the panels.
+- `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component.
+- `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:20](../src/components/Glyph.tsx#L20): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
+- `MapView()` [src/components/MapView.tsx:12](../src/components/MapView.tsx#L12): The interactive map. Knows nothing about what is drawn: layers do that.
+- `Sidebar()` [src/components/Sidebar.tsx:8](../src/components/Sidebar.tsx#L8): Left column (bottom sheet on phones) that hosts the panels.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:7](../src/panels/building-card/PlaceCard.tsx#L7): Shows name, category and description of the selected place, with a Close button. Renders nothing if no place…
-- `SearchPanel()` [src/panels/search/SearchPanel.tsx:25](../src/panels/search/SearchPanel.tsx#L25): Renders the search field and the result list as two siblings (CSS `order` places the detail card
+- `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
+- `SearchPanel()` [src/panels/search/SearchPanel.tsx:26](../src/panels/search/SearchPanel.tsx#L26): Renders the search field and the result list as two siblings (CSS `order` places the detail card
+- `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:32](../src/state/layerFilters.tsx#L32): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
 
 ### Other exported functions & constants
@@ -49,6 +60,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `TILE_URL` [src/config.ts:15](../src/config.ts#L15): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
 - `TILE_ATTRIBUTION` [src/config.ts:17](../src/config.ts#L17): Attribution text OSM requires next to the tiles.
 - `baseStyle` [src/map/baseStyle.ts:6](../src/map/baseStyle.ts#L6): Base style every layer is added on top of.
+- `OTHER_SUBTYPE` [src/map/layerFilters.ts:6](../src/map/layerFilters.ts#L6): Sub-type used for features that have none.
+- `isVisible(filters, category, subtype?)` [src/map/layerFilters.ts:9](../src/map/layerFilters.ts#L9): Is a feature of this category and sub-type currently shown? Categories nobody toggles are always shown.
+- `buildMapFilter(filters)` [src/map/layerFilters.ts:18](../src/map/layerFilters.ts#L18): MapLibre filter that keeps only visible features (reads `category` and `subtype` properties), or
 - `loadLayers()` [src/map/loadLayers.ts:7](../src/map/loadLayers.ts#L7): All layers found in src/map/layers/, sorted by their `order` (default 100).
 
 ### Possible duplicates

@@ -1,5 +1,6 @@
 /** @file Search box and clickable list of places. Rooms and buildings join the list in T-14. */
 import { Fragment, useMemo, useState } from "react";
+import Glyph from "../../components/Glyph";
 import { places } from "../../lib/places";
 import { useSelection } from "../../state/selection";
 import "./search.css";
@@ -56,10 +57,9 @@ export default function SearchPanel() {
               aria-selected={f.properties.id === selectedId}
               onClick={() => select({ kind: "place", id: f.properties.id })}
             >
-              <svg className="cims-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
-                <rect x="5" y="3" width="10" height="18" />
-                <path d="M15 9h4v12h-4M8 7h1M11 7h1M8 11h1M11 11h1M8 15h1M11 15h1" />
-              </svg>
+              <span className="cims-glyph">
+                <Glyph id="building" />
+              </span>
               <span>
                 <span className="cims-result__title">{highlight(f.properties.name, query)}</span>
                 <br />

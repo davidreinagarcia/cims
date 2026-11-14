@@ -1,6 +1,8 @@
-/** @file Places layer: navy markers with gold rings and name labels; highlights and flies to the selected place. */
-import type { MapLayerMouseEvent } from "maplibre-gl";
+/** @file Places layer: markers with gold rings and name labels (layer categories colored, honors the layer filters); highlights and flies to the selected place. */
+import type { ExpressionSpecification, MapLayerMouseEvent } from "maplibre-gl";
 import type { MapLayer } from "../types";
+import { buildMapFilter } from "../layerFilters";
+import { LAYER_CATALOG, categoryColor } from "../../lib/layerCatalog";
 import { places } from "../../lib/places";
 
 const SOURCE = "places";
@@ -18,7 +20,13 @@ const pois: MapLayer = {
       source: SOURCE,
       paint: {
         "circle-radius": ["case", ["boolean", ["feature-state", "selected"], false], 11, 7],
-        "circle-color": "#003057", // --navy
+        // Layer categories take their token color; base places (landmarks, buildings) stay navy.
+        "circle-color": [
+          "match",
+          ["get", "category"],
+          ...LAYER_CATALOG.flatMap((c) => [c.id, categoryColor(c)]),
+          "#003057", // --navy
+        ] as unknown as ExpressionSpecification,
         "circle-stroke-color": "#B3A369", // --gold (a ring, never text)
         "circle-stroke-width": 2.5,
       },
@@ -55,6 +63,11 @@ const pois: MapLayer = {
         }
         const sel = places.features.find((f) => f.properties.id === selectedId);
         if (sel) map.flyTo({ center: sel.geometry.coordinates as [number, number], zoom: 17, duration: 800 });
+      },
+      setFilters(filters) {
+        const filter = buildMapFilter(filters);
+        map.setFilter(CIRCLE, filter);
+        map.setFilter(LABEL, filter);
       },
       remove() {
         map.off("click", CIRCLE, onClick);
