@@ -11,9 +11,8 @@ The MVP must prove both halves of the primary HMW, **navigation** and **discover
 the same map is the natural place to **report** (P2) and **find a room** (P3). See
 [Problem Statement](01-problem-statement.md) for the three prompts.
 
-> ⚠️ **Scope proposal (v0.2, confirm at M0, Q6):** integrating P2/P3 promotes **F-10 Report an issue**
-> to *Must* and adds **F-11 Room finder** as *Should*. If the team decides to stay single-prompt,
-> revert both to their v0.1 priority (F-10 Should, F-11 Could).
+> ✅ **Decided 2026-11-14 (Q6):** CIMS is entered **formally in all three prompts**. F-10 Report an issue
+> and **F-11 Room finder are Must**; F-18 No-show release moves up to *Should* because P3 names no-shows.
 
 ## Guiding principles
 
@@ -39,20 +38,20 @@ Feature IDs (`F-xx`) are used across the PRD, roadmap and risk register. Origins
 | F-06 | **Indoor directory** for 1–2 pilot buildings: level selector, mall-style directory (classrooms, study rooms, offices, restrooms, vending, lockers), selected room highlighted on the floor plan | G2 | In building → directory, breakdown per level, floor plans |
 | F-07 | **Orgs & Events layer**: org/event pins by location, read-only bulletin list (seeded) with "show on map" | G4 | Events → Clubs, Campus Orgs, Community, Admin; Tabs → Bulletin Board |
 | F-10 | **Report an issue** *(P2)*: report pinned to building / room / equipment; category picks the right team (Facilities vs. IT); nearby duplicates shown first with **+1**; public status (Open → Routed → In progress → Resolved) | G5 | Maintenance Form / report something → status, pooling duplicates, type filter |
+| F-11 | **Room finder** *(P3)*: "Available now / at time X" filter by location, capacity and features (whiteboard, screen, outlets); free rooms highlighted on map + floor plan; **Book** deep-links to the system that owns that room, with its policy summarized | G6 | reserve a room → floor plan highlight |
 
 ### Should have (if MVP is done before M2)
 
 | ID | Feature | Origin |
 |----|---------|--------|
 | F-08 | **Study-space fullness self-report** (1-tap: empty / some / full) + color on map | Study spaces / density |
+| F-18 | **No-show release** *(P3)*: check-in at the room (QR/NFC) within 10–15 min or the booking is released and shown as free | P3 prompt; NFC tag inside building |
 | F-09 | **Transport layer**: bus/Stingerette stops, bike parking, key walkways | Transport |
-| F-11 | **Room finder** *(P3)*: "Available now / at time X" filter by location, capacity and features (whiteboard, screen, outlets); free rooms highlighted on map + floor plan; **Book** deep-links to the system that owns that room, with its policy summarized | reserve a room → floor plan highlight |
 
 ### Could have (roadmap / pitch slide)
 
 | ID | Feature | Origin |
 |----|---------|--------|
-| F-18 | **No-show release** *(P3)*: check-in at the room (QR/NFC) within 10–15 min or the booking is released and shown as free | P3 prompt; NFC tag inside building |
 | F-19 | Locker reservation | Also system to reserve a locker |
 | F-20 | Unified booking (book inside CIMS across systems) and real ticket integration with Facilities/IT | P2 + P3 prompts |
 | F-12 | Stories / feed, each story tappable to its map location | Stories/feed; Video stories |
@@ -74,8 +73,8 @@ Feature IDs (`F-xx`) are used across the PRD, roadmap and risk register. Origins
 
 | Dimension | MVP boundary |
 |-----------|--------------|
-| Geography | Pilot area, proposed **central campus** (Tech Green, CULC, Student Center, Library). Confirm at M0 |
-| Indoor | 1–2 pilot buildings, proposed **CULC** (study + ASC desk + Kaldi's) |
+| Geography | **Whole campus** footprints in 3D (decided); curated names/heights first around the pilot building |
+| Indoor | **Kendeda Building** (decided); **CULC** second if time allows |
 | Data | Hand-curated seed (`data/`), each record with `source_url` + `verified_at` |
 | Users | Anonymous; no accounts |
 | Reports (F-10) | Stored in CIMS; routing to Facilities vs. IT is **simulated** (shown, not sent) |
@@ -84,19 +83,20 @@ Feature IDs (`F-xx`) are used across the PRD, roadmap and risk register. Origins
 
 ## Demo script (3 minutes, draft)
 
-1. **Hook (20 s):** "It's your first week. Your class is in CULC 152. Where is it?"
-2. **Find a building (30 s):** search "CULC" → building highlights → card shows hours, BuzzCard access.
-3. **Find a room (40 s):** enter building → choose floor → room 152 highlighted in the directory.
-4. **Discover (50 s):** toggle Food → Kaldi's in the same building; toggle Support → ASC desk on floor 2;
-   toggle Makerspaces → The Hive nearby.
+1. **Hook (20 s):** "It's your first week. Your class is in Kendeda `<room>`. Where is it?"
+2. **Find a building (30 s):** search "Kendeda" → building highlights in 3D → card shows hours, BuzzCard access.
+3. **Find a room (40 s):** enter building → choose floor → the room highlighted in the directory.
+4. **Discover (50 s):** toggle Food → the nearest coffee/dining from the building; toggle Support → the
+   nearest help desk; toggle Makerspaces → the closest one (all from verified POI data).
 5. **Community (25 s):** Orgs & Events layer → a club meeting tonight two buildings away → tap → map.
-6. **Report it (25 s, P2):** in room 152 the projector is broken → "Report" → category *Classroom tech*
+6. **Report it (25 s, P2):** in that room the projector is broken → "Report" → category *Classroom tech*
    → shows "routed to IT" → an existing report is already there → **+1** → status visible.
 7. **Find a room (20 s, P3):** "Available now, 4+ people, whiteboard" → two free rooms light up on the
    same floor → **Book** opens the owning system.
 8. **Vision (10 s):** roadmap slide: no-show release, real ticket integration, density, VR.
 
-> Timing is now ~3:30. Trim steps 4–5 if the slot is strictly 3 minutes.
+> Timing is now ~3:30. Trim steps 4–5 if the slot is strictly 3 minutes. Room numbers are filled in
+> from the real Kendeda floor data (T-20); never invent them for the demo.
 
 ## MVP exit criteria
 

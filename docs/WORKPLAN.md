@@ -87,7 +87,7 @@ them by hand, conflicts resolve themselves, and they're regenerated on every com
 ```
 Task: T-21 Indoor viewer (F-06). Lane B.
 Read: CLAUDE.md, docs/WORKPLAN.md (§2-3), docs/03-prd.md → US-06.1.
-You may edit: src/indoor/**, src/map/layers/rooms.ts, src/data/indoor/culc/**.
+You may edit: src/indoor/**, src/map/layers/rooms.ts, src/data/indoor/kendeda/**.
 Do NOT edit: anything else. If you need a hotspot change, stop and tell me.
 Contracts: use types from src/types/ as-is; propose changes, don't make them.
 Done when: all US-06.1 acceptance criteria pass, `npm run build` passes,
@@ -133,10 +133,13 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   **Done when:** the file loads in geojson.io and pilot buildings have names + heights.
 - [x] **T-04a CI workflow**: `.github/workflows/ci.yml` (index check + build) ✅ in the docs PR
 - [ ] **T-04b Branch protection** · A (repo admin) · see [MERGING-TO-MAIN § one-time setup](MERGING-TO-MAIN.md#one-time-setup-david-repo-admin)
+- [ ] **T-06 Design tokens + fonts** · A · *hotspot PR (`styles.css`, `package.json`)*
+  Apply the tokens, type and header/panel components from [DESIGN-DIRECTION](design/DESIGN-DIRECTION.md);
+  fonts via a `chore/` dependency PR. **Done when:** current UI uses the tokens; no gold text on paper.
 - [ ] **T-05 M0 decisions (30-min call)** · Both
   - [ ] Hackathon dates, deliverables, judging criteria (Q1)
-  - [ ] Pilot area + pilot building: central campus + CULC? (Q3)
-  - [ ] Submit to P2/P3 too, or only P1? (Q6), which confirms F-10 Must / F-11 Should
+  - [x] Pilot: **whole campus** in 3D; indoor pilot **Kendeda**, CULC if time (Q3) ✅
+  - [x] Entered in **all three prompts** (Q6) ✅: F-10 and F-11 are Must
   - [ ] Backend: Supabase vs. `server/` on Alexandria ([ADR-0005](adr/0005-backend-supabase.md))
   - [ ] Ratify lanes in §1
 
@@ -146,19 +149,20 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 
 - [ ] **T-10 3D buildings layer** (F-01) · needs T-01, T-03
   `fill-extrusion` from `buildings.geojson`, tilted default camera, highlight on select, click → `Selection`.
+  Look: white roof cap + hatched walls, gold hatch when selected ([DESIGN-DIRECTION § Map styling](design/DESIGN-DIRECTION.md#map-styling-in-maplibre-how-to-actually-build-it-notes-for-t-10--t-12)).
 - [ ] **T-11 Building card** (F-03) · needs T-02, T-10
   Photo, hours + open-now, BuzzCard access, POIs inside, Directions, **Enter building** (calls Lane B's
   indoor entry point via `Selection`).
 - [ ] **T-12 Layer toggles + legend** (F-02) · needs T-01
 - [ ] **T-13 POI layers** (F-05) · needs T-12 and data from T-30
 - [ ] **T-14 Search** (F-04) · needs T-03; rooms join when T-20 lands
-  Buildings + aliases + places + rooms; "CULC 152" opens indoor view on the right floor.
+  Buildings + aliases + places + rooms; "Kendeda <room>" opens indoor view on the right floor.
 - [ ] **T-15 Orgs & events layer + bulletin tab** (F-07) · needs T-12, data T-32
 
 **Lane B: Inside + Actions (Tato)**
 
-- [ ] **T-20 CULC floor-plan data** · D/B · *start immediately, parallel-safe*
-  Levels + room polygons/types for CULC in `src/data/indoor/culc/`. Source: public plans if
+- [ ] **T-20 Kendeda floor-plan data** · D/B · *start immediately, parallel-safe*
+  Levels + room polygons/types for Kendeda in `src/data/indoor/kendeda/` (CULC later, same format). Source: public plans if
   permitted, or a walking survey drawn as schematic blocks (Risk R-03). Include room capacity +
   features for F-11.
 - [ ] **T-21 Indoor viewer** (F-06) · needs T-01, T-02 (mock rooms until T-20)
@@ -168,6 +172,10 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 - [ ] **T-23 Report an issue** (F-10) · UI can start on mocks after T-02; real data needs T-22
   Prefilled location, category → team ("routes to IT"), duplicates + "Me too", status page,
   staff view, "Prototype: not sent to Facilities/IT" label (Risk R-14).
+- [ ] **T-24 Room finder** (F-11, Must since Q6) · needs T-20, T-21
+  Availability seed for Kendeda rooms, filters (capacity, features), map + floor highlight, Book deep link.
+
+> ⚖️ Lane B now carries F-06, F-10 *and* F-11. If it falls behind at M2, move T-24 to Lane A.
 
 **Data lane (whoever is free; good Claude research tasks)**
 
@@ -181,14 +189,14 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 
 ### P2: Should (only after every P1 box is checked)
 
-- [ ] **T-40 Room finder** (F-11) · B · availability seed for CULC rooms, filters, map/floor highlight, Book deep link
+- [ ] **T-40 No-show release** (F-18) · B · QR check-in per room, auto-release after grace period
 - [ ] **T-41 Offline fallback / PWA** · A · service worker caching the shell + data (Risk R-06)
 - [ ] **T-42 Transport layer** (F-09) · A
 - [ ] **T-43 Study-space fullness** (F-08) · B · reuses T-22 backend
 
 ### P3: Demo & pitch (start T-50 early; the rest at M3)
 
-- [ ] **T-50 Demo scenario seed** · Both: CULC 152 class, broken projector with an existing report,
+- [ ] **T-50 Demo scenario seed** · Both: a class in a Kendeda room, broken projector with an existing report,
       two free group rooms, a club meeting nearby (matches [demo script](02-mvp.md#demo-script-3-minutes-draft))
 - [ ] **T-51 Hallway tests** with ≥ 5 non-team students; log task success
 - [ ] **T-52 Pitch deck**: problem → demo → impact → roadmap → team
@@ -211,12 +219,12 @@ flowchart LR
   T12 --> T15[T-15 Orgs] 
   T32[T-32 Orgs data] --> T15
   T02 --> T21[T-21 Indoor viewer]
-  T20[T-20 CULC floors] --> T21
+  T20[T-20 Kendeda floors] --> T21
   T05[T-05 Decisions] --> T22[T-22 Backend] --> T23[T-23 Report issue]
   T02 --> T23
   T31[T-31 Routing] --> T23
-  T21 --> T40[T-40 Room finder]
-  T20 --> T40
+  T21 --> T24[T-24 Room finder]
+  T20 --> T24
 ```
 
 **Day-one parallel start:** David → T-01 (+ T-04) · Tato → T-03, then T-20 · both → T-05 call.

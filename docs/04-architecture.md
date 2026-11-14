@@ -97,7 +97,7 @@ erDiagram
   ROOM ||--o{ AVAILABILITY_SLOT : "has"
 
   BUILDING {
-    string id PK "e.g. culc"
+    string id PK "e.g. kendeda"
     string name
     string[] aliases "nicknames for search"
     polygon footprint
@@ -129,9 +129,9 @@ Events) live in Postgres. Category → team routing is a curated table, so chang
 ## 6. Key flows
 
 **Find a room (US-04.1 → US-06.1)**
-1. User types "CULC 152" → client search matches alias `culc` + room `152`.
+1. User types "Kendeda 210" (example) → client search matches alias `kendeda` + room `210`.
 2. Map flies to building → highlight → card.
-3. Indoor viewer loads `culc` level containing room `152` → highlights room polygon.
+3. Indoor viewer loads the `kendeda` level containing that room → highlights room polygon.
 
 **Report study-space fullness (US-08.1)**
 1. User taps "Full" → client POSTs `{study_space_id, level}`.
@@ -139,7 +139,7 @@ Events) live in Postgres. Category → team routing is a curated table, so chang
 3. Map layer reads a view: last-2h weighted average → color, or "No recent data".
 
 **Report an issue (US-10.1 → US-10.2)**
-1. User taps **Report** inside room `culc-152` → form prefilled with building/floor/room.
+1. User taps **Report** inside a room (e.g., `kendeda-210`) → form prefilled with building/floor/room.
 2. User picks *Classroom tech* → UI shows "Routes to: IT" (from ISSUE_CATEGORY → TEAM).
 3. Client queries open reports for same room + category → shows duplicates with **+1**.
 4. Submit → insert ISSUE_REPORT (status `open`) → status page link; staff view sees it under IT.

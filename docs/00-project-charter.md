@@ -4,7 +4,7 @@
 | Field | Value |
 |-------|-------|
 | Project | **CIMS** — Campus Interactive Map System |
-| Context | SGA Campus Solutions Hackathon, Georgia Tech. Primary prompt: *Smarter Campus Map*; integrated: *Campus Maintenance*, *Improved Room Reservations* |
+| Context | SGA Campus Solutions Hackathon, Georgia Tech. Entered in all three prompts: *Smarter Campus Map*, *Campus Maintenance*, *Improved Room Reservations* |
 | Sponsor / audience | Student Government Association (challenge owner), hackathon judges |
 | Product Lead | _TBD_ |
 | Tech Lead | _TBD_ |
@@ -41,7 +41,7 @@ and a **UI / dashboard** with interactions. This charter turns that brainstorm i
 **In scope (MVP):** campus base map with clickable buildings; layer toggles and legend; building info
 cards; search; POI layers (Food, Support, Makerspaces, Exercise); indoor directory for **1–2 pilot
 buildings**; orgs & events layer; **issue reporting with status and duplicates** (P2). Should: **room
-finder** (P3). Details in [MVP](02-mvp.md).
+finder** (P3), Must since Q6. Indoor pilot: **Kendeda** (CULC second). Details in [MVP](02-mvp.md).
 
 **Out of scope (for the hackathon):** real room and locker booking (deep links only); real submission
 of tickets into Facilities/IT systems (routing is simulated); production-grade
@@ -63,7 +63,7 @@ native mobile apps; integration with GT authentication (SSO).
 ## 6. Success criteria
 
 - [ ] Live demo covers the core journeys end-to-end without fallbacks: *find a building*,
-      *find a room*, *discover an org/resource*, *report an issue* (+ *find a free room* if F-11 ships).
+      *find a room*, *discover an org/resource*, *report an issue* + *find a free room*.
 - [ ] ≥ 5 hallway testers (not on the team) complete each journey; ≥ 80% task success.
 - [ ] Every POI shown in the demo is **verified** against an official GT source (`verified_at` set).
 - [ ] Runs on a phone browser (≤ 3 s to interactive on 4G) and on a laptop.
