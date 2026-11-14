@@ -1,4 +1,5 @@
 /** @file Sidebar shell: survey-style header plus the panels. Add new panels here (src/panels/). */
+import AccountChip from "../panels/account/AccountChip";
 import { useId, useRef, useState } from "react";
 import BulletinPanel from "../panels/bulletin/BulletinPanel";
 import PlaceCard from "../panels/building-card/PlaceCard";
@@ -20,6 +21,7 @@ export default function Sidebar() {
           <br />
           Campus Map
         </span>
+        <nav className="cims-header__nav" aria-label="Account"><AccountChip /></nav>
       </header>
       <div className="sidebar__tabs" role="tablist" aria-label="Campus panels">
         {["Explore", "Bulletin"].map((label, index) => (

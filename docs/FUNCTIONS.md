@@ -27,11 +27,16 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `showDrafts` [src/lib/places.ts:14](../src/lib/places.ts#L14): True when the page was opened with ?drafts=1: unverified drafts become visible (for reviewers and previews).
 - `places` [src/lib/places.ts:19](../src/lib/places.ts#L19): The places the app shows: seed, demo and verified records, plus drafts only with ?drafts=1.
 - `searchPlaces(query, items)` [src/lib/search.ts:111](../src/lib/search.ts#L111): Searches name, aliases and category; queries under two characters preserve the full input order.
+- `useAuth()` [src/state/auth.tsx:63](../src/state/auth.tsx#L63): Reads the demo session and sign-in controls inside AuthProvider.
 - `useLayerFilters()` [src/state/layerFilters.tsx:72](../src/state/layerFilters.tsx#L72): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
 
 ### Types & contracts
 
+- `Role` [src/auth/types.ts:4](../src/auth/types.ts#L4): Demo roles change labels only and grant no permissions.
+- `Session` [src/auth/types.ts:7](../src/auth/types.ts#L7): Fictional account selected on this device, with no authentication.
+- `Persona` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional identity offered by the demo account picker.
+- `AuthAdapter` [src/auth/types.ts:22](../src/auth/types.ts#L22): Adapter boundary keeps sign-in implementation out of screens.
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
 - `LayerCategory` [src/lib/layerCatalog.ts:11](../src/lib/layerCatalog.ts#L11): One entry of the layer panel.
@@ -57,19 +62,24 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Components
 
-- `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component.
+- `App()` [src/App.tsx:10](../src/App.tsx#L10): Root component.
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:12](../src/components/MapView.tsx#L12): The interactive map. Knows nothing about what is drawn: layers do that.
-- `Sidebar()` [src/components/Sidebar.tsx:10](../src/components/Sidebar.tsx#L10): Left column (bottom sheet on phones) that hosts the panels.
-- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:14](../src/panels/building-card/PlaceCard.tsx#L14): Shows the selected place's known details and correction link, or nothing without a place selection.
+- `Sidebar()` [src/components/Sidebar.tsx:11](../src/components/Sidebar.tsx#L11): Left column (bottom sheet on phones) that hosts the panels.
+- `AccountChip()` [src/panels/account/AccountChip.tsx:7](../src/panels/account/AccountChip.tsx#L7): Shows sign-in or the selected demo persona with a small sign-out disclosure.
+- `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
+- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:15](../src/panels/building-card/PlaceCard.tsx#L15): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinPanel({ onShowMap })` [src/panels/bulletin/BulletinPanel.tsx:9](../src/panels/bulletin/BulletinPanel.tsx#L9): Show upcoming events independently of layer filters and return to Explore on selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `SearchPanel()` [src/panels/search/SearchPanel.tsx:20](../src/panels/search/SearchPanel.tsx#L20): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
+- `AuthProvider({ children, adapter = mockAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
 
 ### Other exported functions & constants
 
+- `DEMO_PERSONAS` [src/auth/mockAdapter.ts:7](../src/auth/mockAdapter.ts#L7): Demo role descriptions describe possible future capabilities, never enforced permissions.
+- `mockAdapter` [src/auth/mockAdapter.ts:15](../src/auth/mockAdapter.ts#L15): Pretends to sign in with fictional accounts; storage failure never blocks the demo.
 - `glyphPath(id)` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
 - `CAMPUS` [src/config.ts:3](../src/config.ts#L3): Central place for map settings. Change here, not inside components.
 - `TILE_URL` [src/config.ts:16](../src/config.ts#L16): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
