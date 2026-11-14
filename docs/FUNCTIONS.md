@@ -132,6 +132,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SearchMatch` [src/lib/search.ts:10](../src/lib/search.ts#L10): A matching name, alias or category and its highlight ranges.
 - `SearchResult` [src/lib/search.ts:17](../src/lib/search.ts#L17): A ranked place with an extensible group label and matches in displayable fields.
 - `CampusSearchResult` [src/lib/search.ts:137](../src/lib/search.ts#L137): A campus result selects its building, room or place directly.
+- `BusFeature` [src/map/transitLive.ts:19](../src/map/transitLive.ts#L19): One live bus: where it is and which route it is running.
 - `LayerContext` [src/map/types.ts:6](../src/map/types.ts#L6): What the host gives a layer so it can talk back to the app.
 - `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
@@ -269,10 +270,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `MAP_WALKWAY` [src/map/palette.ts:34](../src/map/palette.ts#L34): --map-walkway: footways, pedestrian paths and steps (terracotta, lighter than the brick --route so routes sta…
 - `MAP_RAIL` [src/map/palette.ts:36](../src/map/palette.ts#L36): --map-rail: rail and tram lines.
 - `MAP_BUILDING_CONTEXT` [src/map/palette.ts:38](../src/map/palette.ts#L38): --map-building-context: off-campus buildings, flat (ours are the extruded, hatched ones).
+- `SAGE` [src/map/palette.ts:40](../src/map/palette.ts#L40): --cat-transport: bus routes, stops and live buses.
 - `HATCH_GOLD` [src/map/patterns/index.ts:7](../src/map/patterns/index.ts#L7): Image id of the gold hatch (selected building walls).
 - `addHatchPatterns(map)` [src/map/patterns/index.ts:38](../src/map/patterns/index.ts#L38): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
 - `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
+- `TRACKER_URL` [src/map/transitLive.ts:4](../src/map/transitLive.ts#L4): The official tracker page: where "live tracking" links point.
+- `fetchBuses(routeNames, string>, signal?)` [src/map/transitLive.ts:25](../src/map/transitLive.ts#L25): Fetches the buses currently on one of the given routes (route id to name). Throws if the tracker
 - `formatWhen(iso)` [src/panels/report/ReportSummary.tsx:7](../src/panels/report/ReportSummary.tsx#L7): Formats an ISO timestamp for display in the viewer's locale.
 - `locationParts(location)` [src/panels/report/location.ts:7](../src/panels/report/location.ts#L7): Breadcrumb parts for a location: building › floor › room, or the outdoor pin coordinates.
 - `locationForId(id, floor, room)` [src/panels/report/location.ts:22](../src/panels/report/location.ts#L22): Builds a prefilled location for a place or building id (checks curated places first, then the OSM
