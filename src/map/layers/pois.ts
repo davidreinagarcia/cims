@@ -1,5 +1,6 @@
 /** @file Filtered place clusters, survey pins and labels, with a separate gold selected pin and a shared-location picker. */
-import maplibregl, { type ExpressionSpecification, type GeoJSONSource, type MapLayerMouseEvent, type SymbolLayerSpecification } from "maplibre-gl";
+import type { ExpressionSpecification, GeoJSONSource, MapLayerMouseEvent, Popup, SymbolLayerSpecification } from "maplibre-gl";
+import { loadMapLibre } from "../maplibre";
 import type { MapLayer } from "../types";
 import { isVisible } from "../layerFilters";
 import { addPins, pinImageId } from "../pins";
@@ -42,7 +43,7 @@ const pois: MapLayer = {
   order: 10,
   addTo(map, ctx) {
     const pinIds = addPins(map);
-    let popup: maplibregl.Popup | undefined;
+    let popup: Popup | undefined;
     let request = 0;
     let removed = false;
     map.addSource(SOURCE, {
@@ -149,7 +150,7 @@ const pois: MapLayer = {
           list.append(item);
         }
         content.append(list);
-        popup = new maplibregl.Popup({ className: "places-cluster-popup", maxWidth: "min(300px, calc(100vw - 32px))" })
+        popup = new (await loadMapLibre()).Popup({ className: "places-cluster-popup", maxWidth: "min(300px, calc(100vw - 32px))" })
           .setLngLat(center).setDOMContent(content).addTo(map);
       } catch {
         // A cluster can disappear while the worker rebuilds the filtered source.

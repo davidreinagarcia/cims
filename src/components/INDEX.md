@@ -7,7 +7,7 @@ React components for the current UI (map view, sidebar). T-01 moves these into `
 **Files**
 
 - [`Glyph.tsx`](Glyph.tsx): Line glyphs on a 24px grid (survey-map style). Shape differs per category so they work without color. · exports `glyphPath`, `Glyph`
-- [`MapView.tsx`](MapView.tsx): Map host: creates the MapLibre map, loads every layer module from src/map/layers/ and feeds them the selectio… · exports `MapView`
+- [`MapView.tsx`](MapView.tsx): Map host: loads MapLibre on demand, creates the map, loads every layer module from src/map/layers/ and feeds… · exports `MapView`
 - [`OfflineBanner.css`](OfflineBanner.css): * @file Position of the offline notice: top of the map area, clear of the zoom controls.
 - [`OfflineBanner.tsx`](OfflineBanner.tsx): Small notice shown while the browser is offline: the app keeps working from its saved copy. · exports `OfflineBanner`
 - [`Sidebar.css`](Sidebar.css): * @file Layout of the sidebar column. Header look comes from .cims-header (styles/cims-ui.css).
