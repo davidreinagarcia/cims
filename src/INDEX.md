@@ -9,13 +9,17 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 - [`components/`](components/INDEX.md): React components for the current UI (map view, sidebar). T-01 moves these into src/map/ and src/panels/.
 - [`data/`](data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
 - [`lib/`](lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
+- [`map/`](map/INDEX.md): Everything about the map engine: contract for layers, base style, and the layer auto-loader.
+- [`panels/`](panels/INDEX.md): Sidebar panels, one folder per panel. Mount new ones in components/Sidebar.tsx.
+- [`state/`](state/INDEX.md): Shared app state. Today only the current selection.
 
 **Files**
 
-- [`App.tsx`](App.tsx): App shell: holds the selected place and wires the sidebar to the map. · exports `App`
+- [`App.tsx`](App.tsx): App shell: selection provider plus the two-column layout (sidebar and map). · exports `App`
 - [`config.ts`](config.ts): Central place for map settings. Change here, not inside components. · exports `CAMPUS`, `TILE_URL`, `TILE_ATTRIBUTION`
 - [`main.tsx`](main.tsx): Entry point: mounts React and loads global styles.
-- [`styles.css`](styles.css): * @file Global styles: Georgia Tech navy and gold, layout of sidebar and map.
+- [`styles.css`](styles.css): * @file Global styles: tokens, reset and the two-column app layout. Component styles live next to their compo…
 - [`types.ts`](types.ts): Shared types for places shown on the map.
+- [`vite-env.d.ts`](vite-env.d.ts): Vite client types (import.meta.glob, asset imports).
 
 <!-- AUTO:END -->
