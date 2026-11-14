@@ -1,0 +1,13 @@
+{
+  "type": "FeatureCollection",
+  "_note": "SEED DATA: approximate coordinates, to be replaced/extended by the team. Add features here and they appear on the map and in the sidebar automatically.",
+  "features": [
+    { "type": "Feature", "properties": { "id": "tech-tower", "name": "Tech Tower", "category": "landmark", "description": "Georgia Tech's iconic administration building." }, "geometry": { "type": "Point", "coordinates": [-84.3947, 33.7727] } },
+    { "type": "Feature", "properties": { "id": "clough", "name": "Clough Undergraduate Learning Commons", "category": "academic", "description": "Classrooms, study space and collaboration areas." }, "geometry": { "type": "Point", "coordinates": [-84.3964, 33.7750] } },
+    { "type": "Feature", "properties": { "id": "student-center", "name": "Stamps Student Center", "category": "dining", "description": "Food, services and student organizations." }, "geometry": { "type": "Point", "coordinates": [-84.3990, 33.7739] } },
+    { "type": "Feature", "properties": { "id": "crc", "name": "Campus Recreation Center", "category": "recreation", "description": "Gym, pool and climbing wall." }, "geometry": { "type": "Point", "coordinates": [-84.4040, 33.7755] } },
+    { "type": "Feature", "properties": { "id": "bobby-dodd", "name": "Bobby Dodd Stadium", "category": "landmark", "description": "Home of Yellow Jackets football." }, "geometry": { "type": "Point", "coordinates": [-84.3928, 33.7724] } },
+    { "type": "Feature", "properties": { "id": "library", "name": "Price Gilbert Library", "category": "academic", "description": "Main campus library." }, "geometry": { "type": "Point", "coordinates": [-84.3955, 33.7745] } },
+    { "type": "Feature", "properties": { "id": "tech-green", "name": "Tech Green", "category": "landmark", "description": "Central lawn of campus." }, "geometry": { "type": "Point", "coordinates": [-84.3989, 33.7727] } }
+  ]
+}

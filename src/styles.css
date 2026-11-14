@@ -1,0 +1,27 @@
+:root { --navy: #003057; --gold: #b3a369; --bg: #f6f4ee; --ink: #1c2733; }
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; margin: 0; }
+body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--bg); }
+.app { display: flex; height: 100%; }
+.map { flex: 1; min-width: 0; }
+.sidebar { width: 320px; flex: none; display: flex; flex-direction: column; background: #fff; border-right: 1px solid #ddd; z-index: 1; overflow: hidden; }
+.sidebar header { background: var(--navy); color: #fff; padding: 16px 18px; border-bottom: 4px solid var(--gold); }
+.sidebar h1 { margin: 0; font-size: 22px; letter-spacing: 1px; }
+.sidebar header p { margin: 2px 0 0; font-size: 13px; opacity: .8; }
+.search { margin: 12px; padding: 10px 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; }
+.detail { margin: 0 12px 8px; padding: 12px; background: var(--bg); border-radius: 10px; }
+.detail h2 { margin: 0 0 6px; font-size: 16px; }
+.detail p { font-size: 14px; margin: 8px 0; }
+.detail button { border: 0; background: var(--navy); color: #fff; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+.tag { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; background: var(--gold); color: #fff; padding: 2px 8px; border-radius: 99px; }
+.list { list-style: none; margin: 0; padding: 0 12px 12px; overflow-y: auto; flex: 1; }
+.list button { width: 100%; text-align: left; border: 0; background: none; padding: 10px; border-radius: 8px; cursor: pointer; font-size: 14px; display: flex; flex-direction: column; gap: 2px; transition: background .15s; }
+.list button:hover { background: var(--bg); }
+.list button.active { background: var(--navy); color: #fff; }
+.list small { opacity: .6; text-transform: capitalize; }
+.empty { padding: 10px; color: #888; }
+@media (max-width: 700px) {
+  .app { flex-direction: column-reverse; }
+  .sidebar { width: 100%; height: 42%; border-right: 0; border-top: 1px solid #ddd; }
+  .map { height: 58%; flex: none; }
+}
