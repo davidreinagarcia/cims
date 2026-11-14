@@ -6,3 +6,5 @@
 .list button.cims-result { width: 100%; border: 0; border-bottom: var(--hairline-muted); background: none; font: inherit; text-align: left; }
 .list button.cims-result:hover { background: var(--paper-2); }
 .cims-result .cims-glyph { color: var(--ink); }
+.search-empty { order: 4; }
+.list:empty { flex: 0; padding: 0; }

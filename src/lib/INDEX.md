@@ -8,5 +8,6 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 
 - [`layerCatalog.ts`](layerCatalog.ts): The toggleable map layers (PRD F-02): id, label, color token and sub-types. Add a layer or sub-type here. · exports `LAYER_CATALOG`, `categoryColor`
 - [`places.ts`](places.ts): Typed access to the places GeoJSON in src/data/. · exports `places`
+- [`search.ts`](search.ts): Pure ranked place search with accent folding and original-text match ranges. · exports `searchPlaces`
 
 <!-- AUTO:END -->
