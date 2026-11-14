@@ -56,7 +56,17 @@ Something broke on the live site:
 At each milestone (M1–M4) tag `main`: `git tag -a v0.M.0 -m "M<n>: <name>" && git push origin v0.M.0`.
 The demo runs from a tagged commit, so you know exactly what's on stage.
 
-## One-time setup (David, repo admin)
+## Enforcement: by discipline, not by GitHub (decided 2026-11-14)
 
-GitHub → Settings → Branches → protect `main`: require PR, 1 approval, status check **CI / check**,
-linear history; disallow force pushes and deletions.
+GitHub does not enforce branch protection on a **private repo on a free personal account** (it shows
+"rules won't be enforced until you move to a Team or Enterprise organization"). We decided **not** to make
+the repo public or move it to an org just for this. So **nothing technical stops a direct push to `main`**:
+the rules above hold because we, and our agents, follow them.
+
+- Humans: never `git push origin main`. Always branch, PR, approval, squash merge.
+- Agents: `CLAUDE.md` and `AGENTS.md` forbid pushing or merging to `main`. Brief every session accordingly.
+- CI still runs on every PR (`CI / check`), but a red check does **not** block the merge button. The person
+  merging must look at it and not merge on red.
+- If someone breaks a rule by accident, say so in chat and roll back with the procedure above.
+- Revisit if the repo ever goes public or moves to an org: then enable protection on `main`
+  (require PR, 1 approval, status check **CI / check**, linear history, no force-push or deletion).
