@@ -1,0 +1,189 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "couch-park-south-field",
+        "name": "Couch Park South Field",
+        "category": "exercise",
+        "status": "draft",
+        "description": "The former Burger Bowl field supports informal outdoor recreation.",
+        "source_url": "https://crc.gatech.edu/locations/",
+        "aliases": [
+          "Burger Bowl Field"
+        ],
+        "coord_source": "OSM way 34775492 (Burger Bowl Field), field representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4029013,
+          33.7785064
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crc-climbing-wall",
+        "name": "CRC Climbing Wall",
+        "category": "exercise",
+        "status": "draft",
+        "description": "Indoor climbing with bouldering, top-rope and lead routes.",
+        "source_url": "https://crc.gatech.edu/locations/",
+        "building_id": "crc",
+        "floor_or_suite": "1st floor",
+        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4039597,
+          33.7755327
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crc-competition-pool",
+        "name": "Coach Herb McAuley Aquatic Center",
+        "category": "exercise",
+        "status": "draft",
+        "description": "The CRC competition pool hosts recreational swimming as well as varsity teams.",
+        "source_url": "https://crc.gatech.edu/locations/",
+        "building_id": "crc",
+        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4039597,
+          33.7755327
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crc-crawford-pool",
+        "name": "Vernon D. & Helen D. Crawford Pool",
+        "category": "exercise",
+        "status": "draft",
+        "description": "A CRC leisure pool with six lap lanes and a current channel.",
+        "source_url": "https://crc.gatech.edu/locations/",
+        "building_id": "crc",
+        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4039597,
+          33.7755327
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crc-fitness-floor",
+        "name": "CRC Fitness Floor",
+        "category": "exercise",
+        "status": "draft",
+        "description": "The first-floor fitness area provides weights and cardio machines.",
+        "source_url": "https://crc.gatech.edu/locations/",
+        "building_id": "crc",
+        "floor_or_suite": "1st floor",
+        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4039597,
+          33.7755327
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crc-indoor-track",
+        "name": "CRC Indoor Track",
+        "category": "exercise",
+        "status": "draft",
+        "description": "A fifth-floor running track with 6.5 laps per mile.",
+        "source_url": "https://crc.gatech.edu/locations/",
+        "building_id": "crc",
+        "floor_or_suite": "5th floor",
+        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4039597,
+          33.7755327
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crc-main-gymnasium",
+        "name": "CRC Main Gymnasium",
+        "category": "exercise",
+        "status": "draft",
+        "description": "Six multipurpose courts for basketball, volleyball, badminton and fencing.",
+        "source_url": "https://crc.gatech.edu/locations/",
+        "building_id": "crc",
+        "floor_or_suite": "4th floor",
+        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4039597,
+          33.7755327
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "peters-deck-courts",
+        "name": "Peters Parking Deck Courts",
+        "category": "exercise",
+        "status": "draft",
+        "description": "Outdoor basketball, tennis and pickleball courts on Peters Parking Deck.",
+        "source_url": "https://crc.gatech.edu/locations/",
+        "coord_source": "OSM way 42706659 (Peters Parking Deck), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3935553,
+          33.7749665
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "roe-stamps-recreation-fields",
+        "name": "Roe Stamps Recreation Fields and Track",
+        "category": "exercise",
+        "status": "draft",
+        "description": "Fields beside the CRC used for recreation, sport clubs and intramurals.",
+        "source_url": "https://crc.gatech.edu/locations/",
+        "coord_source": "OSM way 42877981 (Roe Stamps Field), field representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4036909,
+          33.7768174
+        ]
+      }
+    }
+  ]
+}

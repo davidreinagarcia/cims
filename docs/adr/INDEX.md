@@ -13,6 +13,7 @@ Architecture Decision Records: one decision per file, immutable once Accepted.
 - [`0004-curated-data-as-versioned-geojson.md`](0004-curated-data-as-versioned-geojson.md): Proposed: curated data as GeoJSON in src/data/ with provenance fields.
 - [`0005-backend-supabase.md`](0005-backend-supabase.md): Proposed/open: Supabase vs server/ on Alexandria for reports, density, availability.
 - [`0006-vector-basemap-survey-style.md`](0006-vector-basemap-survey-style.md): Proposed: replace the OSM raster basemap with free vector tiles styled to the survey-map direction.
+- [`0007-gt-sign-in-simulated.md`](0007-gt-sign-in-simulated.md): Accepted: reading is open, every post needs a signed-in account; the MVP simulates the Georgia Tech sign-in b…
 - [`README.md`](README.md): ADR rules and the index of all decisions with status.
 
 <!-- AUTO:END -->

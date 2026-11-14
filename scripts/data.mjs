@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
-const STATUSES = ['seed', 'draft', 'verified'];
+const STATUSES = ['seed', 'draft', 'verified', 'demo'];
 
 /** Return whether a value is a non-array object. */
 function isObject(value) {
@@ -110,7 +110,35 @@ function validate(documents, catalog) {
         || coords[1] < 33.76 || coords[1] > 33.79) {
         fail('geometry must be Point [lng, lat] inside campus bounds: lng -84.42..-84.375, lat 33.76..33.79');
       }
-      if (isText(p.status) && !STATUSES.includes(p.status)) fail('status must be seed, draft or verified');
+      if (isText(p.status) && !STATUSES.includes(p.status)) fail('status must be seed, draft, verified or demo');
+      if (p.kind !== undefined && !['place', 'org', 'event'].includes(p.kind)) fail('kind must be place, org or event');
+      if (p.status === 'demo' && !['event', 'org'].includes(p.kind)) fail('demo status requires kind event or org');
+      if (p.kind === 'event' && (!isObject(p.event) || (!p.event.weekly && !p.event.starts_at))) {
+        fail('events require event.weekly or event.starts_at');
+      }
+      if (p.event !== undefined) {
+        if (!isObject(p.event)) fail('event must be an object');
+        else {
+          for (const key of ['organizer', 'org_id']) {
+            if (p.event[key] !== undefined && !isText(p.event[key])) fail(`event.${key} must be a nonempty string`);
+          }
+          const weekly = p.event.weekly;
+          if (weekly !== undefined) {
+            if (!isObject(weekly) || !DAYS.includes(weekly.day)) fail('event.weekly.day must be mon..sun');
+            if (!isObject(weekly) || ![weekly.start, weekly.end].every(value => typeof value === 'string' && /^([01]\d|2[0-3]):[0-5]\d$/.test(value))) {
+              fail('event.weekly start and end must be HH:MM (00:00..23:59)');
+            } else if (weekly.start >= weekly.end) fail('event.weekly end must be after start');
+          }
+          if (p.event.starts_at !== undefined || p.event.ends_at !== undefined) {
+            const valid = [p.event.starts_at, p.event.ends_at].every(value => {
+              if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T([01]\d|2[0-3]):[0-5]\d(?::[0-5]\d(?:\.\d+)?)?(?:Z|[+-]([01]\d|2[0-3]):[0-5]\d)$/.test(value)) return false;
+              return isDate(value.slice(0, 10)) && Number.isFinite(Date.parse(value));
+            });
+            if (!valid) fail('event starts_at and ends_at must be ISO 8601 timestamps with offsets');
+            else if (Date.parse(p.event.starts_at) >= Date.parse(p.event.ends_at)) fail('event ends_at must be after starts_at');
+          }
+        }
+      }
       if (['draft', 'verified'].includes(p.status) && !isText(p.source_url)) fail(`${p.status} requires source_url`);
       for (const key of ['source_url', 'url']) {
         if (p[key] !== undefined && !isHttps(p[key])) fail(`${key} must be an absolute https URL`);

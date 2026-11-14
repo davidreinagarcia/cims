@@ -8,6 +8,7 @@ Sidebar panels, one folder per panel. Mount new ones in components/Sidebar.tsx.
 
 - [`account/`](account/INDEX.md): Account chip and accessible DEMO sign-in theater using the existing survey map design.
 - [`building-card/`](building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
+- [`bulletin/`](bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
 - [`layers/`](layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
 - [`search/`](search/INDEX.md): Search box and list of places (rooms and buildings join in T-14).
 
