@@ -31,7 +31,8 @@ export default function MapView({ selectedId, onSelect }: Props) {
     });
     map.addControl(new maplibregl.NavigationControl(), "top-right");
 
-    map.on("load", () => {
+    // style.load (not "load") so markers appear without waiting for every tile.
+    map.on("style.load", () => {
       map.addSource("places", { type: "geojson", data: places, promoteId: "id" });
       map.addLayer({
         id: "places-circle",
@@ -48,7 +49,7 @@ export default function MapView({ selectedId, onSelect }: Props) {
         id: "places-label",
         type: "symbol",
         source: "places",
-        layout: { "text-field": ["get", "name"], "text-size": 12, "text-offset": [0, 1.4], "text-anchor": "top", "text-font": ["Open Sans Regular"] },
+        layout: { "text-field": ["get", "name"], "text-size": 12, "text-offset": [0, 1.4], "text-anchor": "top", "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"] },
         paint: { "text-color": "#003057", "text-halo-color": "#fff", "text-halo-width": 1.5 },
       });
       map.on("click", "places-circle", (e) => {
@@ -60,6 +61,7 @@ export default function MapView({ selectedId, onSelect }: Props) {
     });
 
     mapRef.current = map;
+    (window as unknown as { __map?: unknown }).__map = map; // handy for debugging in the console
     return () => map.remove();
   }, []);
 
