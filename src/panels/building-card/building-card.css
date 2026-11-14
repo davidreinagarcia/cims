@@ -20,3 +20,6 @@
 .detail .cims-btn:active, .detail__inside button:active { background: var(--paper-2); color: var(--ink); }
 
 .detail__report { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); margin-top: var(--s3); }
+
+.detail__link { padding: 0; border: 0; background: none; color: var(--navy); font: inherit; text-align: left; text-decoration: underline; cursor: pointer; overflow-wrap: anywhere; }
+.detail__link:hover { background: var(--paper-2); }

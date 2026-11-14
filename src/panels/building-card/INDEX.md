@@ -6,6 +6,8 @@ Detail card for the selected place (grows into the building card, T-11).
 
 **Files**
 
+- [`BuildingCard.tsx`](BuildingCard.tsx): Card for the selected building footprint: name, nicknames, an honest height note, the places inside it, direc… · exports `BuildingCard`
+- [`BuildingLink.tsx`](BuildingLink.tsx): Table row "Building" for a place card: names the footprint the place stands in and selects it on click. · exports `BuildingLink`
 - [`PlaceCard.tsx`](PlaceCard.tsx): Selected place card with hours, access, provenance, contained places and map directions. · exports `PlaceCard`
 - [`building-card.css`](building-card.css): * @file Detail card layout. Look comes from .cims-card__* / .cims-tag / .cims-btn (styles/cims-ui.css); `orde…
 

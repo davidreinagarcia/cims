@@ -1,9 +1,11 @@
-/** @file Buildings layer: OSM footprints extruded in the survey style (flat paper walls, ink rim, white roof; flat outlined footprints in 2D), gold roof and gold hatch when selected, names in caps from zoom 16. Click selects. */
+/** @file Buildings layer: OSM footprints extruded in the survey style (flat paper walls, ink rim, white roof; flat outlined footprints in 2D), gold roof and gold hatch when selected, names in caps from zoom 16. Click selects; selecting a place also highlights the building it stands in. */
 import type { FillExtrusionLayerSpecification, FilterSpecification, MapLayerMouseEvent, MapMouseEvent } from "maplibre-gl";
 import type { MapLayer } from "../types";
 import { GOLD, INK, PAPER, PAPER_2, WHITE } from "../palette";
 import { addHatchPatterns, HATCH_GOLD } from "../patterns";
 import buildingsUrl from "../../data/buildings.geojson?url";
+import { loadBuildings, loadedBuildings } from "../../lib/buildings";
+import { places } from "../../lib/places";
 
 const SOURCE = "buildings";
 const FLAT = "buildings-flat";
@@ -24,26 +26,6 @@ const ROOF_THICKNESS = 0.4;
 /** Meters of ink band under the roof slab: reads as the drafted roof edge. */
 const RIM_THICKNESS = 0.9;
 
-type Center = [number, number];
-let centers: Promise<Map<string, Center>> | null = null;
-
-/** Center of every building's bounding box, by id. Loaded once, on the first selection made outside the map. */
-function loadCenters(): Promise<Map<string, Center>> {
-  centers ??= fetch(buildingsUrl)
-    .then((r) => r.json())
-    .then((fc: GeoJSON.FeatureCollection<GeoJSON.Polygon | GeoJSON.MultiPolygon, { id: string }>) => {
-      const out = new Map<string, Center>();
-      for (const f of fc.features) {
-        const pts = (f.geometry.type === "Polygon" ? [f.geometry.coordinates] : f.geometry.coordinates).flatMap((p) => p[0]);
-        const xs = pts.map((p) => p[0]);
-        const ys = pts.map((p) => p[1]);
-        out.set(f.properties.id, [(Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...ys) + Math.max(...ys)) / 2]);
-      }
-      return out;
-    });
-  return centers;
-}
-
 const isSelected = (id: string | null): FilterSpecification => ["==", ["get", "id"], id ?? NONE];
 const notSelected = (id: string | null): FilterSpecification => ["!=", ["get", "id"], id ?? NONE];
 
@@ -55,6 +37,7 @@ const buildings: MapLayer = {
     let selectedId: string | null = null;
     let pickedOnMap = false;
     let removed = false;
+    let latest = 0; // guards late async results from an older selection
 
     map.addSource(SOURCE, { type: "geojson", data: buildingsUrl, promoteId: "id", tolerance: 0.5 });
     // Plan view (2D): white footprint, gold when selected. Hidden while the map is tilted.
@@ -158,21 +141,45 @@ const buildings: MapLayer = {
 
     return {
       update(selection) {
-        const next = selection?.kind === "building" ? selection.id : null;
         const fromMap = pickedOnMap;
         pickedOnMap = false;
-        if (next === selectedId) return;
-        if (selectedId) map.setFeatureState({ source: SOURCE, id: selectedId }, { selected: false });
-        if (next) map.setFeatureState({ source: SOURCE, id: next }, { selected: true });
-        selectedId = next;
-        map.setFilter(WALLS, notSelected(next));
-        map.setFilter(WALLS_SELECTED, isSelected(next));
-        // Picked in a panel (search, card): bring it into view. Picked on the map: it is already there.
-        if (next && !fromMap) {
-          void loadCenters().then((byId) => {
-            const center = byId.get(next);
-            if (center && !removed && selectedId === next) map.flyTo({ center, zoom: Math.max(map.getZoom(), 16.5), duration: 800 });
-          });
+        const mine = ++latest;
+        // Gold roof and hatched walls for one building; null clears.
+        const highlight = (next: string | null) => {
+          if (next === selectedId) return;
+          if (selectedId) map.setFeatureState({ source: SOURCE, id: selectedId }, { selected: false });
+          if (next) map.setFeatureState({ source: SOURCE, id: next }, { selected: true });
+          selectedId = next;
+          map.setFilter(WALLS, notSelected(next));
+          map.setFilter(WALLS_SELECTED, isSelected(next));
+        };
+        if (selection?.kind === "building") {
+          highlight(selection.id);
+          // Picked in a panel (search, card): bring it into view. Picked on the map: it is already there.
+          if (!fromMap) {
+            void loadBuildings()
+              .then((index) => {
+                const b = index.byId.get(selection.id);
+                if (b && !removed && latest === mine) map.flyTo({ center: b.center, zoom: Math.max(map.getZoom(), 16.5), duration: 800 });
+              })
+              .catch(() => {});
+          }
+        } else if (selection?.kind === "place") {
+          // A place (list, search, pin): highlight the building it stands in. The pins layer does the fly-to.
+          const place = places.features.find((f) => f.properties.id === selection.id);
+          if (!place) return highlight(null);
+          const [lng, lat] = place.geometry.coordinates;
+          const index = loadedBuildings();
+          if (index) highlight(index.at(lng, lat)?.id ?? null);
+          else {
+            void loadBuildings()
+              .then((loaded) => {
+                if (!removed && latest === mine) highlight(loaded.at(lng, lat)?.id ?? null);
+              })
+              .catch(() => {});
+          }
+        } else {
+          highlight(null);
         }
       },
       remove() {

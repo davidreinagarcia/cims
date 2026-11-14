@@ -2,6 +2,7 @@
 import AccountChip from "../panels/account/AccountChip";
 import { useId, useRef, useState } from "react";
 import BulletinPanel from "../panels/bulletin/BulletinPanel";
+import BuildingCard from "../panels/building-card/BuildingCard";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import LayersPanel from "../panels/layers/LayersPanel";
 import SearchPanel from "../panels/search/SearchPanel";
@@ -41,6 +42,7 @@ export default function Sidebar() {
         <SearchPanel />
         <LayersPanel />
         <PlaceCard />
+        <BuildingCard />
       </div>
       <div className="sidebar__panel" role="tabpanel" id={`${id}-panel-1`} aria-labelledby={`${id}-tab-1`} hidden={tab !== 1}>
         {tab === 1 && <BulletinPanel onShowMap={() => {
