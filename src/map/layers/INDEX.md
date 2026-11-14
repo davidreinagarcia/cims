@@ -6,6 +6,7 @@ One file per map layer; each default-exports a MapLayer and is loaded automatica
 
 **Files**
 
-- [`pois.ts`](pois.ts): Places layer: survey pins per category (glyph inside a paper ring), name labels from zoom 16; the selected pl…
+- [`pois.css`](pois.css): * @file Survey-style shared-location popup and keyboard-accessible place list.
+- [`pois.ts`](pois.ts): Filtered place clusters, survey pins and labels, with a separate gold selected pin and a shared-location pick…
 
 <!-- AUTO:END -->
