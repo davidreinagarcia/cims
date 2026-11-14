@@ -11,9 +11,9 @@
         "subtype": "admin",
         "description": "Ofrece orientación profesional y organiza entrevistas con empleadores en el Bill Moore Student Success Center.",
         "status": "draft",
-        "source_url": "https://career.gatech.edu/hours-of-operation-location/",
-        "url": "https://career.gatech.edu/hours-of-operation-location/",
-        "address": "Bill Moore Student Success Center, 1st floor, 219 Uncle Heinie Way, Atlanta, GA 30332",
+        "source_url": "https://career.gatech.edu/contact-us/",
+        "url": "https://career.gatech.edu/",
+        "address": "219 Uncle Heinie Way, Atlanta, GA 30332",
         "coord_source": "OSM way 42706711 (Bill Moore Student Success Center), building representative point returned by Nominatim search"
       },
       "geometry": {

@@ -22,7 +22,7 @@ Cada fila corresponde al `id` del JSON. La fuente enlazada acredita la ubicació
 | ID | Fuente y evidencia de ubicación |
 | --- | --- |
 | `office-registrar` | [About the Registrar's Office](https://registrar.gatech.edu/about): primera planta del Administration Building, Tech Tower, 225 North Avenue; enumera servicios de matrícula y expedientes. |
-| `career-center` | [Hours of Operation & Location](https://career.gatech.edu/hours-of-operation-location/): personal en la primera planta del Bill Moore Student Success Center, 219 Uncle Heinie Way; entrevistas en la planta inferior. La búsqueda recuperó la página, aunque una apertura posterior devolvió 502. |
+| `career-center` | [Contact Us](https://career.gatech.edu/contact-us/) (the earlier Hours of Operation page returns 404; the floor it mentioned could not be re-confirmed and was removed): personal en la primera planta del Bill Moore Student Success Center, 219 Uncle Heinie Way; entrevistas en la planta inferior. La búsqueda recuperó la página, aunque una apertura posterior devolvió 502. |
 | `scholarships-financial-aid` | [Contacting Our Office](https://finaid.gatech.edu/contacting-our-office): tercera planta del Bill Moore Student Success Center; [página de Financial Aid](https://finaid.gatech.edu/) describe becas y financiación. No se utiliza su dirección postal genérica como ubicación física. |
 | `office-international-education` | [Hours and Contact Information](https://oie.gatech.edu/directions): distingue la dirección postal del mostrador físico y sitúa ambos en Savant, suite 211, 631 Cherry Street; [página principal de OIE](https://oie.gatech.edu/) describe sus tres áreas de actividad. |
 

@@ -70,7 +70,7 @@
 
 ## orgs
 
-- [ ] **Career Center** (`career-center`, orgs/admin) · [source](<https://career.gatech.edu/hours-of-operation-location/>) · check address, hours, buzzcard, [coordinates](https://www.openstreetmap.org/?mlat=33.7724421&mlon=-84.3939568#map=19/33.7724421/-84.3939568) · `npm run data:verify -- career-center --by david`
+- [ ] **Career Center** (`career-center`, orgs/admin) · [source](<https://career.gatech.edu/contact-us/>) · check address, hours, buzzcard, [coordinates](https://www.openstreetmap.org/?mlat=33.7724421&mlon=-84.3939568#map=19/33.7724421/-84.3939568) · `npm run data:verify -- career-center --by david`
 - [ ] **Center for Student Engagement** (`center-student-engagement`, orgs/campus-org) · [source](<https://studentengagement.gatech.edu/about/contact-us>) · check address, hours, buzzcard, [coordinates](https://www.openstreetmap.org/?mlat=33.7741957&mlon=-84.3988236#map=19/33.7741957/-84.3988236) · `npm run data:verify -- center-student-engagement --by david`
 - [ ] **Civic Engagement** (`civic-engagement`, orgs/community) · [source](<https://civic-engagement.gatech.edu/about/connect-us>) · check address, hours, buzzcard, [coordinates](https://www.openstreetmap.org/?mlat=33.7741957&mlon=-84.3988236#map=19/33.7741957/-84.3988236) · `npm run data:verify -- civic-engagement --by david`
 - [ ] **DramaTech Theatre** (`dramatech-theatre`, orgs/club) · [source](<https://dramatech.org/about/history/>) · check address, hours, buzzcard, [coordinates](https://www.openstreetmap.org/?mlat=33.7752999&mlon=-84.3991059#map=19/33.7752999/-84.3991059) · `npm run data:verify -- dramatech-theatre --by david`
