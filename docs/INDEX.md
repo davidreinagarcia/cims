@@ -10,6 +10,7 @@ All project documentation: product (charter → PRD), engineering (architecture,
 - [`brainstorm/`](brainstorm/INDEX.md): Raw inputs: Miro board transcription and the three SGA challenge prompts. Read only when you need the origina…
 - [`data/`](data/INDEX.md): Curated POI schema, verification workflow and generated checklist.
 - [`design/`](design/INDEX.md): Visual direction and UI references: the chosen "survey map" style, tokens and how to build it.
+- [`research/`](research/INDEX.md): Fuentes y dudas pendientes de las investigaciones de datos del campus.
 
 **Files**
 
