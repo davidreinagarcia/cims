@@ -1,5 +1,6 @@
 /** @file Sidebar shell: survey-style header plus the panels. Add new panels here (src/panels/). */
 import PlaceCard from "../panels/building-card/PlaceCard";
+import LayersPanel from "../panels/layers/LayersPanel";
 import SearchPanel from "../panels/search/SearchPanel";
 import "./Sidebar.css";
 
@@ -16,6 +17,7 @@ export default function Sidebar() {
         </span>
       </header>
       <SearchPanel />
+      <LayersPanel />
       <PlaceCard />
     </aside>
   );

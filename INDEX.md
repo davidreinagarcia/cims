@@ -31,6 +31,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
     - [`src/map/layers/`](src/map/layers/INDEX.md): One file per map layer; each default-exports a MapLayer and is loaded automatically. Add yours here.
   - [`src/panels/`](src/panels/INDEX.md): Sidebar panels, one folder per panel. Mount new ones in components/Sidebar.tsx.
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
+    - [`src/panels/layers/`](src/panels/layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
     - [`src/panels/search/`](src/panels/search/INDEX.md): Search box and list of places (rooms and buildings join in T-14).
   - [`src/state/`](src/state/INDEX.md): Shared app state. Today only the current selection.
   - [`src/styles/`](src/styles/INDEX.md): Design system CSS: tokens.css (variables) and cims-ui.css (all cims- components). Wired in by T-06.

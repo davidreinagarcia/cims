@@ -8,10 +8,23 @@ export interface LayerContext {
   select: (selection: Selection | null) => void;
 }
 
+/** Which categories and sub-types the user has switched off in the layer panel. */
+export interface LayerFilters {
+  /** Category id to visible. A category missing here counts as visible. */
+  visible: Record<string, boolean>;
+  /** Category id to the sub-type ids that are switched off ("other" = features with no subtype). */
+  hiddenSubtypes: Record<string, string[]>;
+}
+
 /** What a layer returns from addTo so the host can drive it. */
 export interface LayerHandle {
   /** Called right after addTo and again every time the selection changes. */
   update?: (selection: Selection | null) => void;
+  /**
+   * Called after addTo and whenever the layer panel changes. Hide what the filters exclude, usually
+   * with `map.setFilter(id, buildMapFilter(filters))` (see map/layerFilters.ts).
+   */
+  setFilters?: (filters: LayerFilters) => void;
   /** Remove everything the layer added to the map (sources, layers, listeners). */
   remove: () => void;
 }

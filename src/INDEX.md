@@ -16,7 +16,7 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 
 **Files**
 
-- [`App.tsx`](App.tsx): App shell: selection provider plus the two-column layout (sidebar and map). · exports `App`
+- [`App.tsx`](App.tsx): App shell: selection and layer-filter providers plus the two-column layout (sidebar and map). · exports `App`
 - [`config.ts`](config.ts): Central place for map settings. Change here, not inside components. · exports `CAMPUS`, `TILE_URL`, `TILE_ATTRIBUTION`
 - [`main.tsx`](main.tsx): Entry point: loads fonts, design tokens and styles, then mounts React.
 - [`styles.css`](styles.css): * @file Global layout and map-control skin. Colors, type and components come from styles/tokens.css and style…

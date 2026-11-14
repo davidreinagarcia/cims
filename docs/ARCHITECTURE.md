@@ -10,7 +10,8 @@ src/
   types.ts             Category + PlaceProperties
   state/selection.tsx  Selection {kind, id}, SelectionProvider, useSelection()
   map/
-    types.ts           the layer contract (MapLayer, LayerHandle, LayerContext)
+    types.ts           the layer contract (MapLayer, LayerHandle, LayerContext, LayerFilters)
+    layerFilters.ts    LayerFilters to a MapLibre filter (`buildMapFilter`) and `isVisible`
     baseStyle.ts       base style (OSM raster tiles + glyphs); swap for a vector basemap here
     loadLayers.ts      finds every file in layers/ automatically (import.meta.glob)
     layers/
@@ -20,9 +21,13 @@ src/
     Sidebar.tsx(+css)  shell: header + panels
   panels/
     search/            SearchPanel: search box + list
+    layers/            LayersPanel: category toggles, sub-type tree, legend; chips on phones
     building-card/     PlaceCard: detail of the selected thing (becomes the building card, T-11)
   data/places.json     GeoJSON of points of interest  <- edit this to add places
   lib/places.ts        typed access to the data
+  lib/layerCatalog.ts  the toggleable layers (id, label, color token, sub-types): add a layer or sub-type here
+  state/layerFilters.tsx  which layers/sub-types are on, saved in localStorage
+  components/Glyph.tsx    line glyph per category (shape differs, works without color)
   styles/              tokens.css (colors, type, spacing) + cims-ui.css (cims-* components): the design system
   styles.css           global layout and map-control skin; each component has its own .css for layout only
 ```
@@ -35,6 +40,10 @@ src/
   (`addTo(map, ctx)` returning `{ update?(selection), remove() }`). The host loads them all by itself,
   so adding a layer means adding one file, with no registry or shared file to edit.
   A layer reports clicks with `ctx.select(...)` and reacts to the selection in `update`.
+- **Layer filters** (the layer panel) are a second piece of shared state, `useLayerFilters()`. The host
+  passes them to every layer through `setFilters(filters)`; a layer hides what is switched off, usually
+  with `map.setFilter(id, buildMapFilter(filters))`. Features carry `category` and optional `subtype`
+  properties; a category listed in `lib/layerCatalog.ts` becomes a toggle, any other stays always visible.
 - **Panels** are components in `src/panels/<name>/`, mounted in `components/Sidebar.tsx`.
 
 ## Where things go
@@ -45,6 +54,7 @@ src/
 | Add a category                 | Extend `Category` in `src/types.ts`                                        |
 | Add a new map layer            | New file in `src/map/layers/` default-exporting a `MapLayer`; data in `src/data/` |
 | Add a new panel                | New folder in `src/panels/<name>/`, mount it in `components/Sidebar.tsx`   |
+| Add a toggleable layer / sub-type | Add it to `src/lib/layerCatalog.ts` and give features that `category` (and `subtype`) |
 | React to what is selected      | `useSelection()` in a panel, or `update(selection)` in a layer             |
 | Add a backend / API            | Create `server/` and proxy `/api` in `vite.config.ts` and nginx            |
 | Change tiles or campus bounds  | `src/config.ts` (tiles also in `src/map/baseStyle.ts`)                     |
