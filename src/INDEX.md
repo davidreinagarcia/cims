@@ -12,6 +12,7 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 - [`map/`](map/INDEX.md): Everything about the map engine: contract for layers, base style, and the layer auto-loader.
 - [`panels/`](panels/INDEX.md): Sidebar panels, one folder per panel. Mount new ones in components/Sidebar.tsx.
 - [`state/`](state/INDEX.md): Shared app state. Today only the current selection.
+- [`styles/`](styles/INDEX.md): Design system CSS: tokens.css (variables) and cims-ui.css (all cims- components). Wired in by T-06.
 
 **Files**
 

@@ -11,5 +11,6 @@ Visual direction and UI references: the chosen "survey map" style, tokens and ho
 **Files**
 
 - [`DESIGN-DIRECTION.md`](DESIGN-DIRECTION.md): Chosen visual direction ("survey map"): tokens, type, map styling rules and how to build it in MapLibre.
+- [`styleguide.html`](styleguide.html): HTML entry · CIMS Style Guide
 
 <!-- AUTO:END -->
