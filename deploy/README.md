@@ -25,3 +25,15 @@ The first load of a brand-new subdomain can take a minute while its certificate 
 Logs: `/home/david/deploy/cims-deploy.log`.
 
 Teammates: push a branch, open `branches-cims.queenalexandria.online`, share the link in your PR.
+
+## Cache headers (why `deploy/nginx-cims.conf` exists)
+
+Cloudflare sits in front of the site and, when the origin sends no `Cache-Control`, caches static extensions such as
+`.js` and `.json` for 4 hours. That left visitors on an **old service worker** after a deploy. The nginx config of the
+`cims-frontend` container (`/opt/docker/infra/cims-nginx.conf`, copy in `deploy/nginx-cims.conf`) therefore sends:
+
+- `/sw.js`, `/manifest.json` and the page (`index.html`, SPA fallback): `Cache-Control: no-cache` (always revalidated)
+- `/assets/*` (content-hashed file names): `public, max-age=31536000, immutable`
+
+The branch previews use the same rules. If you change the file, copy it to `/opt/docker/infra/` and
+`docker compose up -d cims-frontend`.
