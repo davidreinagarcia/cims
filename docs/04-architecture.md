@@ -165,7 +165,7 @@ future one is GT SSO. Every user-generated row carries `account_id`; Supabase RL
 | Identity | Reading needs no account. **Every write needs a signed-in account** (F-21): MVP uses a simulated GT sign-in behind an `AuthAdapter` (mock now, real GT SSO later, [ADR-0007](adr/0007-gt-sign-in-simulated.md)). Roles: student, officer, staff, moderator |
 | Privacy | Pseudonymous accounts only (opaque id + role; no names, emails or GTIDs); authors visible to staff and moderators, never to other students; no server-side location |
 | Abuse | Account required to post; rate limits per account; content length caps; escaped rendering; event posting limited to officers; moderator can hide posts and suspend accounts (Phase 2 enforcement) |
-| Offline / demo safety | Add a service worker to cache app shell + curated data (not set up yet); demo runs without backend |
+| Offline / demo safety | Service worker (T-41, `src/pwa/sw.js`, generated at build by `vite.config.ts`): precaches the app shell and the data bundled in it, caches map tiles and glyphs as they are viewed; the app and every place already viewed work with no network. Demo runs without backend |
 | Observability | Privacy-friendly page analytics + error tracking (free tier) |
 | Data freshness | Validation warns on records with `verified_at` > 90 days |
 

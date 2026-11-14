@@ -194,7 +194,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 ### P2: Should (only after every P1 box is checked)
 
 - [ ] **T-40 No-show release** (F-18) · B · QR check-in per room, auto-release after grace period
-- [ ] **T-41 Offline fallback / PWA** · A · service worker caching the shell + data (Risk R-06)
+- [x] **T-41 Offline fallback / PWA** · A · service worker caching the shell + data (Risk R-06)
 - [ ] **T-42 Transport layer** (F-09) · A
 - [ ] **T-43 Study-space fullness** (F-08) · B · reuses T-22 backend
 
