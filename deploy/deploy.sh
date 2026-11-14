@@ -13,7 +13,13 @@ exec 9>"$LOCK"
 flock -n 9 || exit 0
 
 cd "$REPO_DIR"
-git fetch -q origin main
+# Cron has no GITHUB_TOKEN: read it from the Claude settings env and pass it as a
+# one-off header (never stored in the remote URL or on disk).
+if [ -z "${GITHUB_TOKEN:-}" ]; then
+  GITHUB_TOKEN=$(python3 -c "import json;print(json.load(open('/home/david/.claude/settings.json'))['env']['GITHUB_TOKEN'])")
+fi
+AUTH=$(printf 'x-access-token:%s' "$GITHUB_TOKEN" | base64 -w0)
+git -c credential.helper= -c http.extraheader="Authorization: Basic $AUTH" fetch -q origin main
 NEW=$(git rev-parse origin/main)
 OLD=$(cat "$STATE" 2>/dev/null || true)
 [ "$NEW" = "$OLD" ] && exit 0
