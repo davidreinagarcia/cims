@@ -15,8 +15,10 @@ Everything about the map engine: contract for layers, base style, and the layer 
 - [`baseStyle.ts`](baseStyle.ts): The map's base style: paper background, OSM raster tiles washed out to a drafted gray (ADR-0006 step 1), the… · exports `baseStyle`
 - [`layerFilters.ts`](layerFilters.ts): Turns the layer panel's LayerFilters into a MapLibre filter and a plain visibility check. · exports `OTHER_SUBTYPE`, `isVisible`, `buildMapFilter`
 - [`loadLayers.ts`](loadLayers.ts): Discovers every layer module in src/map/layers/ and returns them in draw order. · exports `loadLayers`
-- [`palette.ts`](palette.ts): Survey-map colors as literals for MapLibre paint and canvas drawing. Mirrors src/styles/tokens.css: change bo… · exports `INK`, `PAPER`, `PAPER_2`, `WHITE`, `GOLD`, `GOLD_INK`
+- [`palette.ts`](palette.ts): Survey-map colors as literals for MapLibre paint and canvas drawing. Mirrors src/styles/tokens.css: change bo… · exports `INK`, `PAPER`, `PAPER_2`, `WHITE`, `GOLD`, `GOLD_INK`, `SAGE`
 - [`pins.ts`](pins.ts): Survey-marker pins for the map: teardrop in the category color with the category glyph inside a paper ring. D… · exports `pinImageId`, `addPins`
+- [`transitLive.ts`](transitLive.ts): Live bus positions from the official GT tracker (bus.gatech.edu), as GeoJSON points. Read-only, no key. · exports `TRACKER_URL`, `fetchBuses`
+- [`transport.css`](transport.css): * @file Survey-style skin for the bus stop popup: square, 1px ink, no shadow.
 - [`types.ts`](types.ts): Contract for map layers: every file in src/map/layers/ default-exports one MapLayer.
 
 <!-- AUTO:END -->
