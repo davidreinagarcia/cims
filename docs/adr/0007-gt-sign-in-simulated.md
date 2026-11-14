@@ -35,6 +35,10 @@ approval and registration), but we want the product, the demo and the data model
 and keeps a local session; screens only use `useAuth()` and a `requireAuth(action)` gate. Real SSO (or option 4,
 the cheaper real fallback) becomes a second adapter with the same `Session { accountId, role, provider }`.
 
+**The MVP mock is deliberately theater (David, 2026-11-14):** it looks and flows like a real GT login (redirect
+screen, account picker, account chip, posting gate that resumes the action) but is pure front-end. Nothing is
+authenticated or enforced, and roles only change labels. It exists to show the intended experience.
+
 Rules that come with it:
 - **Reading is open.** Write controls stay visible and tell the user they need sign-in.
 - Every write carries `account_id` (opaque, pseudonymous) and the author's role. Other students never see the
