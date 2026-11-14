@@ -6,6 +6,7 @@ Curated campus data (GeoJSON/JSON). Every record needs `source_url` + `verified_
 
 **Files**
 
+- [`buildings.overrides.json`](buildings.overrides.json): Hand-curated corrections applied on top of OpenStreetMap by scripts/fetch-buildings.mjs. Match by osm_id (pre…
 - [`places.json`](places.json): GeoJSON, 7 features · SEED DATA: approximate coordinates, to be replaced/extended by the team. Add features h…
 
 <!-- AUTO:END -->

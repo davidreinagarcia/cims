@@ -1,0 +1,17 @@
+{
+  "_note": "Hand-curated corrections applied on top of OpenStreetMap by scripts/fetch-buildings.mjs. Match by osm_id (preferred) or exact OSM name. Only add what a person verified; set verified_at + verified_by.",
+  "buildings": [
+    {
+      "match": { "name": "Kendeda Building for Innovative Sustainable Design" },
+      "set": { "aliases": ["Kendeda", "Kendeda Building"] },
+      "verified_at": null,
+      "verified_by": null
+    },
+    {
+      "match": { "name": "Clough Undergraduate Learning Commons" },
+      "set": { "aliases": ["CULC", "Clough"] },
+      "verified_at": null,
+      "verified_by": null
+    }
+  ]
+}
