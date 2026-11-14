@@ -6,7 +6,7 @@ Detail card for the selected place (grows into the building card, T-11).
 
 **Files**
 
-- [`PlaceCard.tsx`](PlaceCard.tsx): Detail card for the selected place. Becomes the building card in T-11. · exports `PlaceCard`
+- [`PlaceCard.tsx`](PlaceCard.tsx): Selected place card with hours, access, provenance, contained places and map directions. · exports `PlaceCard`
 - [`building-card.css`](building-card.css): * @file Detail card layout. Look comes from .cims-card__* / .cims-tag / .cims-btn (styles/cims-ui.css); `orde…
 
 <!-- AUTO:END -->

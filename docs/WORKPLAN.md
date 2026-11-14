@@ -150,9 +150,9 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 - [ ] **T-10 3D buildings layer** (F-01) · needs T-01, T-03
   `fill-extrusion` from `buildings.geojson`, tilted default camera, highlight on select, click → `Selection`.
   Look: white roof cap + hatched walls, gold hatch when selected ([DESIGN-DIRECTION § Map styling](design/DESIGN-DIRECTION.md#map-styling-in-maplibre-how-to-actually-build-it-notes-for-t-10--t-12)).
-- [ ] **T-11 Building card** (F-03) · needs T-02, T-10
+- [x] **T-11 Building card** (F-03) · needs T-02, T-10
   Photo, hours + open-now, BuzzCard access, POIs inside, Directions, **Enter building** (calls Lane B's
-  indoor entry point via `Selection`).
+  indoor entry point via `Selection`). Enter building button waits for T-21
 - [x] **T-12 Layer toggles + legend** (F-02) · needs T-01
 - [ ] **T-13 POI layers** (F-05) · needs T-12 and data from T-30
 - [ ] **T-14 Search** (F-04) · needs T-03; rooms join when T-20 lands

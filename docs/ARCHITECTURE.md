@@ -22,7 +22,7 @@ src/
   panels/
     search/            SearchPanel: search box + list
     layers/            LayersPanel: category toggles, sub-type tree, legend; chips on phones
-    building-card/     PlaceCard: detail of the selected thing (becomes the building card, T-11)
+    building-card/     PlaceCard: hours/access/provenance, inside places, directions and corrections; lib/hours.ts computes campus-local status
   data/places.json     GeoJSON of points of interest  <- edit this to add places
   lib/places.ts        typed access to the data
   lib/search.ts        pure ranked place search with aliases, accent folding and highlight ranges

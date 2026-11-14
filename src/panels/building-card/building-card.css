@@ -2,3 +2,19 @@
 .detail { order: 3; margin: 0 var(--s4) var(--s3); padding: var(--s3) var(--s4); background: var(--white); border: var(--hairline); }
 .detail .cims-card__name { margin-top: 0; }
 .detail p { margin: var(--s2) 0; font-size: var(--fs-sm); }
+.detail { min-width: 0; flex: none; overflow-wrap: anywhere; }
+.detail .cims-card__photo { background: var(--cat); display: grid; place-items: center; }
+.detail .cims-card__photo span { background: var(--white); padding: var(--s1) var(--s2); font-size: var(--fs-sm); }
+.detail .detail__tags { display: flex; flex-wrap: wrap; gap: var(--s1); }
+.detail .cims-status { max-width: 100%; }
+.detail .cims-infotable { table-layout: fixed; }
+.detail .cims-infotable th { padding-right: var(--s2); }
+.detail a { color: var(--navy); }
+.detail .cims-actions { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin-top: var(--s3); }
+.detail .cims-actions a { text-decoration: none; }
+.detail .cims-actions .cims-btn--primary { color: var(--gold); }
+.detail__inside h3 { margin: var(--s3) 0 var(--s1); font-size: var(--fs-md); }
+.detail__inside ul { list-style: none; padding: 0; margin: 0; }
+.detail__inside button { min-height: var(--tap); width: 100%; padding: var(--s2) 0; border: 0; border-top: var(--hairline-muted); background: none; color: var(--navy); font: inherit; text-align: left; text-decoration: underline; cursor: pointer; overflow-wrap: anywhere; }
+.detail__inside button:hover { background: var(--paper-2); }
+.detail .cims-btn:active, .detail__inside button:active { background: var(--paper-2); color: var(--ink); }
