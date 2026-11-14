@@ -11,6 +11,7 @@ Curated points of interest, one file per category (drafts by Codex pending verif
 - [`food.json`](food.json): GeoJSON, 18 features
 - [`health.json`](health.json): GeoJSON, 4 features
 - [`makerspace.json`](makerspace.json): GeoJSON, 6 features
+- [`orgs.json`](orgs.json): GeoJSON, 13 features
 - [`printing.json`](printing.json): GeoJSON, 6 features
 
 <!-- AUTO:END -->

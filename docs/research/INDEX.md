@@ -6,6 +6,7 @@ Fuentes y dudas pendientes de las investigaciones de datos del campus.
 
 **Files**
 
+- [`org-research-notes.md`](org-research-notes.md): Fuentes oficiales, coordenadas OSM, descartes y dudas de los 13 borradores de organizaciones y oficinas T-32.
 - [`poi-research-notes.md`](poi-research-notes.md): Fuentes, coordenadas OSM, descartes y dudas para los borradores T-30 de comida, impresión, salud, fabricación…
 
 <!-- AUTO:END -->
