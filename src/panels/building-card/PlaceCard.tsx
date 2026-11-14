@@ -13,6 +13,11 @@ export default function PlaceCard() {
       <h2 className="cims-card__name">{place.properties.name}</h2>
       <p className="cims-card__alias">
         <span className="cims-tag">{place.properties.category}</span>
+        {place.properties.status !== "verified" && (
+          <span className="cims-tag cims-tag--alert" title="Not yet checked against an official source">
+            {place.properties.status === "draft" ? "Unverified draft" : "Approximate"}
+          </span>
+        )}
       </p>
       <p>{place.properties.description}</p>
       <button className="cims-btn cims-btn--small" onClick={() => select(null)}>

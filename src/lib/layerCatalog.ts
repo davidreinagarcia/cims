@@ -18,7 +18,7 @@ export interface LayerCategory {
   subtypes: SubType[];
 }
 
-/** The six layers of the PRD, in panel order. */
+/** The PRD layers plus Printing and Health (added 2026-11-14), in panel order. */
 export const LAYER_CATALOG: LayerCategory[] = [
   {
     id: "food",
@@ -28,12 +28,15 @@ export const LAYER_CATALOG: LayerCategory[] = [
       { id: "dining-hall", label: "Dining halls" },
       { id: "restaurant", label: "Restaurants" },
       { id: "coffee", label: "Coffee" },
+      { id: "cafeteria", label: "Cafeterias" },
       { id: "vending", label: "Vending" },
     ],
   },
   { id: "support", label: "Support", cssVar: "--cat-support", subtypes: [] },
+  { id: "printing", label: "Printing", cssVar: "--cat-printing", subtypes: [] },
   { id: "makerspace", label: "Makerspaces", cssVar: "--cat-makerspace", subtypes: [] },
   { id: "exercise", label: "Exercise", cssVar: "--cat-exercise", subtypes: [] },
+  { id: "health", label: "Health", cssVar: "--cat-health", subtypes: [] },
   { id: "orgs", label: "Orgs & Events", cssVar: "--cat-orgs", subtypes: [] },
   { id: "transport", label: "Transport", cssVar: "--cat-transport", subtypes: [] },
 ];
