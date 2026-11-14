@@ -55,7 +55,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 ### Components
 
 - `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component.
-- `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
+- `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:12](../src/components/MapView.tsx#L12): The interactive map. Knows nothing about what is drawn: layers do that.
 - `Sidebar()` [src/components/Sidebar.tsx:8](../src/components/Sidebar.tsx#L8): Left column (bottom sheet on phones) that hosts the panels.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:13](../src/panels/building-card/PlaceCard.tsx#L13): Shows the selected place's known details and correction link, or nothing without a place selection.
@@ -66,6 +66,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Other exported functions & constants
 
+- `glyphPath(id)` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
 - `CAMPUS` [src/config.ts:3](../src/config.ts#L3): Central place for map settings. Change here, not inside components.
 - `TILE_URL` [src/config.ts:16](../src/config.ts#L16): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
 - `TILE_ATTRIBUTION` [src/config.ts:18](../src/config.ts#L18): Attribution text OSM requires next to the tiles.
@@ -75,6 +76,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `isVisible(filters, category, subtype?)` [src/map/layerFilters.ts:9](../src/map/layerFilters.ts#L9): Is a feature of this category and sub-type currently shown? Categories nobody toggles are always shown.
 - `buildMapFilter(filters)` [src/map/layerFilters.ts:18](../src/map/layerFilters.ts#L18): MapLibre filter that keeps only visible features (reads `category` and `subtype` properties), or
 - `loadLayers()` [src/map/loadLayers.ts:7](../src/map/loadLayers.ts#L7): All layers found in src/map/layers/, sorted by their `order` (default 100).
+- `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
+- `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
 
 ### Possible duplicates
 
