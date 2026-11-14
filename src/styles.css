@@ -1,10 +1,11 @@
-/** @file Global styles: tokens, reset and the two-column app layout. Component styles live next to their component. */
-:root { --navy: #003057; --gold: #b3a369; --bg: #f6f4ee; --ink: #1c2733; }
-* { box-sizing: border-box; }
+/** @file Global layout and map-control skin. Colors, type and components come from styles/tokens.css and styles/cims-ui.css. */
 html, body, #root { height: 100%; margin: 0; }
-body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: var(--ink); background: var(--bg); }
+body { background: var(--paper); }
 .app { display: flex; height: 100%; }
 .map { flex: 1; min-width: 0; }
+/* MapLibre zoom/compass controls in the survey style: square, 1px ink, no shadow. */
+.maplibregl-ctrl-group { border-radius: 0; box-shadow: none; border: var(--hairline); background: var(--white); }
+.maplibregl-ctrl-group button + button { border-top: var(--hairline); }
 @media (max-width: 700px) {
   .app { flex-direction: column-reverse; }
   .map { height: 58%; flex: none; }

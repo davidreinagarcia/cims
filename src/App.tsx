@@ -7,7 +7,7 @@ import { SelectionProvider } from "./state/selection";
 export default function App() {
   return (
     <SelectionProvider>
-      <div className="app">
+      <div className="app cims">
         <Sidebar />
         <MapView />
       </div>

@@ -8,6 +8,7 @@ All project documentation: product (charter → PRD), engineering (architecture,
 
 - [`adr/`](adr/INDEX.md): Architecture Decision Records: one decision per file, immutable once Accepted.
 - [`brainstorm/`](brainstorm/INDEX.md): Raw inputs: Miro board transcription and the three SGA challenge prompts. Read only when you need the origina…
+- [`design/`](design/INDEX.md): Visual direction and UI references: the chosen "survey map" style, tokens and how to build it.
 
 **Files**
 

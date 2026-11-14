@@ -19,6 +19,8 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
 - [`docs/`](docs/INDEX.md): All project documentation: product (charter → PRD), engineering (architecture, ADRs, function registry) and p…
   - [`docs/adr/`](docs/adr/INDEX.md): Architecture Decision Records: one decision per file, immutable once Accepted.
   - [`docs/brainstorm/`](docs/brainstorm/INDEX.md): Raw inputs: Miro board transcription and the three SGA challenge prompts. Read only when you need the origina…
+  - [`docs/design/`](docs/design/INDEX.md): Visual direction and UI references: the chosen "survey map" style, tokens and how to build it.
+    - [`docs/design/references/`](docs/design/references/INDEX.md): Reference images (Gemini mockups). Mood references, not specs; their data is fake.
 - [`public/`](public/INDEX.md): Static assets served as-is at the site root.
 - [`scripts/`](scripts/INDEX.md): Dev tooling run with Node (no deps): index generator, Claude hooks, data fetchers.
 - [`src/`](src/INDEX.md): The web app (Vite + React + TypeScript + MapLibre). Entry: main.tsx → App.tsx.
@@ -31,6 +33,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
     - [`src/panels/search/`](src/panels/search/INDEX.md): Search box and list of places (rooms and buildings join in T-14).
   - [`src/state/`](src/state/INDEX.md): Shared app state. Today only the current selection.
+  - [`src/styles/`](src/styles/INDEX.md): Design system CSS: tokens.css (variables) and cims-ui.css (all cims- components). Wired in by T-06.
 - [`templates/`](templates/INDEX.md): Copy-and-fill templates: meeting notes, weekly status.
 
 **Root files**

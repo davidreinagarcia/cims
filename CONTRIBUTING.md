@@ -59,9 +59,10 @@ Example: `feat(map): highlight building on first tap`.
 ### Code review
 
 - Review within **2 hours** during hackathon hours. Unblocking others comes before your own card.
-- Reviewer checks the [Definition of Done](docs/07-definition-of-done.md), runs the branch
-  (`npm run dev` serves on the LAN with `--host`, so open it on a phone), and verifies acceptance criteria.
-  There are no per-PR preview URLs.
+- Reviewer checks the [Definition of Done](docs/07-definition-of-done.md), opens the branch's
+  **preview URL** on a phone (`https://<branch-slug>-cims.queenalexandria.online`, all listed at
+  https://branches-cims.queenalexandria.online), and verifies acceptance criteria.
+- Put the preview link in the PR description.
 - Prefix comments: **`blocker:`** must fix · **`suggestion:`** optional · **`nit:`** cosmetic · **`question:`**.
 - Approve when it's good enough to ship, not when it's perfect.
 

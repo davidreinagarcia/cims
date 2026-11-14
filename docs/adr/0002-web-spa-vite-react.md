@@ -39,7 +39,7 @@ nginx behind Traefik on a team member's server (Alexandria). A cron job rebuilds
 - 👍 Auto-deploy from `main` keeps the live demo current.
 - 👎 `main` is production. Broken builds are kept off the site (previous version stays live), but
   a *working-but-wrong* merge goes public. Hence: branches + PRs, `npm run build` before merging.
-- 👎 No per-PR preview URLs; reviewers run the branch locally.
+- 👍 Every branch gets its own preview at `https://<branch-slug>-cims.queenalexandria.online` (list: https://branches-cims.queenalexandria.online), added by David after this ADR.
 - 👎 Depends on one person's server (Risk R-12). Fallback: any static host can serve `dist/`.
 - 👎 Backend features (F-10, F-11) need a separate service: `server/` behind `/api` or a managed
   backend (see [ADR-0005](0005-backend-supabase.md)).

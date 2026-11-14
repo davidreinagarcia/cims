@@ -24,7 +24,7 @@
 
 | Persona | Snapshot | Top job-to-be-done |
 |---------|----------|--------------------|
-| **Ana, first-year** | Week 1, doesn't know building nicknames | "Get me to CULC 152 on time." |
+| **Ana, first-year** | Week 1, doesn't know building nicknames | "Get me to my class in Kendeda on time." |
 | **Luis, transfer** | Junior, skipped most of orientation | "What resources exist that everyone else already knows about?" |
 | **Mei, international admit** | Still abroad, arriving in August | "Show me what campus looks like and which side I'll live on." |
 | **Sam, current student** | Needs a quiet spot between classes | "Where can I study *right now* that isn't packed?" |
@@ -74,8 +74,8 @@ buildings by shape and position.
 
 **US-04.1** As a **student**, I want to search by name, nickname, or room number so that I can jump straight to a place.
 - **Given** I type ≥ 2 characters, **then** results appear as I type (≤ 150 ms), grouped by Buildings / Rooms / Places / Orgs.
-- **Given** I search a nickname (e.g., "CULC", "Student Center"), **then** the right building is the first result.
-- **Given** I search "CULC 152" (building + room), **then** selecting the result opens the building's indoor view on the right floor with the room highlighted.
+- **Given** I search a nickname (e.g., "Kendeda", "CULC", "Student Center"), **then** the right building is the first result.
+- **Given** I search building + room number (e.g., "Kendeda `<room>`"), **then** selecting the result opens the building's indoor view on the right floor with the room highlighted.
 - **Given** no results, **then** I see "No results" plus a suggestion (e.g., check spelling, browse layers).
 
 ### F-05 POI layers — **Must**
@@ -100,7 +100,7 @@ buildings by shape and position.
 - **Given** I tap **Enter building**, **then** I see a level selector (defaulting to the entrance level) and the floor plan for that level.
 - **Given** a floor, **then** a directory lists rooms by type: classrooms, study rooms, offices, restrooms, vending, lockers, with search/filter.
 - **Given** I select a room (from directory or search), **then** it's highlighted on the floor plan and the plan pans to it.
-- **Given** a non-pilot building, **then** "Enter building" isn't shown; the card says "Indoor map coming soon".
+- **Given** a building without indoor data (pilot: Kendeda, then CULC), **then** "Enter building" isn't shown; the card says "Indoor map coming soon".
 
 ### F-07 Orgs & Events layer — **Must**
 
@@ -126,7 +126,7 @@ buildings by shape and position.
 **US-09.1** As a **student**, I want to see bus/Stingerette stops and bike parking so that I can plan how to get around.
 - **Given** Transport is on, **then** stops, routes (static), and bike parking show; tapping a stop links to the official live-tracking page.
 
-### F-10 Report an issue — **Must** *(P2 Campus Maintenance; proposed v0.2)*
+### F-10 Report an issue — **Must** *(P2 Campus Maintenance)*
 
 **US-10.1** As a **student**, I want to report a problem *where it is* so that I don't have to figure
 out which system or team handles it.
@@ -162,7 +162,7 @@ and location so that I can act on them.
 - **Given** the staff view (unlisted URL in MVP), **then** I see reports routed to my team, grouped
   by building and sorted by +1 count, and I can change status.
 
-### F-11 Room finder — **Should** *(P3 Improved Room Reservations; proposed v0.2)*
+### F-11 Room finder — **Must** *(P3 Improved Room Reservations)*
 
 **US-11.1** As a **student who needs a room on short notice**, I want to see which rooms are free right
 now so that I don't check several booking systems one by one.
@@ -203,10 +203,10 @@ opened, "Enter building" used, rooms found. That's enough to back the "discovery
 |---|----------|-------|-----|
 | Q1 | Hackathon dates, deliverables and judging criteria? | Product Lead | M0 |
 | Q2 | Can we get pilot-building floor plans, and are we allowed to publish them? | Data & Content | M0 |
-| Q3 | Pilot area and pilot building(s): central campus + CULC? | Team | M0 |
+| Q3 | ~~Pilot area and pilot building(s)?~~ ✅ Whole campus in 3D; indoor pilot **Kendeda**, then CULC | Team | Done 2026-11-14 |
 | Q4 | Is there an official GT data source (GIS, building list) we can use? | Tech Lead | M1 |
 | Q5 | Do we pitch a path to SGA/Facilities ownership after the hackathon? | Product Lead | M3 |
-| Q6 | Do we formally submit to P2/P3 as well, or only P1 with P2/P3 as integrated features? Confirms F-10 Must / F-11 Should | Product Lead | M0 |
+| Q6 | ~~Submit to P2/P3 formally?~~ ✅ Yes, all three prompts; F-10 and F-11 are Must | Team | Done 2026-11-14 |
 | Q7 | Is there any public room-availability feed, or do we mock availability for the pilot building? | Tech Lead | M1 |
 | Q8 | Which Facilities vs. IT categories match GT's real routing? (validate with staff if possible) | Data & Content | M1 |
 
@@ -216,3 +216,4 @@ opened, "Enter building" used, rooms found. That's enough to back the "discovery
 |------|---------|--------|----|
 | 2026-11-14 | 0.1 | Initial draft from Miro brainstorm | _TBD_ |
 | 2026-11-14 | 0.2 | Project named **CIMS**. Integrated SGA prompts P2 (Campus Maintenance) and P3 (Improved Room Reservations): F-10 → Must (expanded), F-11 Room finder → Should, F-18 to F-20 added. Pending confirmation (Q6) | _TBD_ |
+| 2026-11-14 | 0.3 | M0 decisions: entered in all three prompts (F-11 → Must, F-18 → Should); indoor pilot = Kendeda (CULC second); 3D for whole campus | Tato |
