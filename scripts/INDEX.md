@@ -6,6 +6,7 @@ Dev tooling run with Node (no deps): index generator, Claude hooks, data fetcher
 
 **Files**
 
+- [`check-availability.mjs`](check-availability.mjs): Dependency-free checks of room availability, fictional seed coverage and campus-local DST expansion.
 - [`claude-hook.mjs`](claude-hook.mjs): Claude Code hook: keeps indexes current and makes the agent fix docs gaps in files it touched.
 - [`data.mjs`](data.mjs): Validate curated GeoJSON, record verification and generate the verification checklist.
 - [`gen-index.mjs`](gen-index.mjs): Generates folder INDEX.md files, the global INDEX.md and docs/FUNCTIONS.md from the repo. Zero deps.

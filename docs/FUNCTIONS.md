@@ -31,6 +31,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 ### Types & contracts
 
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
+- `TimeWindow` [src/indoor/availability.ts:7](../src/indoor/availability.ts#L7): A half-open interval of instants: start is included and end is excluded.
+- `RoomQuery` [src/indoor/availability.ts:10](../src/indoor/availability.ts#L10): Filters for bookable rooms available throughout a time window.
+- `FreeRoom` [src/indoor/availability.ts:18](../src/indoor/availability.ts#L18): A matching room together with its building for selection and display.
+- `DemoSlotPattern` [src/indoor/availability.ts:21](../src/indoor/availability.ts#L21): A fictional same-day booking recurring at campus-local HH:MM times.
 - `RoomType` [src/indoor/types.ts:4](../src/indoor/types.ts#L4): What a room is used for. Drives its fill on the floor plan and its group in the directory.
 - `RoomFeature` [src/indoor/types.ts:7](../src/indoor/types.ts#L7): Things a room offers that people filter by in the room finder (F-11).
 - `Level` [src/indoor/types.ts:10](../src/indoor/types.ts#L10): One floor of a building.
@@ -78,6 +82,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `TILE_URL` [src/config.ts:16](../src/config.ts#L16): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
 - `TILE_ATTRIBUTION` [src/config.ts:18](../src/config.ts#L18): Attribution text OSM requires next to the tiles.
 - `CORRECTION_URL` [src/config.ts:21](../src/config.ts#L21): Base URL for prefilled place correction issues.
+- `isRoomFree(id, slots, window)` [src/indoor/availability.ts:40](../src/indoor/availability.ts#L40): Whether a room has no overlapping valid slot; invalid windows return false.
+- `findFreeRooms(buildings, slots, query)` [src/indoor/availability.ts:50](../src/indoor/availability.ts#L50): Finds free bookable rooms satisfying every filter, sorted by building name then room number.
+- `freeUntil(id, slots, from)` [src/indoor/availability.ts:64](../src/indoor/availability.ts#L64): Returns the earliest valid slot start strictly after from, ignoring ongoing slots, or null.
+- `nowWindow(now, minutes = 30)` [src/indoor/availability.ts:76](../src/indoor/availability.ts#L76): Creates an elapsed-time availability window without changing the supplied instant.
+- `expandDemoSlots(pattern, day)` [src/indoor/availability.ts:111](../src/indoor/availability.ts#L111): Expands weekly patterns for one campus-local day, skipping invalid or nonexistent DST times.
 - `roomSelectionId(buildingId, roomId)` [src/indoor/types.ts:77](../src/indoor/types.ts#L77): Selection id of a room: "<building_id>/<room id>" (Selection kind "room").
 - `baseStyle` [src/map/baseStyle.ts:6](../src/map/baseStyle.ts#L6): Base style every layer is added on top of.
 - `OTHER_SUBTYPE` [src/map/layerFilters.ts:6](../src/map/layerFilters.ts#L6): Sub-type used for features that have none.

@@ -6,6 +6,7 @@ Fictional fixtures for building features before real data exists. Always labeled
 
 **Files**
 
+- [`availability-demo.json`](availability-demo.json): FICTIONAL demo data for Demo Hall only; not GT reservations. Weekly campus-local (America/New_York) patterns.…
 - [`indoor-demo.json`](indoor-demo.json): FICTIONAL fixture for building and testing the indoor viewer (T-21) and room finder (T-24). Not a real buildi…
 
 <!-- AUTO:END -->

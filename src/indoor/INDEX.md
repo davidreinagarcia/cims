@@ -6,6 +6,7 @@ Indoor maps (Lane B): contracts, floor-plan viewer, level selector and room dire
 
 **Files**
 
+- [`availability.ts`](availability.ts): Pure room availability queries and campus-local expansion of fictional weekly slots. · exports `isRoomFree`, `findFreeRooms`, `freeUntil`, `nowWindow`, `expandDemoSlots`
 - [`types.ts`](types.ts): Contracts for indoor data (Lane B): levels, rooms, booking metadata and availability. Data files in src/data/… · exports `roomSelectionId`
 
 <!-- AUTO:END -->

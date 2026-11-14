@@ -1,0 +1,168 @@
+{
+  "_note": "FICTIONAL demo data for Demo Hall only; not GT reservations. Weekly campus-local (America/New_York) patterns. D103 stays busy 08:00\u201320:00 and D209 stays free; other study rooms have shorter example bookings. No real availability source exists.",
+  "demo": true,
+  "slots": [
+    {
+      "room": "demo-hall/d103",
+      "weekday": "mon",
+      "start": "08:00",
+      "end": "20:00"
+    },
+    {
+      "room": "demo-hall/d104",
+      "weekday": "mon",
+      "start": "09:00",
+      "end": "11:00"
+    },
+    {
+      "room": "demo-hall/d109",
+      "weekday": "mon",
+      "start": "13:00",
+      "end": "15:00"
+    },
+    {
+      "room": "demo-hall/d203",
+      "weekday": "mon",
+      "start": "16:00",
+      "end": "18:00"
+    },
+    {
+      "room": "demo-hall/d204",
+      "weekday": "mon",
+      "start": "18:00",
+      "end": "20:00"
+    },
+    {
+      "room": "demo-hall/d103",
+      "weekday": "tue",
+      "start": "08:00",
+      "end": "20:00"
+    },
+    {
+      "room": "demo-hall/d104",
+      "weekday": "tue",
+      "start": "09:00",
+      "end": "11:00"
+    },
+    {
+      "room": "demo-hall/d109",
+      "weekday": "tue",
+      "start": "13:00",
+      "end": "15:00"
+    },
+    {
+      "room": "demo-hall/d203",
+      "weekday": "tue",
+      "start": "16:00",
+      "end": "18:00"
+    },
+    {
+      "room": "demo-hall/d204",
+      "weekday": "tue",
+      "start": "18:00",
+      "end": "20:00"
+    },
+    {
+      "room": "demo-hall/d103",
+      "weekday": "wed",
+      "start": "08:00",
+      "end": "20:00"
+    },
+    {
+      "room": "demo-hall/d104",
+      "weekday": "wed",
+      "start": "09:00",
+      "end": "11:00"
+    },
+    {
+      "room": "demo-hall/d109",
+      "weekday": "wed",
+      "start": "13:00",
+      "end": "15:00"
+    },
+    {
+      "room": "demo-hall/d203",
+      "weekday": "wed",
+      "start": "16:00",
+      "end": "18:00"
+    },
+    {
+      "room": "demo-hall/d204",
+      "weekday": "wed",
+      "start": "18:00",
+      "end": "20:00"
+    },
+    {
+      "room": "demo-hall/d103",
+      "weekday": "thu",
+      "start": "08:00",
+      "end": "20:00"
+    },
+    {
+      "room": "demo-hall/d104",
+      "weekday": "thu",
+      "start": "09:00",
+      "end": "11:00"
+    },
+    {
+      "room": "demo-hall/d109",
+      "weekday": "thu",
+      "start": "13:00",
+      "end": "15:00"
+    },
+    {
+      "room": "demo-hall/d203",
+      "weekday": "thu",
+      "start": "16:00",
+      "end": "18:00"
+    },
+    {
+      "room": "demo-hall/d204",
+      "weekday": "thu",
+      "start": "18:00",
+      "end": "20:00"
+    },
+    {
+      "room": "demo-hall/d103",
+      "weekday": "fri",
+      "start": "08:00",
+      "end": "20:00"
+    },
+    {
+      "room": "demo-hall/d104",
+      "weekday": "fri",
+      "start": "09:00",
+      "end": "11:00"
+    },
+    {
+      "room": "demo-hall/d109",
+      "weekday": "fri",
+      "start": "13:00",
+      "end": "15:00"
+    },
+    {
+      "room": "demo-hall/d203",
+      "weekday": "fri",
+      "start": "16:00",
+      "end": "18:00"
+    },
+    {
+      "room": "demo-hall/d204",
+      "weekday": "fri",
+      "start": "18:00",
+      "end": "20:00"
+    },
+    {
+      "room": "demo-hall/d103",
+      "weekday": "sat",
+      "start": "08:00",
+      "end": "20:00"
+    },
+    {
+      "room": "demo-hall/d103",
+      "weekday": "sun",
+      "start": "08:00",
+      "end": "20:00"
+    }
+  ]
+}
