@@ -74,6 +74,7 @@ AI agents: [CLAUDE.md](CLAUDE.md).
 | **[INDEX](INDEX.md)** | **Start here: generated map of every folder and file** |
 | **[Merging to main](docs/MERGING-TO-MAIN.md)** | **Rules before anything reaches production** |
 | [Function registry](docs/FUNCTIONS.md) | Every exported function/type: check before writing one |
+| **[Design direction](docs/design/DESIGN-DIRECTION.md)** | **The "survey map" look: tokens, type, map styling** |
 | [Maintenance system](docs/MAINTENANCE.md) | How indexes and docs stay current automatically |
 | **[Work Plan](docs/WORKPLAN.md)** | **Who does what, priority checklist, how we (and our Claudes) avoid conflicts** |
 | [Code architecture](docs/ARCHITECTURE.md) | Where code and data go in `src/` |
