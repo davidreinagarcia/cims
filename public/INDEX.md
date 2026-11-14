@@ -7,5 +7,6 @@ Static assets served as-is at the site root.
 **Files**
 
 - [`favicon.svg`](favicon.svg): SVG image
+- [`manifest.json`](manifest.json): Interactive map of the Georgia Tech campus
 
 <!-- AUTO:END -->

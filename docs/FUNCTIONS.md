@@ -54,9 +54,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Components
 
-- `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component.
+- `App()` [src/App.tsx:9](../src/App.tsx#L9): Root component.
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:12](../src/components/MapView.tsx#L12): The interactive map. Knows nothing about what is drawn: layers do that.
+- `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
 - `Sidebar()` [src/components/Sidebar.tsx:8](../src/components/Sidebar.tsx#L8): Left column (bottom sheet on phones) that hosts the panels.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:13](../src/panels/building-card/PlaceCard.tsx#L13): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick

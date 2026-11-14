@@ -156,7 +156,7 @@ Events) live in Postgres. Category → team routing is a curated table, so chang
 | Accessibility | Every map entity also reachable via search and list views; keyboard navigation; ARIA on panels |
 | Privacy | No accounts; no server-side location; client hash only for rate limiting, rotated daily |
 | Abuse | Rate limits; content length caps; escaped rendering; posting allowlisted in MVP |
-| Offline / demo safety | Add a service worker to cache app shell + curated data (not set up yet); demo runs without backend |
+| Offline / demo safety | Service worker (T-41, `src/pwa/sw.js`, generated at build by `vite.config.ts`): precaches the app shell and the data bundled in it, caches map tiles and glyphs as they are viewed; the app and every place already viewed work with no network. Demo runs without backend |
 | Observability | Privacy-friendly page analytics + error tracking (free tier) |
 | Data freshness | Validation warns on records with `verified_at` > 90 days |
 

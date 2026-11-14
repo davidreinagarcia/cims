@@ -31,6 +31,7 @@ src/
   state/layerFilters.tsx  which layers/sub-types are on, saved in localStorage
   components/Glyph.tsx    line glyph per category (shape differs, works without color)
   styles/              tokens.css (colors, type, spacing) + cims-ui.css (cims-* components): the design system
+  pwa/sw.js            service worker template: vite.config.ts fills in the file list and emits /sw.js (offline, T-41)
   styles.css           global layout and map-control skin; each component has its own .css for layout only
 ```
 

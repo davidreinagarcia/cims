@@ -11,6 +11,7 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 - [`lib/`](lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
 - [`map/`](map/INDEX.md): Everything about the map engine: contract for layers, base style, and the layer auto-loader.
 - [`panels/`](panels/INDEX.md): Sidebar panels, one folder per panel. Mount new ones in components/Sidebar.tsx.
+- [`pwa/`](pwa/INDEX.md): Offline support: the service worker template. vite.config.ts fills in the precache list and emits it as /sw.j…
 - [`state/`](state/INDEX.md): Shared app state. Today only the current selection.
 - [`styles/`](styles/INDEX.md): Design system CSS: tokens.css (variables) and cims-ui.css (all cims- components). Wired in by T-06.
 
@@ -18,7 +19,7 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 
 - [`App.tsx`](App.tsx): App shell: selection and layer-filter providers plus the two-column layout (sidebar and map). · exports `App`
 - [`config.ts`](config.ts): Campus map settings and the base URL for correction issues. · exports `CAMPUS`, `TILE_URL`, `TILE_ATTRIBUTION`, `CORRECTION_URL`
-- [`main.tsx`](main.tsx): Entry point: loads fonts, design tokens and styles, then mounts React.
+- [`main.tsx`](main.tsx): Entry point: loads fonts, design tokens and styles, mounts React and registers the offline service worker.
 - [`styles.css`](styles.css): * @file Global layout and map-control skin. Colors, type and components come from styles/tokens.css and style…
 - [`types.ts`](types.ts): Shared types for places shown on the map.
 - [`vite-env.d.ts`](vite-env.d.ts): Vite client types (import.meta.glob, asset imports).
