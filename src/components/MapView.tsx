@@ -1,20 +1,19 @@
-/** @file MapLibre map: draws place markers and labels, flies to the selected place. */
+/** @file Map host: creates the MapLibre map, loads every layer module from src/map/layers/ and feeds them the selection. */
 import { useEffect, useRef } from "react";
 import maplibregl from "maplibre-gl";
-import { CAMPUS, TILE_ATTRIBUTION, TILE_URL } from "../config";
-import { places } from "../lib/places";
+import { CAMPUS } from "../config";
+import { baseStyle } from "../map/baseStyle";
+import { loadLayers } from "../map/loadLayers";
+import type { LayerHandle } from "../map/types";
+import { useSelection } from "../state/selection";
 
-interface Props {
-  selectedId: string | null;
-  onSelect: (id: string | null) => void;
-}
-
-/** The interactive map; reports clicks on markers through onSelect. */
-export default function MapView({ selectedId, onSelect }: Props) {
+/** The interactive map. Knows nothing about what is drawn: layers do that. */
+export default function MapView() {
+  const { selection, select } = useSelection();
   const container = useRef<HTMLDivElement>(null);
-  const mapRef = useRef<maplibregl.Map | null>(null);
-  const onSelectRef = useRef(onSelect);
-  onSelectRef.current = onSelect;
+  const handles = useRef<LayerHandle[]>([]);
+  const latest = useRef({ selection, select });
+  latest.current = { selection, select };
 
   useEffect(() => {
     const map = new maplibregl.Map({
@@ -22,65 +21,28 @@ export default function MapView({ selectedId, onSelect }: Props) {
       center: CAMPUS.center,
       zoom: CAMPUS.zoom,
       maxBounds: CAMPUS.bounds,
-      style: {
-        version: 8,
-        glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
-        sources: {
-          osm: { type: "raster", tiles: [TILE_URL], tileSize: 256, attribution: TILE_ATTRIBUTION },
-        },
-        layers: [{ id: "osm", type: "raster", source: "osm" }],
-      },
+      style: baseStyle,
     });
     map.addControl(new maplibregl.NavigationControl(), "top-right");
 
-    // style.load (not "load") so markers appear without waiting for every tile.
+    // style.load (not "load") so layers appear without waiting for every tile.
     map.on("style.load", () => {
-      map.addSource("places", { type: "geojson", data: places, promoteId: "id" });
-      map.addLayer({
-        id: "places-circle",
-        type: "circle",
-        source: "places",
-        paint: {
-          "circle-radius": ["case", ["boolean", ["feature-state", "selected"], false], 11, 7],
-          "circle-color": "#003057",
-          "circle-stroke-color": "#B3A369",
-          "circle-stroke-width": 2.5,
-        },
-      });
-      map.addLayer({
-        id: "places-label",
-        type: "symbol",
-        source: "places",
-        layout: { "text-field": ["get", "name"], "text-size": 12, "text-offset": [0, 1.4], "text-anchor": "top", "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"] },
-        paint: { "text-color": "#003057", "text-halo-color": "#fff", "text-halo-width": 1.5 },
-      });
-      map.on("click", "places-circle", (e) => {
-        const id = e.features?.[0]?.properties?.id as string | undefined;
-        if (id) onSelectRef.current(id);
-      });
-      map.on("mouseenter", "places-circle", () => (map.getCanvas().style.cursor = "pointer"));
-      map.on("mouseleave", "places-circle", () => (map.getCanvas().style.cursor = ""));
+      const ctx = { select: (s: Parameters<typeof select>[0]) => latest.current.select(s) };
+      handles.current = loadLayers().map((layer) => layer.addTo(map, ctx));
+      handles.current.forEach((h) => h.update?.(latest.current.selection));
     });
 
-    mapRef.current = map;
     (window as unknown as { __map?: unknown }).__map = map; // handy for debugging in the console
-    return () => map.remove();
+    return () => {
+      handles.current.forEach((h) => h.remove());
+      handles.current = [];
+      map.remove();
+    };
   }, []);
 
-  // Fly to and highlight the selected place.
   useEffect(() => {
-    const map = mapRef.current;
-    if (!map) return;
-    const apply = () => {
-      for (const f of places.features) {
-        map.setFeatureState({ source: "places", id: f.properties.id }, { selected: f.properties.id === selectedId });
-      }
-      const sel = places.features.find((f) => f.properties.id === selectedId);
-      if (sel) map.flyTo({ center: sel.geometry.coordinates as [number, number], zoom: 17, duration: 800 });
-    };
-    if (map.isStyleLoaded() && map.getSource("places")) apply();
-    else map.once("idle", apply);
-  }, [selectedId]);
+    handles.current.forEach((h) => h.update?.(selection));
+  }, [selection]);
 
   return <div ref={container} className="map" />;
 }

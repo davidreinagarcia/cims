@@ -1,15 +1,16 @@
-/** @file App shell: holds the selected place and wires the sidebar to the map. */
-import { useState } from "react";
+/** @file App shell: selection provider plus the two-column layout (sidebar and map). */
 import MapView from "./components/MapView";
 import Sidebar from "./components/Sidebar";
+import { SelectionProvider } from "./state/selection";
 
-/** Root component: sidebar plus map sharing one selection. */
+/** Root component. */
 export default function App() {
-  const [selectedId, setSelectedId] = useState<string | null>(null);
   return (
-    <div className="app">
-      <Sidebar selectedId={selectedId} onSelect={setSelectedId} />
-      <MapView selectedId={selectedId} onSelect={setSelectedId} />
-    </div>
+    <SelectionProvider>
+      <div className="app">
+        <Sidebar />
+        <MapView />
+      </div>
+    </SelectionProvider>
   );
 }

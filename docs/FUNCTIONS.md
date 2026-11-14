@@ -19,25 +19,37 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 ### Shared helpers (`src/lib`, `src/state`, `src/hooks`): reuse these first
 
 - `places` [src/lib/places.ts:11](../src/lib/places.ts#L11): The places loaded from src/data/places.json.
+- `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
 
 ### Types & contracts
 
 - `PlaceFeature` [src/lib/places.ts:6](../src/lib/places.ts#L6): One place as a GeoJSON point feature.
 - `PlaceCollection` [src/lib/places.ts:8](../src/lib/places.ts#L8): All places as a GeoJSON feature collection.
+- `LayerContext` [src/map/types.ts:6](../src/map/types.ts#L6): What the host gives a layer so it can talk back to the app.
+- `LayerHandle` [src/map/types.ts:12](../src/map/types.ts#L12): What a layer returns from addTo so the host can drive it.
+- `MapLayer` [src/map/types.ts:23](../src/map/types.ts#L23): A self-contained piece of the map. Drop a file in src/map/layers/ that default-exports one of
+- `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): The kinds of thing that can be selected. Only "place" is used so far.
+- `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
+- `SelectionApi` [src/state/selection.tsx:20](../src/state/selection.tsx#L20): What useSelection() returns.
 - `Category` [src/types.ts:3](../src/types.ts#L3): Kinds of place the map can show.
 - `PlaceProperties` [src/types.ts:12](../src/types.ts#L12): Properties of a place feature in src/data/places.json.
 
 ### Components
 
-- `App()` [src/App.tsx:7](../src/App.tsx#L7): Root component: sidebar plus map sharing one selection.
-- `MapView({ selectedId, onSelect })` [src/components/MapView.tsx:13](../src/components/MapView.tsx#L13): The interactive map; reports clicks on markers through onSelect.
-- `Sidebar({ selectedId, onSelect })` [src/components/Sidebar.tsx:11](../src/components/Sidebar.tsx#L11): Left panel with search box, selected-place card and the place list.
+- `App()` [src/App.tsx:7](../src/App.tsx#L7): Root component.
+- `MapView()` [src/components/MapView.tsx:11](../src/components/MapView.tsx#L11): The interactive map. Knows nothing about what is drawn: layers do that.
+- `Sidebar()` [src/components/Sidebar.tsx:7](../src/components/Sidebar.tsx#L7): Left column (bottom sheet on phones) that hosts the panels.
+- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:7](../src/panels/building-card/PlaceCard.tsx#L7): Shows name, category and description of the selected place, with a Close button. Renders nothing if no place…
+- `SearchPanel()` [src/panels/search/SearchPanel.tsx:11](../src/panels/search/SearchPanel.tsx#L11): Renders the search input and the result list as two siblings (CSS `order` places the detail card
+- `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
 
 ### Other exported functions & constants
 
 - `CAMPUS` [src/config.ts:2](../src/config.ts#L2): Central place for map settings. Change here, not inside components.
 - `TILE_URL` [src/config.ts:15](../src/config.ts#L15): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
 - `TILE_ATTRIBUTION` [src/config.ts:17](../src/config.ts#L17): Attribution text OSM requires next to the tiles.
+- `baseStyle` [src/map/baseStyle.ts:6](../src/map/baseStyle.ts#L6): Base style every layer is added on top of.
+- `loadLayers()` [src/map/loadLayers.ts:7](../src/map/loadLayers.ts#L7): All layers found in src/map/layers/, sorted by their `order` (default 100).
 
 ### Possible duplicates
 

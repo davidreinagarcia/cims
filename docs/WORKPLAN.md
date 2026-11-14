@@ -116,7 +116,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 
 ### P0: Foundations (unblock everything; do these first)
 
-- [ ] **T-01 Seams refactor** · A · *hotspot PR*
+- [x] **T-01 Seams refactor** · A · *hotspot PR*
   Turn `MapView.tsx` into a host that loads layer modules from `src/map/layers/` (each exports
   `addTo(map, ctx)`); move `Sidebar` content into `src/panels/`; replace `selectedId` with a
   `Selection` (`{ kind: "building" | "place" | "room" | "report", id }`) in `src/state/`;
