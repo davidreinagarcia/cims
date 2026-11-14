@@ -27,6 +27,8 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
 - [`src/`](src/INDEX.md): The web app (Vite + React + TypeScript + MapLibre). Entry: main.tsx → App.tsx.
   - [`src/components/`](src/components/INDEX.md): React components for the current UI (map view, sidebar). T-01 moves these into src/map/ and src/panels/.
   - [`src/data/`](src/data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
+    - [`src/data/indoor/`](src/data/indoor/INDEX.md): Real indoor data, one folder per building id (rooms.json, later levels and geometry). Every record has a sour…
+      - [`src/data/indoor/kendeda/`](src/data/indoor/kendeda/INDEX.md): Partial Kendeda room inventory with published names, capacities, sources and explicitly documented floors.
     - [`src/data/mocks/`](src/data/mocks/INDEX.md): Fictional fixtures for building features before real data exists. Always labeled as demo in the UI.
   - [`src/indoor/`](src/indoor/INDEX.md): Indoor maps (Lane B): contracts, floor-plan viewer, level selector and room directory.
   - [`src/lib/`](src/lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.

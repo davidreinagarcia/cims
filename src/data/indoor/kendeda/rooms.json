@@ -1,0 +1,130 @@
+{
+  "_note": "Partial public Georgia Tech room inventory; attributes only, no geometry. Sources reopened 2026-11-14; names, numbers and capacities agree with the earlier research note. source_url identifies the room listing; display means the monitor or projection screens explicitly listed in Room Specifications. Supplemental floor and classroom reservation evidence for 210/230: https://livingbuilding.gatech.edu/event-classroom-use. Only those two rooms have an explicitly stated floor (second floor); all other levels remain null. EMS booking is recorded only for these two explicitly identified classrooms; omitted booking/features indicate no claim. Registrar cross-check (152: 176; 210/230: 64): https://registrar.gatech.edu/public/files/Centrally%20Scheduled%20Room%20List%202025_0.pdf (page 3). verified_at and verified_by remain null pending the project verification workflow. This is not a complete building inventory.",
+  "building_id": "kendeda-building-for-innovative-sustainable-design",
+  "name": "Kendeda Building for Innovative Sustainable Design",
+  "rooms": [
+    {
+      "id": "110",
+      "number": "110",
+      "name": "Makerspace Laboratory",
+      "type": "lab",
+      "level": null,
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/210/",
+      "verified_at": null,
+      "verified_by": null
+    },
+    {
+      "id": "118",
+      "number": "118",
+      "name": "Seminar Room",
+      "type": "classroom",
+      "level": null,
+      "capacity": 16,
+      "features": [
+        "display"
+      ],
+      "source_url": "https://livingbuilding.gatech.edu/building-manual/room-specifications",
+      "verified_at": null,
+      "verified_by": null
+    },
+    {
+      "id": "152",
+      "number": "152",
+      "name": "Auditorium",
+      "type": "other",
+      "level": null,
+      "capacity": 176,
+      "features": [
+        "display"
+      ],
+      "source_url": "https://livingbuilding.gatech.edu/building-manual/room-specifications",
+      "verified_at": null,
+      "verified_by": null
+    },
+    {
+      "id": "180",
+      "number": "180",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "level": null,
+      "capacity": 16,
+      "source_url": "https://avservices.gatech.edu/building/210/",
+      "verified_at": null,
+      "verified_by": null
+    },
+    {
+      "id": "210",
+      "number": "210",
+      "name": "Classroom",
+      "type": "classroom",
+      "level": "2",
+      "capacity": 64,
+      "features": [
+        "display"
+      ],
+      "bookable": true,
+      "booking": {
+        "owner_system": "EMS",
+        "policy": "Georgia Tech students, staff and faculty may request classroom space for the current semester; allow up to five business days for approval. Academic use takes priority.",
+        "book_url": "https://gtevents.gatech.edu/emswebapp"
+      },
+      "source_url": "https://livingbuilding.gatech.edu/building-manual/room-specifications",
+      "verified_at": null,
+      "verified_by": null
+    },
+    {
+      "id": "230",
+      "number": "230",
+      "name": "Classroom",
+      "type": "classroom",
+      "level": "2",
+      "capacity": 64,
+      "features": [
+        "display"
+      ],
+      "bookable": true,
+      "booking": {
+        "owner_system": "EMS",
+        "policy": "Georgia Tech students, staff and faculty may request classroom space for the current semester; allow up to five business days for approval. Academic use takes priority.",
+        "book_url": "https://gtevents.gatech.edu/emswebapp"
+      },
+      "source_url": "https://livingbuilding.gatech.edu/building-manual/room-specifications",
+      "verified_at": null,
+      "verified_by": null
+    },
+    {
+      "id": "280",
+      "number": "280",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "level": null,
+      "capacity": 16,
+      "source_url": "https://avservices.gatech.edu/building/210/",
+      "verified_at": null,
+      "verified_by": null
+    },
+    {
+      "id": "288",
+      "number": "288",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "level": null,
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/210/",
+      "verified_at": null,
+      "verified_by": null
+    },
+    {
+      "id": "298",
+      "number": "298",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "level": null,
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/210/",
+      "verified_at": null,
+      "verified_by": null
+    }
+  ]
+}

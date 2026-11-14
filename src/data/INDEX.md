@@ -6,6 +6,7 @@ Curated campus data (GeoJSON/JSON). Every record needs `source_url` + `verified_
 
 **Folders**
 
+- [`indoor/`](indoor/INDEX.md): Real indoor data, one folder per building id (rooms.json, later levels and geometry). Every record has a sour…
 - [`mocks/`](mocks/INDEX.md): Fictional fixtures for building features before real data exists. Always labeled as demo in the UI.
 
 **Files**
