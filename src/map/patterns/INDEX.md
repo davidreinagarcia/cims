@@ -7,6 +7,6 @@ Hatch pattern images for the survey-map look (tiny SVGs registered with `map.add
 **Files**
 
 - [`hatch.svg`](hatch.svg): SVG image
-- [`index.ts`](index.ts): Hatch pattern images for building walls: one tiny SVG tinted from the palette and registered with map.addImag… · exports `HATCH_INK`, `HATCH_GOLD`, `addHatchPatterns`
+- [`index.ts`](index.ts): Hatch pattern image for the selected building's walls: one tiny SVG tinted from the palette and registered wi… · exports `HATCH_GOLD`, `addHatchPatterns`
 
 <!-- AUTO:END -->

@@ -1,8 +1,8 @@
-/** @file Buildings layer: OSM footprints extruded in the survey style (hatched walls, ink rim, white roof; flat outlined footprints in 2D), gold when selected, names in caps from zoom 16. Click selects. */
+/** @file Buildings layer: OSM footprints extruded in the survey style (flat paper walls, ink rim, white roof; flat outlined footprints in 2D), gold roof and gold hatch when selected, names in caps from zoom 16. Click selects. */
 import type { FillExtrusionLayerSpecification, FilterSpecification, MapLayerMouseEvent, MapMouseEvent } from "maplibre-gl";
 import type { MapLayer } from "../types";
-import { GOLD, INK, PAPER, WHITE } from "../palette";
-import { addHatchPatterns, HATCH_GOLD, HATCH_INK } from "../patterns";
+import { GOLD, INK, PAPER, PAPER_2, WHITE } from "../palette";
+import { addHatchPatterns, HATCH_GOLD } from "../patterns";
 import buildingsUrl from "../../data/buildings.geojson?url";
 
 const SOURCE = "buildings";
@@ -72,14 +72,16 @@ const buildings: MapLayer = {
       source: SOURCE,
       paint: { "line-color": INK, "line-width": 1 },
     });
-    const wallPaint = (pattern: string): FillExtrusionLayerSpecification["paint"] => ({
-      "fill-extrusion-pattern": pattern,
+    // Walls are a flat paper tone: the fixed light shades each face a little differently, nothing else.
+    // Hatching is kept for the selected building only, so it is the one textured thing on the map.
+    const wallPaint = (look: FillExtrusionLayerSpecification["paint"]): FillExtrusionLayerSpecification["paint"] => ({
+      ...look,
       "fill-extrusion-base": ["get", "min_height"],
       "fill-extrusion-height": ["-", ["get", "height"], ROOF_THICKNESS + RIM_THICKNESS],
       "fill-extrusion-vertical-gradient": false,
     });
-    map.addLayer({ id: WALLS, type: "fill-extrusion", source: SOURCE, filter: notSelected(null), paint: wallPaint(HATCH_INK) });
-    map.addLayer({ id: WALLS_SELECTED, type: "fill-extrusion", source: SOURCE, filter: isSelected(null), paint: wallPaint(HATCH_GOLD) });
+    map.addLayer({ id: WALLS, type: "fill-extrusion", source: SOURCE, filter: notSelected(null), paint: wallPaint({ "fill-extrusion-color": PAPER_2 }) });
+    map.addLayer({ id: WALLS_SELECTED, type: "fill-extrusion", source: SOURCE, filter: isSelected(null), paint: wallPaint({ "fill-extrusion-pattern": HATCH_GOLD }) });
     map.addLayer({
       id: RIM,
       type: "fill-extrusion",

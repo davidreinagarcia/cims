@@ -134,6 +134,9 @@ Hatch pattern images: tiny SVGs (e.g., 8×8, 1px diagonal ink line on paper) reg
 
 - `fill-extrusion-pattern` does not accept `feature-state`, so the selected building's gold walls are a
   second walls layer switched with `setFilter`; the gold roof does use `feature-state`.
+- **Walls are flat `--paper-2`, not hatched (Tato, 2026-11-14):** ink hatching on all 291 buildings read as
+  dark, noisy "shadows"; he asked for a cleaner, Apple-Maps-like render. Hatching is now reserved for the
+  **selected** building (gold), which makes it the only textured thing on the map.
 - A third thin extrusion in ink sits between walls and roof cap: it reads as the drafted roof edge.
 - Wall patterns stretch about 3× along the wall compared to their height, so the hatch tile is narrow
   (2 × 6 px) to come out as an even 45° line. One SVG, tinted from `src/map/palette.ts`.

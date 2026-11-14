@@ -82,12 +82,12 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `loadLayers()` [src/map/loadLayers.ts:7](../src/map/loadLayers.ts#L7): All layers found in src/map/layers/, sorted by their `order` (default 100).
 - `INK` [src/map/palette.ts:4](../src/map/palette.ts#L4): --ink: outlines, hatching, map labels.
 - `PAPER` [src/map/palette.ts:6](../src/map/palette.ts#L6): --paper: map background, label halos, hatch ground.
-- `WHITE` [src/map/palette.ts:8](../src/map/palette.ts#L8): --white: building roofs.
-- `GOLD` [src/map/palette.ts:10](../src/map/palette.ts#L10): --gold: selected roof, selected hatch ground.
-- `GOLD_INK` [src/map/palette.ts:12](../src/map/palette.ts#L12): --gold-ink: gold linework on paper (selected hatch lines).
-- `HATCH_INK` [src/map/patterns/index.ts:7](../src/map/patterns/index.ts#L7): Image id of the ink hatch (normal building walls).
-- `HATCH_GOLD` [src/map/patterns/index.ts:9](../src/map/patterns/index.ts#L9): Image id of the gold hatch (selected building walls).
-- `addHatchPatterns(map)` [src/map/patterns/index.ts:41](../src/map/patterns/index.ts#L41): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
+- `PAPER_2` [src/map/palette.ts:8](../src/map/palette.ts#L8): --paper-2: building walls (a step darker than the ground, so roofs read as the lightest plane).
+- `WHITE` [src/map/palette.ts:10](../src/map/palette.ts#L10): --white: building roofs.
+- `GOLD` [src/map/palette.ts:12](../src/map/palette.ts#L12): --gold: selected roof, selected hatch ground.
+- `GOLD_INK` [src/map/palette.ts:14](../src/map/palette.ts#L14): --gold-ink: gold linework on paper (selected hatch lines).
+- `HATCH_GOLD` [src/map/patterns/index.ts:7](../src/map/patterns/index.ts#L7): Image id of the gold hatch (selected building walls).
+- `addHatchPatterns(map)` [src/map/patterns/index.ts:38](../src/map/patterns/index.ts#L38): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
 - `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
 

@@ -1,10 +1,8 @@
-/** @file Hatch pattern images for building walls: one tiny SVG tinted from the palette and registered with map.addImage. */
+/** @file Hatch pattern image for the selected building's walls: one tiny SVG tinted from the palette and registered with map.addImage. */
 import type maplibregl from "maplibre-gl";
 import hatchSvg from "./hatch.svg?raw";
-import { GOLD_INK, INK, PAPER, WHITE } from "../palette";
+import { GOLD_INK, PAPER } from "../palette";
 
-/** Image id of the ink hatch (normal building walls). */
-export const HATCH_INK = "hatch-ink";
 /** Image id of the gold hatch (selected building walls). */
 export const HATCH_GOLD = "hatch-gold";
 
@@ -15,7 +13,6 @@ const W = 2;
 const H = 6;
 const RATIO = 4;
 const VARIANTS = [
-  { id: HATCH_INK, line: INK, ground: WHITE },
   { id: HATCH_GOLD, line: GOLD_INK, ground: PAPER },
 ];
 

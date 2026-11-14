@@ -4,6 +4,8 @@
 export const INK = "#1C2733";
 /** --paper: map background, label halos, hatch ground. */
 export const PAPER = "#F3EEE2";
+/** --paper-2: building walls (a step darker than the ground, so roofs read as the lightest plane). */
+export const PAPER_2 = "#E9E2D0";
 /** --white: building roofs. */
 export const WHITE = "#FFFFFF";
 /** --gold: selected roof, selected hatch ground. */
