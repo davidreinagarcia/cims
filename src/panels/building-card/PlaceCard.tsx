@@ -35,7 +35,7 @@ export default function PlaceCard() {
     !p.address && "Address",
     !isEvent && !today && "Today's hours", // opening hours and BuzzCard access do not apply to events
     !isEvent && !p.buzzcard && "BuzzCard required",
-    !isEvent && !p.buzzcard?.note && "BuzzCard note",
+    !isEvent && p.buzzcard?.required && !p.buzzcard.note && "BuzzCard note", // a note only matters when access is required
     !p.url && "Website",
     !p.source_url && "Source URL",
     p.status === "verified" && !p.verified_by && "Verified by",
@@ -78,7 +78,7 @@ export default function PlaceCard() {
         <tbody>
           <tr><th scope="row">Address</th><td>{p.address || unknown}</td></tr>
           {!isEvent && <tr><th scope="row">Today's hours</th><td>{today ? today.length ? today.map(([start, end]) => `${start} to ${end}`).join(", ") : "Closed" : unknown}</td></tr>}
-          {!isEvent && <tr><th scope="row">BuzzCard</th><td>{p.buzzcard ? p.buzzcard.required ? "Required: Yes" : "Required: No" : unknown}<br />Note: {p.buzzcard?.note || unknown}</td></tr>}
+          {!isEvent && <tr><th scope="row">BuzzCard</th><td>{p.buzzcard ? p.buzzcard.required ? "Required: Yes" : "Required: No" : unknown}{(p.buzzcard?.required || p.buzzcard?.note) && <><br />Note: {p.buzzcard?.note || unknown}</>}</td></tr>}
           <tr><th scope="row">Website</th><td>{p.url ? <a href={p.url} target="_blank" rel="noopener noreferrer">{p.url}</a> : unknown}</td></tr>
           <tr><th scope="row">Source</th><td>
             {p.status === "verified" ? <>Verified by {p.verified_by || unknown} on {p.verified_at || unknown}</> : "Unverified"}

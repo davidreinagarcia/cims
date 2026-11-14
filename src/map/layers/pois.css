@@ -1,0 +1,52 @@
+/** @file Survey-style shared-location popup and keyboard-accessible place list. */
+.places-cluster-popup .maplibregl-popup-content {
+  padding: var(--s3);
+  border: var(--hairline);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  box-shadow: none;
+  font-family: var(--font-body);
+}
+.places-cluster-popup .maplibregl-popup-tip { display: none; }
+.places-cluster-popup .maplibregl-popup-close-button {
+  width: var(--tap);
+  height: var(--tap);
+  border-radius: 0;
+  color: var(--ink);
+  font-size: var(--fs-xl);
+}
+.places-cluster-title {
+  margin: 0 32px var(--s2) 0;
+  font: 600 var(--fs-lg) var(--font-display);
+  letter-spacing: var(--caps-tracking);
+  text-transform: uppercase;
+}
+.places-cluster-list {
+  max-height: 240px;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.places-cluster-list button {
+  display: block;
+  width: 100%;
+  min-height: var(--tap);
+  padding: var(--s2);
+  border: 0;
+  border-top: var(--hairline-muted);
+  border-radius: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: var(--fs-md) var(--font-body);
+  text-align: left;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+.places-cluster-list button:hover,
+.places-cluster-list button:active { background: var(--paper-2); }
+.places-cluster-popup button:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: -2px;
+}

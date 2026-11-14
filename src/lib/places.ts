@@ -11,7 +11,7 @@ export type PlaceCollection = GeoJSON.FeatureCollection<GeoJSON.Point, PlaceProp
 const poiFiles = import.meta.glob<{ default: unknown }>("../data/pois/*.json", { eager: true });
 
 /** True when the page was opened with ?drafts=1: unverified drafts become visible (for reviewers and previews). */
-export const showDrafts = typeof location !== "undefined" && new URLSearchParams(location.search).has("drafts");
+export const showDrafts = typeof location !== "undefined" && new URLSearchParams(location.search).get("drafts") === "1";
 
 const collections = [raw, ...Object.values(poiFiles).map((m) => m.default)] as unknown as PlaceCollection[];
 

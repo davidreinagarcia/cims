@@ -7,5 +7,10 @@
 **Files**
 
 - [`events.json`](events.json): GeoJSON, 6 features
+- [`exercise.json`](exercise.json): GeoJSON, 9 features
+- [`food.json`](food.json): GeoJSON, 18 features
+- [`health.json`](health.json): GeoJSON, 4 features
+- [`makerspace.json`](makerspace.json): GeoJSON, 6 features
+- [`printing.json`](printing.json): GeoJSON, 6 features
 
 <!-- AUTO:END -->

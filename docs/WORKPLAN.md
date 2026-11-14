@@ -29,6 +29,7 @@ or open a tiny separate PR they review.
 | `src/map/layers/buildings.ts`, `pois.ts`, `orgs.ts`, `transport.ts` | A (David) |
 | `src/panels/building-card/`, `src/panels/search/`, `src/panels/layers/`, `src/panels/bulletin/` | A (David) |
 | `src/data/buildings.geojson`, `src/data/orgs.json` | A (David) |
+| `src/auth/**` (sign-in mock, adapter), `src/panels/account/` | A (David) |
 | `src/indoor/` (viewer, level selector, directory) | B (Tato) |
 | `src/map/layers/rooms.ts`, `reports.ts` | B (Tato) |
 | `src/panels/report/`, `src/panels/rooms/` | B (Tato) |
@@ -169,12 +170,14 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 - [ ] **T-21 Indoor viewer** (F-06) · needs T-01, T-02 (mock rooms until T-20)
   Level selector, rooms layer filtered by level, directory by room type, highlight selected room.
 - [ ] **T-22 Backend** per T-05 decision · needs T-05
-  Tables: `issue_reports`, `issue_plus_ones`; rate limiting; env vars documented in `.env.example`.
+  Tables: `accounts` (opaque id, role, provider, status), `issue_reports`, `issue_plus_ones`, each write with `account_id`; rate limiting per account; env vars documented in `.env.example`.
 - [ ] **T-23 Report an issue** (F-10) · UI can start on mocks after T-02; real data needs T-22
   Prefilled location, category → team ("routes to IT"), duplicates + "Me too", status page,
-  staff view, "Prototype: not sent to Facilities/IT" label (Risk R-14).
+  staff view, "Prototype: not sent to Facilities/IT" label (Risk R-14). Every write (report, +1) goes through the T-25 sign-in gate; the staff view needs the staff role (no unlisted URL).
 - [ ] **T-24 Room finder** (F-11, Must since Q6) · needs T-20, T-21
   Availability seed for Kendeda rooms, filters (capacity, features), map + floor highlight, Book deep link.
+- [ ] **T-25 Sign-in mock + posting gate** (F-21, [ADR-0007](adr/0007-gt-sign-in-simulated.md)) · A · *hotspot PR (`App.tsx`, `src/state/`)* · needs T-01; land it before T-23 and the T-15 posting UI
+  **Deliberately theater: looks real, enforces nothing; roles only change labels.** `src/auth/`: `AuthAdapter` interface (`signIn(persona)`, `signOut()`, `session`) with a **mock** adapter (localStorage; demo personas Student / Club officer / Facilities staff / Moderator). `AuthProvider` + `useAuth()` in `src/state/`, `SignInDialog` ("Sign in with Georgia Tech (demo)": never asks for credentials, community-rules checkbox, DEMO badge), a `requireAuth(action)` gate that opens the dialog and resumes the action, an account chip in the header. Types `Session { accountId, role, provider }` in `src/types/`. **Done when:** a signed-out write opens the dialog and continues after sign-in; a reload keeps the session; sign-out clears it; every screen says "Demo sign-in".
 
 > ⚖️ Lane B now carries F-06, F-10 *and* F-11. If it falls behind at M2, move T-24 to Lane A.
 
@@ -210,6 +213,8 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 ```mermaid
 flowchart LR
   T01[T-01 Seams] --> T02[T-02 Contracts]
+  T01 --> T25[T-25 Sign-in mock] --> T23
+  T25 -.-> T15
   T01 --> T10[T-10 3D buildings]
   T03[T-03 Footprints] --> T10
   T10 --> T11[T-11 Building card]

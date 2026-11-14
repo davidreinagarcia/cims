@@ -33,6 +33,7 @@
 | **Diego, any student** *(P2)* | Notices a broken projector in class | "Report this in 10 seconds and know it isn't ignored." |
 | **Study group of 4** *(P3)* | Needs a room with a whiteboard in 20 min | "Show me what's free near me right now." |
 | **Facilities / IT staff** *(P2, secondary)* | Receives reports | "Tell me exactly where, what, and how many people it affects." |
+| **Moderator** *(demo persona, F-21)* | Keeps posts honest | "Every post has an owner, and I can hide the bad ones." |
 
 ## 3. User stories & acceptance criteria
 
@@ -110,7 +111,7 @@ buildings by shape and position.
 - **Given** I tap **Show on map**, **then** the map flies to the location and opens the post.
 - **Given** an event has ended, **then** it's hidden from the map and list.
 
-**US-07.2** As a **club officer**, I want to post an event so that students nearby see it. *(MVP: seeded by the team; posting UI is Should.)*
+**US-07.2** As a **club officer**, I want to post an event so that students nearby see it. *(MVP: seeded by the team; posting UI is Should. Posting needs a signed-in account with the **officer** role, see F-21.)*
 
 ---
 
@@ -118,7 +119,7 @@ buildings by shape and position.
 
 **US-08.1** As a **student**, I want to see how full study spaces are so that I don't walk to a packed one.
 - **Given** Study spaces is on, **then** each space is colored by recent reports (empty / some / full) with "last updated N min ago".
-- **Given** I'm viewing a study space, **when** I tap one of three buttons, **then** my report is saved anonymously in 1 tap; I can't report the same space again within 15 min.
+- **Given** I'm viewing a study space, **when** I tap one of three buttons, **then** my report is saved to my account in 1 tap (other students only ever see the aggregate); I can't report the same space again within 15 min. If I'm signed out, I'm asked to sign in first (F-21).
 - **Given** no reports in the last 2 h, **then** the space shows "No recent data" (gray), never a stale color.
 
 ### F-09 Transport layer — **Should**
@@ -131,7 +132,8 @@ buildings by shape and position.
 **US-10.1** As a **student**, I want to report a problem *where it is* so that I don't have to figure
 out which system or team handles it.
 - **Given** I'm on the map, in a building, or on a room, **when** I tap **Report**, **then** the
-  location (building → floor → room, or a map pin outdoors) is prefilled.
+  location (building → floor → room, or a map pin outdoors) is prefilled. **Given** I'm signed out,
+  **then** I'm asked to sign in first (F-21) and return to the prefilled form.
 - **Given** the form, **then** I pick a category: *Classroom tech* (projector, display, mic),
   *Network / Wi-Fi*, *Electrical / lighting*, *Plumbing / restroom*, *HVAC / temperature*,
   *Furniture*, *Accessibility* (elevator, door, ramp), *Cleanliness*, *Safety hazard*, *Other*; I can
@@ -146,7 +148,7 @@ out which system or team handles it.
 add my voice instead of filing a duplicate.
 - **Given** open reports exist for the **same room** (or within 25 m outdoors) and the **same
   category**, **when** I start a report, **then** they're shown first with a **+1 / "Me too"** button.
-- **Given** I tap +1, **then** the report's count increments; one +1 per client per report.
+- **Given** I tap +1, **then** the report's count increments; one +1 per **account** per report (F-21).
 - **Given** a report has N +1s, **then** it's ranked higher in the team's view (impact signal).
 
 **US-10.3** As a **student**, I want to track the status of reports so that I know whether a problem is
@@ -159,7 +161,7 @@ being handled.
 
 **US-10.4** As a **Facilities / IT staff member** *(demo persona)*, I want a queue of reports by team
 and location so that I can act on them.
-- **Given** the staff view (unlisted URL in MVP), **then** I see reports routed to my team, grouped
+- **Given** the staff view (only for the **staff** role, via the F-21 demo persona; no unlisted URL), **then** I see reports routed to my team, grouped
   by building and sorted by +1 count, and I can change status.
 
 ### F-11 Room finder — **Must** *(P3 Improved Room Reservations)*
@@ -175,6 +177,34 @@ now so that I don't check several booking systems one by one.
 - **Given** I tap **Book**, **then** the owning system opens via deep link (MVP: we don't book inside CIMS).
 - **Given** availability data is seeded/mocked, **then** the UI labels it "Demo data".
 
+### F-21 GT sign-in (simulated) and posting gate — **Must** *(David, 2026-11-14)*
+
+**Rule: reading is open, posting needs an account.** Reports, +1s, fullness reports and event posts all need a
+signed-in Georgia Tech account, so every contribution has an accountable author and random posts are
+discouraged. Real GT SSO is out of scope for the hackathon: the MVP ships a **simulated** sign-in with the same
+contract, so swapping in the real one later changes one adapter, not the app ([ADR-0007](adr/0007-gt-sign-in-simulated.md)).
+
+**US-21.1** As **any visitor**, I want to use the whole map without signing in.
+- **Given** I'm signed out, **then** map, search, layers, building cards, indoor directory, bulletin and report status pages all work (read-only).
+- **Given** I'm signed out, **then** write controls (Report, +1, report fullness, post event) are still visible and say they need sign-in; they are never hidden.
+
+**US-21.2** As a **student**, I want to sign in with my Georgia Tech account so that I can post.
+- **Given** I try a write while signed out, **then** a sign-in dialog opens and, after signing in, the action continues where I left off (form values and location kept).
+- **Given** the MVP, **then** the dialog reads **"Sign in with Georgia Tech (demo)"**, states "Demo sign-in. No real authentication. Never enter GT credentials.", and offers demo personas (Student, Club officer, Facilities staff, Moderator). It never asks for a real username or password.
+- **Given** my first sign-in, **then** I accept short community rules (checkbox) before I can post.
+- **Given** I'm signed in, **then** the header shows an account chip with a **DEMO** badge and **Sign out**; the session survives reloads on this device and is cleared on sign-out.
+
+**US-21.3** As a **moderator or staff member**, I want every post tied to an account so that abuse has an owner.
+- **Given** any write, **then** it is stored with `author_id` (opaque id) and the author's role; other students never see the author, only staff and moderators do.
+- **Given** an abusive post, **then** a moderator can hide it and suspend the account; a suspended account can read but not post. *(MVP: shown by the moderator persona as a mock; real enforcement is Phase 2.)*
+- **Given** rate limits, **then** they apply **per account** (and per device before sign-in).
+
+**US-21.4** As the **system**, I want roles so that each persona can do only what it should: **Student** (report, +1, fullness), **Club officer** (also post events for their org), **Facilities/IT staff** (staff queue, change status), **Moderator** (hide posts, suspend accounts).
+
+**Non-goals:** real GT SSO, storing real names, emails or GTIDs, passwords, account recovery. The "Prototype: not sent to Facilities/IT" label (Risk R-14) stays.
+
+---
+
 ### F-12 – F-20 — **Could**
 
 Tracked in the [Roadmap](05-roadmap.md); stories will be written when promoted.
@@ -186,10 +216,10 @@ Tracked in the [Roadmap](05-roadmap.md); stories will be written when promoted.
 | Performance | Time to interactive ≤ 3 s on 4G mid-range phone; map interactions ≥ 30 fps |
 | Accessibility | WCAG 2.1 AA for all non-map UI; every map feature also reachable via search/list; color is never the only signal |
 | Responsiveness | 360 px phone width to desktop; no horizontal scroll |
-| Privacy | No accounts in MVP; no location stored server-side; crowd reports anonymous and rate-limited |
+| Privacy | Reading needs no account; writing needs a pseudonymous account (opaque id and role, no names, emails or GTIDs); authors never shown to other students; no location stored server-side |
 | Data quality | `source_url` + `verified_at` on every record; "Unknown" over guesses |
 | Availability | Demo URL up during judging; offline fallback for the demo (cached build + data) |
-| Security | No secrets in repo; write endpoints rate-limited; user content escaped |
+| Security | No secrets in repo; every write needs a signed-in account and is rate-limited per account; user content escaped; the demo sign-in never collects real credentials |
 | Legal | OSM attribution; no official logos without permission; floor plans only from public/permitted sources |
 
 ## 5. Analytics (demo-level)
@@ -217,3 +247,4 @@ opened, "Enter building" used, rooms found. That's enough to back the "discovery
 | 2026-11-14 | 0.1 | Initial draft from Miro brainstorm | _TBD_ |
 | 2026-11-14 | 0.2 | Project named **CIMS**. Integrated SGA prompts P2 (Campus Maintenance) and P3 (Improved Room Reservations): F-10 → Must (expanded), F-11 Room finder → Should, F-18 to F-20 added. Pending confirmation (Q6) | _TBD_ |
 | 2026-11-14 | 0.3 | M0 decisions: entered in all three prompts (F-11 → Must, F-18 → Should); indoor pilot = Kendeda (CULC second); 3D for whole campus | Tato |
+| 2026-11-14 | 0.4 | **F-21 GT sign-in (simulated) + posting gate** added: reading is open, every write needs an account (demo personas, no real auth). Updated US-07.2, US-08.1, US-10.1, US-10.2, US-10.4, the privacy and security NFRs and a moderator persona | David |
