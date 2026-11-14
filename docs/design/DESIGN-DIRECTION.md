@@ -32,7 +32,7 @@ These 7 treatments are the full set; don't add more effects on top.
 
 **Source of truth:** [`src/styles/tokens.css`](../../src/styles/tokens.css) (colors, type, spacing, lines) and
 [`src/styles/cims-ui.css`](../../src/styles/cims-ui.css) (all `cims-*` components). Living demo:
-[`styleguide.html`](styleguide.html) (open locally). Not imported by the app yet: wiring them in is **T-06**.
+[`styleguide.html`](styleguide.html) (open locally). Imported by the app since **T-06** (`src/main.tsx`); fonts are self-hosted via `@fontsource/*`.
 The token block below is the summary; if they differ, the CSS wins.
 
 ## Reference gallery (2026-11-14)

@@ -23,7 +23,8 @@ src/
     building-card/     PlaceCard: detail of the selected thing (becomes the building card, T-11)
   data/places.json     GeoJSON of points of interest  <- edit this to add places
   lib/places.ts        typed access to the data
-  styles.css           global tokens, reset, app layout; each component has its own .css
+  styles/              tokens.css (colors, type, spacing) + cims-ui.css (cims-* components): the design system
+  styles.css           global layout and map-control skin; each component has its own .css for layout only
 ```
 
 ## How the pieces talk

@@ -7,7 +7,7 @@ React components for the current UI (map view, sidebar). T-01 moves these into `
 **Files**
 
 - [`MapView.tsx`](MapView.tsx): Map host: creates the MapLibre map, loads every layer module from src/map/layers/ and feeds them the selectio… · exports `MapView`
-- [`Sidebar.css`](Sidebar.css): * @file Styles for the sidebar shell (header and column layout).
-- [`Sidebar.tsx`](Sidebar.tsx): Sidebar shell: branded header plus the panels. Add new panels here (src/panels/). · exports `Sidebar`
+- [`Sidebar.css`](Sidebar.css): * @file Layout of the sidebar column. Header look comes from .cims-header (styles/cims-ui.css).
+- [`Sidebar.tsx`](Sidebar.tsx): Sidebar shell: survey-style header plus the panels. Add new panels here (src/panels/). · exports `Sidebar`
 
 <!-- AUTO:END -->

@@ -18,8 +18,8 @@ const pois: MapLayer = {
       source: SOURCE,
       paint: {
         "circle-radius": ["case", ["boolean", ["feature-state", "selected"], false], 11, 7],
-        "circle-color": "#003057",
-        "circle-stroke-color": "#B3A369",
+        "circle-color": "#003057", // --navy
+        "circle-stroke-color": "#B3A369", // --gold (a ring, never text)
         "circle-stroke-width": 2.5,
       },
     });
@@ -34,7 +34,7 @@ const pois: MapLayer = {
         "text-anchor": "top",
         "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
       },
-      paint: { "text-color": "#003057", "text-halo-color": "#fff", "text-halo-width": 1.5 },
+      paint: { "text-color": "#1C2733", "text-halo-color": "#F3EEE2", "text-halo-width": 1.5 }, // --ink on --paper
     });
 
     const onClick = (e: MapLayerMouseEvent) => {

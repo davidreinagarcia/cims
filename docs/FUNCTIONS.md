@@ -40,7 +40,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `MapView()` [src/components/MapView.tsx:11](../src/components/MapView.tsx#L11): The interactive map. Knows nothing about what is drawn: layers do that.
 - `Sidebar()` [src/components/Sidebar.tsx:7](../src/components/Sidebar.tsx#L7): Left column (bottom sheet on phones) that hosts the panels.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:7](../src/panels/building-card/PlaceCard.tsx#L7): Shows name, category and description of the selected place, with a Close button. Renders nothing if no place…
-- `SearchPanel()` [src/panels/search/SearchPanel.tsx:11](../src/panels/search/SearchPanel.tsx#L11): Renders the search input and the result list as two siblings (CSS `order` places the detail card
+- `SearchPanel()` [src/panels/search/SearchPanel.tsx:25](../src/panels/search/SearchPanel.tsx#L25): Renders the search field and the result list as two siblings (CSS `order` places the detail card
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
 
 ### Other exported functions & constants
