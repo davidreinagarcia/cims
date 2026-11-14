@@ -1,3 +1,4 @@
+<!-- summary: Proposed/open: Supabase vs server/ on Alexandria for reports, density, availability. -->
 # ADR-0005: Supabase for user-generated data
 
 - **Status:** Proposed

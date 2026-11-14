@@ -1,3 +1,4 @@
+<!-- summary: ADR rules and the index of all decisions with status. -->
 # Architecture Decision Records
 
 We record every significant technical decision as an ADR, following a lightweight

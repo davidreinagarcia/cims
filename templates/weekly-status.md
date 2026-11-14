@@ -1,3 +1,4 @@
+<!-- summary: Weekly status report template (RAG status, metrics, risks, asks). -->
 # Weekly Status — Week of YYYY-MM-DD
 
 | Field | Value |

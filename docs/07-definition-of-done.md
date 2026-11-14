@@ -1,3 +1,4 @@
+<!-- summary: Done criteria for stories, data changes, features and releases. -->
 # Definition of Done
 
 "Done" means **demoable, reviewed, and trustworthy**. There are three levels; each includes the one

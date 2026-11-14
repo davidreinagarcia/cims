@@ -1,3 +1,4 @@
+<!-- summary: PR template: what, why, screenshots, how to test, checklist. -->
 ## What
 
 <!-- One or two sentences. -->

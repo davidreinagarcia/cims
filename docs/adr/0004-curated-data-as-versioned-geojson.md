@@ -1,3 +1,4 @@
+<!-- summary: Proposed: curated data as GeoJSON in src/data/ with provenance fields. -->
 # ADR-0004: Curated campus data as versioned GeoJSON in the repo
 
 - **Status:** Proposed (location `src/data/` already in use; provenance fields pending)

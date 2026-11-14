@@ -1,3 +1,4 @@
+<!-- summary: Verbatim transcription of the team Miro brainstorm (two trees: Main Map, UI/dashboard). -->
 # Brainstorm — Miro Board Transcription
 
 > **Source:** [Miro board](https://miro.com/app/board/uXjVEOajfEc=/) · transcribed 2026-11-14.

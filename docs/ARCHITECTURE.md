@@ -1,3 +1,4 @@
+<!-- summary: Code layout: where each kind of code and data goes in src/. -->
 # Architecture
 
 Single-page web app. No backend yet; everything the map shows lives in `src/data/`.

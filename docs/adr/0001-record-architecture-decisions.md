@@ -1,3 +1,4 @@
+<!-- summary: Accepted: we record decisions as lightweight MADR files. -->
 # ADR-0001: Record architecture decisions
 
 - **Status:** Accepted

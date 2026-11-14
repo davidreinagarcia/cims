@@ -1,41 +1,34 @@
-# CLAUDE.md: instructions for AI agents working on CIMS
+<!-- summary: Rules for AI agents working on CIMS. Short on purpose; links out for details. -->
+# CLAUDE.md
 
-CIMS (Campus Interactive Map System) is a hackathon project: a Vite + React 18 + TypeScript SPA with
-MapLibre GL JS, showing the Georgia Tech campus. Two humans (David, Tato) each run their own agent.
+CIMS: Georgia Tech campus map (Vite + React 18 + TS + MapLibre). Two humans (David, Tato), each with their own agent.
 
-## Before you write any code
+## Navigate cheaply (token budget matters)
 
-1. Read [`docs/WORKPLAN.md`](docs/WORKPLAN.md), especially §2 (file ownership) and §3 (rules).
-2. Know your task ID (`T-xx`), its lane, and which files you may edit. If the human didn't say, ask.
-3. Read the matching user story and acceptance criteria in [`docs/03-prd.md`](docs/03-prd.md).
-4. Code layout: [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). System design: [`docs/04-architecture.md`](docs/04-architecture.md).
+- Start at [`INDEX.md`](INDEX.md) → open only the target folder's `INDEX.md` → open only the files you need.
+- **Before writing any function, check [`docs/FUNCTIONS.md`](docs/FUNCTIONS.md).** Reuse or extend; never duplicate.
+- Read only the PRD story you're implementing. Never read `package-lock.json`, `dist/`, `node_modules/`.
 
 ## Hard rules
 
-- **Never push to `main` or merge PRs.** `main` auto-deploys to the public site. Work on the task
-  branch (`feat/Txx-short-name`), push it, open a **draft** PR. A human merges.
-- **Stay in your lane's files.** Don't "also fix" things in files your task doesn't own. If a change
-  is needed elsewhere, stop and tell the human.
-- **Hotspot files** (`src/App.tsx`, `src/components/MapView.tsx`, `src/types/*`, `src/state/*`,
-  `src/styles.css`, `src/config.ts`, `package.json`, lockfile, `.github/`, `deploy/`): don't edit
-  unless the task says so explicitly.
-- **No new npm dependencies** unless the task says so. Propose them instead.
-- **`npm run build` must pass** before you say you're done.
-- **No secrets** in code. Use `.env` (git-ignored) and document variables in `.env.example`.
-- **Data needs provenance.** Records in `src/data/` get `source_url`, `verified_at`, `verified_by`.
-  Never invent hours, locations, or room numbers. Leave the field out instead. Never cite the
-  Miro board as a source.
+- **Never push to `main`, never merge.** `main` auto-deploys to production. Branch `feat/Txx-name`,
+  push, open a **draft** PR. Rules: [docs/MERGING-TO-MAIN.md](docs/MERGING-TO-MAIN.md).
+- **Stay in your task's lane and files** ([WORKPLAN §2–3](docs/WORKPLAN.md)). Need another file? Stop and ask.
+- **Hotspots** (`src/App.tsx`, `src/components/MapView.tsx`, `src/types/*`, `src/state/*`,
+  `src/styles.css`, `src/config.ts`, `package.json`, lockfile, `.github/`, `.claude/`, `deploy/`): only if the task says so.
+- **No new dependencies** unless the task says so. **No secrets** in code (`.env` + `.env.example`).
+- **Never invent data** (hours, locations, rooms). Records in `src/data/` need `source_url`, `verified_at`, `verified_by`.
+- `npm run build` must pass before you say you're done.
 
-## Conventions
+## Docs you must keep current (hooks will remind you)
 
-- TypeScript strict; types from `src/types/` are the contract between lanes, so use them and don't redefine them.
-- Map layers are modules in `src/map/layers/`; UI panels live in `src/panels/<name>/`.
-- Conventional Commits: `feat(indoor): level selector` · reference `Refs: T-21, US-06.1`.
-- Small PRs (< 400 changed lines, excluding data). Fill `.github/pull_request_template.md`.
-- Check UI at 360 px wide and on desktop.
+- New/changed code file → line 1: `/** @file One line: what it's for. */`
+- Every export → one-line JSDoc above it. Shared helpers (used by 2+ modules) live in `src/lib/`.
+- New folder → write its one-line description in its `INDEX.md` (above the AUTO marker).
+- New markdown → `<!-- summary: One line. -->` at the top.
+- Never edit between `AUTO:START`/`AUTO:END`, since that part is generated ([docs/MAINTENANCE.md](docs/MAINTENANCE.md)).
 
-## When done
+## Finish every task with
 
-Push the branch, open a draft PR, and report to the human: what changed, how you verified it
-(build output, screens checked), and anything left open. If the task completes a WORKPLAN item,
-tick its box in the same PR.
+1. `npm run build` ✅ 2. `/sync-docs` 3. Conventional Commit (`feat(scope): … (T-xx)`), push, draft PR
+   with the template 4. Report to your human in ≤ 5 bullets: what changed, how you verified it, what's open.

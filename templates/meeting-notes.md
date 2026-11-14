@@ -1,3 +1,4 @@
+<!-- summary: Meeting notes template with stand-up and retro variants. -->
 # Meeting Notes — <Meeting type> · YYYY-MM-DD
 
 | Field | Value |

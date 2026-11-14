@@ -1,3 +1,4 @@
+<!-- summary: How Alexandria auto-deploys main (cron, Docker build, rsync, logs). -->
 # Deployment (Alexandria)
 
 Live site: https://cims.queenalexandria.online

@@ -1,3 +1,4 @@
+<!-- summary: Milestones M0–M4 with exit criteria and the post-hackathon phases. -->
 # Roadmap & Milestones
 
 > Hackathon dates are **TBD** (open question Q1). Milestones are defined by **exit criteria**, not

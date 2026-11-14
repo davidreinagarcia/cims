@@ -1,3 +1,4 @@
+<!-- summary: MVP hypothesis, feature catalogue F-01…F-20 with MoSCoW, boundaries, demo script. -->
 # MVP Definition
 
 ## MVP hypothesis

@@ -1,3 +1,4 @@
+<!-- summary: Accepted: Vite + React + TS SPA, static build auto-deployed to Alexandria. -->
 # ADR-0002: Web SPA with Vite + React + TypeScript, self-hosted with auto-deploy
 
 - **Status:** Accepted (implemented in commit `57ebd42`, "Add map app backbone")

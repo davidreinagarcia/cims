@@ -1,3 +1,4 @@
+<!-- summary: Project overview, quick start, team rules and the map of all docs. -->
 # CIMS: Campus Interactive Map System
 
 Interactive map of the Georgia Tech campus, built for the SGA Campus Solutions Hackathon.
@@ -70,6 +71,10 @@ AI agents: [CLAUDE.md](CLAUDE.md).
 
 | Doc | What it answers |
 |-----|-----------------|
+| **[INDEX](INDEX.md)** | **Start here: generated map of every folder and file** |
+| **[Merging to main](docs/MERGING-TO-MAIN.md)** | **Rules before anything reaches production** |
+| [Function registry](docs/FUNCTIONS.md) | Every exported function/type: check before writing one |
+| [Maintenance system](docs/MAINTENANCE.md) | How indexes and docs stay current automatically |
 | **[Work Plan](docs/WORKPLAN.md)** | **Who does what, priority checklist, how we (and our Claudes) avoid conflicts** |
 | [Code architecture](docs/ARCHITECTURE.md) | Where code and data go in `src/` |
 | [Project Charter](docs/00-project-charter.md) | Why, who, success criteria, constraints |

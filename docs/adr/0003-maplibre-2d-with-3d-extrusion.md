@@ -1,3 +1,4 @@
+<!-- summary: Accepted: MapLibre with 3D extrusion of our own OSM-derived building footprints. -->
 # ADR-0003: MapLibre GL JS with 3D extrusion for the campus map
 
 - **Status:** **Accepted** (2026-11-14). MapLibre already in use; 3D via our own building footprints (option b below), agreed by the team

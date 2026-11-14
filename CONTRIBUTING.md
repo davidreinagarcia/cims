@@ -1,3 +1,4 @@
+<!-- summary: Branching, commits, PRs, code review, data contributions, local dev. -->
 # Contributing
 
 Thanks for helping build **CIMS**. This guide keeps a fast-moving hackathon team from
@@ -13,7 +14,7 @@ stepping on each other.
 2. `git switch -c feat/F-03-building-card`
 3. Small commits using Conventional Commits. `git pull --rebase` before pushing.
 4. Open a PR early (draft is fine), fill the template, link the card.
-5. `npm run build` passes + one approval → **squash merge**. Delete the branch.
+5. Green CI + approval from the other person → **squash merge** ([MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)). Delete the branch.
 
 ## Workflow
 

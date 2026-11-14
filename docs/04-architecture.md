@@ -1,3 +1,4 @@
+<!-- summary: System design: C4 diagrams, stack, data model (ER), key flows, cross-cutting concerns. -->
 # Architecture
 
 > **Status:** Mixed. The frontend stack is **built and live** (Vite + React + TypeScript + MapLibre,

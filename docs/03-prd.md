@@ -1,3 +1,4 @@
+<!-- summary: Personas, user stories with Given/When/Then acceptance criteria per feature, NFRs, open questions. -->
 # Product Requirements Document (PRD)
 
 | Field | Value |

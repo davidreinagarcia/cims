@@ -1,3 +1,4 @@
+<!-- summary: The three SGA prompts (verbatim), HMWs, problem gaps G1–G6, users, hypotheses to validate. -->
 # Problem Statement
 
 ## The challenges (as given by SGA)

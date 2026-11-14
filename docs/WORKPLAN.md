@@ -1,3 +1,4 @@
+<!-- summary: Lanes, file ownership, anti-conflict rules, agent workflow and the prioritized task checklist (T-xx). -->
 # Work Plan: who does what, in what order, without stepping on each other
 
 > **Read this before starting any task, whether you're a human or a Claude.**
@@ -40,12 +41,16 @@ or open a tiny separate PR they review.
 ### Hotspot files (shared, see §3)
 
 `src/App.tsx` · `src/components/MapView.tsx` · `src/types/*` · `src/state/*` · `src/styles.css` ·
-`src/config.ts` · `package.json` + `package-lock.json` · `.github/` · `deploy/`
+`src/config.ts` · `package.json` + `package-lock.json` · `.github/` · `.claude/` · `scripts/gen-index.mjs` · `deploy/`
+
+**Generated files** (`INDEX.md` everywhere, `docs/FUNCTIONS.md`) are *not* hotspots: nobody edits
+them by hand, conflicts resolve themselves, and they're regenerated on every commit
+([MAINTENANCE](MAINTENANCE.md)).
 
 ## 3. Rules that keep us from colliding
 
-1. **`main` is production.** It auto-deploys to https://cims.queenalexandria.online. Never push to
-   `main`. Every change goes through a PR. `npm run build` must pass before merging.
+1. **`main` is production.** It auto-deploys to https://cims.queenalexandria.online. Follow
+   **[MERGING-TO-MAIN](MERGING-TO-MAIN.md)**: PR only, green CI, approval from the *other* person, humans merge.
 2. **Claim before you start.** Push a branch named after the task ID right away:
    `feat/T10-3d-buildings`. The branch list on GitHub *is* our claim board: if a branch for a task
    exists, it's taken. Open a **draft PR** early.
@@ -66,8 +71,9 @@ or open a tiny separate PR they review.
 
 ### Setup (once)
 
-- The repo root has a [`CLAUDE.md`](../CLAUDE.md) that both Claudes load automatically. It points
-  them here and repeats the hard rules. If you use Codex or another agent, point it at `CLAUDE.md` too.
+- The repo root has a [`CLAUDE.md`](../CLAUDE.md) that both Claudes load automatically, plus shared
+  hooks in `.claude/settings.json` that keep indexes current and make agents document what they touch
+  ([MAINTENANCE](MAINTENANCE.md)). Codex and other agents follow [`AGENTS.md`](../AGENTS.md).
 - Use **one git worktree per task**, so a Claude working on T-21 never sees half-done T-23 files:
   ```bash
   git fetch origin
@@ -96,6 +102,8 @@ branch, open a draft PR using the template. Do not merge.
 - **Cross-review:** before asking the other person, run a Claude review on your PR
   (`/code-review` or "review this diff against the acceptance criteria"). The human review then
   focuses on behavior, not typos.
+- **Navigate by index.** `INDEX.md` → folder `INDEX.md` → file. Check [`FUNCTIONS.md`](FUNCTIONS.md)
+  before writing any helper.
 - **Fresh context per task.** Start a new session (or `/clear`) between tasks; long sessions drift.
 - **Research with Claude, verify by hand.** Claude can draft POI/hours data from official GT pages,
   but every record needs a `source_url` a human opened (Risk R-01).
@@ -112,7 +120,8 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Turn `MapView.tsx` into a host that loads layer modules from `src/map/layers/` (each exports
   `addTo(map, ctx)`); move `Sidebar` content into `src/panels/`; replace `selectedId` with a
   `Selection` (`{ kind: "building" | "place" | "room" | "report", id }`) in `src/state/`;
-  per-component CSS files. **Done when:** app looks and behaves exactly as today; build passes.
+  per-component CSS files; `/** @file */` + one-line JSDoc on every file it touches (fills the
+  function registry). **Done when:** app looks and behaves exactly as today; build passes.
 - [ ] **T-02 Shared contracts** · B · *hotspot PR, right after T-01*
   `src/types/`: `Building`, `Level`, `Room`, `Poi`, `Org`, `Event`, `IssueReport`, `IssueCategory`,
   `AvailabilitySlot`, following the [data model](04-architecture.md#5-data-model), plus provenance
@@ -122,8 +131,8 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   (polygons with `id`, `name`, `aliases`, `height` from OSM `height` or `building:levels` × 3.5 m).
   Hand-check names/IDs for the pilot area. ODbL attribution stays in the UI.
   **Done when:** the file loads in geojson.io and pilot buildings have names + heights.
-- [ ] **T-04 CI build check** · A · *parallel-safe*
-  GitHub Action: `npm ci && npm run build` on every PR; enable branch protection on `main`.
+- [x] **T-04a CI workflow**: `.github/workflows/ci.yml` (index check + build) ✅ in the docs PR
+- [ ] **T-04b Branch protection** · A (repo admin) · see [MERGING-TO-MAIN § one-time setup](MERGING-TO-MAIN.md#one-time-setup-david-repo-admin)
 - [ ] **T-05 M0 decisions (30-min call)** · Both
   - [ ] Hackathon dates, deliverables, judging criteria (Q1)
   - [ ] Pilot area + pilot building: central campus + CULC? (Q3)

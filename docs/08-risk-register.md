@@ -1,3 +1,4 @@
+<!-- summary: Risks R-01…R-16 scored L×I with mitigation, contingency and owner. -->
 # Risk Register
 
 **Scoring:** Likelihood (L) and Impact (I) on 1–5. **Score = L × I.**

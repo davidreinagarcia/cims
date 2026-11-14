@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+# Regenerates INDEX.md files + docs/FUNCTIONS.md and stages them, so every commit ships current indexes.
+command -v node >/dev/null 2>&1 || { echo "pre-commit: node not found, skipping index regeneration"; exit 0; }
+node scripts/gen-index.mjs --quiet || exit 0
+git ls-files -mo --exclude-standard -- 'INDEX.md' '*/INDEX.md' 'docs/FUNCTIONS.md' | xargs -r git add --

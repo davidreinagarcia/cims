@@ -1,3 +1,4 @@
+<!-- summary: Why the project exists, objectives, scope, stakeholders, success criteria, governance. -->
 # Project Charter — CIMS
 
 | Field | Value |

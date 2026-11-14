@@ -1,3 +1,4 @@
+<!-- summary: Template for a new ADR (copy, renumber, fill). -->
 # ADR-NNNN: <Short title of solved problem and solution>
 
 - **Status:** Proposed | Accepted | Deprecated | Superseded by [ADR-XXXX](XXXX-title.md)
