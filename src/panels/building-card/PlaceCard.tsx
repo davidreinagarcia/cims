@@ -27,14 +27,15 @@ export default function PlaceCard() {
   const status = openStatus(p.hours, now);
   const today = p.hours?.[campusDay(now)];
   const inside = places.features.filter((f) => f.properties.building_id === p.id && f.properties.id !== p.id);
+  const isEvent = p.kind === "event";
   const category = LAYER_CATALOG.find((layer) => layer.id === p.category);
   const missing = [
     !p.aliases?.length && "Nickname",
     "Photo",
     !p.address && "Address",
-    !today && "Today's hours",
-    !p.buzzcard && "BuzzCard required",
-    !p.buzzcard?.note && "BuzzCard note",
+    !isEvent && !today && "Today's hours", // opening hours and BuzzCard access do not apply to events
+    !isEvent && !p.buzzcard && "BuzzCard required",
+    !isEvent && !p.buzzcard?.note && "BuzzCard note",
     !p.url && "Website",
     !p.source_url && "Source URL",
     p.status === "verified" && !p.verified_by && "Verified by",
@@ -76,8 +77,8 @@ export default function PlaceCard() {
       <table className="cims-infotable" aria-label="Place information">
         <tbody>
           <tr><th scope="row">Address</th><td>{p.address || unknown}</td></tr>
-          <tr><th scope="row">Today's hours</th><td>{today ? today.length ? today.map(([start, end]) => `${start} to ${end}`).join(", ") : "Closed" : unknown}</td></tr>
-          <tr><th scope="row">BuzzCard</th><td>{p.buzzcard ? p.buzzcard.required ? "Required: Yes" : "Required: No" : unknown}<br />Note: {p.buzzcard?.note || unknown}</td></tr>
+          {!isEvent && <tr><th scope="row">Today's hours</th><td>{today ? today.length ? today.map(([start, end]) => `${start} to ${end}`).join(", ") : "Closed" : unknown}</td></tr>}
+          {!isEvent && <tr><th scope="row">BuzzCard</th><td>{p.buzzcard ? p.buzzcard.required ? "Required: Yes" : "Required: No" : unknown}<br />Note: {p.buzzcard?.note || unknown}</td></tr>}
           <tr><th scope="row">Website</th><td>{p.url ? <a href={p.url} target="_blank" rel="noopener noreferrer">{p.url}</a> : unknown}</td></tr>
           <tr><th scope="row">Source</th><td>
             {p.status === "verified" ? <>Verified by {p.verified_by || unknown} on {p.verified_at || unknown}</> : "Unverified"}
