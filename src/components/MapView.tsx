@@ -1,12 +1,12 @@
-/** @file Map host: creates the MapLibre map, loads every layer module from src/map/layers/ and feeds them the selection and layer filters. */
+/** @file Map host: loads MapLibre on demand, creates the map, loads every layer module from src/map/layers/ and feeds them the selection and layer filters. */
 import { useEffect, useRef } from "react";
-import maplibregl from "maplibre-gl";
 import { CAMPUS } from "../config";
 import { baseStyle } from "../map/baseStyle";
 import { NorthArrow } from "../map/furniture/NorthArrow";
 import { ScaleBox } from "../map/furniture/ScaleBox";
 import { ViewToggle } from "../map/furniture/ViewToggle";
 import { loadLayers } from "../map/loadLayers";
+import { loadMapLibre } from "../map/maplibre";
 import type { LayerHandle } from "../map/types";
 import { useLayerFilters } from "../state/layerFilters";
 import { useSelection } from "../state/selection";
@@ -21,38 +21,43 @@ export default function MapView() {
   latest.current = { selection, select, filters };
 
   useEffect(() => {
-    const map = new maplibregl.Map({
-      container: container.current!,
-      center: CAMPUS.center,
-      zoom: CAMPUS.zoom,
-      pitch: CAMPUS.pitch,
-      bearing: CAMPUS.bearing,
-      maxBounds: CAMPUS.bounds,
-      style: baseStyle,
-    });
-    map.addControl(new maplibregl.NavigationControl(), "top-right");
-    map.addControl(new ViewToggle(), "top-right");
-    map.addControl(new ScaleBox(), "bottom-right");
-    map.addControl(new NorthArrow(), "bottom-left");
-
-    // style.load (not "load") so layers appear without waiting for every tile.
-    let alive = true; // a map removed before its style loaded (React StrictMode remount) must not get layers
-    map.on("style.load", () => {
+    let alive = true; // unmounted (or a StrictMode remount) before the library arrived or the style loaded: do nothing
+    let map: import("maplibre-gl").Map | undefined;
+    void loadMapLibre().then((maplibregl) => {
       if (!alive) return;
-      const ctx = { select: (s: Parameters<typeof select>[0]) => latest.current.select(s) };
-      handles.current = loadLayers().map((layer) => layer.addTo(map, ctx));
-      handles.current.forEach((h) => {
-        h.update?.(latest.current.selection);
-        h.setFilters?.(latest.current.filters);
+      map = new maplibregl.Map({
+        container: container.current!,
+        center: CAMPUS.center,
+        zoom: CAMPUS.zoom,
+        pitch: CAMPUS.pitch,
+        bearing: CAMPUS.bearing,
+        maxBounds: CAMPUS.bounds,
+        style: baseStyle,
       });
-    });
+      const m = map;
+      m.addControl(new maplibregl.NavigationControl(), "top-right");
+      m.addControl(new ViewToggle(), "top-right");
+      m.addControl(new ScaleBox(), "bottom-right");
+      m.addControl(new NorthArrow(), "bottom-left");
 
-    (window as unknown as { __map?: unknown }).__map = map; // handy for debugging in the console
+      // style.load (not "load") so layers appear without waiting for every tile.
+      m.on("style.load", () => {
+        if (!alive) return;
+        const ctx = { select: (s: Parameters<typeof select>[0]) => latest.current.select(s) };
+        handles.current = loadLayers().map((layer) => layer.addTo(m, ctx));
+        handles.current.forEach((h) => {
+          h.update?.(latest.current.selection);
+          h.setFilters?.(latest.current.filters);
+        });
+      });
+
+      (window as unknown as { __map?: unknown }).__map = m; // handy for debugging in the console
+    });
     return () => {
       alive = false;
       handles.current.forEach((h) => h.remove());
       handles.current = [];
-      map.remove();
+      map?.remove();
     };
   }, []);
 

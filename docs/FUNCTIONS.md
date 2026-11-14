@@ -101,6 +101,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `isVisible(filters, category, subtype?)` [src/map/layerFilters.ts:9](../src/map/layerFilters.ts#L9): Is a feature of this category and sub-type currently shown? Categories nobody toggles are always shown.
 - `buildMapFilter(filters)` [src/map/layerFilters.ts:18](../src/map/layerFilters.ts#L18): MapLibre filter that keeps only visible features (reads `category` and `subtype` properties), or
 - `loadLayers()` [src/map/loadLayers.ts:7](../src/map/loadLayers.ts#L7): All layers found in src/map/layers/, sorted by their `order` (default 100).
+- `loadMapLibre()` [src/map/maplibre.ts:7](../src/map/maplibre.ts#L7): Starts (or reuses) the MapLibre download. main.tsx calls it first thing so it runs in parallel with the app c…
 - `INK` [src/map/palette.ts:4](../src/map/palette.ts#L4): --ink: outlines, hatching, map labels.
 - `PAPER` [src/map/palette.ts:6](../src/map/palette.ts#L6): --paper: map background, label halos, hatch ground.
 - `PAPER_2` [src/map/palette.ts:8](../src/map/palette.ts#L8): --paper-2: building walls (a step darker than the ground, so roofs read as the lightest plane).

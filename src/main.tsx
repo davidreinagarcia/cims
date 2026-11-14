@@ -12,6 +12,10 @@ import "./styles/tokens.css";
 import "./styles/cims-ui.css";
 import "./styles.css";
 import App from "./App";
+import { loadMapLibre } from "./map/maplibre";
+
+// Start downloading the map library right away, in parallel with rendering the interface.
+void loadMapLibre();
 
 // Offline support (T-41): only in production builds, so dev servers never serve a stale copy.
 if ("serviceWorker" in navigator && import.meta.env.PROD) {
