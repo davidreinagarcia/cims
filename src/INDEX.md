@@ -19,7 +19,7 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 **Files**
 
 - [`App.tsx`](App.tsx): App shell: demo auth, selection and layer filters around the sidebar, the map and the offline notice. · exports `App`
-- [`config.ts`](config.ts): Campus map settings and the base URL for correction issues. · exports `CAMPUS`, `TILE_URL`, `TILE_ATTRIBUTION`, `CORRECTION_URL`
+- [`config.ts`](config.ts): Campus map settings and the base URL for correction issues. · exports `CAMPUS`, `MAP_LIGHT`, `TILE_URL`, `TILE_ATTRIBUTION`, `CORRECTION_URL`
 - [`main.tsx`](main.tsx): Entry point: loads fonts, design tokens and styles, mounts React and registers the offline service worker.
 - [`styles.css`](styles.css): * @file Global layout and map-control skin. Colors, type and components come from styles/tokens.css and style…
 - [`types.ts`](types.ts): Shared types for places shown on the map.

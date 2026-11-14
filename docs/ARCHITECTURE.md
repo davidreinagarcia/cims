@@ -14,6 +14,7 @@ src/
   map/
     types.ts           the layer contract (MapLayer, LayerHandle, LayerContext, LayerFilters)
     pins.ts            draws the survey pins (teardrop + category glyph) on a canvas and registers them with the map
+    ../lib/buildings.ts  building footprints loaded once on demand: lookup of the building containing a point (3D layer, building card, place selection)
     layerFilters.ts    LayerFilters to a MapLibre filter (`buildMapFilter`) and `isVisible`
     baseStyle.ts       base style (OSM raster tiles + glyphs); swap for a vector basemap here
     loadLayers.ts      finds every file in layers/ automatically (import.meta.glob)

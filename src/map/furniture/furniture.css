@@ -1,0 +1,9 @@
+/** @file Layout glue for the map furniture controls. Looks come from .cims-scale / .cims-north / .cims-mapctl in styles/cims-ui.css. */
+.cims-scale__row { display: flex; justify-content: space-between; gap: var(--s2); }
+.cims-scale { pointer-events: none; color: var(--ink); }
+.cims-north { pointer-events: none; }
+.cims-north svg { display: block; }
+/* Phones: the map is short, so the box keeps only the scale bar. */
+@media (max-width: 700px) {
+  .cims-scale [data-coords] { display: none; }
+}

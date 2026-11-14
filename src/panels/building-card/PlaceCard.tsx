@@ -1,6 +1,7 @@
 /** @file Selected place card with hours, access, provenance, contained places and map directions. */
 import { useEffect, useState, type CSSProperties } from "react";
 import { CORRECTION_URL } from "../../config";
+import BuildingLink from "./BuildingLink";
 import { formatWindow, nextWindow } from "../../lib/events";
 import { campusDay, openStatus } from "../../lib/hours";
 import { LAYER_CATALOG } from "../../lib/layerCatalog";
@@ -85,6 +86,7 @@ export default function PlaceCard() {
       <table className="cims-infotable" aria-label="Place information">
         <tbody>
           <tr><th scope="row">Address</th><td>{p.address || unknown}</td></tr>
+          <BuildingLink coordinates={place.geometry.coordinates} />
           {!isEvent && <tr><th scope="row">Today's hours</th><td>{today ? today.length ? today.map(([start, end]) => `${start} to ${end}`).join(", ") : "Closed" : unknown}</td></tr>}
           {!isEvent && <tr><th scope="row">BuzzCard</th><td>{p.buzzcard ? p.buzzcard.required ? "Required: Yes" : "Required: No" : unknown}{(p.buzzcard?.required || p.buzzcard?.note) && <><br />Note: {p.buzzcard?.note || unknown}</>}</td></tr>}
           <tr><th scope="row">Website</th><td>{p.url ? <a href={p.url} target="_blank" rel="noopener noreferrer">{p.url}</a> : unknown}</td></tr>

@@ -6,6 +6,7 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 
 **Files**
 
+- [`buildings.ts`](buildings.ts): Building footprints (OSM, src/data/buildings.geojson): loaded once on demand, with a point-in-footprint looku… · exports `loadedBuildings`, `loadBuildings`
 - [`events.ts`](events.ts): Pure event windows and short labels in the America/New_York campus timezone. · exports `nextWindow`, `formatWindow`
 - [`hours.ts`](hours.ts): Pure opening status and weekday lookup in the campus timezone. · exports `campusDay`, `openStatus`
 - [`layerCatalog.ts`](layerCatalog.ts): The toggleable map layers (PRD F-02): id, label, color token and sub-types. Add a layer or sub-type here. · exports `LAYER_CATALOG`, `categoryColor`

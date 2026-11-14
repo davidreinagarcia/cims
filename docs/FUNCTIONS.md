@@ -18,6 +18,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Shared helpers (`src/lib`, `src/state`, `src/hooks`): reuse these first
 
+- `loadedBuildings()` [src/lib/buildings.ts:76](../src/lib/buildings.ts#L76): The index if it is already loaded, so callers can answer synchronously.
+- `loadBuildings()` [src/lib/buildings.ts:81](../src/lib/buildings.ts#L81): Loads the footprints once; a failed load is forgotten so the next call retries.
 - `nextWindow(event, now)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Return the current or next weekly campus occurrence, or an unexpired one-off window.
 - `formatWindow(window)` [src/lib/events.ts:58](../src/lib/events.ts#L58): Format an event window as short English text in campus time.
 - `campusDay(now)` [src/lib/hours.ts:11](../src/lib/hours.ts#L11): Returns the hours-contract weekday for an instant in America/New_York.
@@ -38,6 +40,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Persona` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional identity offered by the demo account picker.
 - `AuthAdapter` [src/auth/types.ts:22](../src/auth/types.ts#L22): Adapter boundary keeps sign-in implementation out of screens.
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
+- `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
+- `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
 - `LayerCategory` [src/lib/layerCatalog.ts:11](../src/lib/layerCatalog.ts#L11): One entry of the layer panel.
 - `PlaceFeature` [src/lib/places.ts:7](../src/lib/places.ts#L7): One place as a GeoJSON point feature.
@@ -64,12 +68,14 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 - `App()` [src/App.tsx:11](../src/App.tsx#L11): Root component.
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
-- `MapView()` [src/components/MapView.tsx:12](../src/components/MapView.tsx#L12): The interactive map. Knows nothing about what is drawn: layers do that.
+- `MapView()` [src/components/MapView.tsx:15](../src/components/MapView.tsx#L15): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
-- `Sidebar()` [src/components/Sidebar.tsx:11](../src/components/Sidebar.tsx#L11): Left column (bottom sheet on phones) that hosts the panels.
+- `Sidebar()` [src/components/Sidebar.tsx:12](../src/components/Sidebar.tsx#L12): Left column (bottom sheet on phones) that hosts the panels.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:7](../src/panels/account/AccountChip.tsx#L7): Shows sign-in or the selected demo persona with a small sign-out disclosure.
 - `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
-- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:15](../src/panels/building-card/PlaceCard.tsx#L15): Shows the selected place's known details and correction link, or nothing without a place selection.
+- `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:12](../src/panels/building-card/BuildingCard.tsx#L12): Shows the selected building (kind "building"), or nothing when something else is selected.
+- `BuildingLink({ coordinates })` [src/panels/building-card/BuildingLink.tsx:7](../src/panels/building-card/BuildingLink.tsx#L7): Renders nothing when the place is not inside a known footprint (or the footprints are not loaded).
+- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:16](../src/panels/building-card/PlaceCard.tsx#L16): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinPanel({ onShowMap })` [src/panels/bulletin/BulletinPanel.tsx:9](../src/panels/bulletin/BulletinPanel.tsx#L9): Show upcoming events independently of layer filters and return to Explore on selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `SearchPanel()` [src/panels/search/SearchPanel.tsx:20](../src/panels/search/SearchPanel.tsx#L20): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
@@ -83,14 +89,26 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `mockAdapter` [src/auth/mockAdapter.ts:15](../src/auth/mockAdapter.ts#L15): Pretends to sign in with fictional accounts; storage failure never blocks the demo.
 - `glyphPath(id)` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
 - `CAMPUS` [src/config.ts:3](../src/config.ts#L3): Central place for map settings. Change here, not inside components.
-- `TILE_URL` [src/config.ts:16](../src/config.ts#L16): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
-- `TILE_ATTRIBUTION` [src/config.ts:18](../src/config.ts#L18): Attribution text OSM requires next to the tiles.
-- `CORRECTION_URL` [src/config.ts:21](../src/config.ts#L21): Base URL for prefilled place correction issues.
-- `baseStyle` [src/map/baseStyle.ts:6](../src/map/baseStyle.ts#L6): Base style every layer is added on top of.
+- `MAP_LIGHT` [src/config.ts:18](../src/config.ts#L18): Fixed light for the extruded buildings: anchored to the map so wall shading doesn't change as you rotate.
+- `TILE_URL` [src/config.ts:22](../src/config.ts#L22): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
+- `TILE_ATTRIBUTION` [src/config.ts:24](../src/config.ts#L24): Attribution text OSM requires next to the tiles.
+- `CORRECTION_URL` [src/config.ts:27](../src/config.ts#L27): Base URL for prefilled place correction issues.
+- `baseStyle` [src/map/baseStyle.ts:7](../src/map/baseStyle.ts#L7): Base style every layer is added on top of.
+- `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.
+- `ScaleBox` [src/map/furniture/ScaleBox.ts:22](../src/map/furniture/ScaleBox.ts#L22): MapLibre control: a four-segment scale bar in feet and the map center's latitude/longitude, updated as the ma…
+- `ViewToggle` [src/map/furniture/ViewToggle.ts:9](../src/map/furniture/ViewToggle.ts#L9): MapLibre control: "2D" / "3D" button. The label is the view you get by pressing it.
 - `OTHER_SUBTYPE` [src/map/layerFilters.ts:6](../src/map/layerFilters.ts#L6): Sub-type used for features that have none.
 - `isVisible(filters, category, subtype?)` [src/map/layerFilters.ts:9](../src/map/layerFilters.ts#L9): Is a feature of this category and sub-type currently shown? Categories nobody toggles are always shown.
 - `buildMapFilter(filters)` [src/map/layerFilters.ts:18](../src/map/layerFilters.ts#L18): MapLibre filter that keeps only visible features (reads `category` and `subtype` properties), or
 - `loadLayers()` [src/map/loadLayers.ts:7](../src/map/loadLayers.ts#L7): All layers found in src/map/layers/, sorted by their `order` (default 100).
+- `INK` [src/map/palette.ts:4](../src/map/palette.ts#L4): --ink: outlines, hatching, map labels.
+- `PAPER` [src/map/palette.ts:6](../src/map/palette.ts#L6): --paper: map background, label halos, hatch ground.
+- `PAPER_2` [src/map/palette.ts:8](../src/map/palette.ts#L8): --paper-2: building walls (a step darker than the ground, so roofs read as the lightest plane).
+- `WHITE` [src/map/palette.ts:10](../src/map/palette.ts#L10): --white: building roofs.
+- `GOLD` [src/map/palette.ts:12](../src/map/palette.ts#L12): --gold: selected roof, selected hatch ground.
+- `GOLD_INK` [src/map/palette.ts:14](../src/map/palette.ts#L14): --gold-ink: gold linework on paper (selected hatch lines).
+- `HATCH_GOLD` [src/map/patterns/index.ts:7](../src/map/patterns/index.ts#L7): Image id of the gold hatch (selected building walls).
+- `addHatchPatterns(map)` [src/map/patterns/index.ts:38](../src/map/patterns/index.ts#L38): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
 - `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
 
