@@ -20,6 +20,7 @@ export type Category =
 export interface PlaceProperties {
   id: string;
   name: string;
+  aliases?: string[];
   category: Category;
   /** Optional sub-type inside the category (e.g. "coffee" under food). Missing means "other". */
   subtype?: string;

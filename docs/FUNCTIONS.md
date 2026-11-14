@@ -21,6 +21,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LAYER_CATALOG` [src/lib/layerCatalog.ts:22](../src/lib/layerCatalog.ts#L22): The six layers of the PRD, in panel order.
 - `categoryColor(layer, fallback = "#1C2733")` [src/lib/layerCatalog.ts:42](../src/lib/layerCatalog.ts#L42): Resolved color of a layer (reads the design token, so the tokens stay the single source of truth).
 - `places` [src/lib/places.ts:11](../src/lib/places.ts#L11): The places loaded from src/data/places.json.
+- `searchPlaces(query, items)` [src/lib/search.ts:111](../src/lib/search.ts#L111): Searches name, aliases and category; queries under two characters preserve the full input order.
 - `useLayerFilters()` [src/state/layerFilters.tsx:71](../src/state/layerFilters.tsx#L71): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
 
@@ -31,6 +32,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayerCategory` [src/lib/layerCatalog.ts:11](../src/lib/layerCatalog.ts#L11): One entry of the layer panel.
 - `PlaceFeature` [src/lib/places.ts:6](../src/lib/places.ts#L6): One place as a GeoJSON point feature.
 - `PlaceCollection` [src/lib/places.ts:8](../src/lib/places.ts#L8): All places as a GeoJSON feature collection.
+- `MatchRange` [src/lib/search.ts:5](../src/lib/search.ts#L5): A half-open character range in the original field, suitable for String.slice.
+- `SearchMatch` [src/lib/search.ts:8](../src/lib/search.ts#L8): A matching name, alias or category and its highlight ranges.
+- `SearchResult` [src/lib/search.ts:15](../src/lib/search.ts#L15): A ranked place with an extensible group label and matches in displayable fields.
 - `LayerContext` [src/map/types.ts:6](../src/map/types.ts#L6): What the host gives a layer so it can talk back to the app.
 - `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
@@ -50,7 +54,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Sidebar()` [src/components/Sidebar.tsx:8](../src/components/Sidebar.tsx#L8): Left column (bottom sheet on phones) that hosts the panels.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:7](../src/panels/building-card/PlaceCard.tsx#L7): Shows name, category and description of the selected place, with a Close button. Renders nothing if no place…
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
-- `SearchPanel()` [src/panels/search/SearchPanel.tsx:26](../src/panels/search/SearchPanel.tsx#L26): Renders the search field and the result list as two siblings (CSS `order` places the detail card
+- `SearchPanel()` [src/panels/search/SearchPanel.tsx:20](../src/panels/search/SearchPanel.tsx#L20): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:32](../src/state/layerFilters.tsx#L32): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
 

@@ -25,6 +25,7 @@ src/
     building-card/     PlaceCard: detail of the selected thing (becomes the building card, T-11)
   data/places.json     GeoJSON of points of interest  <- edit this to add places
   lib/places.ts        typed access to the data
+  lib/search.ts        pure ranked place search with aliases, accent folding and highlight ranges
   lib/layerCatalog.ts  the toggleable layers (id, label, color token, sub-types): add a layer or sub-type here
   state/layerFilters.tsx  which layers/sub-types are on, saved in localStorage
   components/Glyph.tsx    line glyph per category (shape differs, works without color)
