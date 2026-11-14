@@ -1,4 +1,5 @@
 /** @file Typed access to every curated place: seed file plus src/data/pois/*.json, drafts hidden unless ?drafts=1. */
+import { nextWindow } from "./events";
 import raw from "../data/places.json";
 import type { PlaceProperties } from "../types";
 
@@ -14,10 +15,11 @@ export const showDrafts = typeof location !== "undefined" && new URLSearchParams
 
 const collections = [raw, ...Object.values(poiFiles).map((m) => m.default)] as unknown as PlaceCollection[];
 
-/** The places the app shows: seed and verified records, plus drafts only with ?drafts=1. */
+/** The places the app shows: seed, demo and verified records, plus drafts only with ?drafts=1. */
 export const places: PlaceCollection = {
   type: "FeatureCollection",
   features: collections
     .flatMap((c) => c.features)
-    .filter((f) => f.properties.status !== "draft" || showDrafts),
+    .filter((f) => f.properties.status !== "draft" || showDrafts)
+    .filter((f) => f.properties.kind !== "event" || nextWindow(f.properties.event, new Date()) !== null),
 };

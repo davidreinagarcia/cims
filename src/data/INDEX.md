@@ -6,7 +6,7 @@ Curated campus data (GeoJSON/JSON). Every record needs `source_url` + `verified_
 
 **Folders**
 
-- [`pois/`](pois/INDEX.md): Borradores GeoJSON por categoría, con fuentes y coordenadas OSM trazables.
+- [`pois/`](pois/INDEX.md): Curated points of interest, one file per category (drafts by Codex pending verification, plus demo events). H…
 
 **Files**
 

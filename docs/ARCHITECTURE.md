@@ -19,13 +19,16 @@ src/
       pois.ts          places: filtered clusters and shared-location picker, survey pins/labels, independent gold selection
   components/
     MapView.tsx        host: creates the map, loads layers, passes them the selection
-    Sidebar.tsx(+css)  shell: header + panels
+    Sidebar.tsx(+css)  shell: header + keyboard Explore/Bulletin tabs + panels
   panels/
+    bulletin/          read-only upcoming events, independent of layer toggles; Show on map selects a place and returns to Explore
     search/            SearchPanel: search box + list
     layers/            LayersPanel: category toggles, sub-type tree, legend; chips on phones
     building-card/     PlaceCard: hours/access/provenance, inside places, directions and corrections; lib/hours.ts computes campus-local status
   data/places.json     GeoJSON of points of interest  <- edit this to add places
-  lib/places.ts        typed access to the data
+  data/pois/events.json  fictional weekly demo events at seed locations, explicitly labeled demo
+  lib/events.ts        pure next/current event windows and English labels in America/New_York
+  lib/places.ts        typed access to the data; hides drafts by default and expired one-off events
   lib/search.ts        pure ranked place search with aliases, accent folding and highlight ranges
   lib/layerCatalog.ts  the toggleable layers (id, label, color token, sub-types): add a layer or sub-type here
   state/layerFilters.tsx  which layers/sub-types are on, saved in localStorage
@@ -68,3 +71,5 @@ Stack: Vite, React 18, TypeScript, MapLibre GL JS (free, no API key), OpenStreet
 See `deploy/README.md`. Short version: pushing to `main` updates the public site within about a minute.
 
 Curated POI validation and verification use `scripts/data.mjs`; see [the data workflow](data/README.md).
+
+Orgs and events reuse place features with optional `kind` and `event` metadata and the existing `orgs` category filters. `demo` is visible fictional data, restricted to events and organizations; it is never a verified claim. Weekly schedules recur in campus time, including across DST changes. Data loading filters expired events at startup; the bulletin and selected event card refresh their windows every 30 seconds.

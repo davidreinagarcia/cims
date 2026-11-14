@@ -159,6 +159,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 - [ ] **T-14 Search** (F-04) · needs T-03; rooms join when T-20 lands
   Buildings + aliases + places + rooms; "Kendeda <room>" opens indoor view on the right floor.
 - [ ] **T-15 Orgs & events layer + bulletin tab** (F-07) · needs T-12, data T-32
+  Read-only bulletin and fictional weekly demo events implemented in Lane A. Posting waits for the sign-in gate T-25.
 
 **Lane B: Inside + Actions (Tato)**
 

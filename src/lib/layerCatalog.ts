@@ -37,7 +37,12 @@ export const LAYER_CATALOG: LayerCategory[] = [
   { id: "makerspace", label: "Makerspaces", cssVar: "--cat-makerspace", subtypes: [] },
   { id: "exercise", label: "Exercise", cssVar: "--cat-exercise", subtypes: [] },
   { id: "health", label: "Health", cssVar: "--cat-health", subtypes: [] },
-  { id: "orgs", label: "Orgs & Events", cssVar: "--cat-orgs", subtypes: [] },
+  { id: "orgs", label: "Orgs & Events", cssVar: "--cat-orgs", subtypes: [
+    { id: "club", label: "Clubs" },
+    { id: "campus-org", label: "Campus orgs" },
+    { id: "community", label: "Community" },
+    { id: "admin", label: "Admin" },
+  ] },
   { id: "transport", label: "Transport", cssVar: "--cat-transport", subtypes: [] },
 ];
 
