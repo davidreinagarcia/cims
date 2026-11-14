@@ -133,6 +133,9 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   **Done when:** the file loads in geojson.io and pilot buildings have names + heights.
 - [x] **T-04a CI workflow**: `.github/workflows/ci.yml` (index check + build) ✅ in the docs PR
 - [ ] **T-04b Branch protection** · A (repo admin) · see [MERGING-TO-MAIN § one-time setup](MERGING-TO-MAIN.md#one-time-setup-david-repo-admin)
+- [ ] **T-06 Design tokens + fonts** · A · *hotspot PR (`styles.css`, `package.json`)*
+  Apply the tokens, type and header/panel components from [DESIGN-DIRECTION](design/DESIGN-DIRECTION.md);
+  fonts via a `chore/` dependency PR. **Done when:** current UI uses the tokens; no gold text on paper.
 - [ ] **T-05 M0 decisions (30-min call)** · Both
   - [ ] Hackathon dates, deliverables, judging criteria (Q1)
   - [x] Pilot: **whole campus** in 3D; indoor pilot **Kendeda**, CULC if time (Q3) ✅
@@ -146,6 +149,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 
 - [ ] **T-10 3D buildings layer** (F-01) · needs T-01, T-03
   `fill-extrusion` from `buildings.geojson`, tilted default camera, highlight on select, click → `Selection`.
+  Look: white roof cap + hatched walls, gold hatch when selected ([DESIGN-DIRECTION § Map styling](design/DESIGN-DIRECTION.md#map-styling-in-maplibre-how-to-actually-build-it-notes-for-t-10--t-12)).
 - [ ] **T-11 Building card** (F-03) · needs T-02, T-10
   Photo, hours + open-now, BuzzCard access, POIs inside, Directions, **Enter building** (calls Lane B's
   indoor entry point via `Selection`).
