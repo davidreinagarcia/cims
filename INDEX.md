@@ -22,11 +22,13 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`docs/data/`](docs/data/INDEX.md): Curated POI schema, verification workflow and generated checklist.
   - [`docs/design/`](docs/design/INDEX.md): Visual direction and UI references: the chosen "survey map" style, tokens and how to build it.
     - [`docs/design/references/`](docs/design/references/INDEX.md): Reference images (Gemini mockups). Mood references, not specs; their data is fake.
+  - [`docs/research/`](docs/research/INDEX.md): Fuentes y dudas pendientes de las investigaciones de datos del campus.
 - [`public/`](public/INDEX.md): Static assets served as-is at the site root.
 - [`scripts/`](scripts/INDEX.md): Dev tooling run with Node (no deps): index generator, Claude hooks, data fetchers.
 - [`src/`](src/INDEX.md): The web app (Vite + React + TypeScript + MapLibre). Entry: main.tsx → App.tsx.
   - [`src/components/`](src/components/INDEX.md): React components for the current UI (map view, sidebar). T-01 moves these into src/map/ and src/panels/.
   - [`src/data/`](src/data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
+    - [`src/data/pois/`](src/data/pois/INDEX.md): Borradores GeoJSON por categoría, con fuentes y coordenadas OSM trazables.
   - [`src/lib/`](src/lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
   - [`src/map/`](src/map/INDEX.md): Everything about the map engine: contract for layers, base style, and the layer auto-loader.
     - [`src/map/layers/`](src/map/layers/INDEX.md): One file per map layer; each default-exports a MapLayer and is loaded automatically. Add yours here.

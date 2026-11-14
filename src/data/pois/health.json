@@ -1,0 +1,91 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mental-health-care-resources",
+        "name": "Center for Mental Health Care & Resources",
+        "category": "health",
+        "status": "draft",
+        "description": "Student counseling and mental health assessments in Smithgall Hall.",
+        "source_url": "https://mentalhealth.gatech.edu/",
+        "floor_or_suite": "Suite 238",
+        "address": "353 Ferst Dr NW, Atlanta, GA 30313",
+        "aliases": [
+          "CMHCR"
+        ],
+        "coord_source": "OSM way 42831367 (Flag Building (Charles A. Smithgall Jr. Building)), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3995538,
+          33.7742665
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stamps-health-services",
+        "name": "Stamps Health Services",
+        "category": "health",
+        "status": "draft",
+        "description": "Campus health service providing primary care and other medical services.",
+        "source_url": "https://students.gatech.edu/vp-letter/vpsewb-newsletter-what-role-should-ai-play-georgia-tech",
+        "address": "740 Ferst Drive NW, Atlanta, GA 30332",
+        "url": "https://health.gatech.edu/",
+        "coord_source": "OSM way 42872499 (Joseph B. Whitehead Student Health Center), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4031106,
+          33.7748254
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stamps-pharmacy",
+        "name": "Stamps Health Services Pharmacy",
+        "category": "health",
+        "status": "draft",
+        "description": "Prescription and over-the-counter medicines for the Georgia Tech community.",
+        "source_url": "https://health.gatech.edu/pharmacy/",
+        "coord_source": "OSM way 42872500 (Whitehead - Pharmacy), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4031579,
+          33.774737
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "wellness-empowerment-center",
+        "name": "Wellness Empowerment Center",
+        "category": "health",
+        "status": "draft",
+        "description": "Wellness coaching and well-being programs in the Stamps Health Services building.",
+        "source_url": "https://mentalhealth.gatech.edu/resources/students/student-mental-health-resources",
+        "floor_or_suite": "Suite 204",
+        "address": "740 Ferst Drive NW, Atlanta, GA 30332",
+        "url": "https://wellnesscenter.gatech.edu/about/contact-us",
+        "coord_source": "OSM way 42872499 (Joseph B. Whitehead Student Health Center), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4031106,
+          33.7748254
+        ]
+      }
+    }
+  ]
+}
