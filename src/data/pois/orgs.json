@@ -1,0 +1,325 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "career-center",
+        "name": "Career Center",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "admin",
+        "description": "Offers career advising and organizes employer interviews for Georgia Tech students.",
+        "status": "draft",
+        "source_url": "https://career.gatech.edu/contact-us/",
+        "url": "https://career.gatech.edu/",
+        "address": "219 Uncle Heinie Way, Atlanta, GA 30332",
+        "coord_source": "OSM way 42706711 (Bill Moore Student Success Center), building representative point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3939568,
+          33.7724421
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "center-student-engagement",
+        "name": "Center for Student Engagement",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "campus-org",
+        "description": "Advises student organizations on registration, leadership and event planning.",
+        "status": "draft",
+        "source_url": "https://studentengagement.gatech.edu/about/contact-us",
+        "url": "https://studentengagement.gatech.edu/about/contact-us",
+        "address": "John Lewis Student Center, Suite 3110",
+        "building_id": "student-center",
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3988236,
+          33.7741957
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "civic-engagement",
+        "name": "Civic Engagement",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "community",
+        "description": "Connects students with volunteering opportunities and community service organizations.",
+        "status": "draft",
+        "source_url": "https://civic-engagement.gatech.edu/about/connect-us",
+        "url": "https://civic-engagement.gatech.edu/about/connect-us",
+        "address": "John Lewis Student Center, Suite 3110",
+        "building_id": "student-center",
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3988236,
+          33.7741957
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "dramatech-theatre",
+        "name": "DramaTech Theatre",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "club",
+        "description": "Student-run theatre based in the Black Box space at the back of the Ferst Center for the Arts.",
+        "status": "draft",
+        "source_url": "https://dramatech.org/about/history/",
+        "url": "https://dramatech.org/about/history/",
+        "address": "349 Ferst Drive, Atlanta, GA 30332",
+        "coord_source": "OSM node 5108328828 (DramaTech), named theatre point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3991059,
+          33.7752999
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "erato-magazine",
+        "name": "Erato",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "club",
+        "description": "Student art and literary magazine whose team meets in room 2150 of the Student Center.",
+        "status": "draft",
+        "source_url": "https://erato.gtorg.gatech.edu/about/",
+        "url": "https://erato.gtorg.gatech.edu/about/",
+        "address": "John Lewis Student Center, Room 2150",
+        "building_id": "student-center",
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3988236,
+          33.7741957
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "fraternity-sorority-life",
+        "name": "Fraternity and Sorority Life",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "campus-org",
+        "description": "Advises Georgia Tech's fraternities and sororities and supports the development of their members.",
+        "status": "draft",
+        "source_url": "https://gatech.campuslabs.com/engage/organization/Fraternity-and-Sorority-Life",
+        "url": "https://gatech.campuslabs.com/engage/organization/Fraternity-and-Sorority-Life",
+        "address": "John Lewis Student Center, Suite 3110",
+        "building_id": "student-center",
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3988236,
+          33.7741957
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "office-international-education",
+        "name": "Office of International Education",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "admin",
+        "description": "Coordinates study abroad, services for international students and intercultural programs.",
+        "status": "draft",
+        "source_url": "https://oie.gatech.edu/directions",
+        "url": "https://oie.gatech.edu/directions",
+        "address": "Savant Building, Suite 211, 631 Cherry Street, Atlanta, GA 30332",
+        "aliases": [
+          "OIE"
+        ],
+        "coord_source": "OSM way 42830543 (Savant Building), building representative point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3952667,
+          33.7720875
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "office-registrar",
+        "name": "Office of the Registrar",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "admin",
+        "description": "Manages enrollment and academic records from the first floor of Tech Tower.",
+        "status": "draft",
+        "source_url": "https://registrar.gatech.edu/about",
+        "url": "https://registrar.gatech.edu/about",
+        "address": "Tech Tower, 1st floor, 225 North Avenue, Atlanta, GA 30332",
+        "building_id": "tech-tower",
+        "coord_source": "OSM way 42706709 (Lettie Pate Whithead Evans Administration Building), building representative point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3946737,
+          33.7724961
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "office-student-media",
+        "name": "Office of Student Media",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "campus-org",
+        "description": "Coordinates Georgia Tech's student publications and media.",
+        "status": "draft",
+        "source_url": "https://studentmedia.gatech.edu/about/contact-us",
+        "url": "https://studentmedia.gatech.edu/about/contact-us",
+        "address": "John Lewis Student Center, 2nd floor, Suite 2150",
+        "building_id": "student-center",
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3988236,
+          33.7741957
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "scholarships-financial-aid",
+        "name": "Office of Scholarships and Financial Aid",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "admin",
+        "description": "Advises students on scholarships and financial aid from the Bill Moore Student Success Center.",
+        "status": "draft",
+        "source_url": "https://finaid.gatech.edu/contacting-our-office",
+        "url": "https://finaid.gatech.edu/contacting-our-office",
+        "address": "Bill Moore Student Success Center, 3rd floor",
+        "coord_source": "OSM way 42706711 (Bill Moore Student Success Center), building representative point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3939568,
+          33.7724421
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "student-campus-event-centers",
+        "name": "Student and Campus Event Centers",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "campus-org",
+        "description": "Manages spaces, activities and services for students and campus visitors.",
+        "status": "draft",
+        "source_url": "https://studentcenter.gatech.edu/our-professional-team",
+        "url": "https://studentcenter.gatech.edu/our-professional-team",
+        "address": "John Lewis Student Center, 3rd floor",
+        "building_id": "student-center",
+        "aliases": [
+          "SCEC"
+        ],
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3988236,
+          33.7741957
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "student-government-association",
+        "name": "Student Government Association",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "campus-org",
+        "description": "Represents students and offers ways to take part in student government.",
+        "status": "draft",
+        "source_url": "https://calendar.gatech.edu/event/2025/08/15/sga-open-house",
+        "url": "https://www.sga.gatech.edu/",
+        "address": "John Lewis Student Center, 3rd floor",
+        "building_id": "student-center",
+        "aliases": [
+          "SGA"
+        ],
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3988236,
+          33.7741957
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "wrek-radio",
+        "name": "WREK Atlanta",
+        "category": "orgs",
+        "kind": "org",
+        "subtype": "club",
+        "description": "Student-run radio station broadcasting from the Student Center at 91.1 FM.",
+        "status": "draft",
+        "source_url": "https://wrek.org/about",
+        "url": "https://wrek.org/about",
+        "address": "John Lewis Student Center, Suite 2140, 351 Ferst Drive NW, Atlanta, GA 30332",
+        "building_id": "student-center",
+        "aliases": [
+          "WREK"
+        ],
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim search"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3988236,
+          33.7741957
+        ]
+      }
+    }
+  ]
+}
