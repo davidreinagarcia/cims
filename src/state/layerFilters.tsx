@@ -8,7 +8,8 @@ const EMPTY: LayerFilters = { visible: {}, hiddenSubtypes: {} };
 function load(): LayerFilters {
   try {
     const raw = JSON.parse(localStorage.getItem(KEY) ?? "null");
-    if (raw && typeof raw.visible === "object" && typeof raw.hiddenSubtypes === "object") return raw;
+    const isMap = (v: unknown) => !!v && typeof v === "object" && !Array.isArray(v); // typeof null is "object"
+    if (raw && isMap(raw.visible) && isMap(raw.hiddenSubtypes)) return raw;
   } catch {
     /* storage blocked or corrupt: start fresh */
   }
