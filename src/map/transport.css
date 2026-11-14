@@ -1,0 +1,7 @@
+/** @file Survey-style skin for the bus stop popup: square, 1px ink, no shadow. */
+.cims-stop-popup .maplibregl-popup-content { padding: var(--s2) var(--s3); border: var(--hairline); border-radius: 0; box-shadow: none; background: var(--paper); color: var(--ink); font: var(--fs-sm) var(--font-body); }
+.cims-stop-popup .maplibregl-popup-tip { display: none; }
+.cims-stop-popup strong { display: block; font: 600 var(--fs-md) var(--font-display); letter-spacing: var(--caps-tracking); text-transform: uppercase; }
+.cims-stop-popup span { display: block; color: var(--ink-muted); }
+.cims-stop-popup a { color: var(--navy); }
+.cims-stop-popup .maplibregl-popup-close-button { color: var(--ink); font-size: var(--fs-lg); }

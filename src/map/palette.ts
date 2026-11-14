@@ -12,3 +12,5 @@ export const WHITE = "#FFFFFF";
 export const GOLD = "#B3A369";
 /** --gold-ink: gold linework on paper (selected hatch lines). */
 export const GOLD_INK = "#8A7A3E";
+/** --cat-transport: bus routes, stops and live buses. */
+export const SAGE = "#5E7A5A";
