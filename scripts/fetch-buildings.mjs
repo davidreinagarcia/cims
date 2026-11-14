@@ -72,11 +72,43 @@ function inside([x, y], r) {
   return hit;
 }
 
+/**
+ * Joins a relation's member ways into closed rings. OSM often splits one outline into several ways that
+ * only close when chained end to end; closing each way on its own would invent edges that don't exist.
+ * Ways that never close are dropped (and counted), not force-closed.
+ */
+function stitchRings(members) {
+  const key = (p) => `${p.lon},${p.lat}`;
+  const open = members.filter((m) => m.geometry?.length >= 2).map((m) => [...m.geometry]);
+  const rings = [];
+  while (open.length) {
+    let line = open.pop();
+    for (let grew = true; grew && key(line[0]) !== key(line[line.length - 1]); ) {
+      grew = false;
+      for (let i = 0; i < open.length; i++) {
+        const [head, tail] = [key(open[i][0]), key(open[i][open[i].length - 1])];
+        const end = key(line[line.length - 1]);
+        if (head === end) line = line.concat(open[i].slice(1));
+        else if (tail === end) line = line.concat(open[i].slice(0, -1).reverse());
+        else continue;
+        open.splice(i, 1);
+        grew = true;
+        break;
+      }
+    }
+    if (line.length >= 4 && key(line[0]) === key(line[line.length - 1])) rings.push(ring(line));
+    else unclosed++;
+  }
+  return rings;
+}
+let unclosed = 0;
+
 /** Converts one Overpass element (way or multipolygon relation) into a GeoJSON geometry, or null. */
 function toGeometry(el) {
   if (el.type === "way") return el.geometry?.length >= 4 ? { type: "Polygon", coordinates: [ring(el.geometry)] } : null;
-  const outers = (el.members ?? []).filter((m) => m.role === "outer" && m.geometry?.length >= 4).map((m) => [ring(m.geometry)]);
-  const inners = (el.members ?? []).filter((m) => m.role === "inner" && m.geometry?.length >= 4).map((m) => ring(m.geometry));
+  const members = el.members ?? [];
+  const outers = stitchRings(members.filter((m) => m.role === "outer")).map((r) => [r]);
+  const inners = stitchRings(members.filter((m) => m.role === "inner"));
   for (const r of inners) outers.find((poly) => inside(r[0], poly[0]))?.push(r);
   if (!outers.length) return null;
   return outers.length === 1 ? { type: "Polygon", coordinates: outers[0] } : { type: "MultiPolygon", coordinates: outers };
@@ -145,4 +177,5 @@ writeFileSync(OUT, JSON.stringify(out) + "\n");
 const named = features.filter((f) => f.properties.name).length;
 const src = features.reduce((m, f) => ((m[f.properties.height_source] = (m[f.properties.height_source] ?? 0) + 1), m), {});
 console.log(`buildings.geojson: ${features.length} buildings (${named} named) · heights ${JSON.stringify(src)} · ${(JSON.stringify(out).length / 1024).toFixed(0)} KB`);
+if (unclosed) console.warn(`⚠️ ${unclosed} relation outline(s) never closed and were left out`);
 for (const o of overrides.filter((x) => !x._used)) console.warn(`⚠️ override matched nothing: ${JSON.stringify(o.match)}`);

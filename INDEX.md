@@ -29,7 +29,9 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`src/data/`](src/data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
   - [`src/lib/`](src/lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
   - [`src/map/`](src/map/INDEX.md): Everything about the map engine: contract for layers, base style, and the layer auto-loader.
+    - [`src/map/furniture/`](src/map/furniture/INDEX.md): Cartographic furniture drawn over the map as MapLibre controls: scale + coordinates box, north arrow, 2D/3D t…
     - [`src/map/layers/`](src/map/layers/INDEX.md): One file per map layer; each default-exports a MapLayer and is loaded automatically. Add yours here.
+    - [`src/map/patterns/`](src/map/patterns/INDEX.md): Hatch pattern images for the survey-map look (tiny SVGs registered with map.addImage).
   - [`src/panels/`](src/panels/INDEX.md): Sidebar panels, one folder per panel. Mount new ones in components/Sidebar.tsx.
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
     - [`src/panels/layers/`](src/panels/layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.

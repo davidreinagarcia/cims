@@ -6,6 +6,7 @@ One file per map layer; each default-exports a MapLayer and is loaded automatica
 
 **Files**
 
+- [`buildings.ts`](buildings.ts): Buildings layer: OSM footprints extruded in the survey style (hatched walls, ink rim, white roof; flat outlin…
 - [`pois.ts`](pois.ts): Places layer: survey pins per category (glyph inside a paper ring), name labels from zoom 16; the selected pl…
 
 <!-- AUTO:END -->
