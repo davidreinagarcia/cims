@@ -21,6 +21,8 @@
   --cat-exercise: #7D6E33;    /* hexagon */
   --cat-orgs: #2F6B6B;        /* chevron */
   --cat-transport: #5E7A5A;   /* diamond */
+  --cat-printing: #5B4B8A;    /* printer (4.9:1 on paper) */
+  --cat-health: #A23B72;      /* medical cross (5.0:1 on paper) */
   --cat-issues: #B42318;      /* triangle with ! */
   --cat-free: #3F7D4E;        /* door / clock */
   --route: #A33B2B;           /* dashed walking route */

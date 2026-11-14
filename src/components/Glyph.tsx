@@ -8,6 +8,8 @@ const PATHS: Record<string, string> = {
   exercise: "M12 3l7.8 4.5v9L12 21l-7.8-4.5v-9Z M8 12h8M8 10v4M16 10v4",
   orgs: "M5 5h14v8l-7 6-7-6Z M8 10l4 3 4-3",
   transport: "M12 3l9 9-9 9-9-9Z M12 9.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5Z",
+  printing: "M7 9V4h10v5 M4 9h16v8H4Z M7 14h10v6H7Z M16 12h1",
+  health: "M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6Z",
   issues: "M12 3 21.5 20h-19Z M12 9.5v5M12 16.5v1.5",
   free: "M5 3h12v18H5Z M5 21h14 M14 11.5a1 1 0 1 0 0 1 1 1 0 0 0 0-1Z",
   building: "M5 3h10v18H5Z M15 9h4v12h-4 M8 7h1M11 7h1M8 11h1M11 11h1M8 15h1M11 15h1",
