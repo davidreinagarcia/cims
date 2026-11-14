@@ -16,7 +16,10 @@ engraved hatching, navy and old gold. It feels drafted, not rendered.
 
 1. **Isometric buildings with white roofs and hatched walls**, like an engraved plan. Selected or
    featured buildings switch to **gold hatching**.
-2. **Survey-marker pins**: a circle with a crosshair (gold ring, ink cross), optionally on a teardrop
+2. **Survey-marker pins**: a teardrop in the category color with a paper ring. **Decided 2026-11-14 (David):
+   the category glyph sits inside the ring** instead of a crosshair (variant B: the crosshair vanishes at 24 px and
+   several category colors are indistinguishable in grayscale). Selected pin: gold fill, ink glyph, larger.
+   Original idea: a circle with a crosshair (gold ring, ink cross), optionally on a teardrop
    stem. Small tag below in technical caps (`SURV-1` style → for us: room or POI code).
 3. **Street names in letter-spaced caps** along the road, ink on paper.
 4. **Cartographic furniture**: scale bar + coordinates in a 1px-bordered box (bottom right), a
