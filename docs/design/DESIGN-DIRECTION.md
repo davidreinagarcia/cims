@@ -130,6 +130,16 @@ These faces are a proposal matching the reference; swap only for something with 
 Hatch pattern images: tiny SVGs (e.g., 8×8, 1px diagonal ink line on paper) registered with
 `map.addImage`. Keep them in `src/map/patterns/`.
 
+**As built (T-10, 2026-11-14)**: [`src/map/layers/buildings.ts`](../../src/map/layers/buildings.ts):
+
+- `fill-extrusion-pattern` does not accept `feature-state`, so the selected building's gold walls are a
+  second walls layer switched with `setFilter`; the gold roof does use `feature-state`.
+- A third thin extrusion in ink sits between walls and roof cap: it reads as the drafted roof edge.
+- Wall patterns stretch about 3× along the wall compared to their height, so the hatch tile is narrow
+  (2 × 6 px) to come out as an even 45° line. One SVG, tinted from `src/map/palette.ts`.
+- Below 5° of pitch (the 2D toggle) the extrusions swap for flat white footprints with the ink outline.
+- Map colors for MapLibre live in `src/map/palette.ts` (literal mirror of `tokens.css`).
+
 ## Don'ts from the reference
 
 - Don't copy its fake data ("BLDG 142", "Year Built 2019", garbled entrances).

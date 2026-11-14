@@ -7,6 +7,7 @@ Visual direction and UI references: the chosen "survey map" style, tokens and ho
 **Folders**
 
 - [`references/`](references/INDEX.md): Reference images (Gemini mockups). Mood references, not specs; their data is fake.
+- [`screenshots/`](screenshots/INDEX.md): Before/after screenshots of the real app, taken for PRs (production build, headless Chromium). Named <task-<s…
 
 **Files**
 

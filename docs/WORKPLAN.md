@@ -126,7 +126,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   `src/types/`: `Building`, `Level`, `Room`, `Poi`, `Org`, `Event`, `IssueReport`, `IssueCategory`,
   `AvailabilitySlot`, following the [data model](04-architecture.md#5-data-model), plus provenance
   fields. Tiny mock fixtures in `src/data/mocks/`. **Done when:** both lanes agree in the PR.
-- [ ] **T-03 Building footprints** · B · *parallel-safe (new files only)*
+- [x] **T-03 Building footprints** · B · *parallel-safe (new files only)*
   `scripts/fetch-buildings.mjs`: Overpass query for the campus bbox → `src/data/buildings.geojson`
   (polygons with `id`, `name`, `aliases`, `height` from OSM `height` or `building:levels` × 3.5 m).
   Hand-check names/IDs for the pilot area. ODbL attribution stays in the UI.
@@ -147,7 +147,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 
 **Lane A: Outside (David)**
 
-- [ ] **T-10 3D buildings layer** (F-01) · needs T-01, T-03
+- [x] **T-10 3D buildings layer** (F-01) · needs T-01, T-03
   `fill-extrusion` from `buildings.geojson`, tilted default camera, highlight on select, click → `Selection`.
   Look: white roof cap + hatched walls, gold hatch when selected ([DESIGN-DIRECTION § Map styling](design/DESIGN-DIRECTION.md#map-styling-in-maplibre-how-to-actually-build-it-notes-for-t-10--t-12)).
 - [x] **T-11 Building card** (F-03) · needs T-02, T-10
