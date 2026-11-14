@@ -1,4 +1,5 @@
 /** @file Sidebar shell: survey-style header plus the panels. Add new panels here (src/panels/). */
+import AccountChip from "../panels/account/AccountChip";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import LayersPanel from "../panels/layers/LayersPanel";
 import SearchPanel from "../panels/search/SearchPanel";
@@ -15,6 +16,7 @@ export default function Sidebar() {
           <br />
           Campus Map
         </span>
+        <nav className="cims-header__nav" aria-label="Account"><AccountChip /></nav>
       </header>
       <SearchPanel />
       <LayersPanel />

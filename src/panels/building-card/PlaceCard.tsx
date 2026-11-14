@@ -4,6 +4,7 @@ import { CORRECTION_URL } from "../../config";
 import { campusDay, openStatus } from "../../lib/hours";
 import { LAYER_CATALOG } from "../../lib/layerCatalog";
 import { places } from "../../lib/places";
+import { useAuth } from "../../state/auth";
 import { useSelection } from "../../state/selection";
 import "./building-card.css";
 
@@ -12,6 +13,8 @@ const unknown = <span className="cims-muted">Unknown</span>;
 /** Shows the selected place's known details and correction link, or nothing without a place selection. */
 export default function PlaceCard() {
   const { selection, select } = useSelection();
+  const { session, requireAuth } = useAuth();
+  const [reportPlaceId, setReportPlaceId] = useState<string | null>(null);
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
     setNow(new Date());
@@ -42,6 +45,11 @@ export default function PlaceCard() {
   correction.searchParams.set("body", `Place ID: ${p.id}\n\nFields shown as Unknown:\n${missing.map((field) => `* ${field}`).join("\n")}\n\nSuggested correction:\n\nSource URL:\n`);
   const [lng, lat] = place.geometry.coordinates;
   const directions = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
+
+  // T-23 replaces only this placeholder action with its report flow.
+  function handleReportIssue() {
+    requireAuth(() => setReportPlaceId(p.id));
+  }
 
   return (
     <section className="detail" aria-label="Place details" style={{ "--cat": `var(${category?.cssVar ?? "--cat-support"})` } as CSSProperties}>
@@ -81,6 +89,11 @@ export default function PlaceCard() {
           ))}</ul>
         </div>
       )}
+      <div className="detail__report">
+        <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
+        {!session && <small className="cims-muted">Requires sign-in</small>}
+      </div>
+      {reportPlaceId === p.id && <p role="status">Report form arrives with T-23. Prototype: nothing is sent.</p>}
       <div className="cims-actions">
         <a className="cims-btn cims-btn--primary" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
         <button type="button" className="cims-btn" onClick={() => select(null)}>Close</button>

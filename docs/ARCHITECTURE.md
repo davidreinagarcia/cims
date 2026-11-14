@@ -5,9 +5,11 @@ Single-page web app. No backend yet; everything the map shows lives in `src/data
 
 ```
 src/
-  App.tsx              shell: SelectionProvider + sidebar + map
+  App.tsx              shell: AuthProvider + SelectionProvider + sidebar + map
   config.ts            campus center, bounds, tile source (one place to tweak the map)
   types.ts             Category + PlaceProperties
+  auth/                replaceable AuthAdapter contract, fictional personas and localStorage mock session
+  state/auth.tsx       AuthProvider, useAuth(), pending demo action and sign-in dialog state
   state/selection.tsx  Selection {kind, id}, SelectionProvider, useSelection()
   map/
     types.ts           the layer contract (MapLayer, LayerHandle, LayerContext, LayerFilters)
@@ -21,6 +23,7 @@ src/
     MapView.tsx        host: creates the map, loads layers, passes them the selection
     Sidebar.tsx(+css)  shell: header + panels
   panels/
+    account/           AccountChip + SignInDialog: DEMO sign-in theater, no authentication or permissions
     search/            SearchPanel: search box + list
     layers/            LayersPanel: category toggles, sub-type tree, legend; chips on phones
     building-card/     PlaceCard: hours/access/provenance, inside places, directions and corrections; lib/hours.ts computes campus-local status
