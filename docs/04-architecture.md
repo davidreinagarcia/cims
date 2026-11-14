@@ -95,6 +95,9 @@ erDiagram
   ISSUE_REPORT }o--|| ISSUE_CATEGORY : "is a"
   ISSUE_CATEGORY }o--|| TEAM : "routes to"
   ROOM ||--o{ AVAILABILITY_SLOT : "has"
+  ACCOUNT ||--o{ ISSUE_REPORT : files
+  ACCOUNT ||--o{ DENSITY_REPORT : submits
+  ACCOUNT ||--o{ EVENT : posts
 
   BUILDING {
     string id PK "e.g. kendeda"
@@ -110,11 +113,12 @@ erDiagram
   LEVEL { string id PK  string building_id FK  string label  int ordinal  string plan_url }
   ROOM { string id PK  string level_id FK  string number  string type "classroom|study|office|restroom|vending|locker"  polygon shape }
   POI { string id PK  string category "food|support|makerspace|exercise|transport"  string subtype  point location  string building_id  string level_id  json hours  json attributes "menu_url, dining_dollars, services" }
+  ACCOUNT { string id PK "opaque, never a name or GTID"  string role "student|officer|staff|moderator"  string provider "mock|gt-sso"  string status "active|suspended"  datetime created_at }
   ORG { string id PK  string name  string type "club|campus_org|community|admin"  string url }
   EVENT { string id PK  string org_id FK  datetime starts_at  datetime ends_at  point location }
   STUDY_SPACE { string id PK  string poi_id FK  int capacity_hint }
-  DENSITY_REPORT { uuid id PK  string study_space_id FK  string level "empty|some|full"  datetime created_at  string client_hash "rate limiting, not identity" }
-  ISSUE_REPORT { uuid id PK  string category_id FK  string status "open|routed|in_progress|resolved|duplicate"  string room_id  string equipment  point location  string description  string photo_url  int plus_ones  datetime created_at  datetime status_changed_at }
+  DENSITY_REPORT { uuid id PK  string study_space_id FK  string level "empty|some|full"  datetime created_at  string account_id FK "author; rate limiting per account" }
+  ISSUE_REPORT { uuid id PK  string category_id FK  string status "open|routed|in_progress|resolved|duplicate"  string room_id  string equipment  point location  string description  string photo_url  int plus_ones  datetime created_at  datetime status_changed_at  string account_id FK "author" }
   ISSUE_CATEGORY { string id PK  string label  string team_id FK }
   TEAM { string id PK  string name "Facilities | IT"  string official_url }
   AVAILABILITY_SLOT { uuid id PK  string room_id FK  datetime starts_at  datetime ends_at  bool is_free  string source "seeded|feed" }
@@ -126,6 +130,10 @@ Room booking metadata (capacity, features, owning system, policy) is curated in 
 record. User-generated and time-varying entities (DensityReport, IssueReport, AvailabilitySlot, posted
 Events) live in Postgres. Category → team routing is a curated table, so changing it is a data PR.
 
+**Identity and posting.** Accounts are pseudonymous (`ACCOUNT`: opaque id, role, provider, status). The app talks to
+an `AuthAdapter` (`signIn`, `signOut`, `session`); the MVP adapter is a **mock** (demo personas, local session), the
+future one is GT SSO. Every user-generated row carries `account_id`; Supabase RLS keys on it ([ADR-0005](adr/0005-backend-supabase.md)).
+
 ## 6. Key flows
 
 **Find a room (US-04.1 → US-06.1)**
@@ -135,7 +143,7 @@ Events) live in Postgres. Category → team routing is a curated table, so chang
 
 **Report study-space fullness (US-08.1)**
 1. User taps "Full" → client POSTs `{study_space_id, level}`.
-2. DB policy / function enforces 1 report per client hash per space per 15 min.
+2. DB policy / function enforces 1 report per account per space per 15 min.
 3. Map layer reads a view: last-2h weighted average → color, or "No recent data".
 
 **Report an issue (US-10.1 → US-10.2)**
@@ -154,8 +162,9 @@ Events) live in Postgres. Category → team routing is a curated table, so chang
 | Concern | Approach |
 |---------|----------|
 | Accessibility | Every map entity also reachable via search and list views; keyboard navigation; ARIA on panels |
-| Privacy | No accounts; no server-side location; client hash only for rate limiting, rotated daily |
-| Abuse | Rate limits; content length caps; escaped rendering; posting allowlisted in MVP |
+| Identity | Reading needs no account. **Every write needs a signed-in account** (F-21): MVP uses a simulated GT sign-in behind an `AuthAdapter` (mock now, real GT SSO later, [ADR-0007](adr/0007-gt-sign-in-simulated.md)). Roles: student, officer, staff, moderator |
+| Privacy | Pseudonymous accounts only (opaque id + role; no names, emails or GTIDs); authors visible to staff and moderators, never to other students; no server-side location |
+| Abuse | Account required to post; rate limits per account; content length caps; escaped rendering; event posting limited to officers; moderator can hide posts and suspend accounts (Phase 2 enforcement) |
 | Offline / demo safety | Service worker (T-41, `src/pwa/sw.js`, generated at build by `vite.config.ts`): precaches the app shell and the data bundled in it, caches map tiles and glyphs as they are viewed; the app and every place already viewed work with no network. Demo runs without backend |
 | Observability | Privacy-friendly page analytics + error tracking (free tier) |
 | Data freshness | Validation warns on records with `verified_at` > 90 days |
@@ -165,6 +174,6 @@ Events) live in Postgres. Category → team routing is a curated table, so chang
 - Replace curated GeoJSON with an official GT GIS source if access is granted.
 - Density prediction model (F-13) trained on accumulated `DENSITY_REPORT` data.
 - Indoor routing graph per level (F-14).
-- SSO (GT login) before enabling open posting or reservations.
+- Replace the F-21 simulated sign-in with real GT SSO (needs GT IT approval; fallback: magic link to a verified @gatech.edu address) before opening posting beyond the demo or enabling reservations.
 - Real ticket hand-off: push F-10 reports into Facilities/IT systems (email or API) instead of simulating.
 - No-show release (F-18): check-in via QR/NFC at the room, auto-release after a grace period.

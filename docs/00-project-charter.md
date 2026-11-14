@@ -40,13 +40,13 @@ and a **UI / dashboard** with interactions. This charter turns that brainstorm i
 
 **In scope (MVP):** campus base map with clickable buildings; layer toggles and legend; building info
 cards; search; POI layers (Food, Support, Makerspaces, Exercise); indoor directory for **1–2 pilot
-buildings**; orgs & events layer; **issue reporting with status and duplicates** (P2). Should: **room
+buildings**; orgs & events layer; **issue reporting with status and duplicates** (P2); a **simulated Georgia Tech sign-in that gates every post** (F-21). Should: **room
 finder** (P3), Must since Q6. Indoor pilot: **Kendeda** (CULC second). Details in [MVP](02-mvp.md).
 
 **Out of scope (for the hackathon):** real room and locker booking (deep links only); real submission
 of tickets into Facilities/IT systems (routing is simulated); production-grade
 crowdsourced density with a predictive model; VR / street view; NFC tags; turn-by-turn indoor routing;
-native mobile apps; integration with GT authentication (SSO).
+native mobile apps; **real** integration with GT authentication (SSO): the MVP simulates it (F-21), with the same contract so the real one drops in later.
 
 ## 5. Stakeholders
 

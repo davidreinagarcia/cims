@@ -18,23 +18,30 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Shared helpers (`src/lib`, `src/state`, `src/hooks`): reuse these first
 
+- `nextWindow(event, now)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Return the current or next weekly campus occurrence, or an unexpired one-off window.
+- `formatWindow(window)` [src/lib/events.ts:58](../src/lib/events.ts#L58): Format an event window as short English text in campus time.
 - `campusDay(now)` [src/lib/hours.ts:11](../src/lib/hours.ts#L11): Returns the hours-contract weekday for an instant in America/New_York.
-- `openStatus(hours, now)` [src/lib/hours.ts:21](../src/lib/hours.ts#L21): Computes campus-local opening status without guessing when today's hours are missing.
+- `openStatus(hours, now)` [src/lib/hours.ts:24](../src/lib/hours.ts#L24): Computes campus-local opening status without guessing when today's hours are missing.
 - `LAYER_CATALOG` [src/lib/layerCatalog.ts:22](../src/lib/layerCatalog.ts#L22): The PRD layers plus Printing and Health (added 2026-11-14), in panel order.
-- `categoryColor(layer, fallback = "#1C2733")` [src/lib/layerCatalog.ts:45](../src/lib/layerCatalog.ts#L45): Resolved color of a layer (reads the design token, so the tokens stay the single source of truth).
-- `showDrafts` [src/lib/places.ts:13](../src/lib/places.ts#L13): True when the page was opened with ?drafts=1: unverified drafts become visible (for reviewers and previews).
-- `places` [src/lib/places.ts:18](../src/lib/places.ts#L18): The places the app shows: seed and verified records, plus drafts only with ?drafts=1.
+- `categoryColor(layer, fallback = "#1C2733")` [src/lib/layerCatalog.ts:50](../src/lib/layerCatalog.ts#L50): Resolved color of a layer (reads the design token, so the tokens stay the single source of truth).
+- `showDrafts` [src/lib/places.ts:14](../src/lib/places.ts#L14): True when the page was opened with ?drafts=1: unverified drafts become visible (for reviewers and previews).
+- `places` [src/lib/places.ts:19](../src/lib/places.ts#L19): The places the app shows: seed, demo and verified records, plus drafts only with ?drafts=1.
 - `searchPlaces(query, items)` [src/lib/search.ts:111](../src/lib/search.ts#L111): Searches name, aliases and category; queries under two characters preserve the full input order.
-- `useLayerFilters()` [src/state/layerFilters.tsx:71](../src/state/layerFilters.tsx#L71): Read and change the layer panel state from any component.
+- `useAuth()` [src/state/auth.tsx:63](../src/state/auth.tsx#L63): Reads the demo session and sign-in controls inside AuthProvider.
+- `useLayerFilters()` [src/state/layerFilters.tsx:72](../src/state/layerFilters.tsx#L72): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
 
 ### Types & contracts
 
+- `Role` [src/auth/types.ts:4](../src/auth/types.ts#L4): Demo roles change labels only and grant no permissions.
+- `Session` [src/auth/types.ts:7](../src/auth/types.ts#L7): Fictional account selected on this device, with no authentication.
+- `Persona` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional identity offered by the demo account picker.
+- `AuthAdapter` [src/auth/types.ts:22](../src/auth/types.ts#L22): Adapter boundary keeps sign-in implementation out of screens.
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
 - `LayerCategory` [src/lib/layerCatalog.ts:11](../src/lib/layerCatalog.ts#L11): One entry of the layer panel.
-- `PlaceFeature` [src/lib/places.ts:6](../src/lib/places.ts#L6): One place as a GeoJSON point feature.
-- `PlaceCollection` [src/lib/places.ts:8](../src/lib/places.ts#L8): All places as a GeoJSON feature collection.
+- `PlaceFeature` [src/lib/places.ts:7](../src/lib/places.ts#L7): One place as a GeoJSON point feature.
+- `PlaceCollection` [src/lib/places.ts:9](../src/lib/places.ts#L9): All places as a GeoJSON feature collection.
 - `MatchRange` [src/lib/search.ts:5](../src/lib/search.ts#L5): A half-open character range in the original field, suitable for String.slice.
 - `SearchMatch` [src/lib/search.ts:8](../src/lib/search.ts#L8): A matching name, alias or category and its highlight ranges.
 - `SearchResult` [src/lib/search.ts:15](../src/lib/search.ts#L15): A ranked place with an extensible group label and matches in displayable fields.
@@ -42,31 +49,38 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
 - `MapLayer` [src/map/types.ts:36](../src/map/types.ts#L36): A self-contained piece of the map. Drop a file in src/map/layers/ that default-exports one of
-- `LayerFiltersApi` [src/state/layerFilters.tsx:19](../src/state/layerFilters.tsx#L19): What useLayerFilters() returns.
+- `LayerFiltersApi` [src/state/layerFilters.tsx:20](../src/state/layerFilters.tsx#L20): What useLayerFilters() returns.
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): The kinds of thing that can be selected. Only "place" is used so far.
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
 - `SelectionApi` [src/state/selection.tsx:20](../src/state/selection.tsx#L20): What useSelection() returns.
 - `Category` [src/types.ts:7](../src/types.ts#L7): Kinds of place the map can show. The first six are the toggleable layers of the layer panel
-- `DataStatus` [src/types.ts:25](../src/types.ts#L25): Data trust level (ADR-0004). "seed": existing approximate data, shown. "draft": researched but not
-- `Hours` [src/types.ts:28](../src/types.ts#L28): Opening hours: per weekday, a list of ["HH:MM", "HH:MM"] open/close pairs (24h, campus local time).
-- `BuzzcardAccess` [src/types.ts:31](../src/types.ts#L31): BuzzCard (student ID) access rule for a place.
-- `PlaceProperties` [src/types.ts:37](../src/types.ts#L37): Properties of a place feature in src/data/places.json and src/data/pois/*.json.
+- `DataStatus` [src/types.ts:26](../src/types.ts#L26): Data trust level (ADR-0004). "seed": existing approximate data, shown. "draft": researched but not
+- `EventInfo` [src/types.ts:29](../src/types.ts#L29): Event timing in campus time; demo records are fictional, visible examples only.
+- `Hours` [src/types.ts:38](../src/types.ts#L38): Opening hours: per weekday, a list of ["HH:MM", "HH:MM"] open/close pairs (24h, campus local time).
+- `BuzzcardAccess` [src/types.ts:41](../src/types.ts#L41): BuzzCard (student ID) access rule for a place.
+- `PlaceProperties` [src/types.ts:47](../src/types.ts#L47): Properties of a place feature in src/data/places.json and src/data/pois/*.json.
 
 ### Components
 
-- `App()` [src/App.tsx:9](../src/App.tsx#L9): Root component.
+- `App()` [src/App.tsx:11](../src/App.tsx#L11): Root component.
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:12](../src/components/MapView.tsx#L12): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
-- `Sidebar()` [src/components/Sidebar.tsx:8](../src/components/Sidebar.tsx#L8): Left column (bottom sheet on phones) that hosts the panels.
-- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:13](../src/panels/building-card/PlaceCard.tsx#L13): Shows the selected place's known details and correction link, or nothing without a place selection.
+- `Sidebar()` [src/components/Sidebar.tsx:11](../src/components/Sidebar.tsx#L11): Left column (bottom sheet on phones) that hosts the panels.
+- `AccountChip()` [src/panels/account/AccountChip.tsx:7](../src/panels/account/AccountChip.tsx#L7): Shows sign-in or the selected demo persona with a small sign-out disclosure.
+- `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
+- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:15](../src/panels/building-card/PlaceCard.tsx#L15): Shows the selected place's known details and correction link, or nothing without a place selection.
+- `BulletinPanel({ onShowMap })` [src/panels/bulletin/BulletinPanel.tsx:9](../src/panels/bulletin/BulletinPanel.tsx#L9): Show upcoming events independently of layer filters and return to Explore on selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `SearchPanel()` [src/panels/search/SearchPanel.tsx:20](../src/panels/search/SearchPanel.tsx#L20): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
-- `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:32](../src/state/layerFilters.tsx#L32): Provides the layer filters to the app. Mount once, in App.
+- `AuthProvider({ children, adapter = mockAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
+- `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
 
 ### Other exported functions & constants
 
+- `DEMO_PERSONAS` [src/auth/mockAdapter.ts:7](../src/auth/mockAdapter.ts#L7): Demo role descriptions describe possible future capabilities, never enforced permissions.
+- `mockAdapter` [src/auth/mockAdapter.ts:15](../src/auth/mockAdapter.ts#L15): Pretends to sign in with fictional accounts; storage failure never blocks the demo.
 - `glyphPath(id)` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
 - `CAMPUS` [src/config.ts:3](../src/config.ts#L3): Central place for map settings. Change here, not inside components.
 - `TILE_URL` [src/config.ts:16](../src/config.ts#L16): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…

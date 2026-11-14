@@ -17,6 +17,9 @@ function minutes(time: string): number {
   return hour * 60 + minute;
 }
 
+// A close time of "00:00" means midnight at the end of the day (the data tool asks for "24:00", but be lenient).
+const endMinutes = (time: string): number => (time === "00:00" ? 1440 : minutes(time));
+
 /** Computes campus-local opening status without guessing when today's hours are missing. */
 export function openStatus(hours: Hours | undefined, now: Date): { state: "open" | "closed" | "unknown"; label: string } {
   const day = campusDay(now);
@@ -26,7 +29,7 @@ export function openStatus(hours: Hours | undefined, now: Date): { state: "open"
   const current = Number(parts.find((part) => part.type === "hour")!.value) * 60
     + Number(parts.find((part) => part.type === "minute")!.value);
   const sorted = [...ranges].sort((a, b) => minutes(a[0]) - minutes(b[0]));
-  const active = sorted.find(([start, end]) => minutes(start) <= current && current < minutes(end));
+  const active = sorted.find(([start, end]) => minutes(start) <= current && current < endMinutes(end));
   if (active) return { state: "open", label: `OPEN NOW, closes ${active[1]}` };
   const next = sorted.find(([start]) => minutes(start) > current);
   if (next) return { state: "closed", label: `CLOSED, opens at ${next[0]}` };
@@ -39,7 +42,9 @@ export function openStatus(hours: Hours | undefined, now: Date): { state: "open"
     const first = [...nextRanges].sort((a, b) => minutes(a[0]) - minutes(b[0]))[0];
     if (first) return {
       state: "closed",
-      label: offset === 1 ? `CLOSED, opens ${first[0]} tomorrow` : `CLOSED, opens at ${first[0]} on ${dayNames[nextIndex]}`,
+      label: offset === 1 ? `CLOSED, opens at ${first[0]} tomorrow`
+        : offset === 7 ? `CLOSED, opens at ${first[0]} next ${dayNames[nextIndex]}`
+        : `CLOSED, opens at ${first[0]} on ${dayNames[nextIndex]}`,
     };
   }
   return { state: "closed", label: "CLOSED" };

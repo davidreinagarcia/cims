@@ -6,6 +6,7 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 
 **Folders**
 
+- [`auth/`](auth/INDEX.md): Replaceable demo sign-in contract, fictional personas and local session persistence.
 - [`components/`](components/INDEX.md): React components for the current UI (map view, sidebar). T-01 moves these into src/map/ and src/panels/.
 - [`data/`](data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
 - [`lib/`](lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
@@ -17,7 +18,7 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 
 **Files**
 
-- [`App.tsx`](App.tsx): App shell: selection and layer-filter providers plus the two-column layout (sidebar and map). · exports `App`
+- [`App.tsx`](App.tsx): App shell: demo auth, selection and layer filters around the sidebar, the map and the offline notice. · exports `App`
 - [`config.ts`](config.ts): Campus map settings and the base URL for correction issues. · exports `CAMPUS`, `TILE_URL`, `TILE_ATTRIBUTION`, `CORRECTION_URL`
 - [`main.tsx`](main.tsx): Entry point: loads fonts, design tokens and styles, mounts React and registers the offline service worker.
 - [`styles.css`](styles.css): * @file Global layout and map-control skin. Colors, type and components come from styles/tokens.css and style…

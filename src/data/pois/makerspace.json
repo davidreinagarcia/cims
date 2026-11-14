@@ -1,0 +1,139 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "bme-design-shop",
+        "name": "BME Design Shop",
+        "category": "makerspace",
+        "status": "draft",
+        "description": "A staffed prototyping shop in Whitaker with a required safety orientation.",
+        "source_url": "https://shop.bme.gatech.edu/",
+        "floor_or_suite": "Room 0250 (basement)",
+        "address": "313 Ferst Drive, Atlanta, GA",
+        "url": "https://bmemakerspaces.com/",
+        "coord_source": "OSM way 43332682 (U.A. Whitaker Building), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3968326,
+          33.7784806
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "flowers-invention-studio",
+        "name": "Flowers Invention Studio",
+        "category": "makerspace",
+        "status": "draft",
+        "description": "Student-run fabrication space in MRDC for academic and personal projects.",
+        "source_url": "https://coe.gatech.edu/academics/makerspaces",
+        "aliases": [
+          "Invention Studio"
+        ],
+        "coord_source": "OSM way 42872689 (Manufacturing Related Disciplines Complex), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4005832,
+          33.7769757
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "hive-makerspace",
+        "name": "The Hive Makerspace",
+        "category": "makerspace",
+        "status": "draft",
+        "description": "Free student makerspace in the Van Leer rotunda, open to all majors.",
+        "source_url": "https://hive.ece.gatech.edu/about/",
+        "address": "777 Atlantic Dr, Atlanta, GA 30332-0250",
+        "aliases": [
+          "The Hive",
+          "Interdisciplinary Design Commons"
+        ],
+        "coord_source": "OSM way 42706132 (Van Leer Building), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.397144,
+          33.7759831
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "innovation-ideation-studio",
+        "name": "Innovation & Ideation Studio",
+        "category": "makerspace",
+        "status": "draft",
+        "description": "A low-tech space for model building and collaborative projects in Crosland Tower.",
+        "source_url": "https://library.gatech.edu/innovation-ideation",
+        "floor_or_suite": "2nd floor",
+        "coord_source": "OSM relation 3178620 (Dorothy Murray Crosland Tower), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3951646,
+          33.7741963
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mill-makerspace",
+        "name": "Materials Innovation and Learning Laboratory",
+        "category": "makerspace",
+        "status": "draft",
+        "description": "Open-access materials processing and measurement space in Love, Room 176.",
+        "source_url": "https://mill.mse.gatech.edu/about-us/",
+        "floor_or_suite": "Room 176",
+        "aliases": [
+          "The MILL"
+        ],
+        "coord_source": "OSM way 42872649 (J. Erskine Love Manufacturing Building), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4017713,
+          33.7765908
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "yang-aero-maker-space",
+        "name": "Yang Aero Maker Space",
+        "category": "makerspace",
+        "status": "draft",
+        "description": "Free prototyping and fabrication tools for all majors in Weber SST.",
+        "source_url": "https://ams.gatech.edu/",
+        "aliases": [
+          "AMS",
+          "Aero Maker Space"
+        ],
+        "coord_source": "OSM relation 3178627 (Weber Space Science and Technology Building I), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3966294,
+          33.7728953
+        ]
+      }
+    }
+  ]
+}

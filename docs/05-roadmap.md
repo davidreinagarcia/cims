@@ -60,7 +60,8 @@ gantt
 
 - [ ] F-02 layers + legend · F-03 building card · F-04 search
 - [ ] F-05 POI layers · F-06 indoor directory · F-07 orgs & events
-- [ ] F-10 report an issue (P2): report, duplicates/+1, status, staff view
+- [ ] F-21 simulated GT sign-in gating every write (report, +1, post)
+- [ ] F-10 report an issue (P2): report, duplicates/+1, status, staff view (staff role)
 - [ ] F-11 room finder (P3)
 - [ ] Should features started **only** if all Must are done: F-18 no-show release → F-08 → F-09
 
@@ -88,7 +89,7 @@ gantt
 
 | Phase | Theme | Features |
 |-------|-------|----------|
-| **Phase 2** | Community & live data | F-08 density at scale, real F-10 hand-off to Facilities/IT, F-18 no-show release, F-07 open posting with GT SSO, F-12 stories/feed, F-17 dining capacity & reviews |
+| **Phase 2** | Community & live data | F-08 density at scale, real F-10 hand-off to Facilities/IT, F-18 no-show release, **real GT SSO** replacing the F-21 simulated sign-in, F-07 open posting for officers, F-12 stories/feed, F-17 dining capacity & reviews |
 | **Phase 3** | Campus-wide & integrations | Indoor maps for all buildings, F-14 indoor routing, F-20 unified booking across systems, F-19 lockers, F-13 activity heat map + density model, F-15 NFC tags, F-16 VR/street-view tour, East vs. West campus guide |
 
 ## Now / Next / Later (living view)
