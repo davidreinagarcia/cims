@@ -169,7 +169,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Level selector, rooms layer filtered by level, directory by room type, highlight selected room.
 - [ ] **T-22 Backend** per T-05 decision · needs T-05
   Tables: `issue_reports`, `issue_plus_ones`; rate limiting; env vars documented in `.env.example`.
-- [ ] **T-23 Report an issue** (F-10) · UI can start on mocks after T-02; real data needs T-22
+- [x] **T-23 Report an issue** (F-10) · UI can start on mocks after T-02; real data needs T-22
   Prefilled location, category → team ("routes to IT"), duplicates + "Me too", status page,
   staff view, "Prototype: not sent to Facilities/IT" label (Risk R-14).
 - [ ] **T-24 Room finder** (F-11, Must since Q6) · needs T-20, T-21

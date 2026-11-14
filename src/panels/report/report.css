@@ -14,8 +14,8 @@
 .cims-report__close { margin-left: auto; }
 .cims-report__body { width: 100%; max-width: 720px; margin: 0 auto; }
 .cims-report--wide .cims-report__body { max-width: 960px; }
-.cims-report p { margin: 0 0 var(--s2); }
-.cims-report a { color: var(--navy); }
+:where(.cims-report) p { margin: 0 0 var(--s2); }
+:where(.cims-report) a { color: var(--navy); }
 .cims-report .cims-btn:disabled { cursor: default; background: var(--paper-2); color: var(--ink-muted); border: 1px dashed var(--ink-muted); }
 .cims-report .cims-btn[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: var(--white); }
 .cims-report .cims-tag { vertical-align: middle; }
@@ -26,6 +26,8 @@
   flex: 1; display: flex; align-items: center; gap: var(--s2); min-width: 0; padding: var(--s2) var(--s3);
   font-size: var(--fs-sm); color: var(--ink-muted);
 }
+.cims-report__steps li > .cims-caps { min-width: 0; line-height: 1.15; }
+@media (max-width: 420px) { .cims-report__steps li { padding: var(--s2); font-size: var(--fs-xs); } }
 .cims-report__steps li + li { border-left: var(--hairline-muted); }
 .cims-report__steps li[aria-current] { color: var(--ink); background: var(--white); border-bottom: 3px solid var(--ink); }
 
@@ -76,9 +78,9 @@ textarea.cims-report__control { resize: vertical; }
 .cims-report__route { margin: var(--s3) 0 0; min-height: 24px; font-size: var(--fs-sm); }
 
 /* ---------- emergency banner ---------- */
-.cims-report__emergency { padding: var(--s3) var(--s4); border: 2px solid var(--cat-issues); border-left-width: 8px; background: var(--white); }
+.cims-report__emergency { scroll-margin-top: 120px; padding: var(--s3) var(--s4); border: 2px solid var(--cat-issues); border-left-width: 8px; background: var(--white); }
 .cims-report__emergency-title { color: var(--cat-issues); font-size: var(--fs-lg); }
-.cims-report__emergency a { display: inline-flex; align-items: center; min-height: var(--tap); font-weight: 600; }
+.cims-report__emergency a { display: inline-block; padding: var(--s3) 0; font-weight: 600; }
 
 /* ---------- report lists ---------- */
 .cims-report__list { list-style: none; margin: var(--s3) 0 0; padding: 0; display: grid; gap: var(--s3); }

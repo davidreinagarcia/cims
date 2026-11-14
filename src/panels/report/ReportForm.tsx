@@ -1,5 +1,5 @@
 /** @file Step 1 of the report flow: location, category grid with "Routes to" tag, optional equipment, description and photo. */
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { SAFETY_CATEGORY, hasVerifiedRouting, issueRoutes, routeFor, type IssueCategory } from "../../lib/issue-routing";
 import { places } from "../../lib/places";
 import type { NewIssueReport, ReportLocation } from "../../lib/reports";
@@ -44,7 +44,14 @@ export default function ReportForm({ location, draft, busy, onContinue }: Report
   const problemRef = useRef<HTMLParagraphElement>(null);
   const fileRef = useRef<HTMLInputElement>(null);
 
+  const bannerRef = useRef<HTMLDivElement>(null);
+
   const route = category ? routeFor(category) : null;
+  const isSafety = category === SAFETY_CATEGORY;
+  useEffect(() => {
+    // The banner sits above the form; bring it into view so it's seen before anything else is filled in.
+    if (isSafety) bannerRef.current?.scrollIntoView({ block: "start" });
+  }, [isSafety]);
   const safety = routeFor(SAFETY_CATEGORY);
 
   const fail = (message: string) => {
@@ -80,8 +87,8 @@ export default function ReportForm({ location, draft, busy, onContinue }: Report
 
   return (
     <form className="cims-report__form" onSubmit={onSubmit} noValidate>
-      {category === SAFETY_CATEGORY && (
-        <div className="cims-report__emergency" role="alert">
+      {isSafety && (
+        <div className="cims-report__emergency" role="alert" ref={bannerRef}>
           <p className="cims-caps cims-report__emergency-title">
             <span aria-hidden="true">⚠ </span>Emergency? Don't use this form
           </p>

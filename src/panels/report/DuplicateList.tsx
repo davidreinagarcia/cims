@@ -20,7 +20,7 @@ export default function DuplicateList({ reports, busy, onPlusOne, onView, onSubm
         <h2 className="cims-section__title cims-caps">Already reported?</h2>
         <p className="cims-muted">
           {reports.length === 1 ? "There is 1 open report" : `There are ${reports.length} open reports`} for this
-          place and category. If one is your problem, add a “Me too” instead of filing it again.
+          place and category. If one is your problem, add a “Me too”. If yours is different, submit a new one.
         </p>
         <ul className="cims-report__list">
           {reports.map((report) => (
@@ -46,7 +46,7 @@ export default function DuplicateList({ reports, busy, onPlusOne, onView, onSubm
       <div className="cims-report__footer cims-actions">
         <button type="button" className="cims-btn" onClick={onBack}>Back</button>
         <button type="button" className="cims-btn" disabled={busy} onClick={onSubmitNew}>
-          Mine is different: submit
+          Submit new
         </button>
       </div>
     </div>

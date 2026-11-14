@@ -1,5 +1,5 @@
 /** @file Step 3 of the report flow: confirmation, status timeline (Open → Routed → In progress → Resolved) and shareable link. */
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { STATUS_FLOW, STATUS_LABEL, reportsService, type IssueReport } from "../../lib/reports";
 import ReportSummary, { formatWhen } from "./ReportSummary";
 
@@ -15,6 +15,7 @@ export interface ReportStatusViewProps {
 export default function ReportStatusView({ reportId, justFiled, onAnother }: ReportStatusViewProps) {
   const [report, setReport] = useState<IssueReport | null | undefined>(undefined);
   const [copied, setCopied] = useState<"yes" | "failed" | null>(null);
+  const linkRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     let live = true;
@@ -46,7 +47,9 @@ export default function ReportStatusView({ reportId, justFiled, onAnother }: Rep
       await navigator.clipboard.writeText(link);
       setCopied("yes");
     } catch {
-      setCopied("failed");
+      // Clipboard API needs HTTPS + permission; fall back to copying the selected field.
+      linkRef.current?.select();
+      setCopied(document.execCommand("copy") ? "yes" : "failed");
     }
   }
 
@@ -94,7 +97,7 @@ export default function ReportStatusView({ reportId, justFiled, onAnother }: Rep
       <section className="cims-section">
         <h2 className="cims-section__title cims-caps">Status link</h2>
         <div className="cims-field">
-          <input readOnly value={link} aria-label="Status link" onFocus={(e) => e.target.select()} />
+          <input ref={linkRef} readOnly value={link} aria-label="Status link" onFocus={(e) => e.target.select()} />
         </div>
         <p className="cims-muted cims-report__note">Prototype: this link only opens in this browser.</p>
         <div className="cims-actions">

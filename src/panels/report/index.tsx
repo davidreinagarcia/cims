@@ -49,7 +49,6 @@ export default function ReportPanelRoute() {
         <StaffQueue />
       ) : (
         <ReportFlow
-          key={search}
           location={locationFromParams(params)}
           reportId={params.get("report")}
           navigate={navigate}
