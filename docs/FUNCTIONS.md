@@ -31,6 +31,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 ### Types & contracts
 
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
+- `RoomType` [src/indoor/types.ts:4](../src/indoor/types.ts#L4): What a room is used for. Drives its fill on the floor plan and its group in the directory.
+- `RoomFeature` [src/indoor/types.ts:7](../src/indoor/types.ts#L7): Things a room offers that people filter by in the room finder (F-11).
+- `Level` [src/indoor/types.ts:10](../src/indoor/types.ts#L10): One floor of a building.
+- `RoomBooking` [src/indoor/types.ts:24](../src/indoor/types.ts#L24): How a bookable room is reserved. Only on rooms where `bookable` is true.
+- `Room` [src/indoor/types.ts:34](../src/indoor/types.ts#L34): One room. Every record needs provenance; geometry is optional until a floor plan is digitized.
+- `IndoorBuilding` [src/indoor/types.ts:56](../src/indoor/types.ts#L56): Everything the indoor viewer needs for one building.
+- `AvailabilitySlot` [src/indoor/types.ts:69](../src/indoor/types.ts#L69): A stretch of time when a room is taken. Times are ISO 8601 with offset.
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
 - `LayerCategory` [src/lib/layerCatalog.ts:11](../src/lib/layerCatalog.ts#L11): One entry of the layer panel.
 - `PlaceFeature` [src/lib/places.ts:6](../src/lib/places.ts#L6): One place as a GeoJSON point feature.
@@ -71,6 +78,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `TILE_URL` [src/config.ts:16](../src/config.ts#L16): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
 - `TILE_ATTRIBUTION` [src/config.ts:18](../src/config.ts#L18): Attribution text OSM requires next to the tiles.
 - `CORRECTION_URL` [src/config.ts:21](../src/config.ts#L21): Base URL for prefilled place correction issues.
+- `roomSelectionId(buildingId, roomId)` [src/indoor/types.ts:77](../src/indoor/types.ts#L77): Selection id of a room: "<building_id>/<room id>" (Selection kind "room").
 - `baseStyle` [src/map/baseStyle.ts:6](../src/map/baseStyle.ts#L6): Base style every layer is added on top of.
 - `OTHER_SUBTYPE` [src/map/layerFilters.ts:6](../src/map/layerFilters.ts#L6): Sub-type used for features that have none.
 - `isVisible(filters, category, subtype?)` [src/map/layerFilters.ts:9](../src/map/layerFilters.ts#L9): Is a feature of this category and sub-type currently shown? Categories nobody toggles are always shown.

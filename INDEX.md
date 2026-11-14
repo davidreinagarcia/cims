@@ -27,6 +27,8 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
 - [`src/`](src/INDEX.md): The web app (Vite + React + TypeScript + MapLibre). Entry: main.tsx → App.tsx.
   - [`src/components/`](src/components/INDEX.md): React components for the current UI (map view, sidebar). T-01 moves these into src/map/ and src/panels/.
   - [`src/data/`](src/data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
+    - [`src/data/mocks/`](src/data/mocks/INDEX.md): Fictional fixtures for building features before real data exists. Always labeled as demo in the UI.
+  - [`src/indoor/`](src/indoor/INDEX.md): Indoor maps (Lane B): contracts, floor-plan viewer, level selector and room directory.
   - [`src/lib/`](src/lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
   - [`src/map/`](src/map/INDEX.md): Everything about the map engine: contract for layers, base style, and the layer auto-loader.
     - [`src/map/layers/`](src/map/layers/INDEX.md): One file per map layer; each default-exports a MapLayer and is loaded automatically. Add yours here.

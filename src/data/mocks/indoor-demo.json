@@ -1,0 +1,815 @@
+{
+ "_note": "FICTIONAL fixture for building and testing the indoor viewer (T-21) and room finder (T-24). Not a real building, not a real floor plan. Never attach it to a real building without the 'Demo layout' label.",
+ "building_id": "demo-hall",
+ "name": "Demo Hall",
+ "demo": true,
+ "plan": {
+  "width": 800,
+  "height": 500
+ },
+ "levels": [
+  {
+   "id": "1",
+   "label": "Level 1",
+   "short": "1",
+   "order": 1,
+   "entrance": true
+  },
+  {
+   "id": "2",
+   "label": "Level 2",
+   "short": "2",
+   "order": 2
+  }
+ ],
+ "rooms": [
+  {
+   "id": "d101",
+   "number": "D101",
+   "name": "Classroom",
+   "type": "classroom",
+   "level": "1",
+   "capacity": 48,
+   "features": [
+    "display",
+    "whiteboard",
+    "accessible"
+   ],
+   "polygon": [
+    [
+     40,
+     40
+    ],
+    [
+     240,
+     40
+    ],
+    [
+     240,
+     180
+    ],
+    [
+     40,
+     180
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d102",
+   "number": "D102",
+   "name": "Classroom",
+   "type": "classroom",
+   "level": "1",
+   "capacity": 32,
+   "features": [
+    "display",
+    "whiteboard"
+   ],
+   "polygon": [
+    [
+     240,
+     40
+    ],
+    [
+     400,
+     40
+    ],
+    [
+     400,
+     180
+    ],
+    [
+     240,
+     180
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d103",
+   "number": "D103",
+   "name": "Study Room",
+   "type": "study",
+   "level": "1",
+   "capacity": 6,
+   "features": [
+    "whiteboard",
+    "outlets",
+    "quiet"
+   ],
+   "bookable": true,
+   "booking": {
+    "owner_system": "Demo booking system",
+    "policy": "Demo policy: any student, up to 2 hours, 7 days ahead.",
+    "book_url": "https://example.org/"
+   },
+   "polygon": [
+    [
+     400,
+     40
+    ],
+    [
+     500,
+     40
+    ],
+    [
+     500,
+     180
+    ],
+    [
+     400,
+     180
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d104",
+   "number": "D104",
+   "name": "Study Room",
+   "type": "study",
+   "level": "1",
+   "capacity": 8,
+   "features": [
+    "display",
+    "outlets",
+    "accessible"
+   ],
+   "bookable": true,
+   "booking": {
+    "owner_system": "Demo booking system",
+    "policy": "Demo policy: any student, up to 2 hours, 7 days ahead.",
+    "book_url": "https://example.org/"
+   },
+   "polygon": [
+    [
+     500,
+     40
+    ],
+    [
+     600,
+     40
+    ],
+    [
+     600,
+     180
+    ],
+    [
+     500,
+     180
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d105",
+   "number": "D105",
+   "name": "Teaching Lab",
+   "type": "lab",
+   "level": "1",
+   "capacity": 24,
+   "features": [
+    "outlets"
+   ],
+   "polygon": [
+    [
+     600,
+     40
+    ],
+    [
+     760,
+     40
+    ],
+    [
+     760,
+     260
+    ],
+    [
+     600,
+     260
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d106",
+   "number": "D106",
+   "name": "Office",
+   "type": "office",
+   "level": "1",
+   "polygon": [
+    [
+     600,
+     260
+    ],
+    [
+     760,
+     260
+    ],
+    [
+     760,
+     360
+    ],
+    [
+     600,
+     360
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d107",
+   "number": "D107",
+   "name": "Office",
+   "type": "office",
+   "level": "1",
+   "polygon": [
+    [
+     600,
+     360
+    ],
+    [
+     760,
+     360
+    ],
+    [
+     760,
+     460
+    ],
+    [
+     600,
+     460
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d108",
+   "number": "D108",
+   "name": "Restrooms",
+   "type": "restroom",
+   "level": "1",
+   "features": [
+    "accessible"
+   ],
+   "polygon": [
+    [
+     40,
+     180
+    ],
+    [
+     150,
+     180
+    ],
+    [
+     150,
+     300
+    ],
+    [
+     40,
+     300
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d109",
+   "number": "D109",
+   "name": "Study Room",
+   "type": "study",
+   "level": "1",
+   "capacity": 4,
+   "features": [
+    "whiteboard",
+    "quiet"
+   ],
+   "bookable": true,
+   "booking": {
+    "owner_system": "Demo booking system",
+    "policy": "Demo policy: any student, up to 2 hours, 7 days ahead.",
+    "book_url": "https://example.org/"
+   },
+   "polygon": [
+    [
+     40,
+     300
+    ],
+    [
+     150,
+     300
+    ],
+    [
+     150,
+     460
+    ],
+    [
+     40,
+     460
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d110",
+   "number": "D110",
+   "name": "Classroom",
+   "type": "classroom",
+   "level": "1",
+   "capacity": 40,
+   "features": [
+    "display",
+    "accessible"
+   ],
+   "polygon": [
+    [
+     150,
+     340
+    ],
+    [
+     400,
+     340
+    ],
+    [
+     400,
+     460
+    ],
+    [
+     150,
+     460
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d111",
+   "number": "D111",
+   "name": "Office",
+   "type": "office",
+   "level": "1",
+   "polygon": [
+    [
+     400,
+     340
+    ],
+    [
+     600,
+     340
+    ],
+    [
+     600,
+     460
+    ],
+    [
+     400,
+     460
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d100",
+   "number": "D100",
+   "name": "Corridor",
+   "type": "circulation",
+   "level": "1",
+   "polygon": [
+    [
+     150,
+     180
+    ],
+    [
+     600,
+     180
+    ],
+    [
+     600,
+     340
+    ],
+    [
+     150,
+     340
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d201",
+   "number": "D201",
+   "name": "Classroom",
+   "type": "classroom",
+   "level": "2",
+   "capacity": 48,
+   "features": [
+    "display",
+    "whiteboard",
+    "accessible"
+   ],
+   "polygon": [
+    [
+     40,
+     40
+    ],
+    [
+     240,
+     40
+    ],
+    [
+     240,
+     180
+    ],
+    [
+     40,
+     180
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d202",
+   "number": "D202",
+   "name": "Classroom",
+   "type": "classroom",
+   "level": "2",
+   "capacity": 32,
+   "features": [
+    "display",
+    "whiteboard"
+   ],
+   "polygon": [
+    [
+     240,
+     40
+    ],
+    [
+     400,
+     40
+    ],
+    [
+     400,
+     180
+    ],
+    [
+     240,
+     180
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d203",
+   "number": "D203",
+   "name": "Study Room",
+   "type": "study",
+   "level": "2",
+   "capacity": 6,
+   "features": [
+    "whiteboard",
+    "outlets",
+    "quiet"
+   ],
+   "bookable": true,
+   "booking": {
+    "owner_system": "Demo booking system",
+    "policy": "Demo policy: any student, up to 2 hours, 7 days ahead.",
+    "book_url": "https://example.org/"
+   },
+   "polygon": [
+    [
+     400,
+     40
+    ],
+    [
+     500,
+     40
+    ],
+    [
+     500,
+     180
+    ],
+    [
+     400,
+     180
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d204",
+   "number": "D204",
+   "name": "Study Room",
+   "type": "study",
+   "level": "2",
+   "capacity": 8,
+   "features": [
+    "display",
+    "outlets",
+    "accessible"
+   ],
+   "bookable": true,
+   "booking": {
+    "owner_system": "Demo booking system",
+    "policy": "Demo policy: any student, up to 2 hours, 7 days ahead.",
+    "book_url": "https://example.org/"
+   },
+   "polygon": [
+    [
+     500,
+     40
+    ],
+    [
+     600,
+     40
+    ],
+    [
+     600,
+     180
+    ],
+    [
+     500,
+     180
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d205",
+   "number": "D205",
+   "name": "Teaching Lab",
+   "type": "lab",
+   "level": "2",
+   "capacity": 24,
+   "features": [
+    "outlets"
+   ],
+   "polygon": [
+    [
+     600,
+     40
+    ],
+    [
+     760,
+     40
+    ],
+    [
+     760,
+     260
+    ],
+    [
+     600,
+     260
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d206",
+   "number": "D206",
+   "name": "Office",
+   "type": "office",
+   "level": "2",
+   "polygon": [
+    [
+     600,
+     260
+    ],
+    [
+     760,
+     260
+    ],
+    [
+     760,
+     360
+    ],
+    [
+     600,
+     360
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d207",
+   "number": "D207",
+   "name": "Office",
+   "type": "office",
+   "level": "2",
+   "polygon": [
+    [
+     600,
+     360
+    ],
+    [
+     760,
+     360
+    ],
+    [
+     760,
+     460
+    ],
+    [
+     600,
+     460
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d208",
+   "number": "D208",
+   "name": "Restrooms",
+   "type": "restroom",
+   "level": "2",
+   "features": [
+    "accessible"
+   ],
+   "polygon": [
+    [
+     40,
+     180
+    ],
+    [
+     150,
+     180
+    ],
+    [
+     150,
+     300
+    ],
+    [
+     40,
+     300
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d209",
+   "number": "D209",
+   "name": "Study Room",
+   "type": "study",
+   "level": "2",
+   "capacity": 4,
+   "features": [
+    "whiteboard",
+    "quiet"
+   ],
+   "bookable": true,
+   "booking": {
+    "owner_system": "Demo booking system",
+    "policy": "Demo policy: any student, up to 2 hours, 7 days ahead.",
+    "book_url": "https://example.org/"
+   },
+   "polygon": [
+    [
+     40,
+     300
+    ],
+    [
+     150,
+     300
+    ],
+    [
+     150,
+     460
+    ],
+    [
+     40,
+     460
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d210",
+   "number": "D210",
+   "name": "Classroom",
+   "type": "classroom",
+   "level": "2",
+   "capacity": 40,
+   "features": [
+    "display",
+    "accessible"
+   ],
+   "polygon": [
+    [
+     150,
+     340
+    ],
+    [
+     400,
+     340
+    ],
+    [
+     400,
+     460
+    ],
+    [
+     150,
+     460
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d211",
+   "number": "D211",
+   "name": "Office",
+   "type": "office",
+   "level": "2",
+   "polygon": [
+    [
+     400,
+     340
+    ],
+    [
+     600,
+     340
+    ],
+    [
+     600,
+     460
+    ],
+    [
+     400,
+     460
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  },
+  {
+   "id": "d200",
+   "number": "D200",
+   "name": "Corridor",
+   "type": "circulation",
+   "level": "2",
+   "polygon": [
+    [
+     150,
+     180
+    ],
+    [
+     600,
+     180
+    ],
+    [
+     600,
+     340
+    ],
+    [
+     150,
+     340
+    ]
+   ],
+   "source_url": "https://github.com/davidreinagarcia/cims/blob/main/src/data/mocks/indoor-demo.json",
+   "verified_at": null,
+   "verified_by": null
+  }
+ ]
+}
