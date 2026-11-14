@@ -1,6 +1,6 @@
 # ADR-0003: MapLibre GL JS with 3D extrusion for the campus map
 
-- **Status:** MapLibre **Accepted** (already in use, `src/components/MapView.tsx`) · 3D extrusion **Proposed**
+- **Status:** **Accepted** (2026-11-14). MapLibre already in use; 3D via our own building footprints (option b below), agreed by the team
 - **Date:** 2026-11-14
 - **Deciders:** _TBD_ (ratify at M0)
 - **Related:** F-01, F-02, F-06, F-16; Risks R-04, R-08
@@ -41,7 +41,11 @@ layers for POIs and indoor floors, and is open-source with no billing.
 - ⚠️ Today the app uses **OSM raster tiles** (`src/config.ts`), which have no building geometry to
   extrude. 3D needs either (a) vector tiles with a `building` layer (e.g., OpenFreeMap, self-hosted
   PMTiles), or (b) our own building footprints as GeoJSON in `src/data/` with a `height` property.
-  Option (b) also gives us clickable buildings with our own IDs, so it's the proposed path for the pilot area.
+  **Decision: option (b).** Footprints are exported once from OSM (Overpass) by a committed script
+  into `src/data/buildings.geojson`, curated by hand (IDs, names, aliases, heights) and rendered with
+  `fill-extrusion` on top of the raster base map. That gives us clickable buildings with stable IDs
+  that the building card, search and indoor view can share. Work items: T-03, T-10 in
+  [WORKPLAN](../WORKPLAN.md).
 - ⚠️ The public `tile.openstreetmap.org` server has a usage policy that discourages heavy app
   traffic; fine for the hackathon, switch before any real launch.
 

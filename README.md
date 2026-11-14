@@ -63,12 +63,14 @@ add a place to `src/data/places.json`.
 - Work on `feat/<name>` branches and open a PR. Run `git pull --rebase` before pushing.
 - No secrets (API keys, tokens) in the repo. Use a local `.env` (already in `.gitignore`).
 
-Full guide: [CONTRIBUTING.md](CONTRIBUTING.md).
+Full guide: [CONTRIBUTING.md](CONTRIBUTING.md). Task split and priorities: [docs/WORKPLAN.md](docs/WORKPLAN.md).
+AI agents: [CLAUDE.md](CLAUDE.md).
 
 ## Documentation map
 
 | Doc | What it answers |
 |-----|-----------------|
+| **[Work Plan](docs/WORKPLAN.md)** | **Who does what, priority checklist, how we (and our Claudes) avoid conflicts** |
 | [Code architecture](docs/ARCHITECTURE.md) | Where code and data go in `src/` |
 | [Project Charter](docs/00-project-charter.md) | Why, who, success criteria, constraints |
 | [Problem Statement](docs/01-problem-statement.md) | The three SGA prompts, the problem, who has it, HMW |

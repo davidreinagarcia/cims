@@ -3,6 +3,8 @@
 > Hackathon dates are **TBD** (open question Q1). Milestones are defined by **exit criteria**, not
 > dates. Fill in the target dates at M0. If time gets short, cut scope, not quality: drop *Should*
 > before touching *Must*.
+>
+> Task-level breakdown, owners and order: **[WORKPLAN](WORKPLAN.md)**.
 
 ## Timeline overview
 
