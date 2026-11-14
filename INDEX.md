@@ -19,6 +19,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
 - [`docs/`](docs/INDEX.md): All project documentation: product (charter → PRD), engineering (architecture, ADRs, function registry) and p…
   - [`docs/adr/`](docs/adr/INDEX.md): Architecture Decision Records: one decision per file, immutable once Accepted.
   - [`docs/brainstorm/`](docs/brainstorm/INDEX.md): Raw inputs: Miro board transcription and the three SGA challenge prompts. Read only when you need the origina…
+  - [`docs/data/`](docs/data/INDEX.md): Curated POI schema, verification workflow and generated checklist.
   - [`docs/design/`](docs/design/INDEX.md): Visual direction and UI references: the chosen "survey map" style, tokens and how to build it.
     - [`docs/design/references/`](docs/design/references/INDEX.md): Reference images (Gemini mockups). Mood references, not specs; their data is fake.
 - [`public/`](public/INDEX.md): Static assets served as-is at the site root.
@@ -48,7 +49,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
 - [`README.md`](README.md): Project overview, quick start, team rules and the map of all docs.
 - [`index.html`](index.html): HTML entry · CIMS | Campus Interactive Map System
 - [`package-lock.json`](package-lock.json): npm lockfile (don't read; don't hand-edit)
-- [`package.json`](package.json): npm manifest · scripts: dev, build, preview, index, index:check, setup:hooks
+- [`package.json`](package.json): npm manifest · scripts: dev, build, preview, index, index:check, setup:hooks, data:check, data:verify, data:list
 - [`tsconfig.json`](tsconfig.json): TypeScript compiler config
 - [`vite.config.ts`](vite.config.ts): _no summary_
 

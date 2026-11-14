@@ -65,3 +65,5 @@ Stack: Vite, React 18, TypeScript, MapLibre GL JS (free, no API key), OpenStreet
 ## Deploy
 
 See `deploy/README.md`. Short version: pushing to `main` updates the public site within about a minute.
+
+Curated POI validation and verification use `scripts/data.mjs`; see [the data workflow](data/README.md).
