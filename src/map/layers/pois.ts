@@ -49,7 +49,7 @@ const pois: MapLayer = {
       type: "geojson", data: places, promoteId: "id",
       cluster: true, clusterRadius: 40, clusterMaxZoom: CLUSTER_MAX_ZOOM,
       // Keep the cluster tree available at the map's maximum zoom (default 22).
-      maxzoom: CLUSTER_MAX_ZOOM,
+      maxzoom: CLUSTER_MAX_ZOOM + 1, // MapLibre requires maxzoom > clusterMaxZoom
     });
     const source = map.getSource(SOURCE) as GeoJSONSource;
     const empty: PlaceCollection = { type: "FeatureCollection", features: [] };
