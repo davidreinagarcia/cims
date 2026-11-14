@@ -28,7 +28,7 @@ geo queries ("reports within 25 m") and basic abuse protection. We have no time 
 ## Decision outcome
 
 **Chosen option:** Supabase, because PostGIS covers the deduplication radius query natively, RLS
-lets us enforce insert-only anonymous writes with rate limits in SQL, and it's free at our scale.
+lets us enforce insert-only writes tied to an account id (ADR-0007) with rate limits in SQL, and it's free at our scale.
 
 ### Consequences
 
@@ -36,7 +36,7 @@ lets us enforce insert-only anonymous writes with rate limits in SQL, and it's f
 - 👍 Navigation/discovery (F-01 to F-07) **does not depend on it**; backend outage ≠ demo outage.
 - 👎 F-10 (Must since v0.2) does depend on it; mitigated with a client-side queue that syncs when the backend is back.
 - 👎 Vendor dependency; mitigated because it's standard Postgres (portable).
-- ⚠️ Anonymous writes invite spam: rate limit per client hash + length caps + allowlist for posting (Risk R-05).
+- ⚠️ Open writes invite spam: every write needs a signed-in account (ADR-0007), with a rate limit per account, length caps and moderator hide (Risk R-05).
 
 ## Pros and cons of the options
 

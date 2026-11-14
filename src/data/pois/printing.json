@@ -1,0 +1,126 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "clough-printing",
+        "name": "Clough Printing",
+        "category": "printing",
+        "status": "draft",
+        "description": "Student printing locations inside Clough Undergraduate Learning Commons.",
+        "source_url": "https://news.gatech.edu/features/2024/08/first-year-survival-tips",
+        "building_id": "clough",
+        "coord_source": "OSM relation 3178622 (G. Wayne Clough Undergraduate Learning Commons), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3964166,
+          33.7746495
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "college-computing-pharos",
+        "name": "College of Computing Pharos Printing",
+        "category": "printing",
+        "status": "draft",
+        "description": "Pharos printing serves instructional labs on the first floor of the College of Computing Building.",
+        "source_url": "https://support.cc.gatech.edu/services/printing",
+        "floor_or_suite": "1st floor instructional labs",
+        "coord_source": "OSM way 42706125 (College of Computing Building), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3973721,
+          33.777353
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crosland-printing",
+        "name": "Crosland Tower Printing",
+        "category": "printing",
+        "status": "draft",
+        "description": "Student printing locations inside Crosland Tower.",
+        "source_url": "https://news.gatech.edu/features/2024/08/first-year-survival-tips",
+        "coord_source": "OSM relation 3178620 (Dorothy Murray Crosland Tower), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3951646,
+          33.7741963
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "print-studio-price-gilbert",
+        "name": "Library Print Studio",
+        "category": "printing",
+        "status": "draft",
+        "description": "Staff-assisted poster printing on the third floor of Price Gilbert.",
+        "source_url": "https://library.gatech.edu/print-studio",
+        "building_id": "library",
+        "floor_or_suite": "3rd floor",
+        "coord_source": "OSM relation 3178630 (Price Gilbert Memorial Library), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3957785,
+          33.7743977
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "printing-copying-services-marietta",
+        "name": "Printing and Copying Services",
+        "category": "printing",
+        "status": "draft",
+        "description": "Campus print service offering binding and a choice of paper.",
+        "source_url": "https://arch.gatech.edu/student-resource-guide",
+        "address": "811 Marietta St NW, Atlanta, GA 30318",
+        "coord_source": "OSM way 43335058 (Printing and Copying Services), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4055069,
+          33.7747188
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "student-org-hub-print-release",
+        "name": "Student Organizations Hub Print Release Station",
+        "category": "printing",
+        "status": "draft",
+        "description": "A print release station in the Student Organizations Hub Resource Room.",
+        "source_url": "https://studentengagement.gatech.edu/student-organizations-hub",
+        "building_id": "student-center",
+        "floor_or_suite": "Student Organizations Hub Resource Room",
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim lookup"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3988236,
+          33.7741957
+        ]
+      }
+    }
+  ]
+}

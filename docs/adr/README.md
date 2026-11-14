@@ -23,3 +23,4 @@ We record every significant technical decision as an ADR, following a lightweigh
 | [0004](0004-curated-data-as-versioned-geojson.md) | Curated campus data as versioned GeoJSON in the repo | Proposed |
 | [0005](0005-backend-supabase.md) | Supabase for user-generated data | Proposed |
 | [0006](0006-vector-basemap-survey-style.md) | Vector basemap styled to the "survey map" direction | Proposed |
+| [0007](0007-gt-sign-in-simulated.md) | Posting requires an account; GT sign-in simulated in the MVP | Accepted |

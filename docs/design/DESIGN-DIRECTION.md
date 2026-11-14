@@ -112,6 +112,7 @@ These faces are a proposal matching the reference; swap only for something with 
 - **Primary button:** navy fill, gold caps label, square. Secondary: outlined hairline, ink label.
 - **Layer rows:** square checkbox filled with the category color + white check, label, line glyph in
   category color on the right. Glyph **shape** must differ per category (works without color).
+- **Sign-in dialog (mock, F-21):** square dialog, navy header with the gold rule, title "Sign in with Georgia Tech" and a `cims-status` chip reading DEMO; demo personas as outlined rows (glyph, role, one line); primary button "Continue"; footer "Demo sign-in. No real authentication. Never enter GT credentials." Account chip in the header with a DEMO badge. No GT logo (Risk R-07).
 - **Info table** (building card): two columns, label/value, hairline rules between rows.
 - **Map furniture:** scale + lat/lng box bottom right; north arrow bottom left; OSM attribution kept.
 

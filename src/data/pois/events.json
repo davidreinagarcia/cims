@@ -1,0 +1,173 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "demo-robotics-workshop",
+        "name": "Demo: Robotics workshop",
+        "kind": "event",
+        "category": "orgs",
+        "status": "demo",
+        "subtype": "club",
+        "description": "Fictional demo data to illustrate the campus bulletin. This is not a real event.",
+        "building_id": "student-center",
+        "event": {
+          "organizer": "Demo Robotics Club",
+          "weekly": {
+            "day": "mon",
+            "start": "18:30",
+            "end": "19:30"
+          }
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.399,
+          33.7739
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "demo-study-circle",
+        "name": "Demo: Study circle",
+        "kind": "event",
+        "category": "orgs",
+        "status": "demo",
+        "subtype": "campus-org",
+        "description": "Fictional demo data to illustrate the campus bulletin. This is not a real event.",
+        "building_id": "clough",
+        "event": {
+          "organizer": "Demo Learning Circle",
+          "weekly": {
+            "day": "tue",
+            "start": "17:00",
+            "end": "18:00"
+          }
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3964,
+          33.775
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "demo-movement-meetup",
+        "name": "Demo: Movement meetup",
+        "kind": "event",
+        "category": "orgs",
+        "status": "demo",
+        "subtype": "club",
+        "description": "Fictional demo data to illustrate the campus bulletin. This is not a real event.",
+        "building_id": "crc",
+        "event": {
+          "organizer": "Demo Movement Club",
+          "weekly": {
+            "day": "wed",
+            "start": "16:00",
+            "end": "17:00"
+          }
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.404,
+          33.7755
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "demo-reading-hour",
+        "name": "Demo: Reading hour",
+        "kind": "event",
+        "category": "orgs",
+        "status": "demo",
+        "subtype": "community",
+        "description": "Fictional demo data to illustrate the campus bulletin. This is not a real event.",
+        "building_id": "library",
+        "event": {
+          "organizer": "Demo Reading Community",
+          "weekly": {
+            "day": "thu",
+            "start": "15:30",
+            "end": "16:30"
+          }
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3955,
+          33.7745
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "demo-welcome-session",
+        "name": "Demo: Welcome session",
+        "kind": "event",
+        "category": "orgs",
+        "status": "demo",
+        "subtype": "admin",
+        "description": "Fictional demo data to illustrate the campus bulletin. This is not a real event.",
+        "building_id": "student-center",
+        "event": {
+          "organizer": "Demo Campus Desk",
+          "weekly": {
+            "day": "fri",
+            "start": "11:00",
+            "end": "12:00"
+          }
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.399,
+          33.7739
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "demo-green-gathering",
+        "name": "Demo: Green gathering",
+        "kind": "event",
+        "category": "orgs",
+        "status": "demo",
+        "subtype": "community",
+        "description": "Fictional demo data to illustrate the campus bulletin. This is not a real event.",
+        "building_id": "tech-green",
+        "event": {
+          "organizer": "Demo Neighbours Group",
+          "weekly": {
+            "day": "sat",
+            "start": "14:00",
+            "end": "15:30"
+          }
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3989,
+          33.7727
+        ]
+      }
+    }
+  ]
+}

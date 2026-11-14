@@ -5,9 +5,11 @@ Single-page web app. No backend yet; everything the map shows lives in `src/data
 
 ```
 src/
-  App.tsx              shell: SelectionProvider + sidebar + map
+  App.tsx              shell: AuthProvider + SelectionProvider + sidebar + map
   config.ts            campus center, bounds, tile source (one place to tweak the map)
   types.ts             Category + PlaceProperties
+  auth/                replaceable AuthAdapter contract, fictional personas and localStorage mock session
+  state/auth.tsx       AuthProvider, useAuth(), pending demo action and sign-in dialog state
   state/selection.tsx  Selection {kind, id}, SelectionProvider, useSelection()
   map/
     types.ts           the layer contract (MapLayer, LayerHandle, LayerContext, LayerFilters)
@@ -16,21 +18,26 @@ src/
     baseStyle.ts       base style (OSM raster tiles + glyphs); swap for a vector basemap here
     loadLayers.ts      finds every file in layers/ automatically (import.meta.glob)
     layers/
-      pois.ts          places: survey pins, labels (zoom 16+), gold selected pin, fly-to on select
+      pois.ts          places: filtered clusters and shared-location picker, survey pins/labels, independent gold selection
   components/
     MapView.tsx        host: creates the map, loads layers, passes them the selection
-    Sidebar.tsx(+css)  shell: header + panels
+    Sidebar.tsx(+css)  shell: header + keyboard Explore/Bulletin tabs + panels
   panels/
+    account/           AccountChip + SignInDialog: DEMO sign-in theater, no authentication or permissions
+    bulletin/          read-only upcoming events, independent of layer toggles; Show on map selects a place and returns to Explore
     search/            SearchPanel: search box + list
     layers/            LayersPanel: category toggles, sub-type tree, legend; chips on phones
     building-card/     PlaceCard: hours/access/provenance, inside places, directions and corrections; lib/hours.ts computes campus-local status
   data/places.json     GeoJSON of points of interest  <- edit this to add places
-  lib/places.ts        typed access to the data
+  data/pois/events.json  fictional weekly demo events at seed locations, explicitly labeled demo
+  lib/events.ts        pure next/current event windows and English labels in America/New_York
+  lib/places.ts        typed access to the data; hides drafts by default and expired one-off events
   lib/search.ts        pure ranked place search with aliases, accent folding and highlight ranges
   lib/layerCatalog.ts  the toggleable layers (id, label, color token, sub-types): add a layer or sub-type here
   state/layerFilters.tsx  which layers/sub-types are on, saved in localStorage
   components/Glyph.tsx    line glyph per category (shape differs, works without color)
   styles/              tokens.css (colors, type, spacing) + cims-ui.css (cims-* components): the design system
+  pwa/sw.js            service worker template: vite.config.ts fills in the file list and emits /sw.js (offline, T-41)
   styles.css           global layout and map-control skin; each component has its own .css for layout only
 ```
 
@@ -68,3 +75,5 @@ Stack: Vite, React 18, TypeScript, MapLibre GL JS (free, no API key), OpenStreet
 See `deploy/README.md`. Short version: pushing to `main` updates the public site within about a minute.
 
 Curated POI validation and verification use `scripts/data.mjs`; see [the data workflow](data/README.md).
+
+Orgs and events reuse place features with optional `kind` and `event` metadata and the existing `orgs` category filters. `demo` is visible fictional data, restricted to events and organizations; it is never a verified claim. Weekly schedules recur in campus time, including across DST changes. Data loading filters expired events at startup; the bulletin and selected event card refresh their windows every 30 seconds.
