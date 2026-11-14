@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "vite --host",
     "build": "tsc --noEmit && vite build",
-    "preview": "vite preview --host"
+    "preview": "vite preview --host",
+    "index": "node scripts/gen-index.mjs",
+    "index:check": "node scripts/gen-index.mjs --check",
+    "setup:hooks": "git config core.hooksPath .githooks && git config merge.cims-generated.driver true"
   },
   "dependencies": {
     "maplibre-gl": "^4.7.1",

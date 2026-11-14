@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "SessionStart": [
+      { "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/claude-hook.mjs\" session-start" }] }
+    ],
+    "Stop": [
+      { "hooks": [{ "type": "command", "command": "node \"$CLAUDE_PROJECT_DIR/scripts/claude-hook.mjs\" stop" }] }
+    ]
+  },
+  "permissions": {
+    "allow": ["Bash(npm run index)", "Bash(npm run index:check)", "Bash(npm run build)"],
+    "deny": ["Read(./package-lock.json)", "Read(./node_modules/**)", "Read(./dist/**)"]
+  }
+}
