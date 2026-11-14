@@ -28,6 +28,27 @@ engraved hatching, navy and old gold. It feels drafted, not rendered.
 Doctrine: depth only from **1px lines, hatching and paper grain**. No shadows, gradients, blur or glow.
 These 7 treatments are the full set; don't add more effects on top.
 
+## Implementation: the style sheet
+
+**Source of truth:** [`src/styles/tokens.css`](../../src/styles/tokens.css) (colors, type, spacing, lines) and
+[`src/styles/cims-ui.css`](../../src/styles/cims-ui.css) (all `cims-*` components). Living demo:
+[`styleguide.html`](styleguide.html) (open locally). Not imported by the app yet: wiring them in is **T-06**.
+The token block below is the summary; if they differ, the CSS wins.
+
+## Reference gallery (2026-11-14)
+
+| Screen | File | Take | Don't take |
+|--------|------|------|------------|
+| Map layouts | [`map-variations-01`](references/map-variations-01.webp) | Flat white extrusions + one gold building (simpler than hatching, good fallback); B's collapsible panel sections; C's dashed walking route | Rounded app-window chrome, fake labels |
+| Search | [`search-01`](references/search-01.webp) | Grouped results with caps labels; gold underline on match; 1px focus box + gold tick; empty state with outlined "Browse layers" | Fake addresses/room numbers/capacities |
+| Layers | [`layers-legend-01`](references/layers-legend-01.webp) | Desktop legend as a ruled table; dotted tree for sub-filters; distinct glyph shapes | Mobile chips' rounded corners, heavy color fills, drop shadow, gibberish labels |
+| Floor plan | [`floor-plan-01`](references/floor-plan-01.webp) | Breadcrumb; square level buttons (active navy); solid room fills by type; selected room gold with dashed outline; grouped directory | Duplicated/fake room numbers |
+| Glyphs & pins | [`glyphs-pins-01`](references/glyphs-pins-01.webp) | Line icons on a 24px grid; crosshair survey pins in category colors; dark-background check | Inconsistent numbering, mismatched icons inside pins; we draw our own SVGs |
+
+**Category colors are fixed in `tokens.css`** (the mockups disagree with each other): food ochre ▲,
+support slate ⊕, makerspace umber ▨, exercise olive ⬡, orgs teal ⌄, transport sage ◆, issues red ⚠,
+free rooms green ▯. All ≥ 3:1 on paper; on navy, pins keep a paper ring.
+
 ## Tokens
 
 ```css

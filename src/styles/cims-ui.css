@@ -1,0 +1,188 @@
+/** @file Component styles for the "survey map" UI: header, panels, search, legend, chips, cards, indoor, map furniture. */
+/* Requires tokens.css. Plain BEM-ish classes (`cims-*`) so they work from any component.
+   Visual demo of every class: docs/design/styleguide.html (screenshot: docs/design/styleguide.png). */
+
+/* ---------- base ---------- */
+.cims {
+  font-family: var(--font-body); font-size: var(--fs-md); line-height: 1.4;
+  color: var(--ink); background: var(--paper);
+}
+.cims *, .cims *::before, .cims *::after { box-sizing: border-box; }
+.cims-caps { font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: var(--caps-tracking); }
+.cims-mono { font-family: var(--font-mono); font-size: var(--fs-sm); letter-spacing: 0.02em; }
+.cims-muted { color: var(--ink-muted); }
+.cims :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+/* paper grain: texture, not a tint. Apply to large surfaces only. */
+.cims-grain {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .11 0 0 0 0 .15 0 0 0 0 .2 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- header ---------- */
+.cims-header {
+  display: flex; align-items: center; gap: var(--s4); min-height: 64px; padding: 0 var(--s4);
+  background: var(--navy); color: var(--white); border-bottom: var(--rule-gold);
+}
+.cims-header__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-xxl); letter-spacing: 0.04em; margin: 0; line-height: 1; }
+.cims-header__sub {
+  font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: var(--caps-tracking);
+  color: var(--gold); font-size: var(--fs-sm); line-height: 1.1; padding-left: var(--s4); border-left: 1px solid var(--gold);
+}
+.cims-header__nav { margin-left: auto; display: flex; }
+.cims-header__nav a {
+  color: var(--white); text-decoration: none; padding: var(--s2) var(--s3);
+  font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: var(--caps-tracking);
+}
+.cims-header__nav a + a { border-left: 1px solid rgba(255, 255, 255, 0.35); }
+.cims-header__nav a:hover, .cims-header__nav a[aria-current] { color: var(--gold); }
+
+/* ---------- panel & numbered sections ---------- */
+.cims-panel { width: var(--panel-w); max-width: 100%; background: var(--paper); border: var(--hairline); }
+.cims-section { padding: var(--s3) var(--s4) var(--s4); }
+.cims-section + .cims-section { border-top: var(--hairline); }
+.cims-section__title { display: flex; align-items: center; gap: var(--s2); margin: 0 0 var(--s3); font-size: var(--fs-lg); }
+.cims-badge {
+  flex: none; display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+  background: var(--gold); color: var(--ink); border: var(--hairline);
+  font-family: var(--font-mono); font-size: var(--fs-sm); font-weight: 500;
+}
+.cims-badge--navy { background: var(--navy); color: var(--white); border-color: var(--navy); }
+
+/* ---------- inputs & buttons ---------- */
+.cims-field { display: flex; border: var(--hairline); background: var(--white); min-height: var(--tap); }
+.cims-field input {
+  flex: 1; min-width: 0; border: 0; background: transparent; padding: 0 var(--s3);
+  font: inherit; color: var(--ink);
+}
+.cims-field input:focus { outline: none; }
+.cims-field:focus-within { outline: 2px solid var(--ink); outline-offset: 1px; }
+.cims-field__btn {
+  flex: none; width: var(--tap); border: 0; border-left: var(--hairline); background: var(--paper-2);
+  color: var(--gold-ink); display: grid; place-items: center; cursor: pointer;
+}
+.cims-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: var(--s2); min-height: var(--tap); padding: 0 var(--s4);
+  border: var(--hairline); border-radius: var(--radius); background: var(--white); color: var(--ink); cursor: pointer;
+  font-family: var(--font-display); font-weight: 600; font-size: var(--fs-md); text-transform: uppercase; letter-spacing: var(--caps-tracking);
+}
+.cims-btn:hover { background: var(--paper-2); }
+.cims-btn--primary { background: var(--navy); border-color: var(--navy); color: var(--gold); }
+.cims-btn--primary:hover { background: #0B3D68; }
+.cims-btn--block { width: 100%; }
+.cims-btn--small { min-height: 32px; padding: 0 var(--s3); font-size: var(--fs-sm); }
+
+/* ---------- search results ---------- */
+.cims-results { list-style: none; margin: 0; padding: 0; }
+.cims-results__group {
+  padding: var(--s3) var(--s4) var(--s1); color: var(--ink-muted); font-size: var(--fs-sm);
+  font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: var(--caps-tracking);
+}
+.cims-result {
+  position: relative; display: grid; grid-template-columns: 28px 1fr; gap: var(--s3); align-items: start;
+  padding: var(--s3) var(--s4); border-bottom: var(--hairline-muted); cursor: pointer; text-decoration: none; color: inherit;
+}
+.cims-result:hover { background: var(--paper-2); }
+.cims-result:focus-visible, .cims-result[aria-selected="true"] { outline: var(--hairline); outline-offset: -1px; background: var(--white); }
+.cims-result:focus-visible::before, .cims-result[aria-selected="true"]::before {
+  content: ""; position: absolute; left: -5px; top: 50%; width: 9px; height: 9px; margin-top: -4.5px;
+  border-radius: 50%; background: var(--gold); border: var(--hairline);
+}
+.cims-result__title { font-weight: 500; }
+.cims-result__meta { font-size: var(--fs-sm); color: var(--ink-muted); }
+.cims-result mark { background: none; color: inherit; font-weight: 600; text-decoration: underline 2px var(--gold); text-underline-offset: 3px; }
+
+.cims-empty { display: grid; justify-items: center; gap: var(--s3); padding: var(--s6) var(--s4); text-align: center; color: var(--ink-muted); }
+
+/* ---------- legend (desktop) ---------- */
+.cims-legend { border: var(--hairline); background: var(--paper); }
+.cims-legend__head {
+  display: flex; justify-content: space-between; align-items: baseline; padding: var(--s3) var(--s4);
+  background: var(--navy); color: var(--white); border-bottom: var(--rule-gold);
+}
+.cims-legend__head small { color: var(--gold); }
+.cims-layer { display: grid; grid-template-columns: 22px 24px 1fr; gap: var(--s3); align-items: center; min-height: var(--tap); padding: 0 var(--s4); border-top: var(--hairline-muted); }
+.cims-layer:first-of-type { border-top: 0; }
+.cims-layer__label { font-size: var(--fs-md); }
+.cims-check {
+  appearance: none; width: 20px; height: 20px; margin: 0; border: var(--hairline); background: var(--white);
+  display: grid; place-items: center; cursor: pointer;
+}
+.cims-check:checked { background: var(--cat, var(--ink)); border-color: var(--ink); }
+.cims-check:checked::after { content: ""; width: 10px; height: 5px; border: 2px solid var(--white); border-top: 0; border-right: 0; transform: translateY(-1px) rotate(-45deg); }
+.cims-sublayers { list-style: none; margin: 0 0 var(--s2); padding: 0 var(--s4) 0 calc(var(--s4) + 22px + var(--s3) + 11px); }
+.cims-sublayers li { position: relative; display: flex; align-items: center; gap: var(--s2); min-height: 32px; padding-left: var(--s4); border-left: 1px dotted var(--ink); font-size: var(--fs-sm); }
+.cims-sublayers li::before { content: ""; position: absolute; left: 0; top: 50%; width: 10px; border-top: 1px dotted var(--ink); }
+.cims-sublayers li:last-child { border-left-color: transparent; }
+.cims-sublayers li:last-child::after { content: ""; position: absolute; left: -1px; top: 0; height: 50%; border-left: 1px dotted var(--ink); }
+
+/* category hook: set --cat on any element, e.g. <span class="cims-glyph" style="--cat: var(--cat-food)"> */
+.cims-glyph { width: 24px; height: 24px; color: var(--cat, var(--ink)); flex: none; }
+
+/* ---------- chips (mobile layer row) ---------- */
+.cims-chips { display: flex; gap: var(--s2); overflow-x: auto; scroll-snap-type: x proximity; padding: var(--s2) var(--s4); scrollbar-width: none; }
+.cims-chip {
+  flex: none; scroll-snap-align: start; display: inline-flex; align-items: center; gap: var(--s2);
+  min-height: 36px; padding: 0 var(--s3); border: var(--hairline); background: var(--white); color: var(--ink);
+  font-size: var(--fs-sm); cursor: pointer;
+}
+.cims-chip .cims-glyph { width: 18px; height: 18px; }
+.cims-chip[aria-pressed="true"] { background: var(--paper-2); box-shadow: inset 0 -3px 0 var(--cat, var(--ink)); }
+
+/* ---------- building card ---------- */
+.cims-card__photo { aspect-ratio: 16 / 9; background: var(--cat-food); border-bottom: var(--hairline); } /* placeholder block until real photo */
+.cims-card__name { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-xl); text-transform: uppercase; letter-spacing: 0.02em; line-height: 1.05; margin: var(--s3) 0 0; }
+.cims-card__alias { color: var(--ink-muted); font-size: var(--fs-sm); margin: var(--s1) 0 var(--s3); }
+.cims-status { /* departure-board style status line */
+  display: inline-flex; gap: var(--s2); padding: var(--s1) var(--s2); background: var(--navy); color: var(--gold);
+  font-family: var(--font-mono); font-size: var(--fs-sm); text-transform: uppercase; letter-spacing: 0.08em;
+}
+.cims-status--closed { color: #E6B8B0; }
+.cims-infotable { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); margin: var(--s3) 0; }
+.cims-infotable th, .cims-infotable td { text-align: left; vertical-align: top; padding: var(--s2) 0; border-top: var(--hairline-muted); }
+.cims-infotable th { width: 40%; font-weight: 500; color: var(--ink-muted); }
+.cims-tag { display: inline-flex; align-items: center; gap: var(--s1); padding: 2px var(--s2); border: var(--hairline); background: var(--white); font-size: var(--fs-xs); font-family: var(--font-mono); text-transform: uppercase; }
+.cims-tag--alert { border-color: var(--cat-issues); color: var(--cat-issues); }
+.cims-actions { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); }
+
+/* ---------- indoor ---------- */
+.cims-breadcrumb { display: flex; flex-wrap: wrap; gap: var(--s2); font-size: var(--fs-sm); color: var(--ink-muted); }
+.cims-breadcrumb a { color: var(--navy); }
+.cims-breadcrumb > * + *::before { content: "›"; margin-right: var(--s2); color: var(--ink-muted); }
+.cims-levels { display: grid; gap: var(--s1); width: var(--tap); }
+.cims-levels button {
+  height: var(--tap); border: var(--hairline); background: var(--white); color: var(--ink); cursor: pointer;
+  font-family: var(--font-display); font-weight: 600; font-size: var(--fs-lg);
+}
+.cims-levels button[aria-pressed="true"] { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.cims-directory h4 {
+  margin: 0; padding: var(--s3) var(--s4) var(--s1); color: var(--ink-muted); font-size: var(--fs-sm);
+  font-family: var(--font-display); font-weight: 600; text-transform: uppercase; letter-spacing: var(--caps-tracking);
+}
+.cims-directory a { display: flex; gap: var(--s2); align-items: center; padding: var(--s2) var(--s4); border-top: var(--hairline-muted); color: inherit; text-decoration: none; font-size: var(--fs-sm); }
+.cims-directory a[aria-current] { background: var(--gold); }
+.cims-directory a:hover { background: var(--paper-2); }
+
+/* rooms on a floor plan (SVG): <path class="cims-room cims-room--classroom"> */
+.cims-room { stroke: var(--ink); stroke-width: 1; fill: var(--room-circulation); }
+.cims-room--classroom { fill: var(--room-classroom); }
+.cims-room--study { fill: var(--room-study); }
+.cims-room--office { fill: var(--room-office); }
+.cims-room--lab { fill: var(--room-lab); }
+.cims-room--restroom { fill: var(--room-restroom); }
+/* The one motion in the UI: the selected room's outline marches like a survey line. */
+.cims-room--selected { fill: var(--room-selected); stroke-width: 2; stroke-dasharray: 6 4; animation: cims-march 1.2s linear infinite; }
+@keyframes cims-march { to { stroke-dashoffset: -20; } }
+@media (prefers-reduced-motion: reduce) { .cims-room--selected { animation: none; } }
+
+/* ---------- map furniture ---------- */
+.cims-scale { display: inline-grid; gap: var(--s1); padding: var(--s2) var(--s3); border: var(--hairline); background: var(--paper); font-family: var(--font-mono); font-size: var(--fs-xs); }
+.cims-scale__bar { display: flex; height: 6px; border: var(--hairline); }
+.cims-scale__bar span { flex: 1; }
+.cims-scale__bar span:nth-child(odd) { background: var(--ink); }
+.cims-north { display: inline-grid; justify-items: center; font-family: var(--font-display); font-weight: 700; color: var(--ink); }
+.cims-mapctl { display: grid; border: var(--hairline); background: var(--white); width: 36px; }
+.cims-mapctl button { height: 36px; border: 0; background: none; font: 600 var(--fs-md) var(--font-display); color: var(--ink); cursor: pointer; }
+.cims-mapctl button + button { border-top: var(--hairline); }
+
+/* ---------- mobile sheet ---------- */
+.cims-sheet { background: var(--paper); border-top: var(--hairline); }
+.cims-sheet__handle { width: 40px; height: 4px; margin: var(--s2) auto; background: var(--ink); }

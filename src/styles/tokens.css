@@ -1,0 +1,54 @@
+/** @file Design tokens for the "survey map" direction: colors, type, spacing, lines. Source of truth for all UI and map colors. */
+/* See docs/design/DESIGN-DIRECTION.md. Contrast ratios are measured against --paper.
+   Rule of thumb: gold is never text on paper; category colors are for icons/fills, text stays --ink. */
+:root {
+  /* brand */
+  --navy: #003057;          /* header, primary buttons, headings on paper (11.6:1) */
+  --gold: #B3A369;          /* fills, rules, badges, pins; text only on navy (5.4:1) */
+  --gold-ink: #8A7A3E;      /* gold for lines/icons on paper (3.7:1) */
+
+  /* paper & ink */
+  --paper: #F3EEE2;         /* app + map background */
+  --paper-2: #E9E2D0;       /* hover, pressed, secondary blocks */
+  --white: #FFFFFF;         /* inputs, roofs */
+  --ink: #1C2733;           /* text, outlines, hatching (13.1:1) */
+  --ink-muted: #6B6556;     /* secondary text (5.0:1) */
+
+  /* layer categories: icon + pin colors (all ≥ 3:1 on paper). Shapes differ too. */
+  --cat-food: #A86A1F;        /* triangle */
+  --cat-support: #4A5A6A;     /* circle with cross */
+  --cat-makerspace: #7A4B2A;  /* square with slash */
+  --cat-exercise: #7D6E33;    /* hexagon */
+  --cat-orgs: #2F6B6B;        /* chevron */
+  --cat-transport: #5E7A5A;   /* diamond */
+  --cat-issues: #B42318;      /* triangle with ! */
+  --cat-free: #3F7D4E;        /* door / clock */
+  --route: #A33B2B;           /* dashed walking route */
+
+  /* indoor room fills (solid, not transparent tints; ink text on all ≥ 6:1) */
+  --room-classroom: #CBD5C0;
+  --room-study: #E8D9B5;
+  --room-office: #D8CDB8;
+  --room-lab: #D9A48C;
+  --room-restroom: #C7CED6;
+  --room-circulation: var(--paper);
+  --room-selected: var(--gold);
+
+  /* type */
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif-condensed, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --caps-tracking: 0.06em;
+  --fs-xs: 11px; --fs-sm: 13px; --fs-md: 15px; --fs-lg: 18px; --fs-xl: 24px; --fs-xxl: 32px;
+
+  /* lines & shape: depth comes from these, never from shadows */
+  --hairline: 1px solid var(--ink);
+  --hairline-muted: 1px solid #CFC6B2;
+  --rule-gold: 4px solid var(--gold);
+  --radius: 0;
+
+  /* spacing (4px grid) */
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px;
+  --tap: 44px;               /* minimum touch target */
+  --panel-w: 340px;
+}
