@@ -1,0 +1,6 @@
+/** @file Styles for the detail card. `order` places it between the search box and the list. */
+.detail { order: 2; margin: 0 12px 8px; padding: 12px; background: var(--bg); border-radius: 10px; }
+.detail h2 { margin: 0 0 6px; font-size: 16px; }
+.detail p { font-size: 14px; margin: 8px 0; }
+.detail button { border: 0; background: var(--navy); color: #fff; padding: 6px 12px; border-radius: 6px; cursor: pointer; }
+.tag { font-size: 11px; text-transform: uppercase; letter-spacing: .5px; background: var(--gold); color: #fff; padding: 2px 8px; border-radius: 99px; }
