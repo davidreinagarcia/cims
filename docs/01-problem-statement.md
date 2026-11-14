@@ -3,14 +3,15 @@
 
 ## The challenges (as given by SGA)
 
-CIMS answers **one primary** SGA Campus Solutions prompt and **integrates two secondary** prompts,
-because both of them come down to *a place on the map*: a room to book, a broken thing to report.
+CIMS is entered **formally in all three** SGA Campus Solutions prompts (decided 2026-11-14). P1 is the
+backbone; P2 and P3 are built on it, because both come down to *a place on the map*: a room to book, a
+broken thing to report.
 
 | # | Prompt | Role in CIMS | Where it lands |
 |---|--------|--------------|----------------|
 | P1 | **Smarter Campus Map** | Primary: the product's core | F-01 to F-07 |
-| P2 | **Campus Maintenance** | Integrated: report issues from the map, tied to building/room/equipment | F-10 |
-| P3 | **Improved Room Reservations** | Integrated: find available rooms on the map and floor plan | F-11, F-18 |
+| P2 | **Campus Maintenance** | Entered; built on the map: report issues from the map, tied to building/room/equipment | F-10 |
+| P3 | **Improved Room Reservations** | Entered; built on the map: find available rooms on the map and floor plan | F-11, F-18 |
 
 ### P1 — Smarter Campus Map (primary)
 

@@ -21,7 +21,7 @@
 | R-13 | **External links rot** (menus, booking, transit pages) | Data | 3 | 2 | 🟢 6 | Link checker (CI when it exists) | Hide broken links; show "Unavailable" | BE/Data | Open |
 | R-14 | **False expectations from simulated routing.** Users think a report reached Facilities/IT when it didn't | Product / Ethics | 3 | 4 | 🟠 12 | Clear "Prototype: not sent to Facilities/IT" label on F-10; official link for urgent issues; safety category shows emergency contact | Disable public reporting; demo with seeded reports only | Product | Open |
 | R-15 | **No real room-availability data** for F-11 | Data | 4 | 3 | 🟠 12 | Ask early (Q7); design the data model so a real feed replaces the seed | Mocked schedule labeled "Demo data" | Tech | Open |
-| R-16 | **Three prompts dilute the pitch.** We do P1, P2 and P3 halfway | Delivery | 3 | 4 | 🟠 12 | P1 stays the core; P2/P3 are one demo step each; Q6 decided at M0 | Drop F-11 to a roadmap slide; keep F-10 minimal (report + duplicate + status) | Product | Open |
+| R-16 | **Three prompts dilute the pitch.** We do P1, P2 and P3 halfway | Delivery | 3 | 4 | 🟠 12 | Decided (Q6): all three entered. P1 is the backbone; P2/P3 reuse its building/room model so they cost one feature each, not one app each | Drop F-11 to a roadmap slide; keep F-10 minimal (report + duplicate + status) | Product | Open |
 
 ## Risk heat map (current)
 
