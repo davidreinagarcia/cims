@@ -1,6 +1,7 @@
 /** @file Selected place card with hours, access, provenance, contained places and map directions. */
 import { useEffect, useState, type CSSProperties } from "react";
 import { CORRECTION_URL } from "../../config";
+import { formatWindow, nextWindow } from "../../lib/events";
 import { campusDay, openStatus } from "../../lib/hours";
 import { LAYER_CATALOG } from "../../lib/layerCatalog";
 import { places } from "../../lib/places";
@@ -21,6 +22,8 @@ export default function PlaceCard() {
   const place = selection?.kind === "place" ? places.features.find((f) => f.properties.id === selection.id) : undefined;
   if (!place) return null;
   const p = place.properties;
+  const eventWindow = p.kind === "event" ? nextWindow(p.event, now) : null;
+  if (p.kind === "event" && !eventWindow) return null;
   const status = openStatus(p.hours, now);
   const today = p.hours?.[campusDay(now)];
   const inside = places.features.filter((f) => f.properties.building_id === p.id && f.properties.id !== p.id);
@@ -49,16 +52,26 @@ export default function PlaceCard() {
       <p className="cims-card__alias">{p.aliases?.length ? p.aliases.join(", ") : unknown}</p>
       <p className="detail__tags">
         <span className="cims-tag">{category?.label ?? p.category}</span>
-        {p.status !== "verified" && (
+        {p.kind === "event" && <span className="cims-tag">Event</span>}
+        {p.kind === "org" && <>
+          <span className="cims-tag">Organization</span>
+          {p.subtype && <span className="cims-tag">{category?.subtypes.find((sub) => sub.id === p.subtype)?.label ?? p.subtype}</span>}
+        </>}
+        {p.status === "demo" && <span className="cims-tag cims-tag--alert">
+          {p.kind === "event" ? "Demo event, not a real event" : "Demo organization, not a real organization"}
+        </span>}
+        {p.status !== "verified" && p.status !== "demo" && (
           <span className="cims-tag cims-tag--alert" title="Not yet checked against an official source">
             {p.status === "draft" ? "Unverified draft" : "Approximate"}
           </span>
         )}
       </p>
       <div className="cims-card__photo" role="img" aria-label="Photo unknown"><span className="cims-muted">Unknown</span></div>
-      {status.state !== "unknown" && (
+      {p.kind !== "event" && status.state !== "unknown" && (
         <p><span className={`cims-status${status.state === "closed" ? " cims-status--closed" : ""}`}>{status.label}</span></p>
       )}
+      {eventWindow && <p><strong>{formatWindow(eventWindow)}</strong></p>}
+      {p.kind === "event" && <p>Organizer: {p.event?.organizer || unknown}</p>}
       {p.description && <p>{p.description}</p>}
       <table className="cims-infotable" aria-label="Place information">
         <tbody>

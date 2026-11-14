@@ -21,8 +21,18 @@ export type Category =
 /**
  * Data trust level (ADR-0004). "seed": existing approximate data, shown. "draft": researched but not
  * yet checked by a person, HIDDEN unless the URL has ?drafts=1. "verified": a person opened the source.
+ * "demo": visible, explicitly labeled fictional data; never a real claim.
  */
-export type DataStatus = "seed" | "draft" | "verified";
+export type DataStatus = "seed" | "draft" | "verified" | "demo";
+
+/** Event timing in campus time; demo records are fictional, visible examples only. */
+export interface EventInfo {
+  organizer?: string;
+  org_id?: string;
+  starts_at?: string;
+  ends_at?: string;
+  weekly?: { day: "mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun"; start: string; end: string };
+}
 
 /** Opening hours: per weekday, a list of ["HH:MM", "HH:MM"] open/close pairs (24h, campus local time). */
 export type Hours = Partial<Record<"mon" | "tue" | "wed" | "thu" | "fri" | "sat" | "sun", [string, string][]>>;
@@ -38,6 +48,8 @@ export interface PlaceProperties {
   id: string;
   name: string;
   aliases?: string[];
+  kind?: "place" | "org" | "event";
+  event?: EventInfo;
   category: Category;
   /** Optional sub-type inside the category (e.g. "coffee" under food). Missing means "other". */
   subtype?: string;
