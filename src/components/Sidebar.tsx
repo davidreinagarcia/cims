@@ -1,3 +1,4 @@
+/** @file Sidebar: place search, detail card and list of places. */
 import { useMemo, useState } from "react";
 import { places } from "../lib/places";
 
@@ -6,6 +7,7 @@ interface Props {
   onSelect: (id: string | null) => void;
 }
 
+/** Left panel with search box, selected-place card and the place list. */
 export default function Sidebar({ selectedId, onSelect }: Props) {
   const [query, setQuery] = useState("");
   const results = useMemo(() => {

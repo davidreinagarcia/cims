@@ -9,3 +9,8 @@ __pycache__/
 *.pyc
 .venv/
 .DS_Store
+.env.local
+.env.*.local
+out/
+*.log
+coverage/
