@@ -6,7 +6,7 @@ React components for the current UI (map view, sidebar). T-01 moves these into `
 
 **Files**
 
-- [`Glyph.tsx`](Glyph.tsx): Line glyphs on a 24px grid (survey-map style). Shape differs per category so they work without color. · exports `Glyph`
+- [`Glyph.tsx`](Glyph.tsx): Line glyphs on a 24px grid (survey-map style). Shape differs per category so they work without color. · exports `glyphPath`, `Glyph`
 - [`MapView.tsx`](MapView.tsx): Map host: creates the MapLibre map, loads every layer module from src/map/layers/ and feeds them the selectio… · exports `MapView`
 - [`Sidebar.css`](Sidebar.css): * @file Layout of the sidebar column. Header look comes from .cims-header (styles/cims-ui.css).
 - [`Sidebar.tsx`](Sidebar.tsx): Sidebar shell: survey-style header plus the panels. Add new panels here (src/panels/). · exports `Sidebar`
