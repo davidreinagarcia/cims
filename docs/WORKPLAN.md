@@ -154,7 +154,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Photo, hours + open-now, BuzzCard access, POIs inside, Directions, **Enter building** (calls Lane B's
   indoor entry point via `Selection`). Enter building button waits for T-21
 - [x] **T-12 Layer toggles + legend** (F-02) · needs T-01
-- [ ] **T-13 POI layers** (F-05) · needs T-12 and data from T-30
+- [ ] **T-13 POI layers** (F-05) · needs T-12 and data from T-30 *Pins done (survey pins, glyph variant); waits for verified data from T-30.*
 - [ ] **T-14 Search** (F-04) · needs T-03; rooms join when T-20 lands
   Buildings + aliases + places + rooms; "Kendeda <room>" opens indoor view on the right floor.
 - [ ] **T-15 Orgs & events layer + bulletin tab** (F-07) · needs T-12, data T-32

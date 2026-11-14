@@ -16,5 +16,7 @@ jobs:
       - run: npm ci --no-audit --no-fund
       - name: Indexes & links are current (fix with `npm run index`)
         run: node scripts/gen-index.mjs --check
+      - name: Curated data is valid
+        run: node scripts/data.mjs check
       - name: Type-check + build
         run: npm run build

@@ -6,6 +6,6 @@ One file per map layer; each default-exports a MapLayer and is loaded automatica
 
 **Files**
 
-- [`pois.ts`](pois.ts): Places layer: markers with gold rings and name labels (layer categories colored, honors the layer filters); h…
+- [`pois.ts`](pois.ts): Places layer: survey pins per category (glyph inside a paper ring), name labels from zoom 16; the selected pl…
 
 <!-- AUTO:END -->

@@ -9,7 +9,10 @@
     "preview": "vite preview --host",
     "index": "node scripts/gen-index.mjs",
     "index:check": "node scripts/gen-index.mjs --check",
-    "setup:hooks": "git config core.hooksPath .githooks && git config merge.cims-generated.driver true"
+    "setup:hooks": "git config core.hooksPath .githooks && git config merge.cims-generated.driver true",
+    "data:check": "node scripts/data.mjs check",
+    "data:verify": "node scripts/data.mjs verify",
+    "data:list": "node scripts/data.mjs list"
   },
   "dependencies": {
     "@fontsource/barlow-condensed": "^5.3.0",

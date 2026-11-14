@@ -18,6 +18,11 @@ const PATHS: Record<string, string> = {
 /** Known glyph ids: the layer categories plus "building". */
 export type GlyphId = keyof typeof PATHS | string;
 
+/** SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pins. */
+export function glyphPath(id: GlyphId): string {
+  return PATHS[id] ?? PATHS.building;
+}
+
 /** Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it. */
 export default function Glyph({ id, size = 24, style }: { id: GlyphId; size?: number; style?: CSSProperties }) {
   return (
@@ -32,7 +37,7 @@ export default function Glyph({ id, size = 24, style }: { id: GlyphId; size?: nu
       aria-hidden="true"
       style={style}
     >
-      <path d={PATHS[id] ?? PATHS.building} />
+      <path d={glyphPath(id)} />
     </svg>
   );
 }

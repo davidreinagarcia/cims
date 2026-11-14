@@ -11,11 +11,12 @@ src/
   state/selection.tsx  Selection {kind, id}, SelectionProvider, useSelection()
   map/
     types.ts           the layer contract (MapLayer, LayerHandle, LayerContext, LayerFilters)
+    pins.ts            draws the survey pins (teardrop + category glyph) on a canvas and registers them with the map
     layerFilters.ts    LayerFilters to a MapLibre filter (`buildMapFilter`) and `isVisible`
     baseStyle.ts       base style (OSM raster tiles + glyphs); swap for a vector basemap here
     loadLayers.ts      finds every file in layers/ automatically (import.meta.glob)
     layers/
-      pois.ts          places: markers, labels, highlight and fly-to on select
+      pois.ts          places: survey pins, labels (zoom 16+), gold selected pin, fly-to on select
   components/
     MapView.tsx        host: creates the map, loads layers, passes them the selection
     Sidebar.tsx(+css)  shell: header + panels
@@ -65,3 +66,5 @@ Stack: Vite, React 18, TypeScript, MapLibre GL JS (free, no API key), OpenStreet
 ## Deploy
 
 See `deploy/README.md`. Short version: pushing to `main` updates the public site within about a minute.
+
+Curated POI validation and verification use `scripts/data.mjs`; see [the data workflow](data/README.md).
