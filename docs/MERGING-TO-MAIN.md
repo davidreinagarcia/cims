@@ -14,7 +14,7 @@
    An agent's review counts as a pre-check, never as the approval.
 4. **Agents never merge.** Claude/Codex push branches and open draft PRs; a human merges.
 5. **Rebased on current `main`** right before merging (`git pull --rebase origin main`), and the
-   branch was run locally after the rebase.
+   branch preview (`https://<branch-slug>-cims.queenalexandria.online`) was checked after the rebase.
 6. **Squash merge** with a Conventional Commit title: `feat(indoor): level selector (T-21)`.
    Delete the branch after merging.
 7. **The person who merges checks the live site within 5 minutes.** Open the URL on a phone and

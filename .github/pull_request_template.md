@@ -13,6 +13,10 @@ Refs: <!-- F-xx, US-xx.y, board card link -->
 |-----------------|---------|
 |                 |         |
 
+## Preview
+
+https://<branch-slug>-cims.queenalexandria.online
+
 ## How to test
 
 1.

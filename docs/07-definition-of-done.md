@@ -13,7 +13,7 @@ before it.
 - [ ] Empty, loading and error states handled (no blank screens, no raw errors)
 - [ ] No secrets, API keys, or personal data committed
 - [ ] Unit tests for non-trivial logic (search ranking, open-now calculation, rate limiting)
-- [ ] Reviewer ran the branch locally (`npm run dev`); after merge, checked on the live URL (`main` auto-deploys)
+- [ ] Reviewer checked the branch preview URL on a phone; after merge, checked on the live URL (`main` auto-deploys)
 - [ ] Board card moved to Done with the PR linked
 
 ## 2. Data change is done when…

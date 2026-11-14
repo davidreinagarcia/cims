@@ -33,7 +33,7 @@ gantt
 
 - [ ] Hackathon rules, deliverables and judging criteria read and summarized (Q1)
 - [ ] Charter ratified; roles assigned in [RACI](06-team-raci.md)
-- [ ] Pilot area + pilot building(s) chosen (Q3); floor plan source confirmed (Q2)
+- [x] Pilot chosen: whole campus 3D, indoor Kendeda (+ CULC) (Q3); floor plans: best available public source (Q2)
 - [ ] ADR-0002 to 0005 accepted or replaced
 - [x] Repo + map app backbone + auto-deploy to the live URL (David, done)
 - [ ] Board (GitHub Projects); CI on PRs running `npm run build`
@@ -61,7 +61,8 @@ gantt
 - [ ] F-02 layers + legend · F-03 building card · F-04 search
 - [ ] F-05 POI layers · F-06 indoor directory · F-07 orgs & events
 - [ ] F-10 report an issue (P2): report, duplicates/+1, status, staff view
-- [ ] Should features started **only** if all Must are done: F-11 room finder (P3) → F-08 → F-09
+- [ ] F-11 room finder (P3)
+- [ ] Should features started **only** if all Must are done: F-18 no-show release → F-08 → F-09
 
 **Exit:** the 3 core journeys work end-to-end on a phone; hallway test ≥ 80% task success.
 
