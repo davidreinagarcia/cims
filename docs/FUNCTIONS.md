@@ -19,13 +19,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 ### Shared helpers (`src/lib`, `src/state`, `src/hooks`): reuse these first
 
 - `campusDay(now)` [src/lib/hours.ts:11](../src/lib/hours.ts#L11): Returns the hours-contract weekday for an instant in America/New_York.
-- `openStatus(hours, now)` [src/lib/hours.ts:21](../src/lib/hours.ts#L21): Computes campus-local opening status without guessing when today's hours are missing.
+- `openStatus(hours, now)` [src/lib/hours.ts:24](../src/lib/hours.ts#L24): Computes campus-local opening status without guessing when today's hours are missing.
 - `LAYER_CATALOG` [src/lib/layerCatalog.ts:22](../src/lib/layerCatalog.ts#L22): The PRD layers plus Printing and Health (added 2026-11-14), in panel order.
 - `categoryColor(layer, fallback = "#1C2733")` [src/lib/layerCatalog.ts:45](../src/lib/layerCatalog.ts#L45): Resolved color of a layer (reads the design token, so the tokens stay the single source of truth).
 - `showDrafts` [src/lib/places.ts:13](../src/lib/places.ts#L13): True when the page was opened with ?drafts=1: unverified drafts become visible (for reviewers and previews).
 - `places` [src/lib/places.ts:18](../src/lib/places.ts#L18): The places the app shows: seed and verified records, plus drafts only with ?drafts=1.
 - `searchPlaces(query, items)` [src/lib/search.ts:111](../src/lib/search.ts#L111): Searches name, aliases and category; queries under two characters preserve the full input order.
-- `useLayerFilters()` [src/state/layerFilters.tsx:71](../src/state/layerFilters.tsx#L71): Read and change the layer panel state from any component.
+- `useLayerFilters()` [src/state/layerFilters.tsx:72](../src/state/layerFilters.tsx#L72): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
 
 ### Types & contracts
@@ -42,7 +42,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
 - `MapLayer` [src/map/types.ts:36](../src/map/types.ts#L36): A self-contained piece of the map. Drop a file in src/map/layers/ that default-exports one of
-- `LayerFiltersApi` [src/state/layerFilters.tsx:19](../src/state/layerFilters.tsx#L19): What useLayerFilters() returns.
+- `LayerFiltersApi` [src/state/layerFilters.tsx:20](../src/state/layerFilters.tsx#L20): What useLayerFilters() returns.
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): The kinds of thing that can be selected. Only "place" is used so far.
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
 - `SelectionApi` [src/state/selection.tsx:20](../src/state/selection.tsx#L20): What useSelection() returns.
@@ -61,7 +61,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:13](../src/panels/building-card/PlaceCard.tsx#L13): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `SearchPanel()` [src/panels/search/SearchPanel.tsx:20](../src/panels/search/SearchPanel.tsx#L20): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
-- `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:32](../src/state/layerFilters.tsx#L32): Provides the layer filters to the app. Mount once, in App.
+- `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
 
 ### Other exported functions & constants

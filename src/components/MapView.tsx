@@ -28,7 +28,9 @@ export default function MapView() {
     map.addControl(new maplibregl.NavigationControl(), "top-right");
 
     // style.load (not "load") so layers appear without waiting for every tile.
+    let alive = true; // a map removed before its style loaded (React StrictMode remount) must not get layers
     map.on("style.load", () => {
+      if (!alive) return;
       const ctx = { select: (s: Parameters<typeof select>[0]) => latest.current.select(s) };
       handles.current = loadLayers().map((layer) => layer.addTo(map, ctx));
       handles.current.forEach((h) => {
@@ -39,6 +41,7 @@ export default function MapView() {
 
     (window as unknown as { __map?: unknown }).__map = map; // handy for debugging in the console
     return () => {
+      alive = false;
       handles.current.forEach((h) => h.remove());
       handles.current = [];
       map.remove();
