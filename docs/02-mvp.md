@@ -39,6 +39,7 @@ Feature IDs (`F-xx`) are used across the PRD, roadmap and risk register. Origins
 | F-07 | **Orgs & Events layer**: org/event pins by location, read-only bulletin list (seeded) with "show on map" | G4 | Events → Clubs, Campus Orgs, Community, Admin; Tabs → Bulletin Board |
 | F-10 | **Report an issue** *(P2)*: report pinned to building / room / equipment; category picks the right team (Facilities vs. IT); nearby duplicates shown first with **+1**; public status (Open → Routed → In progress → Resolved) | G5 | Maintenance Form / report something → status, pooling duplicates, type filter |
 | F-11 | **Room finder** *(P3)*: "Available now / at time X" filter by location, capacity and features (whiteboard, screen, outlets); free rooms highlighted on map + floor plan; **Book** deep-links to the system that owns that room, with its policy summarized | G6 | reserve a room → floor plan highlight |
+| F-21 | **GT sign-in (simulated) + posting gate**: reading is open; every write needs a signed-in account so each post has an accountable author. MVP: demo personas, no real auth; same contract as the future real SSO | G4, trust | David, 2026-11-14 (accountability for posts) |
 
 ### Should have (if MVP is done before M2)
 
@@ -64,7 +65,7 @@ Feature IDs (`F-xx`) are used across the PRD, roadmap and risk register. Origins
 ### Won't have (this hackathon)
 
 - Real bookings or real ticket submission into Facilities/IT systems (we deep-link / simulate routing)
-- Payments or GT SSO integration
+- Payments or **real** GT SSO integration (a simulated sign-in is in scope: F-21)
 - Native iOS/Android apps
 - Full campus indoor coverage
 - Moderation tooling for user-generated content (beyond a hard-coded allowlist)
@@ -76,7 +77,7 @@ Feature IDs (`F-xx`) are used across the PRD, roadmap and risk register. Origins
 | Geography | **Whole campus** footprints in 3D (decided); curated names/heights first around the pilot building |
 | Indoor | **Kendeda Building** (decided); **CULC** second if time allows |
 | Data | Hand-curated seed (`data/`), each record with `source_url` + `verified_at` |
-| Users | Anonymous; no accounts |
+| Users | Anyone can **read** without an account. **Posting** (report, +1, report fullness, post an event) needs a signed-in account; the MVP uses a **simulated Georgia Tech sign-in** with demo personas (F-21). No real authentication |
 | Reports (F-10) | Stored in CIMS; routing to Facilities vs. IT is **simulated** (shown, not sent) |
 | Room availability (F-11) | Seeded / mocked schedule for pilot-building rooms unless a real feed is available (Q7) |
 | Platforms | Modern mobile + desktop browsers |
