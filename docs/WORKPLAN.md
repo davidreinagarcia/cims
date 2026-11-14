@@ -133,7 +133,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Hand-check names/IDs for the pilot area. ODbL attribution stays in the UI.
   **Done when:** the file loads in geojson.io and pilot buildings have names + heights.
 - [x] **T-04a CI workflow**: `.github/workflows/ci.yml` (index check + build) ✅ in the docs PR
-- [ ] **T-04b Branch protection** · A (repo admin) · see [MERGING-TO-MAIN § one-time setup](MERGING-TO-MAIN.md#one-time-setup-david-repo-admin)
+- [x] **T-04b Branch protection** · A (repo admin) · see [MERGING-TO-MAIN § one-time setup](MERGING-TO-MAIN.md#one-time-setup-david-repo-admin) *Decided 2026-11-14: GitHub does not enforce protection on a private repo on a free plan; we work by discipline, see MERGING-TO-MAIN.*
 - [x] **T-06 Design tokens + fonts** · A · *hotspot PR (`styles.css`, `package.json`)*
   Apply the tokens, type and header/panel components from [DESIGN-DIRECTION](design/DESIGN-DIRECTION.md);
   fonts via a `chore/` dependency PR. **Done when:** current UI uses the tokens; no gold text on paper.
@@ -155,10 +155,10 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Photo, hours + open-now, BuzzCard access, POIs inside, Directions, **Enter building** (calls Lane B's
   indoor entry point via `Selection`). Enter building button waits for T-21
 - [x] **T-12 Layer toggles + legend** (F-02) · needs T-01
-- [ ] **T-13 POI layers** (F-05) · needs T-12 and data from T-30 *Pins done (survey pins, glyph variant); waits for verified data from T-30.*
-- [ ] **T-14 Search** (F-04) · needs T-03; rooms join when T-20 lands
+- [ ] **T-13 POI layers** (F-05) · needs T-12 and data from T-30 *Survey pins, clusters for stacked places and the filters are done; draft data for food, printing, health, makerspace and exercise is merged (T-30) and waits for human verification.*
+- [ ] **T-14 Search** (F-04) · needs T-03; rooms join when T-20 lands *Places done (ranked, accent and typo tolerant, keyboard). Still to add to the index: buildings (the 3D layer has 291 footprints with aliases) and rooms (T-20/T-21).*
   Buildings + aliases + places + rooms; "Kendeda <room>" opens indoor view on the right floor.
-- [ ] **T-15 Orgs & events layer + bulletin tab** (F-07) · needs T-12, data T-32
+- [x] **T-15 Orgs & events layer + bulletin tab** (F-07) · needs T-12, data T-32 *Read-only done (Bulletin tab, event and org cards, weekly demo events, 13 draft real orgs). Officer posting (US-07.2, Should) not started; the sign-in gate (T-25) exists.*
   Read-only bulletin and fictional weekly demo events implemented in Lane A. Posting waits for the sign-in gate T-25.
 
 **Lane B: Inside + Actions (Tato)**
@@ -176,20 +176,20 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   staff view, "Prototype: not sent to Facilities/IT" label (Risk R-14). Every write (report, +1) goes through the T-25 sign-in gate; the staff view needs the staff role (no unlisted URL).
 - [ ] **T-24 Room finder** (F-11, Must since Q6) · needs T-20, T-21
   Availability seed for Kendeda rooms, filters (capacity, features), map + floor highlight, Book deep link.
-- [ ] **T-25 Sign-in mock + posting gate** (F-21, [ADR-0007](adr/0007-gt-sign-in-simulated.md)) · A · *hotspot PR (`App.tsx`, `src/state/`)* · needs T-01; land it before T-23 and the T-15 posting UI
+- [x] **T-25 Sign-in mock + posting gate** (F-21, [ADR-0007](adr/0007-gt-sign-in-simulated.md)) · A · *hotspot PR (`App.tsx`, `src/state/`)* · needs T-01; land it before T-23 and the T-15 posting UI
   **Deliberately theater: looks real, enforces nothing; roles only change labels.** `src/auth/`: `AuthAdapter` interface (`signIn(persona)`, `signOut()`, `session`) with a **mock** adapter (localStorage; demo personas Student / Club officer / Facilities staff / Moderator). `AuthProvider` + `useAuth()` in `src/state/`, `SignInDialog` ("Sign in with Georgia Tech (demo)": never asks for credentials, community-rules checkbox, DEMO badge), a `requireAuth(action)` gate that opens the dialog and resumes the action, an account chip in the header. Types `Session { accountId, role, provider }` in `src/types/`. **Done when:** a signed-out write opens the dialog and continues after sign-in; a reload keeps the session; sign-out clears it; every screen says "Demo sign-in".
 
 > ⚖️ Lane B now carries F-06, F-10 *and* F-11. If it falls behind at M2, move T-24 to Lane A.
 
 **Data lane (whoever is free; good Claude research tasks)**
 
-- [ ] **T-30 Verified POIs**, one PR per category file:
+- [ ] **T-30 Verified POIs**, one PR per category file: *43 drafts merged (food 18, printing 6, health 4, makerspace 6, exercise 9); verification pending, see `docs/data/UNVERIFIED.md`. Support drafts are on Tato's branch `data/T30-T31-support-routing` (old schema, needs adapting).*
   - [ ] `pois/food.json`: dining halls (+ menu link), restaurants (+ Dining Dollars), coffee, vending
   - [ ] `pois/support.json`: desks from the [Miro board](brainstorm/miro-board.md), each verified
   - [ ] `pois/makerspaces.json`
   - [ ] `pois/exercise.json`
 - [ ] **T-31 Issue routing table** `issue-routing.json`: category → Facilities / IT + official link (Q8)
-- [ ] **T-32 Orgs & events seed** for the demo (real orgs, plausible upcoming events, labeled as demo)
+- [ ] **T-32 Orgs & events seed** for the demo (real orgs, plausible upcoming events, labeled as demo) *6 fictional demo events (weekly, labeled) and 13 draft real organizations are merged; verification pending.*
 
 ### P2: Should (only after every P1 box is checked)
 
