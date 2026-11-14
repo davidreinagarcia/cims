@@ -6,6 +6,9 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 
 **Files**
 
+- [`issue-routing.ts`](issue-routing.ts): Issue categories and their routing (category → team + official contact), from src/data/issue-routing.json whe… · exports `TEAMS`, `SAFETY_CATEGORY`, `hasVerifiedRouting`, `issueRoutes`, `routeFor`
 - [`places.ts`](places.ts): Typed access to the places GeoJSON in src/data/. · exports `places`
+- [`reports.mock.ts`](reports.mock.ts): Mock ReportsService backed by localStorage, with labeled sample reports. Prototype only: nothing leaves the b… · exports `createLocalReportsService`
+- [`reports.ts`](reports.ts): Report-an-issue contracts (types + ReportsService) and the one place that picks the backend adapter. · exports `STATUS_FLOW`, `STATUS_LABEL`, `isActive`, `reportsService`
 
 <!-- AUTO:END -->

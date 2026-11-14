@@ -18,12 +18,31 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Shared helpers (`src/lib`, `src/state`, `src/hooks`): reuse these first
 
+- `TEAMS` [src/lib/issue-routing.ts:31](../src/lib/issue-routing.ts#L31): All teams, in the order the staff view lists them.
+- `SAFETY_CATEGORY` [src/lib/issue-routing.ts:34](../src/lib/issue-routing.ts#L34): Category that must show the emergency banner before the form.
+- `hasVerifiedRouting` [src/lib/issue-routing.ts:69](../src/lib/issue-routing.ts#L69): Whether verified routing data (T-31) was found at build time.
+- `issueRoutes` [src/lib/issue-routing.ts:72](../src/lib/issue-routing.ts#L72): The ten categories with their routing, in display order.
+- `routeFor(category)` [src/lib/issue-routing.ts:80](../src/lib/issue-routing.ts#L80): Routing for one category.
 - `places` [src/lib/places.ts:11](../src/lib/places.ts#L11): The places loaded from src/data/places.json.
+- `createLocalReportsService()` [src/lib/reports.mock.ts:92](../src/lib/reports.mock.ts#L92): Creates the localStorage-backed mock. Falls back to memory when storage is unavailable.
+- `STATUS_FLOW` [src/lib/reports.ts:71](../src/lib/reports.ts#L71): The happy-path statuses in order, for the status timeline.
+- `STATUS_LABEL` [src/lib/reports.ts:74](../src/lib/reports.ts#L74): Human label for each status.
+- `isActive(status)` [src/lib/reports.ts:83](../src/lib/reports.ts#L83): Whether a report still counts as unresolved (shown in "Already reported?").
+- `reportsService` [src/lib/reports.ts:88](../src/lib/reports.ts#L88): The reports backend used by the app. Swap the adapter here (and only here) when ADR-0005 is decided.
 
 ### Types & contracts
 
+- `Team` [src/lib/issue-routing.ts:5](../src/lib/issue-routing.ts#L5): Team a report is routed to (simulated in the MVP).
+- `IssueCategory` [src/lib/issue-routing.ts:8](../src/lib/issue-routing.ts#L8): The ten report categories from PRD US-10.1.
+- `IssueRoute` [src/lib/issue-routing.ts:21](../src/lib/issue-routing.ts#L21): Where a category goes: team plus the official contact, null until verified data exists.
 - `PlaceFeature` [src/lib/places.ts:6](../src/lib/places.ts#L6): One place as a GeoJSON point feature.
 - `PlaceCollection` [src/lib/places.ts:8](../src/lib/places.ts#L8): All places as a GeoJSON feature collection.
+- `ReportStatus` [src/lib/reports.ts:8](../src/lib/reports.ts#L8): Lifecycle of a report (PRD US-10.3).
+- `ReportLocation` [src/lib/reports.ts:11](../src/lib/reports.ts#L11): Where the problem is: a building (› floor › room) or an outdoor map pin.
+- `StatusEvent` [src/lib/reports.ts:21](../src/lib/reports.ts#L21): One status change with its timestamp (ISO 8601).
+- `IssueReport` [src/lib/reports.ts:27](../src/lib/reports.ts#L27): A reported issue as the UI sees it.
+- `NewIssueReport` [src/lib/reports.ts:46](../src/lib/reports.ts#L46): What the form submits; the service assigns id, team, status and timestamps.
+- `ReportsService` [src/lib/reports.ts:55](../src/lib/reports.ts#L55): Backend contract for reports. Implemented by the localStorage mock today (ADR-0005 still open).
 - `Category` [src/types.ts:3](../src/types.ts#L3): Kinds of place the map can show.
 - `PlaceProperties` [src/types.ts:12](../src/types.ts#L12): Properties of a place feature in src/data/places.json.
 
