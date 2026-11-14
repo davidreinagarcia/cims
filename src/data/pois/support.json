@@ -1,0 +1,282 @@
+{
+  "type": "FeatureCollection",
+  "_note": "Verified support desks from official Georgia Tech sources; human spot-check required. Empty hours/floor_or_suite strings mean those details were not verified in the opened sources, not that the desk is closed or has no suite. Geometry and coord_source are null because coordinates were not verified; do not geocode street addresses or reuse seed coordinates. source_url is the primary evidence; additional source_urls substantiate specific fields. Published desk hours are distinguished from building access and emergency staffing. Miro notes are unverified leads, not evidence.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "asc-tech-support-clough",
+        "name": "Administrative Services Center Tech Support",
+        "category": "support",
+        "subtype": "it",
+        "building": "Clough Undergraduate Learning Commons",
+        "floor_or_suite": "Suite 215 (2nd floor, near Kaldi's Coffee)",
+        "hours": "Monday through Friday, 8 a.m. to 5 p.m.",
+        "services": "Walk-up IT help: VPN, email, passwords, DUO and applications.",
+        "source_url": "https://www.gatech.edu/news/2025/06/30/help-desk-business-hours-update",
+        "source_urls": {
+          "floor": "https://housing.gatech.edu/resources/help-and-support/tech-support"
+        },
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "wreck-techs-east-campus",
+        "name": "Technology Support Walk-In — East Campus (Howell)",
+        "category": "support",
+        "subtype": "it",
+        "building": "Howell Residence Hall",
+        "floor_or_suite": "1st floor",
+        "hours": "",
+        "services": "Academic technology, email and Wi-Fi support.",
+        "source_url": "https://students.gatech.edu/student-resource-guide",
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "wreck-techs-west-campus",
+        "name": "Walk-Up Tech Support — West Campus",
+        "category": "support",
+        "subtype": "it",
+        "building": "West Village",
+        "floor_or_suite": "Next to Wreck Stop",
+        "hours": "",
+        "services": "Hands-on technology setup and troubleshooting for students.",
+        "source_url": "https://housing.gatech.edu/resources/help-and-support/tech-support",
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "college-of-computing-tso-help-desk",
+        "name": "College of Computing TSO Help Desk",
+        "category": "support",
+        "subtype": "it",
+        "building": "College of Computing Building",
+        "floor_or_suite": "Room 225D",
+        "hours": "Monday - Friday, 8am-4pm EST",
+        "services": "College of Computing IT support.",
+        "source_url": "https://support.cc.gatech.edu/support-tools/howto/how-contact-it",
+        "source_urls": {
+          "services": "https://support.cc.gatech.edu/"
+        },
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "east-campus-housing-office",
+        "name": "East Campus Area Office (ECHO)",
+        "category": "support",
+        "subtype": "housing",
+        "building": "Field Residence Hall",
+        "floor_or_suite": "",
+        "hours": "Monday – Friday: 8 a.m. – 8 p.m.; Saturday/Sunday: Closed",
+        "services": "Housing key assistance.",
+        "source_url": "https://housing.gatech.edu/resources/help-and-support/area-offices",
+        "source_urls": {
+          "abbreviation": "https://mycampussupport.gatech.edu/hc/en-us/articles/9451082320013-Area-Offices"
+        },
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "west-campus-housing-office",
+        "name": "West Campus Area Office (WCHO)",
+        "category": "support",
+        "subtype": "housing",
+        "building": "Commander Building",
+        "floor_or_suite": "",
+        "hours": "Monday – Friday: 8 a.m. – 8 p.m.; Saturday/Sunday: Closed",
+        "services": "Housing key assistance.",
+        "source_url": "https://housing.gatech.edu/resources/help-and-support/area-offices",
+        "source_urls": {
+          "abbreviation": "https://mycampussupport.gatech.edu/hc/en-us/articles/9451082320013-Area-Offices"
+        },
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "north-avenue-housing-office",
+        "name": "North Avenue Area Office (NANO)",
+        "category": "support",
+        "subtype": "housing",
+        "building": "North Avenue North Residence Hall",
+        "floor_or_suite": "",
+        "hours": "Monday – Friday: 8 a.m. – 10 p.m.; Saturday/Sunday: 12 – 5 p.m. (Gym Only)",
+        "services": "Housing key assistance.",
+        "source_url": "https://housing.gatech.edu/resources/help-and-support/area-offices",
+        "source_urls": {
+          "abbreviation": "https://mycampussupport.gatech.edu/hc/en-us/articles/9451082320013-Area-Offices"
+        },
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "north-campus-housing-office",
+        "name": "North Campus Area Office (Graduate Living Center / Tenth and Home)",
+        "category": "support",
+        "subtype": "housing",
+        "building": "Graduate Living Center",
+        "floor_or_suite": "",
+        "hours": "Monday – Friday: 8 a.m. – 8 p.m.; Saturday/Sunday: Closed",
+        "services": "Housing key assistance.",
+        "source_url": "https://housing.gatech.edu/resources/help-and-support/area-offices",
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "john-lewis-student-center-information-desk",
+        "name": "John Lewis Student Center Information Desk",
+        "category": "support",
+        "subtype": "info",
+        "building": "John Lewis Student Center and Stamps Commons",
+        "floor_or_suite": "2nd floor",
+        "hours": "Monday–Thursday: 8:00 am - 7:00 pm; Friday: 8:00 am - 5:00 pm; Saturday–Sunday: 9:00 am - 3:00 pm",
+        "services": "Events, directions, building services, lost and found, day lockers.",
+        "source_url": "https://studentcenter.gatech.edu/student-center",
+        "source_urls": {
+          "hours": "https://www.studentcenter.gatech.edu/hours"
+        },
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "library-infodesk",
+        "name": "Georgia Tech Library INFODesk",
+        "category": "support",
+        "subtype": "info",
+        "building": "Price Gilbert",
+        "floor_or_suite": "Grove level",
+        "hours": "",
+        "services": "Library navigation, equipment lending, course reserves and general questions.",
+        "source_url": "https://library.gatech.edu/infodesk",
+        "source_urls": {
+          "location": "https://www.library.gatech.edu/about/visitors"
+        },
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "global-learning-center-business-concierge",
+        "name": "Global Learning Center Business Concierge",
+        "category": "support",
+        "subtype": "info",
+        "building": "Georgia Tech Global Learning Center",
+        "floor_or_suite": "",
+        "hours": "",
+        "services": "Georgia Tech and local information, directions and dinner reservations for attendees.",
+        "source_url": "https://pe.gatech.edu/global-learning-center/attend-meeting",
+        "source_urls": {
+          "desk": "https://pe.gatech.edu/index.php/global-learning-center/in-person-meetings"
+        },
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "gtpd-headquarters-general-information",
+        "name": "Georgia Tech Police Department — General Information",
+        "category": "support",
+        "subtype": "safety",
+        "building": "Georgia Tech Police Department headquarters (965 Hemphill Avenue NW)",
+        "floor_or_suite": "",
+        "hours": "Business hours: Monday through Friday from 8am to 4pm; staffed 365/24/7 (not verified as lobby opening hours).",
+        "services": "General police questions and emergency/non-emergency assistance.",
+        "source_url": "https://police.gatech.edu/general-information",
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pts-customer-service-center",
+        "name": "PTS Customer Service Center",
+        "category": "support",
+        "subtype": "transit",
+        "building": "PTS Customer Service Center (770 Spring Street)",
+        "floor_or_suite": "",
+        "hours": "",
+        "services": "Parking and transportation customer service.",
+        "source_url": "https://www.gatech.edu/sites/default/files/GeorgiaTechParkingMap2024.pdf",
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "bursar-walk-up-window",
+        "name": "Office of the Bursar Walk-Up Window",
+        "category": "support",
+        "subtype": "financial",
+        "building": "Lyman Hall",
+        "floor_or_suite": "Suite 111",
+        "hours": "Monday through Friday 9:00 AM - 4:00 PM; closed on the Official Holiday Schedule of Georgia Tech.",
+        "services": "Student account billing and payment support.",
+        "source_url": "https://bursar.gatech.edu/office_information",
+        "verified_at": "2026-11-14",
+        "verified_by": "codex (needs human spot-check)",
+        "coord_source": null
+      },
+      "geometry": null
+    }
+  ]
+}

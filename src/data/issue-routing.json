@@ -1,0 +1,88 @@
+{
+  "_note": "Routing is simulated in the MVP: no report is submitted or dispatched. Category-to-team assignments are MVP defaults, not an official Georgia Tech routing taxonomy. Contacts and reporting pages below were verified on official gatech.edu sources. Facilities covers physical campus maintenance; accessibility here means physical maintenance barriers, not accommodations or digital accessibility. Furniture and other use Facilities customer-service triage. Follow each official page for building-manager authorization, Housing-specific reporting and emergency escalation. For immediate danger use the GTPD phone contact directly.",
+  "categories": {
+    "classroom-tech": {
+      "team": "IT",
+      "reporting_url": "https://support.cc.gatech.edu/",
+      "phone": "404-385-1111",
+      "source_url": "https://support.cc.gatech.edu/",
+      "verified_at": "2026-11-14",
+      "verified_by": "codex (needs human spot-check)"
+    },
+    "network-wifi": {
+      "team": "IT",
+      "reporting_url": "https://oit.gatech.edu/contact-us",
+      "phone": "404-385-1111",
+      "source_url": "https://oit.gatech.edu/contact-us",
+      "verified_at": "2026-11-14",
+      "verified_by": "codex (needs human spot-check)"
+    },
+    "electrical-lighting": {
+      "team": "Facilities",
+      "reporting_url": "https://facilities.gatech.edu/building-maintenance/request-service",
+      "phone": "404-385-6000",
+      "source_url": "https://facilities.gatech.edu/building-maintenance/request-service",
+      "verified_at": "2026-11-14",
+      "verified_by": "codex (needs human spot-check)"
+    },
+    "plumbing-restroom": {
+      "team": "Facilities",
+      "reporting_url": "https://facilities.gatech.edu/building-maintenance/request-service",
+      "phone": "404-385-6000",
+      "source_url": "https://facilities.gatech.edu/building-maintenance/request-service",
+      "verified_at": "2026-11-14",
+      "verified_by": "codex (needs human spot-check)"
+    },
+    "hvac-temperature": {
+      "team": "Facilities",
+      "reporting_url": "https://facilities.gatech.edu/contact-us",
+      "phone": "404-385-6000",
+      "source_url": "https://facilities.gatech.edu/contact-us",
+      "verified_at": "2026-11-14",
+      "verified_by": "codex (needs human spot-check)"
+    },
+    "furniture": {
+      "team": "Facilities",
+      "reporting_url": "https://facilities.gatech.edu/contact-us",
+      "phone": "404-385-6000",
+      "source_url": "https://facilities.gatech.edu/contact-us",
+      "verified_at": "2026-11-14",
+      "verified_by": "codex (needs human spot-check)"
+    },
+    "accessibility": {
+      "team": "Facilities",
+      "reporting_url": "https://facilities.gatech.edu/contact-us",
+      "phone": "404-385-6000",
+      "source_url": "https://facilities.gatech.edu/contact-us",
+      "verified_at": "2026-11-14",
+      "verified_by": "codex (needs human spot-check)"
+    },
+    "cleanliness": {
+      "team": "Facilities",
+      "reporting_url": "https://facilities.gatech.edu/custodial/request-service",
+      "phone": "404-385-6000",
+      "source_url": "https://facilities.gatech.edu/custodial/request-service",
+      "source_urls": {
+        "phone": "https://facilities.gatech.edu/contact-us"
+      },
+      "verified_at": "2026-11-14",
+      "verified_by": "codex (needs human spot-check)"
+    },
+    "safety-hazard": {
+      "team": "Emergency",
+      "reporting_url": "https://police.gatech.edu/general-information",
+      "phone": "404-894-2500",
+      "source_url": "https://police.gatech.edu/general-information",
+      "verified_at": "2026-11-14",
+      "verified_by": "codex (needs human spot-check)"
+    },
+    "other": {
+      "team": "Facilities",
+      "reporting_url": "https://facilities.gatech.edu/contact-us",
+      "phone": "404-385-6000",
+      "source_url": "https://facilities.gatech.edu/contact-us",
+      "verified_at": "2026-11-14",
+      "verified_by": "codex (needs human spot-check)"
+    }
+  }
+}
