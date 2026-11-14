@@ -1,4 +1,4 @@
-/** @file Sidebar shell: branded header plus the panels. Add new panels here (src/panels/). */
+/** @file Sidebar shell: survey-style header plus the panels. Add new panels here (src/panels/). */
 import PlaceCard from "../panels/building-card/PlaceCard";
 import SearchPanel from "../panels/search/SearchPanel";
 import "./Sidebar.css";
@@ -7,9 +7,13 @@ import "./Sidebar.css";
 export default function Sidebar() {
   return (
     <aside className="sidebar">
-      <header>
-        <h1>CIMS</h1>
-        <p>Campus Interactive Map System</p>
+      <header className="cims-header">
+        <h1 className="cims-header__title">CIMS</h1>
+        <span className="cims-header__sub">
+          Georgia Tech
+          <br />
+          Campus Map
+        </span>
       </header>
       <SearchPanel />
       <PlaceCard />

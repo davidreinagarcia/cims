@@ -18,8 +18,8 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 
 - [`App.tsx`](App.tsx): App shell: selection provider plus the two-column layout (sidebar and map). · exports `App`
 - [`config.ts`](config.ts): Central place for map settings. Change here, not inside components. · exports `CAMPUS`, `TILE_URL`, `TILE_ATTRIBUTION`
-- [`main.tsx`](main.tsx): Entry point: mounts React and loads global styles.
-- [`styles.css`](styles.css): * @file Global styles: tokens, reset and the two-column app layout. Component styles live next to their compo…
+- [`main.tsx`](main.tsx): Entry point: loads fonts, design tokens and styles, then mounts React.
+- [`styles.css`](styles.css): * @file Global layout and map-control skin. Colors, type and components come from styles/tokens.css and style…
 - [`types.ts`](types.ts): Shared types for places shown on the map.
 - [`vite-env.d.ts`](vite-env.d.ts): Vite client types (import.meta.glob, asset imports).
 

@@ -7,6 +7,6 @@ Search box and list of places (rooms and buildings join in T-14).
 **Files**
 
 - [`SearchPanel.tsx`](SearchPanel.tsx): Search box and clickable list of places. Rooms and buildings join the list in T-14. · exports `SearchPanel`
-- [`search.css`](search.css): * @file Styles for the search panel. `order` keeps input above the detail card above the list.
+- [`search.css`](search.css): * @file Search panel layout. Look comes from .cims-field / .cims-results (styles/cims-ui.css); `order` keeps…
 
 <!-- AUTO:END -->

@@ -1,8 +1,8 @@
-/** @file Styles for the search panel. `order` keeps input above the detail card above the list. */
-.search { order: 1; margin: 12px; padding: 10px 12px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; }
-.list { order: 3; list-style: none; margin: 0; padding: 0 12px 12px; overflow-y: auto; flex: 1; }
-.list button { width: 100%; text-align: left; border: 0; background: none; padding: 10px; border-radius: 8px; cursor: pointer; font-size: 14px; display: flex; flex-direction: column; gap: 2px; transition: background .15s; }
-.list button:hover { background: var(--bg); }
-.list button.active { background: var(--navy); color: #fff; }
-.list small { opacity: .6; text-transform: capitalize; }
-.empty { padding: 10px; color: #888; }
+/** @file Search panel layout. Look comes from .cims-field / .cims-results (styles/cims-ui.css); `order` keeps field, then detail card, then list. */
+.search { order: 1; margin: var(--s4); }
+.search .cims-field__btn { cursor: default; }
+.list { order: 3; padding: 0 var(--s2) var(--s3); overflow-y: auto; flex: 1; }
+/* .cims-result is styled for links; make the button variant look the same. */
+.list button.cims-result { width: 100%; border: 0; border-bottom: var(--hairline-muted); background: none; font: inherit; text-align: left; }
+.list button.cims-result:hover { background: var(--paper-2); }
+.cims-result .cims-glyph { color: var(--ink); }

@@ -133,7 +133,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   **Done when:** the file loads in geojson.io and pilot buildings have names + heights.
 - [x] **T-04a CI workflow**: `.github/workflows/ci.yml` (index check + build) ✅ in the docs PR
 - [ ] **T-04b Branch protection** · A (repo admin) · see [MERGING-TO-MAIN § one-time setup](MERGING-TO-MAIN.md#one-time-setup-david-repo-admin)
-- [ ] **T-06 Design tokens + fonts** · A · *hotspot PR (`styles.css`, `package.json`)*
+- [x] **T-06 Design tokens + fonts** · A · *hotspot PR (`styles.css`, `package.json`)*
   Apply the tokens, type and header/panel components from [DESIGN-DIRECTION](design/DESIGN-DIRECTION.md);
   fonts via a `chore/` dependency PR. **Done when:** current UI uses the tokens; no gold text on paper.
 - [ ] **T-05 M0 decisions (30-min call)** · Both

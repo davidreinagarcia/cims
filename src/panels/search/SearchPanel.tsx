@@ -1,11 +1,25 @@
 /** @file Search box and clickable list of places. Rooms and buildings join the list in T-14. */
-import { useMemo, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { places } from "../../lib/places";
 import { useSelection } from "../../state/selection";
 import "./search.css";
 
+/** Wraps the part of `text` that matches `query` in <mark> (gold underline, never gold text). */
+function highlight(text: string, query: string) {
+  const q = query.trim();
+  const i = q ? text.toLowerCase().indexOf(q.toLowerCase()) : -1;
+  if (i < 0) return text;
+  return (
+    <Fragment>
+      {text.slice(0, i)}
+      <mark>{text.slice(i, i + q.length)}</mark>
+      {text.slice(i + q.length)}
+    </Fragment>
+  );
+}
+
 /**
- * Renders the search input and the result list as two siblings (CSS `order` places the detail card
+ * Renders the search field and the result list as two siblings (CSS `order` places the detail card
  * between them), so it must be mounted inside the sidebar's flex column.
  */
 export default function SearchPanel() {
@@ -19,25 +33,46 @@ export default function SearchPanel() {
 
   return (
     <>
-      <input
-        className="search"
-        placeholder="Search places..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <ul className="list">
+      <div className="search cims-field">
+        <input
+          aria-label="Search places"
+          placeholder="Search places..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <span className="cims-field__btn" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+            <circle cx="10.5" cy="10.5" r="6" />
+            <path d="M15 15l5 5" />
+          </svg>
+        </span>
+      </div>
+      <ul className="list cims-results">
+        {results.length > 0 && <li className="cims-results__group">Places</li>}
         {results.map((f) => (
           <li key={f.properties.id}>
             <button
-              className={f.properties.id === selectedId ? "active" : ""}
+              className="cims-result"
+              aria-selected={f.properties.id === selectedId}
               onClick={() => select({ kind: "place", id: f.properties.id })}
             >
-              {f.properties.name}
-              <small>{f.properties.category}</small>
+              <svg className="cims-glyph" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">
+                <rect x="5" y="3" width="10" height="18" />
+                <path d="M15 9h4v12h-4M8 7h1M11 7h1M8 11h1M11 11h1M8 15h1M11 15h1" />
+              </svg>
+              <span>
+                <span className="cims-result__title">{highlight(f.properties.name, query)}</span>
+                <br />
+                <span className="cims-result__meta">{f.properties.category}</span>
+              </span>
             </button>
           </li>
         ))}
-        {results.length === 0 && <li className="empty">No results</li>}
+        {results.length === 0 && (
+          <li>
+            <div className="cims-empty">No places match "{query.trim()}"</div>
+          </li>
+        )}
       </ul>
     </>
   );

@@ -9,11 +9,15 @@ export default function PlaceCard() {
   const place = selection?.kind === "place" ? places.features.find((f) => f.properties.id === selection.id) : undefined;
   if (!place) return null;
   return (
-    <div className="detail">
-      <h2>{place.properties.name}</h2>
-      <span className="tag">{place.properties.category}</span>
+    <section className="detail">
+      <h2 className="cims-card__name">{place.properties.name}</h2>
+      <p className="cims-card__alias">
+        <span className="cims-tag">{place.properties.category}</span>
+      </p>
       <p>{place.properties.description}</p>
-      <button onClick={() => select(null)}>Close</button>
-    </div>
+      <button className="cims-btn cims-btn--small" onClick={() => select(null)}>
+        Close
+      </button>
+    </section>
   );
 }
