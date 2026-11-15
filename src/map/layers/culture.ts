@@ -6,38 +6,54 @@ import { getCulture, setGuide, subscribeCulture } from "../../culture/store";
 import { loadMapLibre } from "../maplibre";
 import "../culture.css";
 
-interface Note { id: string; title: string; color: string; rotate: number; lng: number; lat: number; text: string; tip?: string; source_url: string; anywhere?: boolean }
+interface Note {
+  id: string; title: string; color: string; rotate: number; lng: number; lat: number; text: string; tip?: string; source_url: string;
+  anywhere?: boolean; emoji?: string; tag?: string; when?: string; where?: string; facts?: string[];
+}
 
-/** Build one sticky note element; tapping it flips between the title only and the full note. */
+/** Tiny element helper: tag, class and text in one call. */
+function el(tag: string, cls: string, text = ""): HTMLElement {
+  const e = document.createElement(tag);
+  e.className = cls;
+  if (text) e.textContent = text;
+  return e;
+}
+
+/** Build one sticky note: a closed post-it (emoji, title, tag) that opens into a full card (when, where, story, facts, tip, source). */
 function noteEl(n: Note): HTMLElement {
-  const el = document.createElement("button");
-  el.type = "button";
-  el.className = `culture-note culture-note--${n.color}`;
-  el.style.setProperty("--tilt", `${n.rotate}deg`);
-  el.setAttribute("aria-expanded", "false");
-  const title = document.createElement("strong");
-  title.className = "culture-note__title";
-  title.textContent = n.title;
-  const body = document.createElement("span");
-  body.className = "culture-note__body";
-  body.textContent = n.text;
-  const tip = document.createElement("em");
-  tip.className = "culture-note__tip";
-  tip.textContent = [n.anywhere ? "not one spot, pinned near the Green" : "", n.tip ? `psst: ${n.tip}` : ""].filter(Boolean).join(" · ");
-  const src = document.createElement("a");
-  src.className = "culture-note__src";
+  const root = el("button", `culture-note culture-note--${n.color}`);
+  (root as HTMLButtonElement).type = "button";
+  root.style.setProperty("--tilt", `${n.rotate}deg`);
+  root.setAttribute("aria-expanded", "false");
+  root.append(el("span", "culture-note__pin"));
+  const head = el("span", "culture-note__head");
+  head.append(el("span", "culture-note__emoji", n.emoji ?? "📝"), el("strong", "culture-note__title", n.title));
+  root.append(head);
+  if (n.tag) root.append(el("span", "culture-note__tag", n.tag));
+  const more = el("span", "culture-note__more");
+  if (n.when) { const r = el("span", "culture-note__row"); r.append(el("b", "", "When "), n.when); more.append(r); }
+  const where = n.where ?? (n.anywhere ? "Not one spot, it's everywhere" : "");
+  if (where) { const r = el("span", "culture-note__row"); r.append(el("b", "", "Where "), where); more.append(r); }
+  more.append(el("span", "culture-note__text", n.text));
+  if (n.facts?.length) {
+    const ul = el("ul", "culture-note__facts");
+    for (const f of n.facts) ul.append(el("li", "", f));
+    more.append(ul);
+  }
+  if (n.tip) more.append(el("em", "culture-note__tip", `psst: ${n.tip}`));
+  const src = el("a", "culture-note__src", "source") as HTMLAnchorElement;
   src.href = n.source_url;
   src.target = "_blank";
   src.rel = "noopener";
-  src.textContent = "source";
   src.addEventListener("click", (e) => e.stopPropagation());
-  el.append(title, body, tip, src);
-  el.addEventListener("click", () => {
-    const open = el.getAttribute("aria-expanded") !== "true";
-    el.setAttribute("aria-expanded", String(open));
-    el.parentElement?.style.setProperty("z-index", open ? "5" : "");
+  more.append(src);
+  root.append(more);
+  root.addEventListener("click", () => {
+    const open = root.getAttribute("aria-expanded") !== "true";
+    root.setAttribute("aria-expanded", String(open));
+    root.parentElement?.style.setProperty("z-index", open ? "5" : ""); // marker element sits above its neighbours while open
   });
-  return el;
+  return root;
 }
 
 /** MapLibre positions the marker element with an inline transform, so the styled (tilted, relative) note lives inside a plain wrapper. */
@@ -73,7 +89,7 @@ const culture: MapLayer = {
         for (const n of data.notes as Note[]) markers.push(new ml.Marker({ element: wrap(noteEl(n)), anchor: "bottom" }).setLngLat([n.lng, n.lat]).addTo(map));
         for (const a of data.areas) markers.push(new ml.Marker({ element: wrap(areaEl(a.label)), anchor: "center" }).setLngLat([a.lng, a.lat]).addTo(map));
         // Frame the whole campus top-down so every note is on screen (fitBounds proved unreliable here).
-        map.easeTo({ center: [-84.3965, 33.7762], zoom: window.innerWidth < 600 ? 14.3 : 14.9, pitch: 0, bearing: 0, duration: 1200 });
+        map.easeTo({ center: [-84.3975, 33.7766], zoom: window.innerWidth < 600 ? 14.1 : 14.8, pitch: 0, bearing: 0, duration: 1200 });
       });
     };
     const unsubscribe = subscribeCulture(sync);

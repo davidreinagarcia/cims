@@ -1,27 +1,49 @@
-/** @file Sticky-note look for the Culture layer: paper squares, tape, marker handwriting, tilted. Survey ink for text. */
+/** @file Sticky-note look for the Culture layer: paper post-its with tape or pin, folded corner, ruled lines and marker handwriting. Survey ink for text. */
 .culture-note {
-  --note: #F6E58D; position: relative; width: 150px; padding: 14px 12px 10px; border: 0; border-radius: 1px;
-  background: var(--note); color: #1C2733; text-align: left; cursor: pointer; transform: rotate(var(--tilt, 0deg));
-  box-shadow: 1px 3px 0 rgba(28, 39, 51, 0.25); font: 600 14px/1.25 "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive;
-  display: block;
+  --note: #FBE98A; --note-2: #F4D866; --fold: #E6C94E;
+  position: relative; display: block; width: 146px; padding: 16px 10px 10px; border: 0; border-radius: 1px 1px 14px 1px;
+  background: linear-gradient(165deg, var(--note) 0%, var(--note) 55%, var(--note-2) 100%); color: #1C2733; text-align: left; cursor: pointer;
+  transform: rotate(var(--tilt, 0deg)); transform-origin: 50% 0;
+  box-shadow: 0 1px 1px rgba(28, 39, 51, 0.25), 3px 6px 8px -2px rgba(28, 39, 51, 0.35);
+  font: 600 14px/1.25 "Bradley Hand", "Segoe Print", "Marker Felt", "Comic Sans MS", cursive;
 }
-.culture-note--pink { --note: #F4B9C5; }
-.culture-note--blue { --note: #B9D8F0; }
-.culture-note::before { /* tape */
-  content: ""; position: absolute; top: -8px; left: 50%; width: 46px; height: 14px; transform: translateX(-50%) rotate(-2deg);
-  background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(28, 39, 51, 0.15);
+.culture-note--pink { --note: #FAC3D0; --note-2: #F2A5B8; --fold: #E58FA6; }
+.culture-note--blue { --note: #C4E0F5; --note-2: #A3CDEB; --fold: #8BBBDD; }
+.culture-note::after { /* curled bottom-right corner */
+  content: ""; position: absolute; right: 0; bottom: 0; width: 18px; height: 18px; border-radius: 0 0 14px 0;
+  background: linear-gradient(135deg, transparent 50%, var(--fold) 50%); box-shadow: -2px -2px 3px rgba(28, 39, 51, 0.12);
 }
-.culture-note__title { display: block; font-size: 15px; }
-.culture-note__body, .culture-note__tip, .culture-note__src { display: none; margin-top: 6px; font-size: 13px; font-weight: 500; }
-.culture-note__tip { font-style: normal; color: #4a2f2f; }
+.culture-note__pin { /* tape */
+  position: absolute; top: -9px; left: 50%; width: 52px; height: 16px; transform: translateX(-50%) rotate(-3deg);
+  background: rgba(255, 255, 255, 0.6); border-left: 1px dashed rgba(28, 39, 51, 0.2); border-right: 1px dashed rgba(28, 39, 51, 0.2);
+  box-shadow: 0 1px 1px rgba(28, 39, 51, 0.12);
+}
+.culture-note--pink .culture-note__pin { /* red pushpin instead of tape */
+  top: -8px; width: 16px; height: 16px; border: 0; border-radius: 50%; transform: translateX(-50%);
+  background: radial-gradient(circle at 35% 30%, #ff8a8a, #c62828 60%); box-shadow: 1px 3px 3px rgba(28, 39, 51, 0.4);
+}
+.culture-note__head { display: flex; align-items: center; gap: 6px; }
+.culture-note__emoji { font-size: 22px; line-height: 1; filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.5)); }
+.culture-note__title { font-size: 16px; line-height: 1.15; background: linear-gradient(transparent 70%, rgba(255, 255, 255, 0.55) 70%); }
+.culture-note__tag {
+  display: inline-block; margin-top: 7px; padding: 1px 8px; border: 1.5px solid #1C2733; border-radius: 99px; transform: rotate(-2deg);
+  font: 700 10px/1.4 "IBM Plex Mono", ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.06em;
+}
+.culture-note__more { display: none; margin-top: 8px; }
+.culture-note__row { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 500; }
+.culture-note__row b { font-weight: 800; text-decoration: underline wavy rgba(28, 39, 51, 0.35); text-underline-offset: 3px; }
+.culture-note__text { display: block; margin: 8px 0; font-size: 13.5px; font-weight: 500; line-height: 1.35; }
+.culture-note__facts { margin: 0 0 8px; padding: 0 0 0 18px; list-style: none; font-size: 12.5px; font-weight: 500; line-height: 1.3; }
+.culture-note__facts li { position: relative; margin: 0 0 4px; }
+.culture-note__facts li::before { content: "★"; position: absolute; left: -16px; font-size: 10px; top: 2px; }
+.culture-note__tip { display: block; margin: 8px 0 6px; padding: 5px 8px; border-left: 3px solid #1C2733; background: rgba(255, 255, 255, 0.4); font-style: normal; font-size: 13px; }
 .culture-note__src { font-size: 11px; color: #1C2733; text-decoration: underline; }
-.culture-note[aria-expanded="true"] { width: 230px; z-index: 5; }
-.culture-note[aria-expanded="true"] .culture-note__body,
-.culture-note[aria-expanded="true"] .culture-note__tip,
-.culture-note[aria-expanded="true"] .culture-note__src { display: block; }
-.culture-note:focus-visible, .culture-area:focus-visible { outline: 2px solid #1C2733; outline-offset: 2px; }
+.culture-note[aria-expanded="true"] { width: 270px; max-height: 340px; overflow-y: auto; z-index: 5; padding-bottom: 18px; }
+.culture-note[aria-expanded="true"] .culture-note__more { display: block; }
+.culture-note:hover:not([aria-expanded="true"]) { transform: rotate(0deg) scale(1.05); }
+.culture-note:focus-visible, .culture-area:focus-visible { outline: 2px solid #1C2733; outline-offset: 3px; }
 .culture-area {
-  padding: 4px 10px; border: 2px dashed #1C2733; border-radius: 3px; background: rgba(243, 238, 226, 0.85); color: #1C2733;
-  font: 700 16px/1.2 "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive; cursor: pointer; transform: rotate(-2deg);
+  padding: 4px 12px; border: 2px dashed #1C2733; border-radius: 4px; background: rgba(243, 238, 226, 0.9); color: #1C2733; cursor: pointer;
+  font: 700 17px/1.2 "Bradley Hand", "Segoe Print", "Marker Felt", "Comic Sans MS", cursive; transform: rotate(-2deg);
 }
-@media (prefers-reduced-motion: no-preference) { .culture-note { transition: width 0.15s ease; } }
+@media (prefers-reduced-motion: no-preference) { .culture-note { transition: transform 0.15s ease, width 0.15s ease; } }
