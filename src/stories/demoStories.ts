@@ -4,11 +4,13 @@ import type { Story } from "./types";
 
 /** Where the fake activity is, and how much: real building ids, invented story counts. */
 const HOTSPOTS: { buildingId: string; count: number; hue: number }[] = [
-  { buildingId: "sigma-chi", count: 10, hue: 210 },
-  { buildingId: "kappa-alpha", count: 7, hue: 28 },
-  { buildingId: "beta-theta-pi", count: 5, hue: 150 },
-  { buildingId: "phi-delta-theta", count: 4, hue: 280 },
-  { buildingId: "alpha-tau-omega", count: 2, hue: 100 },
+  { buildingId: "lambda-chi-alpha", count: 10, hue: 210 },
+  { buildingId: "kappa-alpha", count: 8, hue: 28 },
+  { buildingId: "sigma-chi", count: 6, hue: 150 },
+  { buildingId: "beta-theta-pi", count: 5, hue: 280 },
+  { buildingId: "phi-delta-theta", count: 4, hue: 100 },
+  { buildingId: "alpha-tau-omega", count: 3, hue: 340 },
+  { buildingId: "delta-tau-delta", count: 2, hue: 190 },
 ];
 const CAPTIONS = ["Quiet corner on floor 2", "Line is out the door", "Free pizza inside", "Sunset from here", "Study group, come join", "Great light today", undefined, undefined];
 
