@@ -1,7 +1,7 @@
 /** @file "Add post" dialog for the Bulletin: title, description, campus-time window, a required registered building or room (search menu, no free text) and an optional poster. */
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import type { Session } from "../../auth/types";
-import { audienceFor, createUserPost, type UserPost } from "../../lib/bulletinPosts";
+import { audienceFor, createUserPost, type PostSection, type UserPost } from "../../lib/bulletinPosts";
 import { loadBuildings, loadedBuildings, type BuildingIndex } from "../../lib/buildings";
 import { campusDateTime } from "../../lib/events";
 import { photoToDataUrl } from "../../lib/photo";
@@ -24,8 +24,8 @@ function describePlace(result: CampusSearchResult): string {
 const onlyRegistered = (result: CampusSearchResult) => result.kind === "building" || result.kind === "room";
 
 /** Modal form that creates a post for the signed-in account; reports the saved post, or closes without one. */
-export default function PostComposer({ session, onDone, onClose }: {
-  session: Session; onDone: (post: UserPost) => void; onClose: () => void;
+export default function PostComposer({ session, section = "general", onDone, onClose }: {
+  session: Session; section?: PostSection; onDone: (post: UserPost) => void; onClose: () => void;
 }) {
   const root = useRef<HTMLDialogElement>(null);
   const file = useRef<HTMLInputElement>(null);
@@ -65,7 +65,7 @@ export default function PostComposer({ session, onDone, onClose }: {
     setBusy(true);
     try {
       const post = await createUserPost(session, {
-        title: title.trim(), description: description.trim() || undefined, startsAt, endsAt, poster: poster ?? undefined,
+        section, title: title.trim(), description: description.trim() || undefined, startsAt, endsAt, poster: poster ?? undefined,
         location: { kind: place.kind === "room" ? "room" : "building", id: place.id, name: place.name, buildingId },
       });
       onDone(post);
@@ -82,7 +82,7 @@ export default function PostComposer({ session, onDone, onClose }: {
       onClick={(event) => { if (event.target === root.current) onClose(); }}>
       <form className="composer__form" onSubmit={submit} noValidate>
         <h3 id="composer-title" className="composer__title">New post</h3>
-        <p className="composer__who">{audience === "org" ? "Posting as an organization: it appears under Orgs." : "Posting as a person: it appears under People."}</p>
+        <p className="composer__who">{section === "alumni" ? "Posting to Alumni: alumni visits to campus and alumni-oriented events." : audience === "org" ? "Posting as an organization: it appears under Orgs." : "Posting as a person: it appears under People."}</p>
         <label className="composer__field"><span className="cims-caps">Name</span>
           <span className="cims-field"><input value={title} maxLength={80} onChange={(e) => setTitle(e.target.value)} autoFocus /></span></label>
         <label className="composer__field"><span className="cims-caps">Description</span>

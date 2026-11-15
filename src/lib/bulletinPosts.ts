@@ -7,30 +7,33 @@ import { rest, withFallback } from "./supabase";
 /** Who wrote a post: a registered organization account or a person (student account). */
 export type Audience = "org" | "person";
 
+/** Which part of the bulletin a post belongs to: the Orgs and People tabs ("general") or the Alumni tab. */
+export type PostSection = "general" | "alumni";
+
 /** A registered place a post is tied to: a building footprint or a room inside an indoor building ("buildingId:spaceId"). */
 export interface PostLocation { kind: "building" | "room"; id: string; name: string; buildingId: string }
 
 /** One saved post. Times are instants; the poster is a downscaled JPEG data URL. */
 export interface UserPost {
   id: string; accountId: string; audience: Audience; authorName: string; title: string; description?: string;
-  startsAt: Date; endsAt: Date; location: PostLocation; poster?: string; createdAt: Date;
+  startsAt: Date; endsAt: Date; location: PostLocation; poster?: string; createdAt: Date; section: PostSection;
 }
 
 /** What the composer hands over; the server (or the local fallback) decides the audience from the account role. */
 export interface UserPostInput {
-  title: string; description?: string; startsAt: Date; endsAt: Date; location: PostLocation; poster?: string;
+  title: string; description?: string; startsAt: Date; endsAt: Date; location: PostLocation; poster?: string; section?: PostSection;
 }
 
 interface Row {
   id: string; account_id: string; audience: Audience; author_name: string; title: string; description: string | null;
   starts_at: string; ends_at: string; location_kind: "building" | "room"; location_id: string;
-  location_name: string; building_id: string; poster_data: string | null; created_at: string;
+  location_name: string; building_id: string; poster_data: string | null; created_at: string; section: PostSection;
 }
 
 const KEY = "cims.bulletin.posts.v1";
 const fromRow = (r: Row): UserPost => ({
   id: r.id, accountId: r.account_id, audience: r.audience, authorName: r.author_name, title: r.title, description: r.description ?? undefined,
-  startsAt: new Date(r.starts_at), endsAt: new Date(r.ends_at), poster: r.poster_data ?? undefined, createdAt: new Date(r.created_at),
+  startsAt: new Date(r.starts_at), endsAt: new Date(r.ends_at), poster: r.poster_data ?? undefined, createdAt: new Date(r.created_at), section: r.section ?? "general",
   location: { kind: r.location_kind, id: r.location_id, name: r.location_name, buildingId: r.building_id },
 });
 
@@ -74,12 +77,13 @@ export async function createUserPost(session: Session, input: UserPostInput): Pr
       starts_at: input.startsAt.toISOString(), ends_at: input.endsAt.toISOString(),
       location_kind: input.location.kind, location_id: input.location.id, location_name: input.location.name,
       building_id: input.location.buildingId, poster_data: input.poster ?? null,
+      ...(input.section === "alumni" ? { section: "alumni" } : {}),
     } });
     return fromRow(row);
   }, async () => {
     const post: UserPost = { id: `LOCAL-${crypto.randomUUID().slice(0, 8)}`, accountId: session.accountId, audience, authorName: session.displayName,
       title: input.title, description: input.description || undefined, startsAt: input.startsAt, endsAt: input.endsAt,
-      location: input.location, poster: input.poster, createdAt: new Date() };
+      location: input.location, poster: input.poster, createdAt: new Date(), section: input.section ?? "general" };
     writeLocal(KEY, [...readLocal<unknown[]>(KEY, []), post]);
     return post;
   });

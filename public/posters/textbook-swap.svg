@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img" aria-label="Textbook Swap (demo poster)">
+<rect width="600" height="800" fill="#713f12"/><rect x="24" y="24" width="552" height="752" fill="none" stroke="#0f766e" stroke-width="6"/>
+<rect x="150" y="150" width="300" height="190" fill="none" stroke="#0f766e" stroke-width="12"/><rect x="185" y="185" width="230" height="12" fill="#0f766e"/><rect x="185" y="225" width="200" height="12" fill="#0f766e"/><rect x="185" y="265" width="170" height="12" fill="#0f766e"/><rect x="185" y="305" width="140" height="12" fill="#0f766e"/>
+<text x="300" y="520" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" font-size="78" font-weight="900" letter-spacing="2" fill="#fffbeb">TEXTBOOK</text><text x="300" y="604" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" font-size="78" font-weight="900" letter-spacing="2" fill="#fffbeb">SWAP</text>
+<rect x="190" y="664" width="220" height="6" fill="#0f766e"/>
+<text x="300" y="718" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="#fffbeb">Leave one, take one</text>
+<text x="300" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" letter-spacing="4" fill="#0f766e">HOSTED BY A STUDENT · DEMO</text>
+</svg>

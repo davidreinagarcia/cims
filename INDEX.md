@@ -38,6 +38,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`public/culture/`](public/culture/INDEX.md): Hand-drawn doodles for the GT Culture sticky notes and the "big sib" welcome letter, one per note id. AI-gene…
   - [`public/photos/`](public/photos/INDEX.md): Static photos served by the app; each one is credited in a data file under src/data/.
     - [`public/photos/buildings/`](public/photos/buildings/INDEX.md): Building photos from Wikimedia Commons (free licenses), one per building id; credits in src/data/building-pho…
+  - [`public/posters/`](public/posters/INDEX.md): _no description yet_
 - [`scripts/`](scripts/INDEX.md): Dev tooling run with Node (no deps): index generator, Claude hooks, data fetchers.
   - [`scripts/fixtures/`](scripts/fixtures/INDEX.md): Saved official GT tracker responses for reproducible offline transit imports.
 - [`server/`](server/INDEX.md): Real-time alerts backend (Node, no dependencies); see README.md.
@@ -60,7 +61,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`src/panels/`](src/panels/INDEX.md): Panels, one folder per panel, shown in the floating card / bottom sheet. Mount new ones in shell/Shell.tsx.
     - [`src/panels/account/`](src/panels/account/INDEX.md): Account chip and accessible DEMO sign-in theater using the existing survey map design.
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
-    - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Upcoming events in campus time (Orgs and People tabs), posting with a required registered building or room an…
+    - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Upcoming events in campus time (Orgs, People and Alumni tabs), posting with a required registered building or…
     - [`src/panels/buses/`](src/panels/buses/INDEX.md): Buses panel (T-42): GT bus routes, live next-bus times, trip options to a destination and the Stingerette.
     - [`src/panels/culture/`](src/panels/culture/INDEX.md): West vs East guide dialog for people deciding where to live (opens from the Culture layer and the layers pane…
     - [`src/panels/layers/`](src/panels/layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.

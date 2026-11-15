@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img" aria-label="Robotics Workshop (demo poster)">
+<rect width="600" height="800" fill="#0b2a4a"/><rect x="24" y="24" width="552" height="752" fill="none" stroke="#eab000" stroke-width="6"/>
+<circle cx="300" cy="230" r="120" fill="none" stroke="#eab000" stroke-width="28" stroke-dasharray="34 18"/><circle cx="300" cy="230" r="55" fill="#eab000"/>
+<text x="300" y="520" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" font-size="78" font-weight="900" letter-spacing="2" fill="#ffffff">ROBOTICS</text><text x="300" y="604" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" font-size="78" font-weight="900" letter-spacing="2" fill="#ffffff">WORKSHOP</text>
+<rect x="190" y="664" width="220" height="6" fill="#eab000"/>
+<text x="300" y="718" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="#ffffff">Build it. Break it. Fix it.</text>
+<text x="300" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" letter-spacing="4" fill="#eab000">DEMO ROBOTICS CLUB · DEMO</text>
+</svg>
