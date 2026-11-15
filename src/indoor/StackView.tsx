@@ -46,7 +46,9 @@ export default function StackView({ building, levels, activeId, selected, route,
   const n = ordered.length;
   // Reserve the aligned label column and fit the entire projected stack, including perspective and slab depth.
   const maxGap = narrow ? 100 : n <= 3 ? 210 : 145;
-  const shelfHeight = Math.min((size.h * 0.8 - 14) / Math.max(1, n), maxGap * 0.8);
+  // Plates may overlap in projection (like an exploded axonometric), so tall stacks keep readable plates.
+  const shelves = Math.max(1, 1 + (n - 1) * 0.62);
+  const shelfHeight = Math.min((size.h * 0.8 - 14) / shelves, maxGap * 0.8 / 0.62);
   const plateW = Math.max(1, Math.min(760, shelfHeight / 0.53 * drawingW / drawingH, (size.w - labelW - margin * 3) * 0.92));
   const plateH = plateW * drawingH / drawingW;
   const gap = Math.max(1, Math.min(maxGap, (size.h * 0.88 - plateH * 0.53 - 14) / (Math.max(1, n - 1) * 0.85)));
@@ -153,8 +155,9 @@ export default function StackView({ building, levels, activeId, selected, route,
         data-active={level.id === activeId || undefined} style={{ left: labelX, top: anchors[`label:${level.id}`].y, width: labelW }}>
         <button type="button" className="stack__level" aria-pressed={level.id === activeId} aria-label={`${level.name}, ${roomCount(level)} spaces${level.id === activeId ? ", Open plan" : ""}`}
           onClick={() => level.id === activeId ? onOpenPlan() : onLevel(level.id)}>
-          <span className="stack__label-heading"><span className="cims-caps">{level.name}</span>{level.id === activeId && <small className="cims-mono" aria-hidden="true">{roomCount(level)}</small>}</span>
-          {level.id === activeId ? <span className="stack__open-plan">Open plan <span aria-hidden="true">↗</span></span> : <small className="cims-mono">{roomCount(level)} spaces</small>}
+          <span className="stack__label-heading"><span className="cims-caps">{level.name}</span></span>
+          <small className="cims-mono">{roomCount(level)} spaces</small>
+          {level.id === activeId && <span className="stack__open-plan">Open plan <span aria-hidden="true">↗</span></span>}
         </button>
       </div>)}
     </>}
