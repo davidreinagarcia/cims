@@ -7,6 +7,18 @@ const URL_ = (import.meta.env.VITE_SUPABASE_URL as string | undefined) ?? "https
 const ANON = (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined) ??
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjYWZidHp6a3phZ29veGtpbnZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ3MTY3ODksImV4cCI6MjExMDI5Mjc4OX0.u9W6Zu6_9vAc_UnDSlL10tlrHNvgQ1IF_yTeZrmpAsc";
 
+/** The backend could not be reached (network, 5xx, sign-in failure): callers fall back to local mocks. */
+export class BackendDown extends Error {}
+
+/** Runs `run` on Supabase; only when the backend is unreachable does it serve `local` instead (rule rejections like "room already booked" still reach the user). */
+export async function withFallback<T>(run: () => Promise<T>, local: () => Promise<T>): Promise<T> {
+  try { return await run(); } catch (e) {
+    if (!(e instanceof BackendDown)) throw e;
+    console.warn("[cims] backend unavailable, using local data:", e.message);
+    return local();
+  }
+}
+
 const AUTH_KEY = "cims.supabase.auth.v1";
 interface Auth { access_token: string; refresh_token: string; expires_at: number; user: { id: string } }
 
@@ -24,8 +36,8 @@ function saveAuth(a: Auth) {
 async function authCall(path: string, body: unknown): Promise<Auth> {
   const res = await fetch(`${URL_}/auth/v1/${path}`, {
     method: "POST", headers: { apikey: ANON, "Content-Type": "application/json" }, body: JSON.stringify(body),
-  });
-  if (!res.ok) throw new Error(`Supabase auth ${res.status}`);
+  }).catch((e) => { throw new BackendDown(String(e)); });
+  if (!res.ok) throw new BackendDown(`auth ${res.status}`);
   const a = await res.json();
   saveAuth({ ...a, expires_at: a.expires_at ?? Math.floor(Date.now() / 1000) + (a.expires_in ?? 3600) });
   return auth as Auth;
@@ -58,8 +70,14 @@ export async function rest<T>(path: string, init: { method?: string; body?: unkn
       ...(init.prefer ? { Prefer: init.prefer } : {}),
     },
     body: init.body === undefined ? undefined : JSON.stringify(init.body),
-  });
-  if (!res.ok) throw new Error(`Supabase ${res.status}: ${(await res.text()).slice(0, 200)}`);
+  }).catch((e) => { throw new BackendDown(String(e)); });
+  if (!res.ok) {
+    const text = await res.text();
+    if (res.status >= 500 || res.status === 401) throw new BackendDown(`${res.status} ${text.slice(0, 120)}`);
+    let message = text.slice(0, 200);
+    try { message = JSON.parse(text).message ?? message; } catch { /* plain text */ }
+    throw new Error(message); // a rule the server enforces (rate limit, double booking...): show it, do not fall back
+  }
   const text = await res.text();
   return (text ? JSON.parse(text) : null) as T;
 }
@@ -72,8 +90,8 @@ export async function upload(bucket: "stories" | "reports", blob: Blob, ext: str
     method: "POST",
     headers: { apikey: ANON, Authorization: `Bearer ${s.access_token}`, "Content-Type": blob.type || "application/octet-stream" },
     body: blob,
-  });
-  if (!res.ok) throw new Error(`Supabase storage ${res.status}`);
+  }).catch((e) => { throw new BackendDown(String(e)); });
+  if (!res.ok) throw new BackendDown(`storage ${res.status}`);
   return path;
 }
 

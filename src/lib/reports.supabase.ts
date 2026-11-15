@@ -2,7 +2,7 @@
 import { routeFor, type IssueCategory, type Team } from "./issue-routing";
 import type { IssueReport, NewIssueReport, ReportLocation, ReportStatus, ReportsService, StatusEvent } from "./reports";
 import { metersBetween, samePlace } from "./reports.mock";
-import { accountId, publicUrl, rest, upload } from "./supabase";
+import { accountId, publicUrl, rest, upload, withFallback } from "./supabase";
 
 interface Row {
   id: string; category: IssueCategory; team: Team;
@@ -43,9 +43,7 @@ async function toReports(rows: Row[]): Promise<IssueReport[]> {
 
 /** Supabase-backed service; any network/backend failure is served by `fallback` so the demo never dies (ADR-0005). */
 export function createSupabaseReportsService(fallback: ReportsService): ReportsService {
-  const safe = async <T>(run: () => Promise<T>, local: () => Promise<T>): Promise<T> => {
-    try { return await run(); } catch (e) { console.warn("[cims] backend unavailable, using local reports:", e); return local(); }
-  };
+  const safe = withFallback;
   const one = async (id: string) => (await toReports(await rest<Row[]>(`reports?select=*&id=eq.${encodeURIComponent(id)}`)))[0] ?? null;
 
   return {

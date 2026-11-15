@@ -1,6 +1,7 @@
 /** @file Room reservation contracts (T-60/T-61/F-20) and the one place that picks the backend adapter. Kendeda + CULC only. */
 import type { AvailabilitySlot } from "../indoor/types";
 import { createLocalReservationsService } from "./reservations.mock";
+import { createSupabaseReservationsService } from "./reservations.supabase";
 
 /** 30 minutes: both the grid's cell size and the minimum booking length. */
 export const SLOT_MINUTES = 30;
@@ -89,24 +90,20 @@ export function checkinDeadline(reservation: Reservation): Date {
 }
 
 /**
- * The interval a reservation currently blocks on its room, for {@link isRoomFree}/{@link findFreeRooms}
- * (see `indoor/availability.ts`). Checked in, it blocks its full booked range. Not yet checked in, it
- * blocks only up to {@link checkinDeadline} -- the same "no now parameter, no cleanup job" trick T-60's
- * open-ended mode used: once that deadline passes, this window's `end` is in the past, so
- * {@link isReservationActive} (and therefore the grid/availability engine) naturally treats the room
- * as free again with nothing having to run a timer. Returns null once cancelled.
+ * The interval a reservation blocks on its room: its whole booked range, or null once cancelled.
+ * Whether it still counts is decided by {@link isReservationActive} (a booking nobody checks in to
+ * stops counting once its check-in window closes, so the room frees itself with no timer or cleanup job).
  */
 export function reservationBusyWindow(reservation: Reservation): AvailabilitySlot | null {
   if (reservation.cancelledAt) return null;
-  const end = reservation.checkedInAt ? reservation.end : checkinDeadline(reservation).toISOString();
-  return { room: reservation.room, start: reservation.start, end };
+  return { room: reservation.room, start: reservation.start, end: reservation.end };
 }
 
-/** Whether a reservation is still occupying its room at `now` (not cancelled, checked in before its window closed if it has, and not past its end/no-show deadline). */
+/** Whether a reservation is still occupying its room at `now`: not cancelled, not past its end, and either checked in or still inside its check-in window (a no-show is released). */
 export function isReservationActive(reservation: Reservation, now: Date): boolean {
   if (reservation.cancelledAt) return false;
-  const window = reservationBusyWindow(reservation);
-  return window !== null && now.getTime() < Date.parse(window.end);
+  if (now.getTime() >= Date.parse(reservation.end)) return false;
+  return reservation.checkedInAt !== null || now.getTime() < checkinDeadline(reservation).getTime();
 }
 
 /** Where one reservation stands right now, for the "My reservations here" UI -- derived purely from timestamps, same spirit as {@link reservationBusyWindow}. */
@@ -124,5 +121,5 @@ export function reservationStatus(reservation: Reservation, now: Date): Reservat
   return nowMs >= endMs - END_REMINDER_MINUTES * 60_000 ? "ending-soon" : "checked-in";
 }
 
-/** The reservations backend used by the app. Swap the adapter here (and only here) when ADR-0005 is decided. */
-export const reservationsService: ReservationsService = createLocalReservationsService();
+/** The reservations backend used by the app. Supabase, with the local mock as offline fallback. */
+export const reservationsService: ReservationsService = createSupabaseReservationsService(createLocalReservationsService());

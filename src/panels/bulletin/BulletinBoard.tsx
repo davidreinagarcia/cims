@@ -1,5 +1,6 @@
 /** @file Full-screen Campus Bulletin: cork board with masonry note cards, type filters with counts, search and deep link. */
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { loadInterests, setInterest } from "../../lib/bulletinInterests";
 import { POST_TYPES, bulletinPosts, countByType, filterPosts, type BulletinPost, type PostType } from "../../lib/bulletin";
 import { Icon } from "../../shell/icons";
 import { useAuth } from "../../state/auth";
@@ -11,16 +12,8 @@ const FILLS = ["var(--white)", "var(--room-classroom)", "var(--room-study)", "va
 const TILTS = [-1.2, 0.9, -0.4, 1.5, -1.5, 0.5, 1.1];
 const PINS = ["var(--navy)", "var(--cat-issues)", "var(--gold-ink)", "var(--cat-orgs)"];
 const FOCUSABLE = "button:not([disabled]), input, a[href], [tabindex]:not([tabindex='-1'])";
-const INTERESTS_KEY = "cims.bulletin.interests.v1";
 const today = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", month: "short", day: "numeric", year: "numeric" });
 const typeLabel = (type: PostType) => POST_TYPES.find((item) => item.id === type)!.label;
-
-function readInterests(): Set<string> {
-  try {
-    const saved: unknown = JSON.parse(localStorage.getItem(INTERESTS_KEY) ?? "[]");
-    return new Set(Array.isArray(saved) ? saved.filter((id): id is string => typeof id === "string") : []);
-  } catch { return new Set(); }
-}
 
 function CorkTexture() {
   return (
@@ -47,8 +40,8 @@ function Pin({ color }: { color: string }) {
   );
 }
 
-function NoteCard({ post, index, interested, onInterest, onShow }: {
-  post: BulletinPost; index: number; interested: boolean; onInterest: () => void; onShow: (placeId: string) => void;
+function NoteCard({ post, index, interested, count, onInterest, onShow }: {
+  post: BulletinPost; index: number; interested: boolean; count: number; onInterest: () => void; onShow: (placeId: string) => void;
 }) {
   const style = { "--fill": FILLS[index % FILLS.length], "--tilt": `${TILTS[index % TILTS.length]}deg` } as CSSProperties;
   return (
@@ -73,14 +66,14 @@ function NoteCard({ post, index, interested, onInterest, onShow }: {
             </button>
           )}
           <button type="button" className="board-card__interest" aria-pressed={interested}
-            aria-label={`Interested in ${post.title}`} onClick={onInterest}>Interested</button>
+            aria-label={`Interested in ${post.title}`} onClick={onInterest}>Interested{count > 0 ? ` · ${count}` : ""}</button>
         </div>
       </article>
     </li>
   );
 }
 
-/** Modal cork board with local interests; the shell owns its URL, type and return focus. */
+/** Modal cork board with shared interests; the shell owns its URL, type and return focus. */
 export default function BulletinBoard({ type, onType, onClose }: {
   type: PostType | "all"; onType: (type: PostType | "all") => void; onClose: () => void;
 }) {
@@ -90,7 +83,9 @@ export default function BulletinBoard({ type, onType, onClose }: {
   const [query, setQuery] = useState("");
   const [notice, setNotice] = useState("");
   const [now, setNow] = useState(() => new Date());
-  const [interests, setInterests] = useState(readInterests);
+  const [interests, setInterests] = useState<Set<string>>(new Set());
+  const [interestCounts, setCounts] = useState<Record<string, number>>({});
+  useEffect(() => { let alive = true; void loadInterests().then((s) => { if (alive) { setInterests(s.mine); setCounts(s.counts); } }); return () => { alive = false; }; }, []);
   const [onlyInterests, setOnlyInterests] = useState(false);
 
   useEffect(() => {
@@ -112,12 +107,12 @@ export default function BulletinBoard({ type, onType, onClose }: {
   const chips: { id: PostType | "all"; label: string }[] = [{ id: "all", label: "All" }, ...POST_TYPES];
 
   const toggleInterest = (id: string) => {
+    const on = !interests.has(id);
     const next = new Set(interests);
-    if (next.has(id)) next.delete(id); else next.add(id);
+    if (on) next.add(id); else next.delete(id);
     setInterests(next);
-    // TODO T-22: add shared interest counts only when a backend provides them.
-    try { localStorage.setItem(INTERESTS_KEY, JSON.stringify([...next])); }
-    catch { setNotice("Interests are available for this visit. This browser could not save them on this device."); }
+    setCounts((c) => ({ ...c, [id]: Math.max(0, (c[id] ?? 0) + (on ? 1 : -1)) }));
+    setInterest(id, on).catch(() => setNotice("Could not save that right now. Try again in a moment."));
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {
@@ -133,7 +128,7 @@ export default function BulletinBoard({ type, onType, onClose }: {
   };
 
   const emptyText = onlyInterests
-    ? "No interested posts match these filters. Mark a post as Interested to save it on this device."
+    ? "No interested posts match these filters. Mark a post as Interested to save it to your account."
     : query.trim()
     ? `No ${type === "all" ? "" : `${typeLabel(type)} `}posts match “${query.trim()}”`
     : type === "all" ? "No posts yet" : `No ${typeLabel(type)} posts yet`;
@@ -176,7 +171,7 @@ export default function BulletinBoard({ type, onType, onClose }: {
           : (
             <ul className="board__grid" aria-label="Posts">
               {shown.map((post, index) => (
-                <NoteCard key={post.id} post={post} index={index} interested={interests.has(post.id)}
+                <NoteCard key={post.id} post={post} index={index} interested={interests.has(post.id)} count={interestCounts[post.id] ?? 0}
                   onInterest={() => toggleInterest(post.id)}
                   onShow={(placeId) => { select({ kind: "place", id: placeId }); onClose(); }} />
               ))}

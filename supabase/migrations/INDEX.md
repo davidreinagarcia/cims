@@ -8,5 +8,7 @@
 
 - [`20261115000000_reports_and_stories.sql`](20261115000000_reports_and_stories.sql): _no summary_
 - [`20261115000100_sample_reports.sql`](20261115000100_sample_reports.sql): _no summary_
+- [`20261115000200_rooms_and_bulletin.sql`](20261115000200_rooms_and_bulletin.sql): _no summary_
+- [`20261115000300_booking_fixes.sql`](20261115000300_booking_fixes.sql): _no summary_
 
 <!-- AUTO:END -->
