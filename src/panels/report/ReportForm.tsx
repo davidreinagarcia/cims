@@ -1,7 +1,10 @@
 /** @file Step 1 of the report flow: location, category grid with "Routes to" tag, optional equipment, description and photo. */
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { SAFETY_CATEGORY, hasVerifiedRouting, issueRoutes, routeFor, type IssueCategory } from "../../lib/issue-routing";
+import { nearestPlace } from "../../lib/nearestPlace";
+import { photoToDataUrl } from "../../lib/photo";
 import { places } from "../../lib/places";
+import { useGpsFix } from "../../lib/useGpsFix";
 import type { NewIssueReport, ReportLocation } from "../../lib/reports";
 import { locationParts } from "./location";
 
@@ -13,21 +16,6 @@ export interface ReportFormProps {
   draft: NewIssueReport | null;
   busy: boolean;
   onContinue: (input: NewIssueReport) => void;
-}
-
-const PHOTO_MAX_PX = 800;
-
-/** Shrinks a photo to a small JPEG data URL so the prototype can keep it in localStorage. */
-async function photoToDataUrl(file: File): Promise<string> {
-  const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, PHOTO_MAX_PX / Math.max(bitmap.width, bitmap.height));
-  const canvas = document.createElement("canvas");
-  canvas.width = Math.round(bitmap.width * scale);
-  canvas.height = Math.round(bitmap.height * scale);
-  const context = canvas.getContext("2d");
-  if (!context) throw new Error("no canvas");
-  context.drawImage(bitmap, 0, 0, canvas.width, canvas.height);
-  return canvas.toDataURL("image/jpeg", 0.7);
 }
 
 /** The details form (PRD US-10.1). Safety hazard shows the emergency banner before everything else. */
@@ -45,6 +33,19 @@ export default function ReportForm({ location, draft, busy, onContinue }: Report
   const fileRef = useRef<HTMLInputElement>(null);
 
   const bannerRef = useRef<HTMLDivElement>(null);
+
+  // GPS: fills the building from where the person is standing, or keeps an outdoor pin when no building is close.
+  const gps = useGpsFix();
+  const [pin, setPin] = useState<{ point: [number, number]; accuracyM: number } | null>(null);
+  const [gpsNote, setGpsNote] = useState<string | null>(null);
+  useEffect(() => {
+    if (!gps.fix) return;
+    const point: [number, number] = [gps.fix.lng, gps.fix.lat];
+    setPin({ point, accuracyM: Math.round(gps.fix.accuracy) });
+    const near = nearestPlace(point);
+    if (near) { setBuildingId(near.id); setGpsNote(`Nearest building: ${near.name} (about ${near.distanceM} m).`); }
+    else { setBuildingId(""); setGpsNote("No campus building is close, so this will be reported as an outdoor spot."); }
+  }, [gps.fix]);
 
   const route = category ? routeFor(category) : null;
   const isSafety = category === SAFETY_CATEGORY;
@@ -73,14 +74,14 @@ export default function ReportForm({ location, draft, busy, onContinue }: Report
   function onSubmit(event: FormEvent) {
     event.preventDefault();
     const place = places.features.find((f) => f.properties.id === buildingId);
-    if (manual && !place) return fail("Pick the building where the problem is.");
+    if (manual && !place && !pin) return fail("Pick the building where the problem is, or use your location.");
     if (!category) return fail("Pick a category.");
     const where: ReportLocation = location ?? {
-      buildingId: place!.properties.id,
-      buildingName: place!.properties.name,
-      floor: floor.trim() || null,
-      room: room.trim() || null,
-      point: null,
+      buildingId: place?.properties.id ?? null,
+      buildingName: place?.properties.name ?? null,
+      floor: place ? floor.trim() || null : null,
+      room: place ? room.trim() || null : null,
+      point: pin?.point ?? null,
     };
     onContinue({ category, location: where, equipment, description, photoDataUrl: photo });
   }
@@ -117,8 +118,16 @@ export default function ReportForm({ location, draft, busy, onContinue }: Report
           </p>
         ) : (
           <div className="cims-report__fields">
+            <div className="cims-report__gps">
+              <button type="button" className="cims-btn cims-btn--block" onClick={gps.request} disabled={gps.status === "locating"}>
+                {gps.status === "locating" ? "Finding you…" : pin ? "Update my location" : "Use my location"}
+              </button>
+              <p className="cims-muted" role="status" aria-live="polite">
+                {gps.status === "error" ? gps.message : pin ? `GPS fix attached (±${pin.accuracyM} m). ${gpsNote ?? ""}` : "Attaches your GPS position so staff can find the spot."}
+              </p>
+            </div>
             <label className="cims-report__label">
-              <span>Building <span className="cims-muted">(required)</span></span>
+              <span>Building <span className="cims-muted">{pin ? "(optional with GPS)" : "(required)"}</span></span>
               <select className="cims-report__control" value={buildingId} onChange={(e) => setBuildingId(e.target.value)}>
                 <option value="">Pick a building…</option>
                 {places.features.map((f) => (

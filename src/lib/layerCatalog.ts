@@ -46,6 +46,21 @@ export const LAYER_CATALOG: LayerCategory[] = [
   { id: "transport", label: "Transport", cssVar: "--cat-transport", subtypes: [] },
 ];
 
+/** A live overlay (not made of places): toggled in the layer panel like a layer, but has no pins, counts or sub-types. */
+export interface OverlayLayer {
+  /** "alerts" is kept in the shared layer filters; "stories-heat" is owned by the stories store. */
+  id: "alerts" | "stories-heat";
+  label: string;
+  hint: string;
+  cssVar: string;
+}
+
+/** Live overlays shown under the place layers in the layer panel. */
+export const OVERLAY_CATALOG: OverlayLayer[] = [
+  { id: "alerts", label: "Police alerts", hint: "Danger zones drawn by GTPD", cssVar: "--cat-issues" },
+  { id: "stories-heat", label: "Social heat map", hint: "Where stories are being posted", cssVar: "--cat-orgs" },
+];
+
 /** Resolved color of a layer (reads the design token, so the tokens stay the single source of truth). */
 export function categoryColor(layer: LayerCategory, fallback = "#1C2733"): string {
   if (typeof document === "undefined") return fallback;

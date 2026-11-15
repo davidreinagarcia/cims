@@ -7,6 +7,7 @@ Report-an-issue flow (F-10) and staff queue; mounted in Shell's "report" slot (s
 **Files**
 
 - [`DuplicateList.tsx`](DuplicateList.tsx): Step 2 of the report flow: open reports for the same place and category, with "Me too +1". · exports `DuplicateList`
+- [`PoliceReportFlow.tsx`](PoliceReportFlow.tsx): Citizen "Notify police" flow: GPS location, what's happening, optional photo, sent live to the GTPD console,… · exports `PoliceReportFlow`
 - [`ReportFlow.tsx`](ReportFlow.tsx): The 3-step report flow: details → "Already reported?" → status. Talks to ReportsService only. · exports `ReportFlow`
 - [`ReportForm.tsx`](ReportForm.tsx): Step 1 of the report flow: location, category grid with "Routes to" tag, optional equipment, description and… · exports `ReportForm`
 - [`ReportStatusView.tsx`](ReportStatusView.tsx): Step 3 of the report flow: confirmation, status timeline (Open → Routed → In progress → Resolved) and shareab… · exports `ReportStatusView`
