@@ -107,9 +107,14 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
     const tomorrow = new Date(today.getTime() + 86_400_000);
     return [...expandDemoSlots(demoSlotPatterns, today), ...expandDemoSlots(demoSlotPatterns, tomorrow), ...busyFromReservations];
   }, [days, busyFromReservations]);
-  const nowSlotIndex = useMemo(() => boundaries[0].findIndex(
-    (slot) => slot.start.getTime() <= now.getTime() && now.getTime() < slot.end.getTime(),
-  ), [boundaries, now]);
+  // Before today's displayed hours open (e.g. testing at 3 AM), there is no "current" slot to anchor
+  // to -- fall back to the opening slot instead of showing nothing all night. After closing there is
+  // no more "today" left to show, so that stays unresolved (-1, handled in the empty state below).
+  const beforeOpen = now.getTime() < boundaries[0][0].start.getTime();
+  const nowSlotIndex = useMemo(() => {
+    const idx = boundaries[0].findIndex((slot) => slot.start.getTime() <= now.getTime() && now.getTime() < slot.end.getTime());
+    return idx >= 0 ? idx : beforeOpen ? 0 : -1;
+  }, [boundaries, now, beforeOpen]);
   const visibleRooms = useMemo(() => {
     if (!onlyAvailable) return bookableRooms;
     if (nowSlotIndex < 0) return [];
@@ -249,6 +254,9 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
         </p>
       ) : (
         <div className="reserve-grid" role="group" aria-label={`Availability for ${dayFmt.format(days[selectedDayIndex])}`}>
+          {onlyAvailable && beforeOpen && (
+            <p className="cims-muted" role="status">Before today's hours start -- showing what's free at opening ({hourFmt.format(boundaries[0][0].start)}).</p>
+          )}
           {visibleRooms.map((room) => {
             const favorited = favoriteIds.has(room.id);
             return (

@@ -49,6 +49,11 @@
 .rooms-board__chip[aria-pressed="true"] { background: var(--navy); color: var(--white); }
 .rooms-board__chip[aria-disabled="true"] { opacity: 0.65; }
 .rooms-board__chip--toggle[aria-pressed="true"] { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+/* "My bookings" stands out from the other chips at all times (not just when active), since it's where
+   a signed-in user's own commitments live -- per direct design feedback. */
+.rooms-board__chip--primary { background: var(--navy); color: var(--white); border-color: var(--navy); font-weight: 600; }
+.rooms-board__chip--primary:hover { background: var(--navy); opacity: 0.9; }
+.rooms-board__chip--primary[aria-pressed="true"] { background: var(--gold); color: var(--ink); border-color: var(--gold); }
 .rooms-board__count { font: 500 var(--fs-xs)/1 var(--font-mono); }
 @media (max-width: 899.98px) {
   .rooms-board__bar { padding-inline: var(--s4); }
