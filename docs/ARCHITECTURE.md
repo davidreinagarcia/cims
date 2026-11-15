@@ -83,3 +83,7 @@ See `deploy/README.md`. Short version: pushing to `main` updates the public site
 Curated POI validation and verification use `scripts/data.mjs`; see [the data workflow](data/README.md).
 
 Orgs and events reuse place features with optional `kind` and `event` metadata and the existing `orgs` category filters. `demo` is visible fictional data, restricted to events and organizations; it is never a verified claim. Weekly schedules recur in campus time, including across DST changes. Data loading filters expired events at startup; the bulletin and selected event card refresh their windows every 30 seconds.
+
+## Live alerts (GTPD)
+
+`server/alerts-server.mjs` (no dependencies) holds alarms and citizen police tips and pushes snapshots over one stream. `src/lib/alerts.ts` is the client store (`useAlerts`, `subscribeAlerts`, `launchAlert`, `endAlert`, `submitTip`); with no server it falls back to a browser-only demo. The main map draws alarms through `map/layers/alerts.ts` (shared overlay in `map/alertsOverlay.ts`), `src/alerts/` is the top banner, `panels/police/` is the GTPD console (`?view=police`), and `panels/report/PoliceReportFlow.tsx` is the citizen "Notify police" form (`?panel=report&kind=police`). Launching and ending alarms needs the access code in `CIMS_POLICE_KEY`.

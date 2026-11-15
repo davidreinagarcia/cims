@@ -37,11 +37,13 @@
 .app[data-alert="true"][data-layout="mobile"] .shell-topbar { top: calc(var(--top) + 48px + var(--s1)); }
 
 @media (max-width: 767.98px) {
-  .alert-banner { flex-wrap: wrap; gap: var(--s2) var(--s3); padding: var(--s2) var(--s3); }
+  .alert-banner { position: relative; flex-wrap: wrap; align-items: flex-start; gap: var(--s2) var(--s3); padding: var(--s2) var(--s3); }
   .alert-banner__icon { width: 36px; height: 36px; }
   .alert-banner__icon svg { width: 22px; height: 22px; }
   .alert-banner__title { font-size: var(--fs-lg); }
   .alert-banner__message { font-size: var(--fs-sm); }
-  .alert-banner__text { flex-basis: calc(100% - 100px); }
-  .alert-banner__actions { width: 100%; justify-content: flex-end; }
+  .alert-banner__text { flex: 1 1 0; min-width: 0; padding-right: 48px; }
+  .alert-banner__actions { flex: 1 1 100%; justify-content: flex-start; }
+  .alert-banner__close { position: absolute; top: var(--s2); right: var(--s2); width: 40px; height: 40px; }
+  .alert-banner__btn { margin-left: 48px; min-height: 36px; padding: 0 var(--s3); }
 }

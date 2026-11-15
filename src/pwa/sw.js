@@ -46,6 +46,8 @@ self.addEventListener("fetch", (event) => {
   const request = event.request;
   if (request.method !== "GET") return;
   const url = new URL(request.url);
+  // Live alerts API (health check, event stream, tip status): always the network, never cached.
+  if (url.origin === self.location.origin && url.pathname.startsWith("/api/")) return;
 
   // Page loads: the network when it works (so deploys show up), the cached app when it does not.
   if (request.mode === "navigate") {
