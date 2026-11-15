@@ -59,9 +59,16 @@ const stops = new Map();
 
 for (const r of routes.filter((x) => x.IsVisibleOnMap && x.EncodedPolyline).sort((a, b) => a.RouteID - b.RouteID)) {
   const name = clean(r.Description);
+  // Stops in the order the bus serves them (the tracker's own Order), with its scheduled seconds to the next stop
+  // and at this stop. The trip planner needs this sequence to know direction and ride time.
+  const sequence = [...(r.Stops ?? [])].sort((a, b) => a.Order - b.Order).map((s) => ({
+    stop: `stop-${s.AddressID}`, route_stop_id: s.RouteStopID,
+    to_next_s: Number.isFinite(s.SecondsToNextStop) ? s.SecondsToNextStop : null,
+    dwell_s: Number.isFinite(s.SecondsAtStop) ? s.SecondsAtStop : null,
+  }));
   features.push({
     type: "Feature",
-    properties: { id: `route-${r.RouteID}`, kind: "route", category: "transport", route_id: r.RouteID, name, color: /^#[0-9a-f]{6}$/i.test(r.MapLineColor ?? "") ? r.MapLineColor.toLowerCase() : null, service_hours: clean(r.InfoText.replace(/\n/g, " · ")).replace(/ ·$/, "") || null, ...provenance },
+    properties: { id: `route-${r.RouteID}`, kind: "route", category: "transport", route_id: r.RouteID, name, color: /^#[0-9a-f]{6}$/i.test(r.MapLineColor ?? "") ? r.MapLineColor.toLowerCase() : null, service_hours: clean(r.InfoText.replace(/\n/g, " · ")).replace(/ ·$/, "") || null, stops: sequence, ...provenance },
     geometry: { type: "LineString", coordinates: decodePolyline(r.EncodedPolyline) },
   });
   for (const s of r.Stops ?? []) {
