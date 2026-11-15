@@ -20,13 +20,22 @@ function isRoutable(room: IndoorRoom): room is RoutableIndoorRoom {
 /** A room with bookable demo amenities (T-60 reservations), with a ready-to-render display label. */
 export interface BookableRoom { id: string; buildingId: string; label: string; amenities: RoomAmenities }
 
-/** Every bookable room in one building (its plain space/room name as the label), sorted alphabetically. */
+/**
+ * Every bookable room in one building, sorted alphabetically. The label prefers the published
+ * room number ("572A Study Room") over a bare space name -- needed for published facts without
+ * geometry (e.g. CULC's `routable: false` rooms, whose `space.name` is a generic "Study Room"
+ * shared by several rooms; a schematic space's `name` already includes its number, so this is a
+ * no-op for those).
+ */
 export function bookableRoomsFor(rooms: IndoorRoom[], amenitiesById: AmenitiesById, buildingId: string): BookableRoom[] {
   return rooms
     .filter((room) => room.building.building_id === buildingId)
     .flatMap((room) => {
       const amenities = amenitiesById.get(room.id);
-      return amenities?.bookable ? [{ id: room.id, buildingId, label: room.space.name, amenities }] : [];
+      if (!amenities?.bookable) return [];
+      const number = room.space.room;
+      const label = number && !room.space.name.includes(number) ? `${number} ${room.space.name}` : room.space.name;
+      return [{ id: room.id, buildingId, label, amenities }];
     })
     .sort((a, b) => a.label.localeCompare(b.label, "en", { numeric: true }));
 }

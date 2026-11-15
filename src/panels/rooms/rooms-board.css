@@ -26,7 +26,7 @@
 .rooms-board__sub { flex: none; padding: var(--s2) var(--s5); border-bottom: var(--hairline); font-size: var(--fs-sm); }
 .rooms-board__sub p { margin: 0; }
 .rooms-board__surface { flex: 1 0 auto; min-width: 0; padding: var(--s5) var(--s6) max(var(--s6), env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: var(--s4); }
-.rooms-board__search { position: relative; max-width: 360px; }
+.rooms-board__search { position: relative; flex: 1 1 220px; max-width: 360px; min-width: 180px; }
 .rooms-board__search .cims-field { max-width: 360px; }
 .rooms-board__search input { width: 100%; }
 .rooms-board__search-results {

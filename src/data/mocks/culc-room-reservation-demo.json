@@ -1,5 +1,5 @@
 {
-  "_note": "Demo data for the CULC room finder/reservation flow (F-11/F-20, T-60). `capacity` on every room below is copied as-is from the real, sourced schematic in src/data/indoor/culc.json (ultimately from docs/research/culc-room-inventory.json) -- never invented. `features`, `bookable`, `owner_system`, `policy` and the weekly busy `slots` ARE fictional, same convention as kendeda-room-finder-demo.json: there is no real GT availability feed yet (PRD Q7). Room ids match registry.ts#indoorRooms() ('buildingId:spaceId'). Covers all 11 real study-type rooms in the current CULC schematic (src/data/indoor/culc.json levels 2-4), not a curated subset.",
+  "_note": "Demo data for the CULC room finder/reservation flow (F-11/F-20, T-60). `capacity` on every room below is copied as-is from the real, sourced inventory (src/data/indoor/culc.json, ultimately docs/research/culc-room-inventory.json / https://libcal.library.gatech.edu/reserve/study-rooms) -- never invented. `features`, `bookable`, `owner_system`, `policy` and the weekly busy `slots` ARE fictional, same convention as kendeda-room-finder-demo.json: there is no real GT availability feed yet (PRD Q7). Room ids match registry.ts#indoorRooms() ('buildingId:spaceId'). Matches the library's own 14-room study-room list exactly: 10 schematic rooms (242/244/246/252/315/317/344/421/445/455, placed on levels 2-4) plus the 4 unplaced 572A-572D rooms (the source doesn't declare a floor for these, so they show with no floor/route, same as CULC's plain search results) -- the schematic's '342 Podcast Room' is deliberately excluded, since the library's study-room list doesn't carry it.",
   "demo": true,
   "amenities": [
     {
@@ -57,15 +57,6 @@
       "book_url": "https://example.org/cims-room-finder-demo/culc/317"
     },
     {
-      "room": "g-wayne-clough-undergraduate-learning-commons:culc-342",
-      "capacity": 6,
-      "features": ["display", "outlets"],
-      "bookable": true,
-      "owner_system": "Library Group Study (demo)",
-      "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead. Podcast room: recording gear on site.",
-      "book_url": "https://example.org/cims-room-finder-demo/culc/342"
-    },
-    {
       "room": "g-wayne-clough-undergraduate-learning-commons:culc-344",
       "capacity": 6,
       "features": ["whiteboard", "outlets"],
@@ -100,6 +91,42 @@
       "owner_system": "Library Group Study (demo)",
       "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead.",
       "book_url": "https://example.org/cims-room-finder-demo/culc/455"
+    },
+    {
+      "room": "g-wayne-clough-undergraduate-learning-commons:culc-572a",
+      "capacity": 4,
+      "features": ["outlets"],
+      "bookable": true,
+      "owner_system": "Library Group Study (demo)",
+      "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead. Floor not published by the source -- no indoor route.",
+      "book_url": "https://example.org/cims-room-finder-demo/culc/572a"
+    },
+    {
+      "room": "g-wayne-clough-undergraduate-learning-commons:culc-572b",
+      "capacity": 4,
+      "features": ["outlets"],
+      "bookable": true,
+      "owner_system": "Library Group Study (demo)",
+      "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead. Floor not published by the source -- no indoor route.",
+      "book_url": "https://example.org/cims-room-finder-demo/culc/572b"
+    },
+    {
+      "room": "g-wayne-clough-undergraduate-learning-commons:culc-572c",
+      "capacity": 4,
+      "features": ["outlets"],
+      "bookable": true,
+      "owner_system": "Library Group Study (demo)",
+      "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead. Floor not published by the source -- no indoor route.",
+      "book_url": "https://example.org/cims-room-finder-demo/culc/572c"
+    },
+    {
+      "room": "g-wayne-clough-undergraduate-learning-commons:culc-572d",
+      "capacity": 4,
+      "features": ["outlets"],
+      "bookable": true,
+      "owner_system": "Library Group Study (demo)",
+      "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead. Floor not published by the source -- no indoor route.",
+      "book_url": "https://example.org/cims-room-finder-demo/culc/572d"
     }
   ],
   "slots": [
@@ -111,10 +138,11 @@
     { "room": "g-wayne-clough-undergraduate-learning-commons:culc-252", "weekday": "fri", "start": "11:00", "end": "12:00" },
     { "room": "g-wayne-clough-undergraduate-learning-commons:culc-315", "weekday": "mon", "start": "10:00", "end": "11:00" },
     { "room": "g-wayne-clough-undergraduate-learning-commons:culc-317", "weekday": "thu", "start": "14:00", "end": "15:00" },
-    { "room": "g-wayne-clough-undergraduate-learning-commons:culc-342", "weekday": "wed", "start": "16:00", "end": "17:30" },
     { "room": "g-wayne-clough-undergraduate-learning-commons:culc-344", "weekday": "tue", "start": "09:00", "end": "10:00" },
     { "room": "g-wayne-clough-undergraduate-learning-commons:culc-421", "weekday": "fri", "start": "13:00", "end": "14:00" },
     { "room": "g-wayne-clough-undergraduate-learning-commons:culc-445", "weekday": "wed", "start": "17:00", "end": "19:00" },
-    { "room": "g-wayne-clough-undergraduate-learning-commons:culc-455", "weekday": "tue", "start": "12:00", "end": "13:30" }
+    { "room": "g-wayne-clough-undergraduate-learning-commons:culc-455", "weekday": "tue", "start": "12:00", "end": "13:30" },
+    { "room": "g-wayne-clough-undergraduate-learning-commons:culc-572a", "weekday": "wed", "start": "11:00", "end": "12:00" },
+    { "room": "g-wayne-clough-undergraduate-learning-commons:culc-572c", "weekday": "mon", "start": "15:00", "end": "16:00" }
   ]
 }
