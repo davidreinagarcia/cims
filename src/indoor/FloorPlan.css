@@ -6,7 +6,7 @@
 .floor-plan__toolbar .cims-btn + .cims-btn { margin-left: -1px; }
 .floor-plan__mode [aria-pressed="true"] { background: var(--navy); color: var(--white); }
 .floor-plan__canvas { position: relative; }
-.floor-plan svg { display: block; width: 100%; height: clamp(260px, 48vh, 620px); touch-action: none; cursor: grab; }
+.floor-plan svg { display: block; width: 100%; height: clamp(320px, 58vh, 700px); touch-action: none; cursor: grab; }
 .floor-plan svg:active { cursor: grabbing; }
 .floor-plan__label { font-family: var(--font-display); font-weight: 600; fill: var(--ink); pointer-events: none; }
 .floor-plan__outline { fill: none; stroke: var(--ink); stroke-width: 2; pointer-events: none; vector-effect: non-scaling-stroke; }
@@ -29,3 +29,6 @@
 .floor-plan__marker--B + text { fill: var(--navy); }
 @keyframes indoor-route-march { to { stroke-dashoffset: -34; } }
 @media (prefers-reduced-motion: reduce) { .floor-plan__route polyline { animation: none; } }
+
+.floor-plan__toolbar { min-height: 68px; box-sizing: border-box; align-items: center; }
+@media (max-width: 700px) { .floor-plan__toolbar .cims-btn { padding: 0 10px; } }

@@ -7,11 +7,12 @@ Building screen, vector schematic renderer and indoor contracts shared by lanes 
 
 **Files**
 
-- [`BuildingView.css`](BuildingView.css): * @file Expanded building layout, with a survey drawing and scrollable directory and facts.
-- [`BuildingView.tsx`](BuildingView.tsx): Expanded building screen over the preserved campus map, with directory and shared building facts. · exports `BuildingView`
+- [`BuildingView.css`](BuildingView.css): * @file Aligned room finder, generous survey canvas and quiet directory on a sixteen pixel grid.
+- [`BuildingView.tsx`](BuildingView.tsx): Room first building screen with immediate routing, plan navigation and collapsible building facts. · exports `BuildingView`
 - [`FloorPlan.css`](FloorPlan.css): * @file Vector plan canvas, survey controls and room interaction states.
 - [`FloorPlan.tsx`](FloorPlan.tsx): Crisp SVG schematic with keyboard space selection, pointer pan and bounded pointer-centered zoom. · exports `FloorPlan`
-- [`registry.ts`](registry.ts): Registry of buildings with an indoor screen, including explicit no-plan placeholders. · exports `indoorFor`, `hasIndoor`
+- [`RoomSearch.tsx`](RoomSearch.tsx): One keyboard accessible room picker across every available building level. · exports `RoomSearch`
+- [`registry.ts`](registry.ts): Registry of buildings with an indoor screen, including explicit no-plan placeholders. · exports `indoorFor`, `hasIndoor`, `indoorRooms`, `resolveRoom`
 - [`route.ts`](route.ts): Dependency free shortest indoor paths and plan relative walking instructions. · exports `findRoute`
 - [`types.ts`](types.ts): Indoor schematic contracts matching the curated JSON, without inferred room facts.
 

@@ -1,8 +1,9 @@
-/** @file Grouped place search with ranked highlights and keyboard selection. */
+/** @file Grouped campus search with ranked highlights and keyboard selection. */
 import { Fragment, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import Glyph from "../../components/Glyph";
 import { places } from "../../lib/places";
-import { searchPlaces, type MatchRange } from "../../lib/search";
+import { loadBuildings, loadedBuildings, type BuildingIndex } from "../../lib/buildings";
+import { searchCampus, type MatchRange } from "../../lib/search";
 import { useSelection } from "../../state/selection";
 import "./search.css";
 
@@ -24,7 +25,19 @@ export default function SearchPanel() {
   const [focused, setFocused] = useState(false);
   const listId = useId();
   const listRef = useRef<HTMLDivElement>(null);
-  const results = useMemo(() => searchPlaces(query, places.features), [query]);
+  const [buildings, setBuildings] = useState<BuildingIndex | null>(loadedBuildings);
+  const [loading, setLoading] = useState(false);
+  const [failed, setFailed] = useState(false);
+  const mounted = useRef(true);
+  useEffect(() => { mounted.current = true; return () => { mounted.current = false; }; }, []);
+  const ensureBuildings = () => {
+    if (buildings || loading) return;
+    setLoading(true); setFailed(false);
+    void loadBuildings().then((index) => { if (mounted.current) setBuildings(index); })
+      .catch(() => { if (mounted.current) setFailed(true); })
+      .finally(() => { if (mounted.current) setLoading(false); });
+  };
+  const results = useMemo(() => searchCampus(query, places.features, buildings?.list ?? []), [query, buildings]);
   const groups = useMemo(() => {
     const grouped = new Map<string, typeof results>();
     for (const result of results) {
@@ -37,7 +50,7 @@ export default function SearchPanel() {
   const ordered = useMemo(() => groups.flatMap(([, items]) => items), [groups]);
   const activeResult = ordered[active];
   const optionId = (id: string) => `${listId}-${id}`;
-  const selectedId = selection?.kind === "place" ? selection.id : null;
+  const selectedId = selection ? `${selection.kind}:${selection.id}` : null;
 
   useEffect(() => {
     if (focused && active >= 0) {
@@ -60,7 +73,7 @@ export default function SearchPanel() {
         : (current + step + ordered.length) % ordered.length);
     } else if (event.key === "Enter" && activeResult) {
       event.preventDefault();
-      select({ kind: "place", id: activeResult.place.properties.id });
+      select({ kind: activeResult.kind, id: activeResult.id });
     }
   }
 
@@ -69,16 +82,16 @@ export default function SearchPanel() {
       <div className="search cims-field">
         <input
           role="combobox"
-          aria-label="Search places"
+          aria-label="Search buildings, rooms and places"
           aria-autocomplete="list"
           aria-expanded={true}
           aria-controls={listId}
-          aria-activedescendant={focused && activeResult ? optionId(activeResult.place.properties.id) : undefined}
-          placeholder="Search places..."
+          aria-activedescendant={focused && activeResult ? optionId(`${activeResult.kind}:${activeResult.id}`) : undefined}
+          placeholder="Search buildings, rooms and places..."
           value={query}
-          onChange={(event) => { setQuery(event.target.value); setActive(0); }}
+          onChange={(event) => { ensureBuildings(); setQuery(event.target.value); setActive(0); }}
           onKeyDown={handleKeyDown}
-          onFocus={() => setFocused(true)}
+          onFocus={() => { setFocused(true); ensureBuildings(); }}
           onBlur={() => setFocused(false)}
         />
         <span className="cims-field__btn" aria-hidden="true">
@@ -88,30 +101,31 @@ export default function SearchPanel() {
           </svg>
         </span>
       </div>
+      {(loading || failed) && <p className="search-status cims-muted" role="status">{loading ? "Loading buildings..." : "Buildings could not be loaded. Focus search to retry."}</p>}
       <div className="list cims-results" id={listId} role="listbox" aria-label="Search results" ref={listRef}>
         {groups.map(([group, items]) => (
           <div key={group} role="group" aria-label={group}>
             <div className="cims-results__group" aria-hidden="true">{group}</div>
-            {items.map(({ place, matches }) => {
-              const { id, name, category } = place.properties;
+            {items.map(({ kind, id, name, meta, matches }) => {
+              const key = `${kind}:${id}`;
               const nameMatch = matches.find((match) => match.field === "name");
               const aliasMatch = matches.find((match) => match.field === "alias");
               const categoryMatch = matches.find((match) => match.field === "category");
-              const isActive = focused && activeResult?.place.properties.id === id;
+              const isActive = focused && activeResult?.id === id && activeResult?.kind === kind;
               return (
                 <button
-                  key={id}
-                  id={optionId(id)}
+                  key={key}
+                  id={optionId(key)}
                   type="button"
                   role="option"
                   tabIndex={-1}
                   className="cims-result"
                   data-active={isActive}
-                  aria-selected={focused && activeResult ? isActive : id === selectedId}
+                  aria-selected={focused && activeResult ? isActive : key === selectedId}
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => {
-                    setActive(ordered.findIndex((result) => result.place.properties.id === id));
-                    select({ kind: "place", id });
+                    setActive(ordered.findIndex((result) => result.id === id && result.kind === kind));
+                    select({ kind, id });
                   }}
                 >
                   <span className="cims-glyph" aria-hidden="true"><Glyph id="building" /></span>
@@ -120,7 +134,7 @@ export default function SearchPanel() {
                     <br />
                     <span className="cims-result__meta">
                       {aliasMatch && <>{highlight(aliasMatch.text, aliasMatch.ranges)}<br /></>}
-                      {highlight(category, categoryMatch?.ranges)}
+                      {highlight(meta, categoryMatch?.ranges)}
                     </span>
                   </span>
                 </button>

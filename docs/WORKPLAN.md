@@ -246,3 +246,5 @@ Nobody touches the same file on day one.
   in practice because each task has its own line).
 - **Blocked > 30 min?** Message the other person right away.
 - **Weekly** (if the hackathon spans weeks): [weekly status](../templates/weekly-status.md).
+
+Building and room search (F-04, T-21): global results select footprints or routable indoor rooms directly. The building screen uses one room finder with automatic routing, a changeable start and step-free preference. CULC retains an explicit no-plan view.

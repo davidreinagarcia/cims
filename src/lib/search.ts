@@ -1,4 +1,6 @@
-/** @file Pure ranked place search with accent folding and original-text match ranges. */
+/** @file Ranked building, room and place search with accent folding and original-text match ranges. */
+import type { Building } from "./buildings";
+import { indoorRooms } from "../indoor/registry";
 import type { PlaceFeature } from "./places";
 
 /** A half-open character range in the original field, suitable for String.slice. */
@@ -129,4 +131,43 @@ export function searchPlaces(query: string, items: readonly PlaceFeature[]): Sea
     if (matches.length) results.push({ result: { group: "Places", place, matches }, rank, index });
   });
   return results.sort((a, b) => a.rank - b.rank || a.index - b.index).map(({ result }) => result);
+}
+
+/** A campus result selects its building, room or place directly. */
+export interface CampusSearchResult {
+  kind: "building" | "room" | "place";
+  id: string;
+  group: "Buildings" | "Rooms" | "Places";
+  name: string;
+  meta: string;
+  matches: SearchMatch[];
+}
+
+/** Searches footprints and routable rooms alongside places, including building aliases in room queries. */
+export function searchCampus(query: string, items: readonly PlaceFeature[], buildings: readonly Building[]): CampusSearchResult[] {
+  const q = fold(query.trim()).text.replace(/\s+/g, " ");
+  const candidates: (CampusSearchResult & { aliases: string[] })[] = [
+    ...buildings.map((building) => ({ kind: "building" as const, id: building.id, group: "Buildings" as const,
+      name: building.name ?? "Unnamed building", meta: building.aliases.join(", "), aliases: building.aliases, matches: [] })),
+    ...indoorRooms().map(({ id, building, level, space }) => {
+      const footprint = buildings.find((item) => item.id === building.building_id);
+      return { kind: "room" as const, id, group: "Rooms" as const, name: space.name,
+        meta: `${footprint?.aliases.find((alias) => alias.endsWith(" Building")) ?? footprint?.aliases[0] ?? building.title}, ${level.name}`,
+        aliases: [building.title, footprint?.name ?? "", ...(footprint?.aliases ?? [])], matches: [] };
+    }),
+  ];
+  const ranked = candidates.flatMap((candidate, index) => {
+    const hit = q.length < 2 ? { rank: 0, ranges: [] } : matchField(q, fold([candidate.name, ...candidate.aliases].join(" ")));
+    if (!hit) return [];
+    const matches: SearchMatch[] = q.length < 2 ? [] : ([ ["name", candidate.name], ["category", candidate.meta] ] as const).map(([field, text]) => ({
+      field, text, ranges: mergeRanges((q.match(/[\p{L}\p{N}]+/gu) ?? []).flatMap((token) => matchField(token, fold(text))?.ranges ?? [])),
+    }));
+    return [{ result: { ...candidate, matches }, rank: hit.rank, index }];
+  }).sort((a, b) => a.rank - b.rank || a.index - b.index);
+  return [
+    ...ranked.filter(({ result }) => result.kind === "building").map(({ result }) => result),
+    ...ranked.filter(({ result }) => result.kind === "room").map(({ result }) => result),
+    ...searchPlaces(query, items).map(({ place, matches }) => ({ kind: "place" as const, id: place.properties.id,
+      group: "Places" as const, name: place.properties.name, meta: place.properties.category, matches })),
+  ];
 }
