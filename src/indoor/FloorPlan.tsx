@@ -1,5 +1,6 @@
 /** @file Crisp SVG schematic with keyboard space selection, pointer pan and bounded pointer-centered zoom. */
 import { useEffect, useRef, useState } from "react";
+import type { IndoorRoute, RouteLeg } from "./route";
 import type { IndoorLevel, IndoorShape, IndoorSpace } from "./types";
 import "./FloorPlan.css";
 
@@ -24,7 +25,7 @@ function zoomAt(camera: Camera, factor: number, point: { x: number; y: number } 
 function SpaceLabel({ space }: { space: IndoorSpace }) {
   const b = bounds(space.shape);
   // Conservatively fit the whole label; tiny spaces remain available in the directory.
-  const words = space.name.toUpperCase().split(" ");
+  const words = (space.type === "void" ? "open to below" : space.name).toUpperCase().split(" ");
   const size = Math.min(13, (b.w - 14) / (Math.max(...words.map((word) => word.length)) * 0.65), (b.h - 12) / (words.length * 1.25));
   if (size < 8 || space.shape.kind === "circle") return null;
   return <text className="floor-plan__label" x={b.x + b.w / 2} y={b.y + b.h / 2 - (words.length - 1) * size * 0.625} fontSize={size} textAnchor="middle" dominantBaseline="central" aria-hidden="true">
@@ -33,19 +34,52 @@ function SpaceLabel({ space }: { space: IndoorSpace }) {
 }
 
 /** Renders one available level with controls and brings the selected space into view. */
-export default function FloorPlan({ level, selected, onSelect }: { level: DrawnLevel; selected?: IndoorSpace; onSelect: (space: IndoorSpace) => void }) {
+export default function FloorPlan({ level, selected, focus, route, legs, onSelect }: { level: DrawnLevel; selected?: IndoorSpace; focus?: IndoorSpace; route?: IndoorRoute; legs?: RouteLeg[]; onSelect: (space: IndoorSpace) => void }) {
   const [vx, vy, width, height] = level.viewBox;
-  const initial = { x: vx + width / 2, y: vy + height / 2, zoom: 1 };
+  const [stageSize, setStageSize] = useState({ w: width, h: height });
+  const aspect = stageSize.w / stageSize.h;
+  const stageWidth = Math.max(width, height * aspect);
+  const stageHeight = Math.max(height, width / aspect);
+  const initial = { x: vx + width / 2, y: vy + height / 2, zoom: 0.94 };
   const [camera, setCamera] = useState<Camera>(initial);
   const svg = useRef<SVGSVGElement>(null);
   const drag = useRef<{ id: number; x: number; y: number; camera: Camera; scale: number; moved: boolean }>();
   const dragged = useRef(false);
+  const lastFocus = useRef<IndoorSpace>();
+
+  // Observe the actual stage: the camera viewBox has the same aspect ratio.
+  useEffect(() => {
+    const element = svg.current;
+    if (!element) return;
+    const observer = new ResizeObserver(([entry]) => {
+      const { width: w, height: h } = entry.contentRect;
+      if (w > 0 && h > 0) setStageSize((current) => current.w === w && current.h === h ? current : { w, h });
+    });
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
-    if (!selected) return;
-    const b = bounds(selected.shape);
-    setCamera({ x: b.x + b.w / 2, y: b.y + b.h / 2, zoom: Math.max(0.6, Math.min(4, width / (b.w * 2), height / (b.h * 2))) });
-  }, [selected, width, height]);
+    if (!legs?.length) {
+      setCamera({ x: vx + width / 2, y: vy + height / 2, zoom: 0.94 });
+      return;
+    }
+    const points = legs.flatMap((leg) => leg.points);
+    const xs = points.map(([x]) => x), ys = points.map(([, y]) => y);
+    const left = Math.min(...xs), top = Math.min(...ys);
+    const w = Math.max(...xs) - left, h = Math.max(...ys) - top;
+    setCamera({ x: left + w / 2, y: top + h / 2, zoom: Math.min(4, stageWidth / (w + 80), stageHeight / (h + 80)) });
+  }, [legs, vx, vy, width, height, stageWidth, stageHeight, stageSize]);
+
+  useEffect(() => {
+    if (focus === lastFocus.current) return;
+    lastFocus.current = focus;
+    if (!focus || !level.spaces.some((space) => space.id === focus.id)) return;
+    const b = bounds(focus.shape);
+    // Keep the present zoom unless zooming out is necessary to contain the space.
+    setCamera((current) => ({ x: b.x + b.w / 2, y: b.y + b.h / 2,
+      zoom: Math.min(current.zoom, stageWidth / (b.w + 40), stageHeight / (b.h + 40)) }));
+  }, [focus, level, stageWidth, stageHeight]);
 
   useEffect(() => {
     const element = svg.current;
@@ -74,7 +108,7 @@ export default function FloorPlan({ level, selected, onSelect }: { level: DrawnL
       </div>
     </div>
     <div className="floor-plan__canvas">
-      <svg ref={svg} viewBox={`${camera.x - width / camera.zoom / 2} ${camera.y - height / camera.zoom / 2} ${width / camera.zoom} ${height / camera.zoom}`}
+      <svg ref={svg} viewBox={`${camera.x - stageWidth / camera.zoom / 2} ${camera.y - stageHeight / camera.zoom / 2} ${stageWidth / camera.zoom} ${stageHeight / camera.zoom}`}
         aria-label={`${level.name} schematic floor plan`} role="group"
         onPointerDown={(event) => {
           if (!event.isPrimary || event.button !== 0) return;
@@ -100,10 +134,10 @@ export default function FloorPlan({ level, selected, onSelect }: { level: DrawnL
           const category = space.type === "auditorium" ? "classroom" : space.type === "core" ? "restroom" : space.type;
           const props = {
             className: `cims-room cims-room--${category}${selected?.id === space.id ? " cims-room--selected" : ""}`,
-            tabIndex: 0, role: "button", "aria-label": `${space.name}, ${space.type}`, "aria-pressed": selected?.id === space.id,
-            onClick: () => { if (!dragged.current) onSelect(space); },
+            tabIndex: space.type === "void" ? undefined : 0, role: space.type === "void" ? undefined : "button", "aria-label": `${space.name}, ${space.type}`, "aria-pressed": selected?.id === space.id,
+            onClick: () => { if (!dragged.current && space.type !== "void") onSelect(space); },
             onKeyDown: (event: React.KeyboardEvent<SVGElement>) => {
-              if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onSelect(space); }
+              if (space.type !== "void" && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(space); }
             },
           };
           return <g key={space.id}>
@@ -114,6 +148,14 @@ export default function FloorPlan({ level, selected, onSelect }: { level: DrawnL
           </g>;
         })}
         <path d={level.outline} className="floor-plan__outline" />
+        {route && !!legs?.length && <g aria-hidden="true" className="floor-plan__route">
+          {legs.map((leg, index) => <polyline key={index} points={leg.points.map((point) => point.join(",")).join(" ")} />) }
+          {[{ node: route.nodes[0], letter: "A" }, { node: route.nodes[route.nodes.length - 1], letter: "B" }].map(({ node, letter }) =>
+            node.level === level.id && <g key={letter} transform={`translate(${node.x},${node.y})`}>
+              <circle r="12" className={`floor-plan__marker floor-plan__marker--${letter}`} />
+              <text textAnchor="middle" dominantBaseline="central">{letter}</text>
+            </g>)}
+        </g>}
       </svg>
       <span className="floor-plan__annotation cims-mono">SCHEMATIC, NOT TO SCALE</span>
     </div>

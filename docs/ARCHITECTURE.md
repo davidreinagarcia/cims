@@ -30,8 +30,8 @@ src/
     search/            SearchPanel: search box + list
     layers/            LayersPanel: category toggles, sub-type tree, legend; chips on phones
     building-card/     PlaceCard: hours/access/provenance, inside places, directions and corrections; lib/hours.ts computes campus-local status
-  indoor/              BuildingView overlay + FloorPlan SVG, typed registry for Kendeda schematic and CULC placeholder
-  data/indoor/         curated indoor JSON: source credit, levels and schematic vector spaces
+  indoor/              BuildingView overlay + FloorPlan SVG, typed registry, pure Dijkstra wayfinding and accessible directions for Kendeda; CULC placeholder
+  data/indoor/         curated indoor JSON: source credit, levels, vector spaces with door node ids, graph edges, connectors and approximate entrances
   data/places.json     GeoJSON of points of interest  <- edit this to add places
   data/pois/events.json  fictional weekly demo events at seed locations, explicitly labeled demo
   lib/events.ts        pure next/current event windows and English labels in America/New_York
@@ -58,6 +58,7 @@ src/
   with `map.setFilter(id, buildMapFilter(filters))`. Features carry `category` and optional `subtype`
   properties; a category listed in `lib/layerCatalog.ts` becomes a toggle, any other stays always visible.
 - **Indoor** opens for registered building selections inside `.stage`, above the continuously mounted map. Back or Escape clears selection and returns focus to the map; places inside reuse the shared selection. `BuildingDetails` is shared with the sidebar card.
+- **Indoor routing** uses `indoor/route.ts`: Euclidean plan units for same level edges, elevator cost 40 and stairs cost 25 per level hop. Step-free routes exclude inaccessible connectors. `BuildingView` supplies endpoint names, manages directions and level changes; `FloorPlan` draws decorative route legs and fits its camera to the stage or current leg. Add buildings as JSON using the same typed schema and register them in `indoor/registry.ts`; buildings without a graph hide directions.
 - **Panels** are components in `src/panels/<name>/`, mounted in `components/Sidebar.tsx`.
 
 ## Where things go

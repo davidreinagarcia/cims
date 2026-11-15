@@ -9,8 +9,7 @@
 .building-view__body { display: grid; grid-template-columns: minmax(0, 1fr) 340px; min-height: 0; flex: 1; }
 .building-view__plan { min-width: 0; overflow-y: auto; padding: var(--s4); }
 .building-view__plan .cims-breadcrumb { margin-bottom: var(--s3); }
-.building-view__drawing { position: relative; border: var(--hairline); background: var(--white); }
-.building-view__levels { position: absolute; left: var(--s2); top: 116px; }
+.building-view__drawing { border: var(--hairline); background: var(--white); }
 .building-view__credit { font-size: var(--fs-sm); color: var(--ink-muted); overflow-wrap: anywhere; margin: var(--s3) 0 0; }
 .building-view a { color: var(--navy); }
 .building-view__details { min-width: 0; overflow-y: auto; border-left: var(--hairline); }
@@ -42,4 +41,28 @@
   .building-view__plan { overflow: visible; padding: var(--s3); }
   .building-view__details { overflow: visible; border-left: 0; border-top: var(--hairline); }
   .building-view__directory-section { padding: var(--s3); }
+}
+.building-view__drawing { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; }
+.building-view__drawing > .floor-plan { grid-column: 2; grid-row: 1; }
+.building-view__levels { position: static; grid-column: 1; grid-row: 1; margin: var(--s3); }
+.building-view__empty { grid-column: 1 / -1; }
+.building-view__directions { padding: var(--s4); border-bottom: var(--hairline); }
+.building-view__directions form { display: grid; gap: var(--s2); }
+.building-view__directions select { width: 100%; min-width: 0; min-height: var(--tap); padding: var(--s2); font: inherit; font-size: var(--fs-sm); border: var(--hairline); background: var(--white); color: var(--ink); }
+.building-view__directions p { font-size: var(--fs-sm); overflow-wrap: anywhere; }
+.building-view__route-actions, .building-view__route-legs { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.building-view__route-actions .cims-btn { flex: 1 1 auto; white-space: normal; }
+.building-view__step-free { display: flex; align-items: center; gap: var(--s2); min-height: var(--tap); font-size: var(--fs-sm); }
+.building-view__step-free input { flex: none; width: 18px; height: 18px; accent-color: var(--navy); }
+.building-view__show-route { width: 100%; background: var(--navy); color: var(--white); }
+.building-view__directions [aria-pressed="true"] { background: var(--gold); color: var(--navy); }
+.building-view__steps { padding-left: var(--s5); font-size: var(--fs-sm); }
+.building-view__steps button { border: 0; color: var(--navy); background: transparent; font: inherit; text-align: left; min-height: var(--tap); padding: var(--s2); cursor: pointer; width: 100%; overflow-wrap: anywhere; }
+.building-view__steps button:hover { background: var(--paper-2); }
+.building-view__directions button:active { filter: brightness(.9); }
+@media (max-width: 700px) {
+  .building-view__drawing { display: flex; flex-direction: column; }
+  .building-view__levels { order: -1; display: flex; margin: 0; width: 100%; border-bottom: var(--hairline); box-shadow: none; }
+  .building-view__drawing > .floor-plan { width: 100%; }
+  .building-view__directions { padding: var(--s3); }
 }

@@ -12,6 +12,7 @@ Building screen, vector schematic renderer and indoor contracts shared by lanes 
 - [`FloorPlan.css`](FloorPlan.css): * @file Vector plan canvas, survey controls and room interaction states.
 - [`FloorPlan.tsx`](FloorPlan.tsx): Crisp SVG schematic with keyboard space selection, pointer pan and bounded pointer-centered zoom. · exports `FloorPlan`
 - [`registry.ts`](registry.ts): Registry of buildings with an indoor screen, including explicit no-plan placeholders. · exports `indoorFor`, `hasIndoor`
+- [`route.ts`](route.ts): Dependency free shortest indoor paths and plan relative walking instructions. · exports `findRoute`
 - [`types.ts`](types.ts): Indoor schematic contracts matching the curated JSON, without inferred room facts.
 
 <!-- AUTO:END -->

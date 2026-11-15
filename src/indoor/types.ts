@@ -6,7 +6,7 @@ export type IndoorShape =
   | { kind: "polygon"; points: string };
 
 /** The supported schematic space categories. */
-export type IndoorSpaceType = "lab" | "study" | "office" | "auditorium" | "core" | "circulation" | "service";
+export type IndoorSpaceType = "lab" | "study" | "office" | "auditorium" | "core" | "circulation" | "service" | "classroom" | "utility" | "outdoor" | "void";
 
 /** One named space with its source and optional contextual note. */
 export interface IndoorSpace {
@@ -16,6 +16,7 @@ export interface IndoorSpace {
   shape: IndoorShape;
   source: string;
   note?: string;
+  door?: string;
 }
 
 /** A level either has vector geometry or an explicit unavailable note. */
@@ -33,4 +34,28 @@ export interface IndoorBuilding {
   credit: string;
   source_url: string;
   levels: IndoorLevel[];
+  graph?: IndoorGraph;
+}
+
+/** A walkable point in plan units on one level. */
+export interface IndoorNode { id: string; level: string; x: number; y: number; label?: string }
+
+/** A named vertical connection with explicit accessibility. */
+export interface IndoorConnector {
+  id: string;
+  name: string;
+  kind: "elevator" | "stairs";
+  stepFree: boolean;
+  nodes: Record<string, string>;
+}
+
+/** An approximate building entrance connected to the walking graph. */
+export interface IndoorEntrance { id: string; name: string; level: string; node: string; note?: string }
+
+/** Undirected walking edges and vertical connections for one building. */
+export interface IndoorGraph {
+  nodes: IndoorNode[];
+  edges: [string, string][];
+  connectors: IndoorConnector[];
+  entrances: IndoorEntrance[];
 }
