@@ -24,7 +24,8 @@ export default function BuildingView() {
 function BuildingScreen({ building }: { building: IndoorBuilding }) {
   const { select } = useSelection();
   const { dialogOpen } = useAuth();
-  const [levelId, setLevelId] = useState(building.levels.find((level) => level.available)?.id);
+  // Open on the floor of the default entrance (the ground floor), not on whatever is listed first.
+  const [levelId, setLevelId] = useState(building.graph?.entrances[0]?.level ?? building.levels.find((level) => level.available)?.id);
   const [selected, setSelected] = useState<IndoorSpace>();
   const [focus, setFocus] = useState<IndoorSpace>();
   const graph = building.graph;

@@ -35,7 +35,8 @@
   .building-view__header { flex-direction: column; gap: var(--s2); }
 }
 @media (max-width: 700px) {
-  .building-view { overflow-y: auto; display: block; }
+  /* On phones the building takes the whole screen (the map pane is only 58% of it and the sidebar sheet sits below). */
+  .building-view { position: fixed; inset: 0; z-index: 20; overflow-y: auto; display: block; }
   .building-view__header { flex-direction: column; gap: var(--s3); padding: var(--s3); }
   .building-view__body { display: block; }
   .building-view__plan { overflow: visible; padding: var(--s3); }

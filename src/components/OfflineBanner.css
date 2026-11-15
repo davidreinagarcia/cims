@@ -1,5 +1,5 @@
 /** @file Position of the offline notice: top of the map area, clear of the zoom controls. */
-.offline-banner { position: fixed; z-index: 5; top: var(--s3); left: calc(var(--panel-w) + var(--s3)); right: 64px; width: fit-content; max-width: calc(100vw - var(--panel-w) - 80px); }
+.offline-banner { position: fixed; z-index: 30; top: var(--s3); left: calc(var(--panel-w) + var(--s3)); right: 64px; width: fit-content; max-width: calc(100vw - var(--panel-w) - 80px); }
 @media (max-width: 700px) {
   .offline-banner { left: var(--s3); right: 64px; max-width: none; top: var(--s3); }
 }

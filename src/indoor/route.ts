@@ -68,6 +68,8 @@ export function findRoute(graph: IndoorGraph, fromNodeId: string, toNodeId: stri
   const steps: Step[] = [{ level: nodes[0].level, text: `Start at ${options.fromLabel ?? nodes[0].label ?? "selected start"}` }];
   const connectorsUsed: IndoorConnector[] = [];
   let straightStep = -1;
+  const connectorNodes = new Set(graph.connectors.flatMap((connector) => Object.values(connector.nodes)));
+  const walkLabel = (node: IndoorNode) => (connectorNodes.has(node.id) ? undefined : node.label); // "Elevator" is not a corridor
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i], before = nodes[i - 1], after = nodes[i + 1];
     if (!before || before.level !== node.level) legs.push({ level: node.level, points: [] });
@@ -90,13 +92,13 @@ export function findRoute(graph: IndoorGraph, fromNodeId: string, toNodeId: stri
       turn = Math.atan2(ax * by - ay * bx, ax * bx + ay * by) * 180 / Math.PI;
     }
     if (Math.abs(turn) >= 35) {
-      steps.push({ level: node.level, text: `Turn ${turn > 0 ? "right" : "left"}${node.label ? ` at ${node.label}` : ""}` });
+      steps.push({ level: node.level, text: `Turn ${turn > 0 ? "right" : "left"}${walkLabel(node) ? ` at ${walkLabel(node)}` : ""}` });
       straightStep = -1;
     } else if (straightStep < 0) {
       straightStep = steps.length;
-      steps.push({ level: node.level, text: node.label && i > 0 ? `Continue along the ${node.label.toLowerCase()}` : "Continue straight" });
-    } else if (node.label) {
-      steps[straightStep].text = `Continue along the ${node.label.toLowerCase()}`;
+      steps.push({ level: node.level, text: walkLabel(node) && i > 0 ? `Continue along the ${walkLabel(node)!.toLowerCase()}` : "Continue straight" });
+    } else if (walkLabel(node)) {
+      steps[straightStep].text = `Continue along the ${walkLabel(node)!.toLowerCase()}`;
     }
   }
   steps.push({ level: nodes[nodes.length - 1].level, text: `Arrive at ${options.toLabel ?? nodes[nodes.length - 1].label ?? "destination"}` });

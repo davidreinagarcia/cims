@@ -68,7 +68,7 @@ export default function FloorPlan({ level, selected, focus, route, legs, onSelec
     const xs = points.map(([x]) => x), ys = points.map(([, y]) => y);
     const left = Math.min(...xs), top = Math.min(...ys);
     const w = Math.max(...xs) - left, h = Math.max(...ys) - top;
-    setCamera({ x: left + w / 2, y: top + h / 2, zoom: Math.min(4, stageWidth / (w + 80), stageHeight / (h + 80)) });
+    setCamera({ x: left + w / 2, y: top + h / 2, zoom: Math.min(1.8, stageWidth / (w + 160), stageHeight / (h + 160)) });
   }, [legs, vx, vy, width, height, stageWidth, stageHeight, stageSize]);
 
   useEffect(() => {
