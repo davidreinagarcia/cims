@@ -1,10 +1,6 @@
 /** @file Buildings layer: OSM footprints extruded in the survey style (flat paper walls, ink rim, white roof; flat outlined footprints in 2D), gold roof and gold hatch when selected, names in caps from zoom 16. Click selects; selecting a place also highlights the building it stands in. */
-<<<<<<< HEAD
 import type maplibregl from "maplibre-gl";
-import type { FillExtrusionLayerSpecification, FilterSpecification, MapLayerMouseEvent, MapMouseEvent, PointLike } from "maplibre-gl";
-=======
-import type { ExpressionSpecification, FillExtrusionLayerSpecification, FilterSpecification, MapLayerMouseEvent, MapMouseEvent } from "maplibre-gl";
->>>>>>> origin/main
+import type { ExpressionSpecification, FillExtrusionLayerSpecification, FilterSpecification, MapLayerMouseEvent, MapMouseEvent, PointLike } from "maplibre-gl";
 import type { MapLayer } from "../types";
 import { baseStyle } from "../baseStyle";
 import { GOLD, INK, PAPER, PAPER_2, WHITE } from "../palette";
@@ -32,7 +28,6 @@ const ROOF_THICKNESS = 0.4;
 /** Meters of ink band under the roof slab: reads as the drafted roof edge. */
 const RIM_THICKNESS = 0.9;
 
-<<<<<<< HEAD
 /** Basemap layers (ground, roads, labels) are scenery: touching them is touching the background. */
 const BASEMAP_LAYERS = new Set(baseStyle.layers.map((layer) => layer.id));
 
@@ -42,14 +37,10 @@ function interactiveFeatures(map: maplibregl.Map, point: PointLike) {
   return map.queryRenderedFeatures(point, { layers });
 }
 
-const isSelected = (id: string | null): FilterSpecification => ["==", ["get", "id"], id ?? NONE];
-const notSelected = (id: string | null): FilterSpecification => ["!=", ["get", "id"], id ?? NONE];
-=======
 /** The building a feature belongs to: its parent for a stacked part (a tower on a podium), else itself. */
 const OWNER: ExpressionSpecification = ["coalesce", ["get", "part_of"], ["get", "id"]];
 const isSelected = (id: string | null): FilterSpecification => ["==", OWNER, id ?? NONE];
 const notSelected = (id: string | null): FilterSpecification => ["!=", OWNER, id ?? NONE];
->>>>>>> origin/main
 
 const buildings: MapLayer = {
   id: "buildings",
@@ -142,13 +133,8 @@ const buildings: MapLayer = {
 
     const onClick = (e: MapLayerMouseEvent) => {
       // Only when the building is the topmost thing under the pointer: a pin over a building wins.
-<<<<<<< HEAD
       const top = interactiveFeatures(map, e.point)[0];
-      const id = top?.source === SOURCE ? (top.properties.id as string | undefined) : undefined;
-=======
-      const top = map.queryRenderedFeatures(e.point)[0];
       const id = top?.source === SOURCE ? ((top.properties.part_of ?? top.properties.id) as string | undefined) : undefined;
->>>>>>> origin/main
       if (!id) return;
       pickedOnMap = true;
       ctx.select({ kind: "building", id });
