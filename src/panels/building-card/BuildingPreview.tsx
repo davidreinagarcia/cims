@@ -1,4 +1,4 @@
-/** @file Short card for a building with an indoor map: name, thumbnail of the entrance floor, key facts, report-an-issue and the button that opens the full indoor screen. */
+/** @file Short card for a building with an indoor map: name, thumbnail of the entrance floor, the button that opens the full indoor screen first, then the plan thumbnail, report-an-issue and the places inside. */
 import { useEffect, useState } from "react";
 import { loadBuildings, loadedBuildings } from "../../lib/buildings";
 import { openIndoor, useOpenIndoor } from "../../indoor/open";
@@ -36,29 +36,31 @@ export default function BuildingPreview() {
     <section className="detail preview" aria-label="Building preview">
       <h2 className="cims-card__name">{facts?.name ?? building.title}</h2>
       {!!aliases.length && <p className="cims-card__alias">{aliases.join(", ")}</p>}
-      {first?.available && (
-        <svg className="preview__plan" viewBox={first.viewBox.join(" ")} role="img" aria-label={`Thumbnail of ${first.name}`} preserveAspectRatio="xMidYMid meet">
-          <path d={first.outline} className="preview__outline" />
-          {first.spaces.filter((space) => space.type !== "void").map((space) => space.shape.kind === "rect"
-            ? <rect key={space.id} x={space.shape.x} y={space.shape.y} width={space.shape.w} height={space.shape.h} className="preview__space" />
-            : space.shape.kind === "polygon" ? <polygon key={space.id} points={space.shape.points} className="preview__space" /> : null)}
-        </svg>
-      )}
       <p className="detail__tags">
         <span className="cims-tag">{drawn.length} {drawn.length === 1 ? "level" : "levels"}</span>
         {rooms > 0 && <span className="cims-tag">{rooms} rooms</span>}
         <span className="cims-tag">Schematic plan</span>
       </p>
+      <div className="cims-actions preview__actions">
+        <button type="button" className="cims-btn cims-btn--primary" onClick={() => openIndoor(building.building_id)}>Open building map</button>
+        {directions ? <a className="cims-btn" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
+          : <button type="button" className="cims-btn" onClick={() => select(null)}>Close</button>}
+      </div>
+      {first?.available && (
+        <button type="button" className="preview__thumb" onClick={() => openIndoor(building.building_id)} aria-label={`Open the ${first.name} plan`}>
+        <svg className="preview__plan" viewBox={first.viewBox.join(" ")} aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+          <path d={first.outline} className="preview__outline" />
+          {first.spaces.filter((space) => space.type !== "void").map((space) => space.shape.kind === "rect"
+            ? <rect key={space.id} x={space.shape.x} y={space.shape.y} width={space.shape.w} height={space.shape.h} className="preview__space" />
+            : space.shape.kind === "polygon" ? <polygon key={space.id} points={space.shape.points} className="preview__space" /> : null)}
+        </svg>
+        </button>
+      )}
       <div className="detail__report">
         <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
         {!session && <small className="cims-muted">Requires sign-in</small>}
       </div>
       <InsidePlaces buildingId={building.building_id} />
-      <div className="cims-actions">
-        <button type="button" className="cims-btn cims-btn--primary" onClick={() => openIndoor(building.building_id)}>Open building map</button>
-        {directions ? <a className="cims-btn" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
-          : <button type="button" className="cims-btn" onClick={() => select(null)}>Close</button>}
-      </div>
     </section>
   );
 }
