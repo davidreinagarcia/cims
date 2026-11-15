@@ -63,8 +63,8 @@ export interface ReservationsService {
   renew(id: string, accountId: string): Promise<Reservation>;
   /** Every non-cancelled reservation for one room, for computing the day grid's busy slots. */
   listForRoom(room: string): Promise<Reservation[]>;
-  /** This account's non-cancelled reservations in one building, for the "My reservations" panel. */
-  listMineForBuilding(buildingId: string, accountId: string): Promise<Reservation[]>;
+  /** This account's non-cancelled reservations across every building, newest first -- the caller filters by room for the "My reservations" panel (works the same whether that's one building or a cross-building favorites list). */
+  listMine(accountId: string): Promise<Reservation[]>;
 }
 
 /** Whether a reservation is still occupying its room at `now` (not cancelled, not past its end/renewal deadline). */

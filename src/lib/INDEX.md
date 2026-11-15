@@ -10,7 +10,10 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`events.ts`](events.ts): Pure event windows and short labels in the America/New_York campus timezone. · exports `nextWindow`, `formatWindow`
 - [`hours.ts`](hours.ts): Pure opening status and weekday lookup in the campus timezone. · exports `campusDay`, `openStatus`
 - [`layerCatalog.ts`](layerCatalog.ts): The toggleable map layers (PRD F-02): id, label, color token and sub-types. Add a layer or sub-type here. · exports `LAYER_CATALOG`, `categoryColor`
+- [`localStore.ts`](localStore.ts): Tiny localStorage JSON helpers shared by the mock backend adapters (prototype persistence only; see ADR-0005). · exports `readLocal`, `writeLocal`
 - [`places.ts`](places.ts): Typed access to every curated place: seed file plus src/data/pois/*.json, drafts hidden unless ?drafts=1. · exports `showDrafts`, `places`
+- [`preferredRooms.mock.ts`](preferredRooms.mock.ts): Mock PreferredRoomsService backed by localStorage. Prototype only: favorites don't sync across devices. · exports `createLocalPreferredRoomsService`
+- [`preferredRooms.ts`](preferredRooms.ts): Preferred ("favorite") rooms contracts (T-60) and the one place that picks the backend adapter. · exports `preferredRoomsService`
 - [`reservations.mock.ts`](reservations.mock.ts): Mock ReservationsService backed by localStorage. Prototype only: nothing leaves the browser, so bookings don'… · exports `createLocalReservationsService`
 - [`reservations.ts`](reservations.ts): Room reservation contracts (T-60/F-20) and the one place that picks the backend adapter. Kendeda + CULC only. · exports `SLOT_MINUTES`, `MIN_DURATION_MINUTES`, `MAX_DURATION_MINUTES`, `RENEWAL_WINDOW_MINUTES`, `isReservationActive`, `reservationBusyWindow`, `reservationsService`
 - [`search.ts`](search.ts): Ranked building, room and place search with accent folding and original-text match ranges. · exports `searchPlaces`, `searchCampus`

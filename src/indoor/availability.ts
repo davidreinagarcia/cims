@@ -17,6 +17,46 @@ function isRoutable(room: IndoorRoom): room is RoutableIndoorRoom {
   return room.routable && room.level !== undefined;
 }
 
+/** A room with bookable demo amenities (T-60 reservations), with a ready-to-render display label. */
+export interface BookableRoom { id: string; buildingId: string; label: string; amenities: RoomAmenities }
+
+/** Every bookable room in one building (its plain space/room name as the label), sorted alphabetically. */
+export function bookableRoomsFor(rooms: IndoorRoom[], amenitiesById: AmenitiesById, buildingId: string): BookableRoom[] {
+  return rooms
+    .filter((room) => room.building.building_id === buildingId)
+    .flatMap((room) => {
+      const amenities = amenitiesById.get(room.id);
+      return amenities?.bookable ? [{ id: room.id, buildingId, label: room.space.name, amenities }] : [];
+    })
+    .sort((a, b) => a.label.localeCompare(b.label, "en", { numeric: true }));
+}
+
+/** "Kendeda" / "CULC" for a compact cross-building row; falls back to the full title minus a leading "The ". */
+function shortBuildingTitle(building: IndoorRoom["building"]): string {
+  if (building.building_id === "kendeda-building-for-innovative-sustainable-design") return "Kendeda";
+  if (building.building_id === "g-wayne-clough-undergraduate-learning-commons") return "CULC";
+  return building.title.replace(/^The /, "");
+}
+
+/**
+ * Bookable rooms in `roomIds` across every building, labeled "Building · Room N" using each
+ * room's real published number when it has one (CULC), or its plain space name when it doesn't
+ * (Kendeda's schematic has no room numbers yet, T-20) -- never an invented number. For the
+ * favorites/"Preferred rooms" view (T-60), which can mix rooms from both buildings.
+ */
+export function favoriteRoomsFrom(rooms: IndoorRoom[], amenitiesById: AmenitiesById, roomIds: ReadonlySet<string>): BookableRoom[] {
+  return rooms
+    .flatMap((room) => {
+      if (!roomIds.has(room.id)) return [];
+      const amenities = amenitiesById.get(room.id);
+      if (!amenities?.bookable) return [];
+      const number = room.space.room;
+      const label = `${shortBuildingTitle(room.building)} · ${number ? `Room ${number}` : room.space.name}`;
+      return [{ id: room.id, buildingId: room.building.building_id, label, amenities }];
+    })
+    .sort((a, b) => a.label.localeCompare(b.label, "en", { numeric: true }));
+}
+
 /** A half-open interval of instants: start is included and end is excluded. */
 export interface TimeWindow { start: Date; end: Date }
 

@@ -1,4 +1,5 @@
 /** @file Mock ReservationsService backed by localStorage. Prototype only: nothing leaves the browser, so bookings don't sync across devices. */
+import { readLocal, writeLocal } from "./localStore";
 import {
   isReservationActive, MAX_DURATION_MINUTES, MIN_DURATION_MINUTES, reservationBusyWindow, RENEWAL_WINDOW_MINUTES, SLOT_MINUTES,
   type NewReservation, type Reservation, type ReservationsService,
@@ -7,26 +8,6 @@ import {
 const KEY = "cims.reservations.v1";
 const OPEN_ENDED_START_SLACK_MS = 5 * 60_000; // how far in the past "now" is still allowed, to absorb render/network lag
 
-/** Reads JSON from localStorage; falls back when storage is blocked or the value is corrupt. */
-function read<T>(key: string, fallback: T): T {
-  try {
-    const raw = window.localStorage.getItem(key);
-    return raw ? (JSON.parse(raw) as T) : fallback;
-  } catch {
-    return fallback;
-  }
-}
-
-/** Writes JSON to localStorage; returns false when storage is blocked or full. */
-function write(key: string, value: unknown): boolean {
-  try {
-    window.localStorage.setItem(key, JSON.stringify(value));
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 function overlaps(a: { start: string; end: string }, b: { start: string; end: string }): boolean {
   return Date.parse(a.start) < Date.parse(b.end) && Date.parse(b.start) < Date.parse(a.end);
 }
@@ -34,9 +15,9 @@ function overlaps(a: { start: string; end: string }, b: { start: string; end: st
 /** Creates the localStorage-backed mock. Falls back to memory when storage is unavailable. */
 export function createLocalReservationsService(): ReservationsService {
   let memory: Reservation[] | null = null;
-  const load = (): Reservation[] => memory ?? read<Reservation[]>(KEY, []);
+  const load = (): Reservation[] => memory ?? readLocal<Reservation[]>(KEY, []);
   const save = (reservations: Reservation[]) => {
-    if (memory || !write(KEY, reservations)) memory = reservations;
+    if (memory || !writeLocal(KEY, reservations)) memory = reservations;
   };
   const update = (id: string, change: (reservation: Reservation) => Reservation): Reservation => {
     const reservations = load();
@@ -112,9 +93,9 @@ export function createLocalReservationsService(): ReservationsService {
       return load().filter((r) => r.room === room);
     },
 
-    async listMineForBuilding(buildingId: string, accountId: string) {
+    async listMine(accountId: string) {
       return load()
-        .filter((r) => r.buildingId === buildingId && r.accountId === accountId && !r.cancelledAt)
+        .filter((r) => r.accountId === accountId && !r.cancelledAt)
         .sort((a, b) => Date.parse(b.start) - Date.parse(a.start));
     },
   };
