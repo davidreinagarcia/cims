@@ -20,6 +20,12 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 - `loadedBuildings()` [src/lib/buildings.ts:76](../src/lib/buildings.ts#L76): The index if it is already loaded, so callers can answer synchronously.
 - `loadBuildings()` [src/lib/buildings.ts:81](../src/lib/buildings.ts#L81): Loads the footprints once; a failed load is forgotten so the next call retries.
+- `POST_TYPES` [src/lib/bulletin.ts:34](../src/lib/bulletin.ts#L34): Bulletin filters in display order, sharing organization labels with the layer catalog.
+- `bulletinPosts(now)` [src/lib/bulletin.ts:69](../src/lib/bulletin.ts#L69): Return ongoing and upcoming dated events or org posts, with ongoing entries first.
+- `filterPosts(posts, type, query?)` [src/lib/bulletin.ts:108](../src/lib/bulletin.ts#L108): Filter posts by type and the shared case/accent-insensitive search, retaining post order.
+- `countByType(posts)` [src/lib/bulletin.ts:133](../src/lib/bulletin.ts#L133): Count every post type and the unfiltered total, including categories with no posts.
+- `bulletinUrl(type)` [src/lib/bulletin.ts:140](../src/lib/bulletin.ts#L140): Build a bulletin deep link, omitting the type parameter for the all filter.
+- `readBulletinParams(search)` [src/lib/bulletin.ts:147](../src/lib/bulletin.ts#L147): Read bulletin visibility and a validated type filter from a query string.
 - `nextWindow(event, now)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Return the current or next weekly campus occurrence, or an unexpired one-off window.
 - `formatWindow(window)` [src/lib/events.ts:58](../src/lib/events.ts#L58): Format an event window as short English text in campus time.
 - `campusDay(now)` [src/lib/hours.ts:11](../src/lib/hours.ts#L11): Returns the hours-contract weekday for an instant in America/New_York.
@@ -58,6 +64,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `RoomFact` [src/indoor/types.ts:68](../src/indoor/types.ts#L68): Published room facts without geometry, inferred levels or routing nodes.
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
+- `PostType` [src/lib/bulletin.ts:11](../src/lib/bulletin.ts#L11): The five supported bulletin filters; unknown source subtypes become community posts.
+- `BulletinPost` [src/lib/bulletin.ts:14](../src/lib/bulletin.ts#L14): A dated bulletin entry with known source facts and a selectable map location.
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
 - `LayerCategory` [src/lib/layerCatalog.ts:11](../src/lib/layerCatalog.ts#L11): One entry of the layer panel.
 - `PlaceFeature` [src/lib/places.ts:7](../src/lib/places.ts#L7): One place as a GeoJSON point feature.
