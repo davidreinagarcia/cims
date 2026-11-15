@@ -11,6 +11,9 @@ import SignInDialog from "../panels/account/SignInDialog";
 import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
+import GameHud from "../games/GameHud";
+import GamesPanel from "../games/GamesPanel";
+import { leaveGame, useGames } from "../games/store";
 import BulletinBoard from "../panels/bulletin/BulletinBoard";
 import BusesPanel from "../panels/buses/BusesPanel";
 import TipNotifier from "../alerts/TipNotifier";
@@ -36,7 +39,7 @@ import SearchPill from "./SearchPill";
 import "./shell.css";
 
 const MOBILE = "(max-width: 767.98px)";
-const PANELS: ShellPanel[] = ["explore", "buses", "rooms", "report", "bulletin", "stories", "route", "buzzprint"];
+const PANELS: ShellPanel[] = ["explore", "buses", "rooms", "report", "bulletin", "stories", "route", "buzzprint", "games"];
 const KINDS: SelectionKind[] = ["building", "place", "room", "report"];
 
 function useIsMobile(): boolean {
@@ -96,6 +99,7 @@ export default function Shell() {
   const [hasQuery, setHasQuery] = useState(false);
   const [snap, setSnap] = useState<SheetSnap>("half");
   const { banners, dismiss } = useAlertBanners();
+  const { game } = useGames();
   // Staff dashboards are full-screen views, deep-linkable with ?view=police or ?view=maintenance.
   const [staffView, setStaffView] = useState<"police" | "maintenance" | null>(() => {
     const v = new URLSearchParams(window.location.search).get("view");
@@ -157,7 +161,14 @@ export default function Shell() {
 
   // Picking something on the map (or from the bulletin) always shows it; a "report" selection
   // (a place/building card's "Report an issue") opens the report panel prefilled with it instead.
-  useEffect(() => { if (selection) setPanel(selection.kind === "report" ? "report" : "explore"); }, [selection]);
+  // During a match, tapping places on the map must not kick the player out of the Games tab.
+  useEffect(() => {
+    if (!selection) return;
+    if (game && panel === "games") { select(null); return; }
+    setPanel(selection.kind === "report" ? "report" : "explore");
+  }, [selection]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Leaving the Games tab (any other tab, URL change) ends the match and clears its map layers.
+  useEffect(() => { if (panel !== "games" || bulletin.open || buzzprintOpen) leaveGame(); }, [panel, bulletin.open, buzzprintOpen]);
   // "Book this room" on the indoor room card: leave the building and open the reservations panel on it.
   const booking = useBookingRequestSeq();
   useEffect(() => { if (booking) { select(null); setPanel("rooms"); } }, [booking]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -206,6 +217,7 @@ export default function Shell() {
     const reportKey = selection?.kind === "report" ? `report:${selection.id}` : "report";
     content = { title: "Report", key: reportKey, body: <ReportPanel key={reportKey} onClose={() => setPanel("explore")} /> };
   }
+  else if (panel === "games" && !game) content = { title: "Games", key: "games", body: <GamesPanel /> };
   else if (panel === "stories") content = { title: "Stories", key: "stories", body: <StoriesPanel onShowMap={() => setPanel("explore")} /> };
   else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel initialSelection={routeTo} onClose={closeContent} /> };
   else if (selection && selection.kind !== "report") content = {
@@ -260,6 +272,7 @@ export default function Shell() {
       <div className="stage">
         <MapView />
         <BuildingView />
+        {panel === "games" && <GameHud />}
         <LayersPopover />
         {mobile && (
           <>
