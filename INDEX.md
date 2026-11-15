@@ -38,6 +38,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`public/culture/`](public/culture/INDEX.md): Hand-drawn doodles for the GT Culture sticky notes and the "big sib" welcome letter, one per note id. AI-gene…
   - [`public/photos/`](public/photos/INDEX.md): Static photos served by the app; each one is credited in a data file under src/data/.
     - [`public/photos/buildings/`](public/photos/buildings/INDEX.md): Building photos from Wikimedia Commons (free licenses), one per building id; credits in src/data/building-pho…
+  - [`public/posters/`](public/posters/INDEX.md): _no description yet_
 - [`scripts/`](scripts/INDEX.md): Dev tooling run with Node (no deps): index generator, Claude hooks, data fetchers.
   - [`scripts/fixtures/`](scripts/fixtures/INDEX.md): Saved official GT tracker responses for reproducible offline transit imports.
 - [`server/`](server/INDEX.md): Real-time alerts backend (Node, no dependencies); see README.md.

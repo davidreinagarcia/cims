@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img" aria-label="Board Game Night (demo poster)">
+<rect width="600" height="800" fill="#7f1d1d"/><rect x="24" y="24" width="552" height="752" fill="none" stroke="#fcd34d" stroke-width="6"/>
+<rect x="170" y="120" width="260" height="260" rx="36" fill="#fcd34d"/><circle cx="225" cy="175" r="22" fill="#00000088"/><circle cx="375" cy="175" r="22" fill="#00000088"/><circle cx="300" cy="250" r="22" fill="#00000088"/><circle cx="225" cy="325" r="22" fill="#00000088"/><circle cx="375" cy="325" r="22" fill="#00000088"/>
+<text x="300" y="520" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" font-size="72" font-weight="900" letter-spacing="2" fill="#fef2f2">BOARD GAME</text><text x="300" y="604" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" font-size="72" font-weight="900" letter-spacing="2" fill="#fef2f2">NIGHT</text>
+<rect x="190" y="664" width="220" height="6" fill="#fcd34d"/>
+<text x="300" y="718" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="#fef2f2">Bring a game or learn one</text>
+<text x="300" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" letter-spacing="4" fill="#fcd34d">HOSTED BY A STUDENT · DEMO</text>
+</svg>

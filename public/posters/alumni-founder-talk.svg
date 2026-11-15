@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img" aria-label="Founder Q&amp;A (demo poster)">
+<rect width="600" height="800" fill="#134e4a"/><rect x="24" y="24" width="552" height="752" fill="none" stroke="#fbbf24" stroke-width="6"/>
+<path d="M300 90 C440 150 440 300 300 370 C160 300 160 150 300 90Z" fill="#fbbf24"/><path d="M300 130 V360" stroke="#00000055" stroke-width="10"/>
+<text x="300" y="520" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" font-size="78" font-weight="900" letter-spacing="2" fill="#f0fdfa">FOUNDER</text><text x="300" y="604" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" font-size="78" font-weight="900" letter-spacing="2" fill="#f0fdfa">Q&amp;A</text>
+<rect x="190" y="664" width="220" height="6" fill="#fbbf24"/>
+<text x="300" y="718" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="#f0fdfa">An alum shares what they built</text>
+<text x="300" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" letter-spacing="4" fill="#fbbf24">ALUMNI VISIT · DEMO</text>
+</svg>

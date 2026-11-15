@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img" aria-label="Movement Meetup (demo poster)">
+<rect width="600" height="800" fill="#c2410c"/><rect x="24" y="24" width="552" height="752" fill="none" stroke="#1c1917" stroke-width="6"/>
+<rect x="110" y="110" width="380" height="26" fill="#1c1917"/><rect x="110" y="156" width="380" height="26" fill="#1c1917"/><rect x="110" y="202" width="380" height="26" fill="#1c1917"/><rect x="110" y="248" width="380" height="26" fill="#1c1917"/><rect x="110" y="294" width="380" height="26" fill="#1c1917"/>
+<text x="300" y="520" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" font-size="78" font-weight="900" letter-spacing="2" fill="#fff7ed">MOVEMENT</text><text x="300" y="604" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" font-size="78" font-weight="900" letter-spacing="2" fill="#fff7ed">MEETUP</text>
+<rect x="190" y="664" width="220" height="6" fill="#1c1917"/>
+<text x="300" y="718" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="#fff7ed">All levels. Shoes optional.</text>
+<text x="300" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" letter-spacing="4" fill="#1c1917">DEMO MOVEMENT CLUB · DEMO</text>
+</svg>
