@@ -12,6 +12,13 @@
       "set": { "aliases": ["CULC", "Clough"] },
       "verified_at": null,
       "verified_by": null
+    },
+    {
+      "match": { "osm_id": "way/1355836113", "name": "George Tower | Scheller Tower" },
+      "set": { "levels": 18, "height": 63 },
+      "note": "OSM tags only 3 levels (the podium). 18 floors per the team (Tato); 18 x 3.5 m = 63 m, same rule as the generator.",
+      "verified_at": "2026-11-14",
+      "verified_by": "tato"
     }
   ]
 }
