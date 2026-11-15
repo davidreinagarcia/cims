@@ -9,7 +9,10 @@ import RoomFinderPanel from "../panels/rooms/RoomFinderPanel";
 import SearchPanel from "../panels/search/SearchPanel";
 import "./Sidebar.css";
 
-const TABS = ["Explore", "Bulletin", "Rooms"];
+// "Room finder" (not just "Rooms"): Explore's search already lists every room, including CULC's
+// published facts (T-21); this tab is specifically the bookable-availability search over Kendeda's
+// demo seed (F-11), so the label should not read as a second, competing way to find any room.
+const TABS = ["Explore", "Bulletin", "Room finder"];
 
 /** Left column (bottom sheet on phones) that hosts the panels. */
 export default function Sidebar() {

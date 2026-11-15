@@ -1,7 +1,21 @@
 /** @file Pure room-finder queries (F-11) and campus-local expansion of fictional weekly demo slots. */
 import { campusDay } from "../lib/hours";
-import type { IndoorRoomEntry } from "./registry";
-import type { AvailabilitySlot, RoomAmenities, RoomFeature } from "./types";
+import type { IndoorRoom } from "./registry";
+import type { AvailabilitySlot, IndoorLevel, RoomAmenities, RoomFeature } from "./types";
+
+/**
+ * A routable (schematic) entry from `registry.ts#indoorRooms`, narrowed from the `IndoorRoom`
+ * union. The room finder only ever matches these: its demo amenities/availability seed
+ * (`roomFinderDemo.ts`) covers Kendeda's drawn spaces, not published facts without geometry
+ * (e.g. CULC's `routable: false` rooms), so there is nothing to show -- or filter by capacity or
+ * features -- for those. `findFreeRooms` below drops non-routable entries before touching `.space`.
+ */
+export type RoutableIndoorRoom = Extract<IndoorRoom, { routable: true }> & { level: IndoorLevel };
+
+/** True for a schematic entry with a resolved level; false (including by construction) for published facts. */
+function isRoutable(room: IndoorRoom): room is RoutableIndoorRoom {
+  return room.routable && room.level !== undefined;
+}
 
 /** A half-open interval of instants: start is included and end is excluded. */
 export interface TimeWindow { start: Date; end: Date }
@@ -15,7 +29,7 @@ export interface RoomQuery {
 }
 
 /** A matching room together with its demo amenities, ready for the results list and selection. */
-export interface FreeRoom extends IndoorRoomEntry { amenities: RoomAmenities }
+export interface FreeRoom extends RoutableIndoorRoom { amenities: RoomAmenities }
 
 /** Demo amenities keyed by room selection id, e.g. `roomFinderDemo.ts#roomAmenitiesById`. */
 export type AmenitiesById = Map<string, RoomAmenities>;
@@ -51,12 +65,16 @@ export function isRoomFree(id: string, slots: AvailabilitySlot[], window: TimeWi
 
 /**
  * Finds free bookable rooms satisfying every filter, sorted by building title then room name.
- * `rooms` is normally `registry.ts#indoorRooms()`; `amenitiesById` keys demo metadata by that same
- * selection id. A room without an amenities entry, or with `bookable` false, never matches.
+ * `rooms` is normally `registry.ts#indoorRooms()`, which now also lists published room facts
+ * without geometry (`routable: false`, e.g. CULC) -- those are dropped before any other check,
+ * since the demo amenities/availability seed never covers them. `amenitiesById` keys demo
+ * metadata by selection id; a room without an amenities entry, or with `bookable` false, never matches.
  */
-export function findFreeRooms(rooms: IndoorRoomEntry[], amenitiesById: AmenitiesById, slots: AvailabilitySlot[], query: RoomQuery): FreeRoom[] {
+export function findFreeRooms(rooms: IndoorRoom[], amenitiesById: AmenitiesById, slots: AvailabilitySlot[], query: RoomQuery): FreeRoom[] {
   if (!validWindow(query.window)) return [];
-  return rooms.flatMap((room) => {
+  return rooms.flatMap((entry) => {
+    if (!isRoutable(entry)) return [];
+    const room = entry;
     if (query.buildingId !== undefined && room.building.building_id !== query.buildingId) return [];
     const amenities = amenitiesById.get(room.id);
     if (!amenities?.bookable) return [];

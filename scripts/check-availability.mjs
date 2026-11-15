@@ -47,13 +47,14 @@ for (const pattern of demo.slots) {
   assert.ok(pattern.end > pattern.start, `slot end after start (${pattern.room} ${pattern.weekday})`);
 }
 
-// Minimal IndoorRoomEntry-shaped fixtures for the four seeded rooms, built from the real schematic
-// (not duplicated by hand), so findFreeRooms is exercised against the actual building + demo seed.
+// Minimal IndoorRoom-shaped (routable: true) fixtures for the four seeded rooms, built from the
+// real schematic (not duplicated by hand), so findFreeRooms is exercised against the actual
+// building + demo seed, the same discriminated shape registry.ts#indoorRooms now returns.
 const building = { building_id: buildingId, title: kendeda.title };
 const rooms = demo.amenities.map(({ room }) => {
   const spaceId = room.slice(buildingId.length + 1);
   const { level, space } = spaceById.get(spaceId);
-  return { id: room, building, level: { id: level.id, name: level.name, label: level.label }, space };
+  return { id: room, building, level: { id: level.id, name: level.name, label: level.label }, space, routable: true };
 });
 const [classroom1, classroom2, breakoutStudy, auditorium] = [
   "classroom-1", "classroom-2", "breakout-study", "auditorium",
