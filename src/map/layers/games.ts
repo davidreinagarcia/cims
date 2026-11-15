@@ -89,21 +89,30 @@ const games: MapLayer = {
       glides.set(id, { from, to, t0: now, ms, props });
     };
 
-    let wasPlaying = false;
+    const stopFrames = () => { cancelAnimationFrame(raf); raf = 0; };
+    let run = 0;
     const sync = () => {
       const { game, player, profile } = getGamesState();
-      if (!game) {
-        if (wasPlaying) { cancelAnimationFrame(raf); glides.clear(); for (const id of Object.values(SRC)) setData(id, []); }
-        wasPlaying = false;
+      if (!game) { // left the match: nothing of it stays on the map
+        stopFrames(); glides.clear(); run = 0;
+        for (const id of Object.values(SRC)) setData(id, []);
         return;
       }
-      if (!wasPlaying) { map.flyTo({ center: [player.lng, player.lat], zoom: 16.6, duration: 1000 }); raf = requestAnimationFrame(frame); }
-      wasPlaying = true;
+      if (game.run !== run) { // a new match (or a rematch): forget every old position
+        run = game.run; glides.clear(); stopFrames();
+        map.flyTo({ center: [player.lng, player.lat], zoom: 16.6, duration: 1000 });
+      }
       setData(SRC.zones, game.zones.map((z) => ({ type: "Feature", properties: { color: colorOf(z.owner), owned: z.owner !== null }, geometry: { type: "Polygon", coordinates: [circle(z, RADIUS_M)] } })));
       setData(SRC.badges, game.zones.map((z, i) => point(z, { n: String(i + 1), name: z.name, color: z.owner ? colorOf(z.owner) : PAPER, ink: z.owner ? "#FFFFFF" : INK })));
+      if (game.finished) { // the match is over: stop animating and clear players and drops; the final territories stay under the result card
+        stopFrames(); glides.clear();
+        setData(SRC.drops, []); setData(SRC.people, []);
+        return;
+      }
       setData(SRC.drops, game.drops.filter((d) => !d.claimedBy).map((d) => point(d, {})));
       for (const b of game.bots) track(b.id, b, 1000, { color: colorOf(b.team), me: false, name: b.nickname });
       track("me", player, 380, { color: colorOf(profile.team), me: true });
+      if (!raf) raf = requestAnimationFrame(frame);
     };
     const unsubscribe = subscribeGames(sync);
     sync();

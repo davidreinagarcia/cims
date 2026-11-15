@@ -72,6 +72,7 @@ function randomPoint(): LngLat {
   return { lng: PLAY_AREA.west + Math.random() * (PLAY_AREA.east - PLAY_AREA.west), lat: PLAY_AREA.south + Math.random() * (PLAY_AREA.north - PLAY_AREA.south) };
 }
 let feedSeq = 0;
+let runSeq = 0;
 function pushFeed(feed: FeedItem[], text: string, team: TeamId | null): FeedItem[] {
   return [{ id: ++feedSeq, text, team }, ...feed].slice(0, FEED_MAX);
 }
@@ -111,7 +112,7 @@ function startGame(meta: Meta) {
   set({
     player: START,
     game: {
-      id: meta.id, name: meta.name, mode: meta.mode, capacity: meta.capacity, listedPlayers: meta.listedPlayers,
+      run: ++runSeq, id: meta.id, name: meta.name, mode: meta.mode, capacity: meta.capacity, listedPlayers: meta.listedPlayers,
       secondsLeft: meta.minutes * 60, finished: false,
       zones: meta.mode === "zones" ? zoneTemplates().slice(0, 8) : [], drops, bots,
       scores: { red: 0, blue: 0 }, playerPoints: 0, feed: [{ id: ++feedSeq, text: `Empieza ${meta.name}`, team: null }],
@@ -153,7 +154,8 @@ export function leaveGame() {
   if (joinedLobbyId) {
     const id = joinedLobbyId;
     joinedLobbyId = null;
-    set({ lobby: state.lobby.map((l) => (l.id === id ? { ...l, players: Math.max(1, l.players - 1) } : l)) });
+    // A match you created disappears with it; a listed one just gets its seat back.
+    set({ lobby: state.lobby.filter((l) => !(l.id === id && l.mine)).map((l) => (l.id === id ? { ...l, players: Math.max(1, l.players - 1) } : l)) });
   }
   if (state.game) set({ game: null });
 }

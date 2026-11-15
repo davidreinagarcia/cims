@@ -421,16 +421,16 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `subscribeGames(listener)` [src/games/store.ts:51](../src/games/store.ts#L51): Subscribe to any change (for the map layer). Returns the unsubscribe function.
 - `getGamesState()` [src/games/store.ts:56](../src/games/store.ts#L56): Current snapshot.
 - `useGames()` [src/games/store.ts:60](../src/games/store.ts#L60): React hook over the games store.
-- `setNickname(nickname)` [src/games/store.ts:80](../src/games/store.ts#L80): Changes the guest nickname (trimmed, 2 to 20 characters; ignored otherwise).
-- `setTeam(team)` [src/games/store.ts:88](../src/games/store.ts#L88): Picks the team used for the next match.
-- `joinGame(id)` [src/games/store.ts:125](../src/games/store.ts#L125): Joins a lobby match (a clean simulated session with 2 to 4 bots). Returns false when it is full.
-- `createGame(opts)` [src/games/store.ts:136](../src/games/store.ts#L136): Creates a match, lists it in the lobby and jumps straight into it.
-- `rematch()` [src/games/store.ts:146](../src/games/store.ts#L146): Starts the same match again from zero (new bots, new drops).
-- `leaveGame()` [src/games/store.ts:151](../src/games/store.ts#L151): Leaves the running match and removes every game layer from the map. Safe to call when nothing runs.
-- `setSimulate(on)` [src/games/store.ts:168](../src/games/store.ts#L168): Turns click-to-move on or off; off asks the browser for the real GPS (falls back to click-to-move if refused).
-- `teleport(point)` [src/games/store.ts:188](../src/games/store.ts#L188): Click-to-move: puts the player at a point (only in simulated mode).
-- `capturableZone(s)` [src/games/store.ts:195](../src/games/store.ts#L195): The zone the player stands in that their team does not hold yet (the "Capturar Zona" target), or null.
-- `captureZone()` [src/games/store.ts:202](../src/games/store.ts#L202): Captures the zone under the player for their team.
+- `setNickname(nickname)` [src/games/store.ts:81](../src/games/store.ts#L81): Changes the guest nickname (trimmed, 2 to 20 characters; ignored otherwise).
+- `setTeam(team)` [src/games/store.ts:89](../src/games/store.ts#L89): Picks the team used for the next match.
+- `joinGame(id)` [src/games/store.ts:126](../src/games/store.ts#L126): Joins a lobby match (a clean simulated session with 2 to 4 bots). Returns false when it is full.
+- `createGame(opts)` [src/games/store.ts:137](../src/games/store.ts#L137): Creates a match, lists it in the lobby and jumps straight into it.
+- `rematch()` [src/games/store.ts:147](../src/games/store.ts#L147): Starts the same match again from zero (new bots, new drops).
+- `leaveGame()` [src/games/store.ts:152](../src/games/store.ts#L152): Leaves the running match and removes every game layer from the map. Safe to call when nothing runs.
+- `setSimulate(on)` [src/games/store.ts:170](../src/games/store.ts#L170): Turns click-to-move on or off; off asks the browser for the real GPS (falls back to click-to-move if refused).
+- `teleport(point)` [src/games/store.ts:190](../src/games/store.ts#L190): Click-to-move: puts the player at a point (only in simulated mode).
+- `capturableZone(s)` [src/games/store.ts:197](../src/games/store.ts#L197): The zone the player stands in that their team does not hold yet (the "Capturar Zona" target), or null.
+- `captureZone()` [src/games/store.ts:204](../src/games/store.ts#L204): Captures the zone under the player for their team.
 - `STACK_VIEW_ENABLED` [src/indoor/StackView.tsx:22](../src/indoor/StackView.tsx#L22): Shows the Plan | Stack toggle in the building header. Set to false to hide the stack view for a demo.
 - `bookableRoomsFor(rooms, amenitiesById, buildingId)` [src/indoor/availability.ts:30](../src/indoor/availability.ts#L30): Every bookable room in one building, sorted alphabetically. The label prefers the published
 - `favoriteRoomsFrom(rooms, amenitiesById, roomIds)` [src/indoor/availability.ts:56](../src/indoor/availability.ts#L56): Bookable rooms in `roomIds` across every building, labeled "Building · Room N" using each

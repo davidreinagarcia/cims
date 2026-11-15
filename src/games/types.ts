@@ -25,6 +25,8 @@ export interface FeedItem { id: number; text: string; team: TeamId | null }
 
 /** A running (or finished) match. Times are in whole seconds. */
 export interface ActiveGame {
+  /** Increments on every (re)start so the map layer can tell a rematch from a tick. */
+  run: number;
   id: string; name: string; mode: GameMode; capacity: number; listedPlayers: number;
   secondsLeft: number; finished: boolean;
   zones: Zone[]; drops: Drop[]; bots: Bot[];
