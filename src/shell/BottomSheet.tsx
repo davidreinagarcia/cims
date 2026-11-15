@@ -6,12 +6,14 @@ import { Icon } from "./icons";
 export type SheetSnap = "peek" | "half" | "full";
 const ORDER: SheetSnap[] = ["peek", "half", "full"];
 const PEEK_PX = 88;
+/** Strip kept free above a full sheet for the Route FAB and the attribution (shell.css --sheet-full). */
+const FAB_ROW_PX = 56 + 2 * 12;
 
-/** Pixel height of each snap right now (full stops under the search pill). */
+/** Pixel height of each snap right now (full stops a FAB row under the search pill). */
 function snapHeights(sheet: HTMLElement): Record<SheetSnap, number> {
   const bottom = sheet.getBoundingClientRect().bottom;
   const pill = document.querySelector(".shell-search")?.getBoundingClientRect().bottom ?? 64;
-  const full = Math.max(PEEK_PX, bottom - pill - 8);
+  const full = Math.max(PEEK_PX, bottom - pill - 8 - FAB_ROW_PX);
   return { peek: PEEK_PX, half: Math.min(full, Math.round(window.innerHeight * 0.5)), full };
 }
 

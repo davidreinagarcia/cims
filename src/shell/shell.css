@@ -223,10 +223,18 @@
 .app[data-layout="mobile"] .shell-layers__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .app[data-layout="mobile"] .shell-popover { left: auto; right: 0; bottom: auto; top: 52px; width: min(340px, calc(100vw - 16px)); max-height: calc(100dvh - var(--top) - var(--bottom) - 180px); }
 
-/* The sheet height drives where the FAB and the map controls sit. */
+/* The sheet height drives where the FAB and the map controls sit; the sheet and the controls read the same variables.
+   Full stops a FAB row (56px FAB + --s3 above and below) short of the pill, so Route and the attribution stay visible.
+   Keep FAB_ROW_PX in BottomSheet.tsx in step with that row. */
+.app[data-layout="mobile"] {
+  --sheet-full: calc(100dvh - var(--top) - 48px - var(--s2) - var(--bottom) - 56px - 2 * var(--s3));
+  --sheet-half: min(50dvh, var(--sheet-full));
+}
 .app[data-layout="mobile"]:has(.shell-sheet[data-snap="peek"] .shell-sheet__body > *) { --sheet-h: 88px; }
-.app[data-layout="mobile"]:has(.shell-sheet[data-snap="half"] .shell-sheet__body > *) { --sheet-h: 50dvh; }
-.app[data-layout="mobile"]:has(.shell-sheet[data-snap="full"] .shell-sheet__body > *) { --sheet-h: 50dvh; }
+.app[data-layout="mobile"]:has(.shell-sheet[data-snap="half"] .shell-sheet__body > *) { --sheet-h: var(--sheet-half); }
+.app[data-layout="mobile"]:has(.shell-sheet[data-snap="full"] .shell-sheet__body > *) { --sheet-h: var(--sheet-full); }
+/* Full sheet: the FAB row takes the strip under the pill, so the chips and the layers button step aside. */
+.app[data-layout="mobile"]:has(.shell-sheet[data-snap="full"] .shell-sheet__body > *) :is(.shell-topbar, .shell-layers) { display: none; }
 .shell-fab {
   position: absolute; z-index: 3; right: var(--s3); bottom: calc(var(--sheet-h, 0px) + var(--s3));
   display: grid; place-items: center; width: 56px; height: 56px; padding: 0;
@@ -243,8 +251,8 @@
 }
 .shell-sheet:has(.shell-sheet__body:empty) { display: none; }
 .shell-sheet[data-snap="peek"] { height: 88px; }
-.shell-sheet[data-snap="half"] { height: min(50dvh, calc(100dvh - var(--top) - 48px - var(--s2) - var(--bottom))); }
-.shell-sheet[data-snap="full"] { height: calc(100dvh - var(--top) - 48px - var(--s2) - var(--bottom)); }
+.shell-sheet[data-snap="half"] { height: var(--sheet-half); }
+.shell-sheet[data-snap="full"] { height: var(--sheet-full); }
 .shell-sheet__head { display: flex; align-items: center; padding-right: var(--s1); border-bottom: var(--hairline-muted); flex: none; }
 .shell-sheet__handle {
   flex: 1; display: grid; justify-items: center; gap: var(--s1); min-height: 64px; padding: var(--s2) 0 var(--s2) var(--tap);
