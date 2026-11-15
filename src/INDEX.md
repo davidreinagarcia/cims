@@ -7,19 +7,20 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 **Folders**
 
 - [`auth/`](auth/INDEX.md): Replaceable demo sign-in contract, fictional personas and local session persistence.
-- [`components/`](components/INDEX.md): React components for the current UI (map view, sidebar). T-01 moves these into src/map/ and src/panels/.
+- [`components/`](components/INDEX.md): React components shared by the shell: map view, glyphs, offline notice. The layout itself lives in src/shell/.
 - [`data/`](data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
 - [`indoor/`](indoor/INDEX.md): Building screen, vector schematic renderer and indoor contracts shared by lanes A and B.
 - [`lib/`](lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
 - [`map/`](map/INDEX.md): Everything about the map engine: contract for layers, base style, and the layer auto-loader.
-- [`panels/`](panels/INDEX.md): Sidebar panels, one folder per panel. Mount new ones in components/Sidebar.tsx.
+- [`panels/`](panels/INDEX.md): Panels, one folder per panel, shown in the floating card / bottom sheet. Mount new ones in shell/Shell.tsx.
 - [`pwa/`](pwa/INDEX.md): Offline support: the service worker template. vite.config.ts fills in the precache list and emits it as /sw.j…
+- [`shell/`](shell/INDEX.md): Map-first app shell (docs/design/APP-SHELL.md): rail / tab bar, search pill, chips, floating card / bottom sh…
 - [`state/`](state/INDEX.md): Shared app state. Today only the current selection.
 - [`styles/`](styles/INDEX.md): Design system CSS: tokens.css (variables) and cims-ui.css (all cims- components). Wired in by T-06.
 
 **Files**
 
-- [`App.tsx`](App.tsx): App shell: demo auth, selection and layer filters around the sidebar, the map and the offline notice. · exports `App`
+- [`App.tsx`](App.tsx): App root: demo auth, selection and layer-filter providers around the map-first shell (src/shell/). · exports `App`
 - [`config.ts`](config.ts): Campus map settings and the base URL for correction issues. · exports `CAMPUS`, `MAP_LIGHT`, `TILE_URL`, `TILE_ATTRIBUTION`, `CORRECTION_URL`
 - [`main.tsx`](main.tsx): Entry point: loads fonts, design tokens and styles, mounts React and registers the offline service worker.
 - [`styles.css`](styles.css): * @file Global layout and map-control skin. Colors, type and components come from styles/tokens.css and style…

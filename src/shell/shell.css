@@ -1,0 +1,273 @@
+/** @file Layout and look of the floating shell: rail, search pill, chips, card, layers tile, sheet, tab bar. Rounding stops at the card edge. */
+/* Coordinates follow docs/design/APP-SHELL.md. Desktop = [data-layout="desktop"] (≥ 768px), phones = [data-layout="mobile"].
+   Floating surfaces: paper/white fill, 1px --hairline-muted, --elev letterpress line. No blurred shadows anywhere. */
+
+/* ---------- shared bits ---------- */
+.shell-iconbtn {
+  flex: none; display: grid; place-items: center; width: var(--tap); height: var(--tap); padding: 0;
+  border: 0; border-radius: var(--radius-pill); background: none; color: var(--ink); cursor: pointer;
+}
+.shell-iconbtn:hover { background: var(--paper-2); }
+.app :focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* Nav item (rail and tab bar): icon in a pill highlight, small caps label under it. */
+.shell-navitem {
+  display: flex; flex-direction: column; align-items: center; gap: var(--s1); min-height: var(--tap); padding: var(--s1) 0;
+  border: 0; background: none; color: var(--ink); cursor: pointer;
+  font: 600 var(--fs-xs)/1 var(--font-display); text-transform: uppercase; letter-spacing: var(--caps-tracking);
+}
+.shell-navitem__icon {
+  display: grid; place-items: center; width: 56px; height: 32px; border: 1px solid transparent; border-radius: var(--radius-pill);
+}
+.shell-navitem:hover .shell-navitem__icon { background: var(--paper-2); }
+.shell-navitem[aria-pressed="true"] { color: var(--navy); }
+.shell-navitem[aria-pressed="true"] .shell-navitem__icon { background: var(--paper-2); border-color: var(--navy); }
+.shell-navitem:focus-visible { outline: none; }
+.shell-navitem:focus-visible .shell-navitem__icon { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* ---------- desktop rail ---------- */
+.shell-rail {
+  position: absolute; z-index: 10; top: 0; bottom: 0; left: 0; width: var(--rail-w);
+  display: flex; flex-direction: column; align-items: center; gap: var(--s3); padding: var(--s3) 0;
+  background: var(--paper); border-right: var(--hairline-muted);
+}
+.shell-rail__menu {
+  display: grid; place-items: center; width: var(--tap); height: var(--tap); border: 0; border-radius: var(--radius-pill);
+  background: none; color: var(--ink); cursor: pointer;
+}
+.shell-rail__menu:hover, .shell-rail__menu[aria-expanded="true"] { background: var(--paper-2); }
+.shell-rail__items { display: flex; flex-direction: column; gap: var(--s3); width: 100%; }
+
+.shell-drawer {
+  position: absolute; top: 0; bottom: 0; left: var(--rail-w); width: 264px; z-index: 12;
+  display: flex; flex-direction: column; padding: var(--s4); overflow-y: auto;
+  background: var(--paper); border-right: var(--hairline); border-radius: 0 var(--radius-card) var(--radius-card) 0;
+  animation: shell-slide-x 150ms ease-out;
+}
+.shell-drawer__title { margin: 0 0 var(--s3); color: var(--navy); font-size: var(--fs-xl); }
+.shell-drawer__item {
+  display: flex; align-items: center; gap: var(--s2); min-height: var(--tap); padding: 0 var(--s2);
+  border: 0; border-top: var(--hairline-muted); background: none; color: var(--ink); text-align: left; text-decoration: none;
+  font: inherit; cursor: pointer;
+}
+.shell-drawer__item:hover { background: var(--paper-2); }
+.shell-drawer__about { margin: 0 0 var(--s3); padding: 0 var(--s2); font-size: var(--fs-sm); color: var(--ink-muted); }
+
+/* ---------- left column: search pill + card ---------- */
+.shell-left {
+  position: absolute; z-index: 6; top: var(--s3); left: calc(var(--rail-w) + var(--s3)); width: 400px;
+  max-height: calc(100% - 2 * var(--s3)); display: flex; flex-direction: column; gap: var(--s2); pointer-events: none;
+}
+.shell-left > * { pointer-events: auto; }
+
+/* The pill is a grid: row 1 = wordmark | SearchPanel field | Route/avatar; rows 2-4 = SearchPanel status, list, empty state. */
+.shell-search { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; grid-template-rows: 48px; min-height: 0; flex: none; }
+.shell-search::before {
+  content: ""; grid-row: 1; grid-column: 1 / -1; background: var(--white);
+  border: var(--hairline-muted); border-radius: var(--radius-pill); box-shadow: var(--elev);
+}
+.shell-search:has(.search:focus-within)::before { border-color: var(--ink); outline: 1px solid var(--ink); }
+.shell-search > * { grid-column: 1 / -1; position: relative; }
+.shell-search__wordmark {
+  grid-row: 1; grid-column: 1; align-self: center; margin: 0; padding: 0 var(--s3) 0 var(--s5);
+  border-right: var(--hairline-muted); color: var(--navy);
+  font: 700 var(--fs-xl)/1 var(--font-display); letter-spacing: 0.04em;
+}
+.shell-search .search {
+  grid-row: 1; grid-column: 2; margin: 0; min-height: 0; border: 0; background: none;
+}
+.shell-search .search:focus-within { outline: none; }
+.shell-search .search input { padding: 0 var(--s2) 0 var(--s3); }
+.shell-search .search .cims-field__btn { border: 0; background: none; color: var(--ink-muted); }
+.shell-search__route {
+  grid-row: 1; grid-column: 3; align-self: center; display: grid; place-items: center; width: 52px; height: 32px;
+  border: 0; border-left: var(--hairline-muted); background: none; color: var(--navy); cursor: pointer;
+}
+.shell-search__route:hover { color: var(--gold-ink); }
+.shell-search__trailing { grid-row: 1; grid-column: 3; align-self: center; padding-right: var(--s1); }
+
+/* Results drop down from the pill, only while there is a query and nothing is selected. */
+.shell-search .search-status { grid-row: 2; }
+.shell-search .list { grid-row: 3; }
+.shell-search .search-empty { grid-row: 4; }
+.shell-search .search-status, .shell-search .list, .shell-search .search-empty {
+  margin: var(--s2) 0 0; background: var(--paper); border: var(--hairline-muted); border-radius: var(--radius-card); box-shadow: var(--elev);
+  overflow: hidden auto; animation: shell-slide-y 150ms ease-out;
+}
+.shell-search .search-status { padding: var(--s2) var(--s4); }
+.shell-search .list { padding: var(--s2) 0; max-height: calc(100dvh - 48px - 6 * var(--s3)); }
+.shell-search .list:empty { display: none; }
+.shell-search[data-results="false"] .search-status,
+.shell-search[data-results="false"] .list,
+.shell-search[data-results="false"] .search-empty { display: none; }
+
+/* Floating card: hosts the panels unchanged (square, hairline survey style inside). */
+.shell-card { position: relative; flex: 0 1 auto; min-height: 0; display: flex; }
+.shell-card:has(.shell-card__body:empty) { display: none; }
+.shell-card__surface {
+  flex: 1; min-width: 0; overflow: hidden auto; background: var(--paper);
+  border: var(--hairline-muted); border-radius: var(--radius-card); box-shadow: var(--elev);
+  animation: shell-slide-y 150ms ease-out;
+}
+.shell-card__surface[hidden] { display: none; }
+.shell-card__head, .shell-popover__head {
+  position: sticky; top: 0; z-index: 2; display: flex; align-items: center; justify-content: space-between;
+  min-height: var(--tap); padding: 0 var(--s1) 0 var(--s4); background: var(--paper); border-bottom: var(--hairline-muted);
+  color: var(--ink-muted); font-size: var(--fs-sm);
+}
+.shell-card__body { padding: var(--s3) 0 var(--s1); }
+.shell-card__body .detail { margin-top: 0; }
+.shell-card__collapse {
+  position: absolute; top: var(--s4); left: 100%; display: grid; place-items: center; width: 24px; height: 48px; padding: 0;
+  background: var(--paper); color: var(--ink); border: var(--hairline-muted); border-left: 0; border-radius: 0 8px 8px 0; cursor: pointer;
+}
+.shell-card[data-collapsed="true"] .shell-card__collapse { position: static; border-left: var(--hairline-muted); border-radius: 8px; }
+.shell-soon { padding: var(--s5) var(--s4); }
+
+/* ---------- chips ---------- */
+/* Top bar right of the pill: chips take the free width, the account sits at the end; they never overlap. */
+.shell-topbar {
+  position: absolute; z-index: 5; top: 15px; left: calc(var(--rail-w) + 424px + var(--s3)); right: var(--s3);
+  display: flex; align-items: center; gap: var(--s4); pointer-events: none;
+}
+.shell-chips { position: relative; flex: 1; min-width: 0; display: flex; pointer-events: none; }
+.shell-chips__row {
+  display: flex; gap: var(--s2); min-width: 0; padding: 3px 2px; overflow-x: auto; scrollbar-width: none; pointer-events: auto;
+}
+.shell-chips__row::-webkit-scrollbar { display: none; }
+.shell-chip {
+  flex: none; display: inline-flex; align-items: center; gap: var(--s2); height: 36px; padding: 0 var(--s4) 0 6px;
+  border: var(--hairline-muted); border-radius: var(--radius-pill); background: var(--white); color: var(--ink); box-shadow: var(--elev);
+  font: 500 var(--fs-sm)/1 var(--font-body); white-space: nowrap; cursor: pointer;
+}
+.shell-chip:hover { background: var(--paper-2); }
+.shell-chip__glyph { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--paper); color: var(--cat, var(--ink)); }
+.shell-chip[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.shell-chip[aria-pressed="true"]:hover { background: #0B3D68; }
+.shell-chip:disabled { background: var(--paper-2); color: var(--ink-muted); box-shadow: none; opacity: 0.6; cursor: not-allowed; }
+.shell-chip:disabled .shell-chip__glyph { color: var(--ink-muted); }
+.shell-chips__arrow {
+  position: absolute; top: 3px; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; pointer-events: auto;
+  border: var(--hairline-muted); border-radius: 50%; background: var(--white); color: var(--ink); box-shadow: var(--elev); cursor: pointer;
+}
+.shell-chips__arrow--start { left: -4px; }
+.shell-chips__arrow--end { right: -4px; }
+
+/* ---------- account (desktop: 40px circle top-right) ---------- */
+.shell-account { position: relative; z-index: 7; flex: none; pointer-events: auto; }
+.shell-account .account-chip__trigger, .shell-search__trailing .account-chip__trigger { border-radius: var(--radius-pill); min-height: 40px; }
+.shell-account .account-chip__trigger:has(.cims-badge), .shell-search__trailing .account-chip__trigger:has(.cims-badge) {
+  width: 40px; height: 40px; padding: 0; justify-content: center; border-radius: 50%;
+}
+.account-chip__trigger:has(.cims-badge) .account-chip__name,
+.account-chip__trigger:has(.cims-badge) .cims-status {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+.shell-account .account-chip__menu { margin-top: var(--s2); border-radius: var(--radius-card); border-color: #CFC6B2; box-shadow: var(--elev); }
+
+/* ---------- layers tile + popover (bottom-left of the map) ---------- */
+.shell-layers { position: absolute; z-index: 1; left: var(--s3); bottom: var(--s3); }
+.shell-layers__tile {
+  display: grid; place-items: center; align-content: center; gap: 2px; width: 64px; height: 64px; padding: 0;
+  border: var(--hairline-muted); border-radius: 12px; background: var(--white); color: var(--navy); box-shadow: var(--elev); cursor: pointer;
+}
+.shell-layers__tile:hover, .shell-layers__tile[aria-expanded="true"] { background: var(--paper-2); }
+.shell-layers__label { font: 600 var(--fs-xs)/1 var(--font-display); text-transform: uppercase; letter-spacing: var(--caps-tracking); color: var(--ink); }
+.shell-popover {
+  position: absolute; left: 0; bottom: 76px; width: 340px; max-height: calc(100dvh - 180px); overflow: hidden auto;
+  background: var(--paper); border: var(--hairline-muted); border-radius: var(--radius-card); box-shadow: var(--elev);
+  animation: shell-slide-y 150ms ease-out;
+}
+.shell-popover .layers { margin: var(--s3) 0; }
+.shell-popover .layers__chips { display: none; } /* the floating chips row does this job now */
+.shell-popover .layers__list { max-height: none; }
+/* North arrow sits right of the Layers tile; both move right of the card when it is open. */
+.app[data-layout="desktop"] .maplibregl-ctrl-bottom-left { left: calc(64px + var(--s3)); }
+.app[data-layout="desktop"]:has(.shell-card[data-collapsed="false"] .shell-card__body > *, .shell-search[data-results="true"]) .shell-layers { left: 424px; }
+.app[data-layout="desktop"]:has(.shell-card[data-collapsed="false"] .shell-card__body > *, .shell-search[data-results="true"]) .maplibregl-ctrl-bottom-left { left: calc(424px + 64px); }
+
+/* ---------- desktop stage + indoor panel ---------- */
+.app[data-layout="desktop"] .stage { left: var(--rail-w); }
+/* Indoor opens as a large floating panel under the pill, clear of the rail and the search pill. */
+.app[data-layout="desktop"] .stage > .building-view {
+  z-index: 4; inset: calc(var(--s3) + 48px + var(--s2)) var(--s3) var(--s3) var(--s3);
+  border: var(--hairline-muted); border-radius: var(--radius-card); box-shadow: var(--elev);
+}
+
+/* ---------- phones ---------- */
+.app[data-layout="mobile"] { --top: calc(env(safe-area-inset-top, 0px) + var(--s2)); --bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px)); }
+.app[data-layout="mobile"] .stage { bottom: var(--bottom); }
+.app[data-layout="mobile"] .shell-left { top: var(--top); left: var(--s2); right: var(--s2); width: auto; max-height: calc(100% - var(--top) - var(--bottom) - var(--s2)); }
+.app[data-layout="mobile"] .shell-search__wordmark { padding: 0 var(--s2) 0 var(--s4); font-size: var(--fs-lg); }
+.app[data-layout="mobile"] .shell-search .search input { padding: 0 var(--s1) 0 var(--s2); min-width: 0; }
+.app[data-layout="mobile"] .shell-search .search .cims-field__btn { width: 32px; }
+.app[data-layout="mobile"] .shell-search .list { max-height: calc(100dvh - var(--top) - var(--bottom) - 48px - var(--s5)); }
+.app[data-layout="mobile"] .account-chip__trigger { min-height: 36px; padding: 0 var(--s2); font-size: var(--fs-sm); }
+.app[data-layout="mobile"] .account-chip__trigger:has(.cims-badge) { width: 36px; height: 36px; padding: 0; }
+.app[data-layout="mobile"] .account-chip__trigger .cims-status { padding: 0 var(--s1); font-size: var(--fs-xs); }
+
+.app[data-layout="mobile"] .shell-topbar { top: calc(var(--top) + 48px + var(--s1)); left: 0; right: 0; }
+/* With the sheet at half or full the map is short: keep only the FAB and the attribution down there. */
+.app[data-layout="mobile"]:has(.shell-sheet:not([data-snap="peek"]) .shell-sheet__body > *) :is(.cims-scale, .cims-mapctl, .maplibregl-ctrl-group, .cims-north) { display: none; }
+.app[data-layout="mobile"] .shell-chips__row { padding: 4px var(--s2); scroll-snap-type: x proximity; }
+.app[data-layout="mobile"] .shell-chip { position: relative; height: 40px; scroll-snap-align: start; }
+.app[data-layout="mobile"] .shell-chip::after { content: ""; position: absolute; inset: -2px 0; } /* 44px tap target */
+.app[data-layout="mobile"] .shell-chips__arrow { display: none; }
+
+/* Layers: a round button under the chips (top-right), popover opens downward. */
+.app[data-layout="mobile"] .shell-layers { left: auto; bottom: auto; right: var(--s2); top: calc(var(--top) + 48px + 56px); z-index: 3; }
+.app[data-layout="mobile"] .shell-layers__tile { width: var(--tap); height: var(--tap); border-radius: 50%; }
+.app[data-layout="mobile"] .shell-layers__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.app[data-layout="mobile"] .shell-popover { left: auto; right: 0; bottom: auto; top: 52px; width: min(340px, calc(100vw - 16px)); max-height: calc(100dvh - var(--top) - var(--bottom) - 180px); }
+
+/* The sheet height drives where the FAB and the map controls sit. */
+.app[data-layout="mobile"]:has(.shell-sheet[data-snap="peek"] .shell-sheet__body > *) { --sheet-h: 88px; }
+.app[data-layout="mobile"]:has(.shell-sheet[data-snap="half"] .shell-sheet__body > *) { --sheet-h: 50dvh; }
+.app[data-layout="mobile"]:has(.shell-sheet[data-snap="full"] .shell-sheet__body > *) { --sheet-h: 50dvh; }
+.shell-fab {
+  position: absolute; z-index: 3; right: var(--s3); bottom: calc(var(--sheet-h, 0px) + var(--s3));
+  display: grid; place-items: center; width: 56px; height: 56px; padding: 0;
+  border: 1px solid var(--navy); border-radius: var(--radius-pill); background: var(--navy); color: var(--gold); box-shadow: var(--elev); cursor: pointer;
+}
+.app[data-layout="mobile"] .maplibregl-ctrl-bottom-right { bottom: calc(var(--sheet-h, 0px) + 56px + var(--s3)); }
+.app[data-layout="mobile"] .maplibregl-ctrl-bottom-left { bottom: var(--sheet-h, 0px); }
+.app[data-layout="mobile"] .maplibregl-ctrl-group:has(.maplibregl-ctrl-zoom-in) { display: none; } /* pinch to zoom */
+
+.shell-sheet {
+  position: absolute; z-index: 8; left: 0; right: 0; bottom: var(--bottom); display: flex; flex-direction: column;
+  background: var(--paper); border: var(--hairline-muted); border-bottom: 0; border-radius: var(--radius-card) var(--radius-card) 0 0;
+  box-shadow: 0 -1px 0 rgba(28, 39, 51, 0.28); transition: height 150ms ease-out; animation: shell-slide-up 150ms ease-out;
+}
+.shell-sheet:has(.shell-sheet__body:empty) { display: none; }
+.shell-sheet[data-snap="peek"] { height: 88px; }
+.shell-sheet[data-snap="half"] { height: min(50dvh, calc(100dvh - var(--top) - 48px - var(--s2) - var(--bottom))); }
+.shell-sheet[data-snap="full"] { height: calc(100dvh - var(--top) - 48px - var(--s2) - var(--bottom)); }
+.shell-sheet__head { display: flex; align-items: center; padding-right: var(--s1); border-bottom: var(--hairline-muted); flex: none; }
+.shell-sheet__handle {
+  flex: 1; display: grid; justify-items: center; gap: var(--s1); min-height: 64px; padding: var(--s2) 0 var(--s2) var(--tap);
+  border: 0; background: none; color: var(--ink-muted); font-size: var(--fs-sm); cursor: grab; touch-action: none;
+}
+.shell-sheet__grip { width: 36px; height: 4px; border-radius: 2px; background: var(--ink-muted); }
+.shell-sheet__body { flex: 1; min-height: 0; overflow-y: auto; padding: var(--s3) 0; overscroll-behavior: contain; }
+.shell-sheet__body[hidden] { display: none; }
+
+.shell-tabbar {
+  position: absolute; z-index: 9; left: 0; right: 0; bottom: 0; height: var(--bottom); padding-bottom: env(safe-area-inset-bottom, 0px);
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center;
+  background: var(--paper); border-top: var(--hairline-muted);
+}
+
+/* Indoor on phones: full width between the pill and the tab bar (never over either). */
+.app[data-layout="mobile"] .building-view {
+  position: fixed; z-index: 20; top: calc(var(--top) + 48px + var(--s2)); left: 0; right: 0; bottom: var(--bottom);
+  border-top: var(--hairline-muted); border-radius: var(--radius-card) var(--radius-card) 0 0;
+}
+
+/* ---------- motion: one short slide, none when reduced ---------- */
+@keyframes shell-slide-y { from { transform: translateY(-6px); opacity: 0; } }
+@keyframes shell-slide-x { from { transform: translateX(-12px); opacity: 0; } }
+@keyframes shell-slide-up { from { transform: translateY(24px); } }
+@media (prefers-reduced-motion: reduce) {
+  .shell-card__surface, .shell-search .list, .shell-search .search-status, .shell-search .search-empty,
+  .shell-drawer, .shell-popover, .shell-sheet { animation: none; transition: none; }
+}

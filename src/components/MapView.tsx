@@ -35,9 +35,12 @@ export default function MapView() {
         style: baseStyle,
       });
       const m = map;
-      m.addControl(new maplibregl.NavigationControl(), "top-right");
-      m.addControl(new ViewToggle(), "top-right");
+      // Bottom corners stack upward (each new control goes on top), so add bottom-right controls from the bottom up:
+      // scale box, compass, 2D/3D, zoom (APP-SHELL.md §7). The top of the map stays free for the floating search UI.
       m.addControl(new ScaleBox(), "bottom-right");
+      m.addControl(new maplibregl.NavigationControl({ showZoom: false }), "bottom-right");
+      m.addControl(new ViewToggle(), "bottom-right");
+      m.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
       m.addControl(new NorthArrow(), "bottom-left");
 
       // style.load (not "load") so layers appear without waiting for every tile.

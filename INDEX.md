@@ -30,7 +30,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
 - [`scripts/`](scripts/INDEX.md): Dev tooling run with Node (no deps): index generator, Claude hooks, data fetchers.
 - [`src/`](src/INDEX.md): The web app (Vite + React + TypeScript + MapLibre). Entry: main.tsx → App.tsx.
   - [`src/auth/`](src/auth/INDEX.md): Replaceable demo sign-in contract, fictional personas and local session persistence.
-  - [`src/components/`](src/components/INDEX.md): React components for the current UI (map view, sidebar). T-01 moves these into src/map/ and src/panels/.
+  - [`src/components/`](src/components/INDEX.md): React components shared by the shell: map view, glyphs, offline notice. The layout itself lives in src/shell/.
   - [`src/data/`](src/data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
     - [`src/data/indoor/`](src/data/indoor/INDEX.md): _no description yet_
     - [`src/data/pois/`](src/data/pois/INDEX.md): Curated points of interest, one file per category (drafts by Codex pending verification, plus demo events). H…
@@ -40,13 +40,14 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
     - [`src/map/furniture/`](src/map/furniture/INDEX.md): Cartographic furniture drawn over the map as MapLibre controls: scale + coordinates box, north arrow, 2D/3D t…
     - [`src/map/layers/`](src/map/layers/INDEX.md): One file per map layer; each default-exports a MapLayer and is loaded automatically. Add yours here.
     - [`src/map/patterns/`](src/map/patterns/INDEX.md): Hatch pattern images for the survey-map look (tiny SVGs registered with map.addImage).
-  - [`src/panels/`](src/panels/INDEX.md): Sidebar panels, one folder per panel. Mount new ones in components/Sidebar.tsx.
+  - [`src/panels/`](src/panels/INDEX.md): Panels, one folder per panel, shown in the floating card / bottom sheet. Mount new ones in shell/Shell.tsx.
     - [`src/panels/account/`](src/panels/account/INDEX.md): Account chip and accessible DEMO sign-in theater using the existing survey map design.
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
     - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
     - [`src/panels/layers/`](src/panels/layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
     - [`src/panels/search/`](src/panels/search/INDEX.md): Search box and list of places (rooms and buildings join in T-14).
   - [`src/pwa/`](src/pwa/INDEX.md): Offline support: the service worker template. vite.config.ts fills in the precache list and emits it as /sw.j…
+  - [`src/shell/`](src/shell/INDEX.md): Map-first app shell (docs/design/APP-SHELL.md): rail / tab bar, search pill, chips, floating card / bottom sh…
   - [`src/state/`](src/state/INDEX.md): Shared app state. Today only the current selection.
   - [`src/styles/`](src/styles/INDEX.md): Design system CSS: tokens.css (variables) and cims-ui.css (all cims- components). Wired in by T-06.
 - [`templates/`](templates/INDEX.md): Copy-and-fill templates: meeting notes, weekly status.

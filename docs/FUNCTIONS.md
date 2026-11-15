@@ -70,6 +70,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
 - `MapLayer` [src/map/types.ts:36](../src/map/types.ts#L36): A self-contained piece of the map. Drop a file in src/map/layers/ that default-exports one of
+- `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
+- `IconName` [src/shell/icons.tsx:19](../src/shell/icons.tsx#L19): Names of the shell icons.
+- `ShellPanel` [src/shell/icons.tsx:32](../src/shell/icons.tsx#L32): What the floating card / bottom sheet can show besides a map selection.
 - `LayerFiltersApi` [src/state/layerFilters.tsx:20](../src/state/layerFilters.tsx#L20): What useLayerFilters() returns.
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): Selectable map and search entities; room ids use "buildingId:spaceId".
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
@@ -83,11 +86,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Components
 
-- `App()` [src/App.tsx:12](../src/App.tsx#L12): Root component.
+- `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component.
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:15](../src/components/MapView.tsx#L15): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
-- `Sidebar()` [src/components/Sidebar.tsx:12](../src/components/Sidebar.tsx#L12): Left column (bottom sheet on phones) that hosts the panels.
 - `BuildingView()` [src/indoor/BuildingView.tsx:19](../src/indoor/BuildingView.tsx#L19): Opens registered buildings and resolves room selections straight into a routed building screen.
 - `FloorPlan({ level, selected, focus, route, legs, onSelect })` [src/indoor/FloorPlan.tsx:38](../src/indoor/FloorPlan.tsx#L38): Renders one available level with controls and brings the selected space into view.
 - `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
@@ -100,6 +102,15 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BulletinPanel({ onShowMap })` [src/panels/bulletin/BulletinPanel.tsx:9](../src/panels/bulletin/BulletinPanel.tsx#L9): Show upcoming events independently of layer filters and return to Explore on selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `SearchPanel()` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
+- `BottomSheet(…)` [src/shell/BottomSheet.tsx:19](../src/shell/BottomSheet.tsx#L19): Drag or tap the handle to move between snaps; arrow keys on the handle do the same. Opens at half.
+- `ChipsBar()` [src/shell/ChipsBar.tsx:12](../src/shell/ChipsBar.tsx#L12): One pill per layer category; pressed = layer on. Categories without data are disabled, like in the Layers pan…
+- `FloatingCard(…)` [src/shell/FloatingCard.tsx:6](../src/shell/FloatingCard.tsx#L6): Card with a close button and a ‹ collapse tab on its right edge. Renders nothing visible when its panel rende…
+- `LayersPopover()` [src/shell/LayersPopover.tsx:7](../src/shell/LayersPopover.tsx#L7): Tile that opens the legend popover. Esc or a click outside closes it and returns focus to the tile.
+- `MobileTabBar({ panel, onPanel })` [src/shell/MobileTabBar.tsx:5](../src/shell/MobileTabBar.tsx#L5): Fixed bottom bar above the safe-area inset. Left/right arrows move between tabs.
+- `Rail({ panel, onPanel })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
+- `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
+- `Shell()` [src/shell/Shell.tsx:51](../src/shell/Shell.tsx#L51): Lays out the map and every floating surface; panels are mounted unchanged inside the card (desktop) or sheet…
+- `Icon({ name, size = 24 })` [src/shell/icons.tsx:22](../src/shell/icons.tsx#L22): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = mockAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
@@ -138,6 +149,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `addHatchPatterns(map)` [src/map/patterns/index.ts:38](../src/map/patterns/index.ts#L38): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
 - `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
+- `NAV_ITEMS` [src/shell/icons.tsx:35](../src/shell/icons.tsx#L35): The four destinations of the rail (desktop) and the tab bar (phones), in order.
+- `moveFocus(event, vertical)` [src/shell/icons.tsx:43](../src/shell/icons.tsx#L43): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 
 ### Possible duplicates
 
