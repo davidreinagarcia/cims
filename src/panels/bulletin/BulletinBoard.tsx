@@ -1,6 +1,7 @@
 /** @file Full-screen Campus Bulletin: cork board with masonry note cards, type filters with counts, search and deep link. */
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 import { POST_TYPES, bulletinPosts, countByType, filterPosts, type BulletinPost, type PostType } from "../../lib/bulletin";
+import { recordPortfolioEntry } from "../../portfolio/store";
 import { Icon } from "../../shell/icons";
 import { useAuth } from "../../state/auth";
 import { useSelection } from "../../state/selection";
@@ -85,7 +86,7 @@ export default function BulletinBoard({ type, onType, onClose }: {
   type: PostType | "all"; onType: (type: PostType | "all") => void; onClose: () => void;
 }) {
   const { select } = useSelection();
-  const { requireAuth, dialogOpen } = useAuth();
+  const { requireAuth, dialogOpen, session } = useAuth();
   const root = useRef<HTMLDialogElement>(null);
   const [query, setQuery] = useState("");
   const [notice, setNotice] = useState("");
@@ -113,11 +114,20 @@ export default function BulletinBoard({ type, onType, onClose }: {
 
   const toggleInterest = (id: string) => {
     const next = new Set(interests);
+    const turningOn = !next.has(id);
     if (next.has(id)) next.delete(id); else next.add(id);
     setInterests(next);
     // TODO T-22: add shared interest counts only when a backend provides them.
     try { localStorage.setItem(INTERESTS_KEY, JSON.stringify([...next])); }
     catch { setNotice("Interests are available for this visit. This browser could not save them on this device."); }
+    // BuzzPrint (T-71): marking a post Interested records it in the signed-in account's portfolio.
+    // Un-marking it does NOT remove that record — it's a history of what you engaged with, not a
+    // mirror of this list. A signed-out click still toggles the interest above; it just has no
+    // account to save a portfolio entry under, so none is recorded.
+    if (turningOn && session) {
+      const post = posts.find((item) => item.id === id);
+      if (post) void recordPortfolioEntry(session, post);
+    }
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {

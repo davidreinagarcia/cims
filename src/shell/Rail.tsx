@@ -1,4 +1,4 @@
-/** @file Desktop left rail: menu drawer (about, sign in/out, data corrections) and the Explore/Rooms/Report/Bulletin switch. */
+/** @file Desktop left rail: menu drawer (about, sign in/out, data corrections) and the Explore/Rooms/Report/Bulletin/Stories/BuzzPrint switch. */
 import { useEffect, useRef, useState } from "react";
 import { CORRECTION_URL } from "../config";
 import { useAuth } from "../state/auth";
@@ -17,7 +17,7 @@ export default function Rail({ panel, onPanel, onPolice }: { panel: ShellPanel; 
       <div className="shell-rail__items" onKeyDown={(event) => moveFocus(event, true)}>
         {NAV_ITEMS.map((item) => (
           <button key={item.id} type="button" data-nav-item data-nav={item.id} className="shell-navitem" aria-pressed={panel === item.id}
-            aria-haspopup={item.id === "bulletin" ? "dialog" : undefined}
+            aria-haspopup={item.id === "bulletin" || item.id === "buzzprint" ? "dialog" : undefined}
             tabIndex={panel === item.id || (panel === "route" && item.id === "explore") ? 0 : -1}
             onClick={() => onPanel(item.id)}>
             <span className="shell-navitem__icon"><Icon name={item.icon} /></span>

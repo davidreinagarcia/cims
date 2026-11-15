@@ -28,6 +28,7 @@ or open a tiny separate PR they review.
 |------|-------|
 | `src/map/layers/buildings.ts`, `pois.ts`, `orgs.ts`, `transport.ts` | A (David) |
 | `src/panels/building-card/`, `src/panels/search/`, `src/panels/layers/`, `src/panels/bulletin/` | A (David) |
+| `src/portfolio/` (BuzzPrint, T-71) | A (David) — hooks off `bulletin/BulletinBoard.tsx`'s "Interested" toggle |
 | `src/data/buildings.geojson`, `src/data/orgs.json` | A (David) |
 | `src/auth/**` (sign-in mock, adapter), `src/panels/account/` | A (David) |
 | `src/indoor/` (viewer, level selector, directory) | B (Tato) |
@@ -160,6 +161,22 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Buildings + aliases + places + rooms; "Kendeda <room>" opens indoor view on the right floor.
 - [x] **T-15 Orgs & events layer + bulletin tab** (F-07) · needs T-12, data T-32 *Read-only done (Bulletin tab, event and org cards, weekly demo events, 13 draft real orgs). Officer posting (US-07.2, Should) not started; the sign-in gate (T-25) exists.*
   Read-only bulletin and fictional weekly demo events implemented in Lane A. Posting waits for the sign-in gate T-25.
+- [x] **T-71 BuzzPrint** (new feature, not in the original SGA prompts/PRD F-list — decided this session, "Team, 2026-11-15") · A · needs T-15, T-25
+  A personal campus-activity portfolio for students: every Bulletin post you mark "Interested" on is saved as a
+  permanent entry (day, time, location and what the event was — snapshotted from the post at that moment, so a
+  later edit or removal of the post never changes your record; un-marking "Interested" does **not** delete the
+  entry, since this is a history of what you engaged with, not a mirror of your current interest list). New
+  `src/portfolio/` (`types.ts`, `store.ts` + `localAdapter.ts`, mirroring `src/stories/`'s shape but **independent**:
+  permanent, no 24 h expiry, account-scoped). Photos you attach per entry are kept as base64 in `localStorage` (no
+  backend, no camera-capture reuse from Stories — a plain file picker); a large photo still shows for the session
+  but may not survive a reload if the browser's storage quota is tight (stated inline in the UI). `PortfolioPage.tsx`
+  is a new full-screen view wired into the shell exactly like the Bulletin board (`src/shell/Shell.tsx`, `Rail.tsx`,
+  `MobileTabBar.tsx`, `icons.tsx`): a big ink-line folder on the landing state that plays a CSS shrink animation on
+  click (skipped under `prefers-reduced-motion`) before revealing the day-grouped entry list. The only edit to
+  Lane A's `BulletinBoard.tsx` is a small additive hook: turning "Interested" **on** calls
+  `recordPortfolioEntry(session, post)` when signed in; a signed-out click still toggles the interest but records
+  nothing (no account to scope an entry to) and does not crash. Viewing your own BuzzPrint needs no account (F-21's
+  "reading is open" rule); recording an entry does.
 
 **Lane B: Inside + Actions (Tato)**
 
