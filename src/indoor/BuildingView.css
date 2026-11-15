@@ -114,3 +114,11 @@
 @media (max-width: 700px) {
   .building-view__room-finder { width: 100%; }
 }
+
+.building-view__stairs-note { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; padding: 8px 12px; border-left: 4px solid var(--route); background: var(--paper-2); font-size: var(--fs-sm); }
+.building-view__stairs-note .cims-btn { font-size: var(--fs-sm); padding: 0 12px; }
+.building-view__steps li:has(.building-view__step-vertical) { background: var(--paper-2); }
+.building-view__step-vertical { font-weight: 600; }
+.building-view__step-vertical--stairs { box-shadow: inset 4px 0 0 var(--route); }
+.building-view__step-badge { display: inline-block; margin-right: 8px; padding: 1px 6px; background: var(--navy); color: var(--white); font: 600 11px var(--font-mono); text-transform: uppercase; letter-spacing: .04em; }
+.building-view__step-vertical--stairs .building-view__step-badge { background: var(--route); }

@@ -2,11 +2,13 @@
 import type { IndoorConnector, IndoorGraph, IndoorNode } from "./types";
 
 /** One accessible instruction and the level on which it happens. */
-export interface Step { level: string; text: string }
+export interface Step { level: string; text: string; /** Set on vertical moves so the UI can stress them. */ vertical?: { kind: "stairs" | "elevator"; direction: "up" | "down"; to: string } }
+/** Where the route changes floor: shown on the plan as a badge. */
+export interface Transition { level: string; x: number; y: number; kind: "stairs" | "elevator"; direction: "up" | "down"; to: string }
 /** A continuous portion of the route on one floor. */
 export interface RouteLeg { level: string; points: [number, number][] }
 /** A shortest path with drawing geometry and human readable instructions. */
-export interface IndoorRoute { nodes: IndoorNode[]; legs: RouteLeg[]; steps: Step[]; connectorsUsed: IndoorConnector[] }
+export interface IndoorRoute { nodes: IndoorNode[]; legs: RouteLeg[]; steps: Step[]; connectorsUsed: IndoorConnector[]; transitions: Transition[] }
 /** Routing preferences and optional endpoint names supplied by the directory. */
 export interface RouteOptions { stepFree: boolean; fromLabel?: string; toLabel?: string }
 
@@ -67,6 +69,7 @@ export function findRoute(graph: IndoorGraph, fromNodeId: string, toNodeId: stri
   const legs: RouteLeg[] = [];
   const steps: Step[] = [{ level: nodes[0].level, text: `Start at ${options.fromLabel ?? nodes[0].label ?? "selected start"}` }];
   const connectorsUsed: IndoorConnector[] = [];
+  const transitions: Transition[] = [];
   let straightStep = -1;
   let connectorStep = -1;
   let connectorStepId = "";
@@ -85,8 +88,9 @@ export function findRoute(graph: IndoorGraph, fromNodeId: string, toNodeId: stri
         ? `Take the elevator to ${levelName(node.level)}${named}`
         : `Take the stairs ${direction} to ${levelName(node.level)}${named}`;
       // Riding one connector through several floors is a single instruction.
-      if (steps.length - 1 === connectorStep && connectorStepId === connector.id) steps[connectorStep].text = text;
-      else { connectorStep = steps.length; connectorStepId = connector.id; steps.push({ level: before.level, text }); }
+      transitions.push({ level: before.level, x: before.x, y: before.y, kind: connector.kind, direction, to: node.level });
+      if (steps.length - 1 === connectorStep && connectorStepId === connector.id) { steps[connectorStep].text = text; steps[connectorStep].vertical!.to = node.level; }
+      else { connectorStep = steps.length; connectorStepId = connector.id; steps.push({ level: before.level, text, vertical: { kind: connector.kind, direction, to: node.level } }); }
       straightStep = -1;
     }
     if (!after || after.level !== node.level) continue;
@@ -107,5 +111,5 @@ export function findRoute(graph: IndoorGraph, fromNodeId: string, toNodeId: stri
     }
   }
   steps.push({ level: nodes[nodes.length - 1].level, text: `Arrive at ${options.toLabel ?? nodes[nodes.length - 1].label ?? "destination"}` });
-  return { nodes, legs, steps, connectorsUsed };
+  return { nodes, legs, steps, connectorsUsed, transitions };
 }
