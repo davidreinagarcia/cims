@@ -83,6 +83,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `createLocalPreferredRoomsService()` [src/lib/preferredRooms.mock.ts:8](../src/lib/preferredRooms.mock.ts#L8): Creates the localStorage-backed mock. Falls back to memory when storage is unavailable.
 - `createSupabasePreferredRoomsService(fallback)` [src/lib/preferredRooms.supabase.ts:9](../src/lib/preferredRooms.supabase.ts#L9): Favorites stored in Supabase; the `accountId` argument is ignored in favor of auth.uid().
 - `preferredRoomsService` [src/lib/preferredRooms.ts:34](../src/lib/preferredRooms.ts#L34): The favorites backend used by the app. Supabase, with the local mock as offline fallback.
+- `qrSvg(text, size = 320)` [src/lib/qr.ts:8](../src/lib/qr.ts#L8): The QR of `text` as a standalone SVG string (quiet zone included, error correction Q so scuffed stickers stil…
+- `qrPng(text, size = 1024)` [src/lib/qr.ts:21](../src/lib/qr.ts#L21): The same QR rendered as a PNG blob (for printers and chat apps that dislike SVG).
 - `watchTable(table, onChange)` [src/lib/realtime.ts:5](../src/lib/realtime.ts#L5): Watches one public table; `onChange` fires on every insert/update/delete you may see (RLS applies) and at mos…
 - `metersBetween(a, number], b, number])` [src/lib/reports.mock.ts:36](../src/lib/reports.mock.ts#L36): Distance in meters between two [lng, lat] points (haversine).
 - `samePlace(a, b)` [src/lib/reports.mock.ts:45](../src/lib/reports.mock.ts#L45): Same place: same building + floor + room indoors, or within 25 m for outdoor pins.
@@ -147,7 +149,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `AmenitiesById` [src/indoor/availability.ts:84](../src/indoor/availability.ts#L84): Demo amenities keyed by room selection id, e.g. `roomFinderDemo.ts#roomAmenitiesById`.
 - `DemoSlotPattern` [src/indoor/availability.ts:87](../src/indoor/availability.ts#L87): A fictional weekly booking recurring at campus-local HH:MM times.
 - `BookingRequest` [src/indoor/handoff.ts:5](../src/indoor/handoff.ts#L5): A request to open the reservations panel on one building, coming from an indoor room card.
-- `IndoorRoom` [src/indoor/registry.ts:19](../src/indoor/registry.ts#L19): A searchable indoor entry explicitly distinguishes drawn routes from published facts.
+- `IndoorRoom` [src/indoor/registry.ts:24](../src/indoor/registry.ts#L24): A searchable indoor entry explicitly distinguishes drawn routes from published facts.
 - `Step` [src/indoor/route.ts:5](../src/indoor/route.ts#L5): One accessible instruction and the level on which it happens.
 - `Transition` [src/indoor/route.ts:11](../src/indoor/route.ts#L11): Where the route changes floor: shown on the plan as a badge.
 - `RouteLeg` [src/indoor/route.ts:13](../src/indoor/route.ts#L13): A continuous portion of the route on one floor.
@@ -217,7 +219,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
 - `MapLayer` [src/map/types.ts:36](../src/map/types.ts#L36): A self-contained piece of the map. Drop a file in src/map/layers/ that default-exports one of
-- `MaintenanceViewProps` [src/panels/maintenance/MaintenanceView.tsx:12](../src/panels/maintenance/MaintenanceView.tsx#L12): Props for the dashboard.
+- `MaintenanceViewProps` [src/panels/maintenance/MaintenanceView.tsx:13](../src/panels/maintenance/MaintenanceView.tsx#L13): Props for the dashboard.
 - `Draft` [src/panels/police/PoliceMap.tsx:12](../src/panels/police/PoliceMap.tsx#L12): The circle being drawn, before it is launched.
 - `PoliceMapProps` [src/panels/police/PoliceMap.tsx:15](../src/panels/police/PoliceMap.tsx#L15): Props for the police map.
 - `PoliceViewProps` [src/panels/police/PoliceView.tsx:18](../src/panels/police/PoliceView.tsx#L18): Props for the console.
@@ -276,7 +278,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:78](../src/panels/bulletin/BulletinBoard.tsx#L78): Modal cork board with shared interests; the shell owns its URL, type and return focus.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:68](../src/panels/layers/LayersPanel.tsx#L68): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
-- `MaintenanceView({ onClose })` [src/panels/maintenance/MaintenanceView.tsx:65](../src/panels/maintenance/MaintenanceView.tsx#L65): Full-screen maintenance dashboard, opened from the menu (and by ?view=maintenance).
+- `DoorStickers()` [src/panels/maintenance/DoorStickers.tsx:33](../src/panels/maintenance/DoorStickers.tsx#L33): Link and QR generator for the entrance stickers, one list per building.
+- `MaintenanceView({ onClose })` [src/panels/maintenance/MaintenanceView.tsx:66](../src/panels/maintenance/MaintenanceView.tsx#L66): Full-screen maintenance dashboard, opened from the menu (and by ?view=maintenance).
 - `PoliceMap(props)` [src/panels/police/PoliceMap.tsx:32](../src/panels/police/PoliceMap.tsx#L32): Police map: pointer events draw the circle (mouse and touch alike) while `drawing` is on.
 - `PoliceView({ onClose })` [src/panels/police/PoliceView.tsx:168](../src/panels/police/PoliceView.tsx#L168): Full-screen console, opened from the home screen (and by ?view=police).
 - `TipsQueue({ tips, selectedId, onSelect, onDrawHere })` [src/panels/police/TipsQueue.tsx:26](../src/panels/police/TipsQueue.tsx#L26): The queue, newest unhandled first.
@@ -348,13 +351,14 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `openIndoor(buildingId)` [src/indoor/open.ts:9](../src/indoor/open.ts#L9): Opens the full indoor screen of a building.
 - `closeIndoor()` [src/indoor/open.ts:11](../src/indoor/open.ts#L11): Back to the preview card (or the map) without clearing the selection.
 - `useOpenIndoor()` [src/indoor/open.ts:13](../src/indoor/open.ts#L13): The building whose full indoor screen is open, if any.
-- `indoorFor(buildingId)` [src/indoor/registry.ts:9](../src/indoor/registry.ts#L9): Returns the curated indoor model for this footprint id, if supported.
-- `hasIndoor(id)` [src/indoor/registry.ts:14](../src/indoor/registry.ts#L14): Whether a building opens the indoor screen instead of the sidebar card.
-- `indoorRooms()` [src/indoor/registry.ts:25](../src/indoor/registry.ts#L25): Lists routable schematic spaces and rooms without geometry for search and selection.
-- `resolveRoom(id)` [src/indoor/registry.ts:36](../src/indoor/registry.ts#L36): Resolves a room selection id without guessing a building or room.
-- `indoorBySlug(slug)` [src/indoor/registry.ts:41](../src/indoor/registry.ts#L41): Finds an indoor building by its sticker slug (or full footprint id).
-- `doorLink()` [src/indoor/registry.ts:46](../src/indoor/registry.ts#L46): A door sticker link: ?in=<building slug>&door=<entrance id>, read once when the app opens.
-- `doorUrl(origin, building, entranceId)` [src/indoor/registry.ts:56](../src/indoor/registry.ts#L56): The sticker link for one entrance, for printing QR codes and programming NFC tags.
+- `indoorBuildings()` [src/indoor/registry.ts:9](../src/indoor/registry.ts#L9): Every building with an indoor model and its entrances, in registry order (for the maintenance sticker generat…
+- `indoorFor(buildingId)` [src/indoor/registry.ts:14](../src/indoor/registry.ts#L14): Returns the curated indoor model for this footprint id, if supported.
+- `hasIndoor(id)` [src/indoor/registry.ts:19](../src/indoor/registry.ts#L19): Whether a building opens the indoor screen instead of the sidebar card.
+- `indoorRooms()` [src/indoor/registry.ts:30](../src/indoor/registry.ts#L30): Lists routable schematic spaces and rooms without geometry for search and selection.
+- `resolveRoom(id)` [src/indoor/registry.ts:41](../src/indoor/registry.ts#L41): Resolves a room selection id without guessing a building or room.
+- `indoorBySlug(slug)` [src/indoor/registry.ts:46](../src/indoor/registry.ts#L46): Finds an indoor building by its sticker slug (or full footprint id).
+- `doorLink()` [src/indoor/registry.ts:51](../src/indoor/registry.ts#L51): A door sticker link: ?in=<building slug>&door=<entrance id>, read once when the app opens.
+- `doorUrl(origin, building, entranceId)` [src/indoor/registry.ts:61](../src/indoor/registry.ts#L61): The sticker link for one entrance, for printing QR codes and programming NFC tags.
 - `roomAmenitiesById` [src/indoor/roomFinderDemo.ts:12](../src/indoor/roomFinderDemo.ts#L12): Demo amenities (capacity, features, booking) keyed by room selection id. Always fictional (capacity is real f…
 - `demoSlotPatterns` [src/indoor/roomFinderDemo.ts:15](../src/indoor/roomFinderDemo.ts#L15): Fictional weekly busy patterns, both buildings combined, to expand per day with `expandDemoSlots`.
 - `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:28](../src/indoor/route.ts#L28): Finds the least cost walk, filtering inaccessible connectors before searching.
