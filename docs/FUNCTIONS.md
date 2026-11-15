@@ -44,6 +44,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `countByType(posts)` [src/lib/bulletin.ts:133](../src/lib/bulletin.ts#L133): Count every post type and the unfiltered total, including categories with no posts.
 - `bulletinUrl(type)` [src/lib/bulletin.ts:140](../src/lib/bulletin.ts#L140): Build a bulletin deep link, omitting the type parameter for the all filter.
 - `readBulletinParams(search)` [src/lib/bulletin.ts:147](../src/lib/bulletin.ts#L147): Read bulletin visibility and a validated type filter from a query string.
+- `loadInterests()` [src/lib/bulletinInterests.ts:13](../src/lib/bulletinInterests.ts#L13): Loads every mark (public counts) and this account's own.
+- `setInterest(postId, on)` [src/lib/bulletinInterests.ts:24](../src/lib/bulletinInterests.ts#L24): Marks or unmarks one post as interesting for this account.
 - `nextWindow(event, now)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Return the current or next weekly campus occurrence, or an unexpired one-off window.
 - `formatWindow(window)` [src/lib/events.ts:58](../src/lib/events.ts#L58): Format an event window as short English text in campus time.
 - `GeolocationError` [src/lib/geolocation.ts:14](../src/lib/geolocation.ts#L14): A geolocation failure with a stable `reason` for branching and a ready-to-show `message`. A real `Error`, so…
@@ -75,31 +77,46 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `showDrafts` [src/lib/places.ts:14](../src/lib/places.ts#L14): True when the page was opened with ?drafts=1: unverified drafts become visible (for reviewers and previews).
 - `places` [src/lib/places.ts:19](../src/lib/places.ts#L19): The places the app shows: seed, demo and verified records, plus drafts only with ?drafts=1.
 - `createLocalPreferredRoomsService()` [src/lib/preferredRooms.mock.ts:8](../src/lib/preferredRooms.mock.ts#L8): Creates the localStorage-backed mock. Falls back to memory when storage is unavailable.
-- `preferredRoomsService` [src/lib/preferredRooms.ts:33](../src/lib/preferredRooms.ts#L33): The favorites backend used by the app. Swap the adapter here (and only here) when ADR-0005 is decided.
+- `createSupabasePreferredRoomsService(fallback)` [src/lib/preferredRooms.supabase.ts:9](../src/lib/preferredRooms.supabase.ts#L9): Favorites stored in Supabase; the `accountId` argument is ignored in favor of auth.uid().
+- `preferredRoomsService` [src/lib/preferredRooms.ts:34](../src/lib/preferredRooms.ts#L34): The favorites backend used by the app. Supabase, with the local mock as offline fallback.
+- `metersBetween(a, number], b, number])` [src/lib/reports.mock.ts:36](../src/lib/reports.mock.ts#L36): Distance in meters between two [lng, lat] points (haversine).
+- `samePlace(a, b)` [src/lib/reports.mock.ts:45](../src/lib/reports.mock.ts#L45): Same place: same building + floor + room indoors, or within 25 m for outdoor pins.
 - `createLocalReportsService()` [src/lib/reports.mock.ts:92](../src/lib/reports.mock.ts#L92): Creates the localStorage-backed mock. Falls back to memory when storage is unavailable.
-- `STATUS_FLOW` [src/lib/reports.ts:71](../src/lib/reports.ts#L71): The happy-path statuses in order, for the status timeline.
-- `STATUS_LABEL` [src/lib/reports.ts:74](../src/lib/reports.ts#L74): Human label for each status.
-- `isActive(status)` [src/lib/reports.ts:83](../src/lib/reports.ts#L83): Whether a report still counts as unresolved (shown in "Already reported?").
-- `reportsService` [src/lib/reports.ts:88](../src/lib/reports.ts#L88): The reports backend used by the app. Swap the adapter here (and only here) when ADR-0005 is decided.
+- `createSupabaseReportsService(fallback)` [src/lib/reports.supabase.ts:45](../src/lib/reports.supabase.ts#L45): Supabase-backed service; any network/backend failure is served by `fallback` so the demo never dies (ADR-0005…
+- `STATUS_FLOW` [src/lib/reports.ts:72](../src/lib/reports.ts#L72): The happy-path statuses in order, for the status timeline.
+- `STATUS_LABEL` [src/lib/reports.ts:75](../src/lib/reports.ts#L75): Human label for each status.
+- `isActive(status)` [src/lib/reports.ts:84](../src/lib/reports.ts#L84): Whether a report still counts as unresolved (shown in "Already reported?").
+- `reportsService` [src/lib/reports.ts:89](../src/lib/reports.ts#L89): The reports backend used by the app: Supabase, with the local mock as offline fallback (ADR-0005).
 - `createLocalReservationsService()` [src/lib/reservations.mock.ts:16](../src/lib/reservations.mock.ts#L16): Creates the localStorage-backed mock. Falls back to memory when storage is unavailable.
-- `SLOT_MINUTES` [src/lib/reservations.ts:6](../src/lib/reservations.ts#L6): 30 minutes: both the grid's cell size and the minimum booking length.
-- `MIN_DURATION_MINUTES` [src/lib/reservations.ts:8](../src/lib/reservations.ts#L8): Shortest a reservation may be.
-- `MAX_DURATION_MINUTES` [src/lib/reservations.ts:10](../src/lib/reservations.ts#L10): Longest a reservation may be; the grid must not let a selection grow past this.
-- `CHECKIN_WINDOW_MINUTES` [src/lib/reservations.ts:18](../src/lib/reservations.ts#L18): Every reservation (T-61, replacing T-60's manually-tapped "Renew" button) has this many minutes
-- `CHECKIN_RADIUS_METERS` [src/lib/reservations.ts:27](../src/lib/reservations.ts#L27): How close (in meters) a check-in's GPS fix must be to the room's *building* centroid
-- `END_REMINDER_MINUTES` [src/lib/reservations.ts:29](../src/lib/reservations.ts#L29): How many minutes before a checked-in reservation's end the UI shows an in-app "ending soon" reminder (honest…
-- `REBOOK_COOLDOWN_MINUTES` [src/lib/reservations.ts:40](../src/lib/reservations.ts#L40): Anti-camping cooldown (T-61, explicitly requested): once an account's reservation on a room ends
-- `checkinDeadline(reservation)` [src/lib/reservations.ts:87](../src/lib/reservations.ts#L87): The instant a reservation's check-in window closes; past this with no check-in, the room is a no-show and fre…
-- `reservationBusyWindow(reservation)` [src/lib/reservations.ts:99](../src/lib/reservations.ts#L99): The interval a reservation currently blocks on its room, for {@link isRoomFree}/{@link findFreeRooms}
-- `isReservationActive(reservation, now)` [src/lib/reservations.ts:106](../src/lib/reservations.ts#L106): Whether a reservation is still occupying its room at `now` (not cancelled, checked in before its window close…
-- `reservationStatus(reservation, now)` [src/lib/reservations.ts:116](../src/lib/reservations.ts#L116): Classifies a reservation's current status for display; see {@link ReservationStatus}.
-- `reservationsService` [src/lib/reservations.ts:128](../src/lib/reservations.ts#L128): The reservations backend used by the app. Swap the adapter here (and only here) when ADR-0005 is decided.
+- `createSupabaseReservationsService(fallback)` [src/lib/reservations.supabase.ts:17](../src/lib/reservations.supabase.ts#L17): Shared reservations; the caller's `accountId` argument is ignored because ownership is the Supabase user (aut…
+- `SLOT_MINUTES` [src/lib/reservations.ts:7](../src/lib/reservations.ts#L7): 30 minutes: both the grid's cell size and the minimum booking length.
+- `MIN_DURATION_MINUTES` [src/lib/reservations.ts:9](../src/lib/reservations.ts#L9): Shortest a reservation may be.
+- `MAX_DURATION_MINUTES` [src/lib/reservations.ts:11](../src/lib/reservations.ts#L11): Longest a reservation may be; the grid must not let a selection grow past this.
+- `CHECKIN_WINDOW_MINUTES` [src/lib/reservations.ts:19](../src/lib/reservations.ts#L19): Every reservation (T-61, replacing T-60's manually-tapped "Renew" button) has this many minutes
+- `CHECKIN_RADIUS_METERS` [src/lib/reservations.ts:28](../src/lib/reservations.ts#L28): How close (in meters) a check-in's GPS fix must be to the room's *building* centroid
+- `END_REMINDER_MINUTES` [src/lib/reservations.ts:30](../src/lib/reservations.ts#L30): How many minutes before a checked-in reservation's end the UI shows an in-app "ending soon" reminder (honest…
+- `REBOOK_COOLDOWN_MINUTES` [src/lib/reservations.ts:41](../src/lib/reservations.ts#L41): Anti-camping cooldown (T-61, explicitly requested): once an account's reservation on a room ends
+- `checkinDeadline(reservation)` [src/lib/reservations.ts:88](../src/lib/reservations.ts#L88): The instant a reservation's check-in window closes; past this with no check-in, the room is a no-show and fre…
+- `reservationBusyWindow(reservation)` [src/lib/reservations.ts:97](../src/lib/reservations.ts#L97): The interval a reservation blocks on its room: its whole booked range, or null once cancelled.
+- `isReservationActive(reservation, now)` [src/lib/reservations.ts:103](../src/lib/reservations.ts#L103): Whether a reservation is still occupying its room at `now`: not cancelled, not past its end, and either check…
+- `reservationStatus(reservation, now)` [src/lib/reservations.ts:113](../src/lib/reservations.ts#L113): Classifies a reservation's current status for display; see {@link ReservationStatus}.
+- `reservationsService` [src/lib/reservations.ts:125](../src/lib/reservations.ts#L125): The reservations backend used by the app. Supabase, with the local mock as offline fallback.
 - `searchPlaces(query, items)` [src/lib/search.ts:113](../src/lib/search.ts#L113): Searches name, aliases and category; queries under two characters preserve the full input order.
 - `searchCampus(query, items, buildings)` [src/lib/search.ts:148](../src/lib/search.ts#L148): Searches footprints and published rooms alongside places, including building aliases in room queries.
 - `suggest(query, buildings, limit = 6)` [src/lib/suggest.ts:7](../src/lib/suggest.ts#L7): Few, ranked suggestions like a map app: nothing for an empty or one letter query, never the whole campus.
 - `locate(result, "kind" | "id">, buildings)` [src/lib/suggest.ts:13](../src/lib/suggest.ts#L13): The [lng, lat] of a building, room (its building) or place result.
 - `recents()` [src/lib/suggest.ts:21](../src/lib/suggest.ts#L21): Last picked results, newest first, kept only in this browser.
 - `remember(result)` [src/lib/suggest.ts:25](../src/lib/suggest.ts#L25): Remembers a picked result (five at most).
+- `BackendDown` [src/lib/supabase.ts:11](../src/lib/supabase.ts#L11): The backend could not be reached (network, 5xx, sign-in failure): callers fall back to local mocks.
+- `withFallback(run)` [src/lib/supabase.ts:14](../src/lib/supabase.ts#L14): Runs `run` on Supabase; only when the backend is unreachable does it serve `local` instead (rule rejections l…
+- `signInWithPassword(email, password)` [src/lib/supabase.ts:47](../src/lib/supabase.ts#L47): Signs in as one of the pre-created demo accounts (replaces the anonymous guest session in this browser).
+- `signOutSupabase()` [src/lib/supabase.ts:54](../src/lib/supabase.ts#L54): Forgets the chosen account; the next call creates a fresh anonymous guest session.
+- `currentAccount()` [src/lib/supabase.ts:60](../src/lib/supabase.ts#L60): The account currently signed in (null for guests), read from the stored session without a network call.
+- `session()` [src/lib/supabase.ts:67](../src/lib/supabase.ts#L67): Signed-in anonymous session for this browser (created once, refreshed when it is about to expire).
+- `accountId()` [src/lib/supabase.ts:82](../src/lib/supabase.ts#L82): This browser's account id (auth.uid()).
+- `rest(path, init)` [src/lib/supabase.ts:85](../src/lib/supabase.ts#L85): PostgREST call. `path` starts with the table or `rpc/<fn>`; returns parsed JSON (or null for empty).
+- `upload(bucket, blob, ext)` [src/lib/supabase.ts:107](../src/lib/supabase.ts#L107): Uploads a blob under `<uid>/<uuid>.<ext>` in a public bucket and returns the object path.
+- `publicUrl(bucket, path)` [src/lib/supabase.ts:120](../src/lib/supabase.ts#L120): Public URL of an uploaded object.
 - `useGpsFix(auto = false)` [src/lib/useGpsFix.ts:15](../src/lib/useGpsFix.ts#L15): GPS fix for forms. Pass `auto` to ask as soon as the form opens. Fresh, high accuracy: these reports depend o…
 - `useAuth()` [src/state/auth.tsx:63](../src/state/auth.tsx#L63): Reads the demo session and sign-in controls inside AuthProvider.
 - `useLayerFilters()` [src/state/layerFilters.tsx:72](../src/state/layerFilters.tsx#L72): Read and change the layer panel state from any component.
@@ -109,10 +126,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 - `AlertBannerProps` [src/alerts/AlertBanner.tsx:8](../src/alerts/AlertBanner.tsx#L8): Props for the banner stack.
 - `Banner` [src/alerts/useAlertBanners.ts:10](../src/alerts/useAlertBanners.ts#L10): One banner: a live alarm or the all-clear that followed it.
-- `Role` [src/auth/types.ts:4](../src/auth/types.ts#L4): Demo roles change labels only and grant no permissions.
-- `Session` [src/auth/types.ts:7](../src/auth/types.ts#L7): Fictional account selected on this device, with no authentication.
-- `Persona` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional identity offered by the demo account picker.
-- `AuthAdapter` [src/auth/types.ts:22](../src/auth/types.ts#L22): Adapter boundary keeps sign-in implementation out of screens.
+- `Role` [src/auth/types.ts:4](../src/auth/types.ts#L4): Pre-created account roles. Supabase enforces them server-side (JWT `app_metadata.role`, see supabase/migratio…
+- `Session` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional account selected on this device, with no authentication.
+- `Persona` [src/auth/types.ts:23](../src/auth/types.ts#L23): Fictional identity offered by the demo account picker.
+- `AuthAdapter` [src/auth/types.ts:32](../src/auth/types.ts#L32): Adapter boundary keeps sign-in implementation out of screens.
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
 - `PlanRoute` [src/indoor/FloorPlan.tsx:93](../src/indoor/FloorPlan.tsx#L93): Everything the plan needs to draw a route: the route, the legs on this level and which step is highlighted.
 - `RoutableIndoorRoom` [src/indoor/availability.ts:13](../src/indoor/availability.ts#L13): A routable (schematic) entry from `registry.ts#indoorRooms`, narrowed from the `IndoorRoom`
@@ -156,6 +173,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
 - `PostType` [src/lib/bulletin.ts:11](../src/lib/bulletin.ts#L11): The five supported bulletin filters; unknown source subtypes become community posts.
 - `BulletinPost` [src/lib/bulletin.ts:14](../src/lib/bulletin.ts#L14): A dated bulletin entry with known source facts and a selectable map location.
+- `InterestState` [src/lib/bulletinInterests.ts:8](../src/lib/bulletinInterests.ts#L8): This browser's marked post ids plus how many people marked each post.
 - `GeolocationFailureReason` [src/lib/geolocation.ts:4](../src/lib/geolocation.ts#L4): Every real-world way `getCurrentPosition` can fail, each with its own honest, human message.
 - `Coordinates` [src/lib/geolocation.ts:24](../src/lib/geolocation.ts#L24): A GPS fix: WGS84 degrees plus the device's own reported accuracy radius in meters.
 - `RoomCategory` [src/lib/indoorPlan.ts:15](../src/lib/indoorPlan.ts#L15): Fill category for a space type: the `cims-room--<category>` class and its legend swatch.
@@ -167,19 +185,19 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `OverlayLayer` [src/lib/layerCatalog.ts:50](../src/lib/layerCatalog.ts#L50): A live overlay (not made of places): toggled in the layer panel like a layer, but has no pins, counts or sub-…
 - `PlaceFeature` [src/lib/places.ts:7](../src/lib/places.ts#L7): One place as a GeoJSON point feature.
 - `PlaceCollection` [src/lib/places.ts:9](../src/lib/places.ts#L9): All places as a GeoJSON feature collection.
-- `PreferredRoom` [src/lib/preferredRooms.ts:5](../src/lib/preferredRooms.ts#L5): One room an account heart-favorited, for the "Preferred rooms" shortcut (T-60).
-- `NewPreferredRoom` [src/lib/preferredRooms.ts:16](../src/lib/preferredRooms.ts#L16): What the heart toggle submits to favorite a room.
-- `PreferredRoomsService` [src/lib/preferredRooms.ts:23](../src/lib/preferredRooms.ts#L23): Backend contract for favorites. Implemented by the localStorage mock today (ADR-0005 still open).
-- `ReportStatus` [src/lib/reports.ts:8](../src/lib/reports.ts#L8): Lifecycle of a report (PRD US-10.3).
-- `ReportLocation` [src/lib/reports.ts:11](../src/lib/reports.ts#L11): Where the problem is: a building (› floor › room) or an outdoor map pin.
-- `StatusEvent` [src/lib/reports.ts:21](../src/lib/reports.ts#L21): One status change with its timestamp (ISO 8601).
-- `IssueReport` [src/lib/reports.ts:27](../src/lib/reports.ts#L27): A reported issue as the UI sees it.
-- `NewIssueReport` [src/lib/reports.ts:46](../src/lib/reports.ts#L46): What the form submits; the service assigns id, team, status and timestamps.
-- `ReportsService` [src/lib/reports.ts:55](../src/lib/reports.ts#L55): Backend contract for reports. Implemented by the localStorage mock today (ADR-0005 still open).
-- `Reservation` [src/lib/reservations.ts:43](../src/lib/reservations.ts#L43): A booked room as the UI sees it. Always a fixed start/end; "open-ended + Renew" (T-60) is gone, replaced by t…
-- `NewReservation` [src/lib/reservations.ts:63](../src/lib/reservations.ts#L63): What the booking flow submits; the service assigns id, timestamps and ownership.
-- `ReservationsService` [src/lib/reservations.ts:73](../src/lib/reservations.ts#L73): Backend contract for reservations. Implemented by the localStorage mock today (ADR-0005 still open).
-- `ReservationStatus` [src/lib/reservations.ts:113](../src/lib/reservations.ts#L113): Where one reservation stands right now, for the "My reservations here" UI -- derived purely from timestamps,…
+- `PreferredRoom` [src/lib/preferredRooms.ts:6](../src/lib/preferredRooms.ts#L6): One room an account heart-favorited, for the "Preferred rooms" shortcut (T-60).
+- `NewPreferredRoom` [src/lib/preferredRooms.ts:17](../src/lib/preferredRooms.ts#L17): What the heart toggle submits to favorite a room.
+- `PreferredRoomsService` [src/lib/preferredRooms.ts:24](../src/lib/preferredRooms.ts#L24): Backend contract for favorites. Implemented by the localStorage mock today (ADR-0005 still open).
+- `ReportStatus` [src/lib/reports.ts:9](../src/lib/reports.ts#L9): Lifecycle of a report (PRD US-10.3).
+- `ReportLocation` [src/lib/reports.ts:12](../src/lib/reports.ts#L12): Where the problem is: a building (› floor › room) or an outdoor map pin.
+- `StatusEvent` [src/lib/reports.ts:22](../src/lib/reports.ts#L22): One status change with its timestamp (ISO 8601).
+- `IssueReport` [src/lib/reports.ts:28](../src/lib/reports.ts#L28): A reported issue as the UI sees it.
+- `NewIssueReport` [src/lib/reports.ts:47](../src/lib/reports.ts#L47): What the form submits; the service assigns id, team, status and timestamps.
+- `ReportsService` [src/lib/reports.ts:56](../src/lib/reports.ts#L56): Backend contract for reports. Implemented by the localStorage mock today (ADR-0005 still open).
+- `Reservation` [src/lib/reservations.ts:44](../src/lib/reservations.ts#L44): A booked room as the UI sees it. Always a fixed start/end; "open-ended + Renew" (T-60) is gone, replaced by t…
+- `NewReservation` [src/lib/reservations.ts:64](../src/lib/reservations.ts#L64): What the booking flow submits; the service assigns id, timestamps and ownership.
+- `ReservationsService` [src/lib/reservations.ts:74](../src/lib/reservations.ts#L74): Backend contract for reservations. Implemented by the localStorage mock today (ADR-0005 still open).
+- `ReservationStatus` [src/lib/reservations.ts:110](../src/lib/reservations.ts#L110): Where one reservation stands right now, for the "My reservations here" UI -- derived purely from timestamps,…
 - `MatchRange` [src/lib/search.ts:7](../src/lib/search.ts#L7): A half-open character range in the original field, suitable for String.slice.
 - `SearchMatch` [src/lib/search.ts:10](../src/lib/search.ts#L10): A matching name, alias or category and its highlight ranges.
 - `SearchResult` [src/lib/search.ts:17](../src/lib/search.ts#L17): A ranked place with an extensible group label and matches in displayable fields.
@@ -200,7 +218,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `ReportFlowProps` [src/panels/report/ReportFlow.tsx:11](../src/panels/report/ReportFlow.tsx#L11): Props for the report flow.
 - `ReportFormProps` [src/panels/report/ReportForm.tsx:12](../src/panels/report/ReportForm.tsx#L12): Props for the details step.
 - `ReportStatusViewProps` [src/panels/report/ReportStatusView.tsx:7](../src/panels/report/ReportStatusView.tsx#L7): Props for the status page.
-- `Navigate` [src/panels/report/index.tsx:12](../src/panels/report/index.tsx#L12): Changes the query string without reloading, so a filed report's status link and the staff team filter stay sh…
+- `Navigate` [src/panels/report/index.tsx:13](../src/panels/report/index.tsx#L13): Changes the query string without reloading, so a filed report's status link and the staff team filter stay sh…
 - `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
 - `IconName` [src/shell/icons.tsx:21](../src/shell/icons.tsx#L21): Names of the shell icons.
 - `ShellPanel` [src/shell/icons.tsx:34](../src/shell/icons.tsx#L34): What the floating card / bottom sheet can show besides a map selection.
@@ -232,7 +250,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `FloorPlan(…)` [src/indoor/FloorPlan.tsx:96](../src/indoor/FloorPlan.tsx#L96): Renders one available level with controls and brings the route or the selected space into view.
 - `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
 - `StackView(…)` [src/indoor/StackView.tsx:26](../src/indoor/StackView.tsx#L26): Every available level as a plate in one CSS 3D scene; click a plate to make it the active level.
-- `AccountChip()` [src/panels/account/AccountChip.tsx:7](../src/panels/account/AccountChip.tsx#L7): Shows sign-in or the selected demo persona with a small sign-out disclosure.
+- `AccountChip()` [src/panels/account/AccountChip.tsx:8](../src/panels/account/AccountChip.tsx#L8): Shows sign-in or the selected demo persona with a small sign-out disclosure.
 - `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
 - `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:14](../src/panels/building-card/BuildingCard.tsx#L14): Shows the selected building (kind "building"), or nothing when something else is selected.
 - `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:21](../src/panels/building-card/BuildingCard.tsx#L21): Shared building facts and actions for the sidebar and expanded indoor screen.
@@ -240,7 +258,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:12](../src/panels/building-card/BuildingPreview.tsx#L12): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
 - `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:11](../src/panels/building-card/InsidePlaces.tsx#L11): Show selectable places grouped by category for a footprint or a legacy seed building.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
-- `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:84](../src/panels/bulletin/BulletinBoard.tsx#L84): Modal cork board with local interests; the shell owns its URL, type and return focus.
+- `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:77](../src/panels/bulletin/BulletinBoard.tsx#L77): Modal cork board with shared interests; the shell owns its URL, type and return focus.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:68](../src/panels/layers/LayersPanel.tsx#L68): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `PoliceMap(props)` [src/panels/police/PoliceMap.tsx:32](../src/panels/police/PoliceMap.tsx#L32): Police map: pointer events draw the circle (mouse and touch alike) while `drawing` is on.
 - `PoliceView({ onClose })` [src/panels/police/PoliceView.tsx:133](../src/panels/police/PoliceView.tsx#L133): Full-screen console, opened from the home screen (and by ?view=police).
@@ -251,8 +269,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `ReportForm({ location, draft, busy, onContinue })` [src/panels/report/ReportForm.tsx:22](../src/panels/report/ReportForm.tsx#L22): The details form (PRD US-10.1). Safety hazard shows the emergency banner before everything else.
 - `ReportStatusView({ reportId, justFiled, onAnother })` [src/panels/report/ReportStatusView.tsx:15](../src/panels/report/ReportStatusView.tsx#L15): Status page of one report (PRD US-10.3), always carrying the "Prototype: not sent" label.
 - `ReportSummary({ report, showLocation = true })` [src/panels/report/ReportSummary.tsx:12](../src/panels/report/ReportSummary.tsx#L12): Category, place, description and tags of a report; used by the duplicates list, status page and staff queue.
-- `StaffQueue()` [src/panels/report/StaffQueue.tsx:23](../src/panels/report/StaffQueue.tsx#L23): Staff view of the report queue. Unlisted in the MVP: reached with ?panel=staff (optionally &team=IT).
-- `ReportPanel({ onClose })` [src/panels/report/index.tsx:18](../src/panels/report/index.tsx#L18): Mounts the 3-step report flow, or (unlisted, ?staff=1) the staff queue; the floating card / bottom
+- `StaffQueue({ role })` [src/panels/report/StaffQueue.tsx:24](../src/panels/report/StaffQueue.tsx#L24): Staff view of the report queue. Unlisted in the MVP: reached with ?panel=staff (optionally &team=IT).
+- `ReportPanel({ onClose })` [src/panels/report/index.tsx:19](../src/panels/report/index.tsx#L19): Mounts the 3-step report flow, or (unlisted, ?staff=1) the staff queue; the floating card / bottom
 - `BuildingGlyph({ buildingId })` [src/panels/rooms/BuildingGlyph.tsx:10](../src/panels/rooms/BuildingGlyph.tsx#L10): Renders a flat, ink-outlined elevation sketch with a gold hatch fill and a row of square windows per level ba…
 - `BuildingPicker({ onPick })` [src/panels/rooms/BuildingPicker.tsx:30](../src/panels/rooms/BuildingPicker.tsx#L30): Search bar + quick-pick chips for the two buildings with real indoor data; other GT buildings show as "Coming…
 - `ReservationGrid({ rooms })` [src/panels/rooms/ReservationGrid.tsx:50](../src/panels/rooms/ReservationGrid.tsx#L50): Day/time grid, booking flow, favorites, location check-in and "My reservations" for any list of
@@ -271,7 +289,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
 - `Shell()` [src/shell/Shell.tsx:79](../src/shell/Shell.tsx#L79): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
 - `Icon({ name, size = 24 })` [src/shell/icons.tsx:24](../src/shell/icons.tsx#L24): A 24px line icon in currentColor; decorative (aria-hidden).
-- `AuthProvider({ children, adapter = mockAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
+- `AuthProvider({ children, adapter = supabaseAuthAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
 - `CameraCapture({ onCapture, onCancel })` [src/stories/CameraCapture.tsx:32](../src/stories/CameraCapture.tsx#L32): Full-height camera view. Calls `onCapture` with the media plus where it was taken; the caller decides what to…
@@ -280,8 +298,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 ### Other exported functions & constants
 
 - `useAlertBanners()` [src/alerts/useAlertBanners.ts:13](../src/alerts/useAlertBanners.ts#L13): Banners to show (live first) and a `dismiss` that hides one on this device only.
-- `DEMO_PERSONAS` [src/auth/mockAdapter.ts:7](../src/auth/mockAdapter.ts#L7): Demo role descriptions describe possible future capabilities, never enforced permissions.
-- `mockAdapter` [src/auth/mockAdapter.ts:15](../src/auth/mockAdapter.ts#L15): Pretends to sign in with fictional accounts; storage failure never blocks the demo.
+- `DEMO_PASSWORD` [src/auth/accounts.ts:6](../src/auth/accounts.ts#L6): Shared password of every demo account. Demo-grade on purpose: the roles protect a hackathon sandbox, not real…
+- `DEMO_ACCOUNTS` [src/auth/accounts.ts:9](../src/auth/accounts.ts#L9): One account per role, in the order the login dialog lists them.
+- `DEMO_PERSONAS` [src/auth/mockAdapter.ts:9](../src/auth/mockAdapter.ts#L9): Offline fallback list: the same accounts as Supabase, used only if the backend is unreachable.
+- `mockAdapter` [src/auth/mockAdapter.ts:12](../src/auth/mockAdapter.ts#L12): Pretends to sign in with fictional accounts; storage failure never blocks the demo.
+- `supabaseAuthAdapter` [src/auth/supabaseAdapter.ts:8](../src/auth/supabaseAdapter.ts#L8): Real Supabase sessions for the demo accounts, so every row a person writes belongs to a real account with a s…
+- `STAFF_ROLES` [src/auth/types.ts:7](../src/auth/types.ts#L7): Roles that work the report queue.
+- `staffTeam(role)` [src/auth/types.ts:10](../src/auth/types.ts#L10): The report team a staff role works for; moderators see every team (null).
 - `glyphPath(id)` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
 - `CAMPUS` [src/config.ts:3](../src/config.ts#L3): Central place for map settings. Change here, not inside components.
 - `MAP_LIGHT` [src/config.ts:18](../src/config.ts#L18): Fixed light for the extruded buildings: anchored to the map so wall shading doesn't change as you rotate.
@@ -373,6 +396,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `focusOnMap(story, "lat" | "lng">)` [src/stories/store.ts:78](../src/stories/store.ts#L78): Ask the map to zoom to where a story was captured.
 - `setAdapter(next)` [src/stories/store.ts:83](../src/stories/store.ts#L83): Backend hook: replace the storage adapter before the first load.
 - `setHeat(on)` [src/stories/store.ts:88](../src/stories/store.ts#L88): Show or hide the heat map layer on the map (remembered on this device).
+- `supabaseStoriesAdapter` [src/stories/supabaseAdapter.ts:20](../src/stories/supabaseAdapter.ts#L20): Shared stories via Supabase; the server sets timestamps, geofences the point and rate-limits (see supabase/mi…
 
 ### Possible duplicates
 

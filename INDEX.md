@@ -66,6 +66,8 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`src/state/`](src/state/INDEX.md): Shared app state. Today only the current selection.
   - [`src/stories/`](src/stories/INDEX.md): Stories (T-70): live camera capture with GPS, the Stories tab viewer, the store and its storage adapter. The…
   - [`src/styles/`](src/styles/INDEX.md): Design system CSS: tokens.css (variables) and cims-ui.css (all cims- components). Wired in by T-06.
+- [`supabase/`](supabase/INDEX.md): _no description yet_
+  - [`supabase/migrations/`](supabase/migrations/INDEX.md): _no description yet_
 - [`templates/`](templates/INDEX.md): Copy-and-fill templates: meeting notes, weekly status.
 
 **Root files**
@@ -79,7 +81,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
 - [`README.md`](README.md): Project overview, quick start, team rules and the map of all docs.
 - [`index.html`](index.html): HTML entry · CIMS | Campus Interactive Map System
 - [`package-lock.json`](package-lock.json): npm lockfile (don't read; don't hand-edit)
-- [`package.json`](package.json): npm manifest · scripts: dev, build, preview, index, index:check, setup:hooks, data:check, data:verify, data:list
+- [`package.json`](package.json): npm manifest · scripts: dev, build, preview, index, index:check, setup:hooks, data:check, data:verify, data:list, db:check, db:status, db:apply, db:accounts
 - [`tsconfig.json`](tsconfig.json): TypeScript compiler config
 - [`vite.config.ts`](vite.config.ts): _no summary_
 

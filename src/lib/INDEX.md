@@ -10,6 +10,7 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`buildingPlaces.ts`](buildingPlaces.ts): Building association and location metadata shared by POI pins and detail cards. · exports `locationDetails`, `placeBuilding`
 - [`buildings.ts`](buildings.ts): Building footprints (OSM, src/data/buildings.geojson): loaded once on demand, with a point-in-footprint looku… · exports `loadedBuildings`, `loadBuildings`
 - [`bulletin.ts`](bulletin.ts): Pure bulletin posts, campus-time labels, filters, counts and deep links. · exports `POST_TYPES`, `bulletinPosts`, `filterPosts`, `countByType`, `bulletinUrl`, `readBulletinParams`
+- [`bulletinInterests.ts`](bulletinInterests.ts): Bulletin "Interested" marks on Supabase (shared counts, one mark per account and post); localStorage only whe… · exports `loadInterests`, `setInterest`
 - [`events.ts`](events.ts): Pure event windows and short labels in the America/New_York campus timezone. · exports `nextWindow`, `formatWindow`
 - [`geolocation.ts`](geolocation.ts): Typed wrapper around the browser Geolocation API (T-61) plus haversine distance math, shared by "Rooms near m… · exports `GeolocationError`, `getCurrentPosition`, `haversineMeters`, `formatDistance`
 - [`hours.ts`](hours.ts): Pure opening status and weekday lookup in the campus timezone. · exports `campusDay`, `openStatus`
@@ -21,13 +22,17 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`photo.ts`](photo.ts): Shrinks a picked photo to a small JPEG data URL, shared by the maintenance and police report forms. · exports `photoToDataUrl`
 - [`places.ts`](places.ts): Typed access to every curated place: seed file plus src/data/pois/*.json, drafts hidden unless ?drafts=1. · exports `showDrafts`, `places`
 - [`preferredRooms.mock.ts`](preferredRooms.mock.ts): Mock PreferredRoomsService backed by localStorage. Prototype only: favorites don't sync across devices. · exports `createLocalPreferredRoomsService`
+- [`preferredRooms.supabase.ts`](preferredRooms.supabase.ts): PreferredRoomsService on Supabase (one row per heart, private to the browser's account); local mock only if t… · exports `createSupabasePreferredRoomsService`
 - [`preferredRooms.ts`](preferredRooms.ts): Preferred ("favorite") rooms contracts (T-60) and the one place that picks the backend adapter. · exports `preferredRoomsService`
-- [`reports.mock.ts`](reports.mock.ts): Mock ReportsService backed by localStorage, with labeled sample reports. Prototype only: nothing leaves the b… · exports `createLocalReportsService`
+- [`reports.mock.ts`](reports.mock.ts): Mock ReportsService backed by localStorage, with labeled sample reports. Prototype only: nothing leaves the b… · exports `metersBetween`, `samePlace`, `createLocalReportsService`
+- [`reports.supabase.ts`](reports.supabase.ts): ReportsService backed by Supabase (reports table, +1 votes, photos in Storage); falls back to the local mock… · exports `createSupabaseReportsService`
 - [`reports.ts`](reports.ts): Report-an-issue contracts (types + ReportsService) and the one place that picks the backend adapter. · exports `STATUS_FLOW`, `STATUS_LABEL`, `isActive`, `reportsService`
 - [`reservations.mock.ts`](reservations.mock.ts): Mock ReservationsService backed by localStorage. Prototype only: nothing leaves the browser, so bookings and… · exports `createLocalReservationsService`
+- [`reservations.supabase.ts`](reservations.supabase.ts): ReservationsService on Supabase: booking, overlap, cooldown and check-in rules run server-side (RPCs); falls… · exports `createSupabaseReservationsService`
 - [`reservations.ts`](reservations.ts): Room reservation contracts (T-60/T-61/F-20) and the one place that picks the backend adapter. Kendeda + CULC… · exports `SLOT_MINUTES`, `MIN_DURATION_MINUTES`, `MAX_DURATION_MINUTES`, `CHECKIN_WINDOW_MINUTES`, `CHECKIN_RADIUS_METERS`, `END_REMINDER_MINUTES`, `REBOOK_COOLDOWN_MINUTES`, `checkinDeadline`, `reservationBusyWindow`, `isReservationActive`, `reservationStatus`, `reservationsService`
 - [`search.ts`](search.ts): Ranked building, room and place search with accent folding and original-text match ranges. · exports `searchPlaces`, `searchCampus`
 - [`suggest.ts`](suggest.ts): Search-as-you-type suggestions (short ranked list, nothing until typed) and where a result sits on the map. · exports `suggest`, `locate`, `recents`, `remember`
+- [`supabase.ts`](supabase.ts): Tiny Supabase client (REST + anonymous auth + Storage over fetch, no SDK) shared by the reports and stories a… · exports `BackendDown`, `withFallback`, `signInWithPassword`, `signOutSupabase`, `currentAccount`, `session`, `accountId`, `rest`, `upload`, `publicUrl`
 - [`useGpsFix.ts`](useGpsFix.ts): React hook around the one-shot GPS fix: request on demand (or on mount), with idle / locating / ok / error st… · exports `useGpsFix`
 
 <!-- AUTO:END -->
