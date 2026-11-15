@@ -10,9 +10,12 @@
 
 1. **Nothing reaches `main` except through a PR.** No direct pushes, no force-pushes, ever.
 2. **CI must be green**: indexes current, links valid, `npm run build` passes ([ci.yml](../.github/workflows/ci.yml)).
-3. **One approval from a human who isn't the author.** David's PRs are approved by Tato and vice versa.
+3. **One approval from a human who isn't the author** (or an explicit "review and merge" request to an agent). David's PRs are approved by Tato and vice versa.
    An agent's review counts as a pre-check, never as the approval.
-4. **Agents never merge.** Claude/Codex push branches and open draft PRs; a human merges.
+4. **Agents merge only when their human asks.** Claude/Codex push branches and open PRs. When a
+   teammate tells their agent "review and merge", the agent does the review, resolves conflicts,
+   checks CI and squash merges through the PR on their behalf (decided by David, 2026-11-15). That
+   request counts as the human's approval. Never `git push origin main`.
 5. **Rebased on current `main`** right before merging (`git pull --rebase origin main`), and the
    branch preview (`https://<branch-slug>-cims.queenalexandria.online`) was checked after the rebase.
 6. **Squash merge** with a Conventional Commit title: `feat(indoor): level selector (T-21)`.
@@ -64,7 +67,9 @@ the repo public or move it to an org just for this. So **nothing technical stops
 the rules above hold because we, and our agents, follow them.
 
 - Humans: never `git push origin main`. Always branch, PR, approval, squash merge.
-- Agents: `CLAUDE.md` and `AGENTS.md` forbid pushing or merging to `main`. Brief every session accordingly.
+- Agents: `CLAUDE.md` and `AGENTS.md` forbid pushing to `main` and allow merging a PR only when their human asks.
+- Conflicts: merge `main` into the branch and keep `main`'s newer code. If `main` already contains the PR's
+  work (squashed or redone), close the PR instead of resolving. Regenerate `INDEX.md` files, don't hand-merge them.
 - CI still runs on every PR (`CI / check`), but a red check does **not** block the merge button. The person
   merging must look at it and not merge on red.
 - If someone breaks a rule by accident, say so in chat and roll back with the procedure above.
