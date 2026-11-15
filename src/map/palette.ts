@@ -12,3 +12,27 @@ export const WHITE = "#FFFFFF";
 export const GOLD = "#B3A369";
 /** --gold-ink: gold linework on paper (selected hatch lines). */
 export const GOLD_INK = "#8A7A3E";
+
+// ---- Basemap (ADR-0006 step 2): one color per kind of ground, muted to sit under the ink linework. ----
+/** --map-campus: university/college land, a sage tint so campus reads as one place. */
+export const MAP_CAMPUS = "#D2DCC0";
+/** --map-grass: lawns, parks, pitches. */
+export const MAP_GRASS = "#A8BB94";
+/** --map-wood: trees and wooded areas, a step darker than grass. */
+export const MAP_WOOD = "#93A985";
+/** --map-water: ponds, fountains, streams. */
+export const MAP_WATER = "#A3B9C9";
+/** --map-road-major: motorways and arterials (old-gold family, lighter than --gold). */
+export const MAP_ROAD_MAJOR = "#D9C38E";
+/** Casing for major roads. */
+export const MAP_ROAD_MAJOR_CASE = "#A8925A";
+/** --map-road-minor: streets and service roads (white with a hairline casing, like a drafted plan). */
+export const MAP_ROAD_MINOR = "#FFFFFF";
+/** Casing for minor roads. */
+export const MAP_ROAD_MINOR_CASE = "#C9BFA8";
+/** --map-walkway: footways, pedestrian paths and steps (terracotta, lighter than the brick --route so routes stay on top). */
+export const MAP_WALKWAY = "#D49C7F";
+/** --map-rail: rail and tram lines. */
+export const MAP_RAIL = "#7D7766";
+/** --map-building-context: off-campus buildings, flat (ours are the extruded, hatched ones). */
+export const MAP_BUILDING_CONTEXT = "#E4DCC8";

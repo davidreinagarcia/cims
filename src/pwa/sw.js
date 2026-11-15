@@ -4,7 +4,7 @@ const SHELL_CACHE = `cims-shell-${VERSION}`;
 const RUNTIME_CACHE = "cims-runtime-v1";
 const SHELL = __SHELL__;
 const MAX_RUNTIME_ENTRIES = 700; // map tiles and glyph ranges seen so far; oldest are dropped first
-const RUNTIME_HOSTS = ["tile.openstreetmap.org", "demotiles.maplibre.org"];
+const RUNTIME_HOSTS = ["tiles.openfreemap.org", "demotiles.maplibre.org"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

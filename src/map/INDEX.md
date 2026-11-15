@@ -12,11 +12,11 @@ Everything about the map engine: contract for layers, base style, and the layer 
 
 **Files**
 
-- [`baseStyle.ts`](baseStyle.ts): The map's base style: paper background, OSM raster tiles washed out to a drafted gray (ADR-0006 step 1), the… · exports `baseStyle`
+- [`baseStyle.ts`](baseStyle.ts): The map's base style: OpenFreeMap vector tiles colored per kind of ground (campus, grass, water, roads, walkw… · exports `baseStyle`
 - [`layerFilters.ts`](layerFilters.ts): Turns the layer panel's LayerFilters into a MapLibre filter and a plain visibility check. · exports `OTHER_SUBTYPE`, `isVisible`, `buildMapFilter`
 - [`loadLayers.ts`](loadLayers.ts): Discovers every layer module in src/map/layers/ and returns them in draw order. · exports `loadLayers`
 - [`maplibre.ts`](maplibre.ts): Loads MapLibre GL JS on demand as its own chunk, so the interface can paint before the 800 KB map library has… · exports `loadMapLibre`
-- [`palette.ts`](palette.ts): Survey-map colors as literals for MapLibre paint and canvas drawing. Mirrors src/styles/tokens.css: change bo… · exports `INK`, `PAPER`, `PAPER_2`, `WHITE`, `GOLD`, `GOLD_INK`
+- [`palette.ts`](palette.ts): Survey-map colors as literals for MapLibre paint and canvas drawing. Mirrors src/styles/tokens.css: change bo… · exports `INK`, `PAPER`, `PAPER_2`, `WHITE`, `GOLD`, `GOLD_INK`, `MAP_CAMPUS`, `MAP_GRASS`, `MAP_WOOD`, `MAP_WATER`, `MAP_ROAD_MAJOR`, `MAP_ROAD_MAJOR_CASE`, `MAP_ROAD_MINOR`, `MAP_ROAD_MINOR_CASE`, `MAP_WALKWAY`, `MAP_RAIL`, `MAP_BUILDING_CONTEXT`
 - [`pins.ts`](pins.ts): Survey-marker pins for the map: teardrop in the category color with the category glyph inside a paper ring. D… · exports `pinImageId`, `addPins`
 - [`types.ts`](types.ts): Contract for map layers: every file in src/map/layers/ default-exports one MapLayer.
 
