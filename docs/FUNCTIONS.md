@@ -221,9 +221,14 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `ReportStatusViewProps` [src/panels/report/ReportStatusView.tsx:7](../src/panels/report/ReportStatusView.tsx#L7): Props for the status page.
 - `Navigate` [src/panels/report/index.tsx:13](../src/panels/report/index.tsx#L13): Changes the query string without reloading, so a filed report's status link and the staff team filter stay sh…
 - `BuildingOption` [src/panels/rooms/buildingOptions.ts:4](../src/panels/rooms/buildingOptions.ts#L4): One quick-pick building: `enabled` buildings have a working reservation flow; the rest are real GT buildings…
+- `PortfolioPhoto` [src/portfolio/types.ts:5](../src/portfolio/types.ts#L5): One photo attached to a portfolio entry, kept as a data URL so it survives a page reload without a backend.
+- `PortfolioPhotoSeed` [src/portfolio/types.ts:13](../src/portfolio/types.ts#L13): What the UI hands the adapter to attach one photo; the adapter assigns the id.
+- `PortfolioEntry` [src/portfolio/types.ts:21](../src/portfolio/types.ts#L21): One activity in a signed-in account's BuzzPrint: a frozen snapshot of a Bulletin post, taken the moment
+- `PortfolioEntrySeed` [src/portfolio/types.ts:42](../src/portfolio/types.ts#L42): What the Bulletin hook hands the adapter to create one entry; the adapter assigns id/accountId/photos.
+- `PortfolioAdapter` [src/portfolio/types.ts:45](../src/portfolio/types.ts#L45): Storage boundary. The local adapter keeps entries in this browser; a Supabase adapter would sit behind the sa…
 - `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
-- `IconName` [src/shell/icons.tsx:21](../src/shell/icons.tsx#L21): Names of the shell icons.
-- `ShellPanel` [src/shell/icons.tsx:34](../src/shell/icons.tsx#L34): What the floating card / bottom sheet can show besides a map selection.
+- `IconName` [src/shell/icons.tsx:22](../src/shell/icons.tsx#L22): Names of the shell icons.
+- `ShellPanel` [src/shell/icons.tsx:35](../src/shell/icons.tsx#L35): What the floating card / bottom sheet can show besides a map selection.
 - `LayerFiltersApi` [src/state/layerFilters.tsx:20](../src/state/layerFilters.tsx#L20): What useLayerFilters() returns.
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): Selectable map and search entities; room ids use "buildingId:spaceId".
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
@@ -260,7 +265,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:12](../src/panels/building-card/BuildingPreview.tsx#L12): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
 - `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:11](../src/panels/building-card/InsidePlaces.tsx#L11): Show selectable places grouped by category for a footprint or a legacy seed building.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
-- `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:77](../src/panels/bulletin/BulletinBoard.tsx#L77): Modal cork board with shared interests; the shell owns its URL, type and return focus.
+- `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:78](../src/panels/bulletin/BulletinBoard.tsx#L78): Modal cork board with shared interests; the shell owns its URL, type and return focus.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:68](../src/panels/layers/LayersPanel.tsx#L68): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `PoliceMap(props)` [src/panels/police/PoliceMap.tsx:32](../src/panels/police/PoliceMap.tsx#L32): Police map: pointer events draw the circle (mouse and touch alike) while `drawing` is on.
 - `PoliceView({ onClose })` [src/panels/police/PoliceView.tsx:133](../src/panels/police/PoliceView.tsx#L133): Full-screen console, opened from the home screen (and by ?view=police).
@@ -281,6 +286,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
 - `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
 - `SearchPanel(…)` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
+- `PortfolioPage({ onClose })` [src/portfolio/PortfolioPage.tsx:95](../src/portfolio/PortfolioPage.tsx#L95): Full-page BuzzPrint view, opened the same way the Bulletin is: its own open flag outside the shell's panel sw…
 - `BottomSheet(…)` [src/shell/BottomSheet.tsx:21](../src/shell/BottomSheet.tsx#L21): Drag or tap the handle (or press Enter/Space on it) to move between snaps; arrow keys step up and down. Opens…
 - `ChipsBar()` [src/shell/ChipsBar.tsx:14](../src/shell/ChipsBar.tsx#L14): One pill per layer category; pressed = layer on. Categories without data stay visible but inert (aria-disable…
 - `FloatingCard(…)` [src/shell/FloatingCard.tsx:6](../src/shell/FloatingCard.tsx#L6): Card with a close button and a ‹ collapse tab on its right edge. Renders nothing visible when its panel rende…
@@ -289,8 +295,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Rail({ panel, onPanel, onPolice })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
 - `RoutePanel({ initialSelection, onClose })` [src/shell/RoutePanel.tsx:10](../src/shell/RoutePanel.tsx#L10): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:79](../src/shell/Shell.tsx#L79): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
-- `Icon({ name, size = 24 })` [src/shell/icons.tsx:24](../src/shell/icons.tsx#L24): A 24px line icon in currentColor; decorative (aria-hidden).
+- `Shell()` [src/shell/Shell.tsx:80](../src/shell/Shell.tsx#L80): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
+- `Icon({ name, size = 24 })` [src/shell/icons.tsx:25](../src/shell/icons.tsx#L25): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = supabaseAuthAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
@@ -381,8 +387,17 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `locationForId(id, floor, room)` [src/panels/report/location.ts:22](../src/panels/report/location.ts#L22): Builds a prefilled location for a place or building id (checks curated places first, then the OSM
 - `locationFromParams(params)` [src/panels/report/location.ts:31](../src/panels/report/location.ts#L31): Builds the prefilled location from ?building=&floor=&room= (or ?lng=&lat=); null when the URL has none.
 - `BUILDING_OPTIONS` [src/panels/rooms/buildingOptions.ts:15](../src/panels/rooms/buildingOptions.ts#L15): Real Georgia Tech building ids/names verified in `src/data/buildings.geojson` -- see that file's
-- `NAV_ITEMS` [src/shell/icons.tsx:37](../src/shell/icons.tsx#L37): The five destinations of the rail (desktop) and the tab bar (phones), in order.
-- `moveFocus(event, vertical)` [src/shell/icons.tsx:46](../src/shell/icons.tsx#L46): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
+- `MAX_PHOTO_BYTES` [src/portfolio/localAdapter.ts:10](../src/portfolio/localAdapter.ts#L10): Soft ceiling on one photo's base64 size. localStorage is typically capped around 5MB *per origin,
+- `localAdapter` [src/portfolio/localAdapter.ts:36](../src/portfolio/localAdapter.ts#L36): Portfolio entries stored on this device only (prototype, like Stories' local adapter); swap for a backend ada…
+- `subscribe(listener)` [src/portfolio/store.ts:22](../src/portfolio/store.ts#L22): Subscribe to any change. Returns the unsubscribe function.
+- `getState()` [src/portfolio/store.ts:28](../src/portfolio/store.ts#L28): Current snapshot.
+- `ensureLoaded(accountId)` [src/portfolio/store.ts:33](../src/portfolio/store.ts#L33): Loads (once per account) the signed-in account's entries. A null accountId clears the list (signed out).
+- `usePortfolio()` [src/portfolio/store.ts:47](../src/portfolio/store.ts#L47): React hook over the store.
+- `recordPortfolioEntry(session, post)` [src/portfolio/store.ts:56](../src/portfolio/store.ts#L56): Records a BuzzPrint entry from a Bulletin post, snapshotting the fields BulletinPost already has
+- `addPortfolioPhoto(accountId, entryId, photo)` [src/portfolio/store.ts:74](../src/portfolio/store.ts#L74): Attaches a photo to one of this account's entries and shows it immediately.
+- `setAdapter(next)` [src/portfolio/store.ts:81](../src/portfolio/store.ts#L81): Backend hook: replace the storage adapter before the first load.
+- `NAV_ITEMS` [src/shell/icons.tsx:38](../src/shell/icons.tsx#L38): The six destinations of the rail (desktop) and the tab bar (phones), in order.
+- `moveFocus(event, vertical)` [src/shell/icons.tsx:48](../src/shell/icons.tsx#L48): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 - `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:13](../src/stories/CameraCapture.tsx#L13): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
 - `ago(ms, now = Date.now()` [src/stories/StoriesPanel.tsx:13](../src/stories/StoriesPanel.tsx#L13): "now", "12m", "3h": how long ago, short like Instagram.
 - `demoStories(now = Date.now()` [src/stories/demoStories.ts:41](../src/stories/demoStories.ts#L41): Builds the fictional stories (created within the last ~20 h, so they never expire mid-session). Resolves empt…
@@ -403,6 +418,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Possible duplicates
 
-_None detected._
+- ⚠️ localAdapter (src/portfolio/localAdapter.ts:36) ↔ localAdapter (src/stories/localAdapter.ts:30)
+- ⚠️ subscribe (src/portfolio/store.ts:22) ↔ subscribe (src/stories/store.ts:32)
+- ⚠️ getState (src/portfolio/store.ts:28) ↔ getState (src/stories/store.ts:38)
+- ⚠️ ensureLoaded (src/portfolio/store.ts:33) ↔ ensureLoaded (src/stories/store.ts:43)
+- ⚠️ setAdapter (src/portfolio/store.ts:81) ↔ setAdapter (src/stories/store.ts:83)
 
 <!-- AUTO:END -->
