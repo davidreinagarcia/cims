@@ -66,7 +66,6 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): Branching, commits, PRs, code review, data contributions, local dev.
 - [`README.md`](README.md): Project overview, quick start, team rules and the map of all docs.
 - [`index.html`](index.html): HTML entry · CIMS | Campus Interactive Map System
-- [`node_modules`](node_modules): _no summary_
 - [`package-lock.json`](package-lock.json): npm lockfile (don't read; don't hand-edit)
 - [`package.json`](package.json): npm manifest · scripts: dev, build, preview, index, index:check, setup:hooks, data:check, data:verify, data:list
 - [`tsconfig.json`](tsconfig.json): TypeScript compiler config
