@@ -26,6 +26,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
     - [`docs/design/references/`](docs/design/references/INDEX.md): Reference images (Gemini mockups). Mood references, not specs; their data is fake.
     - [`docs/design/screenshots/`](docs/design/screenshots/INDEX.md): Before/after screenshots of the real app, taken for PRs (production build, headless Chromium). Named <task-<s…
       - [`docs/design/screenshots/app-shell/`](docs/design/screenshots/app-shell/INDEX.md): Map-first shell (APP-SHELL.md), production build in headless Chromium at 1440, 1280, 390 and 360 px: empty ma…
+      - [`docs/design/screenshots/bulletin/`](docs/design/screenshots/bulletin/INDEX.md): Production screenshots at 1440, 1280, 390 and 360 px: map, full-screen cork board and the empty Lost & Found…
       - [`docs/design/screenshots/data-attach/`](docs/design/screenshots/data-attach/INDEX.md): Production screenshots with drafts visible at 1440, 1280, 390 and 360 pixels.
   - [`docs/research/`](docs/research/INDEX.md): Fuentes y dudas pendientes de las investigaciones de datos del campus.
   - [`docs/stickers/`](docs/stickers/INDEX.md): QR codes and the link list for the door stickers that open a building with the entrance preselected.
@@ -70,6 +71,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): Branching, commits, PRs, code review, data contributions, local dev.
 - [`README.md`](README.md): Project overview, quick start, team rules and the map of all docs.
 - [`index.html`](index.html): HTML entry · CIMS | Campus Interactive Map System
+- [`node_modules`](node_modules): _no summary_
 - [`package-lock.json`](package-lock.json): npm lockfile (don't read; don't hand-edit)
 - [`package.json`](package.json): npm manifest · scripts: dev, build, preview, index, index:check, setup:hooks, data:check, data:verify, data:list
 - [`tsconfig.json`](tsconfig.json): TypeScript compiler config

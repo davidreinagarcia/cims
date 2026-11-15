@@ -16,7 +16,8 @@ export default function Rail({ panel, onPanel }: { panel: ShellPanel; onPanel: (
       </button>
       <div className="shell-rail__items" onKeyDown={(event) => moveFocus(event, true)}>
         {NAV_ITEMS.map((item) => (
-          <button key={item.id} type="button" data-nav-item className="shell-navitem" aria-pressed={panel === item.id}
+          <button key={item.id} type="button" data-nav-item data-nav={item.id} className="shell-navitem" aria-pressed={panel === item.id}
+            aria-haspopup={item.id === "bulletin" ? "dialog" : undefined}
             tabIndex={panel === item.id || (panel === "route" && item.id === "explore") ? 0 : -1}
             onClick={() => onPanel(item.id)}>
             <span className="shell-navitem__icon"><Icon name={item.icon} /></span>

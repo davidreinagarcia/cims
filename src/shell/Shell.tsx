@@ -8,11 +8,12 @@ import SignInDialog from "../panels/account/SignInDialog";
 import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
-import BulletinPanel from "../panels/bulletin/BulletinPanel";
+import BulletinBoard from "../panels/bulletin/BulletinBoard";
 import ReportPanel from "../panels/report";
 import RoomFinderPanel from "../panels/rooms/RoomFinderPanel";
 import StoriesPanel from "../stories/StoriesPanel";
 import { useStories } from "../stories/store";
+import { bulletinUrl, readBulletinParams, type PostType } from "../lib/bulletin";
 import { useAuth } from "../state/auth";
 import { useSelection, type Selection, type SelectionKind } from "../state/selection";
 import BottomSheet, { type SheetSnap } from "./BottomSheet";
@@ -38,10 +39,27 @@ function useIsMobile(): boolean {
   }, () => window.matchMedia(MOBILE).matches);
 }
 
-/** `?panel=bulletin` opens a panel and `?select=place:<id>` selects something on load (shareable links, screenshots). */
+/** Read a shareable shell panel; legacy bulletin links open the full-screen board instead. */
 function initialPanel(): ShellPanel {
   const panel = new URLSearchParams(window.location.search).get("panel") as ShellPanel | null;
-  return panel && PANELS.includes(panel) ? panel : "explore";
+  return panel && panel !== "bulletin" && PANELS.includes(panel) ? panel : "explore";
+}
+
+function initialBulletin() {
+  const bulletin = readBulletinParams(window.location.search);
+  return { ...bulletin, open: bulletin.open || new URLSearchParams(window.location.search).get("panel") === "bulletin" };
+}
+
+function writeBulletinUrl(type: PostType | "all" | null, push = false) {
+  const params = new URLSearchParams(window.location.search);
+  params.delete("view");
+  params.delete("type");
+  if (params.get("panel") === "bulletin") params.delete("panel");
+  if (type !== null) new URLSearchParams(bulletinUrl(type)).forEach((value, key) => params.set(key, value));
+  const query = params.toString();
+  const url = `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
+  if (push) window.history.pushState(window.history.state, "", url);
+  else window.history.replaceState(window.history.state, "", url);
 }
 
 function ComingSoon({ what, hint }: { what: string; hint?: string }) {
@@ -53,15 +71,41 @@ function ComingSoon({ what, hint }: { what: string; hint?: string }) {
   );
 }
 
-/** Lays out the map and every floating surface; panels are mounted unchanged inside the card (desktop) or sheet (phones). */
+/** Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus. */
 export default function Shell() {
   const mobile = useIsMobile();
   const { selection, select } = useSelection();
   const { dialogOpen } = useAuth();
   const [panel, setPanel] = useState<ShellPanel>(initialPanel);
   const [routeTo, setRouteTo] = useState<Selection | null>(null);
+  const [bulletin, setBulletin] = useState(initialBulletin);
+  const bulletinOpener = useRef<HTMLElement | null>(null);
+  const bulletinWasOpen = useRef(false);
   const [hasQuery, setHasQuery] = useState(false);
   const [snap, setSnap] = useState<SheetSnap>("half");
+
+  useEffect(() => {
+    // Canonicalize the old panel link once; history navigation never writes over the destination.
+    if (initialBulletin().open && !readBulletinParams(window.location.search).open) writeBulletinUrl(initialBulletin().type);
+    const onPopState = () => setBulletin(initialBulletin());
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
+  }, []);
+
+  useEffect(() => {
+    if (bulletinWasOpen.current && !bulletin.open) {
+      const opener = bulletinOpener.current;
+      const target = opener?.isConnected ? opener : document.querySelector<HTMLElement>('[data-nav="bulletin"]');
+      target?.focus();
+    }
+    bulletinWasOpen.current = bulletin.open;
+  }, [bulletin.open]);
+
+  const closeBulletin = () => {
+    writeBulletinUrl(null);
+    setBulletin((current) => ({ ...current, open: false }));
+    setPanel("explore");
+  };
 
   useEffect(() => {
     const raw = new URLSearchParams(window.location.search).get("select");
@@ -79,6 +123,14 @@ export default function Shell() {
   useEffect(() => { if (selection) setPanel(selection.kind === "report" ? "report" : "explore"); }, [selection]);
 
   const choosePanel = (next: ShellPanel) => {
+    if (next === "bulletin") {
+      bulletinOpener.current = document.querySelector<HTMLElement>('[data-nav="bulletin"]');
+      writeBulletinUrl("all", true);
+      setBulletin({ open: true, type: "all" });
+      setPanel("explore");
+      select(null);
+      return;
+    }
     if (next !== "explore" && next === panel) setPanel("explore"); // pressing the open item again closes it
     else {
       if (next === "route") setRouteTo(selection);
@@ -90,7 +142,7 @@ export default function Shell() {
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (event.key !== "Escape" || event.defaultPrevented || dialogOpen) return;
+      if (event.key !== "Escape" || event.defaultPrevented || dialogOpen || bulletin.open) return;
       if (document.querySelector(".building-view")) return; // the indoor screen handles its own Esc
       if (panel !== "explore" || selection) { event.preventDefault(); closeContent(); }
     };
@@ -99,8 +151,7 @@ export default function Shell() {
   });
 
   let content: { title: string; key: string; body: ReactNode } | null = null;
-  if (panel === "bulletin") content = { title: "Bulletin", key: "bulletin", body: <BulletinPanel onShowMap={() => setPanel("explore")} /> };
-  else if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <RoomFinderPanel /> };
+  if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <RoomFinderPanel /> };
   else if (panel === "report") {
     // Keyed by the selected place/building (when there is one) so the flow resets for a new "Report an issue".
     const reportKey = selection?.kind === "report" ? `report:${selection.id}` : "report";
@@ -155,7 +206,7 @@ export default function Shell() {
   return (
     <div className="app cims" data-layout={mobile ? "mobile" : "desktop"}>
       <SignInDialog />
-      {!mobile && <Rail panel={panel} onPanel={choosePanel} />}
+      {!mobile && <Rail panel={bulletin.open ? "bulletin" : panel} onPanel={choosePanel} />}
       <div className="stage">
         <MapView />
         <BuildingView />
@@ -179,8 +230,10 @@ export default function Shell() {
       {mobile && content && (
         <BottomSheet title={content.title} contentKey={content.key} snap={snap} onSnap={setSnap} onClose={closeContent}>{content.body}</BottomSheet>
       )}
-      {mobile && <MobileTabBar panel={panel} onPanel={choosePanel} />}
+      {mobile && <MobileTabBar panel={bulletin.open ? "bulletin" : panel} onPanel={choosePanel} />}
       <OfflineBanner />
+      {bulletin.open && <BulletinBoard type={bulletin.type} onClose={closeBulletin}
+        onType={(type) => { writeBulletinUrl(type); setBulletin({ open: true, type }); }} />}
     </div>
   );
 }
