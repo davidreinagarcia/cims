@@ -12,6 +12,9 @@ export default function RoomSearch({ building, onChoose, onChooseRoom }: { build
   const id = useId();
   const tokens = query.toLowerCase().trim().split(/\s+/);
   const roomsOnly = building.status === "rooms-only";
+  // A real example from this building: a published room number, else the first named space.
+  const spaces = building.levels.flatMap((level) => level.available ? level.spaces.filter((space) => space.door && space.type !== "void") : []);
+  const example = spaces.find((space) => space.room)?.room ?? spaces.find((space) => space.type === "auditorium" || space.type === "classroom")?.name;
   const allRooms = roomsOnly ? [...building.levels.map((level) => ({ id: level.id, name: level.name, label: level.label })),
     { id: null, name: "Level not listed", label: "?" }].flatMap((level) => (building.rooms ?? [])
       .filter((room) => room.level === level.id && tokens.every((token) => `${room.room} ${room.name} ${room.type} ${level.name} ${building.title} CULC Clough`.toLowerCase().includes(token)))
@@ -19,7 +22,7 @@ export default function RoomSearch({ building, onChoose, onChooseRoom }: { build
       .map((room) => ({ id: room.id, name: `Room ${room.room}`, meta: [room.name, room.capacity != null ? `${room.capacity} seats` : ""].filter(Boolean).join(", "),
         level, pick: () => onChooseRoom?.(room) })))
     : building.levels.flatMap((level) => level.available ? level.spaces
-      .filter((space) => space.door && space.type !== "void" && tokens.every((token) => `${space.name} ${space.type} ${level.name}`.toLowerCase().includes(token)))
+      .filter((space) => space.door && space.type !== "void" && tokens.every((token) => `${space.name} ${space.room ?? ""} ${space.type} ${level.name}`.toLowerCase().includes(token)))
       .map((space) => ({ id: space.id, name: space.name, meta: space.type, level, pick: () => onChoose?.(space) })) : []);
   // Like a map app: nothing listed until you type, then a handful of matches (the directory beside the plan lists everything).
   const rooms = query.trim() ? allRooms.slice(0, 8) : [];
@@ -43,12 +46,12 @@ export default function RoomSearch({ building, onChoose, onChooseRoom }: { build
   return <div className="building-view__search" onBlur={(event) => {
     if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
   }}>
-    <label className="cims-caps" htmlFor={id}>{roomsOnly ? "Room finder" : "Where to?"}</label>
+    <label className="cims-caps" htmlFor={id}>{roomsOnly ? "Room finder" : "Search this building"}</label>
     <div className="cims-field">
       <span className="building-view__magnifier" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="10.5" cy="10.5" r="6" /><path d="M15 15l5 5" /></svg></span>
       <input ref={input} id={id} type="search" role="combobox" autoComplete="off" aria-autocomplete="list"
-        aria-expanded={open} aria-controls={`${id}-list`} aria-activedescendant={open && rooms[active] ? `${id}-${active}` : undefined}
-        placeholder={roomsOnly ? "Search a room, e.g. 152" : "Search a room, e.g. Auditorium"} value={query}
+        aria-expanded={open && !!query.trim()} aria-controls={`${id}-list`} aria-activedescendant={open && rooms[active] ? `${id}-${active}` : undefined}
+        placeholder={roomsOnly ? "Search a room, e.g. 152" : `Search this building${example ? `, e.g. ${example}` : ""}`} value={query}
         onFocus={() => { setOpen(true); setActive(0); }}
         onChange={(event) => { setQuery(event.target.value); setActive(0); setOpen(true); }}
         onKeyDown={(event) => {
@@ -60,7 +63,7 @@ export default function RoomSearch({ building, onChoose, onChooseRoom }: { build
           } else if (event.key === "Enter" && rooms[active]) { event.preventDefault(); choose(rooms[active].pick); }
         }} />
     </div>
-    {open && <div ref={list} id={`${id}-list`} role="listbox" aria-label="Rooms in this building" className="building-view__matches cims-results">
+    {open && query.trim() && <div ref={list} id={`${id}-list`} role="listbox" aria-label="Rooms in this building" className="building-view__matches cims-results">
       {rooms.map(({ id: roomId, name, meta, level, pick }, index) => <div key={roomId}>
         {(!index || rooms[index - 1].level.id !== level.id) && <div className="cims-results__group" aria-hidden="true">{level.name}</div>}
         <button id={`${id}-${index}`} type="button" role="option" aria-selected={index === active} tabIndex={-1}

@@ -34,7 +34,9 @@ export default function ReportPanel({ onClose }: { onClose: () => void }) {
   if (params.get("staff") === "1") return <StaffGate />;
 
   // A place/building card's "Report an issue" selects { kind: "report", id }; a shared status link falls back to the URL.
-  const location = selection?.kind === "report" ? locationForId(selection.id) : locationFromParams(params);
+  // The indoor room card adds the floor and room: "buildingId|floor|room".
+  const [reportId, reportFloor, reportRoom] = selection?.kind === "report" ? selection.id.split("|") : [];
+  const location = selection?.kind === "report" ? locationForId(reportId, reportFloor || null, reportRoom || null) : locationFromParams(params);
   return <ReportFlow location={location} reportId={params.get("report")} navigate={navigate} />;
 }
 

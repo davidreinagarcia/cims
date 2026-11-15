@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } fro
 import MapView from "../components/MapView";
 import OfflineBanner from "../components/OfflineBanner";
 import BuildingView from "../indoor/BuildingView";
+import { useBookingRequestSeq } from "../indoor/handoff";
 import AccountChip from "../panels/account/AccountChip";
 import SignInDialog from "../panels/account/SignInDialog";
 import BuildingCard from "../panels/building-card/BuildingCard";
@@ -121,6 +122,9 @@ export default function Shell() {
   // Picking something on the map (or from the bulletin) always shows it; a "report" selection
   // (a place/building card's "Report an issue") opens the report panel prefilled with it instead.
   useEffect(() => { if (selection) setPanel(selection.kind === "report" ? "report" : "explore"); }, [selection]);
+  // "Book this room" on the indoor room card: leave the building and open the reservations panel on it.
+  const booking = useBookingRequestSeq();
+  useEffect(() => { if (booking) { select(null); setPanel("rooms"); } }, [booking]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const choosePanel = (next: ShellPanel) => {
     if (next === "bulletin") {

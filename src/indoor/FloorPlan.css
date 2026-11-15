@@ -1,41 +1,43 @@
-/** @file Vector plan canvas, survey controls and room interaction states. */
-.floor-plan { min-width: 0; }
-.floor-plan__toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s2); padding: var(--s3); border-bottom: var(--hairline); }
-.floor-plan__mode, .floor-plan__zoom { display: flex; }
-.floor-plan__toolbar .cims-btn { padding: 0 var(--s3); }
-.floor-plan__toolbar .cims-btn + .cims-btn { margin-left: -1px; }
-.floor-plan__mode [aria-pressed="true"] { background: var(--navy); color: var(--white); }
-.floor-plan__canvas { position: relative; }
-.floor-plan svg { display: block; width: 100%; height: clamp(320px, 58vh, 700px); touch-action: none; cursor: grab; }
-.floor-plan svg:active { cursor: grabbing; }
-.floor-plan__label { font-family: var(--font-display); font-weight: 600; fill: var(--ink); pointer-events: none; }
-.floor-plan__outline { fill: none; stroke: var(--ink); stroke-width: 2; pointer-events: none; vector-effect: non-scaling-stroke; }
-.floor-plan .cims-room { cursor: pointer; vector-effect: non-scaling-stroke; }
-.floor-plan .cims-room--service { fill: var(--gold); }
-.floor-plan .cims-room--selected { fill: var(--room-selected); }
-.floor-plan .cims-room:hover, .floor-plan .cims-room:focus-visible { stroke-width: 3; stroke: var(--navy); filter: brightness(0.92); outline: none; }
-.floor-plan__annotation { position: absolute; bottom: var(--s2); right: var(--s2); pointer-events: none; background: var(--paper); padding: var(--s1); font-size: 10px; }
+/** @file Vector plan canvas: flat typed fills, ink walls, fitted labels, connector glyphs, numbered dashed route. */
+.floor-plan { position: relative; min-width: 0; min-height: 0; height: 100%; }
+.floor-plan__svg { display: block; width: 100%; height: 100%; touch-action: none; cursor: grab; user-select: none; }
+.floor-plan__svg:active { cursor: grabbing; }
+
+/* ink walls over flat fills */
+.floor-plan__floor { fill: var(--white); stroke: none; }
+.floor-plan__outline { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: miter; pointer-events: none; vector-effect: non-scaling-stroke; }
+.floor-plan .cims-room { cursor: pointer; stroke-width: 1; vector-effect: non-scaling-stroke; }
 .floor-plan .cims-room--classroom { fill: var(--room-classroom); }
-.floor-plan .cims-room--utility { fill: var(--room-circulation); stroke-dasharray: 5 3; }
-.floor-plan .cims-room--outdoor { fill: var(--room-classroom); fill-opacity: .55; stroke-dasharray: 1 4; stroke-linecap: round; }
-.floor-plan .cims-room--void { fill: none; stroke-dasharray: 6 4; pointer-events: none; cursor: default; }
-.floor-plan .cims-room--selected { fill: var(--room-selected); }
+.floor-plan .cims-room--service { fill: var(--paper-2); }
+.floor-plan .cims-room--utility { fill: var(--paper); stroke-dasharray: 5 3; }
+.floor-plan .cims-room--outdoor { fill: var(--map-campus); stroke-dasharray: 1 4; stroke-linecap: round; }
+.floor-plan .cims-room--void { fill: var(--white); stroke-dasharray: 6 4; pointer-events: none; cursor: default; }
+.floor-plan .cims-room:hover, .floor-plan .cims-room:focus-visible { stroke: var(--navy); stroke-width: 3; outline: none; }
+.floor-plan .cims-room.cims-room--selected { fill: var(--room-selected); stroke: var(--ink); stroke-width: 2.5; stroke-dasharray: 7 4; }
+
+.floor-plan__labels { pointer-events: none; }
+.floor-plan__label text { font-family: var(--font-display); font-weight: 600; fill: var(--ink); letter-spacing: 0.02em; }
+.floor-plan__label .floor-plan__number { font-family: var(--font-mono); font-weight: 500; fill: var(--ink); letter-spacing: 0.02em; }
+
+/* connectors and entrances keep their screen size (scaled in FloorPlan.tsx) */
+.floor-plan__glyph rect { fill: var(--white); stroke: var(--ink); stroke-width: 1.25; }
+.floor-plan__glyph path { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: miter; }
+.floor-plan__glyph--elevator path { fill: var(--ink); stroke: none; }
+.floor-plan__entrance circle { fill: var(--navy); stroke: var(--white); stroke-width: 2; }
+.floor-plan__entrance text { font: 600 9px var(--font-display); letter-spacing: 0.08em; fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; stroke-linejoin: round; }
+
+/* route: dashed brick line, numbered brick circles, gold "you enter here" tag */
 .floor-plan__route { pointer-events: none; }
-.floor-plan__route polyline { fill: none; stroke: var(--route); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 10 7; animation: indoor-route-march 1.2s linear infinite; }
-.floor-plan__marker { stroke: var(--white); stroke-width: 2; }
-.floor-plan__marker--A { fill: var(--navy); }
-.floor-plan__marker--B { fill: var(--gold); }
-.floor-plan__route text { fill: var(--white); font: bold 13px var(--font-body); }
-.floor-plan__marker--B + text { fill: var(--navy); }
-@keyframes indoor-route-march { to { stroke-dashoffset: -34; } }
-@media (prefers-reduced-motion: reduce) { .floor-plan__route polyline { animation: none; } }
+.floor-plan__route polyline { fill: none; stroke: var(--route); stroke-linecap: butt; stroke-linejoin: round; }
+.floor-plan__route .floor-plan__route-active { stroke: var(--route); stroke-dasharray: none; stroke-linecap: round; }
+.floor-plan__step rect { fill: var(--route); stroke: var(--white); stroke-width: 2; }
+.floor-plan__step text { fill: var(--white); font: 600 12px var(--font-mono); }
+.floor-plan__step--active rect { fill: var(--navy); stroke: var(--gold); stroke-width: 3; }
+.floor-plan__start rect { fill: var(--gold); stroke: var(--ink); stroke-width: 1; }
+.floor-plan__start-title { font: 700 11px var(--font-display); letter-spacing: 0.06em; fill: var(--ink); }
+.floor-plan__start-detail { font: 600 9px var(--font-display); letter-spacing: 0.08em; fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; stroke-linejoin: round; }
+.floor-plan__transition text { font: 700 10px var(--font-display); letter-spacing: 0.06em; fill: var(--route); paint-order: stroke; stroke: var(--white); stroke-width: 3px; stroke-linejoin: round; }
 
-.floor-plan__toolbar { min-height: 68px; box-sizing: border-box; align-items: center; }
-@media (max-width: 700px) { .floor-plan__toolbar .cims-btn { padding: 0 10px; } }
-
-.floor-plan__transition rect { fill: var(--gold); stroke: var(--navy); stroke-width: 2; }
-.floor-plan__transition--stairs rect { fill: var(--route); stroke: var(--white); }
-.floor-plan__transition path { fill: none; stroke: var(--navy); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
-.floor-plan__transition--stairs path { stroke: var(--white); }
-.floor-plan__transition--elevator path { fill: var(--navy); }
-.floor-plan__transition text { font: bold 13px var(--font-body); fill: var(--navy); paint-order: stroke; stroke: var(--white); stroke-width: 4px; stroke-linejoin: round; }
+.floor-plan__zoom { position: absolute; z-index: 1; top: var(--s3); right: var(--s3); }
+.floor-plan__zoom button { display: grid; place-items: center; }
+.floor-plan__zoom button:disabled { color: var(--ink-muted); cursor: default; }
