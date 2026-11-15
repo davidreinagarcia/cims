@@ -6,6 +6,12 @@ Indoor maps (Lane B): contracts, floor-plan viewer, level selector and room dire
 
 **Files**
 
+- [`Directory.tsx`](Directory.tsx): Room directory of one level: rooms grouped by type with a filter box; the selected room is marked. · exports `Directory`
+- [`FloorPlan.tsx`](FloorPlan.tsx): Floor plan of one level as an SVG: rooms filled by type, the selected room in gold with the marching outline. · exports `FloorPlan`
+- [`IndoorViewer.tsx`](IndoorViewer.tsx): Indoor viewer (F-06): covers the map with a building's floor plan, level selector and room directory. · exports `IndoorViewer`
+- [`data.ts`](data.ts): Access to indoor data: which buildings have a floor plan, plus helpers to read levels and rooms. · exports `indoorBuildings`, `getIndoor`, `levelsTopDown`, `entranceLevel`, `findRoom`
+- [`indoor.css`](indoor.css): * @file Layout of the indoor viewer: covers the map area (whole screen on phones). Looks come from cims-ui.cs…
+- [`state.tsx`](state.tsx): Indoor view state: which building is open and which level is shown. Entry point for "Enter building". · exports `IndoorProvider`, `useIndoor`
 - [`types.ts`](types.ts): Contracts for indoor data (Lane B): levels, rooms, booking metadata and availability. Data files in src/data/… · exports `roomSelectionId`
 
 <!-- AUTO:END -->
