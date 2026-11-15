@@ -6,8 +6,8 @@
       "title": "Freshman Cake Race",
       "color": "yellow",
       "rotate": -3,
-      "lng": -84.3916,
-      "lat": 33.7733,
+      "lng": -84.39515,
+      "lat": 33.77365,
       "approx": true,
       "text": "Homecoming morning, before sunrise, freshmen run half a mile and finish on top of Freshman Hill by Bobby Dodd. Everybody gets cupcakes, the winners get actual cakes. Not required anymore, but they really want you there.",
       "tip": "Ramblin' Reck Club bakes the cupcakes the night before.",
@@ -327,8 +327,8 @@
     {
       "id": "east",
       "label": "East",
-      "lng": -84.3912,
-      "lat": 33.7733,
+      "lng": -84.3922,
+      "lat": 33.7751,
       "approx": true,
       "blurb": "the heart of the action"
     }

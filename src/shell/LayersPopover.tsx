@@ -1,6 +1,7 @@
 /** @file Layers tile on the map plus the popover that holds the full LayersPanel (legend, sub-filters, counts). */
 import { useEffect, useRef, useState } from "react";
 import LayersPanel from "../panels/layers/LayersPanel";
+import { useCulture } from "../culture/store";
 import { Icon } from "./icons";
 
 /** Tile that opens the legend popover. Esc or a click outside closes it and returns focus to the tile. */
@@ -8,6 +9,8 @@ export default function LayersPopover() {
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const tile = useRef<HTMLButtonElement>(null);
+  const culture = useCulture().on;
+  useEffect(() => { if (culture) setOpen(false); }, [culture]); // GT Culture closes the legend
   useEffect(() => {
     if (!open) return;
     root.current?.querySelector<HTMLElement>(".shell-popover button")?.focus();
