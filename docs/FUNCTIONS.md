@@ -32,8 +32,25 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `openStatus(hours, now)` [src/lib/hours.ts:24](../src/lib/hours.ts#L24): Computes campus-local opening status without guessing when today's hours are missing.
 - `LAYER_CATALOG` [src/lib/layerCatalog.ts:22](../src/lib/layerCatalog.ts#L22): The PRD layers plus Printing and Health (added 2026-11-14), in panel order.
 - `categoryColor(layer, fallback = "#1C2733")` [src/lib/layerCatalog.ts:50](../src/lib/layerCatalog.ts#L50): Resolved color of a layer (reads the design token, so the tokens stay the single source of truth).
+- `readLocal(key, fallback)` [src/lib/localStore.ts:4](../src/lib/localStore.ts#L4): Reads JSON from localStorage; falls back when storage is blocked or the value is corrupt.
+- `writeLocal(key, value)` [src/lib/localStore.ts:14](../src/lib/localStore.ts#L14): Writes JSON to localStorage; returns false when storage is blocked or full (caller should fall back to memory…
 - `showDrafts` [src/lib/places.ts:14](../src/lib/places.ts#L14): True when the page was opened with ?drafts=1: unverified drafts become visible (for reviewers and previews).
 - `places` [src/lib/places.ts:19](../src/lib/places.ts#L19): The places the app shows: seed, demo and verified records, plus drafts only with ?drafts=1.
+- `createLocalPreferredRoomsService()` [src/lib/preferredRooms.mock.ts:8](../src/lib/preferredRooms.mock.ts#L8): Creates the localStorage-backed mock. Falls back to memory when storage is unavailable.
+- `preferredRoomsService` [src/lib/preferredRooms.ts:33](../src/lib/preferredRooms.ts#L33): The favorites backend used by the app. Swap the adapter here (and only here) when ADR-0005 is decided.
+- `createLocalReservationsService()` [src/lib/reservations.mock.ts:16](../src/lib/reservations.mock.ts#L16): Creates the localStorage-backed mock. Falls back to memory when storage is unavailable.
+- `SLOT_MINUTES` [src/lib/reservations.ts:6](../src/lib/reservations.ts#L6): 30 minutes: both the grid's cell size and the minimum booking length.
+- `MIN_DURATION_MINUTES` [src/lib/reservations.ts:8](../src/lib/reservations.ts#L8): Shortest a reservation may be.
+- `MAX_DURATION_MINUTES` [src/lib/reservations.ts:10](../src/lib/reservations.ts#L10): Longest a reservation may be; the grid must not let a selection grow past this.
+- `CHECKIN_WINDOW_MINUTES` [src/lib/reservations.ts:18](../src/lib/reservations.ts#L18): Every reservation (T-61, replacing T-60's manually-tapped "Renew" button) has this many minutes
+- `CHECKIN_RADIUS_METERS` [src/lib/reservations.ts:27](../src/lib/reservations.ts#L27): How close (in meters) a check-in's GPS fix must be to the room's *building* centroid
+- `END_REMINDER_MINUTES` [src/lib/reservations.ts:29](../src/lib/reservations.ts#L29): How many minutes before a checked-in reservation's end the UI shows an in-app "ending soon" reminder (honest…
+- `REBOOK_COOLDOWN_MINUTES` [src/lib/reservations.ts:40](../src/lib/reservations.ts#L40): Anti-camping cooldown (T-61, explicitly requested): once an account's reservation on a room ends
+- `checkinDeadline(reservation)` [src/lib/reservations.ts:87](../src/lib/reservations.ts#L87): The instant a reservation's check-in window closes; past this with no check-in, the room is a no-show and fre…
+- `reservationBusyWindow(reservation)` [src/lib/reservations.ts:99](../src/lib/reservations.ts#L99): The interval a reservation currently blocks on its room, for {@link isRoomFree}/{@link findFreeRooms}
+- `isReservationActive(reservation, now)` [src/lib/reservations.ts:106](../src/lib/reservations.ts#L106): Whether a reservation is still occupying its room at `now` (not cancelled, checked in before its window close…
+- `reservationStatus(reservation, now)` [src/lib/reservations.ts:116](../src/lib/reservations.ts#L116): Classifies a reservation's current status for display; see {@link ReservationStatus}.
+- `reservationsService` [src/lib/reservations.ts:128](../src/lib/reservations.ts#L128): The reservations backend used by the app. Swap the adapter here (and only here) when ADR-0005 is decided.
 - `searchPlaces(query, items)` [src/lib/search.ts:113](../src/lib/search.ts#L113): Searches name, aliases and category; queries under two characters preserve the full input order.
 - `searchCampus(query, items, buildings)` [src/lib/search.ts:148](../src/lib/search.ts#L148): Searches footprints and published rooms alongside places, including building aliases in room queries.
 - `suggest(query, buildings, limit = 6)` [src/lib/suggest.ts:7](../src/lib/suggest.ts#L7): Few, ranked suggestions like a map app: nothing for an empty or one letter query, never the whole campus.
@@ -51,6 +68,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Persona` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional identity offered by the demo account picker.
 - `AuthAdapter` [src/auth/types.ts:22](../src/auth/types.ts#L22): Adapter boundary keeps sign-in implementation out of screens.
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
+- `RoutableIndoorRoom` [src/indoor/availability.ts:13](../src/indoor/availability.ts#L13): A routable (schematic) entry from `registry.ts#indoorRooms`, narrowed from the `IndoorRoom`
+- `BookableRoom` [src/indoor/availability.ts:21](../src/indoor/availability.ts#L21): A room with bookable demo amenities (T-60 reservations), with a ready-to-render display label.
+- `TimeWindow` [src/indoor/availability.ts:70](../src/indoor/availability.ts#L70): A half-open interval of instants: start is included and end is excluded.
+- `RoomQuery` [src/indoor/availability.ts:73](../src/indoor/availability.ts#L73): Filters for bookable rooms available throughout a time window.
+- `FreeRoom` [src/indoor/availability.ts:81](../src/indoor/availability.ts#L81): A matching room together with its demo amenities, ready for the results list and selection.
+- `AmenitiesById` [src/indoor/availability.ts:84](../src/indoor/availability.ts#L84): Demo amenities keyed by room selection id, e.g. `roomFinderDemo.ts#roomAmenitiesById`.
+- `DemoSlotPattern` [src/indoor/availability.ts:87](../src/indoor/availability.ts#L87): A fictional weekly booking recurring at campus-local HH:MM times.
 - `IndoorRoom` [src/indoor/registry.ts:19](../src/indoor/registry.ts#L19): A searchable indoor entry explicitly distinguishes drawn routes from published facts.
 - `Step` [src/indoor/route.ts:5](../src/indoor/route.ts#L5): One accessible instruction and the level on which it happens.
 - `Transition` [src/indoor/route.ts:7](../src/indoor/route.ts#L7): Where the route changes floor: shown on the plan as a badge.
@@ -67,6 +91,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `IndoorEntrance` [src/indoor/types.ts:59](../src/indoor/types.ts#L59): An approximate building entrance connected to the walking graph.
 - `IndoorGraph` [src/indoor/types.ts:62](../src/indoor/types.ts#L62): Undirected walking edges and vertical connections for one building.
 - `RoomFact` [src/indoor/types.ts:70](../src/indoor/types.ts#L70): Published room facts without geometry, inferred levels or routing nodes.
+- `RoomFeature` [src/indoor/types.ts:82](../src/indoor/types.ts#L82): Things a room offers that people filter by in the room finder (F-11).
+- `RoomAmenities` [src/indoor/types.ts:91](../src/indoor/types.ts#L91): Demo booking metadata for one bookable room, keyed by its selection id ("buildingId:spaceId",
+- `AvailabilitySlot` [src/indoor/types.ts:105](../src/indoor/types.ts#L105): A stretch of time a room is taken. Room is a selection id ("buildingId:spaceId"); times are ISO 8601 with off…
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
 - `GeolocationFailureReason` [src/lib/geolocation.ts:4](../src/lib/geolocation.ts#L4): Every real-world way `getCurrentPosition` can fail, each with its own honest, human message.
@@ -75,6 +102,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayerCategory` [src/lib/layerCatalog.ts:11](../src/lib/layerCatalog.ts#L11): One entry of the layer panel.
 - `PlaceFeature` [src/lib/places.ts:7](../src/lib/places.ts#L7): One place as a GeoJSON point feature.
 - `PlaceCollection` [src/lib/places.ts:9](../src/lib/places.ts#L9): All places as a GeoJSON feature collection.
+- `PreferredRoom` [src/lib/preferredRooms.ts:5](../src/lib/preferredRooms.ts#L5): One room an account heart-favorited, for the "Preferred rooms" shortcut (T-60).
+- `NewPreferredRoom` [src/lib/preferredRooms.ts:16](../src/lib/preferredRooms.ts#L16): What the heart toggle submits to favorite a room.
+- `PreferredRoomsService` [src/lib/preferredRooms.ts:23](../src/lib/preferredRooms.ts#L23): Backend contract for favorites. Implemented by the localStorage mock today (ADR-0005 still open).
+- `Reservation` [src/lib/reservations.ts:43](../src/lib/reservations.ts#L43): A booked room as the UI sees it. Always a fixed start/end; "open-ended + Renew" (T-60) is gone, replaced by t…
+- `NewReservation` [src/lib/reservations.ts:63](../src/lib/reservations.ts#L63): What the booking flow submits; the service assigns id, timestamps and ownership.
+- `ReservationsService` [src/lib/reservations.ts:73](../src/lib/reservations.ts#L73): Backend contract for reservations. Implemented by the localStorage mock today (ADR-0005 still open).
+- `ReservationStatus` [src/lib/reservations.ts:113](../src/lib/reservations.ts#L113): Where one reservation stands right now, for the "My reservations here" UI -- derived purely from timestamps,…
 - `MatchRange` [src/lib/search.ts:7](../src/lib/search.ts#L7): A half-open character range in the original field, suitable for String.slice.
 - `SearchMatch` [src/lib/search.ts:10](../src/lib/search.ts#L10): A matching name, alias or category and its highlight ranges.
 - `SearchResult` [src/lib/search.ts:17](../src/lib/search.ts#L17): A ranked place with an extensible group label and matches in displayable fields.
@@ -122,6 +156,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinPanel({ onShowMap })` [src/panels/bulletin/BulletinPanel.tsx:9](../src/panels/bulletin/BulletinPanel.tsx#L9): Show upcoming events independently of layer filters and return to Explore on selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
+- `BuildingGlyph({ buildingId })` [src/panels/rooms/BuildingGlyph.tsx:10](../src/panels/rooms/BuildingGlyph.tsx#L10): Renders a flat, ink-outlined elevation sketch with a gold hatch fill and a row of square windows per level ba…
+- `BuildingPicker({ onPick })` [src/panels/rooms/BuildingPicker.tsx:30](../src/panels/rooms/BuildingPicker.tsx#L30): Search bar + quick-pick chips for the two buildings with real indoor data; other GT buildings show as "Coming…
+- `ReservationGrid({ rooms })` [src/panels/rooms/ReservationGrid.tsx:50](../src/panels/rooms/ReservationGrid.tsx#L50): Day/time grid, booking flow, favorites, location check-in and "My reservations" for any list of
+- `RoomFinderPanel()` [src/panels/rooms/RoomFinderPanel.tsx:27](../src/panels/rooms/RoomFinderPanel.tsx#L27): Sidebar tab: "Reserve a room" entry point, replacing the read-only room finder (T-24) with a
+- `RoomsNearMe({ onBack })` [src/panels/rooms/RoomsNearMe.tsx:19](../src/panels/rooms/RoomsNearMe.tsx#L19): Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and hands the…
 - `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
 - `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
 - `SearchPanel(…)` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
@@ -133,7 +172,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Rail({ panel, onPanel })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
 - `RoutePanel({ initialSelection, onClose })` [src/shell/RoutePanel.tsx:10](../src/shell/RoutePanel.tsx#L10): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:55](../src/shell/Shell.tsx#L55): Lays out the map and every floating surface; panels are mounted unchanged inside the card (desktop) or sheet…
+- `Shell()` [src/shell/Shell.tsx:56](../src/shell/Shell.tsx#L56): Lays out the map and every floating surface; panels are mounted unchanged inside the card (desktop) or sheet…
 - `Icon({ name, size = 24 })` [src/shell/icons.tsx:23](../src/shell/icons.tsx#L23): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = mockAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
@@ -151,6 +190,15 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BASEMAP_TILEJSON` [src/config.ts:21](../src/config.ts#L21): Vector basemap (ADR-0006 step 2): OpenFreeMap, free and keyless, OpenMapTiles schema.
 - `TILE_ATTRIBUTION` [src/config.ts:23](../src/config.ts#L23): Attribution OpenFreeMap and OpenStreetMap require next to the map.
 - `CORRECTION_URL` [src/config.ts:26](../src/config.ts#L26): Base URL for prefilled place correction issues.
+- `bookableRoomsFor(rooms, amenitiesById, buildingId)` [src/indoor/availability.ts:24](../src/indoor/availability.ts#L24): Every bookable room in one building (its plain space/room name as the label), sorted alphabetically.
+- `favoriteRoomsFrom(rooms, amenitiesById, roomIds)` [src/indoor/availability.ts:47](../src/indoor/availability.ts#L47): Bookable rooms in `roomIds` across every building, labeled "Building · Room N" using each
+- `crossBuildingBookableRooms(rooms, amenitiesById)` [src/indoor/availability.ts:65](../src/indoor/availability.ts#L65): Every bookable room across every building, labeled "Building · Room" exactly like
+- `isRoomFree(id, slots, window)` [src/indoor/availability.ts:106](../src/indoor/availability.ts#L106): Whether a room has no overlapping valid slot; invalid windows return false.
+- `findFreeRooms(rooms, amenitiesById, slots, query)` [src/indoor/availability.ts:122](../src/indoor/availability.ts#L122): Finds free bookable rooms satisfying every filter, sorted by building title then room name.
+- `freeUntil(id, slots, from)` [src/indoor/availability.ts:139](../src/indoor/availability.ts#L139): Returns the earliest valid slot start strictly after from, ignoring ongoing slots, or null.
+- `nowWindow(now, minutes = 30)` [src/indoor/availability.ts:151](../src/indoor/availability.ts#L151): Creates an elapsed-time availability window without changing the supplied instant.
+- `campusTimeToday(now, time)` [src/indoor/availability.ts:186](../src/indoor/availability.ts#L186): Converts a campus-local "HH:MM" time on the same campus day as `now` to an instant, or null if invalid.
+- `expandDemoSlots(pattern, day)` [src/indoor/availability.ts:192](../src/indoor/availability.ts#L192): Expands weekly patterns for one campus-local day, skipping invalid or nonexistent DST times.
 - `openIndoor(buildingId)` [src/indoor/open.ts:9](../src/indoor/open.ts#L9): Opens the full indoor screen of a building.
 - `closeIndoor()` [src/indoor/open.ts:11](../src/indoor/open.ts#L11): Back to the preview card (or the map) without clearing the selection.
 - `useOpenIndoor()` [src/indoor/open.ts:13](../src/indoor/open.ts#L13): The building whose full indoor screen is open, if any.
@@ -161,6 +209,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `indoorBySlug(slug)` [src/indoor/registry.ts:41](../src/indoor/registry.ts#L41): Finds an indoor building by its sticker slug (or full footprint id).
 - `doorLink()` [src/indoor/registry.ts:46](../src/indoor/registry.ts#L46): A door sticker link: ?in=<building slug>&door=<entrance id>, read once when the app opens.
 - `doorUrl(origin, building, entranceId)` [src/indoor/registry.ts:56](../src/indoor/registry.ts#L56): The sticker link for one entrance, for printing QR codes and programming NFC tags.
+- `roomAmenitiesById` [src/indoor/roomFinderDemo.ts:12](../src/indoor/roomFinderDemo.ts#L12): Demo amenities (capacity, features, booking) keyed by room selection id. Always fictional (capacity is real f…
+- `demoSlotPatterns` [src/indoor/roomFinderDemo.ts:15](../src/indoor/roomFinderDemo.ts#L15): Fictional weekly busy patterns, both buildings combined, to expand per day with `expandDemoSlots`.
 - `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:24](../src/indoor/route.ts#L24): Finds the least cost walk, filtering inaccessible connectors before searching.
 - `baseStyle` [src/map/baseStyle.ts:69](../src/map/baseStyle.ts#L69): Base style every layer is added on top of.
 - `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.

@@ -177,8 +177,49 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 - [ ] **T-23 Report an issue** (F-10) · UI can start on mocks after T-02; real data needs T-22
   Prefilled location, category → team ("routes to IT"), duplicates + "Me too", status page,
   staff view, "Prototype: not sent to Facilities/IT" label (Risk R-14). Every write (report, +1) goes through the T-25 sign-in gate; the staff view needs the staff role (no unlisted URL).
-- [ ] **T-24 Room finder** (F-11, Must since Q6) · needs T-20, T-21
+- [x] **T-24 Room finder** (F-11, Must since Q6) · needs T-20, T-21
   Availability seed for Kendeda rooms, filters (capacity, features), map + floor highlight, Book deep link.
+  Integrated into the new app shell's **Rooms** rail/tab item (`src/shell/Shell.tsx`), replacing the
+  `ComingSoon` placeholder the shell's author left for it (2026-11-14).
+- [x] **T-60 Room reservations** (F-20, promoted from Could to in-scope prototype, "Team, 2026-11-14") · B · needs T-24
+  Replaces the Book-deep-link panel with a real (prototype) reservation flow for Kendeda and CULC: building
+  picker with quick-pick chips (three more real GT buildings shown disabled "Coming soon"), a schematic
+  survey-style building glyph, a day + 30-minute-slot grid per bookable room (green/gray reusing the
+  existing "free rooms" token), tap-to-extend selection capped at 2 hours, and an open-ended "renew every
+  30 min" mode standing in for F-18's unbuilt no-show check-in. Every write (reserve, renew, cancel) goes
+  through the T-25 sign-in gate. `src/lib/reservations.ts` + `reservations.mock.ts` (localStorage, same
+  pattern as T-23's reports service) — no real backend yet (T-22 undecided), so bookings don't sync across
+  devices. CULC rooms reuse real sourced capacities from the schematic (`src/data/indoor/culc.json`); the
+  weekly busy schedule and booking policy stay fictional "Demo data" for both buildings, same as T-24's
+  Kendeda seed. **Done when:** a signed-in user can book a 30-min and a 2-hour slot in both buildings, an
+  open-ended booking can be renewed or lapses back to free, and a signed-out write opens the T-25 dialog.
+  *Superseded by T-61: the open-ended/"renew every 30 min" mode is gone, replaced by a check-in window on every booking.*
+- [x] **T-61 Location-based "near me" + check-in no-show release** (F-11/F-18, "Team, 2026-11-14") · B · needs T-60
+  Closes two gaps against the PRD P3 hackathon prompt (`docs/01-problem-statement.md`): *"difficult to
+  quickly identify available rooms... or filter spaces by location, capacity, and features. No-shows can
+  also leave high-demand rooms unused while other students are unable to reserve them..."* **(a) Rooms near
+  me:** a geolocation-based entry point on the Room Finder landing screen, next to "My preferred rooms" —
+  `navigator.geolocation` with honest inline fallbacks for denied/unavailable/timeout/unsupported, haversine
+  distance to Kendeda's and CULC's real footprint centroids (`src/data/buildings.geojson` via Lane A's
+  `lib/buildings.ts`, read-only), a cross-building bookable-room list sorted nearest-first and labeled
+  "Building · Room · ~N m away", feeding the same `ReservationGrid`. **(b) Check-in replaces the T-60
+  open-ended/Renew mode for every reservation:** a 15-minute check-in window from the booked start,
+  confirmed by re-reading the browser's location and checking it's within ~150 m of the room's *building*
+  (necessarily building-level — no indoor positioning hardware); no check-in by the deadline auto-releases
+  the room with no cleanup job (same "falls out of the availability window on its own" trick T-60 used for
+  open-ended bookings); an in-app (no OS push) reminder in the last 10 minutes of a checked-in booking; and
+  an anti-camping rule — a 30-minute cooldown before the same account can rebook the exact same room after
+  one of its (non-cancelled) reservations there ends, early or on time, while a different room or a later
+  rebooking of the same room is unaffected. New `src/lib/geolocation.ts` (typed wrapper + haversine, no new
+  dependency); `src/lib/reservations.ts`/`.mock.ts` updated in place (same localStorage-only, Kendeda+CULC-only
+  prototype scope as T-60 — check-in state doesn't sync across devices either). **Done when:** "Rooms near
+  me" sorts both buildings' free rooms by distance with a clean fallback for every geolocation failure; a
+  check-in inside the radius confirms a booking and outside it explains why and doesn't; an un-checked-in
+  reservation shows as free to other users once its 15-minute window closes; and the same account can't
+  immediately rebook a room it just had, but can book a different one right away.
+  Ported onto `main` after the app-shell restructure (`feat/T61-shell-integration`, 2026-11-14): the old
+  `Sidebar` tab this was built against is gone, so `RoomFinderPanel` now mounts unchanged inside the
+  shell's "Rooms" floating card (desktop) / bottom sheet (mobile), same as `BulletinPanel`.
 - [x] **T-25 Sign-in mock + posting gate** (F-21, [ADR-0007](adr/0007-gt-sign-in-simulated.md)) · A · *hotspot PR (`App.tsx`, `src/state/`)* · needs T-01; land it before T-23 and the T-15 posting UI
   **Deliberately theater: looks real, enforces nothing; roles only change labels.** `src/auth/`: `AuthAdapter` interface (`signIn(persona)`, `signOut()`, `session`) with a **mock** adapter (localStorage; demo personas Student / Club officer / Facilities staff / Moderator). `AuthProvider` + `useAuth()` in `src/state/`, `SignInDialog` ("Sign in with Georgia Tech (demo)": never asks for credentials, community-rules checkbox, DEMO badge), a `requireAuth(action)` gate that opens the dialog and resumes the action, an account chip in the header. Types `Session { accountId, role, provider }` in `src/types/`. **Done when:** a signed-out write opens the dialog and continues after sign-in; a reload keeps the session; sign-out clears it; every screen says "Demo sign-in".
 
@@ -197,6 +238,8 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 ### P2: Should (only after every P1 box is checked)
 
 - [ ] **T-40 No-show release** (F-18) · B · QR check-in per room, auto-release after grace period
+  *Done via location check-in instead of a QR code — see T-61 (P1), which this prompt's human session asked
+  for explicitly over GT Library's QR/code model.*
 - [x] **T-41 Offline fallback / PWA** · A · service worker caching the shell + data (Risk R-06)
 - [ ] **T-42 Transport layer** (F-09) · A
 - [ ] **T-43 Study-space fullness** (F-08) · B · reuses T-22 backend

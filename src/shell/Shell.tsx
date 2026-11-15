@@ -9,6 +9,7 @@ import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinPanel from "../panels/bulletin/BulletinPanel";
+import RoomFinderPanel from "../panels/rooms/RoomFinderPanel";
 import StoriesPanel from "../stories/StoriesPanel";
 import { useStories } from "../stories/store";
 import { useAuth } from "../state/auth";
@@ -97,7 +98,7 @@ export default function Shell() {
 
   let content: { title: string; key: string; body: ReactNode } | null = null;
   if (panel === "bulletin") content = { title: "Bulletin", key: "bulletin", body: <BulletinPanel onShowMap={() => setPanel("explore")} /> };
-  else if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <ComingSoon what="Room finder" hint="You can already search a room number in the search bar." /> };
+  else if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <RoomFinderPanel /> };
   else if (panel === "report") content = { title: "Report", key: "report", body: <ComingSoon what="Report an issue" /> };
   else if (panel === "stories") content = { title: "Stories", key: "stories", body: <StoriesPanel onShowMap={() => setPanel("explore")} /> };
   else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel initialSelection={routeTo} onClose={closeContent} /> };

@@ -1,0 +1,61 @@
+{
+  "_note": "FICTIONAL demo data for the Kendeda room finder (F-11/T-24): capacity, features, booking policy/link and the weekly busy schedule are all invented for the prototype. No real GT availability feed exists yet (PRD Q7); the UI must label this 'Demo data'. Room ids match registry.ts#indoorRooms() ('buildingId:spaceId').",
+  "demo": true,
+  "amenities": [
+    {
+      "room": "kendeda-building-for-innovative-sustainable-design:classroom-1",
+      "capacity": 36,
+      "features": ["whiteboard", "display", "outlets", "accessible"],
+      "bookable": true,
+      "owner_system": "GT Scheduling (demo)",
+      "policy": "Demo policy: any GT student or staff, up to 2 hours, book up to 14 days ahead.",
+      "book_url": "https://example.org/cims-room-finder-demo/kendeda/classroom-1"
+    },
+    {
+      "room": "kendeda-building-for-innovative-sustainable-design:classroom-2",
+      "capacity": 30,
+      "features": ["whiteboard", "display", "outlets"],
+      "bookable": true,
+      "owner_system": "GT Scheduling (demo)",
+      "policy": "Demo policy: any GT student or staff, up to 2 hours, book up to 14 days ahead.",
+      "book_url": "https://example.org/cims-room-finder-demo/kendeda/classroom-2"
+    },
+    {
+      "room": "kendeda-building-for-innovative-sustainable-design:breakout-study",
+      "capacity": 8,
+      "features": ["whiteboard", "outlets", "quiet"],
+      "bookable": true,
+      "owner_system": "Library Group Study (demo)",
+      "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead.",
+      "book_url": "https://example.org/cims-room-finder-demo/kendeda/breakout-study"
+    },
+    {
+      "room": "kendeda-building-for-innovative-sustainable-design:auditorium",
+      "capacity": 150,
+      "features": ["display", "accessible"],
+      "bookable": true,
+      "owner_system": "GT Scheduling (demo)",
+      "policy": "Demo policy: registered student orgs and staff only, up to 3 hours, book up to 30 days ahead.",
+      "book_url": "https://example.org/cims-room-finder-demo/kendeda/auditorium"
+    }
+  ],
+  "slots": [
+    { "room": "kendeda-building-for-innovative-sustainable-design:classroom-1", "weekday": "mon", "start": "09:00", "end": "10:15" },
+    { "room": "kendeda-building-for-innovative-sustainable-design:classroom-1", "weekday": "wed", "start": "09:00", "end": "10:15" },
+    { "room": "kendeda-building-for-innovative-sustainable-design:classroom-1", "weekday": "fri", "start": "09:00", "end": "10:15" },
+    { "room": "kendeda-building-for-innovative-sustainable-design:classroom-1", "weekday": "tue", "start": "11:00", "end": "12:15" },
+    { "room": "kendeda-building-for-innovative-sustainable-design:classroom-1", "weekday": "thu", "start": "11:00", "end": "12:15" },
+
+    { "room": "kendeda-building-for-innovative-sustainable-design:classroom-2", "weekday": "mon", "start": "10:30", "end": "11:45" },
+    { "room": "kendeda-building-for-innovative-sustainable-design:classroom-2", "weekday": "wed", "start": "10:30", "end": "11:45" },
+    { "room": "kendeda-building-for-innovative-sustainable-design:classroom-2", "weekday": "fri", "start": "10:30", "end": "11:45" },
+    { "room": "kendeda-building-for-innovative-sustainable-design:classroom-2", "weekday": "tue", "start": "14:00", "end": "15:15" },
+    { "room": "kendeda-building-for-innovative-sustainable-design:classroom-2", "weekday": "thu", "start": "14:00", "end": "15:15" },
+
+    { "room": "kendeda-building-for-innovative-sustainable-design:breakout-study", "weekday": "tue", "start": "16:00", "end": "17:00" },
+    { "room": "kendeda-building-for-innovative-sustainable-design:breakout-study", "weekday": "thu", "start": "16:00", "end": "17:00" },
+
+    { "room": "kendeda-building-for-innovative-sustainable-design:auditorium", "weekday": "mon", "start": "18:00", "end": "20:00" },
+    { "room": "kendeda-building-for-innovative-sustainable-design:auditorium", "weekday": "wed", "start": "12:00", "end": "13:00" }
+  ]
+}
