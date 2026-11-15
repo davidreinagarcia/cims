@@ -6,6 +6,7 @@ import { indoorFor } from "../../indoor/registry";
 import { useAuth } from "../../state/auth";
 import { useSelection } from "../../state/selection";
 import InsidePlaces from "./InsidePlaces";
+import BuildingPhotoFigure from "./BuildingPhoto";
 import "./building-card.css";
 
 /** Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is open. */
@@ -34,6 +35,7 @@ export default function BuildingPreview() {
   const handleReportIssue = () => requireAuth(() => select({ kind: "report", id: building.building_id }));
   return (
     <section className="detail preview" aria-label="Building preview">
+      <BuildingPhotoFigure buildingId={building.building_id} />
       <h2 className="cims-card__name">{facts?.name ?? building.title}</h2>
       {!!aliases.length && <p className="cims-card__alias">{aliases.join(", ")}</p>}
       <p className="detail__tags">
