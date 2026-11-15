@@ -13,7 +13,7 @@ export default function FloatingCard({ title, contentKey, onClose, children }: {
   const [collapsed, setCollapsed] = useState(false);
   useEffect(() => setCollapsed(false), [contentKey]);
   return (
-    <section className="shell-card" data-collapsed={collapsed} aria-label={title}>
+    <section className="shell-card" data-collapsed={collapsed} aria-label={title} tabIndex={-1}>
       <div className="shell-card__surface" hidden={collapsed}>
         <header className="shell-card__head">
           <span className="cims-caps">{title}</span>
