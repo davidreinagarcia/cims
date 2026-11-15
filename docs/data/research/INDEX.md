@@ -7,6 +7,9 @@ Research reports behind the POI dataset. Not data and not verified.
 
 **Files**
 
+- [`david-osm-coordinates.json`](david-osm-coordinates.json): JSON array, 38 items
 - [`gemini-pass2-2026-11-14.md`](gemini-pass2-2026-11-14.md): Audit report of the Gemini deep research pass on campus POIs (2026-11-14): what is solid, what is missing, wh…
+- [`tato-gemini-2026-11-14-report.txt`](tato-gemini-2026-11-14-report.txt): _no summary_
+- [`tato-gemini-2026-11-14.json`](tato-gemini-2026-11-14.json): GeoJSON, 101 features
 
 <!-- AUTO:END -->
