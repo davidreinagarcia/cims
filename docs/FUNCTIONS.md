@@ -391,7 +391,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
 - `CameraCapture({ onCapture, onCancel })` [src/stories/CameraCapture.tsx:39](../src/stories/CameraCapture.tsx#L39): Full-screen camera view, like the phone's own app. Calls `onCapture` with the media plus where it was taken;…
 - `LocationGate({ gps, permission })` [src/stories/LocationGate.tsx:38](../src/stories/LocationGate.tsx#L38): Card over the camera until a GPS fix exists. Renders nothing once the fix is in.
-- `StoriesPanel({ onShowMap })` [src/stories/StoriesPanel.tsx:115](../src/stories/StoriesPanel.tsx#L115): The Stories tab. `onShowMap` switches the shell back to the map (after "View on map").
+- `StoriesPanel({ onShowMap, onClose })` [src/stories/StoriesPanel.tsx:133](../src/stories/StoriesPanel.tsx#L133): The Stories tab. `onShowMap` switches the shell back to the map (after "View on map"). With `onClose` (phones…
 
 ### Other exported functions & constants
 
@@ -532,7 +532,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `moveFocus(event, vertical)` [src/shell/icons.tsx:52](../src/shell/icons.tsx#L52): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 - `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:16](../src/stories/CameraCapture.tsx#L16): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
 - `useLocationPermission()` [src/stories/LocationGate.tsx:10](../src/stories/LocationGate.tsx#L10): Live location permission. Updates by itself when the person flips the switch in the browser settings and come…
-- `ago(ms, now = Date.now()` [src/stories/StoriesPanel.tsx:13](../src/stories/StoriesPanel.tsx#L13): "now", "12m", "3h": how long ago, short like Instagram.
+- `ago(ms, now = Date.now()` [src/stories/StoriesPanel.tsx:14](../src/stories/StoriesPanel.tsx#L14): "now", "12m", "3h": how long ago, short like Instagram.
 - `demoStories(now = Date.now()` [src/stories/demoStories.ts:43](../src/stories/demoStories.ts#L43): Builds the fictional stories (created within the last ~20 h, so they never expire mid-session). Resolves empt…
 - `STORY_TTL_MS` [src/stories/localAdapter.ts:8](../src/stories/localAdapter.ts#L8): Stories live 24 hours, like Instagram.
 - `localAdapter` [src/stories/localAdapter.ts:30](../src/stories/localAdapter.ts#L30): Stories stored on this device only (demo); swap for a backend adapter without touching the UI.

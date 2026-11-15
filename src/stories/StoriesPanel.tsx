@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { loadBuildings } from "../lib/buildings";
 import { useAuth } from "../state/auth";
+import { Icon } from "../shell/icons";
 import CameraCapture from "./CameraCapture";
 import { closeViewer, ensureLoaded, focusOnMap, liveStories, postStory, setHeat, useStories } from "./store";
 import type { Capture, Story } from "./types";
@@ -28,7 +29,7 @@ function usePlaceName(story: Story | undefined): string | null {
   return name;
 }
 
-function Viewer({ stories, onMap }: { stories: Story[]; onMap: (story: Story) => void }) {
+function Viewer({ stories, onMap, onClose }: { stories: Story[]; onMap: (story: Story) => void; onClose?: () => void }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [muted, setMuted] = useState(true);
@@ -50,9 +51,25 @@ function Viewer({ stories, onMap }: { stories: Story[]; onMap: (story: Story) =>
     return () => window.clearInterval(id);
   }, [story?.id, paused]);
   const root = useRef<HTMLDivElement>(null);
+  // Immersive (phone): drag down to close, like Instagram. The view follows the finger and fades.
+  const drag = useRef<{ y: number; x: number; live: boolean } | null>(null);
+  const move = (dy: number) => { const el = root.current; if (el) { el.style.transform = dy > 0 ? `translateY(${dy}px) scale(${1 - Math.min(dy, 400) / 2000})` : ""; el.style.opacity = String(1 - Math.min(dy, 300) / 600); } };
+  const onTouchStart = (e: React.TouchEvent) => { if (onClose) drag.current = { y: e.touches[0].clientY, x: e.touches[0].clientX, live: false }; };
+  const onTouchMove = (e: React.TouchEvent) => {
+    const d = drag.current; if (!d) return;
+    const dy = e.touches[0].clientY - d.y; const dx = Math.abs(e.touches[0].clientX - d.x);
+    if (!d.live && dy > 12 && dy > dx) { d.live = true; setPaused(true); }
+    if (d.live) move(dy);
+  };
+  const onTouchEnd = (e: React.TouchEvent) => {
+    const d = drag.current; drag.current = null; if (!d?.live) return;
+    setPaused(false);
+    if (e.changedTouches[0].clientY - d.y > 110) onClose?.(); else { const el = root.current; if (el) { el.style.transform = ""; el.style.opacity = ""; } }
+  };
   if (!story) return null;
   return (
-    <div ref={root} className="story-view" tabIndex={0} aria-label="Story viewer"
+    <div ref={root} className="story-view" data-immersive={onClose ? "true" : undefined} tabIndex={0} aria-label="Story viewer"
+      onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd} onTouchCancel={onTouchEnd}
       onKeyDown={(e) => { if (e.key === "ArrowRight") next(); else if (e.key === "ArrowLeft") prev(); }}>
       <div className="story-view__bars" aria-hidden="true">
         {stories.map((s, i) => (
@@ -78,10 +95,11 @@ function Viewer({ stories, onMap }: { stories: Story[]; onMap: (story: Story) =>
           {place && <div className="story-view__place">{place}</div>}
         </div>
         {story.kind === "video" && <button type="button" className="story-view__sound" onClick={() => setMuted(!muted)} aria-pressed={!muted}>{muted ? "Sound off" : "Sound on"}</button>}
+        {onClose && <button type="button" className="story-view__close" aria-label="Close stories, back to the map" onClick={onClose}><Icon name="close" size={20} /></button>}
       </header>
       <footer className="story-view__foot">
         {story.caption && <p>{story.caption}</p>}
-        <button type="button" className="cims-btn cims-btn--primary" onClick={() => onMap(story)}>View on map</button>
+        <button type="button" className="cims-btn cims-btn--primary story-view__map" onClick={() => onMap(story)}>{onClose && <Icon name="explore" size={20} />}{onClose ? " View on map" : "View on map"}</button>
       </footer>
     </div>
   );
@@ -111,8 +129,8 @@ function Review({ capture, onPost, onRetake }: { capture: Capture; onPost: (capt
   );
 }
 
-/** The Stories tab. `onShowMap` switches the shell back to the map (after "View on map"). */
-export default function StoriesPanel({ onShowMap }: { onShowMap: () => void }) {
+/** The Stories tab. `onShowMap` switches the shell back to the map (after "View on map"). With `onClose` (phones) it is a full-screen, Instagram-style page. */
+export default function StoriesPanel({ onShowMap, onClose }: { onShowMap: () => void; onClose?: () => void }) {
   const { session, requireAuth } = useAuth();
   const { stories, loaded, viewer, heat } = useStories();
   const [mode, setMode] = useState<"view" | "camera" | "review">("view");
@@ -129,8 +147,9 @@ export default function StoriesPanel({ onShowMap }: { onShowMap: () => void }) {
     return <Review capture={capture} onRetake={() => setMode("camera")}
       onPost={async (caption) => { await postStory(session, capture, caption); setCapture(null); closeViewer(); setMode("view"); }} />;
   }
+  const immersive = !!onClose;
   return (
-    <div className="stories">
+    <div className={immersive ? "stories stories--immersive" : "stories"}>
       {viewer && (
         <div className="stories__subset">
           <span>Stories at this spot · {shown.length}</span>
@@ -139,13 +158,16 @@ export default function StoriesPanel({ onShowMap }: { onShowMap: () => void }) {
       )}
       {!loaded ? <p className="cims-empty" role="status">Loading stories…</p>
         : shown.length === 0 ? <p className="cims-empty" role="status"><strong>No stories yet</strong><span>Be the first to post from campus.</span></p>
-        : <Viewer stories={shown} onMap={(s) => { focusOnMap(s); onShowMap(); }} />}
-      <button type="button" className="cims-btn cims-btn--block" onClick={startPosting}>
-        {session ? "＋ Add your story" : "Sign in to add a story"}
+        : <Viewer stories={shown} onClose={onClose} onMap={(s) => { focusOnMap(s); onShowMap(); }} />}
+      {immersive && shown.length === 0 && loaded && <button type="button" className="story-view__close story-view__close--float" aria-label="Close stories, back to the map" onClick={onClose}><Icon name="close" size={20} /></button>}
+      <button type="button" className={immersive ? "stories__add" : "cims-btn cims-btn--block"} onClick={startPosting} aria-label={session ? "Add your story" : "Sign in to add a story"}>
+        {immersive ? <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg> : session ? "＋ Add your story" : "Sign in to add a story"}
       </button>
-      <label className="stories__heat">
-        <input type="checkbox" checked={heat} onChange={(e) => setHeat(e.target.checked)} /> Show story heat map on the map
-      </label>
+      {!immersive && (
+        <label className="stories__heat">
+          <input type="checkbox" checked={heat} onChange={(e) => setHeat(e.target.checked)} /> Show story heat map on the map
+        </label>
+      )}
     </div>
   );
 }
