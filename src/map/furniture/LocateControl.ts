@@ -2,11 +2,11 @@
 import type { IControl, Map as MapLibreMap, Marker } from "maplibre-gl";
 import { CAMPUS } from "../../config";
 import { GeolocationError } from "../../lib/geolocation";
+import { IN_APP_BROWSER, IOS } from "../../lib/inAppBrowser";
 import { loadMapLibre } from "../maplibre";
 import "./furniture.css";
 
 const ASKED = "cims.location.asked";
-const IOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
 /** Where to flip location back on once a browser has blocked it; no web page may do that itself. */
 const FIX_STEPS = IOS
   ? ["Tap aA in the address bar, then Website Settings, and set Location to Allow.", "If it stays blocked: Settings > Privacy & Security > Location Services must be on, with Safari Websites on While Using."]
@@ -44,7 +44,7 @@ export class LocateControl implements IControl {
     again.type = "button";
     again.className = "cims-btn cims-btn--small";
     again.textContent = "I allowed it, check again";
-    again.addEventListener("click", () => { this.message("Finding your location…"); void this.request(false); });
+    again.addEventListener("click", () => { this.message("Finding your location…"); this.ask(); });
     this.status.replaceChildren(title, steps, again);
   };
 
@@ -116,30 +116,36 @@ export class LocateControl implements IControl {
     }
   };
 
-  private request = async (automatic: boolean) => {
+  /**
+   * Manual ask, called straight from a tap. It must reach the browser synchronously: Safari on iPhone only shows
+   * the permission prompt when the request comes from the tap itself, so no await may come before it.
+   */
+  private ask = () => {
+    if (!this.map || !this.ready) return;
+    if (!("geolocation" in navigator) || !window.isSecureContext) { this.message(new GeolocationError("unsupported").message); return; }
+    if (IN_APP_BROWSER) this.message(`This looks like an in-app browser, which often can't share location. If nothing happens, open this page in ${IOS ? "Safari" : "Chrome"}.`);
+    this.manual = true;
+    this.enabled = true;
+    this.refresh();
+    this.start();
+  };
+
+  /** Quiet ask when the map opens: only if the browser would show its prompt, and only once per device. */
+  private autoRequest = async () => {
     if (this.pending || !this.map) return;
     this.pending = true;
     try {
-      if (!("geolocation" in navigator) || !window.isSecureContext) {
-        if (!automatic) this.message(new GeolocationError("unsupported").message);
-        return;
-      }
+      if (!("geolocation" in navigator) || !window.isSecureContext) return;
       let permission: PermissionState | undefined;
       try { permission = (await navigator.permissions.query({ name: "geolocation" })).state; } catch { /* Manual location still works without Permissions API. */ }
-      if (!this.map) return;
-      if (permission === "denied") {
-        if (!automatic) this.help();
-        return;
-      }
-      if (automatic && permission !== "granted") {
+      if (!this.map || permission === "denied") return;
+      if (permission !== "granted") {
         if (permission !== "prompt" || askedThisSession) return;
         try { if (localStorage.getItem(ASKED)) return; } catch { /* Fall back to the session flag. */ }
-      }
-      if (permission !== "granted") {
         askedThisSession = true;
         try { localStorage.setItem(ASKED, "1"); } catch { /* Private mode may block storage. */ }
       }
-      this.manual = !automatic;
+      this.manual = false;
       this.enabled = true;
       this.refresh();
       this.start();
@@ -154,7 +160,7 @@ export class LocateControl implements IControl {
       this.message("Location hidden.");
     } else {
       this.message("Finding your location…");
-      void this.request(false);
+      this.ask();
     }
   };
 
@@ -212,7 +218,7 @@ export class LocateControl implements IControl {
     this.ready = true;
     if (this.button) this.button.disabled = false;
     void this.watchPermission();
-    void this.request(true);
+    void this.autoRequest();
   };
 
   /** Builds the accessible locate button beside the existing map controls. */

@@ -17,6 +17,7 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`events.ts`](events.ts): Pure event windows and short labels in the America/New_York campus timezone. · exports `campusDateTime`, `nextWindow`, `formatWindow`
 - [`geolocation.ts`](geolocation.ts): Typed wrapper around the browser Geolocation API (T-61) plus haversine distance math, shared by "Rooms near m… · exports `GeolocationError`, `getCurrentPosition`, `haversineMeters`, `formatDistance`
 - [`hours.ts`](hours.ts): Pure opening status and weekday lookup in the campus timezone. · exports `campusDay`, `openStatus`
+- [`inAppBrowser.ts`](inAppBrowser.ts): Detects iPhones and in-app browsers (Telegram, Instagram, ...), which often cannot share location and need th… · exports `IOS`, `IN_APP_BROWSER`
 - [`indoorPlan.ts`](indoorPlan.ts): Indoor plan helpers shared by the plan, the stack view and the building screen: shape bounds, room categories… · exports `planLabelBounds`, `planWalls`, `planShapeBounds`, `roomCategory`, `roomCategoryLabels`, `spaceTypeLabels`, `spaceDisplayName`, `drawnBounds`, `levelRank`, `planNorthUp`
 - [`issue-routing.ts`](issue-routing.ts): Issue categories and their routing (category → team + official contact), from src/data/issue-routing.json whe… · exports `TEAMS`, `SAFETY_CATEGORY`, `hasVerifiedRouting`, `issueRoutes`, `routeFor`
 - [`layerCatalog.ts`](layerCatalog.ts): The toggleable map layers (PRD F-02): id, label, color token and sub-types. Add a layer or sub-type here. · exports `LAYER_CATALOG`, `OVERLAY_CATALOG`, `categoryColor`
