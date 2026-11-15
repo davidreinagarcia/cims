@@ -253,7 +253,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `demoSlotPatterns` [src/indoor/roomFinderDemo.ts:15](../src/indoor/roomFinderDemo.ts#L15): Fictional weekly busy patterns, both buildings combined, to expand per day with `expandDemoSlots`.
 - `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:24](../src/indoor/route.ts#L24): Finds the least cost walk, filtering inaccessible connectors before searching.
 - `baseStyle` [src/map/baseStyle.ts:69](../src/map/baseStyle.ts#L69): Base style every layer is added on top of.
-- `LocateControl` [src/map/furniture/LocateControl.ts:16](../src/map/furniture/LocateControl.ts#L16): Map control that watches location only while visible and never follows the camera after the first fix.
+- `LocateControl` [src/map/furniture/LocateControl.ts:12](../src/map/furniture/LocateControl.ts#L12): Map control that watches location only while visible and never follows the camera after the first fix.
 - `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.
 - `ScaleBox` [src/map/furniture/ScaleBox.ts:22](../src/map/furniture/ScaleBox.ts#L22): MapLibre control: a four-segment scale bar in feet and the map center's latitude/longitude, updated as the ma…
 - `ViewToggle` [src/map/furniture/ViewToggle.ts:9](../src/map/furniture/ViewToggle.ts#L9): MapLibre control: "2D" / "3D" button. The label is the view you get by pressing it.

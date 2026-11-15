@@ -1,16 +1,12 @@
-/** @file Private, local-only location tracking with a survey dot, accuracy circle and one campus-only camera move. */
-import type { GeoJSONSource, IControl, Map as MapLibreMap } from "maplibre-gl";
+/** @file Private, local-only location tracking with a ground-aligned CIMS marker and one campus-only camera move. */
+import type { IControl, Map as MapLibreMap, Marker } from "maplibre-gl";
 import { CAMPUS } from "../../config";
 import { GeolocationError } from "../../lib/geolocation";
-import { INK, PAPER } from "../palette";
+import { loadMapLibre } from "../maplibre";
 import "./furniture.css";
 
-const SOURCE = "user-location";
-const ACCURACY = "user-location-accuracy";
-const DOT = "user-location-dot";
 const ASKED = "cims.location.asked";
 let askedThisSession = false;
-const EMPTY: GeoJSON.FeatureCollection = { type: "FeatureCollection", features: [] };
 
 /** Map control that watches location only while visible and never follows the camera after the first fix. */
 export class LocateControl implements IControl {
@@ -19,6 +15,8 @@ export class LocateControl implements IControl {
   private button?: HTMLButtonElement;
   private status?: HTMLElement;
   private watch?: number;
+  private marker?: Marker;
+  private fix?: GeolocationCoordinates;
   private enabled = false;
   private ready = false;
   private firstFix = true;
@@ -32,7 +30,8 @@ export class LocateControl implements IControl {
   private clear = () => {
     if (this.watch !== undefined) navigator.geolocation.clearWatch(this.watch);
     this.watch = undefined;
-    (this.map?.getSource(SOURCE) as GeoJSONSource | undefined)?.setData(EMPTY);
+    this.marker?.remove();
+    this.fix = undefined;
   };
 
   private refresh = () => {
@@ -52,22 +51,9 @@ export class LocateControl implements IControl {
     if (!map || !this.enabled || document.hidden) return;
     const { latitude: lat, longitude: lng, accuracy } = coords;
     if (![lat, lng, accuracy].every(Number.isFinite) || accuracy < 0) return;
-    // A geographic polygon keeps the accuracy radius correct while zooming, rotating and tilting.
-    const ring: number[][] = [];
-    const angular = accuracy / 6_371_000;
-    const latitude = lat * Math.PI / 180;
-    const longitude = lng * Math.PI / 180;
-    for (let i = 0; i <= 64; i++) {
-      const bearing = i / 64 * Math.PI * 2;
-      const y = Math.asin(Math.sin(latitude) * Math.cos(angular) + Math.cos(latitude) * Math.sin(angular) * Math.cos(bearing));
-      const x = longitude + Math.atan2(Math.sin(bearing) * Math.sin(angular) * Math.cos(latitude), Math.cos(angular) - Math.sin(latitude) * Math.sin(y));
-      ring.push([x * 180 / Math.PI, y * 180 / Math.PI]);
-    }
-    ring[64] = ring[0];
-    (map.getSource(SOURCE) as GeoJSONSource).setData({ type: "FeatureCollection", features: [
-      { type: "Feature", properties: {}, geometry: { type: "Polygon", coordinates: [ring] } },
-      { type: "Feature", properties: {}, geometry: { type: "Point", coordinates: [lng, lat] } },
-    ] });
+    this.fix = coords;
+    this.resize();
+    this.marker?.setLngLat([lng, lat]).addTo(map);
     if (this.firstFix) {
       this.firstFix = false;
       const [[west, south], [east, north]] = CAMPUS.bounds;
@@ -136,14 +122,52 @@ export class LocateControl implements IControl {
     else this.start();
   };
 
-  private loaded = () => {
+  private resize = () => {
+    if (!this.map || !this.marker || !this.fix) return;
+    // Web Mercator uses 512 CSS pixels per world tile, independent of device pixel ratio.
+    const metersPerPixel = 40_075_016.686 * Math.cos(this.fix.latitude * Math.PI / 180)
+      / (512 * 2 ** this.map.getZoom());
+    const radius = Math.max(56, Math.min(112, this.fix.accuracy / metersPerPixel));
+    const element = this.marker.getElement();
+    element.querySelector("[data-accuracy]")?.setAttribute("r", String(radius));
+    const arrow = element.querySelector<SVGElement>("[data-heading]");
+    if (arrow) {
+      const heading = this.fix.heading;
+      const hasHeading = heading !== null && Number.isFinite(heading);
+      arrow.style.display = hasHeading ? "" : "none";
+      arrow.setAttribute("transform", `rotate(${hasHeading ? heading : 0}) translate(0 ${-radius})`);
+    }
+  };
+
+  private loaded = async () => {
     const map = this.map;
     if (!map) return;
-    map.addSource(SOURCE, { type: "geojson", data: EMPTY });
-    map.addLayer({ id: ACCURACY, type: "fill", source: SOURCE, filter: ["==", ["geometry-type"], "Polygon"],
-      paint: { "fill-color": PAPER, "fill-opacity": 0.25, "fill-outline-color": INK } });
-    map.addLayer({ id: DOT, type: "circle", source: SOURCE, filter: ["==", ["geometry-type"], "Point"],
-      paint: { "circle-radius": 6, "circle-color": "#003057", "circle-stroke-width": 2, "circle-stroke-color": PAPER } });
+    const { Marker } = await loadMapLibre();
+    if (this.map !== map) return;
+    const element = document.createElement("div");
+    element.className = "cims-location-marker";
+    element.setAttribute("role", "img");
+    element.setAttribute("aria-label", "Your location; outer ring shows approximate GPS accuracy");
+    element.innerHTML = `<svg width="256" height="256" viewBox="-128 -128 256 256" aria-hidden="true">
+      <g class="cims-location-marker__rings" fill="none" stroke-width="5">
+        <circle data-accuracy r="56" stroke="#E3D7B0"/>
+        <circle r="46" stroke="#9AA8B4"/>
+        <circle r="38" stroke="#F3EEE2"/>
+        <circle r="30" stroke="#6E8090"/>
+        <circle r="22" stroke="#E3D7B0"/>
+      </g>
+      <g data-heading style="display:none">
+        <path d="M0 -7 5 6 0 3 -5 6Z" fill="#435563" stroke="#003057" stroke-width="1"/>
+      </g>
+      <circle cy="3" r="14" fill="#001E36"/>
+      <path d="M-14 0v3M14 0v3" stroke="#001E36" stroke-width="1"/>
+      <circle r="14" fill="#003057"/>
+      <circle r="11" fill="none" stroke="var(--gold, #B3A369)" stroke-width="1.5"/>
+      <text y="3.5" text-anchor="middle" fill="var(--gold, #B3A369)"
+        font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="10">CIMS</text>
+    </svg>`;
+    this.marker = new Marker({ element, anchor: "center", pitchAlignment: "map", rotationAlignment: "map" });
+    map.on("zoom", this.resize);
     this.ready = true;
     if (this.button) this.button.disabled = false;
     void this.request(true);
@@ -170,14 +194,14 @@ export class LocateControl implements IControl {
     return this.el;
   }
 
-  /** Clears the watch, listeners, dot and accuracy circle when the map is removed. */
+  /** Clears the watch, listeners and location marker when the map is removed. */
   onRemove(): void {
     this.enabled = false;
     this.clear();
     document.removeEventListener("visibilitychange", this.visibility);
     this.map?.off("load", this.loaded);
-    for (const layer of [DOT, ACCURACY]) if (this.map?.getLayer(layer)) this.map.removeLayer(layer);
-    if (this.map?.getSource(SOURCE)) this.map.removeSource(SOURCE);
+    this.map?.off("zoom", this.resize);
+    this.marker = undefined;
     this.button?.removeEventListener("click", this.click);
     this.el?.remove();
     this.map = undefined;
