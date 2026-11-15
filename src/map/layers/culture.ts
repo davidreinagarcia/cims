@@ -6,7 +6,7 @@ import { getCulture, setGuide, subscribeCulture } from "../../culture/store";
 import { loadMapLibre } from "../maplibre";
 import "../culture.css";
 
-interface Note { id: string; title: string; color: string; rotate: number; lng: number; lat: number; text: string; tip?: string; source_url: string }
+interface Note { id: string; title: string; color: string; rotate: number; lng: number; lat: number; text: string; tip?: string; source_url: string; anywhere?: boolean }
 
 /** Build one sticky note element; tapping it flips between the title only and the full note. */
 function noteEl(n: Note): HTMLElement {
@@ -23,7 +23,7 @@ function noteEl(n: Note): HTMLElement {
   body.textContent = n.text;
   const tip = document.createElement("em");
   tip.className = "culture-note__tip";
-  tip.textContent = n.tip ? `psst: ${n.tip}` : "";
+  tip.textContent = [n.anywhere ? "not one spot, pinned near the Green" : "", n.tip ? `psst: ${n.tip}` : ""].filter(Boolean).join(" · ");
   const src = document.createElement("a");
   src.className = "culture-note__src";
   src.href = n.source_url;
@@ -37,6 +37,13 @@ function noteEl(n: Note): HTMLElement {
     el.setAttribute("aria-expanded", String(open));
     el.parentElement?.style.setProperty("z-index", open ? "5" : "");
   });
+  return el;
+}
+
+/** MapLibre positions the marker element with an inline transform, so the styled (tilted, relative) note lives inside a plain wrapper. */
+function wrap(inner: HTMLElement): HTMLElement {
+  const el = document.createElement("div");
+  el.append(inner);
   return el;
 }
 
@@ -63,15 +70,14 @@ const culture: MapLayer = {
       if (markers.length) return;
       void loadMapLibre().then((ml) => {
         if (mine !== token || !getCulture().on) return;
-        for (const n of data.notes as Note[]) markers.push(new ml.Marker({ element: noteEl(n), anchor: "bottom" }).setLngLat([n.lng, n.lat]).addTo(map));
-        for (const a of data.areas) markers.push(new ml.Marker({ element: areaEl(a.label), anchor: "center" }).setLngLat([a.lng, a.lat]).addTo(map));
-        const b = new ml.LngLatBounds();
-        for (const n of data.notes) b.extend([n.lng, n.lat]);
-        for (const a of data.areas) b.extend([a.lng, a.lat]);
-        map.fitBounds(b, { padding: 90, maxZoom: 16.5, pitch: 0, duration: 1200 });
+        for (const n of data.notes as Note[]) markers.push(new ml.Marker({ element: wrap(noteEl(n)), anchor: "bottom" }).setLngLat([n.lng, n.lat]).addTo(map));
+        for (const a of data.areas) markers.push(new ml.Marker({ element: wrap(areaEl(a.label)), anchor: "center" }).setLngLat([a.lng, a.lat]).addTo(map));
+        // Frame the whole campus top-down so every note is on screen (fitBounds proved unreliable here).
+        map.easeTo({ center: [-84.3965, 33.7762], zoom: window.innerWidth < 600 ? 14.3 : 14.9, pitch: 0, bearing: 0, duration: 1200 });
       });
     };
     const unsubscribe = subscribeCulture(sync);
+    sync(); // culture may already be on if the user toggled it before the map style finished loading
     return { remove() { unsubscribe(); token++; clear(); } };
   },
 };
