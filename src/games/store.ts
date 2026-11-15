@@ -102,17 +102,25 @@ function makeBots(count: number): Bot[] {
 type Meta = { id: string; name: string; mode: GameMode; minutes: number; capacity: number; listedPlayers: number };
 let lastMeta: Meta | null = null;
 
+/** A fresh batch of drops at random spots (ids carry the wave so the map never mixes batches). */
+function newWave(wave: number): Drop[] {
+  return Array.from({ length: DROP_COUNT }, (_, i) => ({ id: `drop-${wave}-${i}`, ...randomPoint(), claimedBy: null, team: null }));
+}
+/** When every drop of the batch is taken, the next batch appears; the match only ends with the clock. */
+function rollWave(drops: Drop[], wave: number, feed: FeedItem[]) {
+  if (!drops.length || !drops.every((d) => d.claimedBy)) return { drops, wave, feed };
+  return { drops: newWave(wave + 1), wave: wave + 1, feed: pushFeed(feed, `Wave ${wave + 1}: ${DROP_COUNT} new drops`, null) };
+}
+
 function startGame(meta: Meta) {
   stopEngine();
   lastMeta = meta;
-  const drops: Drop[] = meta.mode === "drops"
-    ? Array.from({ length: DROP_COUNT }, (_, i) => ({ id: `drop-${i}`, ...randomPoint(), claimedBy: null, team: null }))
-    : [];
+  const drops: Drop[] = meta.mode === "drops" ? newWave(1) : [];
   const bots = makeBots(Math.min(4, Math.max(2, meta.listedPlayers - 1)));
   set({
     player: START,
     game: {
-      run: ++runSeq, id: meta.id, name: meta.name, mode: meta.mode, capacity: meta.capacity, listedPlayers: meta.listedPlayers,
+      run: ++runSeq, wave: 1, id: meta.id, name: meta.name, mode: meta.mode, capacity: meta.capacity, listedPlayers: meta.listedPlayers,
       secondsLeft: meta.minutes * 60, finished: false,
       zones: meta.mode === "zones" ? zoneTemplates().slice(0, 8) : [], drops, bots,
       scores: { red: 0, blue: 0 }, playerPoints: 0, feed: [{ id: ++feedSeq, text: `${meta.name} starts`, team: null }],
@@ -221,13 +229,11 @@ function checkDrops() {
   const ids = new Set(hit.map((d) => d.id));
   const team = state.profile.team;
   const drops = g.drops.map((d) => (ids.has(d.id) ? { ...d, claimedBy: state.profile.nickname, team } : d));
+  const next = rollWave(drops, g.wave, pushFeed(g.feed, `You claimed a drop (+${DROP_POINTS * hit.length})`, team));
   setGame({
-    drops, playerPoints: g.playerPoints + DROP_POINTS * hit.length,
+    ...next, playerPoints: g.playerPoints + DROP_POINTS * hit.length,
     scores: { ...g.scores, [team]: g.scores[team] + DROP_POINTS * hit.length },
-    feed: pushFeed(g.feed, `You claimed a drop (+${DROP_POINTS * hit.length})`, team),
-    finished: drops.every((d) => d.claimedBy),
   });
-  if (state.game?.finished) stopEngine();
 }
 
 /** One second of the match: clock, zone income, bot movement and bot captures. */
@@ -269,8 +275,9 @@ function tick() {
   });
 
   const secondsLeft = g.secondsLeft - 1;
-  const finished = secondsLeft <= 0 || (g.mode === "drops" && drops.every((d) => d.claimedBy));
-  set({ game: { ...g, zones, drops, bots, scores, feed, secondsLeft: Math.max(0, secondsLeft), finished } });
+  const finished = secondsLeft <= 0;
+  const next = rollWave(drops, g.wave, feed);
+  set({ game: { ...g, zones, bots, scores, ...next, secondsLeft: Math.max(0, secondsLeft), finished } });
   if (finished) stopEngine();
   else checkDrops();
 }

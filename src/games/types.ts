@@ -27,6 +27,8 @@ export interface FeedItem { id: number; text: string; team: TeamId | null }
 export interface ActiveGame {
   /** Increments on every (re)start so the map layer can tell a rematch from a tick. */
   run: number;
+  /** Drop Race: which batch of drops is on the map (1 = the first). */
+  wave: number;
   id: string; name: string; mode: GameMode; capacity: number; listedPlayers: number;
   secondsLeft: number; finished: boolean;
   zones: Zone[]; drops: Drop[]; bots: Bot[];

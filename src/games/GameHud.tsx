@@ -27,7 +27,7 @@ export default function GameHud() {
         <span className="game-hud__badge" aria-hidden="true"><GIcon name={g.mode} size={20} /></span>
         <div className="game-hud__title">
           <strong>{g.name}</strong>
-          <span>{MODE_LABEL[g.mode]}</span>
+          <span>{MODE_LABEL[g.mode]}{g.mode === "drops" ? ` · Wave ${g.wave}` : ""}</span>
         </div>
         <span className="game-hud__clock" data-low={low} role="timer" aria-label="Time remaining">{clock(g.secondsLeft)}</span>
       </header>
@@ -69,7 +69,7 @@ export default function GameHud() {
             </button>
           ) : (
             <p className="game-hud__hint">
-              {g.mode === "zones" ? "Step inside a circle to capture it. Each zone you hold earns 1 point per second." : "Reach a drop before anyone else: +100."}
+              {g.mode === "zones" ? "Step inside a circle to capture it. Each zone you hold earns 1 point per second." : "Reach a drop before anyone else: +100. Clear all 5 to unlock the next wave."}
             </p>
           )}
 

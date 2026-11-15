@@ -52,4 +52,4 @@ export const MODE_LABEL = { zones: "Zone Conquest", drops: "Drop Race" } as cons
 export const BOT_NAMES = ["Buzz_Runner", "Ramblin_Rita", "NorthAve_Nico", "Yellow_Jacket", "Hive_Hannah", "Clough_Carl"];
 
 /** One-line pitch of each mode, shown on the create screen. */
-export const MODE_BLURB = { zones: "Capture campus zones and hold them: each one earns points every second.", drops: "Reach each drop before the other team: +100 when you claim it." } as const;
+export const MODE_BLURB = { zones: "Capture campus zones and hold them: each one earns points every second.", drops: "Claim every drop before the other team: +100 each. Clear a wave and a new one appears until time runs out." } as const;
