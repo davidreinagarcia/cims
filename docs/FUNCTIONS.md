@@ -361,12 +361,12 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BottomSheet(…)` [src/shell/BottomSheet.tsx:21](../src/shell/BottomSheet.tsx#L21): Drag or tap the handle (or press Enter/Space on it) to move between snaps; arrow keys step up and down. Opens…
 - `ChipsBar()` [src/shell/ChipsBar.tsx:15](../src/shell/ChipsBar.tsx#L15): One pill per layer category; pressed = layer on. Categories without data stay visible but inert (aria-disable…
 - `FloatingCard(…)` [src/shell/FloatingCard.tsx:6](../src/shell/FloatingCard.tsx#L6): Card with a close button and a ‹ collapse tab on its right edge. Renders nothing visible when its panel rende…
-- `LayersPopover()` [src/shell/LayersPopover.tsx:7](../src/shell/LayersPopover.tsx#L7): Tile that opens the legend popover. Esc or a click outside closes it and returns focus to the tile.
+- `LayersPopover()` [src/shell/LayersPopover.tsx:8](../src/shell/LayersPopover.tsx#L8): Tile that opens the legend popover. Esc or a click outside closes it and returns focus to the tile.
 - `MobileTabBar({ panel, onPanel })` [src/shell/MobileTabBar.tsx:5](../src/shell/MobileTabBar.tsx#L5): Fixed bottom bar above the safe-area inset. Left/right arrows move between tabs.
 - `Rail({ panel, onPanel, onPolice, onMaintenance })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
 - `RoutePanel({ initialSelection, onClose })` [src/shell/RoutePanel.tsx:10](../src/shell/RoutePanel.tsx#L10): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:85](../src/shell/Shell.tsx#L85): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
+- `Shell()` [src/shell/Shell.tsx:86](../src/shell/Shell.tsx#L86): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
 - `Icon({ name, size = 24 })` [src/shell/icons.tsx:26](../src/shell/icons.tsx#L26): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = supabaseAuthAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:36](../src/state/layerFilters.tsx#L36): Provides the layer filters to the app. Mount once, in App.

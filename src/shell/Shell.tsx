@@ -13,6 +13,7 @@ import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import HousingGuide from "../panels/culture/HousingGuide";
 import CultureReader from "../panels/culture/CultureReader";
+import { useCulture } from "../culture/store";
 import BulletinBoard from "../panels/bulletin/BulletinBoard";
 import BusesPanel from "../panels/buses/BusesPanel";
 import TipNotifier from "../alerts/TipNotifier";
@@ -160,11 +161,22 @@ export default function Shell() {
   // Picking something on the map (or from the bulletin) always shows it; a "report" selection
   // (a place/building card's "Report an issue") opens the report panel prefilled with it instead.
   useEffect(() => { if (selection) setPanel(selection.kind === "report" ? "report" : "explore"); }, [selection]);
+  // GT Culture is a mode of its own: turning it on closes every panel and card, and while it is on nothing else opens
+  // (the nav, search and route are dimmed and inert; a tap on a building is ignored). The police button stays: safety.
+  const culture = useCulture().on;
+  useEffect(() => {
+    if (!culture) return;
+    setPanel("explore");
+    setBulletin((current) => ({ ...current, open: false }));
+    setBuzzprintOpen(false);
+    if (selection) select(null);
+  }, [culture, selection]); // eslint-disable-line react-hooks/exhaustive-deps
   // "Book this room" on the indoor room card: leave the building and open the reservations panel on it.
   const booking = useBookingRequestSeq();
   useEffect(() => { if (booking) { select(null); setPanel("rooms"); } }, [booking]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const choosePanel = (next: ShellPanel) => {
+    if (culture) return; // blocked while GT Culture is on
     if (next === "bulletin") {
       bulletinOpener.current = document.querySelector<HTMLElement>('[data-nav="bulletin"]');
       writeBulletinUrl("all", true);
@@ -256,7 +268,7 @@ export default function Shell() {
   );
 
   return (
-    <div className="app cims" data-layout={mobile ? "mobile" : "desktop"} data-alert={banners.length > 0 ? "true" : undefined}>
+    <div className="app cims" data-layout={mobile ? "mobile" : "desktop"} data-culture={culture || undefined} data-alert={banners.length > 0 ? "true" : undefined}>
       <AlertBanner banners={banners} onDismiss={dismiss} />
       <SignInDialog />
       {!mobile && <Rail panel={bulletin.open ? "bulletin" : buzzprintOpen ? "buzzprint" : panel} onPanel={choosePanel} onPolice={() => setPolice(true)} onMaintenance={() => openStaff("maintenance")} />}
