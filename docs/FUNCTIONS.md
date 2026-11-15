@@ -126,7 +126,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `rest(path, init)` [src/lib/supabase.ts:88](../src/lib/supabase.ts#L88): PostgREST call. `path` starts with the table or `rpc/<fn>`; returns parsed JSON (or null for empty).
 - `upload(bucket, blob, ext)` [src/lib/supabase.ts:110](../src/lib/supabase.ts#L110): Uploads a blob under `<uid>/<uuid>.<ext>` in a public bucket and returns the object path.
 - `publicUrl(bucket, path)` [src/lib/supabase.ts:123](../src/lib/supabase.ts#L123): Public URL of an uploaded object.
-- `useGpsFix(auto = false)` [src/lib/useGpsFix.ts:15](../src/lib/useGpsFix.ts#L15): GPS fix for forms. Pass `auto` to ask as soon as the form opens. Fresh, high accuracy: these reports depend o…
+- `useGpsFix(auto = false)` [src/lib/useGpsFix.ts:17](../src/lib/useGpsFix.ts#L17): GPS fix for forms. Pass `auto` to ask as soon as the form opens. Fresh, high accuracy: these reports depend o…
 - `useAuth()` [src/state/auth.tsx:63](../src/state/auth.tsx#L63): Reads the demo session and sign-in controls inside AuthProvider.
 - `useLayerFilters()` [src/state/layerFilters.tsx:72](../src/state/layerFilters.tsx#L72): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
@@ -243,6 +243,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): Selectable map and search entities; room ids use "buildingId:spaceId".
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
 - `SelectionApi` [src/state/selection.tsx:20](../src/state/selection.tsx#L20): What useSelection() returns.
+- `LocationPermission` [src/stories/LocationGate.tsx:6](../src/stories/LocationGate.tsx#L6): What the browser says about location permission; "unknown" where the Permissions API can't tell (older Safari…
 - `MapFocus` [src/stories/store.ts:9](../src/stories/store.ts#L9): A request to look at one place on the map; `nonce` makes repeats of the same spot count as new requests.
 - `ViewerRequest` [src/stories/store.ts:11](../src/stories/store.ts#L11): A subset of stories to show in the viewer (set when the user clicks the heat map).
 - `StoryKind` [src/stories/types.ts:5](../src/stories/types.ts#L5): A story is either a photo or a short clip, always captured live in the app.
@@ -315,7 +316,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `AuthProvider({ children, adapter = supabaseAuthAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
-- `CameraCapture({ onCapture, onCancel })` [src/stories/CameraCapture.tsx:32](../src/stories/CameraCapture.tsx#L32): Full-height camera view. Calls `onCapture` with the media plus where it was taken; the caller decides what to…
+- `CameraCapture({ onCapture, onCancel })` [src/stories/CameraCapture.tsx:39](../src/stories/CameraCapture.tsx#L39): Full-screen camera view, like the phone's own app. Calls `onCapture` with the media plus where it was taken;…
+- `LocationGate({ gps, permission })` [src/stories/LocationGate.tsx:41](../src/stories/LocationGate.tsx#L41): Card over the camera until a GPS fix exists. Renders nothing once the fix is in.
 - `StoriesPanel({ onShowMap })` [src/stories/StoriesPanel.tsx:115](../src/stories/StoriesPanel.tsx#L115): The Stories tab. `onShowMap` switches the shell back to the map (after "View on map").
 
 ### Other exported functions & constants
@@ -414,7 +416,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `setAdapter(next)` [src/portfolio/store.ts:81](../src/portfolio/store.ts#L81): Backend hook: replace the storage adapter before the first load.
 - `NAV_ITEMS` [src/shell/icons.tsx:38](../src/shell/icons.tsx#L38): The six destinations of the rail (desktop) and the tab bar (phones), in order.
 - `moveFocus(event, vertical)` [src/shell/icons.tsx:48](../src/shell/icons.tsx#L48): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
-- `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:13](../src/stories/CameraCapture.tsx#L13): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
+- `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:16](../src/stories/CameraCapture.tsx#L16): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
+- `useLocationPermission()` [src/stories/LocationGate.tsx:9](../src/stories/LocationGate.tsx#L9): Live location permission. Updates by itself when the person flips the switch in the browser settings and come…
 - `ago(ms, now = Date.now()` [src/stories/StoriesPanel.tsx:13](../src/stories/StoriesPanel.tsx#L13): "now", "12m", "3h": how long ago, short like Instagram.
 - `demoStories(now = Date.now()` [src/stories/demoStories.ts:41](../src/stories/demoStories.ts#L41): Builds the fictional stories (created within the last ~20 h, so they never expire mid-session). Resolves empt…
 - `STORY_TTL_MS` [src/stories/localAdapter.ts:8](../src/stories/localAdapter.ts#L8): Stories live 24 hours, like Instagram.
