@@ -140,6 +140,9 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
           <div className="building-view__route-options">
             {route && <div className="building-view__route-levels" role="group" aria-label="Route levels">{[...new Set(route.legs.map((leg) => leg.level))].map((id) =>
               <button className="cims-btn" type="button" key={id} aria-pressed={id === levelId} onClick={() => setLevelId(id)}>{building.levels.find((item) => item.id === id)?.name}</button>)}</div>}
+            {route && !stepFree && route.transitions.some((t) => t.kind === "stairs") && <p className="building-view__stairs-note" role="status">
+              <strong>Includes stairs</strong> ({(n => `${n} ${n === 1 ? "flight" : "flights"}`)(new Set(route.transitions.filter((t) => t.kind === "stairs").map((t) => t.level + t.to)).size)}).
+              <button type="button" className="cims-btn" onClick={() => setStepFree(true)}>Avoid stairs</button></p>}
             <label className="building-view__step-free"><input type="checkbox" role="switch" checked={stepFree} onChange={(event) => setStepFree(event.target.checked)} />Step-free route</label>
           </div>
         </section>}
@@ -157,7 +160,8 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
         {route ? <section className="building-view__steps-section" aria-labelledby="steps-title">
           <h3 id="steps-title" className="cims-caps">Directions to {destination?.name}</h3>
           <ol className="building-view__steps">{route.steps.map((step, index) => <li key={index}>
-            <button type="button" onClick={() => setLevelId(step.level)}>{step.text}</button>
+            <button type="button" className={step.vertical ? `building-view__step-vertical building-view__step-vertical--${step.vertical.kind}` : undefined} onClick={() => setLevelId(step.level)}>
+              {step.vertical && <span className="building-view__step-badge">{step.vertical.kind === "stairs" ? "Stairs" : "Elevator"} {step.vertical.direction === "up" ? "↑" : "↓"}</span>}{step.text}</button>
           </li>)}</ol>
           {start?.note && <p className="cims-muted">{start.note}</p>}
           <p className="cims-muted">Schematic route, positions approximate, not for emergency use.</p>
