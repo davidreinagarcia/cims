@@ -12,5 +12,6 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`layerCatalog.ts`](layerCatalog.ts): The toggleable map layers (PRD F-02): id, label, color token and sub-types. Add a layer or sub-type here. · exports `LAYER_CATALOG`, `categoryColor`
 - [`places.ts`](places.ts): Typed access to every curated place: seed file plus src/data/pois/*.json, drafts hidden unless ?drafts=1. · exports `showDrafts`, `places`
 - [`search.ts`](search.ts): Ranked building, room and place search with accent folding and original-text match ranges. · exports `searchPlaces`, `searchCampus`
+- [`suggest.ts`](suggest.ts): Search-as-you-type suggestions (short ranked list, nothing until typed) and where a result sits on the map. · exports `suggest`, `locate`, `recents`, `remember`
 
 <!-- AUTO:END -->
