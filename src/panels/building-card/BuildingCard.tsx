@@ -4,19 +4,26 @@ import { CORRECTION_URL } from "../../config";
 import { loadBuildings, loadedBuildings, type BuildingIndex } from "../../lib/buildings";
 import { places } from "../../lib/places";
 import { useSelection } from "../../state/selection";
+import { hasIndoor } from "../../indoor/registry";
 import "./building-card.css";
 
 const unknown = <span className="cims-muted">Unknown</span>;
 
 /** Shows the selected building (kind "building"), or nothing when something else is selected. */
 export default function BuildingCard() {
-  const { selection, select } = useSelection();
+  const { selection } = useSelection();
+  if (selection?.kind !== "building" || hasIndoor(selection.id)) return null;
+  return <BuildingDetails buildingId={selection.id} />;
+}
+
+/** Shared building facts and actions for the sidebar and expanded indoor screen. */
+export function BuildingDetails({ buildingId, embedded = false }: { buildingId: string; embedded?: boolean }) {
+  const { select } = useSelection();
   const [index, setIndex] = useState<BuildingIndex | null>(loadedBuildings);
   const [failed, setFailed] = useState(false);
-  const wanted = selection?.kind === "building";
 
   useEffect(() => {
-    if (!wanted || index) return;
+    if (index) return;
     let alive = true;
     loadBuildings()
       .then((loaded) => alive && setIndex(loaded))
@@ -24,10 +31,9 @@ export default function BuildingCard() {
     return () => {
       alive = false;
     };
-  }, [wanted, index]);
+  }, [index]);
 
-  if (!wanted) return null;
-  const b = index?.byId.get(selection.id);
+  const b = index?.byId.get(buildingId);
   if (!b) {
     return (
       <section className="detail" aria-label="Building details" aria-busy={!failed}>
@@ -52,12 +58,14 @@ export default function BuildingCard() {
 
   return (
     <section className="detail" aria-label="Building details">
-      <h2 className="cims-card__name">{name}</h2>
-      <p className="cims-card__alias">{b.aliases.length ? b.aliases.join(", ") : unknown}</p>
-      <p className="detail__tags">
-        <span className="cims-tag">Building</span>
-        <span className="cims-tag cims-tag--alert" title="Outline from OpenStreetMap, not yet checked by a person">Unverified</span>
-      </p>
+      {!embedded && <>
+        <h2 className="cims-card__name">{name}</h2>
+        <p className="cims-card__alias">{b.aliases.length ? b.aliases.join(", ") : unknown}</p>
+        <p className="detail__tags">
+          <span className="cims-tag">Building</span>
+          <span className="cims-tag cims-tag--alert" title="Outline from OpenStreetMap, not yet checked by a person">Unverified</span>
+        </p>
+      </>}
       <table className="cims-infotable" aria-label="Building information">
         <tbody>
           <tr><th scope="row">Address</th><td>{b.address || unknown}</td></tr>
@@ -72,7 +80,7 @@ export default function BuildingCard() {
       <p><a href={correction.toString()} target="_blank" rel="noopener noreferrer">Suggest a correction</a></p>
       {inside.length > 0 && (
         <div className="detail__inside">
-          <h3 className="cims-caps">Inside ({inside.length})</h3>
+          <h3 className="cims-caps">{embedded ? "Places inside" : "Inside"} ({inside.length})</h3>
           <ul>{inside.map((item) => (
             <li key={item.properties.id}><button type="button" onClick={() => select({ kind: "place", id: item.properties.id })}>{item.properties.name}</button></li>
           ))}</ul>

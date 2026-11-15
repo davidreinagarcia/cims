@@ -32,7 +32,9 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`src/auth/`](src/auth/INDEX.md): Replaceable demo sign-in contract, fictional personas and local session persistence.
   - [`src/components/`](src/components/INDEX.md): React components for the current UI (map view, sidebar). T-01 moves these into src/map/ and src/panels/.
   - [`src/data/`](src/data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
+    - [`src/data/indoor/`](src/data/indoor/INDEX.md): _no description yet_
     - [`src/data/pois/`](src/data/pois/INDEX.md): Curated points of interest, one file per category (drafts by Codex pending verification, plus demo events). H…
+  - [`src/indoor/`](src/indoor/INDEX.md): Building screen, vector schematic renderer and indoor contracts shared by lanes A and B.
   - [`src/lib/`](src/lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
   - [`src/map/`](src/map/INDEX.md): Everything about the map engine: contract for layers, base style, and the layer auto-loader.
     - [`src/map/furniture/`](src/map/furniture/INDEX.md): Cartographic furniture drawn over the map as MapLibre controls: scale + coordinates box, north arrow, 2D/3D t…

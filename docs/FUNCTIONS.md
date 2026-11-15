@@ -40,6 +40,19 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Persona` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional identity offered by the demo account picker.
 - `AuthAdapter` [src/auth/types.ts:22](../src/auth/types.ts#L22): Adapter boundary keeps sign-in implementation out of screens.
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
+- `Step` [src/indoor/route.ts:5](../src/indoor/route.ts#L5): One accessible instruction and the level on which it happens.
+- `RouteLeg` [src/indoor/route.ts:7](../src/indoor/route.ts#L7): A continuous portion of the route on one floor.
+- `IndoorRoute` [src/indoor/route.ts:9](../src/indoor/route.ts#L9): A shortest path with drawing geometry and human readable instructions.
+- `RouteOptions` [src/indoor/route.ts:11](../src/indoor/route.ts#L11): Routing preferences and optional endpoint names supplied by the directory.
+- `IndoorShape` [src/indoor/types.ts:3](../src/indoor/types.ts#L3): A space shape in the schematic coordinate system.
+- `IndoorSpaceType` [src/indoor/types.ts:9](../src/indoor/types.ts#L9): The supported schematic space categories.
+- `IndoorSpace` [src/indoor/types.ts:12](../src/indoor/types.ts#L12): One named space with its source and optional contextual note.
+- `IndoorLevel` [src/indoor/types.ts:23](../src/indoor/types.ts#L23): A level either has vector geometry or an explicit unavailable note.
+- `IndoorBuilding` [src/indoor/types.ts:29](../src/indoor/types.ts#L29): Building indoor data, including provenance and an honest no-plan status.
+- `IndoorNode` [src/indoor/types.ts:41](../src/indoor/types.ts#L41): A walkable point in plan units on one level.
+- `IndoorConnector` [src/indoor/types.ts:44](../src/indoor/types.ts#L44): A named vertical connection with explicit accessibility.
+- `IndoorEntrance` [src/indoor/types.ts:53](../src/indoor/types.ts#L53): An approximate building entrance connected to the walking graph.
+- `IndoorGraph` [src/indoor/types.ts:56](../src/indoor/types.ts#L56): Undirected walking edges and vertical connections for one building.
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
@@ -66,14 +79,17 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Components
 
-- `App()` [src/App.tsx:11](../src/App.tsx#L11): Root component.
+- `App()` [src/App.tsx:12](../src/App.tsx#L12): Root component.
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:15](../src/components/MapView.tsx#L15): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
 - `Sidebar()` [src/components/Sidebar.tsx:12](../src/components/Sidebar.tsx#L12): Left column (bottom sheet on phones) that hosts the panels.
+- `BuildingView()` [src/indoor/BuildingView.tsx:18](../src/indoor/BuildingView.tsx#L18): Opens only registered building screens; other selections keep the campus map visible.
+- `FloorPlan({ level, selected, focus, route, legs, onSelect })` [src/indoor/FloorPlan.tsx:37](../src/indoor/FloorPlan.tsx#L37): Renders one available level with controls and brings the selected space into view.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:7](../src/panels/account/AccountChip.tsx#L7): Shows sign-in or the selected demo persona with a small sign-out disclosure.
 - `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
-- `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:12](../src/panels/building-card/BuildingCard.tsx#L12): Shows the selected building (kind "building"), or nothing when something else is selected.
+- `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:13](../src/panels/building-card/BuildingCard.tsx#L13): Shows the selected building (kind "building"), or nothing when something else is selected.
+- `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:20](../src/panels/building-card/BuildingCard.tsx#L20): Shared building facts and actions for the sidebar and expanded indoor screen.
 - `BuildingLink({ coordinates })` [src/panels/building-card/BuildingLink.tsx:7](../src/panels/building-card/BuildingLink.tsx#L7): Renders nothing when the place is not inside a known footprint (or the footprints are not loaded).
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:16](../src/panels/building-card/PlaceCard.tsx#L16): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinPanel({ onShowMap })` [src/panels/bulletin/BulletinPanel.tsx:9](../src/panels/bulletin/BulletinPanel.tsx#L9): Show upcoming events independently of layer filters and return to Explore on selection.
@@ -93,6 +109,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `TILE_URL` [src/config.ts:22](../src/config.ts#L22): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
 - `TILE_ATTRIBUTION` [src/config.ts:24](../src/config.ts#L24): Attribution text OSM requires next to the tiles.
 - `CORRECTION_URL` [src/config.ts:27](../src/config.ts#L27): Base URL for prefilled place correction issues.
+- `indoorFor(buildingId)` [src/indoor/registry.ts:9](../src/indoor/registry.ts#L9): Returns the curated indoor model for this footprint id, if supported.
+- `hasIndoor(id)` [src/indoor/registry.ts:14](../src/indoor/registry.ts#L14): Whether a building opens the indoor screen instead of the sidebar card.
+- `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:22](../src/indoor/route.ts#L22): Finds the least cost walk, filtering inaccessible connectors before searching.
 - `baseStyle` [src/map/baseStyle.ts:7](../src/map/baseStyle.ts#L7): Base style every layer is added on top of.
 - `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.
 - `ScaleBox` [src/map/furniture/ScaleBox.ts:22](../src/map/furniture/ScaleBox.ts#L22): MapLibre control: a four-segment scale bar in feet and the map center's latitude/longitude, updated as the ma…

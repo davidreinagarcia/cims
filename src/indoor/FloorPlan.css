@@ -1,0 +1,31 @@
+/** @file Vector plan canvas, survey controls and room interaction states. */
+.floor-plan { min-width: 0; }
+.floor-plan__toolbar { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s2); padding: var(--s3); border-bottom: var(--hairline); }
+.floor-plan__mode, .floor-plan__zoom { display: flex; }
+.floor-plan__toolbar .cims-btn { padding: 0 var(--s3); }
+.floor-plan__toolbar .cims-btn + .cims-btn { margin-left: -1px; }
+.floor-plan__mode [aria-pressed="true"] { background: var(--navy); color: var(--white); }
+.floor-plan__canvas { position: relative; }
+.floor-plan svg { display: block; width: 100%; height: clamp(260px, 48vh, 620px); touch-action: none; cursor: grab; }
+.floor-plan svg:active { cursor: grabbing; }
+.floor-plan__label { font-family: var(--font-display); font-weight: 600; fill: var(--ink); pointer-events: none; }
+.floor-plan__outline { fill: none; stroke: var(--ink); stroke-width: 2; pointer-events: none; vector-effect: non-scaling-stroke; }
+.floor-plan .cims-room { cursor: pointer; vector-effect: non-scaling-stroke; }
+.floor-plan .cims-room--service { fill: var(--gold); }
+.floor-plan .cims-room--selected { fill: var(--room-selected); }
+.floor-plan .cims-room:hover, .floor-plan .cims-room:focus-visible { stroke-width: 3; stroke: var(--navy); filter: brightness(0.92); outline: none; }
+.floor-plan__annotation { position: absolute; bottom: var(--s2); right: var(--s2); pointer-events: none; background: var(--paper); padding: var(--s1); font-size: 10px; }
+.floor-plan .cims-room--classroom { fill: var(--room-classroom); }
+.floor-plan .cims-room--utility { fill: var(--room-circulation); stroke-dasharray: 5 3; }
+.floor-plan .cims-room--outdoor { fill: var(--room-classroom); fill-opacity: .55; stroke-dasharray: 1 4; stroke-linecap: round; }
+.floor-plan .cims-room--void { fill: none; stroke-dasharray: 6 4; pointer-events: none; cursor: default; }
+.floor-plan .cims-room--selected { fill: var(--room-selected); }
+.floor-plan__route { pointer-events: none; }
+.floor-plan__route polyline { fill: none; stroke: var(--route); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 10 7; animation: indoor-route-march 1.2s linear infinite; }
+.floor-plan__marker { stroke: var(--white); stroke-width: 2; }
+.floor-plan__marker--A { fill: var(--navy); }
+.floor-plan__marker--B { fill: var(--gold); }
+.floor-plan__route text { fill: var(--white); font: bold 13px var(--font-body); }
+.floor-plan__marker--B + text { fill: var(--navy); }
+@keyframes indoor-route-march { to { stroke-dashoffset: -34; } }
+@media (prefers-reduced-motion: reduce) { .floor-plan__route polyline { animation: none; } }
