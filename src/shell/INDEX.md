@@ -15,7 +15,7 @@ Map-first app shell (docs/design/APP-SHELL.md): rail / tab bar, search pill, chi
 - [`RoutePanel.tsx`](RoutePanel.tsx): Route panel of the shell: From and To fields with suggestions and swap (walking directions open in Google Map… · exports `RoutePanel`
 - [`SearchPill.tsx`](SearchPill.tsx): Floating search pill: CIMS wordmark + the existing SearchPanel (field in the pill, results drop down under it… · exports `SearchPill`
 - [`Shell.tsx`](Shell.tsx): Map-first app shell (docs/design/APP-SHELL.md): full-bleed map with rail or tab bar, search pill, chips, and… · exports `Shell`
-- [`icons.tsx`](icons.tsx): Line icons for the shell chrome (rail, tab bar, pill, tiles) plus the four navigation destinations. · exports `Icon`, `NAV_ITEMS`, `moveFocus`
+- [`icons.tsx`](icons.tsx): Line icons for the shell chrome (rail, tab bar, pill, tiles) plus the five navigation destinations. · exports `Icon`, `NAV_ITEMS`, `moveFocus`
 - [`shell.css`](shell.css): * @file Layout and look of the floating shell: rail, search pill, chips, card, layers tile, sheet, tab bar. R…
 
 <!-- AUTO:END -->
