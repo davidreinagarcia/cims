@@ -1,4 +1,4 @@
-/** @file Floor plan of one level as an SVG: rooms filled by type, the selected room in gold with the marching outline. */
+/** @file Floor plan of one level as an SVG: rooms filled by type, the selected room in gold with the marching outline, free rooms outlined in green. */
 import type { IndoorBuilding, Room } from "./types";
 
 /** Middle of a room's bounding box, where its number is written. */
@@ -13,11 +13,14 @@ export default function FloorPlan({
   building,
   levelId,
   selectedRoomId,
+  freeRoomIds,
   onPick,
 }: {
   building: IndoorBuilding;
   levelId: string;
   selectedRoomId: string | null;
+  /** Rooms the room finder found free: outlined in green and tagged FREE. */
+  freeRoomIds?: Set<string>;
   onPick: (room: Room) => void;
 }) {
   const rooms = building.rooms.filter((r) => r.level === levelId && r.polygon);
@@ -29,14 +32,15 @@ export default function FloorPlan({
       {sorted.map((room) => {
         const pickable = room.type !== "circulation";
         const selected = room.id === selectedRoomId;
+        const free = freeRoomIds?.has(room.id) ?? false;
         const [x, y] = labelPoint(room.polygon!);
         return (
           <g
             key={room.id}
-            className={pickable ? "indoor-plan__room" : undefined}
+            className={pickable ? `indoor-plan__room${free ? " indoor-plan__room--free" : ""}` : undefined}
             role={pickable ? "button" : undefined}
             tabIndex={pickable ? 0 : undefined}
-            aria-label={pickable ? `${room.number} ${room.name}` : undefined}
+            aria-label={pickable ? `${room.number} ${room.name}${free ? ", free" : ""}` : undefined}
             aria-pressed={pickable ? selected : undefined}
             onClick={pickable ? () => onPick(room) : undefined}
             onKeyDown={pickable ? (e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), onPick(room)) : undefined}
@@ -46,8 +50,13 @@ export default function FloorPlan({
               points={room.polygon!.map((p) => p.join(",")).join(" ")}
             />
             {pickable && (
-              <text className="indoor-plan__label" x={x} y={y}>
+              <text className="indoor-plan__label" x={x} y={free ? y - 8 : y}>
                 {room.number}
+                {free && (
+                  <tspan className="indoor-plan__free" x={x} dy="16">
+                    FREE
+                  </tspan>
+                )}
               </text>
             )}
           </g>

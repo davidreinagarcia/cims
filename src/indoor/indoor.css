@@ -19,7 +19,14 @@
 .indoor__picked strong { font: 600 var(--fs-md) var(--font-display); letter-spacing: var(--caps-tracking); text-transform: uppercase; }
 .indoor__picked span { color: var(--ink-muted); }
 
-.indoor-directory { border-left: var(--hairline); overflow-y: auto; min-height: 0; }
+.indoor__side { border-left: var(--hairline); overflow-y: auto; min-height: 0; }
+.indoor__tabs { display: grid; grid-template-columns: 1fr 1fr; border-bottom: var(--hairline); position: sticky; top: 0; background: var(--paper); z-index: 1; }
+.indoor__tabs button { min-height: var(--tap); border: 0; background: none; color: var(--ink); cursor: pointer; font: 600 var(--fs-md) var(--font-display); letter-spacing: var(--caps-tracking); text-transform: uppercase; }
+.indoor__tabs button + button { border-left: var(--hairline); }
+.indoor__tabs button[aria-selected="true"] { background: var(--navy); color: var(--white); }
+.indoor-plan__room--free .cims-room:not(.cims-room--selected) { stroke: var(--cat-free); stroke-width: 3; }
+.indoor-plan__free { font-size: 10px; fill: var(--cat-free); font-weight: 600; }
+.indoor__picked a { justify-self: start; margin-top: var(--s1); text-decoration: none; display: inline-flex; align-items: center; }
 .indoor-directory__filter { box-sizing: border-box; width: calc(100% - 2 * var(--s4)); min-height: var(--tap); margin: var(--s4) var(--s4) var(--s1); padding: 0 var(--s3); border: var(--hairline); border-radius: 0; background: var(--white); font: var(--fs-md) var(--font-body); color: var(--ink); }
 .indoor-directory__empty { margin: 0; padding: var(--s3) var(--s4); color: var(--ink-muted); font-size: var(--fs-sm); }
 .indoor-directory a { min-height: var(--tap); box-sizing: border-box; }
@@ -36,5 +43,5 @@
 @media (max-width: 700px) {
   .indoor { inset: 0; grid-template: auto minmax(0, 46%) minmax(0, 1fr) / 1fr; }
   .indoor__stage { padding: var(--s3) calc(var(--tap) + var(--s4)) var(--s3) var(--s3); }
-  .indoor-directory { border-left: 0; border-top: var(--hairline); }
+  .indoor__side { border-left: 0; border-top: var(--hairline); }
 }

@@ -35,6 +35,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `RoomQuery` [src/indoor/availability.ts:10](../src/indoor/availability.ts#L10): Filters for bookable rooms available throughout a time window.
 - `FreeRoom` [src/indoor/availability.ts:18](../src/indoor/availability.ts#L18): A matching room together with its building for selection and display.
 - `DemoSlotPattern` [src/indoor/availability.ts:21](../src/indoor/availability.ts#L21): A fictional same-day booking recurring at campus-local HH:MM times.
+- `IndoorApi` [src/indoor/state.tsx:6](../src/indoor/state.tsx#L6): What useIndoor() returns.
 - `RoomType` [src/indoor/types.ts:4](../src/indoor/types.ts#L4): What a room is used for. Drives its fill on the floor plan and its group in the directory.
 - `RoomFeature` [src/indoor/types.ts:7](../src/indoor/types.ts#L7): Things a room offers that people filter by in the room finder (F-11).
 - `Level` [src/indoor/types.ts:10](../src/indoor/types.ts#L10): One floor of a building.
@@ -65,12 +66,17 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Components
 
-- `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component.
+- `App()` [src/App.tsx:10](../src/App.tsx#L10): Root component.
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:12](../src/components/MapView.tsx#L12): The interactive map. Knows nothing about what is drawn: layers do that.
 - `Sidebar()` [src/components/Sidebar.tsx:8](../src/components/Sidebar.tsx#L8): Left column (bottom sheet on phones) that hosts the panels.
+- `Directory(…)` [src/indoor/Directory.tsx:15](../src/indoor/Directory.tsx#L15): Lists the rooms of `levelId` by type. Typing filters by number or name.
+- `FloorPlan(…)` [src/indoor/FloorPlan.tsx:12](../src/indoor/FloorPlan.tsx#L12): Draws the rooms of `levelId`. Rooms are buttons: click or Enter picks one. Circulation is drawn but not picka…
+- `IndoorViewer()` [src/indoor/IndoorViewer.tsx:13](../src/indoor/IndoorViewer.tsx#L13): Renders nothing on the campus map; once a building is entered (or a room is selected) shows its floor plan.
+- `IndoorProvider({ children })` [src/indoor/state.tsx:27](../src/indoor/state.tsx#L27): Provides the indoor state to the app. Mount once, in App.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:13](../src/panels/building-card/PlaceCard.tsx#L13): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
+- `RoomFinder(…)` [src/panels/rooms/RoomFinder.tsx:27](../src/panels/rooms/RoomFinder.tsx#L27): The finder for one building. Reports the free room ids through `onFreeChange` so the floor plan can mark
 - `SearchPanel()` [src/panels/search/SearchPanel.tsx:20](../src/panels/search/SearchPanel.tsx#L20): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:32](../src/state/layerFilters.tsx#L32): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
@@ -87,6 +93,12 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `freeUntil(id, slots, from)` [src/indoor/availability.ts:64](../src/indoor/availability.ts#L64): Returns the earliest valid slot start strictly after from, ignoring ongoing slots, or null.
 - `nowWindow(now, minutes = 30)` [src/indoor/availability.ts:76](../src/indoor/availability.ts#L76): Creates an elapsed-time availability window without changing the supplied instant.
 - `expandDemoSlots(pattern, day)` [src/indoor/availability.ts:111](../src/indoor/availability.ts#L111): Expands weekly patterns for one campus-local day, skipping invalid or nonexistent DST times.
+- `indoorBuildings` [src/indoor/data.ts:12](../src/indoor/data.ts#L12): Every building with a floor plan. The fictional fixture is included only when asked for by URL.
+- `getIndoor(buildingId)` [src/indoor/data.ts:15](../src/indoor/data.ts#L15): The indoor data of a building, or undefined when it has none ("Indoor map coming soon").
+- `levelsTopDown(building)` [src/indoor/data.ts:20](../src/indoor/data.ts#L20): Levels from the top floor down, the order a level selector lists them.
+- `entranceLevel(building)` [src/indoor/data.ts:25](../src/indoor/data.ts#L25): The level people walk in on (or the lowest one when none is marked).
+- `findRoom(selectionId)` [src/indoor/data.ts:30](../src/indoor/data.ts#L30): Splits a room selection id ("<building_id>/<room id>") and finds its building and room.
+- `useIndoor()` [src/indoor/state.tsx:40](../src/indoor/state.tsx#L40): Read and change the indoor view from any component (the building card calls `enter`).
 - `roomSelectionId(buildingId, roomId)` [src/indoor/types.ts:77](../src/indoor/types.ts#L77): Selection id of a room: "<building_id>/<room id>" (Selection kind "room").
 - `baseStyle` [src/map/baseStyle.ts:6](../src/map/baseStyle.ts#L6): Base style every layer is added on top of.
 - `OTHER_SUBTYPE` [src/map/layerFilters.ts:6](../src/map/layerFilters.ts#L6): Sub-type used for features that have none.

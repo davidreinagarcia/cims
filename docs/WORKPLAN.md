@@ -165,7 +165,8 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Levels + room polygons/types for Kendeda in `src/data/indoor/kendeda/` (CULC later, same format). Source: public plans if
   permitted, or a walking survey drawn as schematic blocks (Risk R-03). Include room capacity +
   features for F-11.
-- [ ] **T-21 Indoor viewer** (F-06) · needs T-01, T-02 (mock rooms until T-20)
+- [x] **T-21 Indoor viewer** (F-06) · needs T-01, T-02 (mock rooms until T-20)
+  *Built on the fictional Demo Hall (`?indoor=demo-hall`); Kendeda plugs in when T-20 has geometry. The building card still needs to call `useIndoor().enter()`.*
   Level selector, rooms layer filtered by level, directory by room type, highlight selected room.
 - [ ] **T-22 Backend** per T-05 decision · needs T-05
   Tables: `issue_reports`, `issue_plus_ones`; rate limiting; env vars documented in `.env.example`.

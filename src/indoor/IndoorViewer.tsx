@@ -1,5 +1,6 @@
-/** @file Indoor viewer (F-06): covers the map with a building's floor plan, level selector and room directory. */
-import { useEffect } from "react";
+/** @file Indoor viewer (F-06): covers the map with a building's floor plan, level selector, room directory and the room finder tab. */
+import { useEffect, useState } from "react";
+import RoomFinder from "../panels/rooms/RoomFinder";
 import { useSelection } from "../state/selection";
 import { findRoom, getIndoor, levelsTopDown } from "./data";
 import Directory from "./Directory";
@@ -12,6 +13,8 @@ import "./indoor.css";
 export default function IndoorViewer() {
   const { buildingId, levelId, enter, exit, setLevel } = useIndoor();
   const { selection, select } = useSelection();
+  const [tab, setTab] = useState<"directory" | "free">("directory");
+  const [freeRoomIds, setFreeRoomIds] = useState<Set<string>>(() => new Set());
   const picked = selection?.kind === "room" ? findRoom(selection.id) : undefined;
 
   // A room selected anywhere (directory, search, a link) opens its building on the right level.
@@ -53,7 +56,7 @@ export default function IndoorViewer() {
       </header>
 
       <div className="indoor__stage">
-        <FloorPlan building={building} levelId={level.id} selectedRoomId={selectedRoomId} onPick={pick} />
+        <FloorPlan building={building} levelId={level.id} selectedRoomId={selectedRoomId} freeRoomIds={freeRoomIds} onPick={pick} />
         <div className="cims-levels indoor__levels" role="group" aria-label="Level">
           {levelsTopDown(building).map((l) => (
             <button key={l.id} type="button" aria-pressed={l.id === level.id} aria-label={l.label} onClick={() => setLevel(l.id)}>
@@ -68,11 +71,37 @@ export default function IndoorViewer() {
             </strong>
             {selectedRoom.capacity != null && <span>{selectedRoom.capacity} seats</span>}
             {selectedRoom.features?.length ? <span>{selectedRoom.features.join(" · ")}</span> : null}
+            {selectedRoom.booking && (
+              <>
+                <span>
+                  {selectedRoom.booking.owner_system}: {selectedRoom.booking.policy}
+                </span>
+                <a className="cims-btn cims-btn--primary cims-btn--small" href={selectedRoom.booking.book_url} target="_blank" rel="noopener">
+                  Book in {selectedRoom.booking.owner_system}
+                </a>
+              </>
+            )}
           </p>
         )}
       </div>
 
-      <Directory building={building} levelId={level.id} selectedRoomId={selectedRoomId} onPick={pick} />
+      <div className="indoor__side">
+        <div className="indoor__tabs" role="tablist" aria-label="Rooms">
+          <button type="button" role="tab" aria-selected={tab === "directory"} onClick={() => setTab("directory")}>
+            Directory
+          </button>
+          <button type="button" role="tab" aria-selected={tab === "free"} onClick={() => setTab("free")}>
+            Free rooms
+          </button>
+        </div>
+        {tab === "directory" ? (
+          <Directory building={building} levelId={level.id} selectedRoomId={selectedRoomId} onPick={pick} />
+        ) : (
+          <div className="cims-directory">
+            <RoomFinder building={building} selectedRoomId={selectedRoomId} onPick={pick} onFreeChange={setFreeRoomIds} />
+          </div>
+        )}
+      </div>
     </section>
   );
 }

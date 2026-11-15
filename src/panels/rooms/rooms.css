@@ -1,0 +1,13 @@
+/** @file Layout of the room finder: filters and result rows. Row look comes from .cims-directory. */
+.rooms__demo { margin: 0; padding: var(--s3) var(--s4) 0; font-size: var(--fs-xs); color: var(--ink-muted); }
+.rooms__filters { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2) var(--s3); padding: var(--s3) var(--s4); border-bottom: var(--hairline); }
+.rooms__filters label > span, .rooms__filters legend { display: block; padding: 0; margin-bottom: 2px; font: 600 var(--fs-xs) var(--font-display); letter-spacing: var(--caps-tracking); text-transform: uppercase; color: var(--ink-muted); }
+.rooms__filters select { width: 100%; min-height: var(--tap); padding: 0 var(--s2); border: var(--hairline); border-radius: 0; background: var(--white); font: var(--fs-sm) var(--font-body); color: var(--ink); }
+.rooms__filters fieldset { grid-column: 1 / -1; margin: 0; padding: 0; border: 0; display: flex; flex-wrap: wrap; gap: 0 var(--s3); }
+.rooms__filters legend { width: 100%; }
+.rooms__feature { display: inline-flex; align-items: center; gap: var(--s2); min-height: var(--tap); font-size: var(--fs-sm); cursor: pointer; }
+.rooms__empty { margin: 0; padding: var(--s3) var(--s4); color: var(--ink-muted); font-size: var(--fs-sm); }
+.rooms a { min-height: var(--tap); box-sizing: border-box; }
+.rooms__number { font-family: var(--font-mono); font-weight: 500; }
+.rooms small { display: block; color: var(--ink-muted); font-size: var(--fs-xs); }
+.rooms a[aria-current] small { color: var(--ink); }
