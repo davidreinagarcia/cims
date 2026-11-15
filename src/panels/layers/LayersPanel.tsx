@@ -69,12 +69,12 @@ function Overlays() {
 
 /**
  * The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
- * toggle and the panel (with sub-types) starts collapsed.
+ * toggle and the panel (with sub-types) starts collapsed, unless `startOpen` (the Layers popover always shows the list).
  */
-export default function LayersPanel() {
+export default function LayersPanel({ startOpen }: { startOpen?: boolean } = {}) {
   const { isOn, isSubtypeOn, toggleCategory, toggleSubtype } = useLayerFilters();
   const { byCat, bySub } = useCounts();
-  const [open, setOpen] = useState(() => !window.matchMedia("(max-width: 700px)").matches);
+  const [open, setOpen] = useState(() => startOpen ?? !window.matchMedia("(max-width: 700px)").matches);
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const withData = LAYER_CATALOG.filter((c) => byCat[c.id]);
   const onCount = withData.filter((c) => isOn(c.id)).length;

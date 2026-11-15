@@ -207,6 +207,7 @@ export class LocateControl implements IControl {
     element.setAttribute("role", "img");
     element.setAttribute("aria-label", "Your location; outer ring shows approximate GPS accuracy");
     element.innerHTML = `<svg width="128" height="128" viewBox="-64 -64 128 128" aria-hidden="true">
+      <circle r="40" fill="#F3EEE2" fill-opacity=".9"/>
       <g class="cims-location-marker__rings" fill="none" stroke-width="3">
         <circle data-accuracy r="34" stroke="#E3D7B0"/>
         <circle r="28" stroke="#9AA8B4"/>
