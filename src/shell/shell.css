@@ -281,3 +281,6 @@
   .shell-card__surface, .shell-search .list, .shell-search .search-status, .shell-search .search-empty,
   .shell-drawer, .shell-popover, .shell-sheet { animation: none; transition: none; }
 }
+
+/* GTPD console entry on phones: smaller, beside the route button */
+.shell-fab--police { right: calc(var(--s3) + 56px + var(--s2)); width: 44px; height: 44px; bottom: calc(var(--sheet-h, 0px) + var(--s3) + 6px); background: var(--paper); color: #B42318; border-color: #B42318; }

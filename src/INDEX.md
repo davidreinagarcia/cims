@@ -6,6 +6,7 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 
 **Folders**
 
+- [`alerts/`](alerts/INDEX.md): _no description yet_
 - [`auth/`](auth/INDEX.md): Replaceable demo sign-in contract, fictional personas and local session persistence.
 - [`components/`](components/INDEX.md): React components shared by the shell: map view, glyphs, offline notice. The layout itself lives in src/shell/.
 - [`data/`](data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).

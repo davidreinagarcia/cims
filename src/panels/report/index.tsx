@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "../../state/auth";
 import { useSelection } from "../../state/selection";
 import "./report.css";
+import PoliceReportFlow from "./PoliceReportFlow";
 import ReportFlow from "./ReportFlow";
 import StaffQueue from "./StaffQueue";
 import { locationForId, locationFromParams } from "./location";
@@ -33,11 +34,26 @@ export default function ReportPanel({ onClose }: { onClose: () => void }) {
   const params = new URLSearchParams(search);
   if (params.get("staff") === "1") return <StaffGate />;
 
+  // Maintenance or police: one toggle on top, the kind lives in the URL (?kind=police) so status links are shareable.
+  const police = params.get("kind") === "police";
+  const choose = (kind: "maintenance" | "police") => {
+    const next = new URLSearchParams({ panel: "report" });
+    if (kind === "police") next.set("kind", "police");
+    navigate(next);
+  };
+  const toggle = (
+    <div className="cims-report__kind" role="group" aria-label="What are you reporting?">
+      <button type="button" className="cims-btn" aria-pressed={!police} onClick={() => choose("maintenance")}>Maintenance</button>
+      <button type="button" className="cims-btn cims-btn--police" aria-pressed={police} onClick={() => choose("police")}>Notify police</button>
+    </div>
+  );
+  if (police) return <>{toggle}<div className="cims-report__body"><PoliceReportFlow tipId={params.get("tip")} navigate={navigate} /></div></>;
+
   // A place/building card's "Report an issue" selects { kind: "report", id }; a shared status link falls back to the URL.
   // The indoor room card adds the floor and room: "buildingId|floor|room".
   const [reportId, reportFloor, reportRoom] = selection?.kind === "report" ? selection.id.split("|") : [];
   const location = selection?.kind === "report" ? locationForId(reportId, reportFloor || null, reportRoom || null) : locationFromParams(params);
-  return <ReportFlow location={location} reportId={params.get("report")} navigate={navigate} />;
+  return <>{toggle}<ReportFlow location={location} reportId={params.get("report")} navigate={navigate} /></>;
 }
 
 /** Blocks the staff queue (US-10.4) behind the demo "staff" role; the URL itself stays unlisted. */

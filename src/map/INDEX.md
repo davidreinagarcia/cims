@@ -12,6 +12,7 @@ Everything about the map engine: contract for layers, base style, and the layer 
 
 **Files**
 
+- [`alertsOverlay.ts`](alertsOverlay.ts): Draws live GTPD alarms on a MapLibre map: a red danger circle, an expanding warning ripple and a labeled cent… · exports `flyToAlert`, `addAlertsOverlay`
 - [`baseStyle.ts`](baseStyle.ts): The map's base style: OpenFreeMap vector tiles colored per kind of ground (campus, grass, water, roads, walkw… · exports `baseStyle`
 - [`layerFilters.ts`](layerFilters.ts): Turns the layer panel's LayerFilters into a MapLibre filter and a plain visibility check. · exports `OTHER_SUBTYPE`, `isVisible`, `buildMapFilter`
 - [`loadLayers.ts`](loadLayers.ts): Discovers every layer module in src/map/layers/ and returns them in draw order. · exports `loadLayers`

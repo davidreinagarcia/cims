@@ -1,0 +1,47 @@
+/** @file Alarm banner: loud, full width, readable at a glance; calm green variant for the all clear. */
+.alert-stack { position: absolute; z-index: 40; top: 0; left: 0; right: 0; display: flex; flex-direction: column; }
+.alert-banner {
+  display: flex; align-items: center; gap: var(--s4); padding: var(--s3) var(--s4);
+  background: #B42318; color: #fff; border-bottom: 3px solid #fff;
+  animation: alert-flash 1.6s ease-in-out infinite;
+}
+.alert-banner--test { background: #8A5A12; animation: none; }
+.alert-banner--clear { background: #2F6B3F; animation: none; }
+.alert-banner__icon { flex: none; display: grid; place-items: center; width: 48px; height: 48px; border: 2px solid #fff; border-radius: 50%; }
+.alert-banner__text { flex: 1 1 auto; min-width: 0; }
+.alert-banner__text p { margin: 0; }
+.alert-banner__kicker { font-size: var(--fs-sm); opacity: 0.92; }
+.alert-banner__title { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-xl); line-height: 1.1; text-transform: uppercase; letter-spacing: 0.02em; }
+.alert-banner__message { margin-top: 2px; font-size: var(--fs-md); line-height: 1.35; max-width: 70ch; }
+.alert-banner__actions { flex: none; display: flex; align-items: center; gap: var(--s2); }
+.alert-banner__btn {
+  min-height: var(--tap); padding: 0 var(--s4); border: 2px solid #fff; border-radius: var(--radius-pill);
+  background: #fff; color: #7A1810; font: 600 var(--fs-sm) var(--font-body); cursor: pointer;
+}
+.alert-banner--clear .alert-banner__btn { color: #1F4A2B; }
+.alert-banner__btn:hover { background: #FBE9E7; }
+.alert-banner__close {
+  display: grid; place-items: center; width: var(--tap); height: var(--tap); padding: 0; border: 2px solid #fff;
+  border-radius: 50%; background: transparent; color: #fff; cursor: pointer;
+}
+.alert-banner__close:hover { background: rgba(255, 255, 255, 0.22); }
+.alert-banner :focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
+@keyframes alert-flash { 0%, 100% { background: #B42318; } 50% { background: #8F1B12; } }
+@media (prefers-reduced-motion: reduce) { .alert-banner { animation: none; } }
+
+/* Make room: the shell's floating UI sits below the banner instead of under it. */
+.app[data-alert="true"] .shell-rail, .app[data-alert="true"] .stage { top: var(--alert-h, 0px); }
+.app[data-alert="true"] .shell-left { top: calc(var(--s3) + var(--alert-h, 0px)); max-height: calc(100% - 2 * var(--s3) - var(--alert-h, 0px)); }
+.app[data-alert="true"] .shell-topbar { top: calc(15px + var(--alert-h, 0px)); }
+.app[data-alert="true"][data-layout="mobile"] { --top: calc(env(safe-area-inset-top, 0px) + var(--s2) + var(--alert-h, 0px)); }
+.app[data-alert="true"][data-layout="mobile"] .shell-topbar { top: calc(var(--top) + 48px + var(--s1)); }
+
+@media (max-width: 767.98px) {
+  .alert-banner { flex-wrap: wrap; gap: var(--s2) var(--s3); padding: var(--s2) var(--s3); }
+  .alert-banner__icon { width: 36px; height: 36px; }
+  .alert-banner__icon svg { width: 22px; height: 22px; }
+  .alert-banner__title { font-size: var(--fs-lg); }
+  .alert-banner__message { font-size: var(--fs-sm); }
+  .alert-banner__text { flex-basis: calc(100% - 100px); }
+  .alert-banner__actions { width: 100%; justify-content: flex-end; }
+}

@@ -103,3 +103,11 @@ textarea.cims-report__control { resize: vertical; }
 .cims-report__timeline li[data-state="current"] .cims-report__dot { background: var(--gold); outline: var(--hairline); outline-offset: 2px; }
 .cims-report__timeline li[data-state="pending"] .cims-caps,
 .cims-report__timeline li[data-state="skipped"] .cims-caps { color: var(--ink-muted); }
+
+/* GPS attach (maintenance and police forms) */
+.cims-report__gps { display: grid; gap: var(--s2); }
+.cims-report__gps p { margin: 0; font-size: var(--fs-sm); }
+.cims-report__kind { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s2); padding: var(--s3) var(--s4) 0; }
+.cims-report__kind .cims-btn { justify-content: center; }
+.cims-report__kind .cims-btn[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: var(--white); }
+.cims-report__kind .cims-btn--police[aria-pressed="true"] { background: #B42318; border-color: #B42318; }
