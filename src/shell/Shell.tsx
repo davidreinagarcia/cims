@@ -172,7 +172,6 @@ export default function Shell() {
   // Clicking the story heat map opens the stories under it; phones show them tall.
   const { viewer } = useStories();
   useEffect(() => { if (viewer) setPanel("stories"); }, [viewer]);
-  useEffect(() => { if (panel === "stories" && mobile) setSnap("full"); }, [panel, mobile]);
 
   // Picking something on the map (or from the bulletin) always shows it; a "report" selection
   // (a place/building card's "Report an issue") opens the report panel prefilled with it instead.
@@ -244,8 +243,7 @@ export default function Shell() {
     content = { title: "Report", key: reportKey, body: <Suspense fallback={<p className="cims-empty" role="status">Loading…</p>}><ReportPanel key={reportKey} onClose={() => setPanel("explore")} /></Suspense> };
   }
   else if (panel === "games" && !game) content = { title: "Games", key: "games", body: <Suspense fallback={<p className="cims-empty" role="status">Loading…</p>}><GamesPanel /></Suspense> };
-  // Desktop "stories" is a full-screen takeover beside the rail (below); phones keep the bottom sheet.
-  else if (panel === "stories" && mobile) content = { title: "Stories", key: "stories", body: <Suspense fallback={<p className="cims-empty" role="status">Loading…</p>}><StoriesPanel onShowMap={() => setPanel("explore")} /></Suspense> };
+  // "stories" is a full-screen takeover on both layouts (below): beside the rail on desktop, a whole page on phones.
   else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel initialSelection={routeTo} onClose={closeContent} /> };
   else if (selection && selection.kind !== "report") content = {
     title: selection.kind === "building" ? "Building" : "Place",
@@ -332,6 +330,9 @@ export default function Shell() {
       {staffView !== "police" && <TipNotifier onOpen={() => openStaff("police")} />}
       {staffView === "police" && <Suspense fallback={null}><PoliceView onClose={() => openStaff(null)} /></Suspense>}
       {staffView === "maintenance" && <Suspense fallback={null}><MaintenanceView onClose={() => openStaff(null)} /></Suspense>}
+      {panel === "stories" && mobile && (
+        <Suspense fallback={null}><StoriesPanel onShowMap={() => setPanel("explore")} onClose={closeContent} /></Suspense>
+      )}
       {panel === "stories" && !mobile && (
         <section className="stories-full" aria-label="Stories">
           <header className="stories-full__head">
