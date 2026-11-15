@@ -124,14 +124,14 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
 - `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
-- `SearchPanel()` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
-- `BottomSheet(…)` [src/shell/BottomSheet.tsx:19](../src/shell/BottomSheet.tsx#L19): Drag or tap the handle to move between snaps; arrow keys on the handle do the same. Opens at half.
+- `SearchPanel(…)` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
+- `BottomSheet(…)` [src/shell/BottomSheet.tsx:21](../src/shell/BottomSheet.tsx#L21): Drag or tap the handle (or press Enter/Space on it) to move between snaps; arrow keys step up and down. Opens…
 - `ChipsBar()` [src/shell/ChipsBar.tsx:14](../src/shell/ChipsBar.tsx#L14): One pill per layer category; pressed = layer on. Categories without data stay visible but inert (aria-disable…
 - `FloatingCard(…)` [src/shell/FloatingCard.tsx:6](../src/shell/FloatingCard.tsx#L6): Card with a close button and a ‹ collapse tab on its right edge. Renders nothing visible when its panel rende…
 - `LayersPopover()` [src/shell/LayersPopover.tsx:7](../src/shell/LayersPopover.tsx#L7): Tile that opens the legend popover. Esc or a click outside closes it and returns focus to the tile.
 - `MobileTabBar({ panel, onPanel })` [src/shell/MobileTabBar.tsx:5](../src/shell/MobileTabBar.tsx#L5): Fixed bottom bar above the safe-area inset. Left/right arrows move between tabs.
 - `Rail({ panel, onPanel })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
-- `RoutePanel({ onClose })` [src/shell/RoutePanel.tsx:7](../src/shell/RoutePanel.tsx#L7): Loads the building index and hosts the directions fields inside the floating card or sheet.
+- `RoutePanel({ initialSelection, onClose })` [src/shell/RoutePanel.tsx:10](../src/shell/RoutePanel.tsx#L10): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
 - `Shell()` [src/shell/Shell.tsx:55](../src/shell/Shell.tsx#L55): Lays out the map and every floating surface; panels are mounted unchanged inside the card (desktop) or sheet…
 - `Icon({ name, size = 24 })` [src/shell/icons.tsx:23](../src/shell/icons.tsx#L23): A 24px line icon in currentColor; decorative (aria-hidden).
