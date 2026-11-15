@@ -6,7 +6,7 @@ Static assets served as-is at the site root.
 
 **Folders**
 
-- [`photos/`](photos/INDEX.md): _no description yet_
+- [`photos/`](photos/INDEX.md): Static photos served by the app; each one is credited in a data file under src/data/.
 
 **Files**
 
