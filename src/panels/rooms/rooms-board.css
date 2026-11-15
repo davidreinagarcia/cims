@@ -26,6 +26,19 @@
 .rooms-board__sub { flex: none; padding: var(--s2) var(--s5); border-bottom: var(--hairline); font-size: var(--fs-sm); }
 .rooms-board__sub p { margin: 0; }
 .rooms-board__surface { flex: 1 0 auto; min-width: 0; padding: var(--s5) var(--s6) max(var(--s6), env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: var(--s4); }
+.rooms-board__search { position: relative; max-width: 360px; }
+.rooms-board__search .cims-field { max-width: 360px; }
+.rooms-board__search input { width: 100%; }
+.rooms-board__search-results {
+  position: absolute; top: 100%; left: 0; right: 0; z-index: 1; margin: 2px 0 0; padding: 0; list-style: none;
+  background: var(--white); border: var(--hairline); max-height: 240px; overflow-y: auto;
+}
+.rooms-board__search-result {
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s2); width: 100%;
+  min-height: var(--tap); padding: var(--s2) var(--s4); border: 0; background: none; color: var(--ink);
+  font: 500 var(--fs-sm)/1.2 var(--font-body); text-align: left; cursor: pointer;
+}
+.rooms-board__search-result:hover { background: var(--paper-2); }
 .rooms-board__chips { display: flex; flex-wrap: wrap; gap: var(--s2); }
 .rooms-board__chip {
   display: inline-flex; align-items: center; gap: var(--s2); min-height: var(--tap); padding: var(--s2) var(--s4);
