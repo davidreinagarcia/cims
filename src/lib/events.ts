@@ -32,6 +32,13 @@ function campusInstant(date: Date, clock: string): Date | null {
   return matches.sort((a, b) => a.getTime() - b.getTime())[0] ?? null;
 }
 
+/** Instant for a campus-time date (YYYY-MM-DD) and clock (HH:MM); null when the input is malformed or the time does not exist. */
+export function campusDateTime(day: string, clock: string): Date | null {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(day) || !/^([01]\d|2[0-3]):[0-5]\d$/.test(clock)) return null;
+  const date = new Date(`${day}T00:00:00Z`);
+  return Number.isFinite(date.getTime()) ? campusInstant(date, clock) : null;
+}
+
 /** Return the current or next weekly campus occurrence, or an unexpired one-off window. */
 export function nextWindow(event: EventInfo | undefined, now: Date): { start: Date; end: Date } | null {
   if (!event || !Number.isFinite(now.getTime())) return null;

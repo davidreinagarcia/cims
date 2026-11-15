@@ -8,7 +8,7 @@ Panels, one folder per panel, shown in the floating card / bottom sheet. Mount n
 
 - [`account/`](account/INDEX.md): Account chip and accessible DEMO sign-in theater using the existing survey map design.
 - [`building-card/`](building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
-- [`bulletin/`](bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
+- [`bulletin/`](bulletin/INDEX.md): Upcoming events in campus time (Orgs and People tabs), posting with a required registered building or room an…
 - [`buses/`](buses/INDEX.md): Buses panel (T-42): GT bus routes, live next-bus times, trip options to a destination and the Stingerette.
 - [`layers/`](layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
 - [`maintenance/`](maintenance/INDEX.md): Maintenance dashboard: live Facilities report board by crew, claim box for reports open to all teams, and the…
