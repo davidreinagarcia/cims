@@ -7,3 +7,9 @@
 @media (max-width: 700px) {
   .cims-scale [data-coords] { display: none; }
 }
+
+.cims-locate { position: relative; width: 44px; }
+.cims-locate button { display: grid; place-items: center; width: 44px; height: 44px; }
+.cims-locate button[aria-pressed="true"] { color: var(--navy); background: var(--paper); }
+.cims-locate button:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+.cims-locate__status:not(:empty) { position: absolute; right: 52px; bottom: 0; width: 220px; padding: var(--s2); border: var(--hairline); background: var(--paper); color: var(--ink); font: var(--fs-sm) var(--font-body); }

@@ -6,6 +6,7 @@ Cartographic furniture drawn over the map as MapLibre controls: scale + coordina
 
 **Files**
 
+- [`LocateControl.ts`](LocateControl.ts): Private, local-only location tracking with a survey dot, accuracy circle and one campus-only camera move. · exports `LocateControl`
 - [`NorthArrow.ts`](NorthArrow.ts): Map furniture: a minimal north arrow (bottom left) that turns with the map's bearing. · exports `NorthArrow`
 - [`ScaleBox.ts`](ScaleBox.ts): Map furniture: scale bar plus live center coordinates in a 1px box (bottom right). · exports `ScaleBox`
 - [`ViewToggle.ts`](ViewToggle.ts): Map control: one button that switches between the tilted 3D view and a flat, north-up 2D view. · exports `ViewToggle`

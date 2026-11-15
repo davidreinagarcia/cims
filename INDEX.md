@@ -28,11 +28,13 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
       - [`docs/design/screenshots/app-shell/`](docs/design/screenshots/app-shell/INDEX.md): Map-first shell (APP-SHELL.md), production build in headless Chromium at 1440, 1280, 390 and 360 px: empty ma…
       - [`docs/design/screenshots/bulletin/`](docs/design/screenshots/bulletin/INDEX.md): Production screenshots at 1440, 1280, 390 and 360 px: map, full-screen cork board and the empty Lost & Found…
       - [`docs/design/screenshots/data-attach/`](docs/design/screenshots/data-attach/INDEX.md): Production screenshots with drafts visible at 1440, 1280, 390 and 360 pixels.
+      - [`docs/design/screenshots/transport/`](docs/design/screenshots/transport/INDEX.md): Production transport screenshots at 1440, 1280, 390 and 360 px; official route colors and the locate control.
   - [`docs/research/`](docs/research/INDEX.md): Fuentes y dudas pendientes de las investigaciones de datos del campus.
   - [`docs/stickers/`](docs/stickers/INDEX.md): QR codes and the link list for the door stickers that open a building with the entrance preselected.
   - [`docs/testing/`](docs/testing/INDEX.md): Test plans with people (hallway tests).
 - [`public/`](public/INDEX.md): Static assets served as-is at the site root.
 - [`scripts/`](scripts/INDEX.md): Dev tooling run with Node (no deps): index generator, Claude hooks, data fetchers.
+  - [`scripts/fixtures/`](scripts/fixtures/INDEX.md): Saved official GT tracker responses for reproducible offline transit imports.
 - [`src/`](src/INDEX.md): The web app (Vite + React + TypeScript + MapLibre). Entry: main.tsx → App.tsx.
   - [`src/auth/`](src/auth/INDEX.md): Replaceable demo sign-in contract, fictional personas and local session persistence.
   - [`src/components/`](src/components/INDEX.md): React components shared by the shell: map view, glyphs, offline notice. The layout itself lives in src/shell/.

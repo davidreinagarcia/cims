@@ -140,7 +140,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SearchMatch` [src/lib/search.ts:10](../src/lib/search.ts#L10): A matching name, alias or category and its highlight ranges.
 - `SearchResult` [src/lib/search.ts:17](../src/lib/search.ts#L17): A ranked place with an extensible group label and matches in displayable fields.
 - `CampusSearchResult` [src/lib/search.ts:137](../src/lib/search.ts#L137): A campus result selects its building, room or place directly.
-- `BusFeature` [src/map/transitLive.ts:19](../src/map/transitLive.ts#L19): One live bus: where it is and which route it is running.
+- `BusFeature` [src/map/transitLive.ts:21](../src/map/transitLive.ts#L21): One live bus: where it is and which route it is running.
 - `LayerContext` [src/map/types.ts:6](../src/map/types.ts#L6): What the host gives a layer so it can talk back to the app.
 - `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
@@ -174,7 +174,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 - `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component.
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
-- `MapView()` [src/components/MapView.tsx:15](../src/components/MapView.tsx#L15): The interactive map. Knows nothing about what is drawn: layers do that.
+- `MapView()` [src/components/MapView.tsx:16](../src/components/MapView.tsx#L16): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
 - `BuildingView()` [src/indoor/BuildingView.tsx:20](../src/indoor/BuildingView.tsx#L20): Opens registered buildings and resolves room selections straight into a routed building screen.
 - `FloorPlan({ level, selected, focus, route, legs, onSelect })` [src/indoor/FloorPlan.tsx:38](../src/indoor/FloorPlan.tsx#L38): Renders one available level with controls and brings the selected space into view.
@@ -253,6 +253,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `demoSlotPatterns` [src/indoor/roomFinderDemo.ts:15](../src/indoor/roomFinderDemo.ts#L15): Fictional weekly busy patterns, both buildings combined, to expand per day with `expandDemoSlots`.
 - `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:24](../src/indoor/route.ts#L24): Finds the least cost walk, filtering inaccessible connectors before searching.
 - `baseStyle` [src/map/baseStyle.ts:69](../src/map/baseStyle.ts#L69): Base style every layer is added on top of.
+- `LocateControl` [src/map/furniture/LocateControl.ts:16](../src/map/furniture/LocateControl.ts#L16): Map control that watches location only while visible and never follows the camera after the first fix.
 - `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.
 - `ScaleBox` [src/map/furniture/ScaleBox.ts:22](../src/map/furniture/ScaleBox.ts#L22): MapLibre control: a four-segment scale bar in feet and the map center's latitude/longitude, updated as the ma…
 - `ViewToggle` [src/map/furniture/ViewToggle.ts:9](../src/map/furniture/ViewToggle.ts#L9): MapLibre control: "2D" / "3D" button. The label is the view you get by pressing it.
@@ -284,7 +285,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
 - `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
 - `TRACKER_URL` [src/map/transitLive.ts:4](../src/map/transitLive.ts#L4): The official tracker page: where "live tracking" links point.
-- `fetchBuses(routeNames, string>, signal?)` [src/map/transitLive.ts:25](../src/map/transitLive.ts#L25): Fetches the buses currently on one of the given routes (route id to name). Throws if the tracker
+- `fetchBuses(routeNames, string>, signal?)` [src/map/transitLive.ts:24](../src/map/transitLive.ts#L24): Fetches fresh buses on known routes; throws on a failed tracker or invalid vehicle list.
 - `formatWhen(iso)` [src/panels/report/ReportSummary.tsx:7](../src/panels/report/ReportSummary.tsx#L7): Formats an ISO timestamp for display in the viewer's locale.
 - `locationParts(location)` [src/panels/report/location.ts:7](../src/panels/report/location.ts#L7): Breadcrumb parts for a location: building › floor › room, or the outdoor pin coordinates.
 - `locationForId(id, floor, room)` [src/panels/report/location.ts:22](../src/panels/report/location.ts#L22): Builds a prefilled location for a place or building id (checks curated places first, then the OSM
