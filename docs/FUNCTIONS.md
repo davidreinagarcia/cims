@@ -143,11 +143,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PlanRoute` [src/indoor/FloorPlan.tsx:129](../src/indoor/FloorPlan.tsx#L129): Everything the plan needs to draw a route: the route, the legs on this level and which step is highlighted.
 - `RoutableIndoorRoom` [src/indoor/availability.ts:13](../src/indoor/availability.ts#L13): A routable (schematic) entry from `registry.ts#indoorRooms`, narrowed from the `IndoorRoom`
 - `BookableRoom` [src/indoor/availability.ts:21](../src/indoor/availability.ts#L21): A room with bookable demo amenities (T-60 reservations), with a ready-to-render display label.
-- `TimeWindow` [src/indoor/availability.ts:70](../src/indoor/availability.ts#L70): A half-open interval of instants: start is included and end is excluded.
-- `RoomQuery` [src/indoor/availability.ts:73](../src/indoor/availability.ts#L73): Filters for bookable rooms available throughout a time window.
-- `FreeRoom` [src/indoor/availability.ts:81](../src/indoor/availability.ts#L81): A matching room together with its demo amenities, ready for the results list and selection.
-- `AmenitiesById` [src/indoor/availability.ts:84](../src/indoor/availability.ts#L84): Demo amenities keyed by room selection id, e.g. `roomFinderDemo.ts#roomAmenitiesById`.
-- `DemoSlotPattern` [src/indoor/availability.ts:87](../src/indoor/availability.ts#L87): A fictional weekly booking recurring at campus-local HH:MM times.
+- `TimeWindow` [src/indoor/availability.ts:79](../src/indoor/availability.ts#L79): A half-open interval of instants: start is included and end is excluded.
+- `RoomQuery` [src/indoor/availability.ts:82](../src/indoor/availability.ts#L82): Filters for bookable rooms available throughout a time window.
+- `FreeRoom` [src/indoor/availability.ts:90](../src/indoor/availability.ts#L90): A matching room together with its demo amenities, ready for the results list and selection.
+- `AmenitiesById` [src/indoor/availability.ts:93](../src/indoor/availability.ts#L93): Demo amenities keyed by room selection id, e.g. `roomFinderDemo.ts#roomAmenitiesById`.
+- `DemoSlotPattern` [src/indoor/availability.ts:96](../src/indoor/availability.ts#L96): A fictional weekly booking recurring at campus-local HH:MM times.
 - `BookingRequest` [src/indoor/handoff.ts:5](../src/indoor/handoff.ts#L5): A request to open the reservations panel on one building, coming from an indoor room card.
 - `IndoorRoom` [src/indoor/registry.ts:24](../src/indoor/registry.ts#L24): A searchable indoor entry explicitly distinguishes drawn routes from published facts.
 - `Step` [src/indoor/route.ts:5](../src/indoor/route.ts#L5): One accessible instruction and the level on which it happens.
@@ -335,15 +335,15 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `TILE_ATTRIBUTION` [src/config.ts:23](../src/config.ts#L23): Attribution OpenFreeMap and OpenStreetMap require next to the map.
 - `CORRECTION_URL` [src/config.ts:26](../src/config.ts#L26): Base URL for prefilled place correction issues.
 - `STACK_VIEW_ENABLED` [src/indoor/StackView.tsx:23](../src/indoor/StackView.tsx#L23): Shows the Plan | Stack toggle in the building header. Set to false to hide the stack view for a demo.
-- `bookableRoomsFor(rooms, amenitiesById, buildingId)` [src/indoor/availability.ts:24](../src/indoor/availability.ts#L24): Every bookable room in one building (its plain space/room name as the label), sorted alphabetically.
-- `favoriteRoomsFrom(rooms, amenitiesById, roomIds)` [src/indoor/availability.ts:47](../src/indoor/availability.ts#L47): Bookable rooms in `roomIds` across every building, labeled "Building · Room N" using each
-- `crossBuildingBookableRooms(rooms, amenitiesById)` [src/indoor/availability.ts:65](../src/indoor/availability.ts#L65): Every bookable room across every building, labeled "Building · Room" exactly like
-- `isRoomFree(id, slots, window)` [src/indoor/availability.ts:106](../src/indoor/availability.ts#L106): Whether a room has no overlapping valid slot; invalid windows return false.
-- `findFreeRooms(rooms, amenitiesById, slots, query)` [src/indoor/availability.ts:122](../src/indoor/availability.ts#L122): Finds free bookable rooms satisfying every filter, sorted by building title then room name.
-- `freeUntil(id, slots, from)` [src/indoor/availability.ts:139](../src/indoor/availability.ts#L139): Returns the earliest valid slot start strictly after from, ignoring ongoing slots, or null.
-- `nowWindow(now, minutes = 30)` [src/indoor/availability.ts:151](../src/indoor/availability.ts#L151): Creates an elapsed-time availability window without changing the supplied instant.
-- `campusTimeToday(now, time)` [src/indoor/availability.ts:186](../src/indoor/availability.ts#L186): Converts a campus-local "HH:MM" time on the same campus day as `now` to an instant, or null if invalid.
-- `expandDemoSlots(pattern, day)` [src/indoor/availability.ts:192](../src/indoor/availability.ts#L192): Expands weekly patterns for one campus-local day, skipping invalid or nonexistent DST times.
+- `bookableRoomsFor(rooms, amenitiesById, buildingId)` [src/indoor/availability.ts:30](../src/indoor/availability.ts#L30): Every bookable room in one building, sorted alphabetically. The label prefers the published
+- `favoriteRoomsFrom(rooms, amenitiesById, roomIds)` [src/indoor/availability.ts:56](../src/indoor/availability.ts#L56): Bookable rooms in `roomIds` across every building, labeled "Building · Room N" using each
+- `crossBuildingBookableRooms(rooms, amenitiesById)` [src/indoor/availability.ts:74](../src/indoor/availability.ts#L74): Every bookable room across every building, labeled "Building · Room" exactly like
+- `isRoomFree(id, slots, window)` [src/indoor/availability.ts:115](../src/indoor/availability.ts#L115): Whether a room has no overlapping valid slot; invalid windows return false.
+- `findFreeRooms(rooms, amenitiesById, slots, query)` [src/indoor/availability.ts:131](../src/indoor/availability.ts#L131): Finds free bookable rooms satisfying every filter, sorted by building title then room name.
+- `freeUntil(id, slots, from)` [src/indoor/availability.ts:148](../src/indoor/availability.ts#L148): Returns the earliest valid slot start strictly after from, ignoring ongoing slots, or null.
+- `nowWindow(now, minutes = 30)` [src/indoor/availability.ts:160](../src/indoor/availability.ts#L160): Creates an elapsed-time availability window without changing the supplied instant.
+- `campusTimeToday(now, time)` [src/indoor/availability.ts:195](../src/indoor/availability.ts#L195): Converts a campus-local "HH:MM" time on the same campus day as `now` to an instant, or null if invalid.
+- `expandDemoSlots(pattern, day)` [src/indoor/availability.ts:201](../src/indoor/availability.ts#L201): Expands weekly patterns for one campus-local day, skipping invalid or nonexistent DST times.
 - `requestBooking(buildingId, roomId)` [src/indoor/handoff.ts:12](../src/indoor/handoff.ts#L12): Asks the shell to open the reservations panel on this building (room id is "buildingId:spaceId").
 - `peekBookingRequest()` [src/indoor/handoff.ts:18](../src/indoor/handoff.ts#L18): The latest booking request, if one has not been handled yet.
 - `clearBookingRequest()` [src/indoor/handoff.ts:21](../src/indoor/handoff.ts#L21): Marks the booking request as handled, so opening the panel later starts at its building picker again.
