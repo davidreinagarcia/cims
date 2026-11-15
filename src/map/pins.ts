@@ -1,6 +1,6 @@
 /** @file Survey-marker pins for the map: teardrop in the category color with the category glyph inside a paper ring. Drawn on a canvas, synchronously. */
 import type maplibregl from "maplibre-gl";
-import { glyphPath } from "../components/Glyph";
+import { glyphPath, SUBTYPE_GLYPHS } from "../components/Glyph";
 import { LAYER_CATALOG, categoryColor } from "../lib/layerCatalog";
 
 const INK = "#1C2733"; // --ink
@@ -42,13 +42,14 @@ function drawPin(fill: string, glyph: string, selected: boolean): ImageData {
   ctx.scale(14 / 24, 14 / 24);
   ctx.strokeStyle = selected ? INK : PAPER;
   ctx.lineWidth = 2.6;
-  ctx.lineJoin = "miter";
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
   ctx.stroke(new Path2D(glyph));
   ctx.restore();
   return ctx.getImageData(0, 0, canvas.width, canvas.height);
 }
 
-/** Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the ids added. */
+/** Registers one normal and one selected (gold) pin per layer category and per sub-type with its own pictogram (e.g. coffee), plus the navy "base" pin. Returns the ids added. */
 export function addPins(map: maplibregl.Map): string[] {
   const added: string[] = [];
   const add = (category: string, fill: string, glyph: string) => {
@@ -59,7 +60,10 @@ export function addPins(map: maplibregl.Map): string[] {
       added.push(id);
     }
   };
-  for (const c of LAYER_CATALOG) add(c.id, categoryColor(c), glyphPath(c.id));
+  for (const c of LAYER_CATALOG) {
+    add(c.id, categoryColor(c), glyphPath(c.id));
+    for (const sub of c.subtypes) if (SUBTYPE_GLYPHS[sub.id]) add(`${c.id}-${sub.id}`, categoryColor(c), glyphPath(SUBTYPE_GLYPHS[sub.id]));
+  }
   add("base", NAVY, glyphPath("building"));
   return added;
 }

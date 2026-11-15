@@ -1,4 +1,4 @@
-/** @file Card for the selected building footprint: name, nicknames, an honest height note, the places inside it, directions, report-an-issue and a correction link. */
+/** @file Card for the selected building footprint: name, then Directions and Report an issue, the places inside as pictograms, and the facts (honest height, address, source, correction link) last. */
 import { useEffect, useState } from "react";
 import { CORRECTION_URL } from "../../config";
 import { loadBuildings, loadedBuildings, type BuildingIndex } from "../../lib/buildings";
@@ -69,26 +69,26 @@ export function BuildingDetails({ buildingId, embedded = false }: { buildingId: 
           <span className="cims-tag cims-tag--alert" title="Outline from OpenStreetMap, not yet checked by a person">Unverified</span>
         </p>
       </>}
-      <table className="cims-infotable" aria-label="Building information">
-        <tbody>
-          <tr><th scope="row">Address</th><td>{b.address || unknown}</td></tr>
-          <tr><th scope="row">Height</th><td>{height ?? <>{unknown} <span className="cims-muted">(drawn at an estimated {b.height} m)</span></>}</td></tr>
-          <tr><th scope="row">Hours</th><td>{unknown}</td></tr>
-          <tr><th scope="row">BuzzCard</th><td>{unknown}</td></tr>
-          <tr><th scope="row">Source</th><td>
-            {b.osmId ? <a href={`https://www.openstreetmap.org/${b.osmId}`} target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> : unknown}
-          </td></tr>
-        </tbody>
-      </table>
-      <p><a href={correction.toString()} target="_blank" rel="noopener noreferrer">Suggest a correction</a></p>
-      <div className="detail__report">
-        <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
-        {!session && <small className="cims-muted">Requires sign-in</small>}
-      </div>
-      <InsidePlaces buildingId={b.id} />
       <div className="cims-actions">
         <a className="cims-btn cims-btn--primary" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
-        <button type="button" className="cims-btn" onClick={() => select(null)}>Close</button>
+        <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
+      </div>
+      {!session && <p className="cims-muted"><small>Reporting requires sign-in</small></p>}
+      <InsidePlaces buildingId={b.id} />
+      <div className="detail__facts">
+        <h3 className="cims-caps">Building facts</h3>
+        <table className="cims-infotable" aria-label="Building information">
+          <tbody>
+            <tr><th scope="row">Address</th><td>{b.address || unknown}</td></tr>
+            <tr><th scope="row">Height</th><td>{height ?? <>{unknown} <span className="cims-muted">(drawn at an estimated {b.height} m)</span></>}</td></tr>
+            <tr><th scope="row">Hours</th><td>{unknown}</td></tr>
+            <tr><th scope="row">BuzzCard</th><td>{unknown}</td></tr>
+            <tr><th scope="row">Source</th><td>
+              {b.osmId ? <a href={`https://www.openstreetmap.org/${b.osmId}`} target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> : unknown}
+            </td></tr>
+          </tbody>
+        </table>
+        <p><a href={correction.toString()} target="_blank" rel="noopener noreferrer">Suggest a correction</a></p>
       </div>
     </section>
   );

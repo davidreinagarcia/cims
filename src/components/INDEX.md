@@ -6,7 +6,7 @@ React components shared by the shell: map view, glyphs, offline notice. The layo
 
 **Files**
 
-- [`Glyph.tsx`](Glyph.tsx): Line glyphs on a 24px grid (survey-map style). Shape differs per category so they work without color. · exports `glyphPath`, `Glyph`
+- [`Glyph.tsx`](Glyph.tsx): Line glyphs on a 24px grid (survey-map style). Pictograms (fork and knife, cup, printer…) that read without c… · exports `SUBTYPE_GLYPHS`, `placeGlyph`, `glyphPath`, `Glyph`
 - [`MapView.tsx`](MapView.tsx): Map host: loads MapLibre on demand, creates the map, loads every layer module from src/map/layers/ and feeds… · exports `MapView`
 - [`OfflineBanner.css`](OfflineBanner.css): * @file Position of the offline notice: top of the map, under the floating search pill so it never covers it.
 - [`OfflineBanner.tsx`](OfflineBanner.tsx): Small notice shown while the browser is offline: the app keeps working from its saved copy. · exports `OfflineBanner`

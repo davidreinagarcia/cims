@@ -1,4 +1,4 @@
-/** @file Short card for a building with an indoor map: name, thumbnail of the entrance floor, the button that opens the full indoor screen first, then the plan thumbnail, report-an-issue and the places inside. */
+/** @file Short card for a building with an indoor map: name, thumbnail of the entrance floor, Open building map, Directions and Report an issue first, then the places inside as pictograms and the plan thumbnail. */
 import { useEffect, useState } from "react";
 import { loadBuildings, loadedBuildings } from "../../lib/buildings";
 import { openIndoor, useOpenIndoor } from "../../indoor/open";
@@ -42,10 +42,13 @@ export default function BuildingPreview() {
         <span className="cims-tag">Schematic plan</span>
       </p>
       <div className="cims-actions preview__actions">
-        <button type="button" className="cims-btn cims-btn--primary" onClick={() => openIndoor(building.building_id)}>Open building map</button>
+        <button type="button" className="cims-btn cims-btn--primary detail__wide" onClick={() => openIndoor(building.building_id)}>Open building map</button>
         {directions ? <a className="cims-btn" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
           : <button type="button" className="cims-btn" onClick={() => select(null)}>Close</button>}
+        <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
       </div>
+      {!session && <p className="cims-muted"><small>Reporting requires sign-in</small></p>}
+      <InsidePlaces buildingId={building.building_id} />
       {first?.available && (
         <button type="button" className="preview__thumb" onClick={() => openIndoor(building.building_id)} aria-label={`Open the ${first.name} plan`}>
         <svg className="preview__plan" viewBox={first.viewBox.join(" ")} aria-hidden="true" preserveAspectRatio="xMidYMid meet">
@@ -56,11 +59,6 @@ export default function BuildingPreview() {
         </svg>
         </button>
       )}
-      <div className="detail__report">
-        <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
-        {!session && <small className="cims-muted">Requires sign-in</small>}
-      </div>
-      <InsidePlaces buildingId={building.building_id} />
     </section>
   );
 }
