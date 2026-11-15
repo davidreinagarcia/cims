@@ -7,6 +7,9 @@ const URL_ = (import.meta.env.VITE_SUPABASE_URL as string | undefined) ?? "https
 const ANON = (import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined) ??
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdjYWZidHp6a3phZ29veGtpbnZ3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTQ3MTY3ODksImV4cCI6MjExMDI5Mjc4OX0.u9W6Zu6_9vAc_UnDSlL10tlrHNvgQ1IF_yTeZrmpAsc";
 
+/** Project URL and anon key for the Realtime socket (same public values as above). */
+export const SUPABASE_REALTIME = { url: URL_, anon: ANON };
+
 /** The backend could not be reached (network, 5xx, sign-in failure): callers fall back to local mocks. */
 export class BackendDown extends Error {}
 

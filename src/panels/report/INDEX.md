@@ -6,6 +6,7 @@ Report-an-issue flow (F-10) and staff queue; mounted in Shell's "report" slot (s
 
 **Files**
 
+- [`BuildingPicker.tsx`](BuildingPicker.tsx): Building/place picker for report forms: the map's own search (every building, keyboard friendly) in the sideb… · exports `BuildingPicker`
 - [`DuplicateList.tsx`](DuplicateList.tsx): Step 2 of the report flow: open reports for the same place and category, with "Me too +1". · exports `DuplicateList`
 - [`PoliceReportFlow.tsx`](PoliceReportFlow.tsx): Citizen "Notify police" flow: GPS location, what's happening, optional photo, sent live to the GTPD console,… · exports `PoliceReportFlow`
 - [`ReportFlow.tsx`](ReportFlow.tsx): The 3-step report flow: details → "Already reported?" → status. Talks to ReportsService only. · exports `ReportFlow`
@@ -13,6 +14,7 @@ Report-an-issue flow (F-10) and staff queue; mounted in Shell's "report" slot (s
 - [`ReportStatusView.tsx`](ReportStatusView.tsx): Step 3 of the report flow: confirmation, status timeline (Open → Routed → In progress → Resolved) and shareab… · exports `ReportStatusView`
 - [`ReportSummary.tsx`](ReportSummary.tsx): Shared summary block for one report: category, location, text, "Sample" label and +1 count. · exports `formatWhen`, `ReportSummary`
 - [`StaffQueue.tsx`](StaffQueue.tsx): Staff queue (US-10.4, demo persona): reports for one team, grouped by building, sorted by +1, with a status d… · exports `StaffQueue`
+- [`UnclaimedReports.tsx`](UnclaimedReports.tsx): "Open to all teams" strip: reports whose team is unknown, with a Claim button; the first team to claim takes… · exports `UnclaimedReports`
 - [`index.tsx`](index.tsx): Report panel root, mounted in Shell's "report" slot: the flow (prefilled from a selection or a shared link) o… · exports `ReportPanel`
 - [`location.ts`](location.ts): Location helpers for the report panel: breadcrumb parts and resolving a prefilled location by id or URL param… · exports `locationParts`, `locationForId`, `locationFromParams`
 - [`report.css`](report.css): * @file Layout for the report panel and staff queue. Only tokens.css values; extends the cims-* system, no ne…

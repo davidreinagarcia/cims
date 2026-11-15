@@ -57,6 +57,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
     - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
     - [`src/panels/layers/`](src/panels/layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
+    - [`src/panels/maintenance/`](src/panels/maintenance/INDEX.md): Maintenance dashboard: live Facilities report queue split by crew, with status changes.
     - [`src/panels/police/`](src/panels/police/INDEX.md): GTPD console: draw the danger circle, launch and end alarms, work citizen police tips.
     - [`src/panels/report/`](src/panels/report/INDEX.md): Report-an-issue flow (F-10) and staff queue; mounted in Shell's "report" slot (src/shell/Shell.tsx). Owner: T…
     - [`src/panels/rooms/`](src/panels/rooms/INDEX.md): Full-page Rooms board (F-11/F-20, T-62): top filter-chip bar (a building, Favorites, Rooms near me, My bookin…
@@ -81,6 +82,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): Branching, commits, PRs, code review, data contributions, local dev.
 - [`README.md`](README.md): Project overview, quick start, team rules and the map of all docs.
 - [`index.html`](index.html): HTML entry · CIMS | Campus Interactive Map System
+- [`node_modules`](node_modules): _no summary_
 - [`package-lock.json`](package-lock.json): npm lockfile (don't read; don't hand-edit)
 - [`package.json`](package.json): npm manifest · scripts: dev, build, preview, index, index:check, setup:hooks, data:check, data:verify, data:list, db:check, db:status, db:apply, db:accounts
 - [`tsconfig.json`](tsconfig.json): TypeScript compiler config

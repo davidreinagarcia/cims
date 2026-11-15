@@ -1,0 +1,62 @@
+/** @file Maintenance dashboard: crew rail with live counts + a three-column board whose colors follow the site tokens (red new, gold assigned, navy in progress, green done). */
+.maint {
+  --st-open: var(--cat-issues); --st-routed: var(--gold-ink); --st-in_progress: var(--navy); --st-resolved: var(--cat-free); --st-duplicate: var(--ink-muted);
+  --crew-electrical: var(--cat-food); --crew-plumbing: var(--cat-orgs); --crew-hvac: var(--cat-support); --crew-custodial: var(--cat-printing); --crew-general: var(--cat-makerspace);
+  position: absolute; inset: 0; z-index: 60; display: flex; flex-direction: column; background: var(--paper); outline: none;
+}
+.maint__bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s2) var(--s4); background: var(--navy); color: var(--white); border-bottom: 3px solid var(--gold); }
+.maint__title { flex: 1; margin: 0; font: 700 var(--fs-xl)/1.1 var(--font-display); text-transform: uppercase; letter-spacing: var(--caps-tracking); }
+.maint__bar .cims-btn { background: transparent; color: var(--white); border-color: var(--white); }
+.maint__live { padding: 2px var(--s3); border: 1px solid var(--white); border-radius: var(--radius-pill); font: 500 var(--fs-xs) var(--font-mono); text-transform: uppercase; }
+.maint__gate { display: grid; gap: var(--s3); padding: var(--s5) var(--s4); max-width: 480px; }
+.maint__body { flex: 1; min-height: 0; display: grid; grid-template-columns: 220px minmax(0, 1fr); }
+.maint__crews { display: grid; align-content: start; gap: var(--s2); padding: var(--s3); border-right: var(--hairline); overflow-y: auto; }
+.maint__legend { margin: 0; font-size: var(--fs-xs); color: var(--ink-muted); }
+.maint__crew { display: flex; align-items: center; gap: var(--s2); padding: var(--s2) var(--s3); border: var(--hairline); border-left: 8px solid var(--crew); background: var(--white); color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
+.maint__crew[aria-pressed="true"] { background: var(--crew); color: var(--white); border-color: var(--crew); }
+.maint__crew-name { flex: 1; font-weight: 600; }
+.maint__crew-count { font: 700 var(--fs-lg) var(--font-mono); }
+.maint__help { font-size: var(--fs-xs); line-height: 1.5; }
+.maint__k { font-weight: 700; }
+.maint__k--open { color: var(--st-open); } .maint__k--routed { color: var(--st-routed); } .maint__k--in_progress { color: var(--st-in_progress); } .maint__k--resolved { color: var(--st-resolved); }
+.maint__main { overflow-y: auto; padding: var(--s3) var(--s4); display: grid; gap: var(--s4); align-content: start; }
+.maint__board { display: grid; grid-template-columns: repeat(3, minmax(260px, 1fr)); gap: var(--s3); align-items: start; }
+.maint__col { background: var(--paper-2); padding: var(--s2); border-top: 6px solid var(--ink-muted); }
+.maint__col--todo { border-top-color: var(--st-open); }
+.maint__col--doing { border-top-color: var(--st-in_progress); }
+.maint__col--done { border-top-color: var(--st-resolved); }
+.maint__colhead { display: flex; justify-content: space-between; margin: var(--s1) var(--s1) 0; font: 700 var(--fs-md) var(--font-display); text-transform: uppercase; letter-spacing: var(--caps-tracking); }
+.maint__colcount { font-family: var(--font-mono); }
+.maint__colhint { margin: 0 var(--s1) var(--s2); font-size: var(--fs-xs); }
+.maint__cards { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--s2); }
+.maint__card { display: grid; gap: var(--s1); padding: var(--s3); background: var(--white); border: var(--hairline-muted); border-left: 8px solid var(--st-open); }
+.maint__card--routed { border-left-color: var(--st-routed); }
+.maint__card--in_progress { border-left-color: var(--st-in_progress); }
+.maint__card--resolved { border-left-color: var(--st-resolved); opacity: 0.85; }
+.maint__card--duplicate { border-left-color: var(--st-duplicate); opacity: 0.75; }
+.maint__card.is-new { outline: 2px solid var(--gold); outline-offset: 1px; }
+.maint__row { display: flex; flex-wrap: wrap; gap: var(--s2); align-items: center; margin: 0; }
+.maint__pill { padding: 1px var(--s2); color: var(--white); font: 600 var(--fs-xs) var(--font-mono); text-transform: uppercase; background: var(--st-open); }
+.maint__pill--routed { background: var(--st-routed); } .maint__pill--in_progress { background: var(--st-in_progress); }
+.maint__pill--resolved { background: var(--st-resolved); } .maint__pill--duplicate { background: var(--st-duplicate); }
+.maint__new { padding: 1px var(--s2); background: var(--gold); color: var(--navy); font: 700 var(--fs-xs) var(--font-mono); }
+.maint__crewtag { margin-left: auto; padding: 1px var(--s2); border: 1px solid var(--crew); color: var(--crew); font: 600 var(--fs-xs) var(--font-body); }
+.maint__what { margin: 0; font: 700 var(--fs-lg)/1.15 var(--font-display); text-transform: uppercase; }
+.maint__where { margin: 0; font-weight: 600; color: var(--navy); }
+.maint__text { margin: 0; }
+.maint__photo { max-width: 100%; max-height: 140px; object-fit: cover; }
+.maint__foot { display: flex; flex-wrap: wrap; gap: var(--s3); align-items: center; margin: 0; font-size: var(--fs-sm); }
+.maint__people { font-weight: 600; }
+.maint__late { color: var(--st-open); font-weight: 700; }
+.maint__actions { display: flex; gap: var(--s2); flex-wrap: wrap; }
+.maint__resolve { background: var(--st-resolved); border-color: var(--st-resolved); color: var(--white); font-weight: 600; }
+.maint__empty { margin: var(--s2); }
+.unclaimed { padding: var(--s3); border: 2px dashed var(--gold-ink); background: var(--white); }
+.unclaimed__list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+.unclaimed__item { display: grid; gap: var(--s2); align-content: start; padding: var(--s2); border: var(--hairline-muted); border-left: 8px solid var(--gold-ink); }
+@media (max-width: 900px) {
+  .maint__body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .maint__crews { grid-auto-flow: column; grid-auto-columns: 150px; overflow-x: auto; border-right: 0; border-bottom: var(--hairline); }
+  .maint__help, .maint__legend { display: none; }
+  .maint__board { grid-template-columns: 1fr; }
+}

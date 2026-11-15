@@ -57,3 +57,7 @@
   .police__bar { padding: var(--s2) var(--s3); flex-wrap: wrap; }
   .police__title { font-size: var(--fs-lg); }
 }
+
+.police__badge { padding: 2px var(--s3); background: #B42318; color: #fff; border: 1px solid #fff; border-radius: var(--radius-pill); font: 700 var(--fs-xs) var(--font-mono); text-transform: uppercase; animation: police-pulse 1.4s ease-in-out infinite; }
+@keyframes police-pulse { 50% { opacity: 0.6; } }
+@media (prefers-reduced-motion: reduce) { .police__badge { animation: none; } }
