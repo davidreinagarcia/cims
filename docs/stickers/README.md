@@ -29,4 +29,6 @@ Link format: `https://cims.queenalexandria.online/?in=<building>&door=<entrance 
 
 ## For maintenance staff
 
-Until the maintenance page lists the stickers itself (planned, see US-10.5 in [the PRD](../03-prd.md)), install from this folder: the table above gives each door's name, level and link, and the matching `.svg` is the QR to print. Scan every sticker after sticking it; if it opens the wrong door, tell the CIMS team the door name so the entrance is renamed or moved in the data.
+Use the **Door stickers** tab of the maintenance dashboard (sign in as maintenance, menu → Maintenance dashboard → Door stickers, or `/?view=maintenance`). Pick a building, tick the doors you need, then copy each link, download its QR as SVG or PNG, or press **Print** for a sheet with the QR, building, door name and a readable address. The list is built from `src/data/indoor/*.json`, so new entrances and buildings appear by themselves. Links always use the production address unless you tick the test option. Scan every sticker after sticking it; if it opens the wrong door, tell the CIMS team the door name so the entrance is renamed or moved in the data. The static `.svg` files in this folder are kept as a backup.
+
+Still planned from US-10.5: an Installed / Verified state per door and a "wrong door" flag.

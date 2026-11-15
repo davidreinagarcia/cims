@@ -36,6 +36,8 @@ export interface IssueReport {
   status: ReportStatus;
   history: StatusEvent[];
   plusOnes: number;
+  /** True while nobody has claimed it: every team sees it until one does. */
+  openToAll: boolean;
   /** True when this client already added its +1 (or filed the report). */
   viewerPlusOned: boolean;
   createdAt: string;
@@ -64,8 +66,10 @@ export interface ReportsService {
   plusOne(id: string): Promise<IssueReport>;
   /** Staff action: moves a report to another status and records the timestamp. */
   setStatus(id: string, status: ReportStatus): Promise<IssueReport>;
-  /** Every report routed to one team (staff queue). */
+  /** Every report routed to one team plus the unclaimed ones open to all teams (staff queue). */
   listByTeam(team: Team): Promise<IssueReport[]>;
+  /** Staff action: this team takes an unclaimed report; it disappears from the other teams' queues. */
+  claim(id: string, team: Team): Promise<IssueReport>;
 }
 
 /** The happy-path statuses in order, for the status timeline. */

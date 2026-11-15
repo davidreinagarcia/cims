@@ -17,16 +17,15 @@
 .reserve-grid__roomhead { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
 .reserve-heart { flex: none; border: 0; background: none; padding: 2px; display: grid; place-items: center; cursor: pointer; }
 .reserve-heart:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
-.reserve-grid__cells { display: flex; }
-.reserve-grid__hour { flex: none; width: 22px; font-size: var(--fs-xs); color: var(--ink-muted); text-align: center; font-family: var(--font-mono); padding-top: var(--s1); }
+.reserve-grid__cells { display: flex; gap: 6px; }
+.reserve-grid__hour { flex: none; width: 34px; font-size: var(--fs-xs); color: var(--ink-muted); text-align: center; font-family: var(--font-mono); padding-top: var(--s1); }
 /* scroll-margin keeps the sticky room-name column (168px) from fighting the browser's focus-follows-click
    auto-scroll: without it, focusing a slot near the left edge jumps the grid further right than needed. */
-.reserve-slot { flex: none; width: 22px; height: 28px; border: 0; background: none; padding: 0; cursor: pointer; display: grid; place-items: center; scroll-margin-inline-start: 176px; }
-/* Solid rectangular cells, edge to edge (no gap, no radius) -- a continuous booking-grid row, closer
-   to a real room-scheduling system than the old free-floating dot. Busy cells get an ink diagonal
-   hatch over --paper-2 instead of a flat fill, reusing this app's own "survey map" hatching motif
-   (docs/design/DESIGN-DIRECTION.md's "ink hatching" treatment) instead of a plain gray block. */
-.reserve-slot::before { content: ""; width: 100%; height: 100%; box-sizing: border-box; border: 1px solid var(--ink); }
+.reserve-slot { flex: none; width: 34px; height: 34px; border: 0; background: none; padding: 0; cursor: pointer; display: grid; place-items: center; scroll-margin-inline-start: 176px; }
+/* Bigger, separated circles with a gap between them, rather than an edge-to-edge grid. Busy cells get an
+   ink diagonal hatch over --paper-2 instead of a flat fill, reusing this app's own "survey map" hatching
+   motif (docs/design/DESIGN-DIRECTION.md's "ink hatching" treatment) instead of a plain gray block. */
+.reserve-slot::before { content: ""; width: 28px; height: 28px; border-radius: 50%; box-sizing: border-box; border: 1px solid var(--ink); }
 .reserve-slot--free::before { background: var(--cat-free); border-color: var(--cat-free); }
 .reserve-slot--busy::before {
   background-color: var(--paper-2);
@@ -44,7 +43,8 @@
 .reserve-slot:focus-visible::before { outline: 2px solid var(--ink); outline-offset: 2px; }
 .reserve-grid__legend { display: flex; gap: var(--s4); list-style: none; margin: 0; padding: var(--s2) var(--s3); font-size: var(--fs-sm); border-top: var(--hairline); }
 .reserve-grid__legend li { display: flex; align-items: center; gap: var(--s1); }
-.reserve-grid__legend .reserve-slot { width: 14px; height: 14px; }
+.reserve-grid__legend .reserve-slot { width: 16px; height: 16px; }
+.reserve-grid__legend .reserve-slot::before { width: 14px; height: 14px; }
 
 .reserve-grid__error { color: var(--cat-issues); margin: 0; }
 

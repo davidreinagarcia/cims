@@ -7,7 +7,9 @@ Top-of-page banner for live GTPD alarms and the all-clear.
 **Files**
 
 - [`AlertBanner.tsx`](AlertBanner.tsx): Big top-of-page banner for live GTPD alarms (and the later all-clear), with a close button and a "Show on map… · exports `AlertBanner`
+- [`TipNotifier.tsx`](TipNotifier.tsx): Notification for GTPD accounts: a toast, a short beep and a tab-title badge when a new citizen tip arrives; w… · exports `TipNotifier`
 - [`alerts.css`](alerts.css): * @file Alarm banner: loud, full width, readable at a glance; calm green variant for the all clear.
+- [`tip-notifier.css`](tip-notifier.css): * @file Toast for new citizen police reports.
 - [`useAlertBanners.ts`](useAlertBanners.ts): Which alarm banners this device should show right now: live alarms and recent all-clears the user has not dis… · exports `useAlertBanners`
 
 <!-- AUTO:END -->
