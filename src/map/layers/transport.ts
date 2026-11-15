@@ -112,42 +112,55 @@ const transport: MapLayer = {
     const filtered = [ROUTES, ROUTE_NAMES, STOPS, STOP_NAMES];
     const live = [BUSES, `${BUSES}-dot`];
 
-    // Poll only while the layer is on and the tab is visible. A failed poll clears the buses instead of freezing them.
+    // Poll only while the layer is on and the tab is visible. One request at a time: a slow tracker is waited
+    // for, not aborted and re-asked. A failed poll clears the buses instead of freezing them in place.
     let timer: number | undefined;
     let inFlight: AbortController | null = null;
+    let loading = false;
     const setBuses = (features: GeoJSON.Feature[]) => (map.getSource(LIVE) as GeoJSONSource | undefined)?.setData({ type: "FeatureCollection", features });
+    const active = () => !removed && on && !document.hidden;
     const poll = async () => {
-      if (removed || !on || document.hidden || !routeNames.size) return;
-      inFlight?.abort();
-      inFlight = new AbortController();
+      if (!active() || !routeNames.size || inFlight) return;
+      const request = (inFlight = new AbortController());
       try {
-        const buses = await fetchBuses(routeNames, inFlight.signal);
-        if (!removed && on) setBuses(buses);
+        const buses = await fetchBuses(routeNames, request.signal);
+        if (active()) setBuses(buses);
       } catch (err) {
         if ((err as Error).name !== "AbortError" && !removed) setBuses([]);
+      } finally {
+        if (inFlight === request) inFlight = null;
       }
-    };
-    const start = () => {
-      window.clearInterval(timer);
-      void poll();
-      timer = window.setInterval(poll, POLL_MS);
     };
     const stop = () => {
       window.clearInterval(timer);
       inFlight?.abort();
+      inFlight = null;
       setBuses([]);
     };
-    const onVisibility = () => (document.hidden || !on ? window.clearInterval(timer) : start());
-    document.addEventListener("visibilitychange", onVisibility);
-
-    void fetch(transitUrl)
-      .then((r) => r.json())
-      .then((data: GeoJSON.FeatureCollection) => {
+    // Routes and stops are loaded on first use and again on the next activation if that download failed.
+    const loadStatic = async () => {
+      if (routeNames.size || loading) return;
+      loading = true;
+      try {
+        const data: GeoJSON.FeatureCollection = await (await fetch(transitUrl)).json();
         if (removed) return;
         for (const f of data.features) if (f.properties?.kind === "route") routeNames.set(f.properties.route_id, f.properties.name);
         (map.getSource(SOURCE) as GeoJSONSource).setData(data);
-        if (on) start();
-      });
+      } catch {
+        // offline or a bad deploy: the layer stays empty and start() tries again next time
+      } finally {
+        loading = false;
+      }
+    };
+    const start = () => {
+      window.clearInterval(timer);
+      void loadStatic().then(poll);
+      timer = window.setInterval(poll, POLL_MS);
+    };
+    // Hidden tab: stop asking and drop the positions, so nothing stale is on screen when the user comes back.
+    const onVisibility = () => (active() ? start() : stop());
+    document.addEventListener("visibilitychange", onVisibility);
+    if (active()) start();
 
     const onStopClick = (e: MapLayerMouseEvent) => {
       const f = e.features?.[0];

@@ -38,6 +38,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `MatchRange` [src/lib/search.ts:5](../src/lib/search.ts#L5): A half-open character range in the original field, suitable for String.slice.
 - `SearchMatch` [src/lib/search.ts:8](../src/lib/search.ts#L8): A matching name, alias or category and its highlight ranges.
 - `SearchResult` [src/lib/search.ts:15](../src/lib/search.ts#L15): A ranked place with an extensible group label and matches in displayable fields.
+- `BusFeature` [src/map/transitLive.ts:19](../src/map/transitLive.ts#L19): One live bus: where it is and which route it is running.
 - `LayerContext` [src/map/types.ts:6](../src/map/types.ts#L6): What the host gives a layer so it can talk back to the app.
 - `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
@@ -86,10 +87,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `WHITE` [src/map/palette.ts:10](../src/map/palette.ts#L10): --white: building roofs.
 - `GOLD` [src/map/palette.ts:12](../src/map/palette.ts#L12): --gold: selected roof, selected hatch ground.
 - `GOLD_INK` [src/map/palette.ts:14](../src/map/palette.ts#L14): --gold-ink: gold linework on paper (selected hatch lines).
+- `SAGE` [src/map/palette.ts:16](../src/map/palette.ts#L16): --cat-transport: bus routes, stops and live buses.
 - `HATCH_GOLD` [src/map/patterns/index.ts:7](../src/map/patterns/index.ts#L7): Image id of the gold hatch (selected building walls).
 - `addHatchPatterns(map)` [src/map/patterns/index.ts:39](../src/map/patterns/index.ts#L39): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
 - `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
+- `TRACKER_URL` [src/map/transitLive.ts:4](../src/map/transitLive.ts#L4): The official tracker page: where "live tracking" links point.
+- `fetchBuses(routeNames, string>, signal?)` [src/map/transitLive.ts:25](../src/map/transitLive.ts#L25): Fetches the buses currently on one of the given routes (route id to name). Throws if the tracker
 
 ### Possible duplicates
 
