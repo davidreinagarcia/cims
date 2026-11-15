@@ -89,7 +89,7 @@ function ComingSoon({ what, hint }: { what: string; hint?: string }) {
 export default function Shell() {
   const mobile = useIsMobile();
   const { selection, select } = useSelection();
-  const { dialogOpen } = useAuth();
+  const { dialogOpen, session } = useAuth();
   const [panel, setPanel] = useState<ShellPanel>(initialPanel);
   const [routeTo, setRouteTo] = useState<Selection | null>(null);
   const [bulletin, setBulletin] = useState(initialBulletin);
@@ -116,6 +116,16 @@ export default function Shell() {
     setStaffView(view);
   };
   const setPolice = (open: boolean) => openStaff(open ? "police" : null);
+  // Red shield: police get their dashboard; everyone else lands on the "notify police" emergency request.
+  const onEmergency = () => {
+    if (session?.role === "police") { setPolice(true); return; }
+    window.history.pushState(null, "", `${window.location.pathname}?panel=report&kind=police${window.location.hash}`);
+    setBulletin((current) => ({ ...current, open: false }));
+    setBuzzprintOpen(false);
+    select(null);
+    setPanel("report");
+    setSnap("full");
+  };
 
   useEffect(() => {
     // Canonicalize the old panel link once; history navigation never writes over the destination.
@@ -258,7 +268,7 @@ export default function Shell() {
     if (!lost) return;
     if (!contentKey) {
       const back = opener.current?.isConnected ? opener.current
-        : document.querySelector<HTMLElement>('.shell-navitem[aria-pressed="true"], .shell-search input');
+        : document.querySelector<HTMLElement>('.shell-navitem[aria-pressed="true"], .shell-dockitem[aria-pressed="true"], .shell-search input');
       back?.focus();
     } else if (before) {
       // Replaced while focus was inside it; content shown from nothing with focus nowhere is a page load: leave it.
@@ -293,7 +303,7 @@ export default function Shell() {
         <HousingGuide />
         {mobile && (
           <>
-            <button type="button" className="shell-fab shell-fab--police" aria-label="GTPD alert console" onClick={() => setPolice(true)}>
+            <button type="button" className="shell-fab shell-fab--police" aria-label={session?.role === "police" ? "GTPD alert console" : "Emergency: notify police"} onClick={onEmergency}>
               <Icon name="shield" />
             </button>
             <button type="button" className="shell-fab" aria-label="Route: directions between two places" onClick={() => choosePanel("route")}>
