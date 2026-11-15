@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
 import { loadInterests, setInterest } from "../../lib/bulletinInterests";
 import { POST_TYPES, bulletinPosts, countByType, filterPosts, type BulletinPost, type PostType } from "../../lib/bulletin";
+import { recordPortfolioEntry } from "../../portfolio/store";
 import { Icon } from "../../shell/icons";
 import { useAuth } from "../../state/auth";
 import { useSelection } from "../../state/selection";
@@ -78,7 +79,7 @@ export default function BulletinBoard({ type, onType, onClose }: {
   type: PostType | "all"; onType: (type: PostType | "all") => void; onClose: () => void;
 }) {
   const { select } = useSelection();
-  const { requireAuth, dialogOpen } = useAuth();
+  const { requireAuth, dialogOpen, session } = useAuth();
   const root = useRef<HTMLDialogElement>(null);
   const [query, setQuery] = useState("");
   const [notice, setNotice] = useState("");
@@ -113,6 +114,14 @@ export default function BulletinBoard({ type, onType, onClose }: {
     setInterests(next);
     setCounts((c) => ({ ...c, [id]: Math.max(0, (c[id] ?? 0) + (on ? 1 : -1)) }));
     setInterest(id, on).catch(() => setNotice("Could not save that right now. Try again in a moment."));
+    // BuzzPrint (T-71): marking a post Interested records it in the signed-in account's portfolio.
+    // Un-marking it does NOT remove that record — it's a history of what you engaged with, not a
+    // mirror of this list. A signed-out click still toggles the interest above; it just has no
+    // account to save a portfolio entry under, so none is recorded.
+    if (on && session) {
+      const post = posts.find((item) => item.id === id);
+      if (post) void recordPortfolioEntry(session, post);
+    }
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {
