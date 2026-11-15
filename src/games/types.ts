@@ -20,12 +20,15 @@ export interface Drop extends LngLat { id: string; claimedBy: string | null; tea
 /** A simulated player moving on the map. */
 export interface Bot extends LngLat { id: string; nickname: string; team: TeamId; target: LngLat | null; points: number }
 
+/** One line of the activity feed. */
+export interface FeedItem { id: number; text: string; team: TeamId | null }
+
 /** A running (or finished) match. Times are in whole seconds. */
 export interface ActiveGame {
   id: string; name: string; mode: GameMode; capacity: number; listedPlayers: number;
   secondsLeft: number; finished: boolean;
   zones: Zone[]; drops: Drop[]; bots: Bot[];
   scores: Record<TeamId, number>; playerPoints: number;
-  /** Last few things that happened, newest first. */
-  feed: string[];
+  /** Last few things that happened, newest first; `team` colors the dot. */
+  feed: FeedItem[];
 }

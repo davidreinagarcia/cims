@@ -2,7 +2,7 @@
 import { useSyncExternalStore } from "react";
 import { haversineMeters } from "../lib/geolocation";
 import { BOT_NAMES, DROP_COUNT, DROP_POINTS, PLAY_AREA, RADIUS_M, SEED_LOBBY, START, ZONE_POINTS_PER_SECOND, zoneTemplates } from "./data";
-import type { ActiveGame, Bot, Drop, GameMode, LngLat, LobbyGame, Profile, TeamId } from "./types";
+import type { ActiveGame, Bot, Drop, FeedItem, GameMode, LngLat, LobbyGame, Profile, TeamId } from "./types";
 
 /** Everything the UI and the map layer read. */
 export interface GamesState {
@@ -71,8 +71,9 @@ function stepToward(from: LngLat, to: LngLat, meters: number): LngLat {
 function randomPoint(): LngLat {
   return { lng: PLAY_AREA.west + Math.random() * (PLAY_AREA.east - PLAY_AREA.west), lat: PLAY_AREA.south + Math.random() * (PLAY_AREA.north - PLAY_AREA.south) };
 }
-function pushFeed(feed: string[], line: string): string[] {
-  return [line, ...feed].slice(0, FEED_MAX);
+let feedSeq = 0;
+function pushFeed(feed: FeedItem[], text: string, team: TeamId | null): FeedItem[] {
+  return [{ id: ++feedSeq, text, team }, ...feed].slice(0, FEED_MAX);
 }
 
 /** Changes the guest nickname (trimmed, 2 to 20 characters; ignored otherwise). */
@@ -97,8 +98,12 @@ function makeBots(count: number): Bot[] {
   }));
 }
 
-function startGame(meta: { id: string; name: string; mode: GameMode; minutes: number; capacity: number; listedPlayers: number }) {
+type Meta = { id: string; name: string; mode: GameMode; minutes: number; capacity: number; listedPlayers: number };
+let lastMeta: Meta | null = null;
+
+function startGame(meta: Meta) {
   stopEngine();
+  lastMeta = meta;
   const drops: Drop[] = meta.mode === "drops"
     ? Array.from({ length: DROP_COUNT }, (_, i) => ({ id: `drop-${i}`, ...randomPoint(), claimedBy: null, team: null }))
     : [];
@@ -109,7 +114,7 @@ function startGame(meta: { id: string; name: string; mode: GameMode; minutes: nu
       id: meta.id, name: meta.name, mode: meta.mode, capacity: meta.capacity, listedPlayers: meta.listedPlayers,
       secondsLeft: meta.minutes * 60, finished: false,
       zones: meta.mode === "zones" ? zoneTemplates().slice(0, 8) : [], drops, bots,
-      scores: { red: 0, blue: 0 }, playerPoints: 0, feed: [`Empieza ${meta.name}`],
+      scores: { red: 0, blue: 0 }, playerPoints: 0, feed: [{ id: ++feedSeq, text: `Empieza ${meta.name}`, team: null }],
     },
   });
   timer = window.setInterval(tick, 1000);
@@ -135,6 +140,11 @@ export function createGame(opts: { name: string; mode: GameMode; minutes: number
   joinedLobbyId = game.id;
   set({ lobby: [game, ...state.lobby] });
   startGame({ ...game, listedPlayers: 4 }); // a fresh room fills up with bots so it is not empty
+}
+
+/** Starts the same match again from zero (new bots, new drops). */
+export function rematch() {
+  if (lastMeta) startGame(lastMeta);
 }
 
 /** Leaves the running match and removes every game layer from the map. Safe to call when nothing runs. */
@@ -196,7 +206,7 @@ export function captureZone() {
   setGame({
     zones: g.zones.map((z) => (z.id === zone.id ? { ...z, owner: state.profile.team } : z)),
     playerPoints: g.playerPoints + 50,
-    feed: pushFeed(g.feed, `Capturaste ${zone.name}`),
+    feed: pushFeed(g.feed, `Capturaste ${zone.name}`, state.profile.team),
   });
 }
 
@@ -212,7 +222,7 @@ function checkDrops() {
   setGame({
     drops, playerPoints: g.playerPoints + DROP_POINTS * hit.length,
     scores: { ...g.scores, [team]: g.scores[team] + DROP_POINTS * hit.length },
-    feed: pushFeed(g.feed, `Reclamaste un drop (+${DROP_POINTS * hit.length})`),
+    feed: pushFeed(g.feed, `Reclamaste un drop (+${DROP_POINTS * hit.length})`, team),
     finished: drops.every((d) => d.claimedBy),
   });
   if (state.game?.finished) stopEngine();
@@ -241,7 +251,7 @@ function tick() {
       const zone = zones.find((z) => haversineMeters(b, z) <= RADIUS_M && z.owner !== b.team);
       if (zone && Math.random() < 0.6) {
         zones = zones.map((z) => (z.id === zone.id ? { ...z, owner: b.team } : z));
-        feed = pushFeed(feed, `${b.nickname} capturó ${zone.name}`);
+        feed = pushFeed(feed, `${b.nickname} capturó ${zone.name}`, b.team);
         b = { ...b, points: b.points + 50 };
       }
     } else {
@@ -249,7 +259,7 @@ function tick() {
       if (drop) {
         drops = drops.map((d) => (d.id === drop.id ? { ...d, claimedBy: b.nickname, team: b.team } : d));
         scores = { ...scores, [b.team]: scores[b.team] + DROP_POINTS };
-        feed = pushFeed(feed, `${b.nickname} reclamó un drop`);
+        feed = pushFeed(feed, `${b.nickname} reclamó un drop`, b.team);
         b = { ...b, points: b.points + DROP_POINTS };
       }
     }

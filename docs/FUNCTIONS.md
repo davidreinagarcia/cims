@@ -172,6 +172,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Persona` [src/auth/types.ts:23](../src/auth/types.ts#L23): Fictional identity offered by the demo account picker.
 - `AuthAdapter` [src/auth/types.ts:32](../src/auth/types.ts#L32): Adapter boundary keeps sign-in implementation out of screens.
 - `GlyphId` [src/components/Glyph.tsx:30](../src/components/Glyph.tsx#L30): Known glyph ids: the layer categories plus "building".
+- `GameIconName` [src/games/GameIcons.tsx:17](../src/games/GameIcons.tsx#L17): Names of the Games icons.
 - `GamesState` [src/games/store.ts:8](../src/games/store.ts#L8): Everything the UI and the map layer read.
 - `TeamId` [src/games/types.ts:4](../src/games/types.ts#L4): The two teams of every match.
 - `GameMode` [src/games/types.ts:6](../src/games/types.ts#L6): Game modes: King of the Hill zones or a race for random drops.
@@ -181,7 +182,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Zone` [src/games/types.ts:17](../src/games/types.ts#L17): A capture zone (Conquest mode). `owner` is null while neutral.
 - `Drop` [src/games/types.ts:19](../src/games/types.ts#L19): A drop target (Drop Race mode). `claimedBy` is the nickname of whoever got it.
 - `Bot` [src/games/types.ts:21](../src/games/types.ts#L21): A simulated player moving on the map.
-- `ActiveGame` [src/games/types.ts:24](../src/games/types.ts#L24): A running (or finished) match. Times are in whole seconds.
+- `FeedItem` [src/games/types.ts:24](../src/games/types.ts#L24): One line of the activity feed.
+- `ActiveGame` [src/games/types.ts:27](../src/games/types.ts#L27): A running (or finished) match. Times are in whole seconds.
 - `PlanRoute` [src/indoor/FloorPlan.tsx:129](../src/indoor/FloorPlan.tsx#L129): Everything the plan needs to draw a route: the route, the legs on this level and which step is highlighted.
 - `RoutableIndoorRoom` [src/indoor/availability.ts:13](../src/indoor/availability.ts#L13): A routable (schematic) entry from `registry.ts#indoorRooms`, narrowed from the `IndoorRoom`
 - `BookableRoom` [src/indoor/availability.ts:21](../src/indoor/availability.ts#L21): A room with bookable demo amenities (T-60 reservations), with a ready-to-render display label.
@@ -322,8 +324,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:38](../src/components/Glyph.tsx#L38): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:16](../src/components/MapView.tsx#L16): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
-- `GameHud()` [src/games/GameHud.tsx:10](../src/games/GameHud.tsx#L10): Compact card over the map while a match runs. Renders nothing outside one.
-- `GamesPanel()` [src/games/GamesPanel.tsx:11](../src/games/GamesPanel.tsx#L11): Lobby: shows who you are, lets you join a listed match with one click or create your own.
+- `GameHud()` [src/games/GameHud.tsx:12](../src/games/GameHud.tsx#L12): Compact card over the map while a match runs. Renders nothing outside one.
+- `GIcon({ name, size = 20 })` [src/games/GameIcons.tsx:20](../src/games/GameIcons.tsx#L20): A line icon in currentColor; decorative (aria-hidden).
+- `GamesPanel()` [src/games/GamesPanel.tsx:12](../src/games/GamesPanel.tsx#L12): Lobby: who you are, matches you can join with one click, and a path to create your own.
 - `BuildingView()` [src/indoor/BuildingView.tsx:34](../src/indoor/BuildingView.tsx#L34): Opens registered buildings and resolves room selections straight into a routed building screen.
 - `FloorPlan(…)` [src/indoor/FloorPlan.tsx:132](../src/indoor/FloorPlan.tsx#L132): Renders one available level with controls and brings the route or the selected space into view.
 - `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
@@ -414,18 +417,20 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SEED_LOBBY` [src/games/data.ts:42](../src/games/data.ts#L42): Pre-loaded matches shown in the lobby.
 - `MODE_LABEL` [src/games/data.ts:49](../src/games/data.ts#L49): Display name of a game mode.
 - `BOT_NAMES` [src/games/data.ts:52](../src/games/data.ts#L52): Names for simulated players.
+- `MODE_BLURB` [src/games/data.ts:55](../src/games/data.ts#L55): One-line pitch of each mode, shown on the create screen.
 - `subscribeGames(listener)` [src/games/store.ts:51](../src/games/store.ts#L51): Subscribe to any change (for the map layer). Returns the unsubscribe function.
 - `getGamesState()` [src/games/store.ts:56](../src/games/store.ts#L56): Current snapshot.
 - `useGames()` [src/games/store.ts:60](../src/games/store.ts#L60): React hook over the games store.
-- `setNickname(nickname)` [src/games/store.ts:79](../src/games/store.ts#L79): Changes the guest nickname (trimmed, 2 to 20 characters; ignored otherwise).
-- `setTeam(team)` [src/games/store.ts:87](../src/games/store.ts#L87): Picks the team used for the next match.
-- `joinGame(id)` [src/games/store.ts:120](../src/games/store.ts#L120): Joins a lobby match (a clean simulated session with 2 to 4 bots). Returns false when it is full.
-- `createGame(opts)` [src/games/store.ts:131](../src/games/store.ts#L131): Creates a match, lists it in the lobby and jumps straight into it.
-- `leaveGame()` [src/games/store.ts:141](../src/games/store.ts#L141): Leaves the running match and removes every game layer from the map. Safe to call when nothing runs.
-- `setSimulate(on)` [src/games/store.ts:158](../src/games/store.ts#L158): Turns click-to-move on or off; off asks the browser for the real GPS (falls back to click-to-move if refused).
-- `teleport(point)` [src/games/store.ts:178](../src/games/store.ts#L178): Click-to-move: puts the player at a point (only in simulated mode).
-- `capturableZone(s)` [src/games/store.ts:185](../src/games/store.ts#L185): The zone the player stands in that their team does not hold yet (the "Capturar Zona" target), or null.
-- `captureZone()` [src/games/store.ts:192](../src/games/store.ts#L192): Captures the zone under the player for their team.
+- `setNickname(nickname)` [src/games/store.ts:80](../src/games/store.ts#L80): Changes the guest nickname (trimmed, 2 to 20 characters; ignored otherwise).
+- `setTeam(team)` [src/games/store.ts:88](../src/games/store.ts#L88): Picks the team used for the next match.
+- `joinGame(id)` [src/games/store.ts:125](../src/games/store.ts#L125): Joins a lobby match (a clean simulated session with 2 to 4 bots). Returns false when it is full.
+- `createGame(opts)` [src/games/store.ts:136](../src/games/store.ts#L136): Creates a match, lists it in the lobby and jumps straight into it.
+- `rematch()` [src/games/store.ts:146](../src/games/store.ts#L146): Starts the same match again from zero (new bots, new drops).
+- `leaveGame()` [src/games/store.ts:151](../src/games/store.ts#L151): Leaves the running match and removes every game layer from the map. Safe to call when nothing runs.
+- `setSimulate(on)` [src/games/store.ts:168](../src/games/store.ts#L168): Turns click-to-move on or off; off asks the browser for the real GPS (falls back to click-to-move if refused).
+- `teleport(point)` [src/games/store.ts:188](../src/games/store.ts#L188): Click-to-move: puts the player at a point (only in simulated mode).
+- `capturableZone(s)` [src/games/store.ts:195](../src/games/store.ts#L195): The zone the player stands in that their team does not hold yet (the "Capturar Zona" target), or null.
+- `captureZone()` [src/games/store.ts:202](../src/games/store.ts#L202): Captures the zone under the player for their team.
 - `STACK_VIEW_ENABLED` [src/indoor/StackView.tsx:22](../src/indoor/StackView.tsx#L22): Shows the Plan | Stack toggle in the building header. Set to false to hide the stack view for a demo.
 - `bookableRoomsFor(rooms, amenitiesById, buildingId)` [src/indoor/availability.ts:30](../src/indoor/availability.ts#L30): Every bookable room in one building, sorted alphabetically. The label prefers the published
 - `favoriteRoomsFrom(rooms, amenitiesById, roomIds)` [src/indoor/availability.ts:56](../src/indoor/availability.ts#L56): Bookable rooms in `roomIds` across every building, labeled "Building · Room N" using each

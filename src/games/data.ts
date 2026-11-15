@@ -50,3 +50,6 @@ export const MODE_LABEL = { zones: "Conquista de Zonas", drops: "Carrera de Drop
 
 /** Names for simulated players. */
 export const BOT_NAMES = ["Buzz_Runner", "Ramblin_Rita", "NorthAve_Nico", "Yellow_Jacket", "Hive_Hannah", "Clough_Carl"];
+
+/** One-line pitch of each mode, shown on the create screen. */
+export const MODE_BLURB = { zones: "Captura zonas del campus y mantenlas: cada una suma puntos por segundo.", drops: "Corre hasta cada drop antes que el otro equipo: +100 al reclamarlo." } as const;

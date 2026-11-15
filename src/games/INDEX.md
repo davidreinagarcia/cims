@@ -6,11 +6,12 @@ Games tab (mockup): lobby, two game modes on the campus map, simulated bots and 
 
 **Files**
 
-- [`GameHud.tsx`](GameHud.tsx): Floating HUD of a running match: team scores, clock, contextual capture button, activity feed, click-to-move… · exports `GameHud`
-- [`GamesPanel.tsx`](GamesPanel.tsx): Games tab content: guest profile (nickname + team), the list of open matches to join and the "create match" f… · exports `GamesPanel`
-- [`data.ts`](data.ts): Static data of the Games mockup: team look, campus play area, capture zones taken from real curated places, a… · exports `RADIUS_M`, `ZONE_POINTS_PER_SECOND`, `DROP_POINTS`, `DROP_COUNT`, `TEAMS`, `NEUTRAL`, `PLAY_AREA`, `START`, `zoneTemplates`, `SEED_LOBBY`, `MODE_LABEL`, `BOT_NAMES`
-- [`games.css`](games.css): @file Look of the Games tab (lobby, create form) and the in-match HUD, built from the shell tokens.
-- [`store.ts`](store.ts): Games state without a provider: a small external store (guest profile, lobby, running match) plus the 1 Hz en… · exports `subscribeGames`, `getGamesState`, `useGames`, `setNickname`, `setTeam`, `joinGame`, `createGame`, `leaveGame`, `setSimulate`, `teleport`, `capturableZone`, `captureZone`
+- [`GameHud.tsx`](GameHud.tsx): Floating HUD of a running match: clock, tug-of-war score bar, objective pips, contextual capture button, acti… · exports `GameHud`
+- [`GameIcons.tsx`](GameIcons.tsx): Line icons for the Games UI on the same 24px grid and stroke as the shell icons: modes, clock, people, trophy… · exports `GIcon`
+- [`GamesPanel.tsx`](GamesPanel.tsx): Games tab content: guest profile (avatar, nickname, team), the list of open matches to join and the "new matc… · exports `GamesPanel`
+- [`data.ts`](data.ts): Static data of the Games mockup: team look, campus play area, capture zones taken from real curated places, a… · exports `RADIUS_M`, `ZONE_POINTS_PER_SECOND`, `DROP_POINTS`, `DROP_COUNT`, `TEAMS`, `NEUTRAL`, `PLAY_AREA`, `START`, `zoneTemplates`, `SEED_LOBBY`, `MODE_LABEL`, `BOT_NAMES`, `MODE_BLURB`
+- [`games.css`](games.css): @file Look of the Games tab (lobby, new match) and the in-match HUD: survey-map tokens, hairlines instead of…
+- [`store.ts`](store.ts): Games state without a provider: a small external store (guest profile, lobby, running match) plus the 1 Hz en… · exports `subscribeGames`, `getGamesState`, `useGames`, `setNickname`, `setTeam`, `joinGame`, `createGame`, `rematch`, `leaveGame`, `setSimulate`, `teleport`, `capturableZone`, `captureZone`
 - [`types.ts`](types.ts): Types for the Games mockup: teams, modes, players, zones, drops and the lobby/match state.
 
 <!-- AUTO:END -->
