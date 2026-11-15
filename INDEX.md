@@ -20,6 +20,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`docs/adr/`](docs/adr/INDEX.md): Architecture Decision Records: one decision per file, immutable once Accepted.
   - [`docs/brainstorm/`](docs/brainstorm/INDEX.md): Raw inputs: Miro board transcription and the three SGA challenge prompts. Read only when you need the origina…
   - [`docs/data/`](docs/data/INDEX.md): Curated POI schema, verification workflow and generated checklist.
+    - [`docs/data/research/`](docs/data/research/INDEX.md): Research reports behind the POI dataset. Not data and not verified.
   - [`docs/demo/`](docs/demo/INDEX.md): Demo runbook: script readiness, pre-flight checklist and plan B.
   - [`docs/design/`](docs/design/INDEX.md): Visual direction and UI references: the chosen "survey map" style, tokens and how to build it.
     - [`docs/design/references/`](docs/design/references/INDEX.md): Reference images (Gemini mockups). Mood references, not specs; their data is fake.
