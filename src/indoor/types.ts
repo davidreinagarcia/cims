@@ -30,10 +30,11 @@ export interface IndoorBuilding {
   description: string;
   building_id: string;
   title: string;
-  status: "schematic" | "no-plan";
+  status: "schematic" | "no-plan" | "rooms-only";
   credit: string;
   source_url: string;
   levels: IndoorLevel[];
+  rooms?: RoomFact[];
   graph?: IndoorGraph;
 }
 
@@ -58,4 +59,16 @@ export interface IndoorGraph {
   edges: [string, string][];
   connectors: IndoorConnector[];
   entrances: IndoorEntrance[];
+}
+
+/** Published room facts without geometry, inferred levels or routing nodes. */
+export interface RoomFact {
+  id: string;
+  room: string;
+  name: string;
+  type: string;
+  level: "1" | "2" | "3" | "4" | "5" | null;
+  capacity: number | null;
+  source_url: string;
+  source_note: string;
 }

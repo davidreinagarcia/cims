@@ -141,19 +141,25 @@ export interface CampusSearchResult {
   name: string;
   meta: string;
   matches: SearchMatch[];
+  routable?: boolean;
 }
 
-/** Searches footprints and routable rooms alongside places, including building aliases in room queries. */
+/** Searches footprints and published rooms alongside places, including building aliases in room queries. */
 export function searchCampus(query: string, items: readonly PlaceFeature[], buildings: readonly Building[]): CampusSearchResult[] {
   const q = fold(query.trim()).text.replace(/\s+/g, " ");
-  const candidates: (CampusSearchResult & { aliases: string[] })[] = [
+  const candidates: (CampusSearchResult & { aliases: string[]; roomNumber?: string })[] = [
     ...buildings.map((building) => ({ kind: "building" as const, id: building.id, group: "Buildings" as const,
       name: building.name ?? "Unnamed building", meta: building.aliases.join(", "), aliases: building.aliases, matches: [] })),
-    ...indoorRooms().map(({ id, building, level, space }) => {
+    ...indoorRooms().map(({ id, building, level, space, routable }) => {
       const footprint = buildings.find((item) => item.id === building.building_id);
-      return { kind: "room" as const, id, group: "Rooms" as const, name: space.name,
-        meta: `${footprint?.aliases.find((alias) => alias.endsWith(" Building")) ?? footprint?.aliases[0] ?? building.title}, ${level.name}`,
-        aliases: [building.title, footprint?.name ?? "", ...(footprint?.aliases ?? [])], matches: [] };
+      const fact = "room" in space ? space : undefined;
+      const buildingName = fact ? building.title.replace(/^G\. Wayne /, "")
+        : footprint?.aliases.find((alias) => alias.endsWith(" Building")) ?? footprint?.aliases[0] ?? building.title;
+      return { kind: "room" as const, id, group: "Rooms" as const, name: fact ? `Room ${fact.room}` : space.name,
+        meta: [fact?.name, buildingName, level?.name, fact?.capacity != null ? `${fact.capacity} seats` : undefined].filter(Boolean).join(", "),
+        aliases: [space.name, fact?.room ?? "", building.title, footprint?.name ?? "", ...(footprint?.aliases ?? []),
+          ...(building.status === "rooms-only" ? ["CULC", "Clough"] : [])],
+        roomNumber: fact?.room.toLowerCase(), routable, matches: [] };
     }),
   ];
   const ranked = candidates.flatMap((candidate, index) => {
@@ -162,11 +168,13 @@ export function searchCampus(query: string, items: readonly PlaceFeature[], buil
     const matches: SearchMatch[] = q.length < 2 ? [] : ([ ["name", candidate.name], ["category", candidate.meta] ] as const).map(([field, text]) => ({
       field, text, ranges: mergeRanges((q.match(/[\p{L}\p{N}]+/gu) ?? []).flatMap((token) => matchField(token, fold(text))?.ranges ?? [])),
     }));
-    return [{ result: { ...candidate, matches }, rank: hit.rank, index }];
+    return [{ result: { ...candidate, matches }, rank: candidate.roomNumber && q.split(" ").includes(candidate.roomNumber) ? -1 : hit.rank, index }];
   }).sort((a, b) => a.rank - b.rank || a.index - b.index);
+  const roomFirst = ranked[0]?.rank === -1;
+  const campusResults = (roomFirst ? ["room", "building"] : ["building", "room"])
+    .flatMap((kind) => ranked.filter(({ result }) => result.kind === kind).map(({ result }) => result));
   return [
-    ...ranked.filter(({ result }) => result.kind === "building").map(({ result }) => result),
-    ...ranked.filter(({ result }) => result.kind === "room").map(({ result }) => result),
+    ...campusResults,
     ...searchPlaces(query, items).map(({ place, matches }) => ({ kind: "place" as const, id: place.properties.id,
       group: "Places" as const, name: place.properties.name, meta: place.properties.category, matches })),
   ];

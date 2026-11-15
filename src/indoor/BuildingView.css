@@ -91,3 +91,26 @@
   .building-view__summary .building-view__route-options { flex: 0 1 auto; margin-top: 0; justify-content: flex-end; }
   .building-view__summary .building-view__route-heading > button { margin-left: 16px; order: 3; }
 }
+
+/* Published facts share the schematic view's column edges and sixteen pixel rhythm. */
+.building-view__room-finder { grid-column: 1; grid-row: 1 / 4; display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.building-view__room-card, .building-view__browse { border: var(--hairline); padding: 16px; min-width: 0; overflow-wrap: anywhere; }
+.building-view__room-card h3 { margin: 8px 0 16px; font-size: var(--fs-xl, 32px); }
+.building-view__room-card p { margin: 0 0 16px; }
+.building-view__room-card p:last-child { margin-bottom: 0; }
+.building-view__room-card dl { display: grid; gap: 16px; margin: 16px 0; }
+.building-view__room-card dl > div { display: grid; grid-template-columns: 80px minmax(0, 1fr); gap: 16px; }
+.building-view__room-card dt { color: var(--ink-muted); }
+.building-view__room-card dd { margin: 0; text-transform: capitalize; }
+.building-view__room-source { display: inline-flex; align-items: center; min-height: 44px; }
+.building-view__source-note { font-size: var(--fs-sm); overflow-wrap: anywhere; }
+.building-view__browse details { border-top: var(--hairline-muted); }
+.building-view__browse summary { min-height: 44px; padding: 12px 0; box-sizing: border-box; cursor: pointer; }
+.building-view__browse summary > span { margin-left: 16px; font-size: var(--fs-sm); }
+.building-view__browse .building-view__room-result { padding: 8px; }
+.building-view__browse .building-view__room-result > span:last-child:not(:first-child) { flex: none; font-size: var(--fs-sm); }
+.building-view__room-result[aria-pressed="true"] { background: var(--paper-2); outline: 1px solid var(--ink); outline-offset: -1px; }
+.building-view__room-finder > .building-view__credit { margin: 0; }
+@media (max-width: 700px) {
+  .building-view__room-finder { width: 100%; }
+}
