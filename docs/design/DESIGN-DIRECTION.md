@@ -1,6 +1,9 @@
 <!-- summary: Chosen visual direction ("survey map"): tokens, type, map styling rules and how to build it in MapLibre. -->
 # Design direction: "Survey map"
 
+> **Update 2026-11-14:** the app shell is now map-first with floating, rounded surfaces. See
+> [APP-SHELL.md](APP-SHELL.md), which overrides the header/side-panel and `--radius: 0` rules **for floating UI only**.
+
 > **Status:** Chosen by Tato, 2026-11-14. Reference: [`references/map-direction-01.webp`](references/map-direction-01.webp)
 > (generated with Gemini). The image is a **mood reference, not a spec**: its labels, building codes
 > and data are made up (every building says "BLDG 142"). Take the system from it, not the content.

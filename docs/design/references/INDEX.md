@@ -12,5 +12,8 @@ Reference images (Gemini mockups). Mood references, not specs; their data is fak
 - [`map-direction-01.webp`](map-direction-01.webp): image
 - [`map-variations-01.webp`](map-variations-01.webp): image
 - [`search-01.webp`](search-01.webp): image
+- [`shell-gmaps-desktop-annotated.webp`](shell-gmaps-desktop-annotated.webp): image
+- [`shell-gmaps-mobile-annotated.webp`](shell-gmaps-mobile-annotated.webp): image
+- [`shell-inspo-01.webp`](shell-inspo-01.webp): image
 
 <!-- AUTO:END -->

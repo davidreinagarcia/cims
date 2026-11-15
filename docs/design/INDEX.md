@@ -11,6 +11,7 @@ Visual direction and UI references: the chosen "survey map" style, tokens and ho
 
 **Files**
 
+- [`APP-SHELL.md`](APP-SHELL.md): Map-first app shell (Google Maps-like): thin left rail, floating search pill and POI chips, floating cards; m…
 - [`DESIGN-DIRECTION.md`](DESIGN-DIRECTION.md): Chosen visual direction ("survey map"): tokens, type, map styling rules and how to build it in MapLibre.
 - [`styleguide.html`](styleguide.html): HTML entry · CIMS Style Guide
 
