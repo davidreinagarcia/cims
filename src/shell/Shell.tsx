@@ -12,6 +12,7 @@ import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinBoard from "../panels/bulletin/BulletinBoard";
+import BusesPanel from "../panels/buses/BusesPanel";
 import PoliceView from "../panels/police/PoliceView";
 import ReportPanel from "../panels/report";
 import RoomFinderPanel from "../panels/rooms/RoomFinderPanel";
@@ -32,7 +33,7 @@ import SearchPill from "./SearchPill";
 import "./shell.css";
 
 const MOBILE = "(max-width: 767.98px)";
-const PANELS: ShellPanel[] = ["explore", "rooms", "report", "bulletin", "stories", "route"];
+const PANELS: ShellPanel[] = ["explore", "buses", "rooms", "report", "bulletin", "stories", "route"];
 const KINDS: SelectionKind[] = ["building", "place", "room", "report"];
 
 function useIsMobile(): boolean {
@@ -168,7 +169,8 @@ export default function Shell() {
   });
 
   let content: { title: string; key: string; body: ReactNode } | null = null;
-  if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <RoomFinderPanel /> };
+  if (panel === "buses") content = { title: "Buses", key: "buses", body: <BusesPanel /> };
+  else if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <RoomFinderPanel /> };
   else if (panel === "report") {
     // Keyed by the selected place/building (when there is one) so the flow resets for a new "Report an issue".
     const reportKey = selection?.kind === "report" ? `report:${selection.id}` : "report";

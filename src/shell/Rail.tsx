@@ -1,4 +1,4 @@
-/** @file Desktop left rail: menu drawer (about, sign in/out, data corrections) and the Explore/Rooms/Report/Bulletin switch. */
+/** @file Desktop left rail: menu drawer (about, sign in/out, data corrections) and the Explore/Buses/Rooms/Report/Bulletin/Stories switch. */
 import { useEffect, useRef, useState } from "react";
 import { CORRECTION_URL } from "../config";
 import { useAuth } from "../state/auth";

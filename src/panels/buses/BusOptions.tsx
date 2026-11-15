@@ -1,4 +1,4 @@
-/** @file Bus mode of Directions: which GT buses get you to the destination, best first, with when to leave, the wait, the ride and the walks. */
+/** @file Buses panel with a destination: which GT buses get you to the destination, best first, with when to leave, the wait, the ride and the walks. */
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { formatMinutes, planBusTrips, type BusOption } from "../../lib/busPlanner";
 import { highlightRoutes } from "../../lib/transitHighlight";

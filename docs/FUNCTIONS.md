@@ -249,8 +249,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `ReportStatusViewProps` [src/panels/report/ReportStatusView.tsx:7](../src/panels/report/ReportStatusView.tsx#L7): Props for the status page.
 - `Navigate` [src/panels/report/index.tsx:13](../src/panels/report/index.tsx#L13): Changes the query string without reloading, so a filed report's status link and the staff team filter stay sh…
 - `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
-- `IconName` [src/shell/icons.tsx:21](../src/shell/icons.tsx#L21): Names of the shell icons.
-- `ShellPanel` [src/shell/icons.tsx:34](../src/shell/icons.tsx#L34): What the floating card / bottom sheet can show besides a map selection.
+- `IconName` [src/shell/icons.tsx:22](../src/shell/icons.tsx#L22): Names of the shell icons.
+- `ShellPanel` [src/shell/icons.tsx:35](../src/shell/icons.tsx#L35): What the floating card / bottom sheet can show besides a map selection.
 - `LayerFiltersApi` [src/state/layerFilters.tsx:20](../src/state/layerFilters.tsx#L20): What useLayerFilters() returns.
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): Selectable map and search entities; room ids use "buildingId:spaceId".
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
@@ -288,6 +288,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:11](../src/panels/building-card/InsidePlaces.tsx#L11): Show selectable places grouped by category for a footprint or a legacy seed building.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:77](../src/panels/bulletin/BulletinBoard.tsx#L77): Modal cork board with shared interests; the shell owns its URL, type and return focus.
+- `BusList({ here }, number] | null })` [src/panels/buses/BusList.tsx:48](../src/panels/buses/BusList.tsx#L48): Lists every route for the "which buses are around" view; `here` is the From place, else the GPS fix if allowe…
+- `BusOptions({ origin, destination }, number] | null; destination, number] })` [src/panels/buses/BusOptions.tsx:20](../src/panels/buses/BusOptions.tsx#L20): Lists bus options from `origin` (or the user's GPS position when null) to `destination`.
+- `BusesPanel()` [src/panels/buses/BusesPanel.tsx:12](../src/panels/buses/BusesPanel.tsx#L12): The panel body shown in the floating card (desktop) or bottom sheet (phone). The start is always your locatio…
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:68](../src/panels/layers/LayersPanel.tsx#L68): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `PoliceMap(props)` [src/panels/police/PoliceMap.tsx:32](../src/panels/police/PoliceMap.tsx#L32): Police map: pointer events draw the circle (mouse and touch alike) while `drawing` is on.
 - `PoliceView({ onClose })` [src/panels/police/PoliceView.tsx:133](../src/panels/police/PoliceView.tsx#L133): Full-screen console, opened from the home screen (and by ?view=police).
@@ -305,9 +308,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `ReservationGrid({ rooms })` [src/panels/rooms/ReservationGrid.tsx:50](../src/panels/rooms/ReservationGrid.tsx#L50): Day/time grid, booking flow, favorites, location check-in and "My reservations" for any list of
 - `RoomFinderPanel()` [src/panels/rooms/RoomFinderPanel.tsx:28](../src/panels/rooms/RoomFinderPanel.tsx#L28): Sidebar tab: "Reserve a room" entry point, replacing the read-only room finder (T-24) with a
 - `RoomsNearMe({ onBack })` [src/panels/rooms/RoomsNearMe.tsx:19](../src/panels/rooms/RoomsNearMe.tsx#L19): Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and hands the…
-- `BusList({ here }, number] | null })` [src/panels/search/BusList.tsx:48](../src/panels/search/BusList.tsx#L48): Lists every route for the "which buses are around" view; `here` is the From place, else the GPS fix if allowe…
-- `BusOptions({ origin, destination }, number] | null; destination, number] })` [src/panels/search/BusOptions.tsx:20](../src/panels/search/BusOptions.tsx#L20): Lists bus options from `origin` (or the user's GPS position when null) to `destination`.
-- `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:11](../src/panels/search/DirectionsBox.tsx#L11): Replaces the search field while the user plans a trip from one place to another.
+- `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
 - `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
 - `SearchPanel(…)` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
 - `BottomSheet(…)` [src/shell/BottomSheet.tsx:21](../src/shell/BottomSheet.tsx#L21): Drag or tap the handle (or press Enter/Space on it) to move between snaps; arrow keys step up and down. Opens…
@@ -318,8 +319,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Rail({ panel, onPanel, onPolice })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
 - `RoutePanel({ initialSelection, onClose })` [src/shell/RoutePanel.tsx:10](../src/shell/RoutePanel.tsx#L10): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:79](../src/shell/Shell.tsx#L79): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
-- `Icon({ name, size = 24 })` [src/shell/icons.tsx:24](../src/shell/icons.tsx#L24): A 24px line icon in currentColor; decorative (aria-hidden).
+- `Shell()` [src/shell/Shell.tsx:80](../src/shell/Shell.tsx#L80): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
+- `Icon({ name, size = 24 })` [src/shell/icons.tsx:25](../src/shell/icons.tsx#L25): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = supabaseAuthAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
@@ -409,8 +410,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `locationParts(location)` [src/panels/report/location.ts:7](../src/panels/report/location.ts#L7): Breadcrumb parts for a location: building › floor › room, or the outdoor pin coordinates.
 - `locationForId(id, floor, room)` [src/panels/report/location.ts:22](../src/panels/report/location.ts#L22): Builds a prefilled location for a place or building id (checks curated places first, then the OSM
 - `locationFromParams(params)` [src/panels/report/location.ts:31](../src/panels/report/location.ts#L31): Builds the prefilled location from ?building=&floor=&room= (or ?lng=&lat=); null when the URL has none.
-- `NAV_ITEMS` [src/shell/icons.tsx:37](../src/shell/icons.tsx#L37): The five destinations of the rail (desktop) and the tab bar (phones), in order.
-- `moveFocus(event, vertical)` [src/shell/icons.tsx:46](../src/shell/icons.tsx#L46): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
+- `NAV_ITEMS` [src/shell/icons.tsx:38](../src/shell/icons.tsx#L38): The five destinations of the rail (desktop) and the tab bar (phones), in order.
+- `moveFocus(event, vertical)` [src/shell/icons.tsx:48](../src/shell/icons.tsx#L48): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 - `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:13](../src/stories/CameraCapture.tsx#L13): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
 - `ago(ms, now = Date.now()` [src/stories/StoriesPanel.tsx:13](../src/stories/StoriesPanel.tsx#L13): "now", "12m", "3h": how long ago, short like Instagram.
 - `demoStories(now = Date.now()` [src/stories/demoStories.ts:41](../src/stories/demoStories.ts#L41): Builds the fictional stories (created within the last ~20 h, so they never expire mid-session). Resolves empt…

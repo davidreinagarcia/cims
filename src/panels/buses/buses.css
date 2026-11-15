@@ -1,0 +1,32 @@
+/** @file Buses panel: destination field, route list, trip options and the Stingerette card (T-42). */
+.buses { display: grid; gap: var(--s3); }
+.buses__dest { display: flex; gap: var(--s2); align-items: end; }
+.buses__dest > :first-child { flex: 1; min-width: 0; }
+.bus-options { display: grid; gap: var(--s3); }
+.bus-options__notice { display: grid; gap: var(--s2); justify-items: start; }
+.bus-options__notice p { margin: 0; }
+.bus-options__walk { margin: 0; font-size: var(--fs-sm); color: var(--ink-muted); }
+.bus-options__walk--best { padding: var(--s2) var(--s3); border: var(--hairline); background: var(--paper-2); color: var(--ink); }
+.bus-options__list { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2); }
+.bus-option { display: grid; gap: var(--s1); width: 100%; padding: var(--s3); border: var(--hairline); border-left: 6px solid var(--route-color); background: var(--white); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.bus-option:hover { background: var(--paper-2); }
+.bus-option[aria-pressed="true"] { outline: 2px solid var(--route-color); outline-offset: -2px; }
+.bus-option--idle { background: var(--paper); color: var(--ink-muted); }
+.bus-option__top { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s2); }
+.bus-option__route { font: 600 var(--fs-md) var(--font-display); letter-spacing: var(--caps-tracking); text-transform: uppercase; }
+.bus-option__route::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: var(--s2); border-radius: 50%; background: var(--route-color); border: 1px solid var(--ink); }
+.bus-option__total { display: grid; justify-items: end; font: 600 var(--fs-xl) var(--font-display); line-height: 1; }
+.bus-option__total small { font: var(--fs-xs) var(--font-body); color: var(--ink-muted); }
+.bus-option__leave { font-weight: 600; color: var(--navy); }
+.bus-option--idle .bus-option__leave { color: var(--ink-muted); }
+.bus-option__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-size: var(--fs-sm); }
+.bus-option__hours { font-size: var(--fs-xs); }
+.bus-options__source { margin: 0; font-size: var(--fs-xs); }
+.bus-list__head { margin: var(--s2) 0 0; font-size: var(--fs-sm); color: var(--ink-muted); }
+.bus-row__line { font-size: var(--fs-sm); }
+.bus-ondemand { display: grid; gap: var(--s2); padding: var(--s3); border: var(--hairline); border-left: 6px solid var(--gold); background: var(--white); }
+.bus-ondemand--closed { background: var(--paper); }
+.bus-ondemand__tag { font: 600 var(--fs-xs) var(--font-display); letter-spacing: var(--caps-tracking); text-transform: uppercase; padding: 2px var(--s2); border: var(--hairline); }
+.bus-ondemand__status { color: var(--navy); }
+.bus-ondemand--closed .bus-ondemand__status { color: var(--ink-muted); }
+.bus-option__alert { font-size: var(--fs-sm); font-weight: 600; color: var(--route); }

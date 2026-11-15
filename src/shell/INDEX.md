@@ -10,12 +10,12 @@ Map-first app shell (docs/design/APP-SHELL.md): rail / tab bar, search pill, chi
 - [`ChipsBar.tsx`](ChipsBar.tsx): Floating row of category chips: quick layer toggles wired to the shared layer-filter state. Scrolls sideways,… · exports `ChipsBar`
 - [`FloatingCard.tsx`](FloatingCard.tsx): Desktop floating card under the search pill: hosts the existing panels, scrolls inside, collapses to the side… · exports `FloatingCard`
 - [`LayersPopover.tsx`](LayersPopover.tsx): Layers tile on the map plus the popover that holds the full LayersPanel (legend, sub-filters, counts). · exports `LayersPopover`
-- [`MobileTabBar.tsx`](MobileTabBar.tsx): Phone bottom tab bar (replaces the rail under 768px): Explore, Rooms, Report, Bulletin. · exports `MobileTabBar`
-- [`Rail.tsx`](Rail.tsx): Desktop left rail: menu drawer (about, sign in/out, data corrections) and the Explore/Rooms/Report/Bulletin s… · exports `Rail`
+- [`MobileTabBar.tsx`](MobileTabBar.tsx): Phone bottom tab bar (replaces the rail under 768px): Explore, Buses, Rooms, Report, Bulletin, Stories. · exports `MobileTabBar`
+- [`Rail.tsx`](Rail.tsx): Desktop left rail: menu drawer (about, sign in/out, data corrections) and the Explore/Buses/Rooms/Report/Bull… · exports `Rail`
 - [`RoutePanel.tsx`](RoutePanel.tsx): Route panel of the shell: From and To fields with suggestions and swap (walking directions open in Google Map… · exports `RoutePanel`
 - [`SearchPill.tsx`](SearchPill.tsx): Floating search pill: CIMS wordmark + the existing SearchPanel (field in the pill, results drop down under it… · exports `SearchPill`
 - [`Shell.tsx`](Shell.tsx): Map-first app shell (docs/design/APP-SHELL.md): full-bleed map with rail or tab bar, search pill, chips, and… · exports `Shell`
-- [`icons.tsx`](icons.tsx): Line icons for the shell chrome (rail, tab bar, pill, tiles) plus the five navigation destinations. · exports `Icon`, `NAV_ITEMS`, `moveFocus`
+- [`icons.tsx`](icons.tsx): Line icons for the shell chrome (rail, tab bar, pill, tiles) plus the six navigation destinations. · exports `Icon`, `NAV_ITEMS`, `moveFocus`
 - [`shell.css`](shell.css): * @file Layout and look of the floating shell: rail, search pill, chips, card, layers tile, sheet, tab bar. R…
 
 <!-- AUTO:END -->

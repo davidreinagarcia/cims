@@ -1,4 +1,4 @@
-/** @file Bus mode of Directions before a destination is picked: every GT route, running ones first with the next bus at your nearest stop, plus the Stingerette on-demand card. */
+/** @file Buses panel before a destination is picked: every GT route, running ones first with the next bus at your nearest stop, plus the Stingerette on-demand card. */
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { formatMinutes, routeStatuses, type RouteStatus } from "../../lib/busPlanner";
 import { highlightRoutes } from "../../lib/transitHighlight";
