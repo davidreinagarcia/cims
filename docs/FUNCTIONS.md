@@ -24,6 +24,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `loadBuildings()` [src/lib/buildings.ts:81](../src/lib/buildings.ts#L81): Loads the footprints once; a failed load is forgotten so the next call retries.
 - `nextWindow(event, now)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Return the current or next weekly campus occurrence, or an unexpired one-off window.
 - `formatWindow(window)` [src/lib/events.ts:58](../src/lib/events.ts#L58): Format an event window as short English text in campus time.
+- `GeolocationError` [src/lib/geolocation.ts:14](../src/lib/geolocation.ts#L14): A geolocation failure with a stable `reason` for branching and a ready-to-show `message`. A real `Error`, so…
+- `getCurrentPosition(options, maximumAge)` [src/lib/geolocation.ts:31](../src/lib/geolocation.ts#L31): One-shot current position. Never throws a raw `GeolocationPositionError` or lets "the API doesn't
+- `haversineMeters(a, b)` [src/lib/geolocation.ts:50](../src/lib/geolocation.ts#L50): Great-circle distance in meters between two lng/lat points (haversine, mean Earth radius). Accurate enough fo…
+- `formatDistance(meters)` [src/lib/geolocation.ts:64](../src/lib/geolocation.ts#L64): "~180 m away" / "~1.2 km away": rounds to a sensible precision for an approximate, building-level distance --…
 - `campusDay(now)` [src/lib/hours.ts:11](../src/lib/hours.ts#L11): Returns the hours-contract weekday for an instant in America/New_York.
 - `openStatus(hours, now)` [src/lib/hours.ts:24](../src/lib/hours.ts#L24): Computes campus-local opening status without guessing when today's hours are missing.
 - `LAYER_CATALOG` [src/lib/layerCatalog.ts:22](../src/lib/layerCatalog.ts#L22): The PRD layers plus Printing and Health (added 2026-11-14), in panel order.
@@ -65,6 +69,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `RoomFact` [src/indoor/types.ts:70](../src/indoor/types.ts#L70): Published room facts without geometry, inferred levels or routing nodes.
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
+- `GeolocationFailureReason` [src/lib/geolocation.ts:4](../src/lib/geolocation.ts#L4): Every real-world way `getCurrentPosition` can fail, each with its own honest, human message.
+- `Coordinates` [src/lib/geolocation.ts:24](../src/lib/geolocation.ts#L24): A GPS fix: WGS84 degrees plus the device's own reported accuracy radius in meters.
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
 - `LayerCategory` [src/lib/layerCatalog.ts:11](../src/lib/layerCatalog.ts#L11): One entry of the layer panel.
 - `PlaceFeature` [src/lib/places.ts:7](../src/lib/places.ts#L7): One place as a GeoJSON point feature.
@@ -78,12 +84,18 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
 - `MapLayer` [src/map/types.ts:36](../src/map/types.ts#L36): A self-contained piece of the map. Drop a file in src/map/layers/ that default-exports one of
 - `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
-- `IconName` [src/shell/icons.tsx:19](../src/shell/icons.tsx#L19): Names of the shell icons.
-- `ShellPanel` [src/shell/icons.tsx:32](../src/shell/icons.tsx#L32): What the floating card / bottom sheet can show besides a map selection.
+- `IconName` [src/shell/icons.tsx:20](../src/shell/icons.tsx#L20): Names of the shell icons.
+- `ShellPanel` [src/shell/icons.tsx:33](../src/shell/icons.tsx#L33): What the floating card / bottom sheet can show besides a map selection.
 - `LayerFiltersApi` [src/state/layerFilters.tsx:20](../src/state/layerFilters.tsx#L20): What useLayerFilters() returns.
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): Selectable map and search entities; room ids use "buildingId:spaceId".
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
 - `SelectionApi` [src/state/selection.tsx:20](../src/state/selection.tsx#L20): What useSelection() returns.
+- `MapFocus` [src/stories/store.ts:9](../src/stories/store.ts#L9): A request to look at one place on the map; `nonce` makes repeats of the same spot count as new requests.
+- `ViewerRequest` [src/stories/store.ts:11](../src/stories/store.ts#L11): A subset of stories to show in the viewer (set when the user clicks the heat map).
+- `StoryKind` [src/stories/types.ts:5](../src/stories/types.ts#L5): A story is either a photo or a short clip, always captured live in the app.
+- `Story` [src/stories/types.ts:8](../src/stories/types.ts#L8): One story, already resolved to something an <img>/<video> can show.
+- `Capture` [src/stories/types.ts:29](../src/stories/types.ts#L29): What the camera hands over: the media, captured moments ago, plus the GPS fix taken at that instant.
+- `StoriesAdapter` [src/stories/types.ts:39](../src/stories/types.ts#L39): Storage boundary. The local adapter keeps stories in this browser; a Supabase adapter would sit behind the sa…
 - `Category` [src/types.ts:7](../src/types.ts#L7): Kinds of place the map can show. The first six are the toggleable layers of the layer panel
 - `DataStatus` [src/types.ts:26](../src/types.ts#L26): Data trust level (ADR-0004). "seed": existing approximate data, shown. "draft": researched but not
 - `EventInfo` [src/types.ts:29](../src/types.ts#L29): Event timing in campus time; demo records are fictional, visible examples only.
@@ -121,11 +133,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Rail({ panel, onPanel })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
 - `RoutePanel({ onClose })` [src/shell/RoutePanel.tsx:7](../src/shell/RoutePanel.tsx#L7): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:53](../src/shell/Shell.tsx#L53): Lays out the map and every floating surface; panels are mounted unchanged inside the card (desktop) or sheet…
-- `Icon({ name, size = 24 })` [src/shell/icons.tsx:22](../src/shell/icons.tsx#L22): A 24px line icon in currentColor; decorative (aria-hidden).
+- `Shell()` [src/shell/Shell.tsx:55](../src/shell/Shell.tsx#L55): Lays out the map and every floating surface; panels are mounted unchanged inside the card (desktop) or sheet…
+- `Icon({ name, size = 24 })` [src/shell/icons.tsx:23](../src/shell/icons.tsx#L23): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = mockAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
+- `CameraCapture({ onCapture, onCancel })` [src/stories/CameraCapture.tsx:32](../src/stories/CameraCapture.tsx#L32): Full-height camera view. Calls `onCapture` with the media plus where it was taken; the caller decides what to…
+- `StoriesPanel({ onShowMap })` [src/stories/StoriesPanel.tsx:115](../src/stories/StoriesPanel.tsx#L115): The Stories tab. `onShowMap` switches the shell back to the map (after "View on map").
 
 ### Other exported functions & constants
 
@@ -178,8 +192,24 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `addHatchPatterns(map)` [src/map/patterns/index.ts:38](../src/map/patterns/index.ts#L38): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
 - `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
-- `NAV_ITEMS` [src/shell/icons.tsx:35](../src/shell/icons.tsx#L35): The four destinations of the rail (desktop) and the tab bar (phones), in order.
-- `moveFocus(event, vertical)` [src/shell/icons.tsx:43](../src/shell/icons.tsx#L43): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
+- `NAV_ITEMS` [src/shell/icons.tsx:36](../src/shell/icons.tsx#L36): The five destinations of the rail (desktop) and the tab bar (phones), in order.
+- `moveFocus(event, vertical)` [src/shell/icons.tsx:45](../src/shell/icons.tsx#L45): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
+- `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:13](../src/stories/CameraCapture.tsx#L13): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
+- `ago(ms, now = Date.now()` [src/stories/StoriesPanel.tsx:13](../src/stories/StoriesPanel.tsx#L13): "now", "12m", "3h": how long ago, short like Instagram.
+- `demoStories(now = Date.now()` [src/stories/demoStories.ts:41](../src/stories/demoStories.ts#L41): Builds the fictional stories (created within the last ~20 h, so they never expire mid-session). Resolves empt…
+- `STORY_TTL_MS` [src/stories/localAdapter.ts:8](../src/stories/localAdapter.ts#L8): Stories live 24 hours, like Instagram.
+- `localAdapter` [src/stories/localAdapter.ts:30](../src/stories/localAdapter.ts#L30): Stories stored on this device only (demo); swap for a backend adapter without touching the UI.
+- `subscribe(listener)` [src/stories/store.ts:32](../src/stories/store.ts#L32): Subscribe to any change (for non-React consumers such as the map layer). Returns the unsubscribe function.
+- `getState()` [src/stories/store.ts:38](../src/stories/store.ts#L38): Current snapshot, newest story first among live ones.
+- `ensureLoaded()` [src/stories/store.ts:43](../src/stories/store.ts#L43): Loads real + demo stories once (safe to call repeatedly).
+- `useStories()` [src/stories/store.ts:51](../src/stories/store.ts#L51): React hook over the store.
+- `liveStories(stories, now = Date.now()` [src/stories/store.ts:56](../src/stories/store.ts#L56): Live stories, newest first (expired ones are dropped as time passes).
+- `postStory(author, capture, caption?)` [src/stories/store.ts:61](../src/stories/store.ts#L61): Saves a captured story for the signed-in account and shows it immediately.
+- `openViewer(ids)` [src/stories/store.ts:68](../src/stories/store.ts#L68): Show only these stories in the Stories tab (heat map click).
+- `closeViewer()` [src/stories/store.ts:73](../src/stories/store.ts#L73): Back to the full feed.
+- `focusOnMap(story, "lat" | "lng">)` [src/stories/store.ts:78](../src/stories/store.ts#L78): Ask the map to zoom to where a story was captured.
+- `setAdapter(next)` [src/stories/store.ts:83](../src/stories/store.ts#L83): Backend hook: replace the storage adapter before the first load.
+- `setHeat(on)` [src/stories/store.ts:88](../src/stories/store.ts#L88): Show or hide the heat map layer on the map (remembered on this device).
 
 ### Possible duplicates
 

@@ -9,6 +9,7 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`buildingPlaces.ts`](buildingPlaces.ts): Building association and location metadata shared by POI pins and detail cards. · exports `locationDetails`, `placeBuilding`
 - [`buildings.ts`](buildings.ts): Building footprints (OSM, src/data/buildings.geojson): loaded once on demand, with a point-in-footprint looku… · exports `loadedBuildings`, `loadBuildings`
 - [`events.ts`](events.ts): Pure event windows and short labels in the America/New_York campus timezone. · exports `nextWindow`, `formatWindow`
+- [`geolocation.ts`](geolocation.ts): Typed wrapper around the browser Geolocation API (T-61) plus haversine distance math, shared by "Rooms near m… · exports `GeolocationError`, `getCurrentPosition`, `haversineMeters`, `formatDistance`
 - [`hours.ts`](hours.ts): Pure opening status and weekday lookup in the campus timezone. · exports `campusDay`, `openStatus`
 - [`layerCatalog.ts`](layerCatalog.ts): The toggleable map layers (PRD F-02): id, label, color token and sub-types. Add a layer or sub-type here. · exports `LAYER_CATALOG`, `categoryColor`
 - [`places.ts`](places.ts): Typed access to every curated place: seed file plus src/data/pois/*.json, drafts hidden unless ?drafts=1. · exports `showDrafts`, `places`
