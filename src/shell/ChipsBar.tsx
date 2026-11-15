@@ -33,7 +33,7 @@ export default function ChipsBar() {
       <div ref={row} className="shell-chips__row" role="group" aria-label="Quick layer toggles">
         <button type="button" className="shell-chip shell-chip--culture" aria-pressed={culture} style={{ "--cat": "var(--gold-ink)" } as CSSProperties}
           title="Sticky-note map of GT traditions. Hides the other layers." onClick={() => toggleCategory("culture")}>
-          <span className="shell-chip__glyph" aria-hidden="true">📝</span>
+          <span className="shell-chip__glyph" aria-hidden="true"><Glyph id="culture" size={16} /></span>
           GT Culture
         </button>
         {ordered.map((layer) => {
