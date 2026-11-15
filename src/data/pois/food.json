@@ -12,7 +12,59 @@
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
         "building_id": "student-center",
-        "coord_source": "OSM node 14224945530 (Big Chicken), named venue point returned by Nominatim lookup"
+        "coord_source": "OSM node 14224945530 (Big Chicken), named venue point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "10:30",
+              "21:00"
+            ]
+          ],
+          "tue": [
+            [
+              "10:30",
+              "21:00"
+            ]
+          ],
+          "wed": [
+            [
+              "10:30",
+              "21:00"
+            ]
+          ],
+          "thu": [
+            [
+              "10:30",
+              "21:00"
+            ]
+          ],
+          "fri": [
+            [
+              "10:30",
+              "21:00"
+            ]
+          ],
+          "sat": [
+            [
+              "12:00",
+              "16:00"
+            ]
+          ],
+          "sun": [
+            [
+              "10:30",
+              "17:00"
+            ]
+          ]
+        },
+        "hours_note": "Special Thanksgiving week hours (Nov 22-28, 2026): Sun 10:30-17:00, Mon-Tue 10:30-21:00, Wed 10:30-17:00, Thu-Sat closed.",
+        "buzzcard": {
+          "required": false,
+          "note": "Accepts BuzzCard Funds, Dining Dollars, credit/debit, Grubhub, and $9 Flex Swipes; standard dining-hall meal swipes do not apply."
+        },
+        "url": "https://dining.gatech.edu/dining-locations",
+        "dining_dollars": true,
+        "meal_swipes": false
       },
       "geometry": {
         "type": "Point",
@@ -33,7 +85,54 @@
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
         "building_id": "student-center",
-        "coord_source": "OSM node 14224945529 (Blenz Bowls), named venue point returned by Nominatim lookup"
+        "coord_source": "OSM node 14224945529 (Blenz Bowls), named venue point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "09:00",
+              "18:00"
+            ]
+          ],
+          "tue": [
+            [
+              "09:00",
+              "18:00"
+            ]
+          ],
+          "wed": [
+            [
+              "09:00",
+              "18:00"
+            ]
+          ],
+          "thu": [
+            [
+              "09:00",
+              "18:00"
+            ]
+          ],
+          "fri": [
+            [
+              "09:00",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": [
+            [
+              "12:00",
+              "18:00"
+            ]
+          ]
+        },
+        "hours_note": "Listed on Fall 2026 Tech Dining directory without separate Thanksgiving week exceptions.",
+        "buzzcard": {
+          "required": false,
+          "note": "Accepts BuzzCard Funds, Dining Dollars, credit/debit, Grubhub, and $9 Flex Swipes."
+        },
+        "url": "https://dining.gatech.edu/dining-locations",
+        "dining_dollars": true,
+        "meal_swipes": false
       },
       "geometry": {
         "type": "Point",
@@ -88,7 +187,15 @@
           ],
           "sat": [],
           "sun": []
-        }
+        },
+        "hours_note": "Special Thanksgiving week hours (Nov 22-28, 2026): Sun-Tue 11:00-23:00, Wed-Sat closed.",
+        "buzzcard": {
+          "required": false,
+          "note": "Required for meal plan swipes or Dining Dollars; public door rates also accepted."
+        },
+        "url": "https://dining.gatech.edu/location/brittain-dining-hall-0",
+        "dining_dollars": true,
+        "meal_swipes": true
       },
       "geometry": {
         "type": "Point",
@@ -615,7 +722,15 @@
               "21:00"
             ]
           ]
-        }
+        },
+        "hours_note": "Special Thanksgiving week hours (Nov 22-28, 2026): Sun 09:00-21:00, Mon-Tue 07:00-23:00, Wed 09:00-15:00, Thu-Sat closed.",
+        "buzzcard": {
+          "required": false,
+          "note": "Required for meal plan swipes or Dining Dollars; public door rates also accepted."
+        },
+        "url": "https://dining.gatech.edu/location/west-village-dining-hall",
+        "dining_dollars": true,
+        "meal_swipes": true
       },
       "geometry": {
         "type": "Point",
@@ -623,6 +738,237 @@
           -84.4048503,
           33.7793586
         ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.387903,
+          33.776654
+        ]
+      },
+      "properties": {
+        "id": "boho-taco-tech-square",
+        "name": "Boho Taco",
+        "category": "food",
+        "status": "draft",
+        "subtype": "restaurant",
+        "description": "Georgia Tech Partner fast-casual taco restaurant in Tech Square.",
+        "address": "22 5th Street NW, Atlanta, GA 30308",
+        "hours": {
+          "mon": [
+            [
+              "11:00",
+              "22:00"
+            ]
+          ],
+          "tue": [
+            [
+              "11:00",
+              "22:00"
+            ]
+          ],
+          "wed": [
+            [
+              "11:00",
+              "22:00"
+            ]
+          ],
+          "thu": [
+            [
+              "11:00",
+              "22:00"
+            ]
+          ],
+          "fri": [
+            [
+              "11:00",
+              "22:00"
+            ]
+          ],
+          "sat": [
+            [
+              "11:00",
+              "22:00"
+            ]
+          ],
+          "sun": [
+            [
+              "11:00",
+              "22:00"
+            ]
+          ]
+        },
+        "hours_note": "No break exceptions printed on the directory block.",
+        "buzzcard": {
+          "required": false,
+          "note": "Accepts Dining Dollars, BuzzCard Funds, and credit/debit; Dining Dollars and BuzzCard cannot purchase alcohol."
+        },
+        "url": "https://dining.gatech.edu/dining-locations",
+        "dining_dollars": true,
+        "meal_swipes": false,
+        "source_url": "https://dining.gatech.edu/dining-locations",
+        "confidence": "medium",
+        "coord_source": "OSM node 535031257 (David research)",
+        "coord_precision": "exact"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3893327,
+          33.7763706
+        ]
+      },
+      "properties": {
+        "id": "tech-square-tavern",
+        "name": "Tech Square Tavern",
+        "category": "food",
+        "status": "draft",
+        "subtype": "restaurant",
+        "description": "Evening restaurant inside the Georgia Tech Hotel and Conference Center listed as an active Tech Dining retail location.",
+        "address": "800 Spring St NW, Atlanta, GA 30308",
+        "building": "Georgia Tech Hotel and Conference Center",
+        "hours": {
+          "mon": [
+            [
+              "16:00",
+              "23:00"
+            ]
+          ],
+          "tue": [
+            [
+              "16:00",
+              "23:00"
+            ]
+          ],
+          "wed": [
+            [
+              "16:00",
+              "23:00"
+            ]
+          ],
+          "thu": [
+            [
+              "16:00",
+              "23:00"
+            ]
+          ],
+          "fri": [
+            [
+              "16:00",
+              "23:00"
+            ]
+          ],
+          "sat": [
+            [
+              "16:00",
+              "23:00"
+            ]
+          ],
+          "sun": [
+            [
+              "16:00",
+              "23:00"
+            ]
+          ]
+        },
+        "hours_note": "Evening dining hours confirmed on Tech Dining and Georgia Tech Hotel sites; no break dates printed.",
+        "buzzcard": {
+          "required": false,
+          "note": "Listed as an open Tech Dining campus retail location (accepts Dining Dollars per Tech Dining policy)."
+        },
+        "url": "https://dining.gatech.edu/location/tech-square-tavern",
+        "menu_url": "https://www.gatechhotel.com/gallery/tech-square-tavern-menu",
+        "dining_dollars": true,
+        "meal_swipes": false,
+        "source_url": "https://dining.gatech.edu/location/tech-square-tavern",
+        "confidence": "medium",
+        "building_id": "georgia-tech-hotel-and-conference-center",
+        "coord_source": "building centroid: georgia-tech-hotel-and-conference-center",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3879281,
+          33.7753978
+        ]
+      },
+      "properties": {
+        "id": "collective-food-hall-coda",
+        "name": "The Collective Food Hall",
+        "category": "food",
+        "status": "draft",
+        "subtype": "cafeteria",
+        "aliases": [
+          "Coda Food Hall"
+        ],
+        "description": "Multi-vendor food hall inside the Coda Building in Tech Square.",
+        "building": "Coda Building",
+        "hours": {
+          "mon": [
+            [
+              "11:00",
+              "21:30"
+            ]
+          ],
+          "tue": [
+            [
+              "11:00",
+              "21:30"
+            ]
+          ],
+          "wed": [
+            [
+              "11:00",
+              "21:30"
+            ]
+          ],
+          "thu": [
+            [
+              "11:00",
+              "21:30"
+            ]
+          ],
+          "fri": [
+            [
+              "11:00",
+              "21:30"
+            ]
+          ],
+          "sat": [
+            [
+              "11:00",
+              "21:30"
+            ]
+          ],
+          "sun": [
+            [
+              "11:00",
+              "21:30"
+            ]
+          ]
+        },
+        "hours_note": "Undated official business site schedule; individual stall hours may vary.",
+        "buzzcard": {
+          "required": false,
+          "note": "Commercial Tech Square food hall open to the public; Tech Dining payment acceptance not stated."
+        },
+        "url": "https://codatechsquare.com/the-collective-food-hall/",
+        "meal_swipes": false,
+        "source_url": "https://codatechsquare.com/the-collective-food-hall/",
+        "confidence": "medium",
+        "building_id": "coda",
+        "coord_source": "building centroid: coda",
+        "coord_precision": "building"
       }
     }
   ]

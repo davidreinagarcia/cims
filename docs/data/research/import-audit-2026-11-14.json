@@ -1,0 +1,1438 @@
+{
+  "added": [
+    {
+      "research_id": "boho-taco-tech-square",
+      "id": "boho-taco-tech-square",
+      "name": "Boho Taco",
+      "category": "food",
+      "coord_source": "OSM node 535031257 (David research)",
+      "coord_precision": "exact"
+    },
+    {
+      "research_id": "tech-square-tavern",
+      "id": "tech-square-tavern",
+      "name": "Tech Square Tavern",
+      "category": "food",
+      "coord_source": "building centroid: georgia-tech-hotel-and-conference-center",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "collective-food-hall-coda",
+      "id": "collective-food-hall-coda",
+      "name": "The Collective Food Hall",
+      "category": "food",
+      "coord_source": "building centroid: coda",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "coc-tso-help-desk",
+      "id": "coc-tso-help-desk",
+      "name": "College of Computing TSO Help Desk",
+      "category": "support",
+      "coord_source": "building centroid: college-of-computing-building",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "oit-asc-walk-up-support",
+      "id": "oit-asc-walk-up-support",
+      "name": "OIT Administrative Services Center (ASC) Walk-Up Support",
+      "category": "support",
+      "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "jlsc-information-desk",
+      "id": "jlsc-information-desk",
+      "name": "John Lewis Student Center Information Desk",
+      "category": "support",
+      "coord_source": "building centroid: john-lewis-student-center",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "georgia-tech-post-office",
+      "id": "georgia-tech-post-office",
+      "name": "Georgia Tech Post Office",
+      "category": "support",
+      "coord_source": "building centroid: john-lewis-student-center",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "scec-event-services-office",
+      "id": "scec-event-services-office",
+      "name": "Student and Campus Event Centers Administration and Event Services",
+      "category": "support",
+      "coord_source": "building centroid: john-lewis-student-center",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "buzzcard-center",
+      "id": "buzzcard-center",
+      "name": "BuzzCard Center",
+      "category": "support",
+      "coord_source": "building centroid: john-lewis-student-center",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "bursars-office",
+      "id": "bursars-office",
+      "name": "Office of the Bursar",
+      "category": "support",
+      "coord_source": "building centroid: lyman-hall-building",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "office-of-disability-services",
+      "id": "office-of-disability-services",
+      "name": "Office of Disability Services (ODS)",
+      "category": "support",
+      "coord_source": "building centroid: flag-building-charles-a-smithgall-jr-building",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "gtpd-headquarters",
+      "id": "gtpd-headquarters",
+      "name": "Georgia Tech Police Department (GTPD)",
+      "category": "support",
+      "coord_source": "OSM way 751387123 (David research)",
+      "coord_precision": "exact"
+    },
+    {
+      "research_id": "pts-customer-service-center",
+      "id": "pts-customer-service-center",
+      "name": "Parking and Transportation Services (PTS) Customer Service Center",
+      "category": "support",
+      "coord_source": "building centroid: technology-square-parking-deck",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "crosland-grove-printers",
+      "id": "crosland-grove-printers",
+      "name": "Crosland Tower Grove Level Printers and Copier/Scanner",
+      "category": "printing",
+      "coord_source": "building centroid: dorothy-murray-crosland-tower",
+      "coord_precision": "building",
+      "hours_issue": {
+        "id": "crosland-grove-printers",
+        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
+        "research_hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "research_id": "crosland-2f-bw-printer",
+      "id": "crosland-2f-bw-printer",
+      "name": "Crosland Tower 2nd Floor B&W Printer",
+      "category": "printing",
+      "coord_source": "building centroid: dorothy-murray-crosland-tower",
+      "coord_precision": "building",
+      "hours_issue": {
+        "id": "crosland-2f-bw-printer",
+        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
+        "research_hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "research_id": "crosland-6f-gsc-color-printer",
+      "id": "crosland-6f-gsc-color-printer",
+      "name": "Crosland Tower 6th Floor Color Printer (Graduate Student Community)",
+      "category": "printing",
+      "coord_source": "building centroid: dorothy-murray-crosland-tower",
+      "coord_precision": "building",
+      "hours_issue": {
+        "id": "crosland-6f-gsc-color-printer",
+        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
+        "research_hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "research_id": "price-gilbert-3f-purple-zone-printer",
+      "id": "price-gilbert-3f-purple-zone-printer",
+      "name": "Price Gilbert 3rd Floor Purple Zone Color Printer",
+      "category": "printing",
+      "coord_source": "building centroid: price-gilbert-memorial-library",
+      "coord_precision": "building",
+      "hours_issue": {
+        "id": "price-gilbert-3f-purple-zone-printer",
+        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
+        "research_hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "research_id": "clough-2f-color-printer",
+      "id": "clough-2f-color-printer",
+      "name": "Clough Commons 2nd Floor Color Printer",
+      "category": "printing",
+      "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
+      "coord_precision": "building",
+      "hours_issue": {
+        "id": "clough-2f-color-printer",
+        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
+        "research_hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "research_id": "clough-3f-pink-zone-printer",
+      "id": "clough-3f-pink-zone-printer",
+      "name": "Clough Commons 3rd Floor B&W Printer (Pink Computing Zone)",
+      "category": "printing",
+      "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
+      "coord_precision": "building",
+      "hours_issue": {
+        "id": "clough-3f-pink-zone-printer",
+        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
+        "research_hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "research_id": "clough-4f-bw-printer",
+      "id": "clough-4f-bw-printer",
+      "name": "Clough Commons 4th Floor B&W Printer",
+      "category": "printing",
+      "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
+      "coord_precision": "building",
+      "hours_issue": {
+        "id": "clough-4f-bw-printer",
+        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
+        "research_hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "research_id": "ccb-1f-pharos-printer",
+      "id": "ccb-1f-pharos-printer",
+      "name": "College of Computing Building 1st Floor Pharos Station",
+      "category": "printing",
+      "coord_source": "building centroid: college-of-computing-building",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "ccb-ground-pharos-printer",
+      "id": "ccb-ground-pharos-printer",
+      "name": "College of Computing Building Ground Floor Pharos Station",
+      "category": "printing",
+      "coord_source": "building centroid: college-of-computing-building",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "klaus-ece-public-lab-printers",
+      "id": "klaus-ece-public-lab-printers",
+      "name": "Klaus ECE Public Lab Pharos Printers",
+      "category": "printing",
+      "coord_source": "building centroid: christopher-w-klaus-advanced-computing-building",
+      "coord_precision": "building",
+      "hours_issue": {
+        "id": "klaus-ece-public-lab-printers",
+        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
+        "research_hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "research_id": "van-leer-c257-ece-lab-printer",
+      "id": "van-leer-c257-ece-lab-printer",
+      "name": "Van Leer C257 ECE Public Lab Pharos Printer",
+      "category": "printing",
+      "coord_source": "building centroid: van-leer-building",
+      "coord_precision": "building",
+      "hours_issue": {
+        "id": "van-leer-c257-ece-lab-printer",
+        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
+        "research_hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "research_id": "architecture-west-359a-plotters",
+      "id": "architecture-west-359a-plotters",
+      "name": "Architecture West Plotter Printers",
+      "category": "printing",
+      "coord_source": "building centroid: architecture-west",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "ken-byers-tennis-complex",
+      "id": "ken-byers-tennis-complex",
+      "name": "Ken Byers Tennis Complex",
+      "category": "exercise",
+      "coord_source": "OSM way 42789686 (David research)",
+      "coord_precision": "exact"
+    },
+    {
+      "research_id": "pharmabox-clough",
+      "id": "pharmabox-clough",
+      "name": "Pharmabox (Clough Commons)",
+      "category": "health",
+      "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
+      "coord_precision": "building",
+      "hours_issue": {
+        "id": "pharmabox-clough",
+        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
+        "research_hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "research_id": "cmhcr-cos-mose-1120b",
+      "id": "cmhcr-cos-mose-1120b",
+      "name": "CMHCR Embedded Clinician Office - College of Sciences",
+      "category": "health",
+      "coord_source": "building centroid: glen-p-robinson-jr-building",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "w02-student-center-parking-deck",
+      "id": "w02-student-center-parking-deck",
+      "name": "W02: Student Center Parking Deck",
+      "category": "transport",
+      "coord_source": "building centroid: student-center-parking-deck",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "w22-dalney-parking-deck",
+      "id": "w22-dalney-parking-deck",
+      "name": "W22: Dalney Parking Deck",
+      "category": "transport",
+      "coord_source": "building centroid: dalney-street-parking-deck",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "e81-tech-square-parking-deck",
+      "id": "e81-tech-square-parking-deck",
+      "name": "E81: Tech Square Parking Deck",
+      "category": "transport",
+      "coord_source": "building centroid: technology-square-parking-deck",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "coda-parking-garage",
+      "id": "coda-parking-garage",
+      "name": "Coda Building Parking Garage",
+      "category": "transport",
+      "coord_source": "building centroid: coda",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "w02-bike-room-fix-it",
+      "id": "w02-bike-room-fix-it",
+      "name": "W02 Bike Room and Bike Repair Station",
+      "category": "transport",
+      "coord_source": "building centroid: student-center-parking-deck",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "w22-bike-room-fix-it",
+      "id": "w22-bike-room-fix-it",
+      "name": "W22 Dalney Bike Room and Fix-It Station",
+      "category": "transport",
+      "coord_source": "building centroid: dalney-street-parking-deck",
+      "coord_precision": "building"
+    },
+    {
+      "research_id": "marta-north-avenue-station",
+      "id": "marta-north-avenue-station",
+      "name": "MARTA North Avenue Station",
+      "category": "transport",
+      "coord_source": "OSM node 69286902 (David research)",
+      "coord_precision": "exact"
+    },
+    {
+      "research_id": "marta-midtown-station",
+      "id": "marta-midtown-station",
+      "name": "MARTA Midtown Station",
+      "category": "transport",
+      "coord_source": "OSM node 69286872 (David research)",
+      "coord_precision": "exact"
+    }
+  ],
+  "matched": [
+    {
+      "research_id": "brittain-dining-hall",
+      "id": "brittain-dining-hall",
+      "name": "Brittain Dining Hall",
+      "source_url": "https://dining.gatech.edu/location/brittain-dining-hall-0",
+      "fields": [
+        "hours_note",
+        "buzzcard",
+        "url",
+        "dining_dollars",
+        "meal_swipes"
+      ]
+    },
+    {
+      "research_id": "west-village-dining-hall",
+      "id": "west-village-dining-hall",
+      "name": "West Village Dining Hall",
+      "source_url": "https://dining.gatech.edu/location/west-village-dining-hall",
+      "fields": [
+        "hours_note",
+        "buzzcard",
+        "url",
+        "dining_dollars",
+        "meal_swipes"
+      ]
+    },
+    {
+      "research_id": "big-chicken-jlsc",
+      "id": "big-chicken-student-center",
+      "name": "Big Chicken",
+      "source_url": "https://dining.gatech.edu/dining-locations",
+      "fields": [
+        "hours",
+        "hours_note",
+        "buzzcard",
+        "url",
+        "dining_dollars",
+        "meal_swipes"
+      ]
+    },
+    {
+      "research_id": "blenz-bowls-jlsc",
+      "id": "blenz-bowls-student-center",
+      "name": "Blenz Bowls",
+      "source_url": "https://dining.gatech.edu/dining-locations",
+      "fields": [
+        "hours",
+        "hours_note",
+        "buzzcard",
+        "url",
+        "dining_dollars",
+        "meal_swipes"
+      ]
+    },
+    {
+      "research_id": "financial-aid-office",
+      "id": "scholarships-financial-aid",
+      "name": "Office of Scholarships and Financial Aid",
+      "source_url": "https://bursar.gatech.edu/PDF/Fall_2019_OSFA_and_Bursar_FASET.pdf",
+      "fields": [
+        "hours_note",
+        "buzzcard",
+        "floor_or_room"
+      ],
+      "conflict": {
+        "existing_hours": {
+          "mon": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "research_hours": {
+          "mon": [
+            [
+              "09:30",
+              "15:30"
+            ]
+          ],
+          "tue": [
+            [
+              "09:30",
+              "15:30"
+            ]
+          ],
+          "wed": [
+            [
+              "09:30",
+              "15:30"
+            ]
+          ],
+          "thu": [
+            [
+              "09:30",
+              "15:30"
+            ]
+          ],
+          "fri": [
+            [
+              "09:30",
+              "15:30"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
+      }
+    },
+    {
+      "research_id": "career-center",
+      "id": "career-center",
+      "name": "Career Center",
+      "source_url": "https://career.gatech.edu/contact-us/",
+      "fields": [
+        "hours_note",
+        "buzzcard"
+      ]
+    },
+    {
+      "research_id": "office-of-international-education",
+      "id": "office-international-education",
+      "name": "Office of International Education",
+      "source_url": "https://oie.gatech.edu/directions",
+      "fields": [
+        "hours_note",
+        "buzzcard",
+        "floor_or_room"
+      ]
+    },
+    {
+      "research_id": "price-gilbert-print-studio",
+      "id": "print-studio-price-gilbert",
+      "name": "Library Print Studio",
+      "source_url": "https://library.gatech.edu/print-studio",
+      "fields": [
+        "hours_note",
+        "buzzcard",
+        "url",
+        "floor_or_room"
+      ]
+    },
+    {
+      "research_id": "flowers-invention-studio",
+      "id": "flowers-invention-studio",
+      "name": "Flowers Invention Studio",
+      "source_url": "https://inventionstudio.gatech.edu/",
+      "fields": [
+        "hours_note",
+        "buzzcard",
+        "url",
+        "floor_or_room"
+      ],
+      "conflict": {
+        "existing_hours": {
+          "mon": [
+            [
+              "10:00",
+              "16:00"
+            ],
+            [
+              "17:00",
+              "18:00"
+            ]
+          ],
+          "tue": [
+            [
+              "10:00",
+              "16:00"
+            ],
+            [
+              "17:00",
+              "18:00"
+            ]
+          ],
+          "wed": [
+            [
+              "10:00",
+              "16:00"
+            ],
+            [
+              "17:00",
+              "18:00"
+            ]
+          ],
+          "thu": [
+            [
+              "10:00",
+              "16:00"
+            ],
+            [
+              "17:00",
+              "18:00"
+            ]
+          ],
+          "fri": [
+            [
+              "10:00",
+              "16:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "research_hours": {
+          "mon": [
+            [
+              "10:00",
+              "16:00"
+            ]
+          ],
+          "tue": [
+            [
+              "10:00",
+              "16:00"
+            ]
+          ],
+          "wed": [
+            [
+              "10:00",
+              "16:00"
+            ]
+          ],
+          "thu": [
+            [
+              "10:00",
+              "16:00"
+            ]
+          ],
+          "fri": [
+            [
+              "10:00",
+              "16:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
+      }
+    },
+    {
+      "research_id": "the-hive-makerspace",
+      "id": "hive-makerspace",
+      "name": "The Hive Makerspace",
+      "source_url": "https://hive.ece.gatech.edu/",
+      "fields": [
+        "hours_note",
+        "buzzcard",
+        "url",
+        "floor_or_room"
+      ]
+    },
+    {
+      "research_id": "yang-aero-maker-space",
+      "id": "yang-aero-maker-space",
+      "name": "Yang Aero Maker Space",
+      "source_url": "https://ams.gatech.edu/faq/",
+      "fields": [
+        "hours",
+        "hours_note",
+        "buzzcard",
+        "url"
+      ]
+    },
+    {
+      "research_id": "the-mill-mse-makerspace",
+      "id": "mill-makerspace",
+      "name": "Materials Innovation and Learning Laboratory",
+      "source_url": "https://mill.mse.gatech.edu/take-a-t-make-a-t/",
+      "fields": [
+        "hours",
+        "hours_note",
+        "buzzcard",
+        "url",
+        "floor_or_room"
+      ]
+    },
+    {
+      "research_id": "bme-design-shop",
+      "id": "bme-design-shop",
+      "name": "BME Design Shop",
+      "source_url": "https://bmemakerspaces.com/",
+      "fields": [
+        "hours",
+        "hours_note",
+        "buzzcard",
+        "floor_or_room"
+      ]
+    },
+    {
+      "research_id": "campus-recreation-center",
+      "id": "crc",
+      "name": "Campus Recreation Center",
+      "source_url": "https://crc.gatech.edu/hours/",
+      "fields": [
+        "hours_note",
+        "buzzcard",
+        "url",
+        "floor_or_room"
+      ],
+      "conflict": {
+        "existing_hours": {
+          "mon": [
+            [
+              "05:30",
+              "23:59"
+            ]
+          ],
+          "tue": [
+            [
+              "05:30",
+              "23:59"
+            ]
+          ],
+          "wed": [
+            [
+              "05:30",
+              "23:59"
+            ]
+          ],
+          "thu": [
+            [
+              "05:30",
+              "23:59"
+            ]
+          ],
+          "fri": [
+            [
+              "05:30",
+              "21:00"
+            ]
+          ],
+          "sat": [
+            [
+              "09:00",
+              "19:00"
+            ]
+          ],
+          "sun": [
+            [
+              "09:00",
+              "22:00"
+            ]
+          ]
+        },
+        "research_hours": {
+          "mon": [
+            [
+              "05:30",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "05:30",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "05:30",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "05:30",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "05:30",
+              "21:00"
+            ]
+          ],
+          "sat": [
+            [
+              "09:00",
+              "19:00"
+            ]
+          ],
+          "sun": [
+            [
+              "09:00",
+              "22:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "research_id": "mcauley-competition-pool",
+      "id": "crc-competition-pool",
+      "name": "Coach Herb McAuley Aquatic Center",
+      "source_url": "https://crc.gatech.edu/hours/",
+      "fields": [
+        "hours_note",
+        "buzzcard",
+        "url"
+      ]
+    },
+    {
+      "research_id": "crawford-leisure-pool",
+      "id": "crc-crawford-pool",
+      "name": "Vernon D. & Helen D. Crawford Pool",
+      "source_url": "https://crc.gatech.edu/hours/",
+      "fields": [
+        "hours_note",
+        "buzzcard",
+        "url"
+      ],
+      "conflict": {
+        "existing_hours": {
+          "mon": [
+            [
+              "16:00",
+              "20:00"
+            ]
+          ],
+          "tue": [
+            [
+              "16:00",
+              "20:00"
+            ]
+          ],
+          "wed": [
+            [
+              "16:00",
+              "20:00"
+            ]
+          ],
+          "thu": [
+            [
+              "16:00",
+              "20:00"
+            ]
+          ],
+          "fri": [
+            [
+              "16:00",
+              "20:00"
+            ]
+          ],
+          "sat": [
+            [
+              "10:00",
+              "18:00"
+            ]
+          ],
+          "sun": [
+            [
+              "12:00",
+              "18:00"
+            ]
+          ]
+        },
+        "research_hours": {
+          "mon": [
+            [
+              "06:00",
+              "09:00"
+            ],
+            [
+              "14:00",
+              "20:00"
+            ]
+          ],
+          "tue": [
+            [
+              "06:00",
+              "12:00"
+            ],
+            [
+              "14:00",
+              "20:00"
+            ]
+          ],
+          "wed": [
+            [
+              "06:00",
+              "09:00"
+            ],
+            [
+              "14:00",
+              "20:00"
+            ]
+          ],
+          "thu": [
+            [
+              "06:00",
+              "12:00"
+            ],
+            [
+              "14:00",
+              "20:00"
+            ]
+          ],
+          "fri": [
+            [
+              "06:00",
+              "09:00"
+            ],
+            [
+              "14:00",
+              "20:00"
+            ]
+          ],
+          "sat": [
+            [
+              "13:00",
+              "18:00"
+            ]
+          ],
+          "sun": [
+            [
+              "12:00",
+              "18:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "research_id": "crc-indoor-climbing-wall",
+      "id": "crc-climbing-wall",
+      "name": "CRC Climbing Wall",
+      "source_url": "https://crc.gatech.edu/hours/",
+      "fields": [
+        "hours_note",
+        "buzzcard",
+        "url"
+      ]
+    },
+    {
+      "research_id": "stamps-health-services",
+      "id": "stamps-health-services",
+      "name": "Stamps Health Services",
+      "source_url": "https://health.gatech.edu/hours/",
+      "fields": [
+        "hours_note",
+        "buzzcard"
+      ],
+      "conflict": {
+        "existing_hours": {
+          "mon": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "thu": [
+            [
+              "09:00",
+              "16:30"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "research_hours": {
+          "mon": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "thu": [
+            [
+              "09:00",
+              "17:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
+      }
+    },
+    {
+      "research_id": "stamps-pharmacy",
+      "id": "stamps-pharmacy",
+      "name": "Stamps Health Services Pharmacy",
+      "source_url": "https://health.gatech.edu/contact-us/",
+      "fields": [
+        "hours",
+        "hours_note",
+        "buzzcard",
+        "url"
+      ]
+    },
+    {
+      "research_id": "cmhcr-smithgall",
+      "id": "mental-health-care-resources",
+      "name": "Center for Mental Health Care & Resources",
+      "source_url": "https://mentalhealth.gatech.edu/about/hours-operation",
+      "fields": [
+        "hours_note",
+        "buzzcard",
+        "url",
+        "floor_or_room"
+      ]
+    }
+  ]
+}

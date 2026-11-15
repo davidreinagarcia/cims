@@ -13,7 +13,47 @@
         "floor_or_suite": "Room 0250 (basement)",
         "address": "313 Ferst Drive, Atlanta, GA",
         "url": "https://bmemakerspaces.com/",
-        "coord_source": "OSM way 43332682 (U.A. Whitaker Building), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 43332682 (U.A. Whitaker Building), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "08:30",
+              "17:30"
+            ]
+          ],
+          "tue": [
+            [
+              "08:30",
+              "17:30"
+            ]
+          ],
+          "wed": [
+            [
+              "08:30",
+              "17:30"
+            ]
+          ],
+          "thu": [
+            [
+              "08:30",
+              "17:30"
+            ]
+          ],
+          "fri": [
+            [
+              "08:30",
+              "17:30"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Design Shop open Mon-Fri 08:30-17:30; Design Vault open Tue-Thu 08:30-17:30.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open to the whole GT community; orientation walkthrough required before first build."
+        },
+        "floor_or_room": "Room 0250"
       },
       "geometry": {
         "type": "Point",
@@ -85,7 +125,14 @@
           ],
           "sat": [],
           "sun": []
-        }
+        },
+        "hours_note": "Fall 2026: Open hours Mon-Fri 10:00-16:00; After-Hours Training Mon-Thu 17:00-18:00. Closed week of Thanksgiving and closes for the semester Dec 4, 2026.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open to the GT community; Prototyping Instructors train and test users on equipment (training available during open hours and Mon-Thu 17:00-18:00 After Hours)."
+        },
+        "url": "https://inventionstudio.gatech.edu/",
+        "floor_or_room": "2nd Floor"
       },
       "geometry": {
         "type": "Point",
@@ -143,7 +190,14 @@
           ],
           "sat": [],
           "sun": []
-        }
+        },
+        "hours_note": "Fall 2026 Hours: Sept 8-Dec 2, 2026. No after-hours access for general users (24/7 access restricted to active Peer Instructors).",
+        "buzzcard": {
+          "required": true,
+          "note": "Open to all GT students free of charge with no prior training required (Peer Instructors assist); BuzzCard required to sign in at 2nd floor entrance."
+        },
+        "url": "https://hive.ece.gatech.edu/",
+        "floor_or_room": "2nd Floor (north side of Tech Green entrance)"
       },
       "geometry": {
         "type": "Point",
@@ -186,7 +240,48 @@
         "aliases": [
           "The MILL"
         ],
-        "coord_source": "OSM way 42872649 (J. Erskine Love Manufacturing Building), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 42872649 (J. Erskine Love Manufacturing Building), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "09:00",
+              "17:00"
+            ]
+          ],
+          "tue": [
+            [
+              "09:00",
+              "17:00"
+            ]
+          ],
+          "wed": [
+            [
+              "09:00",
+              "17:00"
+            ]
+          ],
+          "thu": [
+            [
+              "09:00",
+              "17:00"
+            ]
+          ],
+          "fri": [
+            [
+              "09:00",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "No general after-hours access outside MILL staff/approved lab TAs.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open to all GT students, faculty, and staff; users must sign in at Main Lab (Love 176) and reserve equipment via SUMS (training rules not detailed in retrieved snippets)."
+        },
+        "url": "https://mill.mse.gatech.edu/",
+        "floor_or_room": "1st and 3rd Floors (Main Lab Room 176)"
       },
       "geometry": {
         "type": "Point",
@@ -209,7 +304,47 @@
           "AMS",
           "Aero Maker Space"
         ],
-        "coord_source": "OSM relation 3178627 (Weber Space Science and Technology Building I), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM relation 3178627 (Weber Space Science and Technology Building I), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "10:00",
+              "18:00"
+            ]
+          ],
+          "tue": [
+            [
+              "10:00",
+              "18:00"
+            ]
+          ],
+          "wed": [
+            [
+              "10:00",
+              "18:00"
+            ]
+          ],
+          "thu": [
+            [
+              "10:00",
+              "18:00"
+            ]
+          ],
+          "fri": [
+            [
+              "10:00",
+              "18:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Fall and Spring hours Mon-Fri 10:00-18:00; summer hours limited (Mon/Fri 09:00-12:00, Wed/Thu 11:00-13:00).",
+        "buzzcard": {
+          "required": false,
+          "note": "Students, faculty, and public welcome under mentor supervision with no prior training; training required for unsupervised machine operation and CNC/Tormach."
+        },
+        "url": "https://ams.gatech.edu/"
       },
       "geometry": {
         "type": "Point",

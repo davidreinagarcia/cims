@@ -1,0 +1,269 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4006057,
+          33.7741585
+        ]
+      },
+      "properties": {
+        "id": "w02-student-center-parking-deck",
+        "name": "W02: Student Center Parking Deck",
+        "category": "transport",
+        "status": "draft",
+        "aliases": [
+          "W02",
+          "Student Center Deck"
+        ],
+        "description": "West/central campus parking deck adjacent to the John Lewis Student Center and Exhibition Hall.",
+        "building": "W02: Student Center Parking Deck",
+        "hours_note": "Operating/visitor hours not specified in retrieved PTS sources.",
+        "buzzcard": {
+          "required": false,
+          "note": "Permit or visitor parking; BuzzCard/PTS gate credentials per parking zone rules."
+        },
+        "url": "https://www.pts.gatech.edu/parking/parking-zones/",
+        "source_url": "https://www.pts.gatech.edu/2025/10/30/new-bike-room-in-w02-student-center-parking-deck/",
+        "source_updated": "2026-10-14",
+        "confidence": "medium",
+        "building_id": "student-center-parking-deck",
+        "coord_source": "building centroid: student-center-parking-deck",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4004563,
+          33.7800962
+        ]
+      },
+      "properties": {
+        "id": "w22-dalney-parking-deck",
+        "name": "W22: Dalney Parking Deck",
+        "category": "transport",
+        "status": "draft",
+        "aliases": [
+          "W22",
+          "Dalney Deck"
+        ],
+        "description": "Campus parking deck accessed via Dalney Street.",
+        "building": "W22: Dalney Parking Deck",
+        "hours_note": "Operating/visitor hours not specified in retrieved PTS sources.",
+        "buzzcard": {
+          "required": false,
+          "note": "Permit or visitor parking per PTS parking zone rules."
+        },
+        "url": "https://www.pts.gatech.edu/parking/parking-zones/",
+        "source_url": "https://www.pts.gatech.edu/2025/10/30/new-bike-room-in-w02-student-center-parking-deck/",
+        "source_updated": "2026-10-14",
+        "confidence": "medium",
+        "building_id": "dalney-street-parking-deck",
+        "coord_source": "building centroid: dalney-street-parking-deck",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.389548,
+          33.7755971
+        ]
+      },
+      "properties": {
+        "id": "e81-tech-square-parking-deck",
+        "name": "E81: Tech Square Parking Deck",
+        "category": "transport",
+        "status": "draft",
+        "aliases": [
+          "E81",
+          "Tech Square Parking Deck"
+        ],
+        "description": "Hourly visitor and permit parking deck in Tech Square housing the PTS Customer Service Center on the ground level.",
+        "address": "770 Spring Street, Atlanta, GA 30332",
+        "building": "E81: Tech Square Parking Deck",
+        "hours_note": "Deck operating hours not explicitly stated in retrieved PTS posts.",
+        "buzzcard": {
+          "required": false,
+          "note": "Hourly visitor parking and permit access available."
+        },
+        "url": "https://www.pts.gatech.edu/parking/parking-zones/",
+        "source_url": "https://www.pts.gatech.edu/author/bhoang34/page/3/",
+        "confidence": "medium",
+        "building_id": "technology-square-parking-deck",
+        "coord_source": "building centroid: technology-square-parking-deck",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3879281,
+          33.7753978
+        ]
+      },
+      "properties": {
+        "id": "coda-parking-garage",
+        "name": "Coda Building Parking Garage",
+        "category": "transport",
+        "status": "draft",
+        "aliases": [
+          "Coda Deck"
+        ],
+        "description": "Hourly parking garage serving the Coda Building in Tech Square.",
+        "building": "Coda Building",
+        "hours_note": "Operating hours not stated in source.",
+        "buzzcard": {
+          "required": false,
+          "note": "Public hourly parking available."
+        },
+        "url": "https://techsupport.gatech.edu/contact-us",
+        "source_url": "https://techsupport.gatech.edu/contact-us",
+        "confidence": "medium",
+        "building_id": "coda",
+        "coord_source": "building centroid: coda",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4006057,
+          33.7741585
+        ]
+      },
+      "properties": {
+        "id": "w02-bike-room-fix-it",
+        "name": "W02 Bike Room and Bike Repair Station",
+        "category": "transport",
+        "status": "draft",
+        "aliases": [
+          "Student Center Bike Room"
+        ],
+        "description": "Secure bike parking room and public bike repair station equipped with a pump, screwdriver, and Allen key set.",
+        "building": "W02: Student Center Parking Deck",
+        "hours_note": "Outdoor bike repair facilities are free; specific hours not stated.",
+        "buzzcard": {
+          "required": false,
+          "note": "Fix-it repair station is free outside; secure bike room access requires PTS bike room enrollment."
+        },
+        "url": "https://www.pts.gatech.edu/2025/10/30/new-bike-room-in-w02-student-center-parking-deck/",
+        "floor_or_room": "Pathway between Exhibition Hall and Student Center (behind BuzzCard office)",
+        "source_url": "https://www.pts.gatech.edu/2025/10/30/new-bike-room-in-w02-student-center-parking-deck/",
+        "source_updated": "2026-10-14",
+        "confidence": "high",
+        "building_id": "student-center-parking-deck",
+        "coord_source": "building centroid: student-center-parking-deck",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.4004563,
+          33.7800962
+        ]
+      },
+      "properties": {
+        "id": "w22-bike-room-fix-it",
+        "name": "W22 Dalney Bike Room and Fix-It Station",
+        "category": "transport",
+        "status": "draft",
+        "aliases": [
+          "Dalney Bike Room"
+        ],
+        "description": "Bike parking room and Dero Fix-It public bike repair station at Dalney Parking Deck.",
+        "building": "W22: Dalney Parking Deck",
+        "hours_note": "Outdoor bike repair facilities are free; specific hours not stated.",
+        "buzzcard": {
+          "required": false,
+          "note": "Fix-it station is free; secure bike room access requires PTS enrollment."
+        },
+        "url": "https://www.pts.gatech.edu/commute/commute-options/bicycling-pmds/",
+        "floor_or_room": "Dalney Street access",
+        "source_url": "https://www.pts.gatech.edu/2025/10/30/new-bike-room-in-w02-student-center-parking-deck/",
+        "source_updated": "2026-10-14",
+        "confidence": "high",
+        "building_id": "dalney-street-parking-deck",
+        "coord_source": "building centroid: dalney-street-parking-deck",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.386965,
+          33.772592
+        ]
+      },
+      "properties": {
+        "id": "marta-north-avenue-station",
+        "name": "MARTA North Avenue Station",
+        "category": "transport",
+        "status": "draft",
+        "aliases": [
+          "North Avenue MARTA"
+        ],
+        "description": "MARTA Red/Gold rail station just south of Tech Square and Coda serving Georgia Tech.",
+        "address": "713 West Peachtree Street",
+        "hours_note": "MARTA rail operating hours not stated in campus sources.",
+        "buzzcard": {
+          "required": false,
+          "note": "Public transit station requiring MARTA Breeze fare."
+        },
+        "url": "https://techsupport.gatech.edu/contact-us",
+        "source_url": "https://techsupport.gatech.edu/contact-us",
+        "confidence": "medium",
+        "coord_source": "OSM node 69286902 (David research)",
+        "coord_precision": "exact"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.386286,
+          33.78111
+        ]
+      },
+      "properties": {
+        "id": "marta-midtown-station",
+        "name": "MARTA Midtown Station",
+        "category": "transport",
+        "status": "draft",
+        "aliases": [
+          "Midtown MARTA"
+        ],
+        "description": "MARTA Red/Gold rail station directly connected to campus via seven Stinger shuttle buses.",
+        "hours_note": "MARTA rail operating hours not stated in campus sources; sourced from Fall 2025 PTS route update.",
+        "buzzcard": {
+          "required": false,
+          "note": "Public transit station requiring MARTA Breeze fare."
+        },
+        "url": "https://www.pts.gatech.edu/2025/09/29/stinger-route-update-oct-6-25/",
+        "source_url": "https://www.pts.gatech.edu/2025/09/29/stinger-route-update-oct-6-25/",
+        "source_updated": "2025-09-29",
+        "confidence": "medium",
+        "coord_source": "OSM node 69286872 (David research)",
+        "coord_precision": "exact"
+      }
+    }
+  ]
+}
