@@ -46,13 +46,19 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `readBulletinParams(search)` [src/lib/bulletin.ts:147](../src/lib/bulletin.ts#L147): Read bulletin visibility and a validated type filter from a query string.
 - `loadInterests()` [src/lib/bulletinInterests.ts:13](../src/lib/bulletinInterests.ts#L13): Loads every mark (public counts) and this account's own.
 - `setInterest(postId, on)` [src/lib/bulletinInterests.ts:24](../src/lib/bulletinInterests.ts#L24): Marks or unmarks one post as interesting for this account.
+- `bearingDegrees(a, b)` [src/lib/busMotion.ts:18](../src/lib/busMotion.ts#L18): Compass bearing in degrees (0 = north, clockwise) from `a` to `b`.
+- `recordMotion(buses, now = Date.now()` [src/lib/busMotion.ts:31](../src/lib/busMotion.ts#L31): Records one poll's positions and returns each bus's motion. A bus first seen now counts as still since now (w…
+- `stoppedText(stillSince, now = Date.now()` [src/lib/busMotion.ts:51](../src/lib/busMotion.ts#L51): "Stopped for 3 min" once a bus has stood still at least 90 seconds; null while it moves.
+- `compassWord(bearing)` [src/lib/busMotion.ts:58](../src/lib/busMotion.ts#L58): "north", "northeast", ... for a compass bearing.
 - `MAX_WALK_TO_STOP_M` [src/lib/busPlanner.ts:10](../src/lib/busPlanner.ts#L10): Farthest stop (straight line) we'd ask someone to walk to, at either end: about 10 minutes.
-- `walkSeconds(a, b)` [src/lib/busPlanner.ts:45](../src/lib/busPlanner.ts#L45): Estimated walking seconds between two points (straight line with a street detour factor).
-- `rideSeconds(route, from, to)` [src/lib/busPlanner.ts:50](../src/lib/busPlanner.ts#L50): Scheduled seconds riding from stop index `from` to `to`, going forward around the loop (waits at the stops in…
-- `busEtaSeconds(route, stops, TransitStop>, bus, target)` [src/lib/busPlanner.ts:74](../src/lib/busPlanner.ts#L74): Seconds until a live bus reaches stop index `target`: it is placed on the leg it's driving (nearest stop and…
-- `planBusTrips(network, origin, destination, buses)` [src/lib/busPlanner.ts:106](../src/lib/busPlanner.ts#L106): Bus options from `origin` to `destination` ([lng, lat]), best first. Uses live buses for waiting time when gi…
-- `formatMinutes(seconds)` [src/lib/busPlanner.ts:150](../src/lib/busPlanner.ts#L150): "Now", "1 min", "12 min": rounded minutes for people on the move.
-- `routeStatuses(network, buses, here)` [src/lib/busPlanner.ts:168](../src/lib/busPlanner.ts#L168): Every route with a stop sequence, for the "buses near you" list: running routes first, soonest bus at your ne…
+- `walkSeconds(a, b)` [src/lib/busPlanner.ts:48](../src/lib/busPlanner.ts#L48): Estimated walking seconds between two points (straight line with a street detour factor).
+- `rideSeconds(route, from, to)` [src/lib/busPlanner.ts:53](../src/lib/busPlanner.ts#L53): Scheduled seconds riding from stop index `from` to `to`, going forward around the loop (waits at the stops in…
+- `busLeg(route, stops, TransitStop>, bus, heading)` [src/lib/busPlanner.ts:81](../src/lib/busPlanner.ts#L81): Places a live bus on its route: on the stop-to-stop leg it's closest to, at a stop when near one. Loops pass…
+- `nextStopIndex(route, stops, TransitStop>, bus, heading)` [src/lib/busPlanner.ts:120](../src/lib/busPlanner.ts#L120): The stop a live bus serves next (index), or null if it can't be placed. A bus sitting at a stop is serving th…
+- `busEtaSeconds(route, stops, TransitStop>, bus, target, heading)` [src/lib/busPlanner.ts:126](../src/lib/busPlanner.ts#L126): Seconds until a live bus reaches stop index `target`.
+- `planBusTrips(network, origin, destination, buses)` [src/lib/busPlanner.ts:136](../src/lib/busPlanner.ts#L136): Bus options from `origin` to `destination` ([lng, lat]), best first. Uses live buses for waiting time when gi…
+- `formatMinutes(seconds)` [src/lib/busPlanner.ts:183](../src/lib/busPlanner.ts#L183): "Now", "1 min", "12 min": rounded minutes for people on the move.
+- `routeStatuses(network, buses, here)` [src/lib/busPlanner.ts:203](../src/lib/busPlanner.ts#L203): Every route with a stop sequence, for the "buses near you" list: running routes first, soonest bus at your ne…
 - `nextWindow(event, now)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Return the current or next weekly campus occurrence, or an unexpired one-off window.
 - `formatWindow(window)` [src/lib/events.ts:58](../src/lib/events.ts#L58): Format an event window as short English text in campus time.
 - `GeolocationError` [src/lib/geolocation.ts:14](../src/lib/geolocation.ts#L14): A geolocation failure with a stable `reason` for branching and a ready-to-show `message`. A real `Error`, so…
@@ -187,10 +193,12 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PostType` [src/lib/bulletin.ts:11](../src/lib/bulletin.ts#L11): The five supported bulletin filters; unknown source subtypes become community posts.
 - `BulletinPost` [src/lib/bulletin.ts:14](../src/lib/bulletin.ts#L14): A dated bulletin entry with known source facts and a selectable map location.
 - `InterestState` [src/lib/bulletinInterests.ts:8](../src/lib/bulletinInterests.ts#L8): This browser's marked post ids plus how many people marked each post.
-- `LiveBus` [src/lib/busPlanner.ts:17](../src/lib/busPlanner.ts#L17): A live bus as the planner needs it.
-- `BusOption` [src/lib/busPlanner.ts:20](../src/lib/busPlanner.ts#L20): One way to get there by bus. Times are seconds. `live` is false when no bus is running on the route right now.
-- `BusPlan` [src/lib/busPlanner.ts:39](../src/lib/busPlanner.ts#L39): The planner's answer: bus options (best first) and the plain walking time to compare against.
-- `RouteStatus` [src/lib/busPlanner.ts:156](../src/lib/busPlanner.ts#L156): One route's status for the bus list: is it running, its nearest stop to you, and the next bus there.
+- `Motion` [src/lib/busMotion.ts:28](../src/lib/busMotion.ts#L28): What we know about a bus's motion: when it last stopped moving (ms timestamp) and its direction of travel fro…
+- `LiveBus` [src/lib/busPlanner.ts:18](../src/lib/busPlanner.ts#L18): A live bus as the planner needs it; `stillSince` is when it last stopped moving (ms), if known.
+- `BusOption` [src/lib/busPlanner.ts:21](../src/lib/busPlanner.ts#L21): One way to get there by bus. Times are seconds. `live` is false when no bus is running on the route right now.
+- `BusPlan` [src/lib/busPlanner.ts:42](../src/lib/busPlanner.ts#L42): The planner's answer: bus options (best first) and the plain walking time to compare against.
+- `BusLeg` [src/lib/busPlanner.ts:77](../src/lib/busPlanner.ts#L77): Where a live bus is on its route: at stop `at`, or driving the leg from `from` to `to` with `left` scheduled…
+- `RouteStatus` [src/lib/busPlanner.ts:189](../src/lib/busPlanner.ts#L189): One route's status for the bus list: is it running, its nearest stop to you, and the next bus there.
 - `GeolocationFailureReason` [src/lib/geolocation.ts:4](../src/lib/geolocation.ts#L4): Every real-world way `getCurrentPosition` can fail, each with its own honest, human message.
 - `Coordinates` [src/lib/geolocation.ts:24](../src/lib/geolocation.ts#L24): A GPS fix: WGS84 degrees plus the device's own reported accuracy radius in meters.
 - `RoomCategory` [src/lib/indoorPlan.ts:15](../src/lib/indoorPlan.ts#L15): Fill category for a space type: the `cims-room--<category>` class and its legend swatch.
@@ -226,7 +234,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `GpsState` [src/lib/useGpsFix.ts:6](../src/lib/useGpsFix.ts#L6): State of the GPS request.
 - `AlertsOverlayOptions` [src/map/alertsOverlay.ts:16](../src/map/alertsOverlay.ts#L16): Options for the overlay.
 - `AlertsOverlayHandle` [src/map/alertsOverlay.ts:32](../src/map/alertsOverlay.ts#L32): Handle returned by the overlay: show/hide it (the layer panel toggle) and remove it.
-- `BusFeature` [src/map/transitLive.ts:21](../src/map/transitLive.ts#L21): One live bus: where it is and which route it is running.
+- `BusFeature` [src/map/transitLive.ts:22](../src/map/transitLive.ts#L22): One live bus: where it is and which route it is running.
 - `LayerContext` [src/map/types.ts:6](../src/map/types.ts#L6): What the host gives a layer so it can talk back to the app.
 - `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
@@ -297,8 +305,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `ReservationGrid({ rooms })` [src/panels/rooms/ReservationGrid.tsx:50](../src/panels/rooms/ReservationGrid.tsx#L50): Day/time grid, booking flow, favorites, location check-in and "My reservations" for any list of
 - `RoomFinderPanel()` [src/panels/rooms/RoomFinderPanel.tsx:28](../src/panels/rooms/RoomFinderPanel.tsx#L28): Sidebar tab: "Reserve a room" entry point, replacing the read-only room finder (T-24) with a
 - `RoomsNearMe({ onBack })` [src/panels/rooms/RoomsNearMe.tsx:19](../src/panels/rooms/RoomsNearMe.tsx#L19): Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and hands the…
-- `BusList({ here }, number] | null })` [src/panels/search/BusList.tsx:45](../src/panels/search/BusList.tsx#L45): Lists every route for the "which buses are around" view; `here` is the From place, else the GPS fix if allowe…
-- `BusOptions({ origin, destination }, number] | null; destination, number] })` [src/panels/search/BusOptions.tsx:19](../src/panels/search/BusOptions.tsx#L19): Lists bus options from `origin` (or the user's GPS position when null) to `destination`.
+- `BusList({ here }, number] | null })` [src/panels/search/BusList.tsx:48](../src/panels/search/BusList.tsx#L48): Lists every route for the "which buses are around" view; `here` is the From place, else the GPS fix if allowe…
+- `BusOptions({ origin, destination }, number] | null; destination, number] })` [src/panels/search/BusOptions.tsx:20](../src/panels/search/BusOptions.tsx#L20): Lists bus options from `origin` (or the user's GPS position when null) to `destination`.
 - `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:11](../src/panels/search/DirectionsBox.tsx#L11): Replaces the search field while the user plans a trip from one place to another.
 - `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
 - `SearchPanel(…)` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
@@ -395,8 +403,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `addHatchPatterns(map)` [src/map/patterns/index.ts:38](../src/map/patterns/index.ts#L38): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
 - `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
-- `TRACKER_URL` [src/map/transitLive.ts:4](../src/map/transitLive.ts#L4): The official tracker page: where "live tracking" links point.
-- `fetchBuses(routeNames, string>, signal?)` [src/map/transitLive.ts:24](../src/map/transitLive.ts#L24): Fetches fresh buses on known routes; throws on a failed tracker or invalid vehicle list.
+- `TRACKER_URL` [src/map/transitLive.ts:5](../src/map/transitLive.ts#L5): The official tracker page: where "live tracking" links point.
+- `fetchBuses(routeNames, string>, signal?)` [src/map/transitLive.ts:25](../src/map/transitLive.ts#L25): Fetches fresh buses on known routes; throws on a failed tracker or invalid vehicle list.
 - `formatWhen(iso)` [src/panels/report/ReportSummary.tsx:7](../src/panels/report/ReportSummary.tsx#L7): Formats an ISO timestamp for display in the viewer's locale.
 - `locationParts(location)` [src/panels/report/location.ts:7](../src/panels/report/location.ts#L7): Breadcrumb parts for a location: building › floor › room, or the outdoor pin coordinates.
 - `locationForId(id, floor, room)` [src/panels/report/location.ts:22](../src/panels/report/location.ts#L22): Builds a prefilled location for a place or building id (checks curated places first, then the OSM

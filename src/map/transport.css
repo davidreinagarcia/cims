@@ -5,3 +5,6 @@
 .cims-stop-popup span { display: block; color: var(--ink-muted); }
 .cims-stop-popup a { color: var(--navy); }
 .cims-stop-popup .maplibregl-popup-close-button { color: var(--ink); font-size: var(--fs-lg); }
+.cims-stop-popup__idle { opacity: 0.7; }
+.cims-stop-popup__note { font-size: var(--fs-xs); }
+.cims-stop-popup .cims-stop-popup__alert { color: var(--route); font-weight: 600; }

@@ -19,7 +19,7 @@ Everything about the map engine: contract for layers, base style, and the layer 
 - [`maplibre.ts`](maplibre.ts): Loads MapLibre GL JS on demand as its own chunk, so the interface can paint before the 800 KB map library has… · exports `loadMapLibre`
 - [`palette.ts`](palette.ts): Survey-map colors as literals for MapLibre paint and canvas drawing. Mirrors src/styles/tokens.css: change bo… · exports `INK`, `PAPER`, `PAPER_2`, `WHITE`, `GOLD`, `GOLD_INK`, `MAP_CAMPUS`, `MAP_GRASS`, `MAP_WOOD`, `MAP_WATER`, `MAP_ROAD_MAJOR`, `MAP_ROAD_MAJOR_CASE`, `MAP_ROAD_MINOR`, `MAP_ROAD_MINOR_CASE`, `MAP_WALKWAY`, `MAP_RAIL`, `MAP_BUILDING_CONTEXT`, `SAGE`
 - [`pins.ts`](pins.ts): Survey-marker pins for the map: teardrop in the category color with the category glyph inside a paper ring. D… · exports `pinImageId`, `addPins`
-- [`transitLive.ts`](transitLive.ts): Live bus positions from the official GT tracker (bus.gatech.edu), as GeoJSON points. Read-only, no key. · exports `TRACKER_URL`, `fetchBuses`
+- [`transitLive.ts`](transitLive.ts): Live bus positions from the official GT tracker (bus.gatech.edu), as GeoJSON points with direction and how lo… · exports `TRACKER_URL`, `fetchBuses`
 - [`transport.css`](transport.css): * @file Survey-style skin for the bus stop popup: square, 1px ink, no shadow.
 - [`types.ts`](types.ts): Contract for map layers: every file in src/map/layers/ default-exports one MapLayer.
 

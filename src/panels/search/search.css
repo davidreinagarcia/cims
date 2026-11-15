@@ -59,3 +59,4 @@
 .bus-ondemand__tag { font: 600 var(--fs-xs) var(--font-display); letter-spacing: var(--caps-tracking); text-transform: uppercase; padding: 2px var(--s2); border: var(--hairline); }
 .bus-ondemand__status { color: var(--navy); }
 .bus-ondemand--closed .bus-ondemand__status { color: var(--ink-muted); }
+.bus-option__alert { font-size: var(--fs-sm); font-weight: 600; color: var(--route); }

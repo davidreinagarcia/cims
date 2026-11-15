@@ -4,7 +4,9 @@ import type { MapLayer } from "../types";
 import { buildMapFilter, isVisible } from "../layerFilters";
 import { INK, PAPER, SAGE } from "../palette";
 import { fetchBuses, TRACKER_URL, type BusFeature } from "../transitLive";
-import { loadTransitNetwork } from "../../lib/transitNetwork";
+import { loadTransitNetwork, type TransitNetwork } from "../../lib/transitNetwork";
+import { busEtaSeconds, formatMinutes, nextStopIndex } from "../../lib/busPlanner";
+import { compassWord, stoppedText } from "../../lib/busMotion";
 import { onRouteHighlight } from "../../lib/transitHighlight";
 import "../transport.css";
 
@@ -23,12 +25,14 @@ const ofKind = (kind: string): FilterSpecification => ["==", ["get", "kind"], ki
 const LABEL_FONT = ["Open Sans Semibold"];
 const labelPaint = { "text-color": INK, "text-halo-color": PAPER, "text-halo-width": 1.5 };
 
-/** Rasterizes a flat top-down SVG bus at double resolution for a crisp one-pixel outline. */
-async function busImage(color: string): Promise<HTMLImageElement> {
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="36" height="60" viewBox="0 0 18 30">
-    <rect x="2.5" y="1.5" width="13" height="27" rx="3" fill="${color}" stroke="${INK}"/>
-    <rect x="4" y="4" width="10" height="5" rx="1" fill="${INK}"/>
-    <path d="M5 12v11M13 12v11" stroke="${PAPER}" stroke-width="2"/>
+/** Rasterizes a flat top-down SVG bus at double resolution for a crisp one-pixel outline. With `arrow`, a bold
+ *  chevron sits in front of the bus so the direction reads at a glance (a plain rectangle looks the same both ways). */
+async function busImage(color: string, arrow: boolean): Promise<HTMLImageElement> {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="40" height="76" viewBox="0 0 20 38">
+    ${arrow ? `<path d="M10 0.8L18.2 9.2H1.8Z" fill="${INK}" stroke="${PAPER}" stroke-width="1.2" stroke-linejoin="round"/>` : ""}
+    <rect x="3.5" y="9.5" width="13" height="27" rx="3" fill="${color}" stroke="${INK}"/>
+    <rect x="5" y="12" width="10" height="5" rx="1" fill="${INK}"/>
+    <path d="M6 20v11M14 20v11" stroke="${PAPER}" stroke-width="2"/>
   </svg>`;
   const image = new Image();
   image.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
@@ -113,9 +117,12 @@ const transport: MapLayer = {
       source: LIVE,
       layout: {
         "icon-image": ["get", "icon"],
-        "icon-size": ["interpolate", ["linear"], ["zoom"], 13, 0.65, 17, 1],
+        "icon-size": ["interpolate", ["linear"], ["zoom"], 13, 0.8, 17, 1.3],
         "icon-allow-overlap": true,
+        // Rotates with the map (so the arrow points along the street) but stands up to the camera: lying flat on a
+        // tilted 3D map the arrow got squashed to a sliver.
         "icon-rotation-alignment": "map",
+        "icon-pitch-alignment": "viewport",
         "icon-rotate": ["coalesce", ["get", "heading"], 0],
         "text-field": ["get", "route"],
         "text-transform": "uppercase",
@@ -145,13 +152,18 @@ const transport: MapLayer = {
     let timer: number | undefined;
     let expiry: number | undefined;
     let currentBuses: BusFeature[] = [];
+    let network: TransitNetwork | null = null;
     let inFlight: AbortController | null = null;
     let loading = false;
     const setBuses = (features: GeoJSON.Feature[]) => (map.getSource(LIVE) as GeoJSONSource | undefined)?.setData({ type: "FeatureCollection", features });
     const publish = (buses: BusFeature[]) => {
       window.clearTimeout(expiry);
       currentBuses = buses.filter((bus) => bus.properties.expires_at > Date.now());
-      setBuses(currentBuses.map((bus) => ({ ...bus, properties: { ...bus.properties, icon: routeIcons.get(bus.properties.route_id) } })));
+      // The arrow version only when we know the direction: an arrow pointing north by default would lie.
+      setBuses(currentBuses.map((bus) => {
+        const icon = routeIcons.get(bus.properties.route_id);
+        return { ...bus, properties: { ...bus.properties, icon: icon && bus.properties.heading != null ? `${icon}-arrow` : icon } };
+      }));
       if (currentBuses.length) expiry = window.setTimeout(() => publish(currentBuses),
         Math.max(1, Math.min(...currentBuses.map((bus) => bus.properties.expires_at)) - Date.now()));
     };
@@ -181,17 +193,20 @@ const transport: MapLayer = {
       if (routeNames.size || loading) return;
       loading = true;
       try {
-        const data = (await loadTransitNetwork()).geojson;
+        const net = await loadTransitNetwork();
+        const data = net.geojson;
         if (removed) return;
+        network = net;
         for (const f of data.features) {
           if (f.properties?.kind !== "route") continue;
           const color = /^#[0-9a-f]{6}$/i.test(f.properties.color ?? "") ? f.properties.color : SAGE;
           const icon = `transit-bus-${color.slice(1)}`;
-          if (!map.hasImage(icon)) {
-            const image = await busImage(color);
+          for (const [id, arrow] of [[icon, false], [`${icon}-arrow`, true]] as const) {
+            if (map.hasImage(id)) continue;
+            const image = await busImage(color, arrow);
             if (removed) return;
-            map.addImage(icon, image, { pixelRatio: 2, sdf: false });
-            images.add(icon);
+            map.addImage(id, image, { pixelRatio: 2, sdf: false });
+            images.add(id);
           }
           routeIcons.set(f.properties.route_id, icon);
         }
@@ -213,25 +228,69 @@ const transport: MapLayer = {
     document.addEventListener("visibilitychange", onVisibility);
     if (active()) start();
 
-    const onStopClick = (e: MapLayerMouseEvent) => {
-      const f = e.features?.[0];
-      if (!f || f.geometry.type !== "Point") return;
-      const box = document.createElement("div");
-      const name = document.createElement("strong");
-      name.textContent = f.properties.name ?? "Bus";
-      const routes = document.createElement("span");
-      routes.textContent = f.properties.routes ?? f.properties.route;
+    const line = (text: string, className?: string) => {
+      const el = document.createElement("span");
+      el.textContent = text;
+      if (className) el.className = className;
+      return el;
+    };
+    const trackerLink = (text: string) => {
       const link = document.createElement("a");
       link.href = TRACKER_URL;
       link.target = "_blank";
       link.rel = "noopener";
-      link.textContent = "Live arrivals on bus.gatech.edu";
-      box.append(name, routes, link);
-      popup.setLngLat(f.geometry.coordinates as [number, number]).setDOMContent(box).addTo(map);
+      link.textContent = text;
+      return link;
+    };
+    const show = (at: [number, number], ...children: HTMLElement[]) => {
+      const box = document.createElement("div");
+      box.append(...children);
+      popup.setLngLat(at).setDOMContent(box).addTo(map);
+    };
+
+    // Stop: the next bus of each route that serves it, estimated from live positions (soonest first).
+    const onStopClick = (e: MapLayerMouseEvent) => {
+      const f = e.features?.[0];
+      if (!f || f.geometry.type !== "Point") return;
+      const title = document.createElement("strong");
+      title.textContent = f.properties.name ?? "Bus stop";
+      const rows: { name: string; eta: number | null }[] = [];
+      for (const route of network?.routes ?? []) {
+        const index = route.stops.findIndex((s) => s.stop === f.properties.id);
+        if (index < 0) continue;
+        const etas = currentBuses.filter((b) => b.properties.route_id === route.id)
+          .map((b) => busEtaSeconds(route, network!.stops, b.geometry.coordinates as [number, number], index, b.properties.heading))
+          .filter((eta): eta is number => eta != null);
+        rows.push({ name: route.name, eta: etas.length ? Math.min(...etas) : null });
+      }
+      rows.sort((a, b) => (a.eta ?? Infinity) - (b.eta ?? Infinity));
+      const list = rows.length
+        ? rows.map((r) => line(`${r.name} · ${r.eta == null ? "not running now" : r.eta < 60 ? "arriving" : formatMinutes(r.eta)}`, r.eta == null ? "cims-stop-popup__idle" : undefined))
+        : [line(f.properties.routes ?? "")];
+      show(f.geometry.coordinates as [number, number], title, ...list, line("Estimated from live bus positions.", "cims-stop-popup__note"), trackerLink("Official tracker"));
+    };
+
+    // Bus: its route, the stop it serves next and which way it's going, and how long it has stood still.
+    const onBusClick = (e: MapLayerMouseEvent) => {
+      const f = e.features?.[0];
+      if (!f || f.geometry.type !== "Point") return;
+      const at = f.geometry.coordinates as [number, number];
+      const p = f.properties as { route: string; route_id: number; heading?: number | null; still_since?: number };
+      const title = document.createElement("strong");
+      title.textContent = `${p.route} bus`;
+      // MapLibre may hand properties back as strings; a missing heading becomes NaN here.
+      const heading = p.heading == null ? NaN : Number(p.heading);
+      const route = network?.routes.find((r) => r.id === Number(p.route_id));
+      const next = route && network ? nextStopIndex(route, network.stops, at, Number.isFinite(heading) ? heading : null) : null;
+      const nextName = route && next != null ? network!.stops.get(route.stops[next].stop)?.name : undefined;
+      const toward = nextName ? `Next stop: ${nextName}` : "Next stop unknown";
+      const direction = Number.isFinite(heading) ? `Heading ${compassWord(heading)}` : "Direction not known yet";
+      const stopped = p.still_since ? stoppedText(Number(p.still_since)) : null;
+      show(at, title, line(toward), line(direction), line(stopped ?? "Moving", stopped ? "cims-stop-popup__alert" : undefined), trackerLink("Official tracker"));
     };
     const onEnter = () => (map.getCanvas().style.cursor = "pointer");
     const onLeave = () => (map.getCanvas().style.cursor = "");
-    map.on("click", BUSES, onStopClick);
+    map.on("click", BUSES, onBusClick);
     map.on("mouseenter", BUSES, onEnter);
     map.on("mouseleave", BUSES, onLeave);
     map.on("click", STOPS, onStopClick);
@@ -261,7 +320,7 @@ const transport: MapLayer = {
         stop();
         popup.remove();
         document.removeEventListener("visibilitychange", onVisibility);
-        map.off("click", BUSES, onStopClick);
+        map.off("click", BUSES, onBusClick);
         map.off("mouseenter", BUSES, onEnter);
         map.off("mouseleave", BUSES, onLeave);
         map.off("click", STOPS, onStopClick);

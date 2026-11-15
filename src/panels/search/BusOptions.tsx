@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { formatMinutes, planBusTrips, type BusOption } from "../../lib/busPlanner";
 import { highlightRoutes } from "../../lib/transitHighlight";
+import { stoppedText } from "../../lib/busMotion";
 import { useGpsFix } from "../../lib/useGpsFix";
 import { useLiveBuses, useTransitNetwork } from "../../lib/useTransit";
 import { TRACKER_URL } from "../../map/transitLive";
@@ -74,6 +75,7 @@ export default function BusOptions({ origin, destination }: { origin: [number, n
                 <li><span aria-hidden="true">🚌</span> {o.wait != null ? <>Bus in ≈{formatMinutes(o.wait)} · </> : null}ride {formatMinutes(o.rideTime)}</li>
                 <li><span aria-hidden="true">🚶</span> Get off at <strong>{o.alight.name}</strong>, walk {formatMinutes(o.walkFromStop)}</li>
               </ol>
+              {o.busStillSince != null && stoppedText(o.busStillSince) && <span className="bus-option__alert">That bus has been {stoppedText(o.busStillSince)!.toLowerCase()}: it may be late.</span>}
               {!o.live && o.route.hours && <span className="bus-option__hours">Service: {o.route.hours}</span>}
             </button>
           </li>
