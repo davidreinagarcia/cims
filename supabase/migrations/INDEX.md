@@ -13,5 +13,6 @@
 - [`20261115000400_roles.sql`](20261115000400_roles.sql): _no summary_
 - [`20261115000500_police_alerts_and_realtime.sql`](20261115000500_police_alerts_and_realtime.sql): _no summary_
 - [`20261115000600_report_claim.sql`](20261115000600_report_claim.sql): _no summary_
+- [`20261115000700_bulletin_posts.sql`](20261115000700_bulletin_posts.sql): _no summary_
 
 <!-- AUTO:END -->

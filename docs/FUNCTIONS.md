@@ -37,16 +37,24 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `placeBuilding(place, index, all)` [src/lib/buildingPlaces.ts:11](../src/lib/buildingPlaces.ts#L11): Resolve explicit footprint ids, legacy seed building ids, then exact-point containment.
 - `loadedBuildings()` [src/lib/buildings.ts:84](../src/lib/buildings.ts#L84): The index if it is already loaded, so callers can answer synchronously.
 - `loadBuildings()` [src/lib/buildings.ts:89](../src/lib/buildings.ts#L89): Loads the footprints once; a failed load is forgotten so the next call retries.
-- `POST_TYPES` [src/lib/bulletin.ts:34](../src/lib/bulletin.ts#L34): Bulletin filters in display order, sharing organization labels with the layer catalog.
-- `bulletinPosts(now)` [src/lib/bulletin.ts:69](../src/lib/bulletin.ts#L69): Return ongoing and upcoming dated events or org posts, with ongoing entries first.
-- `filterPosts(posts, type, query?)` [src/lib/bulletin.ts:108](../src/lib/bulletin.ts#L108): Filter posts by type and the shared case/accent-insensitive search, retaining post order.
-- `countByType(posts)` [src/lib/bulletin.ts:133](../src/lib/bulletin.ts#L133): Count every post type and the unfiltered total, including categories with no posts.
-- `bulletinUrl(type)` [src/lib/bulletin.ts:140](../src/lib/bulletin.ts#L140): Build a bulletin deep link, omitting the type parameter for the all filter.
-- `readBulletinParams(search)` [src/lib/bulletin.ts:147](../src/lib/bulletin.ts#L147): Read bulletin visibility and a validated type filter from a query string.
+- `POST_TYPES` [src/lib/bulletin.ts:41](../src/lib/bulletin.ts#L41): Bulletin filters in display order, sharing organization labels with the layer catalog.
+- `bulletinPosts(now, written)` [src/lib/bulletin.ts:76](../src/lib/bulletin.ts#L76): Return ongoing and upcoming dated events or org posts (curated plus user-written), with ongoing entries first.
+- `postsFor(posts, audience)` [src/lib/bulletin.ts:126](../src/lib/bulletin.ts#L126): Keep only the posts of one tab (Orgs or People).
+- `filterPosts(posts, type, query?)` [src/lib/bulletin.ts:131](../src/lib/bulletin.ts#L131): Filter posts by type and the shared case/accent-insensitive search, retaining post order.
+- `countByType(posts)` [src/lib/bulletin.ts:156](../src/lib/bulletin.ts#L156): Count every post type and the unfiltered total, including categories with no posts.
+- `bulletinUrl(type)` [src/lib/bulletin.ts:163](../src/lib/bulletin.ts#L163): Build a bulletin deep link, omitting the type parameter for the all filter.
+- `readBulletinParams(search)` [src/lib/bulletin.ts:170](../src/lib/bulletin.ts#L170): Read bulletin visibility and a validated type filter from a query string.
 - `loadInterests()` [src/lib/bulletinInterests.ts:13](../src/lib/bulletinInterests.ts#L13): Loads every mark (public counts) and this account's own.
 - `setInterest(postId, on)` [src/lib/bulletinInterests.ts:24](../src/lib/bulletinInterests.ts#L24): Marks or unmarks one post as interesting for this account.
-- `nextWindow(event, now)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Return the current or next weekly campus occurrence, or an unexpired one-off window.
-- `formatWindow(window)` [src/lib/events.ts:58](../src/lib/events.ts#L58): Format an event window as short English text in campus time.
+- `audienceFor(role)` [src/lib/bulletinPosts.ts:38](../src/lib/bulletinPosts.ts#L38): Audience an account role posts under, or null when that role may not post (staff, moderators).
+- `subscribeUserPosts(listener)` [src/lib/bulletinPosts.ts:47](../src/lib/bulletinPosts.ts#L47): Subscribe to changes of the loaded posts; returns the unsubscribe function.
+- `getUserPosts()` [src/lib/bulletinPosts.ts:53](../src/lib/bulletinPosts.ts#L53): Current snapshot of the loaded posts (stable between changes).
+- `refreshUserPosts()` [src/lib/bulletinPosts.ts:56](../src/lib/bulletinPosts.ts#L56): Loads posts that have not ended yet and publishes them; failures keep what is already loaded.
+- `createUserPost(session, input)` [src/lib/bulletinPosts.ts:68](../src/lib/bulletinPosts.ts#L68): Saves a post for the signed-in account and adds it to the live store. Rule rejections (wrong role, too fast)…
+- `userPostFeatures()` [src/lib/bulletinPosts.ts:91](../src/lib/bulletinPosts.ts#L91): Map anchors for the loaded posts: one orgs-layer point per post at its building's centre (none until footprin…
+- `campusDateTime(day, clock)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Instant for a campus-time date (YYYY-MM-DD) and clock (HH:MM); null when the input is malformed or the time d…
+- `nextWindow(event, now)` [src/lib/events.ts:43](../src/lib/events.ts#L43): Return the current or next weekly campus occurrence, or an unexpired one-off window.
+- `formatWindow(window)` [src/lib/events.ts:65](../src/lib/events.ts#L65): Format an event window as short English text in campus time.
 - `GeolocationError` [src/lib/geolocation.ts:14](../src/lib/geolocation.ts#L14): A geolocation failure with a stable `reason` for branching and a ready-to-show `message`. A real `Error`, so…
 - `getCurrentPosition(options, maximumAge)` [src/lib/geolocation.ts:31](../src/lib/geolocation.ts#L31): One-shot current position. Never throws a raw `GeolocationPositionError` or lets "the API doesn't
 - `haversineMeters(a, b)` [src/lib/geolocation.ts:50](../src/lib/geolocation.ts#L50): Great-circle distance in meters between two lng/lat points (haversine, mean Earth radius). Accurate enough fo…
@@ -77,7 +85,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `readLocal(key, fallback)` [src/lib/localStore.ts:4](../src/lib/localStore.ts#L4): Reads JSON from localStorage; falls back when storage is blocked or the value is corrupt.
 - `writeLocal(key, value)` [src/lib/localStore.ts:14](../src/lib/localStore.ts#L14): Writes JSON to localStorage; returns false when storage is blocked or full (caller should fall back to memory…
 - `nearestPlace(point, number], maxMeters = 120)` [src/lib/nearestPlace.ts:6](../src/lib/nearestPlace.ts#L6): The closest curated place to a [lng, lat] point within `maxMeters`, with its distance; null when none is that…
-- `photoToDataUrl(file)` [src/lib/photo.ts:6](../src/lib/photo.ts#L6): Shrinks a photo to a small JPEG data URL so it is cheap to store and send; rejects when the file is not an im…
+- `photoToDataUrl(file, maxPx = PHOTO_MAX_PX)` [src/lib/photo.ts:6](../src/lib/photo.ts#L6): Shrinks a photo (longest side `maxPx`, default 800) to a small JPEG data URL so it is cheap to store and send…
 - `showDrafts` [src/lib/places.ts:14](../src/lib/places.ts#L14): True when the page was opened with ?drafts=1: unverified drafts become visible (for reviewers and previews).
 - `places` [src/lib/places.ts:19](../src/lib/places.ts#L19): The places the app shows: seed, demo and verified records, plus drafts only with ?drafts=1.
 - `createLocalPreferredRoomsService()` [src/lib/preferredRooms.mock.ts:8](../src/lib/preferredRooms.mock.ts#L8): Creates the localStorage-backed mock. Falls back to memory when storage is unavailable.
@@ -180,9 +188,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `AlertsState` [src/lib/alerts.ts:91](../src/lib/alerts.ts#L91): The store state React and map layers read.
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
-- `PostType` [src/lib/bulletin.ts:11](../src/lib/bulletin.ts#L11): The five supported bulletin filters; unknown source subtypes become community posts.
-- `BulletinPost` [src/lib/bulletin.ts:14](../src/lib/bulletin.ts#L14): A dated bulletin entry with known source facts and a selectable map location.
+- `PostType` [src/lib/bulletin.ts:12](../src/lib/bulletin.ts#L12): The five supported bulletin filters; unknown source subtypes become community posts.
+- `BulletinPost` [src/lib/bulletin.ts:15](../src/lib/bulletin.ts#L15): A dated bulletin entry with known source facts and a selectable map location.
 - `InterestState` [src/lib/bulletinInterests.ts:8](../src/lib/bulletinInterests.ts#L8): This browser's marked post ids plus how many people marked each post.
+- `Audience` [src/lib/bulletinPosts.ts:8](../src/lib/bulletinPosts.ts#L8): Who wrote a post: a registered organization account or a person (student account).
+- `PostLocation` [src/lib/bulletinPosts.ts:11](../src/lib/bulletinPosts.ts#L11): A registered place a post is tied to: a building footprint or a room inside an indoor building ("buildingId:s…
+- `UserPost` [src/lib/bulletinPosts.ts:14](../src/lib/bulletinPosts.ts#L14): One saved post. Times are instants; the poster is a downscaled JPEG data URL.
+- `UserPostInput` [src/lib/bulletinPosts.ts:20](../src/lib/bulletinPosts.ts#L20): What the composer hands over; the server (or the local fallback) decides the audience from the account role.
 - `GeolocationFailureReason` [src/lib/geolocation.ts:4](../src/lib/geolocation.ts#L4): Every real-world way `getCurrentPosition` can fail, each with its own honest, human message.
 - `Coordinates` [src/lib/geolocation.ts:24](../src/lib/geolocation.ts#L24): A GPS fix: WGS84 degrees plus the device's own reported accuracy radius in meters.
 - `RoomCategory` [src/lib/indoorPlan.ts:93](../src/lib/indoorPlan.ts#L93): Fill category for a space type: the `cims-room--<category>` class and its legend swatch.
@@ -234,8 +246,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PortfolioPhoto` [src/portfolio/types.ts:5](../src/portfolio/types.ts#L5): One photo attached to a portfolio entry, kept as a data URL so it survives a page reload without a backend.
 - `PortfolioPhotoSeed` [src/portfolio/types.ts:13](../src/portfolio/types.ts#L13): What the UI hands the adapter to attach one photo; the adapter assigns the id.
 - `PortfolioEntry` [src/portfolio/types.ts:21](../src/portfolio/types.ts#L21): One activity in a signed-in account's BuzzPrint: a frozen snapshot of a Bulletin post, taken the moment
-- `PortfolioEntrySeed` [src/portfolio/types.ts:42](../src/portfolio/types.ts#L42): What the Bulletin hook hands the adapter to create one entry; the adapter assigns id/accountId/photos.
-- `PortfolioAdapter` [src/portfolio/types.ts:45](../src/portfolio/types.ts#L45): Storage boundary. The local adapter keeps entries in this browser; a Supabase adapter would sit behind the sa…
+- `PortfolioEntrySeed` [src/portfolio/types.ts:47](../src/portfolio/types.ts#L47): What the Bulletin hook hands the adapter to create one entry; the adapter assigns id/accountId/photos.
+- `PortfolioAdapter` [src/portfolio/types.ts:50](../src/portfolio/types.ts#L50): Storage boundary. The local adapter keeps entries in this browser; a Supabase adapter would sit behind the sa…
 - `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
 - `IconName` [src/shell/icons.tsx:22](../src/shell/icons.tsx#L22): Names of the shell icons.
 - `ShellPanel` [src/shell/icons.tsx:35](../src/shell/icons.tsx#L35): What the floating card / bottom sheet can show besides a map selection.
@@ -276,7 +288,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:12](../src/panels/building-card/BuildingPreview.tsx#L12): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
 - `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:11](../src/panels/building-card/InsidePlaces.tsx#L11): Show selectable places grouped by category for a footprint or a legacy seed building.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
-- `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:78](../src/panels/bulletin/BulletinBoard.tsx#L78): Modal cork board with shared interests; the shell owns its URL, type and return focus.
+- `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:85](../src/panels/bulletin/BulletinBoard.tsx#L85): Modal cork board with shared interests; the shell owns its URL, type and return focus.
+- `PostComposer(…)` [src/panels/bulletin/PostComposer.tsx:17](../src/panels/bulletin/PostComposer.tsx#L17): Modal form that creates a post for the signed-in account; reports the saved post, or closes without one.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:68](../src/panels/layers/LayersPanel.tsx#L68): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `DoorStickers()` [src/panels/maintenance/DoorStickers.tsx:33](../src/panels/maintenance/DoorStickers.tsx#L33): Link and QR generator for the entrance stickers, one list per building.
 - `MaintenanceView({ onClose })` [src/panels/maintenance/MaintenanceView.tsx:66](../src/panels/maintenance/MaintenanceView.tsx#L66): Full-screen maintenance dashboard, opened from the menu (and by ?view=maintenance).
@@ -301,7 +314,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
 - `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
 - `SearchPanel(…)` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
-- `PortfolioPage({ onClose })` [src/portfolio/PortfolioPage.tsx:95](../src/portfolio/PortfolioPage.tsx#L95): Full-page BuzzPrint view, opened the same way the Bulletin is: its own open flag outside the shell's panel sw…
+- `PortfolioPage({ onClose })` [src/portfolio/PortfolioPage.tsx:102](../src/portfolio/PortfolioPage.tsx#L102): Full-page BuzzPrint view, opened the same way the Bulletin is: its own open flag outside the shell's panel sw…
 - `BottomSheet(…)` [src/shell/BottomSheet.tsx:21](../src/shell/BottomSheet.tsx#L21): Drag or tap the handle (or press Enter/Space on it) to move between snaps; arrow keys step up and down. Opens…
 - `ChipsBar()` [src/shell/ChipsBar.tsx:14](../src/shell/ChipsBar.tsx#L14): One pill per layer category; pressed = layer on. Categories without data stay visible but inert (aria-disable…
 - `FloatingCard(…)` [src/shell/FloatingCard.tsx:6](../src/shell/FloatingCard.tsx#L6): Card with a close button and a ‹ collapse tab on its right edge. Renders nothing visible when its panel rende…
@@ -410,8 +423,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `ensureLoaded(accountId)` [src/portfolio/store.ts:33](../src/portfolio/store.ts#L33): Loads (once per account) the signed-in account's entries. A null accountId clears the list (signed out).
 - `usePortfolio()` [src/portfolio/store.ts:47](../src/portfolio/store.ts#L47): React hook over the store.
 - `recordPortfolioEntry(session, post)` [src/portfolio/store.ts:56](../src/portfolio/store.ts#L56): Records a BuzzPrint entry from a Bulletin post, snapshotting the fields BulletinPost already has
-- `addPortfolioPhoto(accountId, entryId, photo)` [src/portfolio/store.ts:74](../src/portfolio/store.ts#L74): Attaches a photo to one of this account's entries and shows it immediately.
-- `setAdapter(next)` [src/portfolio/store.ts:81](../src/portfolio/store.ts#L81): Backend hook: replace the storage adapter before the first load.
+- `addPortfolioPhoto(accountId, entryId, photo)` [src/portfolio/store.ts:77](../src/portfolio/store.ts#L77): Attaches a photo to one of this account's entries and shows it immediately.
+- `setAdapter(next)` [src/portfolio/store.ts:84](../src/portfolio/store.ts#L84): Backend hook: replace the storage adapter before the first load.
 - `NAV_ITEMS` [src/shell/icons.tsx:38](../src/shell/icons.tsx#L38): The six destinations of the rail (desktop) and the tab bar (phones), in order.
 - `moveFocus(event, vertical)` [src/shell/icons.tsx:48](../src/shell/icons.tsx#L48): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 - `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:13](../src/stories/CameraCapture.tsx#L13): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
@@ -438,6 +451,6 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - ⚠️ subscribe (src/portfolio/store.ts:22) ↔ subscribe (src/stories/store.ts:32)
 - ⚠️ getState (src/portfolio/store.ts:28) ↔ getState (src/stories/store.ts:38)
 - ⚠️ ensureLoaded (src/portfolio/store.ts:33) ↔ ensureLoaded (src/stories/store.ts:43)
-- ⚠️ setAdapter (src/portfolio/store.ts:81) ↔ setAdapter (src/stories/store.ts:83)
+- ⚠️ setAdapter (src/portfolio/store.ts:84) ↔ setAdapter (src/stories/store.ts:83)
 
 <!-- AUTO:END -->
