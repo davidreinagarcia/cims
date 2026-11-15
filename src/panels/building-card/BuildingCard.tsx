@@ -6,6 +6,7 @@ import { useAuth } from "../../state/auth";
 import InsidePlaces from "./InsidePlaces";
 import BuildingPhotoFigure from "./BuildingPhoto";
 import { useSelection } from "../../state/selection";
+import { requestBookingsView } from "../../indoor/handoff";
 import { hasIndoor } from "../../indoor/registry";
 import { buildingPhoto } from "../../lib/buildingPhotos";
 import "./building-card.css";
@@ -75,6 +76,7 @@ export function BuildingDetails({ buildingId, embedded = false }: { buildingId: 
       <div className="cims-actions">
         <a className="cims-btn cims-btn--primary" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
         <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
+        <button type="button" className="cims-btn" onClick={requestBookingsView}>Go back to bookings</button>
       </div>
       {!session && <p className="cims-muted"><small>Reporting requires sign-in</small></p>}
       <InsidePlaces buildingId={b.id} />

@@ -1,5 +1,6 @@
 /** @file Step 3 of the report flow: confirmation, status timeline (Open → Routed → In progress → Resolved) and shareable link. */
 import { useEffect, useRef, useState } from "react";
+import { requestBookingsView } from "../../indoor/handoff";
 import { STATUS_FLOW, STATUS_LABEL, reportsService, type IssueReport } from "../../lib/reports";
 import ReportSummary, { formatWhen } from "./ReportSummary";
 
@@ -103,6 +104,7 @@ export default function ReportStatusView({ reportId, justFiled, onAnother }: Rep
         <div className="cims-actions">
           <button type="button" className="cims-btn" onClick={copy}>Copy link</button>
           <button type="button" className="cims-btn cims-btn--primary" onClick={onAnother}>Report another</button>
+          <button type="button" className="cims-btn" onClick={requestBookingsView}>Go back to bookings</button>
         </div>
         <p role="status" className="cims-report__note">
           {copied === "yes" && "✓ Link copied."}

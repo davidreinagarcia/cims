@@ -1,17 +1,28 @@
-/** @file Hands a room from the indoor screen to the shell's existing reservations panel ("Book this room"). */
+/** @file Hands off to the shell's existing reservations panel ("Book this room", "Go back to bookings") from anywhere else in the app. */
 import { useSyncExternalStore } from "react";
 
-/** A request to open the reservations panel on one building, coming from an indoor room card. */
-export interface BookingRequest { buildingId: string; roomId: string; seq: number }
+/** A request to open the reservations panel: on one building/room ("Book this room"), or straight on "My bookings" ("Go back to bookings"). */
+export type BookingRequest =
+  | { kind: "room"; buildingId: string; roomId: string; seq: number }
+  | { kind: "bookings"; seq: number };
 
 let pending: BookingRequest | null = null;
 let seq = 0;
 const listeners = new Set<() => void>();
 
+function publish(request: BookingRequest): void {
+  pending = request;
+  listeners.forEach((listener) => listener());
+}
+
 /** Asks the shell to open the reservations panel on this building (room id is "buildingId:spaceId"). */
 export function requestBooking(buildingId: string, roomId: string): void {
-  pending = { buildingId, roomId, seq: ++seq };
-  listeners.forEach((listener) => listener());
+  publish({ kind: "room", buildingId, roomId, seq: ++seq });
+}
+
+/** Asks the shell to open the reservations panel straight on "My bookings" -- the quick way back from a room card, a filed report, a place card, etc. */
+export function requestBookingsView(): void {
+  publish({ kind: "bookings", seq: ++seq });
 }
 
 /** The latest booking request, if one has not been handled yet. */

@@ -1,7 +1,7 @@
 /** @file Full-page Rooms board (T-62): top filter-chip bar (buildings, Favorites, Rooms near me, My bookings, plus an "Only available rooms" toggle) over the day/slot grid, mirroring how `panels/bulletin/BulletinBoard.tsx` takes over the screen for the Bulletin. Assembles existing T-20/T-21/T-24/T-60/T-61 pieces -- it does not reimplement the reservation or availability engine. */
 import { useEffect, useRef, useState, type KeyboardEvent } from "react";
 import { bookableRoomsFor, favoriteRoomsFrom } from "../../indoor/availability";
-import { clearBookingRequest, peekBookingRequest } from "../../indoor/handoff";
+import { clearBookingRequest, peekBookingRequest, useBookingRequestSeq } from "../../indoor/handoff";
 import { indoorFor, indoorRooms } from "../../indoor/registry";
 import { roomAmenitiesById } from "../../indoor/roomFinderDemo";
 import { preferredRoomsService, type PreferredRoom } from "../../lib/preferredRooms";
@@ -21,9 +21,11 @@ const FOCUSABLE = "button:not([disabled]), input, a[href], [tabindex]:not([tabin
 type Section = { kind: "search" } | { kind: "building"; buildingId: string; roomId?: string } | { kind: "favorites" } | { kind: "nearby" } | { kind: "bookings" };
 
 function initialSection(): Section {
-  // "Book this room" on an indoor room card (useBookingRequestSeq, src/shell/Shell.tsx) opens straight on that room's row.
+  // "Book this room" on an indoor room card (useBookingRequestSeq, src/shell/Shell.tsx) opens straight on that room's row;
+  // "Go back to bookings" (from a room card, a filed report, a place card...) opens straight on My bookings.
   const request = peekBookingRequest();
-  if (request) return { kind: "building", buildingId: request.buildingId, roomId: request.roomId };
+  if (request?.kind === "room") return { kind: "building", buildingId: request.buildingId, roomId: request.roomId };
+  if (request?.kind === "bookings") return { kind: "bookings" };
   // Otherwise land on the search prompt rather than defaulting into one building's grid -- picking a
   // building (or a different section entirely) is a deliberate first step, per direct design feedback.
   return { kind: "search" };
@@ -43,6 +45,19 @@ export default function RoomsBoard({ onClose }: { onClose: () => void }) {
   const root = useRef<HTMLDialogElement>(null);
   const [section, setSection] = useState<Section>(initialSection);
   useEffect(() => clearBookingRequest(), []);
+  // A "Go back to bookings"/"My bookings" button clicked from *inside* this already-mounted board
+  // (the reservation confirm panel, say) publishes a request the same way every other call site
+  // does, but the shell's own effect (setPanel("rooms")) is a no-op here since the panel never
+  // changes -- so this board has to notice the request itself and switch section live.
+  const bookingSeq = useBookingRequestSeq();
+  const mountBookingSeq = useRef(bookingSeq);
+  useEffect(() => {
+    if (bookingSeq === mountBookingSeq.current) return;
+    const request = peekBookingRequest();
+    if (request?.kind === "bookings") setSection({ kind: "bookings" });
+    else if (request?.kind === "room") setSection({ kind: "building", buildingId: request.buildingId, roomId: request.roomId });
+    clearBookingRequest();
+  }, [bookingSeq]);
   const [onlyAvailable, setOnlyAvailable] = useState(false);
   const [comingSoon, setComingSoon] = useState<string | null>(null);
   const [buildingQuery, setBuildingQuery] = useState("");

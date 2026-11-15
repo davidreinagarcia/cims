@@ -1,6 +1,7 @@
 /** @file Selected place card with hours, access, provenance, contained places and map directions. */
 import { useEffect, useState, type CSSProperties } from "react";
 import { CORRECTION_URL } from "../../config";
+import { requestBookingsView } from "../../indoor/handoff";
 import InsidePlaces from "./InsidePlaces";
 import { locationDetails } from "../../lib/buildingPlaces";
 import BuildingLink from "./BuildingLink";
@@ -105,6 +106,7 @@ export default function PlaceCard() {
       <div className="cims-actions">
         <a className="cims-btn cims-btn--primary" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
         <button type="button" className="cims-btn" onClick={() => select(null)}>Close</button>
+        <button type="button" className="cims-btn" onClick={requestBookingsView}>Go back to bookings</button>
       </div>
     </section>
   );
