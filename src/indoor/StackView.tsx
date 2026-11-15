@@ -8,6 +8,16 @@ import "./StackView.css";
 type DrawnLevel = Extract<IndoorLevel, { available: true }>;
 type Point = { x: number; y: number };
 
+/** The corner points of an outline path ("M x y L x y … Z", possibly several rings), duplicates removed. */
+function outlineVertices(d: string): Point[] {
+  const out: Point[] = [];
+  for (const m of d.matchAll(/[ML]\s*(-?[\d.]+)[\s,]+(-?[\d.]+)/g)) {
+    const p = { x: Number(m[1]), y: Number(m[2]) };
+    if (!out.some((q) => q.x === p.x && q.y === p.y)) out.push(p);
+  }
+  return out;
+}
+
 
 /** Shows the Plan | Stack toggle in the building header. Set to false to hide the stack view for a demo. */
 export const STACK_VIEW_ENABLED = true;
@@ -31,9 +41,19 @@ export default function StackView({ building, levels, activeId, selected, route,
   const gap = Math.min(150, Math.max(50, (size.h * 0.62) / Math.max(1, n - 1)), plateH * 0.9);
   const z = (index: number) => (index - (n - 1) / 2) * gap;
 
-  // Stairs and elevators: dashed guides tie them across consecutive plates, like an axonometric drawing.
-  const cores = building.graph?.connectors ?? [];
-  const nodeById = new Map((building.graph?.nodes ?? []).map((node) => [node.id, node]));
+  // Dashed guides only where an outline corner on one plate sits over a corner on the plate below.
+  const tolerance = Math.max(frame.w, frame.h) * 0.03;
+  const guides: { key: string; from: string; to: string }[] = [];
+  ordered.slice(1).forEach((upper, k) => {
+    const lower = ordered[k];
+    const below = outlineVertices(lower.outline);
+    const used = new Set<number>();
+    outlineVertices(upper.outline).forEach((v, i) => {
+      let best = -1, bestD = tolerance;
+      below.forEach((w, j) => { const d = Math.hypot(v.x - w.x, v.y - w.y); if (!used.has(j) && d <= bestD) { best = j; bestD = d; } });
+      if (best >= 0) { used.add(best); guides.push({ key: `${upper.id}-${i}`, from: `v:${lower.id}:${best}`, to: `v:${upper.id}:${i}` }); }
+    });
+  });
   // Where the route changes level: the node it leaves and the node it reaches, from the graph.
   const links: { from: string; to: string }[] = [];
   route?.nodes.forEach((node, i) => {
@@ -91,20 +111,15 @@ export default function StackView({ building, levels, activeId, selected, route,
           {/* anchors: right edge for the level label, and every route node for the vertical links */}
           <span className="stack__anchor" data-anchor={`label:${level.id}`} style={{ left: "50%", top: "50%" }} />
           {[[0, 0], [100, 0], [100, 100], [0, 100]].map(([left, top]) => <span key={`${left}-${top}`} className="stack__anchor" data-anchor={`corner:${level.id}:${left}-${top}`} style={{ left: `${left}%`, top: `${top}%` }} />)}
-          {/* stairs and elevators on this level, joined plate to plate by dashed guides */}
-          {cores.map((core) => {
-            const node = nodeById.get(core.nodes[level.id]);
-            return node ? <span key={`core-${core.id}`} className="stack__anchor" data-anchor={`core:${level.id}:${core.id}`} style={pct(node)} /> : null;
-          })}
+          {/* outline corners, for the dashed guides between plates */}
+          {outlineVertices(level.outline).map((v, i) => <span key={`v-${i}`} className="stack__anchor" data-anchor={`v:${level.id}:${i}`} style={pct(v)} />)}
           {routeNodes.map((node) => <span key={node.id} className="stack__anchor" data-anchor={`${level.id}:${node.id}`} style={pct(node)} />)}
         </div>;
       })}
     </div>
     <svg className="stack__overlay" width={size.w} height={size.h} aria-hidden="true">
-      {ordered.slice(1).flatMap((level, k) => cores.map((core) => {
-        const a = anchors[`core:${ordered[k].id}:${core.id}`], b = anchors[`core:${level.id}:${core.id}`];
-        return a && b ? <line key={`guide-${level.id}-${core.id}`} x1={a.x} y1={a.y} x2={b.x} y2={b.y} className="stack__guide" /> : null;
-      }))}
+      {guides.map(({ key, from, to }) => anchors[from] && anchors[to]
+        ? <line key={key} x1={anchors[from].x} y1={anchors[from].y} x2={anchors[to].x} y2={anchors[to].y} className="stack__guide" /> : null)}
       {links.map(({ from, to }) => anchors[from] && anchors[to] && <g key={`${from}-${to}`}>
         <line x1={anchors[from].x} y1={anchors[from].y} x2={anchors[to].x} y2={anchors[to].y} className="stack__link" />
         <circle cx={anchors[from].x} cy={anchors[from].y} r="4" className="stack__link-end" />
