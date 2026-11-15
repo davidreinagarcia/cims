@@ -7,6 +7,6 @@
 **Files**
 
 - [`culc.json`](culc.json): Clough Undergraduate Learning Commons indoor model: no floor-plan source found yet, so no levels.
-- [`kendeda.json`](kendeda.json): Kendeda Building indoor model: Level 1 as a simplified schematic redrawn from the public schematic design dra…
+- [`kendeda.json`](kendeda.json): Kendeda Building indoor model: Level 2, Level 1 and the basement as simplified schematics redrawn from public…
 
 <!-- AUTO:END -->
