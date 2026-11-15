@@ -72,3 +72,4 @@
 @media (prefers-reduced-motion: reduce) {
   .buzzprint-folder { transition: none; }
 }
+.buzzprint-card__poster { display: block; width: 100%; max-height: 300px; object-fit: contain; margin: 0 0 var(--s2); border: var(--hairline); background: var(--white); }

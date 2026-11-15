@@ -31,6 +31,11 @@ export interface PortfolioEntry {
   endAt?: number;
   /** The post's already-formatted `when` label at save time, kept as a fallback if start/end are ever missing. */
   when: string;
+  /** The post's poster (data URL) at save time, shown on the BuzzPrint card. */
+  posterUrl?: string;
+  /** What the post pointed at (a room, building or place id and its kind), so BuzzPrint can guide you back there. */
+  placeId?: string;
+  placeKind?: "place" | "building" | "room";
   /** Where: the post's place name at save time. */
   placeName?: string;
   /** When this entry was recorded (epoch ms) — i.e. when "Interested" was first clicked. */

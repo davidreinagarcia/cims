@@ -55,7 +55,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`src/panels/`](src/panels/INDEX.md): Panels, one folder per panel, shown in the floating card / bottom sheet. Mount new ones in shell/Shell.tsx.
     - [`src/panels/account/`](src/panels/account/INDEX.md): Account chip and accessible DEMO sign-in theater using the existing survey map design.
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
-    - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
+    - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Upcoming events in campus time (Orgs and People tabs), posting with a required registered building or room an…
     - [`src/panels/buses/`](src/panels/buses/INDEX.md): Buses panel (T-42): GT bus routes, live next-bus times, trip options to a destination and the Stingerette.
     - [`src/panels/layers/`](src/panels/layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
     - [`src/panels/maintenance/`](src/panels/maintenance/INDEX.md): Maintenance dashboard: live Facilities report board by crew, claim box for reports open to all teams, and the…

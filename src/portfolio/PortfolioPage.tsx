@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import { POST_TYPES } from "../lib/bulletin";
 import { useAuth } from "../state/auth";
+import { useSelection } from "../state/selection";
 import { Icon } from "../shell/icons";
 import { MAX_PHOTO_BYTES } from "./localAdapter";
 import { addPortfolioPhoto, ensureLoaded, usePortfolio } from "./store";
@@ -48,7 +49,7 @@ function timeFor(entry: PortfolioEntry): string {
   return entry.endAt === undefined ? start : `${start}–${timeLabel.format(new Date(entry.endAt))}`;
 }
 
-function EntryCard({ entry, accountId }: { entry: PortfolioEntry; accountId: string }) {
+function EntryCard({ entry, accountId, onGuide }: { entry: PortfolioEntry; accountId: string; onGuide: (entry: PortfolioEntry) => void }) {
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState("");
@@ -72,10 +73,16 @@ function EntryCard({ entry, accountId }: { entry: PortfolioEntry; accountId: str
 
   return (
     <li className="buzzprint-card">
+      {entry.posterUrl && <img className="buzzprint-card__poster" src={entry.posterUrl} alt={`Poster for ${entry.postTitle}`} loading="lazy" />}
       <p className="buzzprint-card__what cims-caps">{typeLabel(entry.postType)}{entry.org && <> · {entry.org}</>}</p>
       <h4 className="buzzprint-card__title">{entry.postTitle}</h4>
       <p className="buzzprint-card__when">{timeFor(entry)}</p>
       {entry.placeName && <p className="buzzprint-card__where">{entry.placeName}</p>}
+      {entry.placeId && (
+        <button type="button" className="cims-btn cims-btn--small" onClick={() => onGuide(entry)}>
+          {entry.placeKind === "room" ? "Guide me to the room" : "Show on map"}
+        </button>
+      )}
       {entry.photos.length > 0 && (
         <ul className="buzzprint-card__photos" aria-label="Your photos">
           {entry.photos.map((photo) => <li key={photo.id}><img src={photo.dataUrl} alt="" /></li>)}
@@ -94,6 +101,7 @@ function EntryCard({ entry, accountId }: { entry: PortfolioEntry; accountId: str
 /** Full-page BuzzPrint view, opened the same way the Bulletin is: its own open flag outside the shell's panel switch. */
 export default function PortfolioPage({ onClose }: { onClose: () => void }) {
   const { session, dialogOpen } = useAuth();
+  const { select } = useSelection();
   const { entries, loaded } = usePortfolio();
   const [opened, setOpened] = useState(false);
   const [shrinking, setShrinking] = useState(false);
@@ -165,7 +173,8 @@ export default function PortfolioPage({ onClose }: { onClose: () => void }) {
               <section key={label} className="buzzprint-day">
                 <h3 className="buzzprint-day__title cims-caps">{label}</h3>
                 <ul className="buzzprint-day__cards">
-                  {items.map((entry) => <EntryCard key={entry.id} entry={entry} accountId={entry.accountId} />)}
+                  {items.map((entry) => <EntryCard key={entry.id} entry={entry} accountId={entry.accountId}
+                    onGuide={(item) => { select({ kind: item.placeKind ?? "place", id: item.placeId! }); onClose(); }} />)}
                 </ul>
               </section>
             ))}

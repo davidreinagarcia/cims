@@ -63,6 +63,9 @@ export async function recordPortfolioEntry(session: Session, post: BulletinPost)
     endAt: post.end?.getTime(),
     when: post.when,
     placeName: post.placeName,
+    placeId: post.placeId,
+    placeKind: post.placeKind,
+    posterUrl: post.poster,
     savedAt: Date.now(),
   });
   if (state.accountId === session.accountId && !state.entries.some((item) => item.id === entry.id)) {

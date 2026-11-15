@@ -2,10 +2,10 @@
 
 const PHOTO_MAX_PX = 800;
 
-/** Shrinks a photo to a small JPEG data URL so it is cheap to store and send; rejects when the file is not an image. */
-export async function photoToDataUrl(file: File): Promise<string> {
+/** Shrinks a photo (longest side `maxPx`, default 800) to a small JPEG data URL so it is cheap to store and send; rejects when the file is not an image. */
+export async function photoToDataUrl(file: File, maxPx = PHOTO_MAX_PX): Promise<string> {
   const bitmap = await createImageBitmap(file);
-  const scale = Math.min(1, PHOTO_MAX_PX / Math.max(bitmap.width, bitmap.height));
+  const scale = Math.min(1, maxPx / Math.max(bitmap.width, bitmap.height));
   const canvas = document.createElement("canvas");
   canvas.width = Math.round(bitmap.width * scale);
   canvas.height = Math.round(bitmap.height * scale);

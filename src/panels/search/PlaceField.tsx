@@ -5,7 +5,9 @@ import type { CampusSearchResult } from "../../lib/search";
 import { suggest } from "../../lib/suggest";
 
 /** A labelled combobox that reports the chosen result, or null once the text is edited again. */
-export default function PlaceField({ label, placeholder, buildings, picked, onPick, filter, autoFocus }: {
+export default function PlaceField({ label, placeholder, buildings, picked, onPick, filter, autoFocus, describe }: {
+  /** Optional list title for a result (e.g. to tell identical rooms apart); the picked name is shown as given. */
+  describe?: (result: CampusSearchResult) => string;
   filter?: (result: CampusSearchResult) => boolean; autoFocus?: boolean;
   label: string; placeholder: string; buildings: BuildingIndex | null; picked: CampusSearchResult | null; onPick: (result: CampusSearchResult | null) => void;
 }) {
@@ -36,7 +38,7 @@ export default function PlaceField({ label, placeholder, buildings, picked, onPi
       {options.map((result, index) => <button key={`${result.kind}:${result.id}`} id={`${id}-${index}`} type="button" role="option" tabIndex={-1}
         className="cims-result" data-active={index === active} aria-selected={index === active}
         onMouseDown={(event) => event.preventDefault()} onClick={() => choose(result)}>
-        <span><span className="cims-result__title">{result.name}</span><br /><span className="cims-result__meta">{result.meta}</span></span>
+        <span><span className="cims-result__title">{describe ? describe(result) : result.name}</span><br /><span className="cims-result__meta">{result.meta}</span></span>
       </button>)}
     </div>
   </div>;
