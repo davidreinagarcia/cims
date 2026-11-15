@@ -17,14 +17,16 @@ import "./rooms-board.css";
 
 const FOCUSABLE = "button:not([disabled]), input, a[href], [tabindex]:not([tabindex='-1'])";
 
-/** Which top-level section the board shows: one bookable building's grid, the cross-building favorites grid, the distance-sorted nearby grid, or the user's own bookings. */
-type Section = { kind: "building"; buildingId: string; roomId?: string } | { kind: "favorites" } | { kind: "nearby" } | { kind: "bookings" };
+/** Which top-level section the board shows: the landing "search for a building" prompt, one bookable building's grid, the cross-building favorites grid, the distance-sorted nearby grid, or the user's own bookings. */
+type Section = { kind: "search" } | { kind: "building"; buildingId: string; roomId?: string } | { kind: "favorites" } | { kind: "nearby" } | { kind: "bookings" };
 
 function initialSection(): Section {
   // "Book this room" on an indoor room card (useBookingRequestSeq, src/shell/Shell.tsx) opens straight on that room's row.
   const request = peekBookingRequest();
   if (request) return { kind: "building", buildingId: request.buildingId, roomId: request.roomId };
-  return { kind: "building", buildingId: BUILDING_OPTIONS.find((option) => option.enabled)!.id };
+  // Otherwise land on the search prompt rather than defaulting into one building's grid -- picking a
+  // building (or a different section entirely) is a deliberate first step, per direct design feedback.
+  return { kind: "search" };
 }
 
 /**
@@ -116,19 +118,6 @@ export default function RoomsBoard({ onClose }: { onClose: () => void }) {
       </div>
       <div className="rooms-board__surface">
         <div className="rooms-board__chips" role="group" aria-label="Filter rooms">
-          <button type="button" className="rooms-board__chip" aria-pressed={section.kind === "favorites"} onClick={() => setSection({ kind: "favorites" })}>
-            Favorites <span className="rooms-board__count">{favorites.length}</span>
-          </button>
-          <button type="button" className="rooms-board__chip" aria-pressed={section.kind === "nearby"} onClick={() => setSection({ kind: "nearby" })}>
-            Rooms near me
-          </button>
-          <button type="button" className="rooms-board__chip" aria-pressed={section.kind === "bookings"} onClick={() => setSection({ kind: "bookings" })}>
-            My bookings <span className="rooms-board__count">{bookingsCount}</span>
-          </button>
-          <button type="button" className="rooms-board__chip rooms-board__chip--toggle" aria-pressed={onlyAvailable}
-            onClick={() => setOnlyAvailable(!onlyAvailable)}>
-            Only available rooms
-          </button>
           <div className="rooms-board__search">
             <div className="cims-field">
               <input type="text" value={buildingQuery} placeholder={currentBuildingLabel ?? "Search a building..."}
@@ -150,6 +139,19 @@ export default function RoomsBoard({ onClose }: { onClose: () => void }) {
               </ul>
             )}
           </div>
+          <button type="button" className="rooms-board__chip" aria-pressed={section.kind === "nearby"} onClick={() => setSection({ kind: "nearby" })}>
+            Rooms near me
+          </button>
+          <button type="button" className="rooms-board__chip rooms-board__chip--toggle" aria-pressed={onlyAvailable}
+            onClick={() => setOnlyAvailable(!onlyAvailable)}>
+            Only available rooms
+          </button>
+          <button type="button" className="rooms-board__chip" aria-pressed={section.kind === "favorites"} onClick={() => setSection({ kind: "favorites" })}>
+            Favorites <span className="rooms-board__count">{favorites.length}</span>
+          </button>
+          <button type="button" className="rooms-board__chip rooms-board__chip--primary" aria-pressed={section.kind === "bookings"} onClick={() => setSection({ kind: "bookings" })}>
+            My bookings <span className="rooms-board__count">{bookingsCount}</span>
+          </button>
         </div>
 
         {comingSoon && (
@@ -158,7 +160,11 @@ export default function RoomsBoard({ onClose }: { onClose: () => void }) {
           </p>
         )}
 
-        {section.kind === "bookings" ? (
+        {section.kind === "search" ? (
+          <p className="cims-empty" role="status">
+            Search for a building above, or pick Rooms near me, Favorites or My bookings.
+          </p>
+        ) : section.kind === "bookings" ? (
           <MyBookingsSection onCountChange={setBookingsCount} />
         ) : section.kind === "nearby" ? (
           <RoomsNearMe onlyAvailable={onlyAvailable} />
