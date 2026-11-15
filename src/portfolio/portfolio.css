@@ -46,21 +46,54 @@
   list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s4);
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
 }
+/* Cards spill out of the folder like loose paper: a short fall-and-settle with a slight alternating
+   tilt, staggered by each card's flat index (--i, set inline per card) across the whole list -- not
+   just a plain fade. */
+@keyframes buzzprint-paper-in {
+  from { opacity: 0; transform: translateY(28px) rotate(var(--tilt, -2.5deg)); }
+  to { opacity: 1; transform: translateY(0) rotate(0deg); }
+}
 .buzzprint-card {
   padding: var(--s4); border: var(--hairline); background: var(--white);
+  --tilt: -2.5deg;
+  animation: buzzprint-paper-in 480ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: calc(var(--i, 0) * 80ms);
 }
+.buzzprint-card:nth-child(even) { --tilt: 2.5deg; }
 .buzzprint-card__what { margin: 0 0 var(--s2); font-size: var(--fs-sm); color: var(--ink-muted); }
 .buzzprint-card__title { margin: 0 0 var(--s2); font: 600 var(--fs-lg)/1.2 var(--font-display); }
 .buzzprint-card__when, .buzzprint-card__where { margin: var(--s1) 0; font-size: var(--fs-sm); }
 .buzzprint-card__where { color: var(--ink-muted); }
+.buzzprint-card__actions { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s3); }
+.buzzprint-card__actions .cims-btn { margin-top: 0; }
+.buzzprint-card__share { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s2); }
+.buzzprint-card__share .cims-btn { margin-top: 0; }
 .buzzprint-card__photos {
   list-style: none; display: flex; flex-wrap: wrap; gap: var(--s2); margin: var(--s3) 0 0; padding: 0;
 }
+.buzzprint-card__photo-btn { display: block; padding: 0; border: var(--hairline); background: none; cursor: pointer; line-height: 0; }
+.buzzprint-card__photo-btn:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 .buzzprint-card__photos img {
-  display: block; width: 72px; height: 72px; object-fit: cover; border: var(--hairline);
+  display: block; width: 72px; height: 72px; object-fit: cover;
 }
 .buzzprint-card__notice { margin: var(--s3) 0 0; font-size: var(--fs-xs); color: var(--ink-muted); }
 .buzzprint-card .cims-btn { margin-top: var(--s3); }
+
+/* Photo lightbox: the photo enlarged with its activity's details as a caption, over a paper scrim. */
+.buzzprint-lightbox {
+  position: fixed; inset: 0; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--s4); padding: var(--s5); background: color-mix(in srgb, var(--paper) 92%, var(--ink));
+}
+.buzzprint-lightbox__photo { display: block; max-width: min(90vw, 720px); max-height: 65vh; object-fit: contain; border: var(--hairline); background: var(--white); }
+.buzzprint-lightbox__caption { max-width: min(90vw, 720px); width: 100%; text-align: center; color: var(--ink); }
+.buzzprint-lightbox__what { margin: 0 0 var(--s1); font-size: var(--fs-sm); color: var(--ink-muted); }
+.buzzprint-lightbox__title { margin: 0 0 var(--s1); font: 600 var(--fs-lg)/1.2 var(--font-display); }
+.buzzprint-lightbox__when, .buzzprint-lightbox__where { margin: var(--s1) 0; font-size: var(--fs-sm); color: var(--ink-muted); }
+.buzzprint-lightbox__close {
+  position: absolute; top: var(--s4); right: var(--s4); width: 44px; height: 44px; border: var(--hairline);
+  background: var(--white); color: var(--ink); font-size: var(--fs-xl); line-height: 1; cursor: pointer;
+}
+.buzzprint-lightbox__close:focus-visible { outline: 2px solid var(--gold); outline-offset: 1px; }
 
 .buzzprint .cims-empty { margin: auto; max-width: 480px; }
 
@@ -71,5 +104,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .buzzprint-folder { transition: none; }
+  .buzzprint-card { animation: none; }
 }
 .buzzprint-card__poster { display: block; width: 100%; max-height: 300px; object-fit: contain; margin: 0 0 var(--s2); border: var(--hairline); background: var(--white); }

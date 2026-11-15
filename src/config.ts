@@ -24,3 +24,6 @@ export const TILE_ATTRIBUTION = "© <a href=\"https://openfreemap.org\" target=\
 
 /** Base URL for prefilled place correction issues. */
 export const CORRECTION_URL = "https://github.com/davidreinagarcia/cims/issues/new";
+
+/** The app's own live production URL (README), used where a share target needs a public link (LinkedIn has no raw-text share). */
+export const SITE_URL = "https://cims.queenalexandria.online";
