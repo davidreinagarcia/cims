@@ -7,7 +7,7 @@
         "id": "mental-health-care-resources",
         "name": "Center for Mental Health Care & Resources",
         "category": "health",
-        "status": "draft",
+        "status": "verified",
         "description": "Student counseling and mental health assessments in Smithgall Hall.",
         "source_url": "https://mentalhealth.gatech.edu/",
         "floor_or_suite": "Suite 238",
@@ -56,7 +56,9 @@
           "note": "Free crisis and counseling services for Georgia Tech students; walk in or call 404-894-2575."
         },
         "url": "https://mentalhealth.gatech.edu/",
-        "floor_or_room": "Suite 238"
+        "floor_or_room": "Suite 238",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -72,7 +74,7 @@
         "id": "stamps-health-services",
         "name": "Stamps Health Services",
         "category": "health",
-        "status": "draft",
+        "status": "verified",
         "description": "Campus health service providing primary care and other medical services.",
         "source_url": "https://students.gatech.edu/vp-letter/vpsewb-newsletter-what-role-should-ai-play-georgia-tech",
         "address": "740 Ferst Drive NW, Atlanta, GA 30332",
@@ -116,7 +118,9 @@
         "buzzcard": {
           "required": false,
           "note": "Student clinic; appointments via 404-894-1420."
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -132,7 +136,7 @@
         "id": "stamps-pharmacy",
         "name": "Stamps Health Services Pharmacy",
         "category": "health",
-        "status": "draft",
+        "status": "verified",
         "description": "Prescription and over-the-counter medicines for the Georgia Tech community.",
         "source_url": "https://health.gatech.edu/pharmacy/",
         "coord_source": "OSM way 42872500 (Whitehead - Pharmacy), building representative point returned by Nominatim lookup",
@@ -195,7 +199,9 @@
           "required": false,
           "note": "Open to GT students, faculty, and staff; accepts most insurance plans; call 404-894-1430 ext 5."
         },
-        "url": "https://health.gatech.edu/pharmacy/"
+        "url": "https://health.gatech.edu/pharmacy/",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -211,7 +217,7 @@
         "id": "wellness-empowerment-center",
         "name": "Wellness Empowerment Center",
         "category": "health",
-        "status": "draft",
+        "status": "verified",
         "description": "Wellness coaching and well-being programs in the Stamps Health Services building.",
         "source_url": "https://mentalhealth.gatech.edu/resources/students/student-mental-health-resources",
         "floor_or_suite": "Suite 204",
@@ -251,7 +257,9 @@
           ],
           "sat": [],
           "sun": []
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -274,7 +282,7 @@
         "id": "pharmabox-clough",
         "name": "Pharmabox (Clough Commons)",
         "category": "health",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "Pharmabox"
         ],
@@ -336,7 +344,9 @@
               "24:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -352,7 +362,7 @@
         "id": "cmhcr-cos-mose-1120b",
         "name": "CMHCR Embedded Clinician Office - College of Sciences",
         "category": "health",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "CoS Mental Health Clinician"
         ],
@@ -404,7 +414,9 @@
         "confidence": "medium",
         "building_id": "glen-p-robinson-jr-building",
         "coord_source": "building centroid: glen-p-robinson-jr-building",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     }
   ]

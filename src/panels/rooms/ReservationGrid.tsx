@@ -1,17 +1,14 @@
-/** @file Step 2 of reserving a room (T-60/T-61): day/time grid of 30-minute slots per bookable room (own building, a cross-building favorites list, or a "rooms near me" list), the booking flow, location check-in, "Get directions" and "My reservations here". */
-import { useCallback, useEffect, useMemo, useState } from "react";
+/** @file Step 2 of reserving a room (T-60/T-61/T-62): day/time grid of 30-minute slots per bookable room (own building, a cross-building favorites list, or a "rooms near me" list), the booking flow and an optional "only free right now" filter. "My bookings" (check-in, cancel, directions) is a top-level section, `MyBookingsSection.tsx`. */
+import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { campusTimeToday, expandDemoSlots, isRoomFree, type BookableRoom } from "../../indoor/availability";
 import { demoSlotPatterns } from "../../indoor/roomFinderDemo";
 import type { AvailabilitySlot } from "../../indoor/types";
-import { loadBuildings, loadedBuildings } from "../../lib/buildings";
-import { formatDistance, getCurrentPosition, haversineMeters } from "../../lib/geolocation";
 import { preferredRoomsService, type PreferredRoom } from "../../lib/preferredRooms";
 import {
-  CHECKIN_RADIUS_METERS, CHECKIN_WINDOW_MINUTES, checkinDeadline, isReservationActive, MAX_DURATION_MINUTES, REBOOK_COOLDOWN_MINUTES,
-  reservationBusyWindow, reservationsService, reservationStatus, SLOT_MINUTES, type NewReservation, type Reservation,
+  CHECKIN_WINDOW_MINUTES, isReservationActive, MAX_DURATION_MINUTES,
+  reservationBusyWindow, reservationsService, SLOT_MINUTES, type NewReservation, type Reservation,
 } from "../../lib/reservations";
 import { useAuth } from "../../state/auth";
-import { useSelection } from "../../state/selection";
 
 /** An in-progress tap-to-extend selection: slots `startIndex` (inclusive) to `endIndex` (exclusive) on one room/day. */
 interface GridSelection { room: string; dayIndex: number; startIndex: number; endIndex: number }
@@ -40,16 +37,17 @@ function HeartIcon({ filled }: { filled: boolean }) {
 }
 
 /**
- * Day/time grid, booking flow, favorites, location check-in and "My reservations" for any list of
- * bookable rooms -- one building's rooms (`RoomFinderPanel`'s building screen), a cross-building
- * favorites list ("Preferred rooms"), or a cross-building distance-sorted list ("Rooms near me",
- * T-61). All three pass the same `BookableRoom[]` shape (`indoor/availability.ts#bookableRoomsFor` /
- * `#favoriteRoomsFrom` / `#crossBuildingBookableRooms`), so this component never needs to know which
- * one it's showing.
+ * Day/time grid, booking flow and favorites for any list of bookable rooms -- one building's rooms
+ * (`RoomsBoard`'s building chip), a cross-building favorites list ("Favorites"), or a cross-building
+ * distance-sorted list ("Rooms near me", T-61). All three pass the same `BookableRoom[]` shape
+ * (`indoor/availability.ts#bookableRoomsFor` / `#favoriteRoomsFrom` / `#crossBuildingBookableRooms`),
+ * so this component never needs to know which one it's showing. `onlyAvailable` (T-62, the board's
+ * "Only available rooms" chip) narrows the rendered rooms to ones free *right now* -- the current
+ * 30-minute slot on today's grid, regardless of which day tab happens to be selected -- reusing
+ * {@link isRoomFree} rather than a second availability engine.
  */
-export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
+export default function ReservationGrid({ rooms, onlyAvailable = false }: { rooms: BookableRoom[]; onlyAvailable?: boolean }) {
   const { session, requireAuth } = useAuth();
-  const { select } = useSelection();
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
     const timer = window.setInterval(() => setNow(new Date()), 30_000);
@@ -57,7 +55,6 @@ export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
   }, []);
 
   const bookableRooms = rooms;
-  const roomIds = useMemo(() => new Set(bookableRooms.map((room) => room.id)), [bookableRooms]);
   const days = useMemo(() => Array.from({ length: DAY_COUNT }, (_, i) => new Date(now.getTime() + i * 86_400_000)), [now]);
   // boundaries[dayIndex][slotIndex] = the half-open instant window that slot covers, in campus-local time.
   const boundaries = useMemo(() => days.map((day) => {
@@ -74,19 +71,13 @@ export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
   const [refreshKey, setRefreshKey] = useState(0);
 
   const [reservationsByRoom, setReservationsByRoom] = useState<Record<string, Reservation[]>>({});
-  const [myReservations, setMyReservations] = useState<Reservation[]>([]);
   const [favorites, setFavorites] = useState<PreferredRoom[]>([]);
   const refresh = useCallback(() => {
     void Promise.all(bookableRooms.map(async (room) => [room.id, await reservationsService.listForRoom(room.id)] as const))
       .then((entries) => setReservationsByRoom(Object.fromEntries(entries)));
-    if (session) {
-      void reservationsService.listMine(session.accountId).then((mine) => setMyReservations(mine.filter((r) => roomIds.has(r.room))));
-      void preferredRoomsService.list(session.accountId).then(setFavorites);
-    } else {
-      setMyReservations([]);
-      setFavorites([]);
-    }
-  }, [bookableRooms, roomIds, session]);
+    if (session) void preferredRoomsService.list(session.accountId).then(setFavorites);
+    else setFavorites([]);
+  }, [bookableRooms, session]);
   useEffect(() => { refresh(); }, [refresh, refreshKey]);
   const favoriteIds = useMemo(() => new Set(favorites.map((f) => f.room)), [favorites]);
 
@@ -108,6 +99,23 @@ export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
   }, [boundaries, selectedDayIndex, daySlots]);
   const cellPast = useCallback((index: number): boolean => boundaries[selectedDayIndex][index].end.getTime() <= now.getTime(), [boundaries, selectedDayIndex, now]);
 
+  // "Only available rooms" (T-62): today's slots and the current instant's slot index, always
+  // anchored to day 0 (today) regardless of which day tab is selected -- "right now" doesn't change
+  // when you flip to tomorrow's grid. Reuses expandDemoSlots/isRoomFree verbatim, no second engine.
+  const todaySlots = useMemo(() => {
+    const today = days[0];
+    const tomorrow = new Date(today.getTime() + 86_400_000);
+    return [...expandDemoSlots(demoSlotPatterns, today), ...expandDemoSlots(demoSlotPatterns, tomorrow), ...busyFromReservations];
+  }, [days, busyFromReservations]);
+  const nowSlotIndex = useMemo(() => boundaries[0].findIndex(
+    (slot) => slot.start.getTime() <= now.getTime() && now.getTime() < slot.end.getTime(),
+  ), [boundaries, now]);
+  const visibleRooms = useMemo(() => {
+    if (!onlyAvailable) return bookableRooms;
+    if (nowSlotIndex < 0) return [];
+    return bookableRooms.filter((room) => isRoomFree(room.id, todaySlots, boundaries[0][nowSlotIndex]));
+  }, [onlyAvailable, bookableRooms, nowSlotIndex, todaySlots, boundaries]);
+
   function pickDay(index: number) {
     setSelectedDayIndex(index);
     setSelection(null);
@@ -115,6 +123,7 @@ export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
   }
 
   function onSlotClick(roomId: string, index: number) {
+    if (didDragRef.current) { didDragRef.current = false; return; } // the click that follows a drag's pointerup; the drag already set the selection
     if (!cellFree(roomId, index) || cellPast(index)) return;
     setError(null);
     setNotice(null);
@@ -130,6 +139,44 @@ export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
     });
   }
 
+  // Drag-to-select (mouse/pen): press a free slot, drag across adjacent free slots to extend the
+  // selection continuously instead of tapping each one. Stops growing at the first busy/past cell
+  // or at the 2-hour cap (MAX_SLOTS) in whichever direction the drag is heading -- same caps as the
+  // tap-to-extend path in onSlotClick above, just applied live as the pointer moves.
+  const dragAnchor = useRef<{ room: string; index: number } | null>(null);
+  const didDragRef = useRef(false);
+  useEffect(() => {
+    const onUp = () => { dragAnchor.current = null; };
+    window.addEventListener("pointerup", onUp);
+    return () => window.removeEventListener("pointerup", onUp);
+  }, []);
+
+  function onSlotPointerDown(roomId: string, index: number) {
+    if (!cellFree(roomId, index) || cellPast(index)) return;
+    dragAnchor.current = { room: roomId, index };
+    didDragRef.current = false;
+  }
+
+  function onSlotPointerEnter(roomId: string, index: number, event: ReactPointerEvent<HTMLButtonElement>) {
+    const anchor = dragAnchor.current;
+    if (!anchor || anchor.room !== roomId || event.buttons !== 1) return;
+    didDragRef.current = true;
+    setError(null);
+    setNotice(null);
+    let startIndex: number;
+    let endIndex: number;
+    if (index >= anchor.index) {
+      startIndex = anchor.index;
+      endIndex = Math.min(index + 1, anchor.index + MAX_SLOTS);
+      for (let i = anchor.index; i < endIndex; i++) { if (!cellFree(roomId, i) || cellPast(i)) { endIndex = i; break; } }
+    } else {
+      endIndex = anchor.index + 1;
+      startIndex = Math.max(index, anchor.index + 1 - MAX_SLOTS);
+      for (let i = anchor.index; i >= startIndex; i--) { if (!cellFree(roomId, i) || cellPast(i)) { startIndex = i + 1; break; } }
+    }
+    setSelection({ room: roomId, dayIndex: selectedDayIndex, startIndex, endIndex });
+  }
+
   const activeSelection = selection?.dayIndex === selectedDayIndex ? selection : null;
   const selectedRoom = activeSelection && bookableRooms.find((room) => room.id === activeSelection.room);
   const selectionWindow = activeSelection && {
@@ -140,14 +187,11 @@ export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
   const atMaxDuration = activeSelection ? activeSelection.endIndex - activeSelection.startIndex >= MAX_SLOTS : false;
 
   const [pending, setPending] = useState<NewReservation | null>(null);
-  const [pendingCancel, setPendingCancel] = useState<string | null>(null);
-  const [pendingCheckIn, setPendingCheckIn] = useState<string | null>(null);
   const [pendingFavorite, setPendingFavorite] = useState<{ room: BookableRoom; next: boolean } | null>(null);
-  const [checkingIn, setCheckingIn] = useState(false);
 
-  // Each of these resumes automatically once `session` appears, which is exactly how F-21's sign-in
-  // gate is supposed to work ("the action continues where I left off") -- a closure captured at click
-  // time would still hold the stale (signed-out) session, so the pending-then-effect handoff is load-bearing here.
+  // Resumes automatically once `session` appears, which is exactly how F-21's sign-in gate is
+  // supposed to work ("the action continues where I left off") -- a closure captured at click time
+  // would still hold the stale (signed-out) session, so the pending-then-effect handoff is load-bearing here.
   useEffect(() => {
     if (!pending || !session) return;
     const input = pending;
@@ -155,53 +199,10 @@ export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
     setBooking(true);
     setError(null);
     void reservationsService.create(input, session.accountId)
-      .then(() => { setSelection(null); setNotice(`Reserved. Check in within ${CHECKIN_WINDOW_MINUTES} minutes of the start time from “My reservations here” below, or it releases automatically.`); setRefreshKey((k) => k + 1); })
+      .then(() => { setSelection(null); setNotice(`Reserved. Check in within ${CHECKIN_WINDOW_MINUTES} minutes of the start time from "My bookings" above, or it releases automatically.`); setRefreshKey((k) => k + 1); })
       .catch((err: unknown) => setError(err instanceof Error ? err.message : "Something went wrong saving on this device. Please try again."))
       .finally(() => setBooking(false));
   }, [pending, session]);
-  useEffect(() => {
-    if (!pendingCancel || !session) return;
-    const id = pendingCancel;
-    setPendingCancel(null);
-    void reservationsService.cancel(id, session.accountId)
-      .then(() => { setNotice("Reservation cancelled."); setRefreshKey((k) => k + 1); })
-      .catch((err: unknown) => setError(err instanceof Error ? err.message : "Something went wrong. Please try again."));
-  }, [pendingCancel, session]);
-  useEffect(() => {
-    if (!pendingCheckIn || !session) return;
-    const id = pendingCheckIn;
-    const accountId = session.accountId;
-    const reservation = myReservations.find((r) => r.id === id);
-    setPendingCheckIn(null);
-    if (!reservation) return;
-    setCheckingIn(true);
-    setError(null);
-    void (async () => {
-      try {
-        // Location check-in (T-61): re-read the browser's position and confirm it's within
-        // CHECKIN_RADIUS_METERS of the room's *building* centroid -- necessarily building-level,
-        // since there's no indoor positioning hardware. Only on success does the service record
-        // checkedInAt; a too-far fix never touches the reservation.
-        const [position, buildings] = await Promise.all([
-          getCurrentPosition(),
-          loadedBuildings() ? Promise.resolve(loadedBuildings()!) : loadBuildings(),
-        ]);
-        const center = buildings.byId.get(reservation.buildingId)?.center;
-        if (!center) throw new Error("This building's location isn't loaded on this device yet -- try again in a moment.");
-        const distance = haversineMeters({ lat: position.lat, lng: position.lng }, { lat: center[1], lng: center[0] });
-        if (distance > CHECKIN_RADIUS_METERS) {
-          throw new Error(`You're ${formatDistance(distance)} from the building -- check-in needs you within about ${CHECKIN_RADIUS_METERS} m of it. Get closer and try again.`);
-        }
-        await reservationsService.checkIn(id, accountId);
-        setNotice("Checked in -- enjoy the room.");
-        setRefreshKey((k) => k + 1);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Something went wrong getting your location. Please try again.");
-      } finally {
-        setCheckingIn(false);
-      }
-    })();
-  }, [pendingCheckIn, session, myReservations]);
   useEffect(() => {
     if (!pendingFavorite || !session) return;
     const { room, next } = pendingFavorite;
@@ -217,11 +218,7 @@ export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
     if (!selectedRoom || !selectionWindow) return;
     requireAuth(() => setPending({ room: selectedRoom.id, buildingId: selectedRoom.buildingId, roomLabel: selectedRoom.label, start: selectionWindow.start, end: selectionWindow.end }));
   }
-  const cancelReservation = (id: string) => requireAuth(() => setPendingCancel(id));
-  const checkIn = (id: string) => requireAuth(() => setPendingCheckIn(id));
   const toggleFavorite = (room: BookableRoom) => requireAuth(() => setPendingFavorite({ room, next: !favoriteIds.has(room.id) }));
-  /** Opens the existing indoor building screen routed to this room -- the same selection the search/room-finder results have always used (BuildingView.tsx reads it via registry.ts#resolveRoom). Also how someone would actually get there in time to check in. */
-  const getDirections = (roomId: string) => select({ kind: "room", id: roomId });
 
   function slotClass(roomId: string, index: number, free: boolean, past: boolean): string {
     const selected = !!(activeSelection && activeSelection.room === roomId && index >= activeSelection.startIndex && index < activeSelection.endIndex);
@@ -244,6 +241,12 @@ export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
 
       {bookableRooms.length === 0 ? (
         <p className="cims-empty" role="status">No bookable rooms to show.</p>
+      ) : visibleRooms.length === 0 ? (
+        <p className="cims-empty" role="status">
+          {nowSlotIndex < 0
+            ? `Outside today's displayed hours (${hourFmt.format(boundaries[0][0].start)}–${hourFmt.format(boundaries[0][boundaries[0].length - 1].end)}) -- can't tell what's free right now.`
+            : "No rooms are free right now. Turn off “Only available rooms” to see the full list."}
+        </p>
       ) : (
         <div className="reserve-grid" role="group" aria-label={`Availability for ${dayFmt.format(days[selectedDayIndex])}`}>
           <div className="reserve-grid__row reserve-grid__row--header">
@@ -256,7 +259,7 @@ export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
               ))}
             </div>
           </div>
-          {bookableRooms.map((room) => {
+          {visibleRooms.map((room) => {
             const favorited = favoriteIds.has(room.id);
             return (
               <div className="reserve-grid__row" key={room.id}>
@@ -290,6 +293,8 @@ export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
                         aria-pressed={selected}
                         aria-label={`${room.label}, ${timeFmt.format(start)}, ${cappedNeighbor ? "2-hour maximum reached" : status}`}
                         title={cappedNeighbor ? "2-hour maximum reached" : undefined}
+                        onPointerDown={() => onSlotPointerDown(room.id, index)}
+                        onPointerEnter={(event) => onSlotPointerEnter(room.id, index, event)}
                         onClick={() => onSlotClick(room.id, index)} />
                     );
                   })}
@@ -323,67 +328,11 @@ export default function ReservationGrid({ rooms }: { rooms: BookableRoom[] }) {
           </div>
           <p className="cims-muted">
             After reserving, check in within {CHECKIN_WINDOW_MINUTES} minutes of the start time using this device's location
-            (see "My reservations here" below) or the room releases automatically for someone else.
+            (see "My bookings" above) or the room releases automatically for someone else.
           </p>
           {!session && <p className="cims-muted">Sign-in required to reserve &mdash; you'll be asked when you tap Reserve.</p>}
         </section>
       )}
-
-      <section className="reserve-mine" aria-label="My reservations">
-        <h3 className="cims-caps">My reservations here</h3>
-        {!session && <p className="cims-muted">Sign in to see and manage your reservations.</p>}
-        {session && myReservations.length === 0 && <p className="cims-muted">No reservations yet.</p>}
-        {myReservations.length > 0 && (
-          <ul className="reserve-mine__list">
-            {myReservations.map((reservation) => {
-              const status = reservationStatus(reservation, now);
-              const deadline = checkinDeadline(reservation);
-              const timeRange = `${dayFmt.format(new Date(reservation.start))}, ${timeFmt.format(new Date(reservation.start))}–${timeFmt.format(new Date(reservation.end))}`;
-              const statusLine: Record<typeof status, string> = {
-                "pending-checkin": `Check in by ${timeFmt.format(deadline)} (within ${CHECKIN_WINDOW_MINUTES} min of the start) or this releases automatically.`,
-                "checked-in": "Checked in -- enjoy the room.",
-                "ending-soon": `Ending soon -- wraps up at ${timeFmt.format(new Date(reservation.end))}.`,
-                "no-show-released": "Released automatically -- no check-in within the window.",
-                "ended": "Ended.",
-                "cancelled": "Cancelled.",
-              };
-              const canCheckIn = status === "pending-checkin";
-              const canCancel = status === "pending-checkin" || status === "checked-in" || status === "ending-soon";
-              return (
-                <li className="reserve-mine__item" key={reservation.id}>
-                  <div className="reserve-mine__info">
-                    <strong>{reservation.roomLabel}</strong>
-                    <span className="cims-muted">{timeRange}</span>
-                    <span className={status === "pending-checkin" || status === "ending-soon" ? "reserve-mine__reminder" : "cims-muted"}>
-                      {statusLine[status]}
-                    </span>
-                    {(status === "no-show-released" || status === "ended") && <span className="cims-tag">{status === "no-show-released" ? "Released" : "Ended"}</span>}
-                  </div>
-                  <div className="cims-actions reserve-mine__actions">
-                    <button type="button" className="cims-btn cims-btn--small" onClick={() => getDirections(reservation.room)}>Get directions</button>
-                    {canCheckIn && (
-                      <button type="button" className="cims-btn cims-btn--small cims-btn--primary" disabled={checkingIn} onClick={() => checkIn(reservation.id)}>
-                        {checkingIn ? "Checking in…" : "Check in"}
-                      </button>
-                    )}
-                    {canCancel && (
-                      <button type="button" className="cims-btn cims-btn--small" onClick={() => cancelReservation(reservation.id)}>Cancel</button>
-                    )}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-        <p className="cims-muted reserve-mine__prototype">
-          <span className="cims-tag cims-tag--alert">Prototype</span> Check-in confirms you're within about {CHECKIN_RADIUS_METERS} m
-          of the <em>building</em> using this device's location -- there's no indoor positioning, so it can't confirm you're in the
-          room itself. No check-in within {CHECKIN_WINDOW_MINUTES} minutes of the start releases the room automatically for someone
-          else. After a reservation ends, this account can't immediately rebook the same room for {REBOOK_COOLDOWN_MINUTES} minutes
-          (a different room is fine right away). Check-in state and reservations live only on this device/browser. "Get directions"
-          is also how you'd actually get there in time to check in.
-        </p>
-      </section>
     </div>
   );
 }

@@ -1,16 +1,48 @@
 /** @file Crisp SVG schematic: typed room fills, fitted labels, connector glyphs, numbered route, keyboard selection, pan and zoom. */
 import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
-import { planShapeBounds, roomCategory, spaceDisplayName } from "../lib/indoorPlan";
+import { planLabelBounds, planShapeBounds, planWalls, roomCategory, spaceDisplayName } from "../lib/indoorPlan";
 import type { IndoorRoute, RouteLeg } from "./route";
 import type { IndoorGraph, IndoorLevel, IndoorSpace } from "./types";
 import "./FloorPlan.css";
 
 type DrawnLevel = Extract<IndoorLevel, { available: true }>;
 type Camera = { x: number; y: number; zoom: number };
+type Box = { x: number; y: number; w: number; h: number };
 
 const MIN_ZOOM = 0.6, MAX_ZOOM = 6;
-/** Rough advance width of a Barlow Condensed capital, in em, and line height. Conservative so labels never spill. */
-const CHAR_EM = 0.56, LINE_EM = 1.12, NUM_EM = 0.62;
+/** Line height in em; text widths are measured with the same fonts as the SVG labels. */
+const LINE_EM = 1.12;
+const measuring = document.createElement("canvas").getContext("2d");
+const advances = new Map<string, number>();
+
+function advance(text: string, number = false): number {
+  const key = `${number}:${text}`;
+  const cached = advances.get(key);
+  if (cached != null) return cached;
+  if (!measuring) return text.length * 0.8;
+  const family = getComputedStyle(document.documentElement).getPropertyValue(number ? "--font-mono" : "--font-display");
+  measuring.font = `${number ? 500 : 600} 100px ${family}`;
+  const width = measuring.measureText(text).width / 100 + text.length * 0.025;
+  advances.set(key, width);
+  return width;
+}
+
+function touches(a: Box, b: Box, pad = 0): boolean {
+  return a.x < b.x + b.w + pad && a.x + a.w + pad > b.x && a.y < b.y + b.h + pad && a.y + a.h + pad > b.y;
+}
+
+/** Carves label space around glyphs and route markers without moving text outside its room. */
+function freeLabelBoxes(box: Box, avoid: Box[]): Box[] {
+  let free = [box];
+  for (const obstacle of avoid) free = free.flatMap((b) => {
+    if (!touches(b, obstacle)) return [b];
+    return [
+      { ...b, w: obstacle.x - b.x }, { ...b, x: obstacle.x + obstacle.w, w: b.x + b.w - obstacle.x - obstacle.w },
+      { ...b, h: obstacle.y - b.y }, { ...b, y: obstacle.y + obstacle.h, h: b.y + b.h - obstacle.y - obstacle.h },
+    ].filter((candidate) => candidate.w > 0 && candidate.h > 0);
+  }).sort((a, b) => b.w * b.h - a.w * a.h).slice(0, 64);
+  return free;
+}
 
 function zoomAt(camera: Camera, factor: number, point: { x: number; y: number } = camera): Camera {
   const zoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, camera.zoom * factor));
@@ -33,29 +65,21 @@ function wrap(words: string[], lines: number): string[] {
 }
 
 /** Picks the largest label that fits inside the room box at this zoom; falls back to the number, then to nothing. */
-function labelLayout(space: IndoorSpace, pxPerUnit: number, avoid: { x: number; y: number }[]) {
-  if (space.shape.kind === "circle") return null;
-  let b = planShapeBounds(space.shape);
-  // A stair or elevator glyph inside the room: put the label in the half of the room away from it.
-  const glyph = avoid.find((p) => p.x > b.x && p.x < b.x + b.w && p.y > b.y && p.y < b.y + b.h);
-  if (glyph) {
-    const r = 12 / pxPerUnit;
-    b = glyph.y - b.y > b.y + b.h - glyph.y ? { ...b, h: glyph.y - r - b.y } : { ...b, y: glyph.y + r, h: b.y + b.h - glyph.y - r };
-  }
+function fitLabelBox(space: IndoorSpace, pxPerUnit: number, b: Box) {
   const pad = Math.min(8, Math.min(b.w, b.h) * 0.1) + 3 / pxPerUnit;
   const w = b.w - pad * 2, h = b.h - pad * 2;
   if (w <= 0 || h <= 0) return null;
   const number = space.room;
   const minPx = 8;
   // Screen-size caps so labels stay a label, not a headline, when you zoom in.
-  const numSize = number ? Math.min(12 / pxPerUnit, w / (number.length * NUM_EM), h * 0.3) : 0;
+  const numSize = number ? Math.min(12 / pxPerUnit, w / advance(number, true), h * 0.3) : 0;
   const reserve = number && numSize * pxPerUnit >= minPx ? numSize * 1.35 : 0;
   const words = (space.type === "void" ? "Open to below" : spaceDisplayName(space)).toUpperCase().split(/\s+/).filter(Boolean);
   let best: { lines: string[]; size: number } = { lines: [], size: 0 };
   for (let n = 1; n <= Math.min(4, words.length); n++) {
     const lines = wrap(words, n);
-    const longest = Math.max(...lines.map((line) => line.length));
-    const size = Math.min(15 / pxPerUnit, w / (longest * CHAR_EM), (h - reserve) / (lines.length * LINE_EM));
+    const longest = Math.max(...lines.map((line) => advance(line)));
+    const size = Math.min(15 / pxPerUnit, w / longest, (h - reserve) / (lines.length * LINE_EM));
     if (size > best.size) best = { lines, size };
   }
   const nameFits = best.size * pxPerUnit >= (number ? 9 : minPx);
@@ -63,20 +87,32 @@ function labelLayout(space: IndoorSpace, pxPerUnit: number, avoid: { x: number; 
   if (nameFits && (numberFits || !number)) return { b, lines: best.lines, size: best.size, number: numberFits ? number : undefined, numSize };
   // Tight numbered room: the published number is what people look for, so it wins over the name.
   if (number) {
-    const alone = Math.min(13 / pxPerUnit, w / (number.length * NUM_EM), h * 0.6);
+    const alone = Math.min(13 / pxPerUnit, w / advance(number, true), h * 0.85);
     if (alone * pxPerUnit >= minPx) return { b, lines: [], size: 0, number, numSize: alone };
+    return null;
   }
   return nameFits ? { b, lines: best.lines, size: best.size, number: undefined, numSize } : null;
 }
 
-function SpaceLabel({ space, pxPerUnit, avoid }: { space: IndoorSpace; pxPerUnit: number; avoid: { x: number; y: number }[] }) {
-  const layout = labelLayout(space, pxPerUnit, avoid);
+/** Try every free rectangle before dropping a label; a smaller area can fit a long room name better. */
+function labelLayout(space: IndoorSpace, pxPerUnit: number, avoid: Box[], viewport: Box) {
+  if (space.shape.kind === "circle") return null;
+  const b = planLabelBounds(space.shape);
+  const x = Math.max(b.x, viewport.x), y = Math.max(b.y, viewport.y);
+  const visible = { x, y, w: Math.min(b.x + b.w, viewport.x + viewport.w) - x, h: Math.min(b.y + b.h, viewport.y + viewport.h) - y };
+  if (visible.w <= 0 || visible.h <= 0) return null;
+  const choices = freeLabelBoxes(visible, avoid).map((box) => fitLabelBox(space, pxPerUnit, box)).filter((layout) => layout !== null);
+  const score = (layout: NonNullable<ReturnType<typeof fitLabelBox>>) => (layout.lines.length ? 1000 : 0) + (layout.number ? 100 : 0) + (layout.lines.length ? layout.size : layout.numSize) * pxPerUnit;
+  return choices.sort((a, b) => score(b) - score(a))[0] ?? null;
+}
+
+function SpaceLabel({ layout, spaceId }: { layout: ReturnType<typeof labelLayout>; spaceId: string }) {
   if (!layout) return null;
   const { b, lines, size, number, numSize } = layout;
   const cx = b.x + b.w / 2;
   const block = lines.length * size * LINE_EM + (number ? numSize * (lines.length ? 1.35 : 1) : 0);
   let y = b.y + b.h / 2 - block / 2;
-  return <g className="floor-plan__label" aria-hidden="true">
+  return <g className="floor-plan__label" data-space={spaceId} aria-hidden="true">
     {lines.length > 0 && <text x={cx} fontSize={size} textAnchor="middle">
       {lines.map((line, i) => { y += size * LINE_EM; return <tspan key={i} x={cx} y={y - size * 0.25}>{line}</tspan>; })}
     </text>}
@@ -100,6 +136,7 @@ export default function FloorPlan({ level, graph, selected, planRoute, onSelect,
 }) {
   const [vx, vy, width, height] = level.viewBox;
   const [stageSize, setStageSize] = useState({ w: width, h: height });
+  const phone = window.matchMedia("(max-width: 767.98px)").matches;
   const aspect = stageSize.w / stageSize.h;
   const stageWidth = Math.max(width, height * aspect);
   const stageHeight = Math.max(height, width / aspect);
@@ -112,6 +149,13 @@ export default function FloorPlan({ level, graph, selected, planRoute, onSelect,
   const k = 1 / pxPerUnit; // plan units per screen pixel
   const route = planRoute?.route;
   const legs = planRoute?.legs;
+  const walls = useMemo(() => planWalls(level), [level]);
+  const [, setFontVersion] = useState(0);
+  useEffect(() => {
+    let alive = true;
+    void document.fonts.ready.then(() => { if (alive) { advances.clear(); setFontVersion((v) => v + 1); } });
+    return () => { alive = false; };
+  }, []);
 
   // Observe the actual stage: the camera viewBox has the same aspect ratio.
   useEffect(() => {
@@ -125,16 +169,18 @@ export default function FloorPlan({ level, graph, selected, planRoute, onSelect,
     return () => observer.disconnect();
   }, []);
 
-  // Home view: the drawn building (shared by every level, so levels line up) filling the stage, with a margin.
+  // Home frames this level, with equal screen-space padding on all sides.
+  const margin = phone ? 28 : 40;
   const home: Camera = frame
-    ? { x: frame.x + frame.w / 2, y: frame.y + frame.h / 2, zoom: Math.min(3, stageWidth / (frame.w * 1.2), stageHeight / (frame.h * 1.14)) }
+    ? { x: frame.x + frame.w / 2, y: frame.y + frame.h / 2, zoom: Math.min(MAX_ZOOM,
+      stageWidth / (frame.w / Math.max(0.1, 1 - 2 * margin / stageSize.w)), stageHeight / (frame.h / Math.max(0.1, 1 - 2 * margin / stageSize.h))) }
     : initial;
   // With a route: frame the whole route plus the destination room, but only when that is a real close-up;
   // a small zoom-in would just crop the plan.
   const fitKey = route?.nodes.map((node) => node.id).join("|") ?? "";
   useEffect(() => {
-    const points: [number, number][] = route?.nodes.map((node) => [node.x, node.y]) ?? [];
-    if (points.length && selected) {
+    const points: [number, number][] = route?.nodes.filter((node) => node.level === level.id).map((node) => [node.x, node.y]) ?? [];
+    if (points.length && selected && level.spaces.some((space) => space.id === selected.id)) {
       const b = planShapeBounds(selected.shape);
       points.push([b.x, b.y], [b.x + b.w, b.y + b.h]);
     }
@@ -142,10 +188,11 @@ export default function FloorPlan({ level, graph, selected, planRoute, onSelect,
     const xs = points.map(([x]) => x), ys = points.map(([, y]) => y);
     const left = Math.min(...xs), top = Math.min(...ys);
     const w = Math.max(...xs) - left, h = Math.max(...ys) - top;
-    const pad = Math.max(width, height) * 0.25;
-    const zoom = Math.min(home.zoom * 1.8, Math.min(stageWidth / (w + pad), stageHeight / (h + pad)));
-    setCamera(zoom < home.zoom * 1.3 ? home : { x: left + w / 2, y: top + h / 2, zoom });
-  }, [fitKey, selected?.id, vx, vy, width, height, stageWidth, stageHeight, home.zoom]); // eslint-disable-line react-hooks/exhaustive-deps
+    const padX = 2 * margin * stageWidth / stageSize.w / home.zoom;
+    const padY = 2 * margin * stageHeight / stageSize.h / home.zoom;
+    const zoom = Math.min(MAX_ZOOM, home.zoom * 2.2, stageWidth / (w + padX), stageHeight / (h + padY));
+    setCamera(zoom < home.zoom * 1.05 ? home : { x: left + w / 2, y: top + h / 2, zoom });
+  }, [fitKey, level.id, selected?.id, vx, vy, width, height, stageWidth, stageHeight, home.x, home.y, home.zoom]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const element = svg.current;
@@ -164,23 +211,43 @@ export default function FloorPlan({ level, graph, selected, planRoute, onSelect,
   const nodeById = useMemo(() => new Map(graph?.nodes.map((node) => [node.id, node]) ?? []), [graph]);
   const connectors = (graph?.connectors ?? []).flatMap((connector) => {
     const node = nodeById.get(connector.nodes[level.id]);
-    return node ? [{ connector, node }] : [];
+    if (!node) return [];
+    // Drawing glyphs belong in their explicit core rooms; the walking graph keeps its door positions.
+    const core = level.spaces.find((space) => space.type === "core" && space.id.includes(connector.kind))
+      ?? (connector.kind === "elevator" ? level.spaces.find((space) => space.type === "core") : undefined);
+    const b = core && planLabelBounds(core.shape);
+    const point = b ? { x: b.x + b.w / 2, y: b.y + b.h / 2 } : node;
+    return [{ connector, node: point }];
   });
-  const glyphPoints = connectors.map(({ node }) => node);
   const entrances = (graph?.entrances ?? []).filter((entrance) => entrance.level === level.id)
     .flatMap((entrance) => { const node = nodeById.get(entrance.node); return node ? [{ entrance, node }] : []; });
 
   // Numbered circles: one per step on this level; steps that land on top of each other at this zoom share one
   // marker labelled with their range ("2–4"), so every number in the list still has its place on the plan.
-  const circles: { first: number; last: number; x: number; y: number; active: boolean }[] = [];
+  const circles: { numbers: number[]; x: number; y: number; active: boolean }[] = [];
   if (route) route.steps.forEach((step, index) => {
     const node = route.nodes[step.node];
     if (!node || node.level !== level.id) return;
     const active = planRoute?.activeStep === index;
-    const near = circles.find((c) => Math.hypot(c.x - node.x, c.y - node.y) < 24 * k);
-    if (near) { near.last = index + 1; near.active ||= active; }
-    else circles.push({ first: index + 1, last: index + 1, x: node.x, y: node.y, active });
+    circles.push({ numbers: [index + 1], x: node.x, y: node.y, active });
   });
+  const markerText = (numbers: number[]) => {
+    const sorted = [...numbers].sort((a, b) => a - b), groups: string[] = [];
+    let first = sorted[0], last = first;
+    for (const number of sorted.slice(1)) {
+      if (number === last + 1) last = number;
+      else { groups.push(first === last ? String(first) : `${first}–${last}`); first = last = number; }
+    }
+    groups.push(first === last ? String(first) : `${first}–${last}`);
+    return groups.join(",");
+  };
+  const markerHalf = (numbers: number[]) => Math.max(11, 5 + advance(markerText(numbers), true) * 6);
+  // Recheck after every merge: a wider range badge can now meet another badge. This is transitive.
+  for (let i = 0; i < circles.length; i++) {
+    const a = circles[i];
+    const j = circles.findIndex((b, index) => index > i && Math.abs(a.x - b.x) < (markerHalf(a.numbers) + markerHalf(b.numbers) + 6) * k && Math.abs(a.y - b.y) < 28 * k);
+    if (j >= 0) { const [b] = circles.splice(j, 1); a.numbers.push(...b.numbers); a.active ||= b.active; i = -1; }
+  }
   // The highlighted stretch: from the active step's node to the next step's node, on this level.
   let highlight: [number, number][] = [];
   if (route && planRoute?.activeStep != null) {
@@ -189,6 +256,83 @@ export default function FloorPlan({ level, graph, selected, planRoute, onSelect,
     highlight = route.nodes.slice(from, Math.max(from, to) + 1).filter((node) => node.level === level.id).map((node) => [node.x, node.y]);
   }
   const start = route?.nodes[0];
+
+  const left = camera.x - stageWidth / camera.zoom / 2, top = camera.y - stageHeight / camera.zoom / 2;
+  const screenBox = (b: Box): Box => ({ x: (b.x - left) / k, y: (b.y - top) / k, w: b.w / k, h: b.h / k });
+  const pinBox = (p: { x: number; y: number }, halfW: number, halfH = halfW): Box => ({ x: p.x - halfW * k, y: p.y - halfH * k, w: halfW * 2 * k, h: halfH * 2 * k });
+  const symbols = [...connectors.map(({ node }) => pinBox(node, 13)), ...entrances.map(({ node }) => pinBox(node, 9)),
+    ...circles.map((c) => pinBox(c, markerHalf(c.numbers) + 3, 14))];
+  const controlBoxes: Box[] = interactive ? [{ x: stageSize.w - 52, y: 0, w: 52, h: 128 },
+    ...(!phone ? [{ x: 0, y: 0, w: 64, h: 60 + (graph ? new Set(graph.nodes.map((node) => node.level)).size : 5) * 44 }] : [])] : [];
+  const controlObstacles = controlBoxes.map((b) => ({ x: left + b.x * k, y: top + b.y * k, w: b.w * k, h: b.h * k }));
+  const routeBoxes = (legs ?? []).flatMap((leg) => leg.points.slice(1).map(([x, y], i) => {
+    const [xx, yy] = leg.points[i];
+    return { x: Math.min(x, xx) - 4 * k, y: Math.min(y, yy) - 4 * k, w: Math.abs(x - xx) + 8 * k, h: Math.abs(y - yy) + 8 * k };
+  }));
+  const labels = level.spaces.map((space) => {
+    let layout = labelLayout(space, pxPerUnit, [...symbols, ...routeBoxes, ...controlObstacles],
+      { x: left + 3 * k, y: top + 3 * k, w: (stageSize.w - 6) * k, h: (stageSize.h - 6) * k });
+    if (layout) {
+      const b = screenBox(layout.b);
+      // A route close-up may crop other rooms: hide their whole label instead of showing cut text.
+      if (b.x < 3 || b.y < 3 || b.x + b.w > stageSize.w - 3 || b.y + b.h > stageSize.h - 3) layout = null;
+    }
+    return { space, layout };
+  });
+  const occupied = symbols.map(screenBox);
+  labels.forEach(({ layout }) => {
+    if (!layout) return;
+    const { b, lines, size, number, numSize } = layout;
+    const w = Math.max(0, ...lines.map((line) => advance(line) * size), number ? advance(number, true) * numSize : 0);
+    const h = lines.length * size * LINE_EM + (number ? numSize * (lines.length ? 1.35 : 1) : 0);
+    occupied.push(screenBox({ x: b.x + (b.w - w) / 2, y: b.y + (b.h - h) / 2, w, h }));
+  });
+  // Keep annotations clear of the level rail and zoom controls as well as the floor's ink walls.
+  occupied.push(...controlBoxes);
+  const wallSegments = [...walls.matchAll(/M([-\d.e+]+),([-\d.e+]+)L([-\d.e+]+),([-\d.e+]+)/g)].map((m) => {
+    const [, x, y, xx, yy] = m.map(Number);
+    return { x: (x - left) / k, y: (y - top) / k, xx: (xx - left) / k, yy: (yy - top) / k };
+  });
+  const crossesWall = (box: Box) => wallSegments.some(({ x, y, xx, yy }) => {
+    // Liang–Barsky clipping, expanded by three pixels for breathing space from the wall.
+    let low = 0, high = 1;
+    const dx = xx - x, dy = yy - y;
+    const p = [-dx, dx, -dy, dy], q = [x - box.x + 3, box.x + box.w + 3 - x, y - box.y + 3, box.y + box.h + 3 - y];
+    for (let i = 0; i < 4; i++) {
+      if (Math.abs(p[i]) < 1e-8) { if (q[i] < 0) return false; }
+      else if (p[i] < 0) low = Math.max(low, q[i] / p[i]);
+      else high = Math.min(high, q[i] / p[i]);
+    }
+    return low <= high;
+  });
+  const annotations: { key: string; text: string; kind: string; box: Box }[] = [];
+  const place = (key: string, text: string, kind: string, anchor: { x: number; y: number }) => {
+    const font = kind === "start" ? 11 : kind === "transition" ? 10 : 9;
+    const w = kind === "start" ? 112 : advance(text) * font + 14, h = kind === "start" ? 22 : 18;
+    const x = (anchor.x - left) / k, y = (anchor.y - top) / k;
+    if (x < 0 || y < 0 || x > stageSize.w || y > stageSize.h) return undefined;
+    for (const distance of [18, 32, 50, 72, 98, 128]) {
+      const candidates = [
+        { x: x - w / 2, y: y + distance }, { x: x - w / 2, y: y - distance - h },
+        { x: x + distance, y: y - h / 2 }, { x: x - distance - w, y: y - h / 2 },
+        { x: x + distance, y: y + distance }, { x: x - distance - w, y: y + distance },
+        { x: x + distance, y: y - distance - h }, { x: x - distance - w, y: y - distance - h },
+      ];
+      for (const position of candidates) {
+        const box = { ...position, w, h };
+        if (box.x < 8 || box.y < 8 || box.x + w > stageSize.w - 8 || box.y + h > stageSize.h - 8) continue;
+        if (occupied.some((other) => touches(box, other, 5)) || crossesWall(box)) continue;
+        annotations.push({ key, text, kind, box }); occupied.push(box); return box;
+      }
+    }
+    return undefined; // The directory and selection retain the full text when the canvas is crowded.
+  };
+  const startBox = start?.level === level.id && planRoute?.startTag ? place("start", planRoute.startTag.title, "start", start) : undefined;
+  route?.transitions.filter((t) => t.level === level.id).forEach((t, i) => place(`t${i}`,
+    `${t.kind === "stairs" ? "STAIRS" : "ELEVATOR"} ${t.direction === "up" ? "↑" : "↓"} ${t.to === "B" ? "BASEMENT" : `LEVEL ${t.to}`}`, "transition", t));
+  if (startBox && planRoute?.startTag) place("start-detail", planRoute.startTag.detail.toUpperCase(), "detail",
+    { x: left + (startBox.x + startBox.w / 2) * k, y: top + (startBox.y + startBox.h) * k });
+  entrances.filter(({ node }) => node.id !== start?.id).forEach(({ entrance, node }) => place(entrance.id, entrance.name.toUpperCase(), "entrance-label", node));
 
   return <div className="floor-plan">
     {interactive && <div className="floor-plan__zoom cims-mapctl" role="group" aria-label="Plan zoom">
@@ -233,45 +377,43 @@ export default function FloorPlan({ level, graph, selected, planRoute, onSelect,
           },
         };
         return <g key={space.id}>
+          <title>{space.name}{space.room && !space.name.includes(space.room) ? `, room ${space.room}` : ""}</title>
           {shape.kind === "rect" ? <rect {...props} x={shape.x} y={shape.y} width={shape.w} height={shape.h} />
             : shape.kind === "circle" ? <circle {...props} cx={shape.cx} cy={shape.cy} r={shape.r} />
             : <polygon {...props} points={shape.points} />}
         </g>;
       })}
-      <path d={level.outline} className="floor-plan__outline" />
-      <g className="floor-plan__labels">{level.spaces.map((space) => <SpaceLabel key={space.id} space={space} pxPerUnit={pxPerUnit} avoid={glyphPoints} />)}</g>
+      <path d={walls} className="floor-plan__outline" />
+      <g className="floor-plan__labels">{labels.map(({ space, layout }) => <SpaceLabel key={space.id} spaceId={space.id} layout={layout} />)}</g>
       <g aria-hidden="true">
-        {connectors.map(({ connector, node }) => <Pin key={connector.id} x={node.x} y={node.y} k={k} className={`floor-plan__glyph floor-plan__glyph--${connector.kind}`} label={connector.name}>
+        {connectors.filter(({ node }) => !circles.some((c) => Math.abs(c.x - node.x) < (markerHalf(c.numbers) + 12) * k && Math.abs(c.y - node.y) < 24 * k))
+          .map(({ connector, node }) => <Pin key={connector.id} x={node.x} y={node.y} k={k} className={`floor-plan__glyph floor-plan__glyph--${connector.kind}`} label={connector.name}>
           <rect x="-10" y="-10" width="20" height="20" />
           {connector.kind === "stairs" ? <path d="M-6 6 H-2 V2 H2 V-2 H6 V-6" /> : <><path d="M-4 -1 L0 -6 L4 -1 Z" /><path d="M-4 1 L0 6 L4 1 Z" /></>}
         </Pin>)}
         {entrances.map(({ entrance, node }) => !(start && start.id === node.id) && <Pin key={entrance.id} x={node.x} y={node.y} k={k} className="floor-plan__entrance" label={entrance.name}>
           <circle r="6" />
-          <text y="18" textAnchor="middle">ENTRANCE</text>
         </Pin>)}
       </g>
       {route && !!legs?.length && <g aria-hidden="true" className="floor-plan__route">
-        {legs.map((leg, index) => <polyline key={index} points={leg.points.map((point) => point.join(",")).join(" ")} style={{ strokeWidth: 3.5 * k, strokeDasharray: `${9 * k} ${6 * k}` }} />)}
-        {highlight.length > 1 && <polyline className="floor-plan__route-active" points={highlight.map((point) => point.join(",")).join(" ")} style={{ strokeWidth: 6 * k }} />}
+        {legs.map((leg, index) => <polyline key={index} points={leg.points.map((point) => point.join(",")).join(" ")} />)}
+        {highlight.length > 1 && <polyline className="floor-plan__route-active" points={highlight.map((point) => point.join(",")).join(" ")} />}
       </g>}
       {route && <g aria-hidden="true">
-        {start?.level === level.id && planRoute?.startTag && <Pin x={start.x} y={start.y} k={k} className="floor-plan__start">
-          <rect x="-56" y="16" width="112" height="22" rx="11" />
-          <text y="31" textAnchor="middle" className="floor-plan__start-title">{planRoute.startTag.title}</text>
-          <text y="51" textAnchor="middle" className="floor-plan__start-detail">{planRoute.startTag.detail.toUpperCase()}</text>
-        </Pin>}
-        {route.transitions.filter((t) => t.level === level.id).map((t, i) => <Pin key={`t${i}`} x={t.x} y={t.y} k={k} className="floor-plan__transition">
-          <text x="16" y="-14">{t.kind === "stairs" ? "STAIRS" : "ELEVATOR"} {t.direction === "up" ? "↑" : "↓"} {t.to === "B" ? "BASEMENT" : `LEVEL ${t.to}`}</text>
-        </Pin>)}
         {circles.map((c) => {
-          const label = c.first === c.last ? String(c.first) : `${c.first}–${c.last}`;
-          const half = Math.max(11, 4 + label.length * 3.8);
-          return <Pin key={c.first} x={c.x} y={c.y} k={k} className={`floor-plan__step${c.active ? " floor-plan__step--active" : ""}`}>
+          const label = markerText(c.numbers), half = markerHalf(c.numbers);
+          return <Pin key={c.numbers[0]} x={c.x} y={c.y} k={k} className={`floor-plan__step${c.active ? " floor-plan__step--active" : ""}`}>
             <rect x={-half} y="-11" width={half * 2} height="22" rx="11" />
             <text textAnchor="middle" dominantBaseline="central">{label}</text>
           </Pin>;
         })}
       </g>}
+      <g aria-hidden="true" className="floor-plan__annotations">
+        {annotations.map(({ key, text, kind, box }) => <Pin key={key} x={left + box.x * k} y={top + box.y * k} k={k} className={`floor-plan__annotation floor-plan__annotation--${kind}`} label={text}>
+          <rect width={box.w} height={box.h} rx={kind === "start" ? 11 : 3} />
+          <text x={box.w / 2} y={box.h / 2} textAnchor="middle" dominantBaseline="central">{text}</text>
+        </Pin>)}
+      </g>
     </svg>
   </div>;
 }

@@ -8,7 +8,7 @@ interface Row {
   id: string; category: IssueCategory; team: Team;
   building_id: string | null; building_name: string | null; floor: string | null; room: string | null;
   lng: number | null; lat: number | null; equipment: string | null; description: string | null;
-  photo_path: string | null; status: ReportStatus; history: StatusEvent[]; plus_ones: number;
+  photo_path: string | null; status: ReportStatus; history: StatusEvent[]; plus_ones: number; open_to_all: boolean;
   created_at: string; sample: boolean;
 }
 
@@ -36,7 +36,7 @@ async function toReports(rows: Row[]): Promise<IssueReport[]> {
     id: r.id, category: r.category, team: r.team, location: toLocation(r),
     equipment: r.equipment, description: r.description,
     photoDataUrl: r.photo_path ? publicUrl("reports", r.photo_path) : null,
-    status: r.status, history: r.history, plusOnes: r.plus_ones, viewerPlusOned: voted.has(r.id),
+    status: r.status, history: r.history, plusOnes: r.plus_ones, openToAll: r.open_to_all, viewerPlusOned: voted.has(r.id),
     createdAt: r.created_at, sample: r.sample,
   }));
 }
@@ -94,6 +94,13 @@ export function createSupabaseReportsService(fallback: ReportsService): ReportsS
     }, () => fallback.setStatus(id, status)),
 
     listByTeam: (team) => safe(async () =>
-      toReports(await rest<Row[]>(`reports?select=*&team=eq.${team}&order=created_at.desc`)), () => fallback.listByTeam(team)),
+      toReports(await rest<Row[]>(`reports?select=*&or=(team.eq.${team},open_to_all.eq.true)&order=created_at.desc`)), () => fallback.listByTeam(team)),
+
+    claim: (id, team) => safe(async () => {
+      await rest("rpc/claim_report", { method: "POST", body: { p_id: id } });
+      const report = await one(id);
+      if (!report) throw new Error("not found");
+      return report;
+    }, () => fallback.claim(id, team)),
   };
 }

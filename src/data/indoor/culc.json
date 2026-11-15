@@ -18,7 +18,7 @@
     890,
     1450
    ],
-   "outline": "M136 268 L268 268 L268 1032 L382 1032 L670 1032 L670 1480 L136 1480 L136 944 L20 944 L20 340 L136 340 Z",
+   "outline": "M136 268 L268 268 L268 188 L660 188 L660 892 L478 892 L478 1032 L670 1032 L670 1480 L612 1480 L612 1594 L20 1594 L20 1058 L136 1058 L136 944 L20 944 L20 340 L136 340 Z",
    "spaces": [
     {
      "id": "culc-152",
@@ -26,7 +26,7 @@
      "type": "classroom",
      "shape": {
       "kind": "polygon",
-      "points": "276,188 660,188 660,530 362,530 362,454 276,454"
+      "points": "268,188 660,188 660,530 362,530 362,454 268,454"
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d1-152",
@@ -39,9 +39,9 @@
      "type": "classroom",
      "shape": {
       "kind": "rect",
-      "x": 276,
+      "x": 268,
       "y": 454,
-      "w": 86,
+      "w": 94,
       "h": 76
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -55,10 +55,10 @@
      "type": "classroom",
      "shape": {
       "kind": "rect",
-      "x": 276,
-      "y": 552,
-      "w": 86,
-      "h": 74
+      "x": 268,
+      "y": 550,
+      "w": 94,
+      "h": 76
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d1-146",
@@ -71,7 +71,7 @@
      "type": "classroom",
      "shape": {
       "kind": "polygon",
-      "points": "362,550 660,550 660,892 276,892 276,626 362,626"
+      "points": "362,550 660,550 660,892 268,892 268,626 362,626"
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d1-144",
@@ -87,7 +87,7 @@
       "x": 20,
       "y": 1058,
       "w": 104,
-      "h": 144
+      "h": 148
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d1-131",
@@ -134,7 +134,7 @@
       "kind": "rect",
       "x": 142,
       "y": 1486,
-      "w": 234,
+      "w": 236,
       "h": 108
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -222,7 +222,7 @@
       "x": 686,
       "y": 228,
       "w": 108,
-      "h": 266
+      "h": 272
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d2-273",
@@ -237,7 +237,7 @@
       "x": 686,
       "y": 500,
       "w": 108,
-      "h": 102
+      "h": 108
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d2-277",
@@ -267,7 +267,7 @@
       "x": 688,
       "y": 858,
       "w": 106,
-      "h": 46
+      "h": 54
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d2-285",
@@ -282,7 +282,7 @@
       "x": 688,
       "y": 912,
       "w": 106,
-      "h": 310
+      "h": 318
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d2-205",
@@ -311,7 +311,7 @@
       "kind": "rect",
       "x": 328,
       "y": 270,
-      "w": 88,
+      "w": 93,
       "h": 107
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -328,7 +328,7 @@
       "x": 421,
       "y": 270,
       "w": 96,
-      "h": 109
+      "h": 114
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d2-272",
@@ -359,7 +359,7 @@
       "x": 421,
       "y": 538,
       "w": 96,
-      "h": 108
+      "h": 114
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d2-278",
@@ -390,7 +390,7 @@
       "kind": "rect",
       "x": 328,
       "y": 556,
-      "w": 88,
+      "w": 93,
       "h": 27
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -406,7 +406,7 @@
       "kind": "rect",
       "x": 328,
       "y": 583,
-      "w": 88,
+      "w": 93,
       "h": 31
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -422,7 +422,7 @@
       "kind": "rect",
       "x": 328,
       "y": 614,
-      "w": 88,
+      "w": 93,
       "h": 30
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -438,7 +438,7 @@
       "kind": "rect",
       "x": 328,
       "y": 644,
-      "w": 88,
+      "w": 93,
       "h": 30
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -454,7 +454,7 @@
       "kind": "rect",
       "x": 328,
       "y": 674,
-      "w": 88,
+      "w": 93,
       "h": 32
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -470,7 +470,7 @@
       "kind": "rect",
       "x": 328,
       "y": 706,
-      "w": 88,
+      "w": 93,
       "h": 32
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -517,7 +517,7 @@
     890,
     1450
    ],
-   "outline": "M178 257 L318 257 L318 400 L496 400 L496 324 L636 324 L636 1480 L284 1480 L284 1584 L88 1584 L88 1080 L178 1080 Z",
+   "outline": "M84 257 L318 257 L318 400 L496 400 L496 324 L734 324 L734 1176 L872 1176 L872 1508 L686 1508 L686 1548 L284 1548 L284 1584 L88 1584 L88 1080 L84 1080 Z",
    "spaces": [
     {
      "id": "culc-373",
@@ -591,7 +591,7 @@
       "x": 638,
       "y": 912,
       "w": 96,
-      "h": 34
+      "h": 40
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d3-385",
@@ -621,7 +621,7 @@
       "kind": "rect",
       "x": 642,
       "y": 1148,
-      "w": 44,
+      "w": 48,
       "h": 28
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -652,7 +652,7 @@
       "x": 84,
       "y": 257,
       "w": 90,
-      "h": 57
+      "h": 63
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d3-367",
@@ -667,7 +667,7 @@
       "x": 84,
       "y": 320,
       "w": 90,
-      "h": 98
+      "h": 104
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d3-365",
@@ -682,7 +682,7 @@
       "x": 86,
       "y": 424,
       "w": 86,
-      "h": 56
+      "h": 64
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d3-363",
@@ -729,7 +729,7 @@
       "x": 86,
       "y": 922,
       "w": 86,
-      "h": 120
+      "h": 128
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d3-335",
@@ -744,7 +744,7 @@
       "kind": "rect",
       "x": 84,
       "y": 1050,
-      "w": 44,
+      "w": 48,
       "h": 30
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -774,7 +774,7 @@
       "kind": "rect",
       "x": 325,
       "y": 408,
-      "w": 79,
+      "w": 85,
       "h": 90
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -806,7 +806,7 @@
       "kind": "rect",
       "x": 325,
       "y": 658,
-      "w": 79,
+      "w": 83,
       "h": 112
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -838,7 +838,7 @@
       "kind": "rect",
       "x": 325,
       "y": 780,
-      "w": 39,
+      "w": 41,
       "h": 34
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -854,7 +854,7 @@
       "kind": "rect",
       "x": 366,
       "y": 780,
-      "w": 36,
+      "w": 42,
       "h": 34
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -871,7 +871,7 @@
       "x": 634,
       "y": 1348,
       "w": 52,
-      "h": 62
+      "h": 64
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d3-315",
@@ -902,7 +902,7 @@
       "kind": "rect",
       "x": 303,
       "y": 1442,
-      "w": 139,
+      "w": 143,
       "h": 100
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -931,11 +931,8 @@
      "name": "Winsett Gallery",
      "type": "circulation",
      "shape": {
-      "kind": "rect",
-      "x": 636,
-      "y": 1166,
-      "w": 236,
-      "h": 342
+      "kind": "polygon",
+      "points": "636,1176 872,1176 872,1508 636,1508 636,1472 686,1472 686,1348 636,1348"
      },
      "source": "Clough Floor Maps (Georgia Tech Library)",
      "door": "d3-winsett-gallery"
@@ -979,7 +976,7 @@
     890,
     1450
    ],
-   "outline": "M192 300 L334 300 L334 444 L508 444 L508 350 L736 350 L736 1132 L872 1132 L872 1552 L100 1552 L100 1050 L192 1050 Z",
+   "outline": "M99 300 L334 300 L334 442 L508 442 L508 350 L752 350 L752 1132 L872 1132 L872 1584 L100 1584 L100 1050 L66 1050 L66 652 L99 652 Z",
    "spaces": [
     {
      "id": "culc-457",
@@ -1005,7 +1002,7 @@
       "x": 99,
       "y": 300,
       "w": 89,
-      "h": 58
+      "h": 62
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d4-469",
@@ -1061,7 +1058,7 @@
       "kind": "rect",
       "x": 100,
       "y": 964,
-      "w": 40,
+      "w": 42,
       "h": 86
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -1094,7 +1091,7 @@
       "x": 338,
       "y": 442,
       "w": 52,
-      "h": 75
+      "h": 82
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d4-466",
@@ -1124,7 +1121,7 @@
       "x": 339,
       "y": 524,
       "w": 51,
-      "h": 36
+      "h": 42
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d4-462",
@@ -1168,7 +1165,7 @@
       "kind": "rect",
       "x": 338,
       "y": 784,
-      "w": 36,
+      "w": 38,
       "h": 66
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
@@ -1201,7 +1198,7 @@
       "x": 646,
       "y": 402,
       "w": 92,
-      "h": 115
+      "h": 122
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d4-473",
@@ -1217,7 +1214,7 @@
       "x": 646,
       "y": 524,
       "w": 92,
-      "h": 124
+      "h": 130
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d4-475",
@@ -1233,7 +1230,7 @@
       "x": 708,
       "y": 654,
       "w": 44,
-      "h": 60
+      "h": 68
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d4-479",
@@ -1248,7 +1245,7 @@
       "x": 646,
       "y": 722,
       "w": 92,
-      "h": 108
+      "h": 115
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d4-481",
@@ -1264,7 +1261,7 @@
       "x": 646,
       "y": 837,
       "w": 92,
-      "h": 111
+      "h": 119
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d4-483",
@@ -1280,7 +1277,7 @@
       "x": 646,
       "y": 956,
       "w": 92,
-      "h": 108
+      "h": 114
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d4-487",
@@ -1373,7 +1370,7 @@
     890,
     1450
    ],
-   "outline": "M496 284 L652 284 L652 1492 L496 1492 L496 1436 L294 1436 L294 608 L496 608 Z M25 218 L293 218 L293 1436 L540 1436 L540 1570 L25 1570 Z",
+   "outline": "M20 218 L293 218 L293 394 L496 394 L496 284 L746 284 L746 1492 L540 1492 L540 1570 L20 1570 Z",
    "spaces": [
     {
      "id": "culc-571",
@@ -1384,7 +1381,7 @@
       "x": 654,
       "y": 317,
       "w": 92,
-      "h": 129
+      "h": 137
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d5-571",
@@ -1400,7 +1397,7 @@
       "x": 654,
       "y": 454,
       "w": 92,
-      "h": 128
+      "h": 136
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d5-573",
@@ -1448,7 +1445,7 @@
       "x": 656,
       "y": 970,
       "w": 78,
-      "h": 150
+      "h": 154
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d5-584",
@@ -1463,7 +1460,7 @@
       "x": 652,
       "y": 1124,
       "w": 92,
-      "h": 154
+      "h": 158
      },
      "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
      "door": "d5-587",

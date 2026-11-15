@@ -4,6 +4,8 @@ import { staffTeam, type Role } from "../../auth/types";
 import { TEAMS, type Team } from "../../lib/issue-routing";
 import { STATUS_LABEL, reportsService, type IssueReport, type ReportStatus } from "../../lib/reports";
 import ReportSummary from "./ReportSummary";
+import UnclaimedReports from "./UnclaimedReports";
+import "../maintenance/maintenance.css";
 
 const STATUSES = Object.keys(STATUS_LABEL) as ReportStatus[];
 
@@ -54,7 +56,8 @@ export default function StaffQueue({ role }: { role: Role }) {
     }
   }
 
-  const groups = reports ? groupByBuilding(reports) : [];
+  const groups = reports ? groupByBuilding(reports.filter((r) => !r.openToAll)) : [];
+  const unclaimed = (reports ?? []).filter((r) => r.openToAll);
 
   return (
     <div className="cims-report__body">
@@ -74,6 +77,7 @@ export default function StaffQueue({ role }: { role: Role }) {
         </div>
       </section>
 
+      <UnclaimedReports reports={unclaimed} team={own} />
       {error && <p className="cims-report__error" role="alert"><strong>Error:</strong> {error}</p>}
       {!reports && !error && <p className="cims-empty" role="status">Loading queue…</p>}
       {reports && groups.length === 0 && <p className="cims-empty" role="status">No reports routed to {team}.</p>}

@@ -64,7 +64,7 @@ export default function ReportStatusView({ reportId, justFiled, onAnother }: Rep
         {report.photoDataUrl && (
           <div className="cims-report__photo"><img src={report.photoDataUrl} alt="Photo attached to this report" /></div>
         )}
-        <p><span className="cims-tag">Routes to: {report.team}</span></p>
+        <p><span className="cims-tag">Routes to: {report.openToAll ? "All teams (waiting for one to claim it)" : report.team}</span></p>
       </section>
 
       <section className="cims-section">

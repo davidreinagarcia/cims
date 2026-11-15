@@ -14,7 +14,7 @@
         "id": "coc-tso-help-desk",
         "name": "College of Computing TSO Help Desk",
         "category": "support",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "TSO",
           "TSO Help Desk",
@@ -68,7 +68,9 @@
         "confidence": "high",
         "building_id": "college-of-computing-building",
         "coord_source": "building centroid: college-of-computing-building",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -84,7 +86,7 @@
         "id": "oit-asc-walk-up-support",
         "name": "OIT Administrative Services Center (ASC) Walk-Up Support",
         "category": "support",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "ASC",
           "OIT Technology Support Center",
@@ -138,7 +140,9 @@
         "confidence": "medium",
         "building_id": "g-wayne-clough-undergraduate-learning-commons",
         "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -154,7 +158,7 @@
         "id": "jlsc-information-desk",
         "name": "John Lewis Student Center Information Desk",
         "category": "support",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "Student Center Info Desk"
         ],
@@ -215,7 +219,9 @@
         "confidence": "high",
         "building_id": "john-lewis-student-center",
         "coord_source": "building centroid: john-lewis-student-center",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -231,7 +237,7 @@
         "id": "georgia-tech-post-office",
         "name": "Georgia Tech Post Office",
         "category": "support",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "GT Post Office",
           "Student Center Post Office",
@@ -289,7 +295,9 @@
         "confidence": "high",
         "building_id": "john-lewis-student-center",
         "coord_source": "building centroid: john-lewis-student-center",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -305,7 +313,7 @@
         "id": "scec-event-services-office",
         "name": "Student and Campus Event Centers Administration and Event Services",
         "category": "support",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "Student Center Event Services Suite"
         ],
@@ -357,7 +365,9 @@
         "confidence": "medium",
         "building_id": "john-lewis-student-center",
         "coord_source": "building centroid: john-lewis-student-center",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -373,7 +383,7 @@
         "id": "buzzcard-center",
         "name": "BuzzCard Center",
         "category": "support",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "BuzzCard Office"
         ],
@@ -425,7 +435,9 @@
         "confidence": "medium",
         "building_id": "john-lewis-student-center",
         "coord_source": "building centroid: john-lewis-student-center",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -441,7 +453,7 @@
         "id": "bursars-office",
         "name": "Office of the Bursar",
         "category": "support",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "Bursar's Office"
         ],
@@ -493,7 +505,9 @@
         "confidence": "medium",
         "building_id": "lyman-hall-building",
         "coord_source": "building centroid: lyman-hall-building",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -509,7 +523,7 @@
         "id": "office-of-disability-services",
         "name": "Office of Disability Services (ODS)",
         "category": "support",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "ODS",
           "Disability Services",
@@ -563,7 +577,9 @@
         "confidence": "medium",
         "building_id": "flag-building-charles-a-smithgall-jr-building",
         "coord_source": "building centroid: flag-building-charles-a-smithgall-jr-building",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -579,7 +595,7 @@
         "id": "gtpd-headquarters",
         "name": "Georgia Tech Police Department (GTPD)",
         "category": "support",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "GTPD",
           "Campus Police"
@@ -594,7 +610,9 @@
         "source_url": "https://president.gatech.edu/sites/default/files/documents/gt-student-mental-health-appendix-a.pdf",
         "confidence": "medium",
         "coord_source": "OSM way 751387123 (David research)",
-        "coord_precision": "exact"
+        "coord_precision": "exact",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -610,7 +628,7 @@
         "id": "pts-customer-service-center",
         "name": "Parking and Transportation Services (PTS) Customer Service Center",
         "category": "support",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "PTS",
           "PTS Customer Service Center"
@@ -629,7 +647,9 @@
         "confidence": "medium",
         "building_id": "technology-square-parking-deck",
         "coord_source": "building centroid: technology-square-parking-deck",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     }
   ]

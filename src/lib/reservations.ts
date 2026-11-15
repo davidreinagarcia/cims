@@ -1,5 +1,7 @@
-/** @file Room reservation contracts (T-60/T-61/F-20) and the one place that picks the backend adapter. Kendeda + CULC only. */
+/** @file Room reservation contracts (T-60/T-61/T-62/F-20) and the one place that picks the backend adapter. Kendeda + CULC only. */
 import type { AvailabilitySlot } from "../indoor/types";
+import { loadBuildings, loadedBuildings } from "./buildings";
+import { formatDistance, getCurrentPosition, haversineMeters } from "./geolocation";
 import { createLocalReservationsService } from "./reservations.mock";
 import { createSupabaseReservationsService } from "./reservations.supabase";
 
@@ -123,3 +125,26 @@ export function reservationStatus(reservation: Reservation, now: Date): Reservat
 
 /** The reservations backend used by the app. Supabase, with the local mock as offline fallback. */
 export const reservationsService: ReservationsService = createSupabaseReservationsService(createLocalReservationsService());
+
+/**
+ * Location check-in (T-61/T-62): re-reads the browser's position and confirms it's within
+ * {@link CHECKIN_RADIUS_METERS} of the reservation's *building* centroid (`src/data/buildings.geojson`
+ * via `lib/buildings.ts`) before calling {@link ReservationsService.checkIn}. Necessarily
+ * building-level, since there's no indoor positioning hardware. Shared by the day/slot grid
+ * (`panels/rooms/ReservationGrid.tsx`) and the top-level "My bookings" section
+ * (`panels/rooms/MyBookingsSection.tsx`) so both check-in flows stay identical -- throws the same
+ * human-readable messages either way; a too-far fix never touches the reservation.
+ */
+export async function checkInNearby(reservation: Reservation, accountId: string): Promise<Reservation> {
+  const [position, buildings] = await Promise.all([
+    getCurrentPosition(),
+    loadedBuildings() ? Promise.resolve(loadedBuildings()!) : loadBuildings(),
+  ]);
+  const center = buildings.byId.get(reservation.buildingId)?.center;
+  if (!center) throw new Error("This building's location isn't loaded on this device yet -- try again in a moment.");
+  const distance = haversineMeters({ lat: position.lat, lng: position.lng }, { lat: center[1], lng: center[0] });
+  if (distance > CHECKIN_RADIUS_METERS) {
+    throw new Error(`You're ${formatDistance(distance)} from the building -- check-in needs you within about ${CHECKIN_RADIUS_METERS} m of it. Get closer and try again.`);
+  }
+  return reservationsService.checkIn(reservation.id, accountId);
+}

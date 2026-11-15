@@ -1,6 +1,8 @@
-/** @file Campus alerts (GTPD alarms) and citizen police tips: types, geometry, and a live store that talks to the real-time server or falls back to this browser only. */
+/** @file Campus alerts (GTPD alarms) and citizen police tips: types, geometry, and a live store on Supabase (Realtime) that falls back to this browser only if the backend is down. */
 import { useSyncExternalStore } from "react";
 import { readLocal, writeLocal } from "./localStore";
+import { watchTable } from "./realtime";
+import { BackendDown, currentAccount, publicUrl, rest, upload } from "./supabase";
 
 /** What kind of danger an alarm announces (drives the label and default wording). */
 export type AlertKind = "armed-person" | "shelter-in-place" | "evacuate" | "fire" | "hazard" | "other";
@@ -74,11 +76,11 @@ export interface PoliceTip {
 /** What the citizen form submits. */
 export type NewPoliceTip = Pick<PoliceTip, "category" | "description" | "photoDataUrl" | "point" | "accuracyM" | "buildingName">;
 
-/** Everything the app knows right now. `tips` stays empty unless the police access code was accepted. */
+/** Everything the app knows right now. `tips` stays empty unless a police or moderator account is signed in. */
 export interface AlertsSnapshot {
   alerts: CampusAlert[];
   tips: PoliceTip[];
-  /** True once the server accepted the police access code (always true in local demo mode). */
+  /** True when the signed-in account is police or moderator (always true in local demo mode). */
   police: boolean;
 }
 
@@ -88,13 +90,11 @@ export type AlertsStatus = "connecting" | "live" | "offline";
 /** The store state React and map layers read. */
 export interface AlertsState extends AlertsSnapshot {
   status: AlertsStatus;
-  /** "remote" talks to the server; "local" is a single-browser demo used when no server answers. */
+  /** "remote" is Supabase; "local" is a single-browser demo used when the backend is unreachable. */
   mode: "remote" | "local" | null;
-  /** The saved access code was rejected by the server. */
-  keyRejected: boolean;
 }
 
-/** Error from a police action; `unauthorized` means the access code is wrong or missing. */
+/** Error from a police action; `unauthorized` means the account is not allowed. */
 export class AlertsError extends Error {
   constructor(public reason: "unauthorized" | "rate-limited" | "invalid" | "offline", message: string) {
     super(message);
@@ -129,68 +129,55 @@ export function alertKindLabel(kind: AlertKind): string {
 
 // ---------------------------------------------------------------- store
 
-const POLICE_KEY_STORAGE = "cims.police.key.v1";
 const LOCAL_KEY = "cims.alerts.local.v1";
-const API = "/api";
-const EMPTY: AlertsState = { alerts: [], tips: [], police: false, status: "connecting", mode: null, keyRejected: false };
+const EMPTY: AlertsState = { alerts: [], tips: [], police: false, status: "connecting", mode: null };
 
 let state: AlertsState = EMPTY;
 const listeners = new Set<() => void>();
 let stop: (() => void) | null = null;
-let policeKey: string | null = null;
-try { policeKey = sessionStorage.getItem(POLICE_KEY_STORAGE); } catch { /* memory only */ }
 
 function set(patch: Partial<AlertsState>) {
   state = { ...state, ...patch };
   listeners.forEach((l) => l());
 }
 
-function readSnapshotEvent(raw: string): AlertsSnapshot | null {
-  try {
-    const data = JSON.parse(raw) as AlertsSnapshot;
-    return Array.isArray(data.alerts) ? { alerts: data.alerts, tips: data.tips ?? [], police: !!data.police } : null;
-  } catch { return null; }
+interface AlertRow { id: string; kind: AlertKind; title: string; message: string; lng: number; lat: number; radius_m: number; test: boolean; status: "active" | "ended"; created_at: string; ended_at: string | null }
+interface TipRow { id: string; category: TipCategory; description: string; photo_path: string | null; lng: number; lat: number; accuracy_m: number | null; building_name: string | null; status: TipStatus; created_at: string }
+
+const toAlert = (r: AlertRow): CampusAlert => ({
+  id: r.id, kind: r.kind, title: r.title, message: r.message, center: [r.lng, r.lat], radiusM: r.radius_m,
+  test: r.test, status: r.status, createdAt: r.created_at, endedAt: r.ended_at,
+});
+const toTip = (r: TipRow): PoliceTip => ({
+  id: r.id, category: r.category, description: r.description, photoDataUrl: r.photo_path ? publicUrl("reports", r.photo_path) : null,
+  point: [r.lng, r.lat], accuracyM: r.accuracy_m, buildingName: r.building_name, status: r.status, createdAt: r.created_at,
+});
+
+/** Whether the signed-in account may see tips and launch alarms. */
+const isPoliceAccount = () => { const r = currentAccount()?.role; return r === "police" || r === "moderator"; };
+
+/** Reads alarms (and tips, for police) from Supabase. Throws BackendDown when it is unreachable. */
+let fetchSeq = 0;
+async function fetchRemote(): Promise<void> {
+  const seq = ++fetchSeq; // several refreshes can be in flight (one per realtime event): only the newest answer may update the state
+  const police = isPoliceAccount();
+  const [alerts, tips] = await Promise.all([
+    rest<AlertRow[]>("alerts?select=*&order=created_at.desc&limit=100"),
+    police ? rest<TipRow[]>("police_tips?select=*&order=created_at.desc&limit=200") : Promise.resolve([] as TipRow[]),
+  ]);
+  if (seq !== fetchSeq) return;
+  set({ alerts: alerts.map(toAlert), tips: tips.map(toTip), police, status: "live" });
 }
 
-/** Opens the live stream (fetch based so the access code travels in a header, not the URL). Returns a stopper. */
 function startRemote(): () => void {
-  const ctrl = new AbortController();
-  let retry = 1000;
-  (async () => {
-    while (!ctrl.signal.aborted) {
-      try {
-        const res = await fetch(`${API}/stream`, { headers: policeKey ? { "x-police-key": policeKey } : {}, signal: ctrl.signal });
-        if (res.status === 401) {
-          forgetKey();
-          set({ keyRejected: true });
-          continue;
-        }
-        if (!res.ok || !res.body) throw new Error(String(res.status));
-        retry = 1000;
-        const reader = res.body.pipeThrough(new TextDecoderStream()).getReader();
-        let buffer = "";
-        for (;;) {
-          const { value, done } = await reader.read();
-          if (done) break;
-          buffer += value;
-          let end: number;
-          while ((end = buffer.indexOf("\n\n")) >= 0) {
-            const block = buffer.slice(0, end);
-            buffer = buffer.slice(end + 2);
-            const data = block.split("\n").filter((l) => l.startsWith("data: ")).map((l) => l.slice(6)).join("\n");
-            const snap = data ? readSnapshotEvent(data) : null;
-            if (snap) set({ ...snap, status: "live", keyRejected: snap.police ? false : state.keyRejected });
-          }
-        }
-      } catch {
-        if (ctrl.signal.aborted) return;
-      }
-      set({ status: "offline" });
-      await new Promise((r) => setTimeout(r, retry));
-      retry = Math.min(retry * 2, 10_000);
-    }
-  })();
-  return () => ctrl.abort();
+  const refresh = () => { void fetchRemote().catch(() => set({ status: "offline" })); };
+  const stops = [watchTable("alerts", refresh, 15_000), watchTable("police_tips", refresh, 15_000)];
+  return () => stops.forEach((f) => f());
+}
+
+/** Re-reads everything now; call after signing in or out so the police view picks up the new role. */
+export function refreshAlerts(): void {
+  if (state.mode === "remote") void fetchRemote().catch(() => set({ status: "offline" }));
 }
 
 interface LocalDb { alerts: CampusAlert[]; tips: PoliceTip[] }
@@ -206,7 +193,7 @@ function mutateLocal(change: (db: LocalDb) => void) {
   pushLocal();
 }
 
-/** Browser-only fallback so the feature still works without the server (other tabs see changes through `storage`). */
+/** Browser-only fallback so the feature still works without the backend (other tabs see changes through `storage`). */
 function startLocal(): () => void {
   const onStorage = (e: StorageEvent) => { if (e.key === LOCAL_KEY) pushLocal(); };
   window.addEventListener("storage", onStorage);
@@ -216,14 +203,13 @@ function startLocal(): () => void {
 
 async function chooseBackend(): Promise<void> {
   try {
-    const res = await fetch(`${API}/health`, { signal: AbortSignal.timeout(3000), cache: "no-store" });
-    const ok = res.ok && (await res.json()).ok === true;
-    if (!ok) throw new Error("no server");
+    await fetchRemote();
     if (stop) return;
     set({ mode: "remote" });
     stop = startRemote();
-  } catch {
+  } catch (e) {
     if (stop) return;
+    if (!(e instanceof BackendDown)) console.warn("[cims] alerts:", e);
     set({ mode: "local" });
     stop = startLocal();
   }
@@ -238,7 +224,7 @@ function subscribe(listener: () => void): () => void {
   };
 }
 
-/** Live alarms, tips and connection state; re-renders on every server push. */
+/** Live alarms, tips and connection state; re-renders on every change. */
 export function useAlerts(): AlertsState {
   return useSyncExternalStore(subscribe, () => state, () => EMPTY);
 }
@@ -248,38 +234,11 @@ export function subscribeAlerts(listener: (s: AlertsState) => void): () => void 
   return subscribe(() => listener(state));
 }
 
-function forgetKey() {
-  policeKey = null;
-  try { sessionStorage.removeItem(POLICE_KEY_STORAGE); } catch { /* ignore */ }
-}
-
-/** Saves the police access code for this tab and reconnects with it; the server answers with tips when it is right. */
-export function setPoliceKey(key: string | null): void {
-  policeKey = key?.trim() || null;
-  try {
-    if (policeKey) sessionStorage.setItem(POLICE_KEY_STORAGE, policeKey);
-    else sessionStorage.removeItem(POLICE_KEY_STORAGE);
-  } catch { /* memory only */ }
-  set({ keyRejected: false, police: state.mode === "local" });
-  if (state.mode === "remote") { stop?.(); stop = startRemote(); }
-}
-
-/** The code currently in use (null when none). */
-export function currentPoliceKey(): string | null {
-  return policeKey;
-}
-
-async function call<T>(path: string, init: RequestInit & { police?: boolean }): Promise<T> {
-  const headers: Record<string, string> = { "content-type": "application/json" };
-  if (init.police && policeKey) headers["x-police-key"] = policeKey;
-  let res: Response;
-  try { res = await fetch(`${API}${path}`, { ...init, headers }); } catch { throw new AlertsError("offline", "No connection to the alert server."); }
-  const body = await res.json().catch(() => ({}));
-  if (res.ok) return body as T;
-  const message = typeof body?.error === "string" ? body.error : "Something went wrong.";
-  if (res.status === 401) throw new AlertsError("unauthorized", message);
-  if (res.status === 429) throw new AlertsError("rate-limited", message);
-  throw new AlertsError("invalid", message);
+/** Turns a Supabase rule rejection into an AlertsError the UI can show. */
+function wrap(e: unknown): never {
+  if (e instanceof BackendDown) throw new AlertsError("offline", "No connection to the alert server.");
+  const message = e instanceof Error ? e.message : "Something went wrong.";
+  throw new AlertsError(/Only GTPD/.test(message) ? "unauthorized" : /Too many/.test(message) ? "rate-limited" : "invalid", message);
 }
 
 /** Police: launches an alarm that every open page shows at once. */
@@ -289,7 +248,13 @@ export async function launchAlert(input: NewAlert): Promise<CampusAlert> {
     mutateLocal((db) => { db.alerts.push(alert); });
     return alert;
   }
-  return call<CampusAlert>("/alerts", { method: "POST", body: JSON.stringify(input), police: true });
+  try {
+    const row = await rest<AlertRow>("rpc/launch_alert", { method: "POST", body: {
+      p_kind: input.kind, p_title: input.title, p_message: input.message, p_lng: input.center[0], p_lat: input.center[1],
+      p_radius: Math.round(input.radiusM), p_test: input.test } });
+    refreshAlerts();
+    return toAlert(row);
+  } catch (e) { return wrap(e); }
 }
 
 /** Police: ends an alarm (everyone sees an all-clear). */
@@ -298,7 +263,7 @@ export async function endAlert(id: string): Promise<void> {
     mutateLocal((db) => { const a = db.alerts.find((x) => x.id === id); if (a && a.status === "active") { a.status = "ended"; a.endedAt = new Date().toISOString(); } });
     return;
   }
-  await call(`/alerts/${id}/end`, { method: "POST", body: "{}", police: true });
+  try { await rest("rpc/end_alert", { method: "POST", body: { p_id: id } }); refreshAlerts(); } catch (e) { wrap(e); }
 }
 
 /** Citizen: sends a police tip; returns its id for status tracking. */
@@ -308,7 +273,14 @@ export async function submitTip(input: NewPoliceTip): Promise<{ id: string; stat
     mutateLocal((db) => { db.tips.push(tip); });
     return { id: tip.id, status: tip.status, createdAt: tip.createdAt };
   }
-  return call("/tips", { method: "POST", body: JSON.stringify(input) });
+  try {
+    let photo_path: string | null = null;
+    if (input.photoDataUrl) photo_path = await upload("reports", await (await fetch(input.photoDataUrl)).blob(), "jpg");
+    const rows = await rest<TipRow[]>("police_tips?select=id,status,created_at", { method: "POST", prefer: "return=representation", body: {
+      category: input.category, description: input.description, photo_path, lng: input.point[0], lat: input.point[1],
+      accuracy_m: input.accuracyM, building_name: input.buildingName } });
+    return { id: rows[0].id, status: rows[0].status, createdAt: rows[0].created_at };
+  } catch (e) { return wrap(e); }
 }
 
 /** Citizen: current status of a tip they sent. */
@@ -317,7 +289,10 @@ export async function tipStatus(id: string): Promise<{ id: string; status: TipSt
     const tip = readLocalDb().tips.find((t) => t.id === id);
     return tip ? { id, status: tip.status, createdAt: tip.createdAt } : null;
   }
-  try { return await call(`/tips/${id}`, {}); } catch { return null; }
+  try {
+    const rows = await rest<TipRow[]>(`police_tips?select=id,status,created_at&id=eq.${encodeURIComponent(id)}`);
+    return rows[0] ? { id, status: rows[0].status, createdAt: rows[0].created_at } : null;
+  } catch { return null; }
 }
 
 /** Police: moves a tip along the queue. */
@@ -326,7 +301,7 @@ export async function setTipStatus(id: string, status: TipStatus): Promise<void>
     mutateLocal((db) => { const t = db.tips.find((x) => x.id === id); if (t) t.status = status; });
     return;
   }
-  await call(`/tips/${id}`, { method: "PATCH", body: JSON.stringify({ status }), police: true });
+  try { await rest("rpc/set_tip_status", { method: "POST", body: { p_id: id, p_status: status } }); refreshAlerts(); } catch (e) { wrap(e); }
 }
 
 /** Asks the map to fly to an alarm (the banner's "Show on map"). */
