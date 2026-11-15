@@ -12,9 +12,9 @@ export const DROP_POINTS = 100;
 export const DROP_COUNT = 5;
 
 /** Team names and map colors (red matches --route family, blue matches --navy family). */
-export const TEAMS: Record<TeamId, { label: string; color: string }> = {
-  red: { label: "Equipo Rojo", color: "#B42318" },
-  blue: { label: "Equipo Azul", color: "#1F5FA8" },
+export const TEAMS: Record<TeamId, { label: string; short: string; color: string }> = {
+  red: { label: "Red Team", short: "Red", color: "#B42318" },
+  blue: { label: "Blue Team", short: "Blue", color: "#1F5FA8" },
 };
 /** Fill color of an unclaimed zone. */
 export const NEUTRAL = "#8A8470";
@@ -40,16 +40,16 @@ export function zoneTemplates(): Zone[] {
 
 /** Pre-loaded matches shown in the lobby. */
 export const SEED_LOBBY: LobbyGame[] = [
-  { id: "seed-dom", name: "Dominación en el Campus", mode: "zones", minutes: 10, players: 6, capacity: 10 },
-  { id: "seed-sprint", name: "Sprint de Checkpoints", mode: "drops", minutes: 5, players: 3, capacity: 8 },
-  { id: "seed-night", name: "Rey de la Colina: Tech Green", mode: "zones", minutes: 15, players: 4, capacity: 8 },
+  { id: "seed-dom", name: "Campus Domination", mode: "zones", minutes: 10, players: 6, capacity: 10 },
+  { id: "seed-sprint", name: "Checkpoint Sprint", mode: "drops", minutes: 5, players: 3, capacity: 8 },
+  { id: "seed-night", name: "King of the Hill: Tech Green", mode: "zones", minutes: 15, players: 4, capacity: 8 },
 ];
 
 /** Display name of a game mode. */
-export const MODE_LABEL = { zones: "Conquista de Zonas", drops: "Carrera de Drops" } as const;
+export const MODE_LABEL = { zones: "Zone Conquest", drops: "Drop Race" } as const;
 
 /** Names for simulated players. */
 export const BOT_NAMES = ["Buzz_Runner", "Ramblin_Rita", "NorthAve_Nico", "Yellow_Jacket", "Hive_Hannah", "Clough_Carl"];
 
 /** One-line pitch of each mode, shown on the create screen. */
-export const MODE_BLURB = { zones: "Captura zonas del campus y mantenlas: cada una suma puntos por segundo.", drops: "Corre hasta cada drop antes que el otro equipo: +100 al reclamarlo." } as const;
+export const MODE_BLURB = { zones: "Capture campus zones and hold them: each one earns points every second.", drops: "Reach each drop before the other team: +100 when you claim it." } as const;

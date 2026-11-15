@@ -57,7 +57,7 @@ const games: MapLayer = {
     map.addLayer({ id: IDS[10], type: "circle", source: SRC.people, filter: ["==", ["get", "me"], false], paint: { "circle-radius": 8, "circle-color": ["get", "color"], "circle-stroke-color": "#FFFFFF", "circle-stroke-width": 2.5 } });
     map.addLayer({ id: IDS[11], type: "symbol", source: SRC.people, filter: ["==", ["get", "me"], false], layout: label({ "text-field": ["get", "name"], "text-size": 9.5, "text-anchor": "bottom", "text-offset": [0, -1] }), paint: halo });
     map.addLayer({ id: IDS[12], type: "circle", source: SRC.people, filter: ["==", ["get", "me"], true], paint: { "circle-radius": 11, "circle-color": ["get", "color"], "circle-stroke-color": "#FFFFFF", "circle-stroke-width": 3.5 } });
-    map.addLayer({ id: IDS[13], type: "symbol", source: SRC.people, filter: ["==", ["get", "me"], true], layout: label({ "text-field": "Tú", "text-anchor": "bottom", "text-offset": [0, -1.4] }), paint: halo });
+    map.addLayer({ id: IDS[13], type: "symbol", source: SRC.people, filter: ["==", ["get", "me"], true], layout: label({ "text-field": "You", "text-anchor": "bottom", "text-offset": [0, -1.4] }), paint: halo });
 
     const setData = (id: string, features: unknown[]) => (map.getSource(id) as GeoJSONSource | undefined)?.setData({ type: "FeatureCollection", features } as never);
 

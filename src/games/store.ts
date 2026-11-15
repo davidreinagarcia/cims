@@ -23,9 +23,9 @@ const FEED_MAX = 4;
 function loadProfile(): Profile {
   try {
     const raw = JSON.parse(localStorage.getItem(PROFILE_KEY) ?? "null") as Partial<Profile> | null;
-    if (raw && typeof raw.nickname === "string" && (raw.team === "red" || raw.team === "blue")) return { nickname: raw.nickname, team: raw.team };
+    if (raw && typeof raw.nickname === "string" && (raw.team === "red" || raw.team === "blue")) return { nickname: raw.nickname.replace(/^Estudiante_/, "Student_"), team: raw.team };
   } catch { /* corrupt or blocked storage: make a new guest */ }
-  const profile: Profile = { nickname: `Estudiante_${10 + Math.floor(Math.random() * 90)}`, team: Math.random() < 0.5 ? "red" : "blue" };
+  const profile: Profile = { nickname: `Student_${10 + Math.floor(Math.random() * 90)}`, team: Math.random() < 0.5 ? "red" : "blue" };
   saveProfile(profile);
   return profile;
 }
@@ -115,7 +115,7 @@ function startGame(meta: Meta) {
       run: ++runSeq, id: meta.id, name: meta.name, mode: meta.mode, capacity: meta.capacity, listedPlayers: meta.listedPlayers,
       secondsLeft: meta.minutes * 60, finished: false,
       zones: meta.mode === "zones" ? zoneTemplates().slice(0, 8) : [], drops, bots,
-      scores: { red: 0, blue: 0 }, playerPoints: 0, feed: [{ id: ++feedSeq, text: `Empieza ${meta.name}`, team: null }],
+      scores: { red: 0, blue: 0 }, playerPoints: 0, feed: [{ id: ++feedSeq, text: `${meta.name} starts`, team: null }],
     },
   });
   timer = window.setInterval(tick, 1000);
@@ -137,7 +137,7 @@ export function joinGame(id: string): boolean {
 export function createGame(opts: { name: string; mode: GameMode; minutes: number; team: TeamId }) {
   leaveGame();
   setTeam(opts.team);
-  const game: LobbyGame = { id: `mine-${Date.now()}`, name: opts.name.trim() || "Partida sin nombre", mode: opts.mode, minutes: opts.minutes, players: 1, capacity: 8, mine: true };
+  const game: LobbyGame = { id: `mine-${Date.now()}`, name: opts.name.trim() || "Untitled match", mode: opts.mode, minutes: opts.minutes, players: 1, capacity: 8, mine: true };
   joinedLobbyId = game.id;
   set({ lobby: [game, ...state.lobby] });
   startGame({ ...game, listedPlayers: 4 }); // a fresh room fills up with bots so it is not empty
@@ -174,10 +174,10 @@ export function setSimulate(on: boolean) {
 }
 function startWatch() {
   stopWatch();
-  if (!("geolocation" in navigator)) { set({ simulate: true, gpsMessage: "Este navegador no ofrece GPS." }); return; }
+  if (!("geolocation" in navigator)) { set({ simulate: true, gpsMessage: "This browser has no GPS." }); return; }
   watchId = navigator.geolocation.watchPosition(
     (p) => { set({ player: { lng: p.coords.longitude, lat: p.coords.latitude } }); checkDrops(); },
-    () => { stopWatch(); set({ simulate: true, gpsMessage: "GPS no disponible: usa clic para moverte." }); },
+    () => { stopWatch(); set({ simulate: true, gpsMessage: "GPS unavailable: click the map to move." }); },
     { enableHighAccuracy: true, maximumAge: 5000, timeout: 15000 },
   );
 }
@@ -208,7 +208,7 @@ export function captureZone() {
   setGame({
     zones: g.zones.map((z) => (z.id === zone.id ? { ...z, owner: state.profile.team } : z)),
     playerPoints: g.playerPoints + 50,
-    feed: pushFeed(g.feed, `Capturaste ${zone.name}`, state.profile.team),
+    feed: pushFeed(g.feed, `You captured ${zone.name}`, state.profile.team),
   });
 }
 
@@ -224,7 +224,7 @@ function checkDrops() {
   setGame({
     drops, playerPoints: g.playerPoints + DROP_POINTS * hit.length,
     scores: { ...g.scores, [team]: g.scores[team] + DROP_POINTS * hit.length },
-    feed: pushFeed(g.feed, `Reclamaste un drop (+${DROP_POINTS * hit.length})`, team),
+    feed: pushFeed(g.feed, `You claimed a drop (+${DROP_POINTS * hit.length})`, team),
     finished: drops.every((d) => d.claimedBy),
   });
   if (state.game?.finished) stopEngine();
@@ -253,7 +253,7 @@ function tick() {
       const zone = zones.find((z) => haversineMeters(b, z) <= RADIUS_M && z.owner !== b.team);
       if (zone && Math.random() < 0.6) {
         zones = zones.map((z) => (z.id === zone.id ? { ...z, owner: b.team } : z));
-        feed = pushFeed(feed, `${b.nickname} capturó ${zone.name}`, b.team);
+        feed = pushFeed(feed, `${b.nickname} captured ${zone.name}`, b.team);
         b = { ...b, points: b.points + 50 };
       }
     } else {
@@ -261,7 +261,7 @@ function tick() {
       if (drop) {
         drops = drops.map((d) => (d.id === drop.id ? { ...d, claimedBy: b.nickname, team: b.team } : d));
         scores = { ...scores, [b.team]: scores[b.team] + DROP_POINTS };
-        feed = pushFeed(feed, `${b.nickname} reclamó un drop`, b.team);
+        feed = pushFeed(feed, `${b.nickname} claimed a drop`, b.team);
         b = { ...b, points: b.points + DROP_POINTS };
       }
     }
