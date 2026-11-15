@@ -7,11 +7,13 @@
         "id": "clough-printing",
         "name": "Clough Printing",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "description": "Student printing locations inside Clough Undergraduate Learning Commons.",
         "source_url": "https://news.gatech.edu/features/2024/08/first-year-survival-tips",
         "building_id": "clough",
-        "coord_source": "OSM relation 3178622 (G. Wayne Clough Undergraduate Learning Commons), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM relation 3178622 (G. Wayne Clough Undergraduate Learning Commons), building representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -27,11 +29,13 @@
         "id": "college-computing-pharos",
         "name": "College of Computing Pharos Printing",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "description": "Pharos printing serves instructional labs on the first floor of the College of Computing Building.",
         "source_url": "https://support.cc.gatech.edu/services/printing",
         "floor_or_suite": "1st floor instructional labs",
-        "coord_source": "OSM way 42706125 (College of Computing Building), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 42706125 (College of Computing Building), building representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -47,7 +51,7 @@
         "id": "crosland-printing",
         "name": "Crosland Tower Printing",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "description": "Student printing locations inside Crosland Tower.",
         "source_url": "https://news.gatech.edu/features/2024/08/first-year-survival-tips",
         "coord_source": "OSM relation 3178620 (Dorothy Murray Crosland Tower), building representative point returned by Nominatim lookup",
@@ -94,7 +98,9 @@
               "23:59"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -110,7 +116,7 @@
         "id": "print-studio-price-gilbert",
         "name": "Library Print Studio",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "description": "Staff-assisted poster printing on the third floor of Price Gilbert.",
         "source_url": "https://library.gatech.edu/print-studio",
         "building_id": "library",
@@ -166,7 +172,9 @@
           "note": "BuzzCard (with funds loaded) or submitted departmental funding ticket required for poster payment."
         },
         "url": "https://library.gatech.edu/print-studio",
-        "floor_or_room": "3rd Floor"
+        "floor_or_room": "3rd Floor",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -182,7 +190,7 @@
         "id": "printing-copying-services-marietta",
         "name": "Printing and Copying Services",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "description": "Campus print service offering binding and a choice of paper.",
         "source_url": "https://arch.gatech.edu/student-resource-guide",
         "address": "811 Marietta St NW, Atlanta, GA 30318",
@@ -220,7 +228,9 @@
           ],
           "sat": [],
           "sun": []
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -236,12 +246,14 @@
         "id": "student-org-hub-print-release",
         "name": "Student Organizations Hub Print Release Station",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "description": "A print release station in the Student Organizations Hub Resource Room.",
         "source_url": "https://studentengagement.gatech.edu/student-organizations-hub",
         "building_id": "student-center",
         "floor_or_suite": "Student Organizations Hub Resource Room",
-        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -264,7 +276,7 @@
         "id": "crosland-grove-printers",
         "name": "Crosland Tower Grove Level Printers and Copier/Scanner",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "description": "Self-service black-and-white printer and color printer with scanner/copier on Crosland Grove level.",
         "address": "260 4th Street NW, Atlanta, GA 30332",
         "building": "Dorothy Crosland Tower",
@@ -323,7 +335,9 @@
               "24:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -339,7 +353,7 @@
         "id": "crosland-2f-bw-printer",
         "name": "Crosland Tower 2nd Floor B&W Printer",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "description": "Black-and-white Pharos printer located near the yellow staircase on Crosland 2nd floor.",
         "address": "260 4th Street NW, Atlanta, GA 30332",
         "building": "Dorothy Crosland Tower",
@@ -398,7 +412,9 @@
               "24:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -414,7 +430,7 @@
         "id": "crosland-6f-gsc-color-printer",
         "name": "Crosland Tower 6th Floor Color Printer (Graduate Student Community)",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "GSC Printer"
         ],
@@ -476,7 +492,9 @@
               "24:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -492,7 +510,7 @@
         "id": "price-gilbert-3f-purple-zone-printer",
         "name": "Price Gilbert 3rd Floor Purple Zone Color Printer",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "description": "Self-service color printer in the Price Gilbert 3rd floor Purple Computing Zone.",
         "address": "260 4th Street NW, Atlanta, GA 30332",
         "building": "Price Gilbert Memorial Library",
@@ -551,7 +569,9 @@
               "24:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -567,7 +587,7 @@
         "id": "clough-2f-color-printer",
         "name": "Clough Commons 2nd Floor Color Printer",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "CULC 2nd Floor Printer"
         ],
@@ -629,7 +649,9 @@
               "24:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -645,7 +667,7 @@
         "id": "clough-3f-pink-zone-printer",
         "name": "Clough Commons 3rd Floor B&W Printer (Pink Computing Zone)",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "CULC 3rd Floor Printer"
         ],
@@ -707,7 +729,9 @@
               "24:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -723,7 +747,7 @@
         "id": "clough-4f-bw-printer",
         "name": "Clough Commons 4th Floor B&W Printer",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "CULC 4th Floor Printer"
         ],
@@ -785,7 +809,9 @@
               "24:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -801,7 +827,7 @@
         "id": "ccb-1f-pharos-printer",
         "name": "College of Computing Building 1st Floor Pharos Station",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "CCB 148 Printer"
         ],
@@ -819,7 +845,9 @@
         "confidence": "medium",
         "building_id": "college-of-computing-building",
         "coord_source": "building centroid: college-of-computing-building",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -835,7 +863,7 @@
         "id": "ccb-ground-pharos-printer",
         "name": "College of Computing Building Ground Floor Pharos Station",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "CCB 16 Printer"
         ],
@@ -853,7 +881,9 @@
         "confidence": "medium",
         "building_id": "college-of-computing-building",
         "coord_source": "building centroid: college-of-computing-building",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -869,7 +899,7 @@
         "id": "klaus-ece-public-lab-printers",
         "name": "Klaus ECE Public Lab Pharos Printers",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "Klaus 1446/1448/2440 Printers"
         ],
@@ -931,7 +961,9 @@
               "24:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -947,7 +979,7 @@
         "id": "van-leer-c257-ece-lab-printer",
         "name": "Van Leer C257 ECE Public Lab Pharos Printer",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "description": "24-hour ECE public thin-client lab connected to ECE Pharos black-and-white and color print queues.",
         "building": "Van Leer Building",
         "hours_note": "Open 24 hours via BuzzCard; User Assistants staffed 10:00-22:00 normally and 09:00-17:00 during finals week.",
@@ -1005,7 +1037,9 @@
               "24:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -1021,7 +1055,7 @@
         "id": "architecture-west-359a-plotters",
         "name": "Architecture West Plotter Printers",
         "category": "printing",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "ID Plotters"
         ],
@@ -1067,7 +1101,9 @@
         "confidence": "medium",
         "building_id": "architecture-west",
         "coord_source": "building centroid: architecture-west",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     }
   ]
