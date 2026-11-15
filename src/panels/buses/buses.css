@@ -1,5 +1,5 @@
 /** @file Buses panel: destination field, route list, trip options and the Stingerette card (T-42). */
-.buses { display: grid; gap: var(--s3); }
+.buses { display: grid; gap: var(--s3); padding: var(--s4); min-width: 0; overflow-wrap: anywhere; }
 .buses__dest { display: flex; gap: var(--s2); align-items: end; }
 .buses__dest > :first-child { flex: 1; min-width: 0; }
 .bus-options { display: grid; gap: var(--s3); }
