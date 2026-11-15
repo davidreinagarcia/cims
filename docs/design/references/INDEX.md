@@ -6,6 +6,7 @@ Reference images (Gemini mockups). Mood references, not specs; their data is fak
 
 **Files**
 
+- [`bulletin-corkboard-01.jpg`](bulletin-corkboard-01.jpg): image
 - [`floor-plan-01.webp`](floor-plan-01.webp): image
 - [`glyphs-pins-01.webp`](glyphs-pins-01.webp): image
 - [`layers-legend-01.webp`](layers-legend-01.webp): image
