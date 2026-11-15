@@ -25,9 +25,11 @@ export interface BuildingIndex {
   list: Building[];
   /** The building whose footprint contains the point, if any. */
   at: (lng: number, lat: number) => Building | undefined;
+  /** Feature ids of the stacked volumes (towers on a podium) drawn for a building, by building id. */
+  partsOf: Map<string, string[]>;
 }
 
-type Props = { id: string; name?: string; aliases?: string[]; address?: string; height?: number; height_source?: string; levels?: number; osm_id?: string };
+type Props = { id: string; part_of?: string; name?: string; aliases?: string[]; address?: string; height?: number; height_source?: string; levels?: number; osm_id?: string };
 type Footprint = GeoJSON.Polygon | GeoJSON.MultiPolygon;
 
 function ringContains(ring: number[][], x: number, y: number): boolean {
@@ -47,7 +49,13 @@ function contains(b: Building, x: number, y: number): boolean {
 
 function build(fc: GeoJSON.FeatureCollection<Footprint, Props>): BuildingIndex {
   const list: Building[] = [];
+  const partsOf = new Map<string, string[]>();
   for (const f of fc.features) {
+    // A part is a volume of its parent, not a building of its own: no search hit, no card, no footprint lookup.
+    if (f.properties.part_of) {
+      partsOf.set(f.properties.part_of, [...(partsOf.get(f.properties.part_of) ?? []), f.properties.id]);
+      continue;
+    }
     if (!f.geometry || (f.geometry.type !== "Polygon" && f.geometry.type !== "MultiPolygon")) continue;
     const polygons = f.geometry.type === "Polygon" ? [f.geometry.coordinates] : f.geometry.coordinates;
     let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
@@ -66,7 +74,7 @@ function build(fc: GeoJSON.FeatureCollection<Footprint, Props>): BuildingIndex {
     });
   }
   const byId = new Map(list.map((b) => [b.id, b]));
-  return { byId, list, at: (lng, lat) => list.find((b) => contains(b, lng, lat)) };
+  return { byId, list, partsOf, at: (lng, lat) => list.find((b) => contains(b, lng, lat)) };
 }
 
 let loaded: BuildingIndex | null = null;
