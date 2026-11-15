@@ -61,7 +61,8 @@ export default function BusesPanel() {
     {showFrom ? <div className="buses__from">
       <div className="buses__dest">
         <PlaceField label="Where are you now?" placeholder="Search a building or place" buildings={buildings} picked={from} onPick={setFrom} />
-        {(from || editFrom) && gps.status !== "failed" && <button type="button" className="cims-btn" onClick={() => { setFrom(null); setEditFrom(false); }}>Use my location</button>}
+        {(from || (editFrom && gps.status !== "failed")) && <button type="button" className="cims-btn"
+          onClick={() => { setFrom(null); if (gps.status === "ok") setEditFrom(false); else retry(); }}>Use my location</button>}
       </div>
       {!from && gps.status === "failed" && <p className="buses__hint">{gps.message} Type where you are to see bus times.{" "}
         <button type="button" className="buses__link" onClick={retry}>Try my location again</button></p>}
