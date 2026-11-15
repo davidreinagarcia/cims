@@ -6,6 +6,7 @@ import BuildingView from "../indoor/BuildingView";
 import AccountChip from "../panels/account/AccountChip";
 import SignInDialog from "../panels/account/SignInDialog";
 import BuildingCard from "../panels/building-card/BuildingCard";
+import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinPanel from "../panels/bulletin/BulletinPanel";
 import { useAuth } from "../state/auth";
@@ -89,7 +90,7 @@ export default function Shell() {
   else if (selection) content = {
     title: selection.kind === "building" ? "Building" : "Place",
     key: `${selection.kind}:${selection.id}`,
-    body: <><PlaceCard /><BuildingCard /></>,
+    body: <><PlaceCard /><BuildingPreview /><BuildingCard /></>,
   };
   const showResults = hasQuery && !selection && panel === "explore";
 

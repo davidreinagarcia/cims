@@ -7,6 +7,7 @@ import { useAuth } from "../state/auth";
 import FloorPlan from "./FloorPlan";
 import RoomSearch from "./RoomSearch";
 import { findRoute } from "./route";
+import { closeIndoor, useOpenIndoor } from "./open";
 import { indoorFor, resolveRoom } from "./registry";
 import type { IndoorBuilding, IndoorSpace, IndoorSpaceType, RoomFact } from "./types";
 import "./BuildingView.css";
@@ -18,14 +19,19 @@ const typeLabels: Record<IndoorSpaceType, string> = {
 /** Opens registered buildings and resolves room selections straight into a routed building screen. */
 export default function BuildingView() {
   const { selection } = useSelection();
+  const open = useOpenIndoor();
   const room = selection?.kind === "room" ? resolveRoom(selection.id) : undefined;
-  const building = selection?.kind === "building" ? indoorFor(selection.id) : room?.building;
+  // Picking a building shows its preview card; the full screen opens from the card (or straight from a room or a door sticker).
+  const building = selection?.kind === "building" ? (open === selection.id ? indoorFor(selection.id) : undefined) : room?.building;
+  useEffect(() => { if (open && selection?.kind !== "building") closeIndoor(); }, [open, selection]);
   return building ? <BuildingScreen key={building.building_id} building={building} initialRoom={room?.routable ? room.space : undefined} initialFact={room && !room.routable ? room.space : undefined} /> : null;
 }
 
 function BuildingScreen({ building, initialRoom, initialFact }: { building: IndoorBuilding; initialRoom?: IndoorSpace; initialFact?: RoomFact }) {
-  const { select } = useSelection();
+  const { selection, select } = useSelection();
   const { dialogOpen } = useAuth();
+  // Opened from a building card: leaving returns to that card; opened from a room: leaving returns to the map.
+  const leave = () => (selection?.kind === "building" ? closeIndoor() : select(null));
   const graph = building.graph;
   const destinations = useMemo(() => building.levels.flatMap((level) => level.available
     ? level.spaces.filter((space) => space.type !== "void").map((space) => ({ ...space, level: level.id })) : []), [building]);
@@ -92,7 +98,7 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
       if (event.key !== "Escape" || event.defaultPrevented || dialogOpen) return;
       event.preventDefault();
       if (changeStart || pickStart) { setChangeStart(false); setPickStart(false); startControl.current?.focus(); }
-      else select(null);
+      else leave();
     };
     window.addEventListener("keydown", close);
     return () => window.removeEventListener("keydown", close);
@@ -100,7 +106,7 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
 
   return <section ref={screen} className="building-view" aria-labelledby="indoor-title">
     <header className="building-view__header">
-      <button ref={back} className="cims-btn" type="button" onClick={() => select(null)}>Back to map</button>
+      <button ref={back} className="cims-btn" type="button" onClick={leave}>Back to map</button>
       <h2 id="indoor-title" className="cims-card__name">{facts?.name ?? building.title}</h2>
       {!!facts?.aliases.length && <span className="cims-card__alias">{facts.aliases.join(", ")}</span>}
       <span className="cims-tag">{building.status === "schematic" ? "Schematic plan" : building.status === "rooms-only" ? "Room finder" : "No floor plan yet"}</span>
