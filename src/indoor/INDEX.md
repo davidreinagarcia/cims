@@ -7,12 +7,15 @@ Building screen, vector schematic renderer and indoor contracts shared by lanes 
 
 **Files**
 
-- [`BuildingView.css`](BuildingView.css): * @file Aligned room finder, generous survey canvas and quiet directory on a sixteen pixel grid.
-- [`BuildingView.tsx`](BuildingView.tsx): Room first building screen with immediate routing, plan navigation and collapsible building facts. · exports `BuildingView`
-- [`FloorPlan.css`](FloorPlan.css): * @file Vector plan canvas, survey controls and room interaction states.
-- [`FloorPlan.tsx`](FloorPlan.tsx): Crisp SVG schematic with keyboard space selection, pointer pan and bounded pointer-centered zoom. · exports `FloorPlan`
+- [`BuildingView.css`](BuildingView.css): * @file Building screen layout: breadcrumb header, hero plan frame with level rail and legend, room card, pho…
+- [`BuildingView.tsx`](BuildingView.tsx): Building screen: breadcrumb header, hero plan with level rail and legend, room card with booking, report and… · exports `BuildingView`
+- [`FloorPlan.css`](FloorPlan.css): * @file Vector plan canvas: flat typed fills, ink walls, fitted labels, connector glyphs, numbered dashed rou…
+- [`FloorPlan.tsx`](FloorPlan.tsx): Crisp SVG schematic: typed room fills, fitted labels, connector glyphs, numbered route, keyboard selection, p… · exports `FloorPlan`
 - [`RoomSearch.tsx`](RoomSearch.tsx): One keyboard accessible room picker across every available building level. · exports `RoomSearch`
+- [`StackView.css`](StackView.css): * @file Stack view: CSS 3D plates (perspective, tilt, translateZ per level), flat labels and dashed vertical…
+- [`StackView.tsx`](StackView.tsx): Exploded "stack" view (concept B): every drawn level as a plate in one CSS 3D scene, with the route and its v… · exports `STACK_VIEW_ENABLED`, `StackView`
 - [`availability.ts`](availability.ts): Pure room-finder queries (F-11) and campus-local expansion of fictional weekly demo slots. · exports `bookableRoomsFor`, `favoriteRoomsFrom`, `crossBuildingBookableRooms`, `isRoomFree`, `findFreeRooms`, `freeUntil`, `nowWindow`, `campusTimeToday`, `expandDemoSlots`
+- [`handoff.ts`](handoff.ts): Hands a room from the indoor screen to the shell's existing reservations panel ("Book this room"). · exports `requestBooking`, `peekBookingRequest`, `clearBookingRequest`, `useBookingRequestSeq`
 - [`open.ts`](open.ts): Which indoor building screen is open: picking a building shows a preview card first, this opens its full scre… · exports `openIndoor`, `closeIndoor`, `useOpenIndoor`
 - [`registry.ts`](registry.ts): Registry of buildings with an indoor screen, including explicit no-plan placeholders. · exports `indoorFor`, `hasIndoor`, `indoorRooms`, `resolveRoom`, `indoorBySlug`, `doorLink`, `doorUrl`
 - [`roomFinderDemo.ts`](roomFinderDemo.ts): Loads the Kendeda + CULC room finder/reservation demo seeds (F-11/F-20, T-24/T-60) and indexes them by select… · exports `roomAmenitiesById`, `demoSlotPatterns`

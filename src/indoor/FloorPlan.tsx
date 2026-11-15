@@ -1,41 +1,103 @@
-/** @file Crisp SVG schematic with keyboard space selection, pointer pan and bounded pointer-centered zoom. */
-import { useEffect, useRef, useState } from "react";
+/** @file Crisp SVG schematic: typed room fills, fitted labels, connector glyphs, numbered route, keyboard selection, pan and zoom. */
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
+import { planShapeBounds, roomCategory, spaceDisplayName } from "../lib/indoorPlan";
 import type { IndoorRoute, RouteLeg } from "./route";
-import type { IndoorLevel, IndoorShape, IndoorSpace } from "./types";
+import type { IndoorGraph, IndoorLevel, IndoorSpace } from "./types";
 import "./FloorPlan.css";
 
 type DrawnLevel = Extract<IndoorLevel, { available: true }>;
 type Camera = { x: number; y: number; zoom: number };
 
-function bounds(shape: IndoorShape) {
-  if (shape.kind === "rect") return { x: shape.x, y: shape.y, w: shape.w, h: shape.h };
-  if (shape.kind === "circle") return { x: shape.cx - shape.r, y: shape.cy - shape.r, w: shape.r * 2, h: shape.r * 2 };
-  const points = shape.points.trim().split(/\s+/).map((point) => point.split(",").map(Number));
-  const xs = points.map(([x]) => x), ys = points.map(([, y]) => y);
-  const x = Math.min(...xs), y = Math.min(...ys);
-  return { x, y, w: Math.max(...xs) - x, h: Math.max(...ys) - y };
-}
+const MIN_ZOOM = 0.6, MAX_ZOOM = 6;
+/** Rough advance width of a Barlow Condensed capital, in em, and line height. Conservative so labels never spill. */
+const CHAR_EM = 0.56, LINE_EM = 1.12, NUM_EM = 0.62;
 
 function zoomAt(camera: Camera, factor: number, point: { x: number; y: number } = camera): Camera {
-  const zoom = Math.max(0.6, Math.min(6, camera.zoom * factor));
+  const zoom = Math.max(MIN_ZOOM, Math.min(MAX_ZOOM, camera.zoom * factor));
   return { x: point.x + (camera.x - point.x) * camera.zoom / zoom,
     y: point.y + (camera.y - point.y) * camera.zoom / zoom, zoom };
 }
 
-function SpaceLabel({ space }: { space: IndoorSpace }) {
-  const b = bounds(space.shape);
-  // Conservatively fit the whole label; tiny spaces remain available in the directory.
-  // Numbered rooms show just the number on the plan; the full name lives in the directory and card.
-  const words = (space.type === "void" ? "open to below" : space.room ?? space.name).toUpperCase().split(" ");
-  const size = Math.min(space.room ? 26 : 13, (b.w - 14) / (Math.max(...words.map((word) => word.length)) * 0.65), (b.h - 12) / (words.length * 1.25));
-  if (size < 8 || space.shape.kind === "circle") return null;
-  return <text className="floor-plan__label" x={b.x + b.w / 2} y={b.y + b.h / 2 - (words.length - 1) * size * 0.625} fontSize={size} textAnchor="middle" dominantBaseline="central" aria-hidden="true">
-    {words.map((word, i) => <tspan key={i} x={b.x + b.w / 2} dy={i ? size * 1.25 : 0}>{word}</tspan>)}
-  </text>;
+/** Splits words into n lines of similar length (greedy against the average). */
+function wrap(words: string[], lines: number): string[] {
+  const target = words.join(" ").length / lines;
+  const out: string[] = [];
+  let line = "";
+  for (const word of words) {
+    const next = line ? `${line} ${word}` : word;
+    if (line && next.length > target * 1.15 && out.length < lines - 1) { out.push(line); line = word; }
+    else line = next;
+  }
+  if (line) out.push(line);
+  return out;
 }
 
-/** Renders one available level with controls and brings the selected space into view. */
-export default function FloorPlan({ level, selected, focus, route, legs, onSelect }: { level: DrawnLevel; selected?: IndoorSpace; focus?: IndoorSpace; route?: IndoorRoute; legs?: RouteLeg[]; onSelect: (space: IndoorSpace) => void }) {
+/** Picks the largest label that fits inside the room box at this zoom; falls back to the number, then to nothing. */
+function labelLayout(space: IndoorSpace, pxPerUnit: number, avoid: { x: number; y: number }[]) {
+  if (space.shape.kind === "circle") return null;
+  let b = planShapeBounds(space.shape);
+  // A stair or elevator glyph inside the room: put the label in the half of the room away from it.
+  const glyph = avoid.find((p) => p.x > b.x && p.x < b.x + b.w && p.y > b.y && p.y < b.y + b.h);
+  if (glyph) {
+    const r = 12 / pxPerUnit;
+    b = glyph.y - b.y > b.y + b.h - glyph.y ? { ...b, h: glyph.y - r - b.y } : { ...b, y: glyph.y + r, h: b.y + b.h - glyph.y - r };
+  }
+  const pad = Math.min(8, Math.min(b.w, b.h) * 0.1) + 3 / pxPerUnit;
+  const w = b.w - pad * 2, h = b.h - pad * 2;
+  if (w <= 0 || h <= 0) return null;
+  const number = space.room;
+  const minPx = 8;
+  // Screen-size caps so labels stay a label, not a headline, when you zoom in.
+  const numSize = number ? Math.min(12 / pxPerUnit, w / (number.length * NUM_EM), h * 0.3) : 0;
+  const reserve = number && numSize * pxPerUnit >= minPx ? numSize * 1.35 : 0;
+  const words = (space.type === "void" ? "Open to below" : spaceDisplayName(space)).toUpperCase().split(/\s+/).filter(Boolean);
+  let best: { lines: string[]; size: number } = { lines: [], size: 0 };
+  for (let n = 1; n <= Math.min(4, words.length); n++) {
+    const lines = wrap(words, n);
+    const longest = Math.max(...lines.map((line) => line.length));
+    const size = Math.min(15 / pxPerUnit, w / (longest * CHAR_EM), (h - reserve) / (lines.length * LINE_EM));
+    if (size > best.size) best = { lines, size };
+  }
+  const nameFits = best.size * pxPerUnit >= (number ? 9 : minPx);
+  const numberFits = !!number && numSize * pxPerUnit >= minPx;
+  if (nameFits && (numberFits || !number)) return { b, lines: best.lines, size: best.size, number: numberFits ? number : undefined, numSize };
+  // Tight numbered room: the published number is what people look for, so it wins over the name.
+  if (number) {
+    const alone = Math.min(13 / pxPerUnit, w / (number.length * NUM_EM), h * 0.6);
+    if (alone * pxPerUnit >= minPx) return { b, lines: [], size: 0, number, numSize: alone };
+  }
+  return nameFits ? { b, lines: best.lines, size: best.size, number: undefined, numSize } : null;
+}
+
+function SpaceLabel({ space, pxPerUnit, avoid }: { space: IndoorSpace; pxPerUnit: number; avoid: { x: number; y: number }[] }) {
+  const layout = labelLayout(space, pxPerUnit, avoid);
+  if (!layout) return null;
+  const { b, lines, size, number, numSize } = layout;
+  const cx = b.x + b.w / 2;
+  const block = lines.length * size * LINE_EM + (number ? numSize * (lines.length ? 1.35 : 1) : 0);
+  let y = b.y + b.h / 2 - block / 2;
+  return <g className="floor-plan__label" aria-hidden="true">
+    {lines.length > 0 && <text x={cx} fontSize={size} textAnchor="middle">
+      {lines.map((line, i) => { y += size * LINE_EM; return <tspan key={i} x={cx} y={y - size * 0.25}>{line}</tspan>; })}
+    </text>}
+    {number && <text className="floor-plan__number" x={cx} y={y + numSize * (lines.length ? 1.25 : 0.95)} fontSize={numSize} textAnchor="middle">{number}</text>}
+  </g>;
+}
+
+/** A glyph that keeps its screen size at any zoom. */
+function Pin({ x, y, k, children, className, label }: { x: number; y: number; k: number; children: ReactNode; className: string; label?: string }) {
+  return <g className={className} transform={`translate(${x},${y}) scale(${k})`}>{label && <title>{label}</title>}{children}</g>;
+}
+
+/** Everything the plan needs to draw a route: the route, the legs on this level and which step is highlighted. */
+export interface PlanRoute { route: IndoorRoute; legs: RouteLeg[]; activeStep: number | null; startTag?: { title: string; detail: string } }
+
+/** Renders one available level with controls and brings the route or the selected space into view. */
+export default function FloorPlan({ level, graph, selected, planRoute, onSelect, interactive = true, frame }: {
+  level: DrawnLevel; graph?: IndoorGraph; selected?: IndoorSpace; planRoute?: PlanRoute;
+  onSelect: (space: IndoorSpace) => void; interactive?: boolean;
+  /** What the home view frames, in plan units; defaults to the level's viewBox. */ frame?: { x: number; y: number; w: number; h: number };
+}) {
   const [vx, vy, width, height] = level.viewBox;
   const [stageSize, setStageSize] = useState({ w: width, h: height });
   const aspect = stageSize.w / stageSize.h;
@@ -46,7 +108,10 @@ export default function FloorPlan({ level, selected, focus, route, legs, onSelec
   const svg = useRef<SVGSVGElement>(null);
   const drag = useRef<{ id: number; x: number; y: number; camera: Camera; scale: number; moved: boolean }>();
   const dragged = useRef(false);
-  const lastFocus = useRef<IndoorSpace>();
+  const pxPerUnit = stageSize.w / (stageWidth / camera.zoom);
+  const k = 1 / pxPerUnit; // plan units per screen pixel
+  const route = planRoute?.route;
+  const legs = planRoute?.legs;
 
   // Observe the actual stage: the camera viewBox has the same aspect ratio.
   useEffect(() => {
@@ -60,31 +125,31 @@ export default function FloorPlan({ level, selected, focus, route, legs, onSelec
     return () => observer.disconnect();
   }, []);
 
+  // Home view: the drawn building (shared by every level, so levels line up) filling the stage, with a margin.
+  const home: Camera = frame
+    ? { x: frame.x + frame.w / 2, y: frame.y + frame.h / 2, zoom: Math.min(3, stageWidth / (frame.w * 1.2), stageHeight / (frame.h * 1.14)) }
+    : initial;
+  // With a route: frame the whole route plus the destination room, but only when that is a real close-up;
+  // a small zoom-in would just crop the plan.
+  const fitKey = route?.nodes.map((node) => node.id).join("|") ?? "";
   useEffect(() => {
-    if (!legs?.length) {
-      setCamera({ x: vx + width / 2, y: vy + height / 2, zoom: 0.94 });
-      return;
+    const points: [number, number][] = route?.nodes.map((node) => [node.x, node.y]) ?? [];
+    if (points.length && selected) {
+      const b = planShapeBounds(selected.shape);
+      points.push([b.x, b.y], [b.x + b.w, b.y + b.h]);
     }
-    const points = legs.flatMap((leg) => leg.points);
+    if (!points.length) { setCamera(home); return; }
     const xs = points.map(([x]) => x), ys = points.map(([, y]) => y);
     const left = Math.min(...xs), top = Math.min(...ys);
     const w = Math.max(...xs) - left, h = Math.max(...ys) - top;
-    setCamera({ x: left + w / 2, y: top + h / 2, zoom: Math.min(1.8, stageWidth / (w + 160), stageHeight / (h + 160)) });
-  }, [legs, vx, vy, width, height, stageWidth, stageHeight, stageSize]);
-
-  useEffect(() => {
-    if (focus === lastFocus.current) return;
-    lastFocus.current = focus;
-    if (!focus || !level.spaces.some((space) => space.id === focus.id)) return;
-    const b = bounds(focus.shape);
-    // Keep the present zoom unless zooming out is necessary to contain the space.
-    setCamera((current) => ({ x: b.x + b.w / 2, y: b.y + b.h / 2,
-      zoom: Math.min(current.zoom, stageWidth / (b.w + 40), stageHeight / (b.h + 40)) }));
-  }, [focus, level, stageWidth, stageHeight]);
+    const pad = Math.max(width, height) * 0.25;
+    const zoom = Math.min(home.zoom * 1.8, Math.min(stageWidth / (w + pad), stageHeight / (h + pad)));
+    setCamera(zoom < home.zoom * 1.3 ? home : { x: left + w / 2, y: top + h / 2, zoom });
+  }, [fitKey, selected?.id, vx, vy, width, height, stageWidth, stageHeight, home.zoom]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     const element = svg.current;
-    if (!element) return;
+    if (!element || !interactive) return;
     const wheel = (event: WheelEvent) => {
       const matrix = element.getScreenCTM();
       if (!matrix) return;
@@ -94,76 +159,119 @@ export default function FloorPlan({ level, selected, focus, route, legs, onSelec
     };
     element.addEventListener("wheel", wheel, { passive: false });
     return () => element.removeEventListener("wheel", wheel);
-  }, []);
+  }, [interactive]);
+
+  const nodeById = useMemo(() => new Map(graph?.nodes.map((node) => [node.id, node]) ?? []), [graph]);
+  const connectors = (graph?.connectors ?? []).flatMap((connector) => {
+    const node = nodeById.get(connector.nodes[level.id]);
+    return node ? [{ connector, node }] : [];
+  });
+  const glyphPoints = connectors.map(({ node }) => node);
+  const entrances = (graph?.entrances ?? []).filter((entrance) => entrance.level === level.id)
+    .flatMap((entrance) => { const node = nodeById.get(entrance.node); return node ? [{ entrance, node }] : []; });
+
+  // Numbered circles: one per step on this level; steps that land on top of each other at this zoom share one
+  // marker labelled with their range ("2–4"), so every number in the list still has its place on the plan.
+  const circles: { first: number; last: number; x: number; y: number; active: boolean }[] = [];
+  if (route) route.steps.forEach((step, index) => {
+    const node = route.nodes[step.node];
+    if (!node || node.level !== level.id) return;
+    const active = planRoute?.activeStep === index;
+    const near = circles.find((c) => Math.hypot(c.x - node.x, c.y - node.y) < 24 * k);
+    if (near) { near.last = index + 1; near.active ||= active; }
+    else circles.push({ first: index + 1, last: index + 1, x: node.x, y: node.y, active });
+  });
+  // The highlighted stretch: from the active step's node to the next step's node, on this level.
+  let highlight: [number, number][] = [];
+  if (route && planRoute?.activeStep != null) {
+    const from = route.steps[planRoute.activeStep]?.node ?? 0;
+    const to = route.steps[planRoute.activeStep + 1]?.node ?? route.nodes.length - 1;
+    highlight = route.nodes.slice(from, Math.max(from, to) + 1).filter((node) => node.level === level.id).map((node) => [node.x, node.y]);
+  }
+  const start = route?.nodes[0];
 
   return <div className="floor-plan">
-    <div className="floor-plan__toolbar" role="toolbar" aria-label="Plan view controls">
-      <div className="floor-plan__mode" role="group" aria-label="View mode">
-        <button className="cims-btn" type="button" aria-pressed="true">2D</button>
-        <button className="cims-btn" type="button" disabled title="Expanded 3D view is coming soon">3D soon</button>
-      </div>
-      <div className="floor-plan__zoom" role="group" aria-label="Plan zoom">
-        <button className="cims-btn" type="button" aria-label="Zoom in" disabled={camera.zoom >= 6} onClick={() => setCamera((current) => zoomAt(current, 1.3))}>+</button>
-        <button className="cims-btn" type="button" aria-label="Zoom out" disabled={camera.zoom <= 0.6} onClick={() => setCamera((current) => zoomAt(current, 1 / 1.3))}>−</button>
-        <button className="cims-btn" type="button" onClick={() => setCamera(initial)}>Reset</button>
-      </div>
-    </div>
-    <div className="floor-plan__canvas">
-      <svg ref={svg} viewBox={`${camera.x - stageWidth / camera.zoom / 2} ${camera.y - stageHeight / camera.zoom / 2} ${stageWidth / camera.zoom} ${stageHeight / camera.zoom}`}
-        aria-label={`${level.name} schematic floor plan`} role="group"
-        onPointerDown={(event) => {
-          if (!event.isPrimary || event.button !== 0) return;
-          const matrix = svg.current?.getScreenCTM();
-          if (!matrix) return;
-          dragged.current = false;
-          drag.current = { id: event.pointerId, x: event.clientX, y: event.clientY, camera, scale: matrix.a, moved: false };
-        }}
-        onPointerMove={(event) => {
-          const start = drag.current;
-          if (!start || start.id !== event.pointerId) return;
-          const dx = event.clientX - start.x, dy = event.clientY - start.y;
-          if (!start.moved && Math.hypot(dx, dy) < 5) return;
-          start.moved = true;
-          dragged.current = true;
-          event.currentTarget.setPointerCapture(event.pointerId);
-          setCamera({ ...start.camera, x: start.camera.x - dx / start.scale, y: start.camera.y - dy / start.scale });
-        }}
-        onPointerUp={() => { drag.current = undefined; }} onPointerCancel={() => { drag.current = undefined; }}>
-        <title>{level.name} schematic floor plan</title>
-        {level.spaces.map((space) => {
-          const shape = space.shape;
-          const category = space.type === "auditorium" ? "classroom" : space.type === "core" ? "restroom" : space.type;
-          const props = {
-            className: `cims-room cims-room--${category}${selected?.id === space.id ? " cims-room--selected" : ""}`,
-            tabIndex: space.type === "void" ? undefined : 0, role: space.type === "void" ? undefined : "button", "aria-label": `${space.name}, ${space.type}`, "aria-pressed": selected?.id === space.id,
-            onClick: () => { if (!dragged.current && space.type !== "void") onSelect(space); },
-            onKeyDown: (event: React.KeyboardEvent<SVGElement>) => {
-              if (space.type !== "void" && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(space); }
-            },
-          };
-          return <g key={space.id}>
-            {shape.kind === "rect" ? <rect {...props} x={shape.x} y={shape.y} width={shape.w} height={shape.h} />
-              : shape.kind === "circle" ? <circle {...props} cx={shape.cx} cy={shape.cy} r={shape.r} />
-              : <polygon {...props} points={shape.points} />}
-            <SpaceLabel space={space} />
-          </g>;
+    {interactive && <div className="floor-plan__zoom cims-mapctl" role="group" aria-label="Plan zoom">
+      <button type="button" aria-label="Zoom in" disabled={camera.zoom >= MAX_ZOOM} onClick={() => setCamera((current) => zoomAt(current, 1.3))}>+</button>
+      <button type="button" aria-label="Zoom out" disabled={camera.zoom <= MIN_ZOOM} onClick={() => setCamera((current) => zoomAt(current, 1 / 1.3))}>−</button>
+      <button type="button" aria-label="Reset view" title="Reset view" onClick={() => setCamera(home)}><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4" fill="none" stroke="currentColor" strokeWidth="1.5" /></svg></button>
+    </div>}
+    <svg ref={svg} className="floor-plan__svg" viewBox={`${camera.x - stageWidth / camera.zoom / 2} ${camera.y - stageHeight / camera.zoom / 2} ${stageWidth / camera.zoom} ${stageHeight / camera.zoom}`}
+      aria-label={`${level.name} schematic floor plan`} role="group"
+      onPointerDown={(event) => {
+        if (!interactive || !event.isPrimary || event.button !== 0) return;
+        const matrix = svg.current?.getScreenCTM();
+        if (!matrix) return;
+        dragged.current = false;
+        drag.current = { id: event.pointerId, x: event.clientX, y: event.clientY, camera, scale: matrix.a, moved: false };
+      }}
+      onPointerMove={(event) => {
+        const start = drag.current;
+        if (!start || start.id !== event.pointerId) return;
+        const dx = event.clientX - start.x, dy = event.clientY - start.y;
+        if (!start.moved && Math.hypot(dx, dy) < 5) return;
+        start.moved = true;
+        dragged.current = true;
+        event.currentTarget.setPointerCapture(event.pointerId);
+        setCamera({ ...start.camera, x: start.camera.x - dx / start.scale, y: start.camera.y - dy / start.scale });
+      }}
+      onPointerUp={() => { drag.current = undefined; }} onPointerCancel={() => { drag.current = undefined; }}>
+      <title>{level.name} schematic floor plan</title>
+      <path d={level.outline} className="floor-plan__floor" />
+      {level.spaces.map((space) => {
+        const shape = space.shape;
+        const isSelected = selected?.id === space.id;
+        const pickable = space.type !== "void" && interactive;
+        const props = {
+          className: `cims-room cims-room--${roomCategory(space.type)}${isSelected ? " cims-room--selected" : ""}`,
+          tabIndex: pickable ? 0 : undefined, role: pickable ? "button" : undefined,
+          "aria-label": pickable ? `${space.name}${space.room && !space.name.includes(space.room) ? `, room ${space.room}` : ""}, ${space.type}` : undefined,
+          "aria-pressed": pickable ? isSelected : undefined,
+          onClick: () => { if (!dragged.current && pickable) onSelect(space); },
+          onKeyDown: (event: React.KeyboardEvent<SVGElement>) => {
+            if (pickable && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onSelect(space); }
+          },
+        };
+        return <g key={space.id}>
+          {shape.kind === "rect" ? <rect {...props} x={shape.x} y={shape.y} width={shape.w} height={shape.h} />
+            : shape.kind === "circle" ? <circle {...props} cx={shape.cx} cy={shape.cy} r={shape.r} />
+            : <polygon {...props} points={shape.points} />}
+        </g>;
+      })}
+      <path d={level.outline} className="floor-plan__outline" />
+      <g className="floor-plan__labels">{level.spaces.map((space) => <SpaceLabel key={space.id} space={space} pxPerUnit={pxPerUnit} avoid={glyphPoints} />)}</g>
+      <g aria-hidden="true">
+        {connectors.map(({ connector, node }) => <Pin key={connector.id} x={node.x} y={node.y} k={k} className={`floor-plan__glyph floor-plan__glyph--${connector.kind}`} label={connector.name}>
+          <rect x="-10" y="-10" width="20" height="20" />
+          {connector.kind === "stairs" ? <path d="M-6 6 H-2 V2 H2 V-2 H6 V-6" /> : <><path d="M-4 -1 L0 -6 L4 -1 Z" /><path d="M-4 1 L0 6 L4 1 Z" /></>}
+        </Pin>)}
+        {entrances.map(({ entrance, node }) => !(start && start.id === node.id) && <Pin key={entrance.id} x={node.x} y={node.y} k={k} className="floor-plan__entrance" label={entrance.name}>
+          <circle r="6" />
+          <text y="18" textAnchor="middle">ENTRANCE</text>
+        </Pin>)}
+      </g>
+      {route && !!legs?.length && <g aria-hidden="true" className="floor-plan__route">
+        {legs.map((leg, index) => <polyline key={index} points={leg.points.map((point) => point.join(",")).join(" ")} style={{ strokeWidth: 3.5 * k, strokeDasharray: `${9 * k} ${6 * k}` }} />)}
+        {highlight.length > 1 && <polyline className="floor-plan__route-active" points={highlight.map((point) => point.join(",")).join(" ")} style={{ strokeWidth: 6 * k }} />}
+      </g>}
+      {route && <g aria-hidden="true">
+        {start?.level === level.id && planRoute?.startTag && <Pin x={start.x} y={start.y} k={k} className="floor-plan__start">
+          <rect x="-56" y="16" width="112" height="22" rx="11" />
+          <text y="31" textAnchor="middle" className="floor-plan__start-title">{planRoute.startTag.title}</text>
+          <text y="51" textAnchor="middle" className="floor-plan__start-detail">{planRoute.startTag.detail.toUpperCase()}</text>
+        </Pin>}
+        {route.transitions.filter((t) => t.level === level.id).map((t, i) => <Pin key={`t${i}`} x={t.x} y={t.y} k={k} className="floor-plan__transition">
+          <text x="16" y="-14">{t.kind === "stairs" ? "STAIRS" : "ELEVATOR"} {t.direction === "up" ? "↑" : "↓"} {t.to === "B" ? "BASEMENT" : `LEVEL ${t.to}`}</text>
+        </Pin>)}
+        {circles.map((c) => {
+          const label = c.first === c.last ? String(c.first) : `${c.first}–${c.last}`;
+          const half = Math.max(11, 4 + label.length * 3.8);
+          return <Pin key={c.first} x={c.x} y={c.y} k={k} className={`floor-plan__step${c.active ? " floor-plan__step--active" : ""}`}>
+            <rect x={-half} y="-11" width={half * 2} height="22" rx="11" />
+            <text textAnchor="middle" dominantBaseline="central">{label}</text>
+          </Pin>;
         })}
-        <path d={level.outline} className="floor-plan__outline" />
-        {route && !!legs?.length && <g aria-hidden="true" className="floor-plan__route">
-          {legs.map((leg, index) => <polyline key={index} points={leg.points.map((point) => point.join(",")).join(" ")} />) }
-          {[{ node: route.nodes[0], letter: "A" }, { node: route.nodes[route.nodes.length - 1], letter: "B" }].map(({ node, letter }) =>
-            node.level === level.id && <g key={letter} transform={`translate(${node.x},${node.y})`}>
-              <circle r="12" className={`floor-plan__marker floor-plan__marker--${letter}`} />
-              <text textAnchor="middle" dominantBaseline="central">{letter}</text>
-            </g>)}
-          {route.transitions.filter((t) => t.level === level.id).map((t, i) => <g key={`t${i}`} transform={`translate(${t.x},${t.y})`} className={`floor-plan__transition floor-plan__transition--${t.kind}`}>
-            <rect x="-14" y="-14" width="28" height="28" rx="3" />
-            <path d={t.kind === "stairs" ? "M-8 7 H-3 V2 H2 V-3 H7 V-8" : t.direction === "up" ? "M0 -8 L6 0 H-6 Z" : "M0 8 L6 0 H-6 Z"} />
-            <text x="0" y="28" textAnchor="middle">{t.kind === "stairs" ? "STAIRS" : "LIFT"} {t.direction === "up" ? "↑" : "↓"} {t.to === "B" ? "Basement" : `Level ${t.to}`}</text>
-          </g>)}
-        </g>}
-      </svg>
-      <span className="floor-plan__annotation cims-mono">SCHEMATIC, NOT TO SCALE</span>
-    </div>
+      </g>}
+    </svg>
   </div>;
 }

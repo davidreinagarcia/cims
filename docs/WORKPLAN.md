@@ -172,12 +172,13 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Level selector, rooms layer filtered by level, directory by room type, highlight selected room.
   First indoor building view: Kendeda Level 1 vector schematic and CULC no-plan placeholder, shared Lane A/B. Includes directory, space selection and pan/zoom; 3D remains future work.
   Wayfinding v1 on Kendeda: multilevel schematic routes, stairs or step-free elevator, accessible directions, route leg navigation and responsive plan fitting; CULC has no plan or graph.
+  *Polish (`feat/indoor-polish`, see [docs/design/INDOOR.md](design/INDOOR.md)): plan-first desktop and phone layouts, room card with Book/Report, numbered steps, and the 3D "Stack" view of every level.*
 - [ ] **T-22 Backend** per T-05 decision · needs T-05
   Tables: `accounts` (opaque id, role, provider, status), `issue_reports`, `issue_plus_ones`, each write with `account_id`; rate limiting per account; env vars documented in `.env.example`.
 - [x] **T-23 Report an issue** (F-10) · UI can start on mocks after T-02; real data needs T-22
   Prefilled location, category → team ("routes to IT"), duplicates + "Me too", status page,
   staff view, "Prototype: not sent to Facilities/IT" label (Risk R-14). Every write (report, +1) goes through the T-25 sign-in gate; the staff view needs the staff role (no unlisted URL).
-  *Mounted in the map-first shell's "Report" slot (`src/panels/report/`, `src/shell/Shell.tsx`), prefilled from the place card, the building card and the building preview's "Report an issue" buttons (`select({ kind: "report", id })`), built against a `localStorage` mock. Branch `feat/T23-shell-integration`, not yet merged. Deferred: room-level entry from the indoor floor plan, the open-reports map-pin layer (US-10.3), the door-stickers page (US-10.5) and real data (needs T-22).*
+  *Mounted in the map-first shell's "Report" slot (`src/panels/report/`, `src/shell/Shell.tsx`), prefilled from the place card, the building card and the building preview's "Report an issue" buttons (`select({ kind: "report", id })`), built against a `localStorage` mock. Branch `feat/T23-shell-integration`, not yet merged. Room-level entry from the indoor room card landed in `feat/indoor-polish` (id `building|floor|room`). Deferred: the open-reports map-pin layer (US-10.3), the door-stickers page (US-10.5) and real data (needs T-22).*
 - [x] **T-24 Room finder** (F-11, Must since Q6) · needs T-20, T-21
   Availability seed for Kendeda rooms, filters (capacity, features), map + floor highlight, Book deep link.
   Integrated into the new app shell's **Rooms** rail/tab item (`src/shell/Shell.tsx`), replacing the
