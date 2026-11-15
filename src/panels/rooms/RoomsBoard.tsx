@@ -26,9 +26,8 @@ function initialSection(): Section {
   const request = peekBookingRequest();
   if (request?.kind === "room") return { kind: "building", buildingId: request.buildingId, roomId: request.roomId };
   if (request?.kind === "bookings") return { kind: "bookings" };
-  // Otherwise land on the search prompt rather than defaulting into one building's grid -- picking a
-  // building (or a different section entirely) is a deliberate first step, per direct design feedback.
-  return { kind: "search" };
+  // Otherwise open on Rooms near me, so the board shows rooms right away instead of an empty search prompt.
+  return { kind: "nearby" };
 }
 
 /**

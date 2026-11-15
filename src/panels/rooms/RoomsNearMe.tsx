@@ -1,4 +1,4 @@
-/** @file "Rooms near me" (T-61): geolocation -> haversine distance to Kendeda's and CULC's real footprint centroids -> a cross-building bookable-room list sorted nearest-first, feeding the shared ReservationGrid. Distance is to the building, never the room. */
+/** @file "Rooms near me" (T-61): geolocation -> haversine distance to Kendeda's and CULC's real footprint centroids -> a cross-building bookable-room list sorted nearest-first, feeding the shared ReservationGrid; without location it lists every bookable room. Distance is to the building, never the room. */
 import { useEffect, useState } from "react";
 import { crossBuildingBookableRooms, type BookableRoom } from "../../indoor/availability";
 import { indoorRooms } from "../../indoor/registry";
@@ -12,13 +12,14 @@ const NEARBY_BUILDING_IDS = ["kendeda-building-for-innovative-sustainable-design
 
 type Status =
   | { kind: "requesting" }
-  | { kind: "error"; retryable: boolean; message: string }
-  | { kind: "ready"; rooms: BookableRoom[] };
+  | { kind: "ready"; rooms: BookableRoom[] }
+  /** No location: every bookable room still shows (not a blank screen), with why it isn't sorted by distance. */
+  | { kind: "unsorted"; rooms: BookableRoom[]; retryable: boolean; message: string };
 
 /**
  * Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and
- * hands the result to the shared reservation grid -- or shows a clear, honest fallback for every way
- * that can fail. `onBack` is omitted when mounted as a top-level section of `RoomsBoard.tsx` (T-62),
+ * hands the result to the shared reservation grid -- or, when location fails, still lists every bookable
+ * room (unsorted) with the reason and a retry, so the board is never blank. `onBack` is omitted when mounted as a top-level section of `RoomsBoard.tsx` (T-62),
  * whose chip bar already doubles as navigation; `onlyAvailable` passes the board's "Only available
  * rooms" toggle straight through to the grid.
  */
@@ -52,8 +53,10 @@ export default function RoomsNearMe({ onBack, onlyAvailable }: { onBack?: () => 
         setStatus({ kind: "ready", rooms });
       } catch (err) {
         if (!alive) return;
-        if (err instanceof GeolocationError) setStatus({ kind: "error", retryable: err.reason !== "unsupported", message: err.message });
-        else setStatus({ kind: "error", retryable: true, message: "Something went wrong finding your location. Please try again." });
+        const rooms = crossBuildingBookableRooms(indoorRooms(), roomAmenitiesById)
+          .sort((a, b) => a.label.localeCompare(b.label, "en", { numeric: true }));
+        if (err instanceof GeolocationError) setStatus({ kind: "unsorted", rooms, retryable: err.reason !== "unsupported", message: err.message });
+        else setStatus({ kind: "unsorted", rooms, retryable: true, message: "Something went wrong finding your location." });
       }
     })();
     return () => { alive = false; };
@@ -72,14 +75,17 @@ export default function RoomsNearMe({ onBack, onlyAvailable }: { onBack?: () => 
 
       {status.kind === "requesting" && <p className="cims-muted" role="status">Requesting your location…</p>}
 
-      {status.kind === "error" && (
-        <div role="alert" className="reserve-nearby__error">
-          <p className="reserve-grid__error"><strong>Couldn't use your location:</strong> {status.message}</p>
-          <div className="cims-actions">
-            {status.retryable && <button type="button" className="cims-btn" onClick={() => setAttempt((a) => a + 1)}>Try again</button>}
-            {onBack && <button type="button" className="cims-btn" onClick={onBack}>Back to building picker</button>}
+      {status.kind === "unsorted" && (
+        <>
+          <div role="status" className="reserve-nearby__error">
+            <p className="cims-muted"><strong>Showing every bookable room</strong>, not sorted by distance: {status.message}</p>
+            <div className="cims-actions">
+              {status.retryable && <button type="button" className="cims-btn" onClick={() => setAttempt((a) => a + 1)}>Use my location</button>}
+              {onBack && <button type="button" className="cims-btn" onClick={onBack}>Back to building picker</button>}
+            </div>
           </div>
-        </div>
+          <ReservationGrid rooms={status.rooms} onlyAvailable={onlyAvailable} />
+        </>
       )}
 
       {status.kind === "ready" && (
