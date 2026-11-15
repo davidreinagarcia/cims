@@ -39,7 +39,7 @@ export default function RoomSearch({ building, onChoose }: { building: IndoorBui
       <span className="building-view__magnifier" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><circle cx="10.5" cy="10.5" r="6" /><path d="M15 15l5 5" /></svg></span>
       <input ref={input} id={id} type="search" role="combobox" autoComplete="off" aria-autocomplete="list"
         aria-expanded={open} aria-controls={`${id}-list`} aria-activedescendant={open && rooms[active] ? `${id}-${active}` : undefined}
-        placeholder="Search a room in this building, e.g. Auditorium" value={query}
+        placeholder="Search a room, e.g. Auditorium" value={query}
         onFocus={() => { setOpen(true); setActive(0); }}
         onChange={(event) => { setQuery(event.target.value); setActive(0); setOpen(true); }}
         onKeyDown={(event) => {

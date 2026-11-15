@@ -78,3 +78,16 @@
   .building-view__no-plan { order: 0; }
   .building-view__route-heading > button { margin-left: 0; }
 }
+
+/* Compact desktop header: search and start point share a row, the route summary is one line, so the plan stays on screen. */
+@media (min-width: 701px) {
+  .building-view__search > label { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+  .building-view__finder { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 8px 16px; }
+  .building-view__finder > .building-view__search { grid-column: 1; }
+  .building-view__finder > .building-view__origin { grid-column: 2; margin-top: 0; flex-wrap: nowrap; white-space: nowrap; }
+  .building-view__finder > .building-view__start-options, .building-view__finder > [role="status"] { grid-column: 1 / -1; margin-top: 0; }
+  .building-view__summary { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 8px 16px; }
+  .building-view__summary .building-view__route-heading { flex: 1 1 auto; }
+  .building-view__summary .building-view__route-options { flex: 0 1 auto; margin-top: 0; justify-content: flex-end; }
+  .building-view__summary .building-view__route-heading > button { margin-left: 16px; order: 3; }
+}
