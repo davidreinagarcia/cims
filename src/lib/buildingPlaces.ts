@@ -18,11 +18,16 @@ export function placeBuilding(place: PlaceFeature, index: BuildingIndex, all: Pl
 }
 
 /**
- * The footprint (building) id a venue place stands for, so "Show on map" opens the building card with its photo
- * instead of the bare place card. Events and orgs, and places outside every footprint, return undefined (keep the place).
+ * The footprint (building) id a place stands for, so "Show on map" opens the same card as tapping the building (with its photo).
+ * Tries the usual resolution, then the OSM element the place was sourced from (a place whose point misses the outline).
+ * Places that are not a building (a lawn, a stop) return undefined: keep the place card.
  */
 export async function buildingIdForPlace(placeId: string): Promise<string | undefined> {
   const place = places.features.find((f) => f.properties.id === placeId);
-  if (!place || place.properties.kind === "event" || place.properties.kind === "org") return undefined;
-  return placeBuilding(place, await loadBuildings(), places.features);
+  if (!place) return undefined;
+  const index = await loadBuildings();
+  const direct = placeBuilding(place, index, places.features);
+  if (direct) return direct;
+  const osm = place.properties.source_url?.match(/openstreetmap\.org\/((?:way|relation)\/\d+)/)?.[1];
+  return osm ? index.list.find((b) => b.osmId === osm)?.id : undefined;
 }

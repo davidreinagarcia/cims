@@ -36,7 +36,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `buildingPhoto(buildingId)` [src/lib/buildingPhotos.ts:10](../src/lib/buildingPhotos.ts#L10): The photo for a building footprint id, if one has been sourced.
 - `locationDetails(place)` [src/lib/buildingPlaces.ts:7](../src/lib/buildingPlaces.ts#L7): Read sourced location metadata without assuming an exact point or inventing a room.
 - `placeBuilding(place, index, all)` [src/lib/buildingPlaces.ts:12](../src/lib/buildingPlaces.ts#L12): Resolve explicit footprint ids, legacy seed building ids, then exact-point containment.
-- `buildingIdForPlace(placeId)` [src/lib/buildingPlaces.ts:24](../src/lib/buildingPlaces.ts#L24): The footprint (building) id a venue place stands for, so "Show on map" opens the building card with its photo
+- `buildingIdForPlace(placeId)` [src/lib/buildingPlaces.ts:25](../src/lib/buildingPlaces.ts#L25): The footprint (building) id a place stands for, so "Show on map" opens the same card as tapping the building…
 - `loadedBuildings()` [src/lib/buildings.ts:84](../src/lib/buildings.ts#L84): The index if it is already loaded, so callers can answer synchronously.
 - `loadBuildings()` [src/lib/buildings.ts:89](../src/lib/buildings.ts#L89): Loads the footprints once; a failed load is forgotten so the next call retries.
 - `POST_TYPES` [src/lib/bulletin.ts:46](../src/lib/bulletin.ts#L46): Bulletin filters in display order, sharing organization labels with the layer catalog.
