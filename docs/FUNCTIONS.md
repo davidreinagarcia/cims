@@ -51,11 +51,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `IndoorSpace` [src/indoor/types.ts:12](../src/indoor/types.ts#L12): One named space with its source and optional contextual note.
 - `IndoorLevel` [src/indoor/types.ts:26](../src/indoor/types.ts#L26): A level either has vector geometry or an explicit unavailable note.
 - `IndoorBuilding` [src/indoor/types.ts:32](../src/indoor/types.ts#L32): Building indoor data, including provenance and an honest no-plan status.
-- `IndoorNode` [src/indoor/types.ts:45](../src/indoor/types.ts#L45): A walkable point in plan units on one level.
-- `IndoorConnector` [src/indoor/types.ts:48](../src/indoor/types.ts#L48): A named vertical connection with explicit accessibility.
-- `IndoorEntrance` [src/indoor/types.ts:57](../src/indoor/types.ts#L57): An approximate building entrance connected to the walking graph.
-- `IndoorGraph` [src/indoor/types.ts:60](../src/indoor/types.ts#L60): Undirected walking edges and vertical connections for one building.
-- `RoomFact` [src/indoor/types.ts:68](../src/indoor/types.ts#L68): Published room facts without geometry, inferred levels or routing nodes.
+- `IndoorNode` [src/indoor/types.ts:47](../src/indoor/types.ts#L47): A walkable point in plan units on one level.
+- `IndoorConnector` [src/indoor/types.ts:50](../src/indoor/types.ts#L50): A named vertical connection with explicit accessibility.
+- `IndoorEntrance` [src/indoor/types.ts:59](../src/indoor/types.ts#L59): An approximate building entrance connected to the walking graph.
+- `IndoorGraph` [src/indoor/types.ts:62](../src/indoor/types.ts#L62): Undirected walking edges and vertical connections for one building.
+- `RoomFact` [src/indoor/types.ts:70](../src/indoor/types.ts#L70): Published room facts without geometry, inferred levels or routing nodes.
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
@@ -118,6 +118,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `hasIndoor(id)` [src/indoor/registry.ts:14](../src/indoor/registry.ts#L14): Whether a building opens the indoor screen instead of the sidebar card.
 - `indoorRooms()` [src/indoor/registry.ts:25](../src/indoor/registry.ts#L25): Lists routable schematic spaces and rooms without geometry for search and selection.
 - `resolveRoom(id)` [src/indoor/registry.ts:36](../src/indoor/registry.ts#L36): Resolves a room selection id without guessing a building or room.
+- `indoorBySlug(slug)` [src/indoor/registry.ts:41](../src/indoor/registry.ts#L41): Finds an indoor building by its sticker slug (or full footprint id).
+- `doorLink()` [src/indoor/registry.ts:46](../src/indoor/registry.ts#L46): A door sticker link: ?in=<building slug>&door=<entrance id>, read once when the app opens.
+- `doorUrl(origin, building, entranceId)` [src/indoor/registry.ts:56](../src/indoor/registry.ts#L56): The sticker link for one entrance, for printing QR codes and programming NFC tags.
 - `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:22](../src/indoor/route.ts#L22): Finds the least cost walk, filtering inaccessible connectors before searching.
 - `baseStyle` [src/map/baseStyle.ts:7](../src/map/baseStyle.ts#L7): Base style every layer is added on top of.
 - `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.
