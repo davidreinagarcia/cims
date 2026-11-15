@@ -1,5 +1,83 @@
 /** @file Indoor plan helpers shared by the plan, the stack view and the building screen: shape bounds, room categories, labels. */
-import type { IndoorBuilding, IndoorShape, IndoorSpace, IndoorSpaceType } from "../indoor/types";
+import type { IndoorBuilding, IndoorLevel, IndoorShape, IndoorSpace, IndoorSpaceType } from "../indoor/types";
+
+type Point = [number, number];
+
+function shapePoints(shape: IndoorShape): Point[] {
+  if (shape.kind === "polygon") return shape.points.trim().split(/\s+/).map((p) => p.split(",").map(Number) as Point);
+  if (shape.kind === "rect") return [[shape.x, shape.y], [shape.x + shape.w, shape.y], [shape.x + shape.w, shape.y + shape.h], [shape.x, shape.y + shape.h]];
+  return Array.from({ length: 64 }, (_, i) => [shape.cx + shape.r * Math.cos(i * Math.PI / 32), shape.cy + shape.r * Math.sin(i * Math.PI / 32)]);
+}
+
+/** Largest axis-aligned rectangle wholly inside a room, including concave rooms with notches. */
+export function planLabelBounds(shape: IndoorShape): { x: number; y: number; w: number; h: number } {
+  if (shape.kind === "rect") return planShapeBounds(shape);
+  const points = shapePoints(shape);
+  const ys = [...new Set(points.map((p) => p[1]))].sort((a, b) => a - b);
+  const bands = ys.slice(1).map((bottom, i) => {
+    const top = ys[i], spans: [number, number][] = [];
+    // Sample both ends of each band: a rectangle must also fit a sloping wall at its narrow end.
+    for (const y of [top + 1e-8, bottom - 1e-8]) {
+      const xs = points.flatMap(([x1, y1], j) => {
+        const [x2, y2] = points[(j + 1) % points.length];
+        return y > Math.min(y1, y2) && y < Math.max(y1, y2) ? [x1 + (y - y1) * (x2 - x1) / (y2 - y1)] : [];
+      }).sort((a, b) => a - b);
+      const next: [number, number][] = [];
+      for (let j = 0; j + 1 < xs.length; j += 2) next.push([xs[j], xs[j + 1]]);
+      if (!spans.length) spans.push(...next);
+      else {
+        const intersection = spans.flatMap(([a, b]) => next.flatMap(([c, d]): [number, number][] => Math.min(b, d) > Math.max(a, c) ? [[Math.max(a, c), Math.min(b, d)]] : []));
+        spans.splice(0, spans.length, ...intersection);
+      }
+    }
+    return { top, bottom, spans };
+  });
+  let best = { x: 0, y: 0, w: 0, h: 0 };
+  for (let i = 0; i < bands.length; i++) {
+    let spans = bands[i].spans;
+    for (let j = i; j < bands.length && spans.length; j++) {
+      spans = spans.flatMap(([a, b]) => bands[j].spans.flatMap(([c, d]): [number, number][] => Math.min(b, d) > Math.max(a, c) ? [[Math.max(a, c), Math.min(b, d)]] : []));
+      for (const [x, right] of spans) {
+        const h = bands[j].bottom - bands[i].top, w = right - x;
+        if (w * h > best.w * best.h) best = { x, y: bands[i].top, w, h };
+      }
+    }
+  }
+  return best;
+}
+
+/** One wall path for a level: collinear touching edges from rooms and outline are painted only once. */
+export function planWalls(level: Extract<IndoorLevel, { available: true }>): string {
+  const rings = level.outline.split(/Z/i).filter((ring) => ring.trim()).map((ring) => {
+    const n = ring.match(/-?\d+(?:\.\d+)?/g)?.map(Number) ?? [];
+    return Array.from({ length: n.length / 2 }, (_, i) => [n[i * 2], n[i * 2 + 1]] as Point);
+  });
+  rings.push(...level.spaces.map((space) => shapePoints(space.shape)));
+  const groups = new Map<string, { ux: number; uy: number; offset: number; spans: [number, number][] }>();
+  for (const ring of rings) ring.forEach(([x, y], i) => {
+    const [xx, yy] = ring[(i + 1) % ring.length], length = Math.hypot(xx - x, yy - y);
+    if (length < 1e-7) return;
+    const sign = xx < x || (xx === x && yy < y) ? -1 : 1;
+    const ux = sign * (xx - x) / length, uy = sign * (yy - y) / length, offset = -uy * x + ux * y;
+    const key = [ux, uy, offset].map((n) => n.toFixed(6)).join(",");
+    const group = groups.get(key) ?? { ux, uy, offset, spans: [] };
+    const a = ux * x + uy * y, b = ux * xx + uy * yy;
+    group.spans.push([Math.min(a, b), Math.max(a, b)]);
+    groups.set(key, group);
+  });
+  const paths: string[] = [];
+  for (const { ux, uy, offset, spans } of groups.values()) {
+    spans.sort((a, b) => a[0] - b[0]);
+    const merged: [number, number][] = [];
+    for (const [a, b] of spans) {
+      const last = merged[merged.length - 1];
+      if (last && a <= last[1] + 1e-6) last[1] = Math.max(last[1], b);
+      else merged.push([a, b]);
+    }
+    for (const [a, b] of merged) paths.push(`M${ux * a - uy * offset},${uy * a + ux * offset}L${ux * b - uy * offset},${uy * b + ux * offset}`);
+  }
+  return paths.join(" ");
+}
 
 /** Axis-aligned bounding box of a schematic shape, in plan units. */
 export function planShapeBounds(shape: IndoorShape): { x: number; y: number; w: number; h: number } {
@@ -58,10 +136,7 @@ export function levelRank(id: string): number {
   return id === "B" ? 0 : Number(id) || 0;
 }
 
-/**
- * Whether "up" on this building's plans is north, judged only from the data: true when it names a west and an east
- * entrance on the same level and the west one is drawn left of the east one. Otherwise unknown, so no compass is drawn.
- */
+/** Whether entrance names and positions support showing north up on this schematic. */
 export function planNorthUp(building: IndoorBuilding): boolean {
   const graph = building.graph;
   if (!graph) return false;

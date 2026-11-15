@@ -5,15 +5,16 @@
 
 /* ink walls over flat fills */
 .floor-plan__floor { fill: var(--white); stroke: none; }
-.floor-plan__outline { fill: none; stroke: var(--ink); stroke-width: 2.5; stroke-linejoin: miter; pointer-events: none; vector-effect: non-scaling-stroke; }
-.floor-plan .cims-room { cursor: pointer; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.floor-plan__outline { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: miter; pointer-events: none; vector-effect: non-scaling-stroke; }
+.floor-plan .cims-room { cursor: pointer; stroke: none; animation: none; }
 .floor-plan .cims-room--classroom { fill: var(--room-classroom); }
 .floor-plan .cims-room--service { fill: var(--paper-2); }
 .floor-plan .cims-room--utility { fill: var(--paper); stroke-dasharray: 5 3; }
 .floor-plan .cims-room--outdoor { fill: var(--map-campus); stroke-dasharray: 1 4; stroke-linecap: round; }
 .floor-plan .cims-room--void { fill: var(--white); stroke-dasharray: 6 4; pointer-events: none; cursor: default; }
-.floor-plan .cims-room:hover, .floor-plan .cims-room:focus-visible { stroke: var(--navy); stroke-width: 3; outline: none; }
-.floor-plan .cims-room.cims-room--selected { fill: var(--room-selected); stroke: var(--ink); stroke-width: 2.5; stroke-dasharray: 7 4; }
+.floor-plan .cims-room:hover, .floor-plan .cims-room:focus-visible { fill: var(--room-selected); outline: none; }
+.floor-plan .cims-room:focus-visible { stroke: var(--navy); stroke-width: 2; vector-effect: non-scaling-stroke; }
+.floor-plan .cims-room.cims-room--selected { fill: var(--room-selected); }
 
 .floor-plan__labels { pointer-events: none; }
 .floor-plan__label text { font-family: var(--font-display); font-weight: 600; fill: var(--ink); letter-spacing: 0.02em; }
@@ -24,19 +25,20 @@
 .floor-plan__glyph path { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-linejoin: miter; }
 .floor-plan__glyph--elevator path { fill: var(--ink); stroke: none; }
 .floor-plan__entrance circle { fill: var(--navy); stroke: var(--white); stroke-width: 2; }
-.floor-plan__entrance text { font: 600 9px var(--font-display); letter-spacing: 0.08em; fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; stroke-linejoin: round; }
 
 /* route: dashed brick line, numbered brick circles, gold "you enter here" tag */
 .floor-plan__route { pointer-events: none; }
-.floor-plan__route polyline { fill: none; stroke: var(--route); stroke-linecap: butt; stroke-linejoin: round; }
-.floor-plan__route .floor-plan__route-active { stroke: var(--route); stroke-dasharray: none; stroke-linecap: round; }
+.floor-plan__route polyline { fill: none; stroke: var(--route); stroke-width: 2.5; stroke-dasharray: 8 5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; }
+.floor-plan__route .floor-plan__route-active { stroke: var(--route); stroke-width: 5; stroke-dasharray: none; stroke-linecap: round; }
 .floor-plan__step rect { fill: var(--route); stroke: var(--white); stroke-width: 2; }
 .floor-plan__step text { fill: var(--white); font: 600 12px var(--font-mono); }
 .floor-plan__step--active rect { fill: var(--navy); stroke: var(--gold); stroke-width: 3; }
-.floor-plan__start rect { fill: var(--gold); stroke: var(--ink); stroke-width: 1; }
-.floor-plan__start-title { font: 700 11px var(--font-display); letter-spacing: 0.06em; fill: var(--ink); }
-.floor-plan__start-detail { font: 600 9px var(--font-display); letter-spacing: 0.08em; fill: var(--ink); paint-order: stroke; stroke: var(--paper); stroke-width: 3px; stroke-linejoin: round; }
-.floor-plan__transition text { font: 700 10px var(--font-display); letter-spacing: 0.06em; fill: var(--route); paint-order: stroke; stroke: var(--white); stroke-width: 3px; stroke-linejoin: round; }
+.floor-plan__annotations { pointer-events: none; }
+.floor-plan__annotation rect { fill: var(--paper); }
+.floor-plan__annotation text { font: 600 9px var(--font-display); letter-spacing: 0.02em; fill: var(--ink); }
+.floor-plan__annotation--start rect { fill: var(--gold); stroke: var(--ink); stroke-width: 1; }
+.floor-plan__annotation--start text { font-size: 11px; }
+.floor-plan__annotation--transition text { font-size: 10px; fill: var(--route); }
 
 .floor-plan__zoom { position: absolute; z-index: 1; top: var(--s3); right: var(--s3); }
 .floor-plan__zoom button { display: grid; place-items: center; }
