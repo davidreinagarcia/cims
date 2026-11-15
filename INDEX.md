@@ -35,6 +35,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`docs/stickers/`](docs/stickers/INDEX.md): QR codes and the link list for the door stickers that open a building with the entrance preselected.
   - [`docs/testing/`](docs/testing/INDEX.md): Test plans with people (hallway tests).
 - [`public/`](public/INDEX.md): Static assets served as-is at the site root.
+  - [`public/culture/`](public/culture/INDEX.md): Hand-drawn doodles for the GT Culture sticky notes and the "big sib" welcome letter, one per note id. AI-gene…
   - [`public/photos/`](public/photos/INDEX.md): Static photos served by the app; each one is credited in a data file under src/data/.
     - [`public/photos/buildings/`](public/photos/buildings/INDEX.md): Building photos from Wikimedia Commons (free licenses), one per building id; credits in src/data/building-pho…
 - [`scripts/`](scripts/INDEX.md): Dev tooling run with Node (no deps): index generator, Claude hooks, data fetchers.
@@ -44,6 +45,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`src/alerts/`](src/alerts/INDEX.md): Top-of-page banner for live GTPD alarms and the all-clear.
   - [`src/auth/`](src/auth/INDEX.md): Replaceable demo sign-in contract, fictional personas and local session persistence.
   - [`src/components/`](src/components/INDEX.md): React components shared by the shell: map view, glyphs, offline notice. The layout itself lives in src/shell/.
+  - [`src/culture/`](src/culture/INDEX.md): Culture mode state (layer on/off, West vs East guide open): never saved, so the layer always starts off.
   - [`src/data/`](src/data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
     - [`src/data/indoor/`](src/data/indoor/INDEX.md): Indoor models per building: schematic levels, rooms, walking graph and entrances.
     - [`src/data/mocks/`](src/data/mocks/INDEX.md): Fictional fixtures layered on top of real building data, always labeled "Demo data" in the UI.
@@ -59,6 +61,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
     - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Upcoming events in campus time (Orgs and People tabs), posting with a required registered building or room an…
     - [`src/panels/buses/`](src/panels/buses/INDEX.md): Buses panel (T-42): GT bus routes, live next-bus times, trip options to a destination and the Stingerette.
+    - [`src/panels/culture/`](src/panels/culture/INDEX.md): West vs East guide dialog for people deciding where to live (opens from the Culture layer and the layers pane…
     - [`src/panels/layers/`](src/panels/layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
     - [`src/panels/maintenance/`](src/panels/maintenance/INDEX.md): Maintenance dashboard: live Facilities report board by crew, claim box for reports open to all teams, and the…
     - [`src/panels/police/`](src/panels/police/INDEX.md): GTPD console: draw the danger circle, launch and end alarms, work citizen police tips.
@@ -85,7 +88,6 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): Branching, commits, PRs, code review, data contributions, local dev.
 - [`README.md`](README.md): Project overview, quick start, team rules and the map of all docs.
 - [`index.html`](index.html): HTML entry · CIMS | Campus Interactive Map System
-- [`node_modules`](node_modules): _no summary_
 - [`package-lock.json`](package-lock.json): npm lockfile (don't read; don't hand-edit)
 - [`package.json`](package.json): npm manifest · scripts: dev, build, preview, index, index:check, setup:hooks, data:check, data:verify, data:list, db:check, db:status, db:apply, db:accounts
 - [`tsconfig.json`](tsconfig.json): TypeScript compiler config

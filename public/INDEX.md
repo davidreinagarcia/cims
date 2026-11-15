@@ -6,6 +6,7 @@ Static assets served as-is at the site root.
 
 **Folders**
 
+- [`culture/`](culture/INDEX.md): Hand-drawn doodles for the GT Culture sticky notes and the "big sib" welcome letter, one per note id. AI-gene…
 - [`photos/`](photos/INDEX.md): Static photos served by the app; each one is credited in a data file under src/data/.
 
 **Files**

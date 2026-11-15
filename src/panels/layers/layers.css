@@ -26,3 +26,4 @@
 /* Live overlays (police alerts, social heat map) */
 .layers__overlays { border-top: var(--hairline); }
 .layers__hint { display: block; font-size: var(--fs-xs); }
+.layers__guide { width: 100%; margin: var(--s2) 0; }

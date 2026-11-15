@@ -1,5 +1,8 @@
 /** @file Layer panel state (which categories and sub-types are on), remembered on this device. */
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { getCulture, setCulture, useCulture } from "../culture/store";
+import { LAYER_CATALOG } from "../lib/layerCatalog";
+import { places } from "../lib/places";
 import type { LayerFilters } from "../map/types";
 
 const KEY = "cims.layers.v1";
@@ -31,18 +34,35 @@ const Ctx = createContext<LayerFiltersApi | null>(null);
 
 /** Provides the layer filters to the app. Mount once, in App. */
 export function LayerFiltersProvider({ children }: { children: ReactNode }) {
-  const [filters, setFilters] = useState<LayerFilters>(load);
+  const [saved, setFilters] = useState<LayerFilters>(load);
+  const culture = useCulture().on;
+  // Culture mode hides every place layer without touching the user's own choices; the alerts overlay stays (safety).
+  const filters = useMemo<LayerFilters>(() => {
+    if (!culture) return saved;
+    const visible: Record<string, boolean> = { ...saved.visible };
+    for (const c of LAYER_CATALOG) visible[c.id] = false;
+    for (const f of places.features) visible[f.properties.category] = false; // also landmarks and any category without a chip
+    return { ...saved, visible };
+  }, [saved, culture]);
 
   useEffect(() => {
     try {
-      localStorage.setItem(KEY, JSON.stringify(filters));
+      localStorage.setItem(KEY, JSON.stringify(saved));
     } catch {
       /* ignore: persistence is a convenience */
     }
-  }, [filters]);
+  }, [saved]);
 
   const toggleCategory = useCallback(
-    (cat: string) => setFilters((f) => ({ ...f, visible: { ...f.visible, [cat]: f.visible[cat] === false } })),
+    (cat: string) => {
+      if (cat === "culture") { setCulture(!getCulture().on); return; }
+      if (getCulture().on) { // picking a normal layer leaves culture mode and makes sure that layer shows
+        setCulture(false);
+        setFilters((f) => ({ ...f, visible: { ...f.visible, [cat]: true } }));
+        return;
+      }
+      setFilters((f) => ({ ...f, visible: { ...f.visible, [cat]: f.visible[cat] === false } }));
+    },
     [],
   );
   const toggleSubtype = useCallback(
@@ -58,12 +78,12 @@ export function LayerFiltersProvider({ children }: { children: ReactNode }) {
   const api = useMemo<LayerFiltersApi>(
     () => ({
       filters,
-      isOn: (cat) => filters.visible[cat] !== false,
+      isOn: (cat) => (cat === "culture" ? culture : filters.visible[cat] !== false),
       isSubtypeOn: (cat, sub) => !(filters.hiddenSubtypes[cat] ?? []).includes(sub),
       toggleCategory,
       toggleSubtype,
     }),
-    [filters, toggleCategory, toggleSubtype],
+    [filters, culture, toggleCategory, toggleSubtype],
   );
   return <Ctx.Provider value={api}>{children}</Ctx.Provider>;
 }

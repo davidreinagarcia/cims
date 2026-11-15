@@ -11,6 +11,8 @@ import SignInDialog from "../panels/account/SignInDialog";
 import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
+import HousingGuide from "../panels/culture/HousingGuide";
+import CultureReader from "../panels/culture/CultureReader";
 import BulletinBoard from "../panels/bulletin/BulletinBoard";
 import BusesPanel from "../panels/buses/BusesPanel";
 import TipNotifier from "../alerts/TipNotifier";
@@ -262,6 +264,8 @@ export default function Shell() {
         <MapView />
         <BuildingView />
         <LayersPopover />
+        <CultureReader />
+        <HousingGuide />
         {mobile && (
           <>
             <button type="button" className="shell-fab shell-fab--police" aria-label="GTPD alert console" onClick={() => setPolice(true)}>

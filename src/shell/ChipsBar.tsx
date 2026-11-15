@@ -3,6 +3,7 @@ import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Glyph from "../components/Glyph";
 import { LAYER_CATALOG } from "../lib/layerCatalog";
 import { places } from "../lib/places";
+import { useCulture } from "../culture/store";
 import { useLayerFilters } from "../state/layerFilters";
 import { Icon } from "./icons";
 
@@ -13,6 +14,7 @@ const ordered = [...LAYER_CATALOG].sort((a, b) => Number(!withData.has(a.id)) - 
 /** One pill per layer category; pressed = layer on. Categories without data stay visible but inert (aria-disabled, dashed). */
 export default function ChipsBar() {
   const { isOn, toggleCategory } = useLayerFilters();
+  const culture = useCulture().on;
   const row = useRef<HTMLDivElement>(null);
   const [edges, setEdges] = useState({ start: false, end: false });
   useEffect(() => {
@@ -29,6 +31,11 @@ export default function ChipsBar() {
   return (
     <div className="shell-chips" data-start={edges.start} data-end={edges.end}>
       <div ref={row} className="shell-chips__row" role="group" aria-label="Quick layer toggles">
+        <button type="button" className="shell-chip shell-chip--culture" aria-pressed={culture} style={{ "--cat": "var(--gold-ink)" } as CSSProperties}
+          title="Sticky-note map of GT traditions. Hides the other layers." onClick={() => toggleCategory("culture")}>
+          <span className="shell-chip__glyph" aria-hidden="true">📝</span>
+          GT Culture
+        </button>
         {ordered.map((layer) => {
           const ready = withData.has(layer.id);
           return (
