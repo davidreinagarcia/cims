@@ -64,7 +64,7 @@ export default function PoliceMap(props: PoliceMapProps) {
         map.on("click", "tips", (e) => { const id = e.features?.[0]?.properties?.id; if (id && !latest.current.drawing) latest.current.onSelectTip(String(id)); });
         map.on("mouseenter", "tips", () => { map.getCanvas().style.cursor = "pointer"; });
         map.on("mouseleave", "tips", () => { map.getCanvas().style.cursor = latest.current.drawing ? "crosshair" : ""; });
-        removeAlerts = addAlertsOverlay(map);
+        removeAlerts = addAlertsOverlay(map).remove;
         ready.current = true;
         paint();
       });

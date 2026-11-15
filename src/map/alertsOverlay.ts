@@ -28,9 +28,13 @@ export function flyToAlert(map: MapLibreMap, alert: CampusAlert): void {
   });
 }
 
-/** Adds the alarm layers to a map whose style is ready and keeps them in sync with the live store. Returns a remover. */
-export function addAlertsOverlay(map: MapLibreMap, options: AlertsOverlayOptions = {}): () => void {
+/** Handle returned by the overlay: show/hide it (the layer panel toggle) and remove it. */
+export interface AlertsOverlayHandle { setVisible: (visible: boolean) => void; remove: () => void }
+
+/** Adds the alarm layers to a map whose style is ready and keeps them in sync with the live store. */
+export function addAlertsOverlay(map: MapLibreMap, options: AlertsOverlayOptions = {}): AlertsOverlayHandle {
   let removed = false;
+  let shown = true;
   let active: CampusAlert[] = [];
   let seen: Set<string> | null = null; // null until the first snapshot, so alarms already running at load don't yank the camera
   const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -83,7 +87,7 @@ export function addAlertsOverlay(map: MapLibreMap, options: AlertsOverlayOptions
     if (removed) return;
     active = state.alerts.filter((a) => a.status === "active");
     const ids = new Set(active.map((a) => a.id));
-    if (options.fly && seen && state.status === "live") {
+    if (options.fly && shown && seen && state.status === "live") {
       const fresh = active.find((a) => !seen!.has(a.id));
       if (fresh) flyToAlert(map, fresh);
     }
@@ -91,7 +95,7 @@ export function addAlertsOverlay(map: MapLibreMap, options: AlertsOverlayOptions
     draw();
   });
 
-  const onFocus = (event: Event) => { if (options.fly) flyToAlert(map, (event as CustomEvent<CampusAlert>).detail); };
+  const onFocus = (event: Event) => { if (options.fly && shown) flyToAlert(map, (event as CustomEvent<CampusAlert>).detail); };
   window.addEventListener("cims:focus-alert", onFocus);
 
   // Pulse: the fill breathes and a ring grows out of the circle edge. ~12 fps is plenty and keeps phones cool.
@@ -99,7 +103,7 @@ export function addAlertsOverlay(map: MapLibreMap, options: AlertsOverlayOptions
   let last = 0;
   const tick = (now: number) => {
     raf = requestAnimationFrame(tick);
-    if (document.hidden || active.length === 0 || now - last < 80) return;
+    if (document.hidden || !shown || active.length === 0 || now - last < 80) return;
     last = now;
     const phase = (now % 2200) / 2200;
     map.setPaintProperty("cims-alert-fill", "fill-opacity", 0.2 + 0.14 * Math.sin(phase * Math.PI * 2) ** 2);
@@ -107,12 +111,19 @@ export function addAlertsOverlay(map: MapLibreMap, options: AlertsOverlayOptions
   };
   if (!reduced) raf = requestAnimationFrame(tick);
 
-  return () => {
+  const LAYER_IDS = ["cims-alert-label", "cims-alert-center", "cims-alert-ripple", "cims-alert-edge", "cims-alert-fill"];
+  const setVisible = (visible: boolean) => {
+    shown = visible;
+    for (const id of LAYER_IDS) if (map.getLayer(id)) map.setLayoutProperty(id, "visibility", visible ? "visible" : "none");
+  };
+
+  const remove = () => {
     removed = true;
     cancelAnimationFrame(raf);
     unsubscribe();
     window.removeEventListener("cims:focus-alert", onFocus);
-    for (const id of ["cims-alert-label", "cims-alert-center", "cims-alert-ripple", "cims-alert-edge", "cims-alert-fill"]) if (map.getLayer(id)) map.removeLayer(id);
+    for (const id of LAYER_IDS) if (map.getLayer(id)) map.removeLayer(id);
     for (const id of [AREAS, RIPPLE, CENTERS]) if (map.getSource(id)) map.removeSource(id);
   };
+  return { setVisible, remove };
 }
