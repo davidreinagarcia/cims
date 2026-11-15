@@ -24,6 +24,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`docs/design/`](docs/design/INDEX.md): Visual direction and UI references: the chosen "survey map" style, tokens and how to build it.
     - [`docs/design/references/`](docs/design/references/INDEX.md): Reference images (Gemini mockups). Mood references, not specs; their data is fake.
     - [`docs/design/screenshots/`](docs/design/screenshots/INDEX.md): Before/after screenshots of the real app, taken for PRs (production build, headless Chromium). Named <task-<s…
+      - [`docs/design/screenshots/app-shell/`](docs/design/screenshots/app-shell/INDEX.md): Map-first shell (APP-SHELL.md), production build in headless Chromium at 1440, 1280, 390 and 360 px: empty ma…
   - [`docs/research/`](docs/research/INDEX.md): Fuentes y dudas pendientes de las investigaciones de datos del campus.
   - [`docs/testing/`](docs/testing/INDEX.md): Test plans with people (hallway tests).
 - [`public/`](public/INDEX.md): Static assets served as-is at the site root.
