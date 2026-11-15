@@ -15,5 +15,6 @@
 - [`20261115000600_report_claim.sql`](20261115000600_report_claim.sql): _no summary_
 - [`20261115000700_bulletin_posts.sql`](20261115000700_bulletin_posts.sql): _no summary_
 - [`20261115000800_bulletin_posts_delete.sql`](20261115000800_bulletin_posts_delete.sql): _no summary_
+- [`20261115000900_bulletin_alumni_section.sql`](20261115000900_bulletin_alumni_section.sql): _no summary_
 
 <!-- AUTO:END -->

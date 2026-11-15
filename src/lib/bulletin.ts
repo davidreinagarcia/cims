@@ -4,7 +4,7 @@ import { LAYER_CATALOG } from "./layerCatalog";
 import { places, showDrafts } from "./places";
 import type { PlaceCollection, PlaceFeature } from "./places";
 import { searchPlaces } from "./search";
-import type { UserPost } from "./bulletinPosts";
+import type { PostSection, UserPost } from "./bulletinPosts";
 import events from "../data/pois/events.json";
 import orgs from "../data/pois/orgs.json";
 
@@ -28,6 +28,8 @@ export interface BulletinPost {
   placeName?: string;
   /** Orgs tab (curated orgs and org accounts) or People tab (student accounts). */
   audience: "org" | "person";
+  /** Alumni posts get their own tab, whoever wrote them. */
+  section: PostSection;
   /** Account that wrote a user post (curated posts have none); drives who may delete it. */
   ownerId?: string;
   /** Poster image (data URL) attached by the author, shown on the board and in BuzzPrint. */
@@ -103,6 +105,7 @@ export function bulletinPosts(now: Date, written: readonly UserPost[] = []): Bul
       placeId: venue?.id ?? p.id,
       placeKind: "place",
       audience: "org",
+      section: "general",
       placeName: venue?.name,
       isDemo: p.status === "demo",
       url: p.url,
@@ -110,7 +113,7 @@ export function bulletinPosts(now: Date, written: readonly UserPost[] = []): Bul
     }];
   });
   const mine = written.flatMap((post): BulletinPost[] => post.endsAt > now ? [{
-    id: post.id, title: post.title, org: post.authorName, type: "community", audience: post.audience,
+    id: post.id, title: post.title, org: post.authorName, type: "community", audience: post.audience, section: post.section,
     description: post.description, start: post.startsAt, end: post.endsAt,
     when: whenLabel({ start: post.startsAt, end: post.endsAt }, now),
     soon: post.startsAt.getTime() <= now.getTime() + 86_400_000,
@@ -124,9 +127,12 @@ export function bulletinPosts(now: Date, written: readonly UserPost[] = []): Bul
   });
 }
 
-/** Keep only the posts of one tab (Orgs or People). */
-export function postsFor(posts: readonly BulletinPost[], audience: "org" | "person"): BulletinPost[] {
-  return posts.filter((post) => post.audience === audience);
+/** The three bulletin tabs. */
+export type BoardTab = "org" | "person" | "alumni";
+
+/** Keep only the posts of one tab: Alumni shows the alumni section, Orgs and People split the rest by author. */
+export function postsFor(posts: readonly BulletinPost[], tab: BoardTab): BulletinPost[] {
+  return posts.filter((post) => tab === "alumni" ? post.section === "alumni" : post.section === "general" && post.audience === tab);
 }
 
 /** Filter posts by type and the shared case/accent-insensitive search, retaining post order. */

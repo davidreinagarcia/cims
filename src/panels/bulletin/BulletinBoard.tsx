@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type CSSProperties, type KeyboardEvent } from "react";
 import { loadInterests, setInterest } from "../../lib/bulletinInterests";
 import { canDeletePost, deleteUserPost, getUserPosts, refreshUserPosts, subscribeUserPosts, audienceFor, type UserPost } from "../../lib/bulletinPosts";
-import { POST_TYPES, bulletinPosts, countByType, filterPosts, postsFor, type BulletinPost, type PostType } from "../../lib/bulletin";
+import { POST_TYPES, bulletinPosts, countByType, filterPosts, postsFor, type BoardTab, type BulletinPost, type PostType } from "../../lib/bulletin";
 import { recordPortfolioEntry } from "../../portfolio/store";
 import { Icon } from "../../shell/icons";
 import PostComposer from "./PostComposer";
@@ -62,7 +62,7 @@ function NoteCard({ post, index, interested, count, onInterest, onShow, onDelete
             {post.isDemo && <span className="cims-tag cims-tag--alert" title="Fictional demo data, not a real post">DEMO</span>}
           </div>
         )}
-        <p className="board-card__kicker cims-caps">{post.audience === "person" ? "Person" : typeLabel(post.type)}{post.org && <> · {post.org}</>}</p>
+        <p className="board-card__kicker cims-caps">{post.section === "alumni" ? "Alumni" : post.audience === "person" ? "Person" : typeLabel(post.type)}{post.org && <> · {post.org}</>}</p>
         <h3 id={`post-${post.id}`} className="board-card__title">{post.title}</h3>
         <p className="board-card__when">{post.when}</p>
         {post.placeName && <p className="board-card__place">{post.placeName}</p>}
@@ -96,7 +96,7 @@ export default function BulletinBoard({ type, onType, onClose }: {
   const [interestCounts, setCounts] = useState<Record<string, number>>({});
   useEffect(() => { let alive = true; void loadInterests().then((s) => { if (alive) { setInterests(s.mine); setCounts(s.counts); } }); return () => { alive = false; }; }, []);
   const [onlyInterests, setOnlyInterests] = useState(false);
-  const [audience, setAudience] = useState<"org" | "person">("org");
+  const [audience, setAudience] = useState<BoardTab>("org");
   const [composing, setComposing] = useState(false);
   const written = useSyncExternalStore(subscribeUserPosts, getUserPosts, getUserPosts);
   useEffect(() => { void refreshUserPosts(); }, []);
@@ -114,7 +114,7 @@ export default function BulletinBoard({ type, onType, onClose }: {
 
   const posts = useMemo(() => bulletinPosts(now, written), [now, written]);
   const searched = useMemo(() => filterPosts(posts, "all", query), [posts, query]);
-  const audienceCounts = { org: postsFor(searched, "org").length, person: postsFor(searched, "person").length };
+  const audienceCounts = { org: postsFor(searched, "org").length, person: postsFor(searched, "person").length, alumni: postsFor(searched, "alumni").length };
   const matching = useMemo(() => postsFor(searched, audience), [searched, audience]);
   const saved = matching.filter((post) => interests.has(post.id));
   const counts = countByType(onlyInterests ? saved : matching);
@@ -189,10 +189,10 @@ export default function BulletinBoard({ type, onType, onClose }: {
       <div className="board__surface">
         <CorkTexture />
         <div className="board__chips board__tabs" role="group" aria-label="Whose posts">
-          {(["org", "person"] as const).map((id) => (
+          {(["org", "person", "alumni"] as const).map((id) => (
             <button key={id} type="button" className="board__chip board__tab" aria-pressed={audience === id}
               onClick={() => { setAudience(id); onType("all"); }}>
-              {id === "org" ? "Orgs" : "People"} <span className="board__count">{audienceCounts[id]}</span>
+              {id === "org" ? "Orgs" : id === "person" ? "People" : "Alumni"} <span className="board__count">{audienceCounts[id]}</span>
             </button>
           ))}
         </div>
@@ -219,8 +219,8 @@ export default function BulletinBoard({ type, onType, onClose }: {
           )}
       </div>
       {composing && session && (
-        <PostComposer session={session} onClose={() => setComposing(false)}
-          onDone={(post: UserPost) => { setComposing(false); setAudience(post.audience); onType("all"); setNotice("Posted. It is on the board and pinned to its building on the map."); }} />
+        <PostComposer session={session} section={audience === "alumni" ? "alumni" : "general"} onClose={() => setComposing(false)}
+          onDone={(post: UserPost) => { setComposing(false); setAudience(post.section === "alumni" ? "alumni" : post.audience); onType("all"); setNotice("Posted. It is on the board and pinned to its building on the map."); }} />
       )}
     </dialog>
   );
