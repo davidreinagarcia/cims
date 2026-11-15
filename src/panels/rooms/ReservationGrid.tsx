@@ -31,7 +31,7 @@ function HeartIcon({ filled }: { filled: boolean }) {
     <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
       <path
         d="M12 20.2s-7.2-4.4-9.6-8.9C.8 7.8 2.1 4.3 5.5 4.3c2 0 3.4 1.2 4.2 2.4.1.2.3.2.6 0 .8-1.2 2.2-2.4 4.2-2.4 3.4 0 4.7 3.5 3.1 7-2.4 4.5-9.6 8.9-9.6 8.9z"
-        fill={filled ? "var(--gold)" : "none"} stroke="var(--ink)" strokeWidth="1.5" strokeLinejoin="round" />
+        fill={filled ? "var(--cat-issues)" : "none"} stroke="var(--ink)" strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -252,11 +252,16 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
           <div className="reserve-grid__row reserve-grid__row--header">
             <div className="reserve-grid__roomcell" aria-hidden="true" />
             <div className="reserve-grid__cells" aria-hidden="true">
-              {DISPLAY_TIMES.map((_, index) => (
-                <span key={index} className="reserve-grid__hour">
-                  {index % 2 === 0 ? hourFmt.format(boundaries[selectedDayIndex][index].start).replace(" ", "") : ""}
-                </span>
-              ))}
+              {DISPLAY_TIMES.map((_, index) => {
+                if (index % 2 !== 0) return <span key={index} className="reserve-grid__hour" />;
+                const [num, meridiem] = hourFmt.format(boundaries[selectedDayIndex][index].start).split(" ");
+                return (
+                  <span key={index} className="reserve-grid__hour">
+                    <span className="reserve-grid__hour-num">{num}</span>
+                    <span className="reserve-grid__hour-meridiem">{meridiem}</span>
+                  </span>
+                );
+              })}
             </div>
           </div>
           {visibleRooms.map((room) => {
