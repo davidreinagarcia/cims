@@ -1,5 +1,5 @@
 /** @file Map-first app shell (docs/design/APP-SHELL.md): full-bleed map with rail or tab bar, search pill, chips, and a card or sheet for panels. */
-import { useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import MapView from "../components/MapView";
 import OfflineBanner from "../components/OfflineBanner";
 import BuildingView from "../indoor/BuildingView";
@@ -94,6 +94,30 @@ export default function Shell() {
     body: <><PlaceCard /><BuildingCard /></>,
   };
   const showResults = hasQuery && !selection && panel === "explore";
+
+  // Focus follows the content. When the focused control unmounts (a card's "Show on map", its close button, Esc
+  // from inside it), focus moves to the new card/sheet, or back to whatever opened the content once it closes.
+  // Focus that is still somewhere (map canvas, search field, nav item) is never stolen.
+  const contentKey = content?.key ?? null;
+  const shownKey = useRef<string | null>(null);
+  const opener = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const before = shownKey.current;
+    shownKey.current = contentKey;
+    if (before === contentKey) return;
+    const active = document.activeElement;
+    const lost = !(active instanceof HTMLElement) || active === document.body;
+    if (!lost && contentKey && !before) opener.current = active;
+    if (!lost) return;
+    if (!contentKey) {
+      const back = opener.current?.isConnected ? opener.current
+        : document.querySelector<HTMLElement>('.shell-navitem[aria-pressed="true"], .shell-search input');
+      back?.focus();
+    } else if (before) {
+      // Replaced while focus was inside it; content shown from nothing with focus nowhere is a page load: leave it.
+      document.querySelector<HTMLElement>(".shell-card, .shell-sheet")?.focus();
+    }
+  }, [contentKey]);
 
   const pill = (
     <SearchPill showResults={showResults}

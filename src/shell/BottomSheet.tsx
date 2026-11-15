@@ -63,7 +63,7 @@ export default function BottomSheet({ title, contentKey, snap, onSnap, onClose, 
   };
 
   return (
-    <section ref={sheet} className="shell-sheet" data-snap={snap} aria-label={title}
+    <section ref={sheet} className="shell-sheet" data-snap={snap} aria-label={title} tabIndex={-1}
       style={dragHeight == null ? undefined : { height: dragHeight, transition: "none" }}>
       <header className="shell-sheet__head">
         <button type="button" className="shell-sheet__handle" aria-label={`${title}: ${snap === "full" ? "collapse" : "expand"} sheet`}
