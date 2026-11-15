@@ -46,6 +46,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `readBulletinParams(search)` [src/lib/bulletin.ts:147](../src/lib/bulletin.ts#L147): Read bulletin visibility and a validated type filter from a query string.
 - `loadInterests()` [src/lib/bulletinInterests.ts:13](../src/lib/bulletinInterests.ts#L13): Loads every mark (public counts) and this account's own.
 - `setInterest(postId, on)` [src/lib/bulletinInterests.ts:24](../src/lib/bulletinInterests.ts#L24): Marks or unmarks one post as interesting for this account.
+- `MAX_WALK_TO_STOP_M` [src/lib/busPlanner.ts:10](../src/lib/busPlanner.ts#L10): Farthest stop (straight line) we'd ask someone to walk to, at either end: about 10 minutes.
+- `walkSeconds(a, b)` [src/lib/busPlanner.ts:45](../src/lib/busPlanner.ts#L45): Estimated walking seconds between two points (straight line with a street detour factor).
+- `rideSeconds(route, from, to)` [src/lib/busPlanner.ts:50](../src/lib/busPlanner.ts#L50): Scheduled seconds riding from stop index `from` to `to`, going forward around the loop (waits at the stops in…
+- `busEtaSeconds(route, stops, TransitStop>, bus, target)` [src/lib/busPlanner.ts:74](../src/lib/busPlanner.ts#L74): Seconds until a live bus reaches stop index `target`: it is placed on the leg it's driving (nearest stop and…
+- `planBusTrips(network, origin, destination, buses)` [src/lib/busPlanner.ts:106](../src/lib/busPlanner.ts#L106): Bus options from `origin` to `destination` ([lng, lat]), best first. Uses live buses for waiting time when gi…
+- `formatMinutes(seconds)` [src/lib/busPlanner.ts:150](../src/lib/busPlanner.ts#L150): "Now", "1 min", "12 min": rounded minutes for people on the move.
+- `routeStatuses(network, buses, here)` [src/lib/busPlanner.ts:168](../src/lib/busPlanner.ts#L168): Every route with a stop sequence, for the "buses near you" list: running routes first, soonest bus at your ne…
 - `nextWindow(event, now)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Return the current or next weekly campus occurrence, or an unexpired one-off window.
 - `formatWindow(window)` [src/lib/events.ts:58](../src/lib/events.ts#L58): Format an event window as short English text in campus time.
 - `GeolocationError` [src/lib/geolocation.ts:14](../src/lib/geolocation.ts#L14): A geolocation failure with a stable `reason` for branching and a ready-to-show `message`. A real `Error`, so…
@@ -117,7 +124,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `rest(path, init)` [src/lib/supabase.ts:85](../src/lib/supabase.ts#L85): PostgREST call. `path` starts with the table or `rpc/<fn>`; returns parsed JSON (or null for empty).
 - `upload(bucket, blob, ext)` [src/lib/supabase.ts:107](../src/lib/supabase.ts#L107): Uploads a blob under `<uid>/<uuid>.<ext>` in a public bucket and returns the object path.
 - `publicUrl(bucket, path)` [src/lib/supabase.ts:120](../src/lib/supabase.ts#L120): Public URL of an uploaded object.
+- `highlightRoutes(routeIds)` [src/lib/transitHighlight.ts:8](../src/lib/transitHighlight.ts#L8): Spotlights these routes and dims the rest; null (or an empty list) shows every route normally.
+- `onRouteHighlight(listener)` [src/lib/transitHighlight.ts:15](../src/lib/transitHighlight.ts#L15): Calls `listener` now and on every change; returns the unsubscribe function.
+- `loadTransitNetwork()` [src/lib/transitNetwork.ts:19](../src/lib/transitNetwork.ts#L19): Loads the network once; a failed download is forgotten so the next call tries again.
+- `parseNetwork(geojson)` [src/lib/transitNetwork.ts:34](../src/lib/transitNetwork.ts#L34): Turns the generated GeoJSON into routes and a stop index. Routes without a stop sequence are kept (drawn) but…
 - `useGpsFix(auto = false)` [src/lib/useGpsFix.ts:15](../src/lib/useGpsFix.ts#L15): GPS fix for forms. Pass `auto` to ask as soon as the form opens. Fresh, high accuracy: these reports depend o…
+- `useTransitNetwork()` [src/lib/useTransit.ts:10](../src/lib/useTransit.ts#L10): The network once loaded; `failed` when the download failed.
+- `useLiveBuses(network)` [src/lib/useTransit.ts:21](../src/lib/useTransit.ts#L21): Live buses every 10 s while mounted and the tab is visible. `updatedAt` is null until the first good answer;…
 - `useAuth()` [src/state/auth.tsx:63](../src/state/auth.tsx#L63): Reads the demo session and sign-in controls inside AuthProvider.
 - `useLayerFilters()` [src/state/layerFilters.tsx:72](../src/state/layerFilters.tsx#L72): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
@@ -174,6 +187,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PostType` [src/lib/bulletin.ts:11](../src/lib/bulletin.ts#L11): The five supported bulletin filters; unknown source subtypes become community posts.
 - `BulletinPost` [src/lib/bulletin.ts:14](../src/lib/bulletin.ts#L14): A dated bulletin entry with known source facts and a selectable map location.
 - `InterestState` [src/lib/bulletinInterests.ts:8](../src/lib/bulletinInterests.ts#L8): This browser's marked post ids plus how many people marked each post.
+- `LiveBus` [src/lib/busPlanner.ts:17](../src/lib/busPlanner.ts#L17): A live bus as the planner needs it.
+- `BusOption` [src/lib/busPlanner.ts:20](../src/lib/busPlanner.ts#L20): One way to get there by bus. Times are seconds. `live` is false when no bus is running on the route right now.
+- `BusPlan` [src/lib/busPlanner.ts:39](../src/lib/busPlanner.ts#L39): The planner's answer: bus options (best first) and the plain walking time to compare against.
+- `RouteStatus` [src/lib/busPlanner.ts:156](../src/lib/busPlanner.ts#L156): One route's status for the bus list: is it running, its nearest stop to you, and the next bus there.
 - `GeolocationFailureReason` [src/lib/geolocation.ts:4](../src/lib/geolocation.ts#L4): Every real-world way `getCurrentPosition` can fail, each with its own honest, human message.
 - `Coordinates` [src/lib/geolocation.ts:24](../src/lib/geolocation.ts#L24): A GPS fix: WGS84 degrees plus the device's own reported accuracy radius in meters.
 - `RoomCategory` [src/lib/indoorPlan.ts:15](../src/lib/indoorPlan.ts#L15): Fill category for a space type: the `cims-room--<category>` class and its legend swatch.
@@ -202,6 +219,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SearchMatch` [src/lib/search.ts:10](../src/lib/search.ts#L10): A matching name, alias or category and its highlight ranges.
 - `SearchResult` [src/lib/search.ts:17](../src/lib/search.ts#L17): A ranked place with an extensible group label and matches in displayable fields.
 - `CampusSearchResult` [src/lib/search.ts:137](../src/lib/search.ts#L137): A campus result selects its building, room or place directly.
+- `TransitStop` [src/lib/transitNetwork.ts:5](../src/lib/transitNetwork.ts#L5): One physical bus stop.
+- `RouteStop` [src/lib/transitNetwork.ts:8](../src/lib/transitNetwork.ts#L8): One stop in a route's served order, with the tracker's scheduled seconds to the next stop and at this stop.
+- `TransitRoute` [src/lib/transitNetwork.ts:11](../src/lib/transitNetwork.ts#L11): One bus route: official name, color, service-hours text and its stops in order (routes are loops).
+- `TransitNetwork` [src/lib/transitNetwork.ts:14](../src/lib/transitNetwork.ts#L14): Routes and stops of the network, plus the raw GeoJSON the map draws.
 - `GpsState` [src/lib/useGpsFix.ts:6](../src/lib/useGpsFix.ts#L6): State of the GPS request.
 - `AlertsOverlayOptions` [src/map/alertsOverlay.ts:16](../src/map/alertsOverlay.ts#L16): Options for the overlay.
 - `AlertsOverlayHandle` [src/map/alertsOverlay.ts:32](../src/map/alertsOverlay.ts#L32): Handle returned by the overlay: show/hide it (the layer panel toggle) and remove it.
@@ -276,7 +297,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `ReservationGrid({ rooms })` [src/panels/rooms/ReservationGrid.tsx:50](../src/panels/rooms/ReservationGrid.tsx#L50): Day/time grid, booking flow, favorites, location check-in and "My reservations" for any list of
 - `RoomFinderPanel()` [src/panels/rooms/RoomFinderPanel.tsx:28](../src/panels/rooms/RoomFinderPanel.tsx#L28): Sidebar tab: "Reserve a room" entry point, replacing the read-only room finder (T-24) with a
 - `RoomsNearMe({ onBack })` [src/panels/rooms/RoomsNearMe.tsx:19](../src/panels/rooms/RoomsNearMe.tsx#L19): Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and hands the…
-- `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
+- `BusList({ here }, number] | null })` [src/panels/search/BusList.tsx:45](../src/panels/search/BusList.tsx#L45): Lists every route for the "which buses are around" view; `here` is the From place, else the GPS fix if allowe…
+- `BusOptions({ origin, destination }, number] | null; destination, number] })` [src/panels/search/BusOptions.tsx:19](../src/panels/search/BusOptions.tsx#L19): Lists bus options from `origin` (or the user's GPS position when null) to `destination`.
+- `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:11](../src/panels/search/DirectionsBox.tsx#L11): Replaces the search field while the user plans a trip from one place to another.
 - `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
 - `SearchPanel(…)` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
 - `BottomSheet(…)` [src/shell/BottomSheet.tsx:21](../src/shell/BottomSheet.tsx#L21): Drag or tap the handle (or press Enter/Space on it) to move between snaps; arrow keys step up and down. Opens…

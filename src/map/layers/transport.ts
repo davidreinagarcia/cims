@@ -4,7 +4,8 @@ import type { MapLayer } from "../types";
 import { buildMapFilter, isVisible } from "../layerFilters";
 import { INK, PAPER, SAGE } from "../palette";
 import { fetchBuses, TRACKER_URL, type BusFeature } from "../transitLive";
-import transitUrl from "../../data/transit.geojson?url";
+import { loadTransitNetwork } from "../../lib/transitNetwork";
+import { onRouteHighlight } from "../../lib/transitHighlight";
 import "../transport.css";
 
 const SOURCE = "transit";
@@ -126,6 +127,16 @@ const transport: MapLayer = {
       },
       paint: labelPaint,
     });
+    // Trip planner spotlight: the routes that get you there stay bold, the others fade back.
+    const dimmed = (ids: ReadonlySet<number> | null, full: number, faded: number) =>
+      ids ? ["case", ["in", ["get", "route_id"], ["literal", [...ids]]], full, faded] : full;
+    const offHighlight = onRouteHighlight((ids) => {
+      map.setPaintProperty(ROUTES, "line-opacity", dimmed(ids, 1, 0.2));
+      map.setPaintProperty(CASING, "line-opacity", dimmed(ids, 1, 0.2));
+      map.setPaintProperty(ROUTE_NAMES, "text-opacity", dimmed(ids, 1, 0));
+      map.setPaintProperty(BUSES, "icon-opacity", dimmed(ids, 1, 0.25));
+      map.setPaintProperty(BUSES, "text-opacity", dimmed(ids, 1, 0));
+    });
     const filtered = [CASING, ROUTES, ROUTE_NAMES, STOPS, STOP_NAMES];
     const live = [BUSES];
 
@@ -170,7 +181,7 @@ const transport: MapLayer = {
       if (routeNames.size || loading) return;
       loading = true;
       try {
-        const data: GeoJSON.FeatureCollection = await (await fetch(transitUrl)).json();
+        const data = (await loadTransitNetwork()).geojson;
         if (removed) return;
         for (const f of data.features) {
           if (f.properties?.kind !== "route") continue;
@@ -246,6 +257,7 @@ const transport: MapLayer = {
       },
       remove() {
         removed = true;
+        offHighlight();
         stop();
         popup.remove();
         document.removeEventListener("visibilitychange", onVisibility);

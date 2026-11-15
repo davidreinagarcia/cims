@@ -6,7 +6,9 @@ Search box and list of places (rooms and buildings join in T-14).
 
 **Files**
 
-- [`DirectionsBox.tsx`](DirectionsBox.tsx): From and To fields with swap, like a map app; walking directions open in Google Maps until we route outdoors… · exports `DirectionsBox`
+- [`BusList.tsx`](BusList.tsx): Bus mode of Directions before a destination is picked: every GT route, running ones first with the next bus a… · exports `BusList`
+- [`BusOptions.tsx`](BusOptions.tsx): Bus mode of Directions: which GT buses get you to the destination, best first, with when to leave, the wait,… · exports `BusOptions`
+- [`DirectionsBox.tsx`](DirectionsBox.tsx): From and To fields with swap, like a map app, and a Walk / Bus switch: walking opens Google Maps, bus lists t… · exports `DirectionsBox`
 - [`PlaceField.tsx`](PlaceField.tsx): One place input with a short suggestion list, used for the From and To fields of directions. · exports `PlaceField`
 - [`SearchPanel.tsx`](SearchPanel.tsx): Grouped campus search with ranked highlights and keyboard selection. · exports `SearchPanel`
 - [`search.css`](search.css): * @file Search panel layout. Look comes from .cims-field / .cims-results (styles/cims-ui.css); `order` keeps…

@@ -1,0 +1,18 @@
+{
+  "_note": "Stingerette on-demand service facts, copied from the official PTS page. Re-check each semester: hours and service area change.",
+  "name": "Stingerette",
+  "summary": "On-demand shared ride from campus to off-campus residential areas. It no longer runs between on-campus locations: use the Stinger buses for those.",
+  "days": "Every day",
+  "opens": "16:30",
+  "closes": "24:00",
+  "hours_text": "4:30 pm – midnight, every day",
+  "exceptions": "No service on Institute holidays or during home football games.",
+  "how_to_request": "TransLoc app → OnDemand tab (sign in with your GT account).",
+  "request_url": "https://ondemand.transloc.com/",
+  "app_url": "https://transloc.com/app/",
+  "late_night": "Midnight – 3 am: Yellow Jacket Vouchers (Uber).",
+  "phone": "404-385-7275",
+  "source_url": "https://www.pts.gatech.edu/shuttles/stingerette/",
+  "verified_at": "2026-11-15",
+  "verified_by": "Claude (page read 2026-11-15)"
+}
