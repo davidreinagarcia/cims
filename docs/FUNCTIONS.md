@@ -30,6 +30,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `formatDistance(meters)` [src/lib/geolocation.ts:64](../src/lib/geolocation.ts#L64): "~180 m away" / "~1.2 km away": rounds to a sensible precision for an approximate, building-level distance --…
 - `campusDay(now)` [src/lib/hours.ts:11](../src/lib/hours.ts#L11): Returns the hours-contract weekday for an instant in America/New_York.
 - `openStatus(hours, now)` [src/lib/hours.ts:24](../src/lib/hours.ts#L24): Computes campus-local opening status without guessing when today's hours are missing.
+- `TEAMS` [src/lib/issue-routing.ts:31](../src/lib/issue-routing.ts#L31): All teams, in the order the staff view lists them.
+- `SAFETY_CATEGORY` [src/lib/issue-routing.ts:34](../src/lib/issue-routing.ts#L34): Category that must show the emergency banner before the form.
+- `hasVerifiedRouting` [src/lib/issue-routing.ts:69](../src/lib/issue-routing.ts#L69): Whether verified routing data (T-31) was found at build time.
+- `issueRoutes` [src/lib/issue-routing.ts:72](../src/lib/issue-routing.ts#L72): The ten categories with their routing, in display order.
+- `routeFor(category)` [src/lib/issue-routing.ts:80](../src/lib/issue-routing.ts#L80): Routing for one category.
 - `LAYER_CATALOG` [src/lib/layerCatalog.ts:22](../src/lib/layerCatalog.ts#L22): The PRD layers plus Printing and Health (added 2026-11-14), in panel order.
 - `categoryColor(layer, fallback = "#1C2733")` [src/lib/layerCatalog.ts:50](../src/lib/layerCatalog.ts#L50): Resolved color of a layer (reads the design token, so the tokens stay the single source of truth).
 - `readLocal(key, fallback)` [src/lib/localStore.ts:4](../src/lib/localStore.ts#L4): Reads JSON from localStorage; falls back when storage is blocked or the value is corrupt.
@@ -38,6 +43,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `places` [src/lib/places.ts:19](../src/lib/places.ts#L19): The places the app shows: seed, demo and verified records, plus drafts only with ?drafts=1.
 - `createLocalPreferredRoomsService()` [src/lib/preferredRooms.mock.ts:8](../src/lib/preferredRooms.mock.ts#L8): Creates the localStorage-backed mock. Falls back to memory when storage is unavailable.
 - `preferredRoomsService` [src/lib/preferredRooms.ts:33](../src/lib/preferredRooms.ts#L33): The favorites backend used by the app. Swap the adapter here (and only here) when ADR-0005 is decided.
+- `createLocalReportsService()` [src/lib/reports.mock.ts:92](../src/lib/reports.mock.ts#L92): Creates the localStorage-backed mock. Falls back to memory when storage is unavailable.
+- `STATUS_FLOW` [src/lib/reports.ts:71](../src/lib/reports.ts#L71): The happy-path statuses in order, for the status timeline.
+- `STATUS_LABEL` [src/lib/reports.ts:74](../src/lib/reports.ts#L74): Human label for each status.
+- `isActive(status)` [src/lib/reports.ts:83](../src/lib/reports.ts#L83): Whether a report still counts as unresolved (shown in "Already reported?").
+- `reportsService` [src/lib/reports.ts:88](../src/lib/reports.ts#L88): The reports backend used by the app. Swap the adapter here (and only here) when ADR-0005 is decided.
 - `createLocalReservationsService()` [src/lib/reservations.mock.ts:16](../src/lib/reservations.mock.ts#L16): Creates the localStorage-backed mock. Falls back to memory when storage is unavailable.
 - `SLOT_MINUTES` [src/lib/reservations.ts:6](../src/lib/reservations.ts#L6): 30 minutes: both the grid's cell size and the minimum booking length.
 - `MIN_DURATION_MINUTES` [src/lib/reservations.ts:8](../src/lib/reservations.ts#L8): Shortest a reservation may be.
@@ -98,6 +108,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
 - `GeolocationFailureReason` [src/lib/geolocation.ts:4](../src/lib/geolocation.ts#L4): Every real-world way `getCurrentPosition` can fail, each with its own honest, human message.
 - `Coordinates` [src/lib/geolocation.ts:24](../src/lib/geolocation.ts#L24): A GPS fix: WGS84 degrees plus the device's own reported accuracy radius in meters.
+- `Team` [src/lib/issue-routing.ts:5](../src/lib/issue-routing.ts#L5): Team a report is routed to (simulated in the MVP).
+- `IssueCategory` [src/lib/issue-routing.ts:8](../src/lib/issue-routing.ts#L8): The ten report categories from PRD US-10.1.
+- `IssueRoute` [src/lib/issue-routing.ts:21](../src/lib/issue-routing.ts#L21): Where a category goes: team plus the official contact, null until verified data exists.
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
 - `LayerCategory` [src/lib/layerCatalog.ts:11](../src/lib/layerCatalog.ts#L11): One entry of the layer panel.
 - `PlaceFeature` [src/lib/places.ts:7](../src/lib/places.ts#L7): One place as a GeoJSON point feature.
@@ -105,6 +118,12 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PreferredRoom` [src/lib/preferredRooms.ts:5](../src/lib/preferredRooms.ts#L5): One room an account heart-favorited, for the "Preferred rooms" shortcut (T-60).
 - `NewPreferredRoom` [src/lib/preferredRooms.ts:16](../src/lib/preferredRooms.ts#L16): What the heart toggle submits to favorite a room.
 - `PreferredRoomsService` [src/lib/preferredRooms.ts:23](../src/lib/preferredRooms.ts#L23): Backend contract for favorites. Implemented by the localStorage mock today (ADR-0005 still open).
+- `ReportStatus` [src/lib/reports.ts:8](../src/lib/reports.ts#L8): Lifecycle of a report (PRD US-10.3).
+- `ReportLocation` [src/lib/reports.ts:11](../src/lib/reports.ts#L11): Where the problem is: a building (› floor › room) or an outdoor map pin.
+- `StatusEvent` [src/lib/reports.ts:21](../src/lib/reports.ts#L21): One status change with its timestamp (ISO 8601).
+- `IssueReport` [src/lib/reports.ts:27](../src/lib/reports.ts#L27): A reported issue as the UI sees it.
+- `NewIssueReport` [src/lib/reports.ts:46](../src/lib/reports.ts#L46): What the form submits; the service assigns id, team, status and timestamps.
+- `ReportsService` [src/lib/reports.ts:55](../src/lib/reports.ts#L55): Backend contract for reports. Implemented by the localStorage mock today (ADR-0005 still open).
 - `Reservation` [src/lib/reservations.ts:43](../src/lib/reservations.ts#L43): A booked room as the UI sees it. Always a fixed start/end; "open-ended + Renew" (T-60) is gone, replaced by t…
 - `NewReservation` [src/lib/reservations.ts:63](../src/lib/reservations.ts#L63): What the booking flow submits; the service assigns id, timestamps and ownership.
 - `ReservationsService` [src/lib/reservations.ts:73](../src/lib/reservations.ts#L73): Backend contract for reservations. Implemented by the localStorage mock today (ADR-0005 still open).
@@ -117,6 +136,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
 - `MapLayer` [src/map/types.ts:36](../src/map/types.ts#L36): A self-contained piece of the map. Drop a file in src/map/layers/ that default-exports one of
+- `DuplicateListProps` [src/panels/report/DuplicateList.tsx:6](../src/panels/report/DuplicateList.tsx#L6): Props for the "Already reported?" step.
+- `ReportFlowProps` [src/panels/report/ReportFlow.tsx:11](../src/panels/report/ReportFlow.tsx#L11): Props for the report flow.
+- `ReportFormProps` [src/panels/report/ReportForm.tsx:9](../src/panels/report/ReportForm.tsx#L9): Props for the details step.
+- `ReportStatusViewProps` [src/panels/report/ReportStatusView.tsx:7](../src/panels/report/ReportStatusView.tsx#L7): Props for the status page.
+- `Navigate` [src/panels/report/index.tsx:11](../src/panels/report/index.tsx#L11): Changes the query string without reloading, so a filed report's status link and the staff team filter stay sh…
 - `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
 - `IconName` [src/shell/icons.tsx:20](../src/shell/icons.tsx#L20): Names of the shell icons.
 - `ShellPanel` [src/shell/icons.tsx:33](../src/shell/icons.tsx#L33): What the floating card / bottom sheet can show besides a map selection.
@@ -148,14 +172,21 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:7](../src/panels/account/AccountChip.tsx#L7): Shows sign-in or the selected demo persona with a small sign-out disclosure.
 - `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
-- `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:13](../src/panels/building-card/BuildingCard.tsx#L13): Shows the selected building (kind "building"), or nothing when something else is selected.
-- `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:20](../src/panels/building-card/BuildingCard.tsx#L20): Shared building facts and actions for the sidebar and expanded indoor screen.
+- `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:14](../src/panels/building-card/BuildingCard.tsx#L14): Shows the selected building (kind "building"), or nothing when something else is selected.
+- `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:21](../src/panels/building-card/BuildingCard.tsx#L21): Shared building facts and actions for the sidebar and expanded indoor screen.
 - `BuildingLink({ coordinates, buildingId, attached, floorOrRoom })` [src/panels/building-card/BuildingLink.tsx:7](../src/panels/building-card/BuildingLink.tsx#L7): Renders nothing when the place is not inside a known footprint (or the footprints are not loaded).
-- `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:11](../src/panels/building-card/BuildingPreview.tsx#L11): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
+- `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:12](../src/panels/building-card/BuildingPreview.tsx#L12): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
 - `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:11](../src/panels/building-card/InsidePlaces.tsx#L11): Show selectable places grouped by category for a footprint or a legacy seed building.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinPanel({ onShowMap })` [src/panels/bulletin/BulletinPanel.tsx:9](../src/panels/bulletin/BulletinPanel.tsx#L9): Show upcoming events independently of layer filters and return to Explore on selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
+- `DuplicateList({ reports, busy, onPlusOne, onView, onSubmitNew, onBack })` [src/panels/report/DuplicateList.tsx:16](../src/panels/report/DuplicateList.tsx#L16): Lists matching open reports so the user can add a +1 instead of filing a duplicate (PRD US-10.2).
+- `ReportFlow({ location, reportId, navigate })` [src/panels/report/ReportFlow.tsx:23](../src/panels/report/ReportFlow.tsx#L23): Report-an-issue flow (PRD US-10.1 to US-10.3). Filing and "+1" need a signed-in demo account (F-21).
+- `ReportForm({ location, draft, busy, onContinue })` [src/panels/report/ReportForm.tsx:34](../src/panels/report/ReportForm.tsx#L34): The details form (PRD US-10.1). Safety hazard shows the emergency banner before everything else.
+- `ReportStatusView({ reportId, justFiled, onAnother })` [src/panels/report/ReportStatusView.tsx:15](../src/panels/report/ReportStatusView.tsx#L15): Status page of one report (PRD US-10.3), always carrying the "Prototype: not sent" label.
+- `ReportSummary({ report, showLocation = true })` [src/panels/report/ReportSummary.tsx:12](../src/panels/report/ReportSummary.tsx#L12): Category, place, description and tags of a report; used by the duplicates list, status page and staff queue.
+- `StaffQueue()` [src/panels/report/StaffQueue.tsx:23](../src/panels/report/StaffQueue.tsx#L23): Staff view of the report queue. Unlisted in the MVP: reached with ?panel=staff (optionally &team=IT).
+- `ReportPanel({ onClose })` [src/panels/report/index.tsx:17](../src/panels/report/index.tsx#L17): Mounts the 3-step report flow, or (unlisted, ?staff=1) the staff queue; the floating card / bottom
 - `BuildingGlyph({ buildingId })` [src/panels/rooms/BuildingGlyph.tsx:10](../src/panels/rooms/BuildingGlyph.tsx#L10): Renders a flat, ink-outlined elevation sketch with a gold hatch fill and a row of square windows per level ba…
 - `BuildingPicker({ onPick })` [src/panels/rooms/BuildingPicker.tsx:30](../src/panels/rooms/BuildingPicker.tsx#L30): Search bar + quick-pick chips for the two buildings with real indoor data; other GT buildings show as "Coming…
 - `ReservationGrid({ rooms })` [src/panels/rooms/ReservationGrid.tsx:50](../src/panels/rooms/ReservationGrid.tsx#L50): Day/time grid, booking flow, favorites, location check-in and "My reservations" for any list of
@@ -172,7 +203,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Rail({ panel, onPanel })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
 - `RoutePanel({ initialSelection, onClose })` [src/shell/RoutePanel.tsx:10](../src/shell/RoutePanel.tsx#L10): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:56](../src/shell/Shell.tsx#L56): Lays out the map and every floating surface; panels are mounted unchanged inside the card (desktop) or sheet…
+- `Shell()` [src/shell/Shell.tsx:57](../src/shell/Shell.tsx#L57): Lays out the map and every floating surface; panels are mounted unchanged inside the card (desktop) or sheet…
 - `Icon({ name, size = 24 })` [src/shell/icons.tsx:23](../src/shell/icons.tsx#L23): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = mockAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
@@ -242,6 +273,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `addHatchPatterns(map)` [src/map/patterns/index.ts:38](../src/map/patterns/index.ts#L38): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
 - `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
+- `formatWhen(iso)` [src/panels/report/ReportSummary.tsx:7](../src/panels/report/ReportSummary.tsx#L7): Formats an ISO timestamp for display in the viewer's locale.
+- `locationParts(location)` [src/panels/report/location.ts:7](../src/panels/report/location.ts#L7): Breadcrumb parts for a location: building › floor › room, or the outdoor pin coordinates.
+- `locationForId(id, floor, room)` [src/panels/report/location.ts:22](../src/panels/report/location.ts#L22): Builds a prefilled location for a place or building id (checks curated places first, then the OSM
+- `locationFromParams(params)` [src/panels/report/location.ts:31](../src/panels/report/location.ts#L31): Builds the prefilled location from ?building=&floor=&room= (or ?lng=&lat=); null when the URL has none.
 - `NAV_ITEMS` [src/shell/icons.tsx:36](../src/shell/icons.tsx#L36): The five destinations of the rail (desktop) and the tab bar (phones), in order.
 - `moveFocus(event, vertical)` [src/shell/icons.tsx:45](../src/shell/icons.tsx#L45): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 - `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:13](../src/stories/CameraCapture.tsx#L13): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…

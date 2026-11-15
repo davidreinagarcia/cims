@@ -1,7 +1,8 @@
-/** @file Card for the selected building footprint: name, nicknames, an honest height note, the places inside it, directions and a correction link. */
+/** @file Card for the selected building footprint: name, nicknames, an honest height note, the places inside it, directions, report-an-issue and a correction link. */
 import { useEffect, useState } from "react";
 import { CORRECTION_URL } from "../../config";
 import { loadBuildings, loadedBuildings, type BuildingIndex } from "../../lib/buildings";
+import { useAuth } from "../../state/auth";
 import InsidePlaces from "./InsidePlaces";
 import { useSelection } from "../../state/selection";
 import { hasIndoor } from "../../indoor/registry";
@@ -19,6 +20,7 @@ export default function BuildingCard() {
 /** Shared building facts and actions for the sidebar and expanded indoor screen. */
 export function BuildingDetails({ buildingId, embedded = false }: { buildingId: string; embedded?: boolean }) {
   const { select } = useSelection();
+  const { session, requireAuth } = useAuth();
   const [index, setIndex] = useState<BuildingIndex | null>(loadedBuildings);
   const [failed, setFailed] = useState(false);
 
@@ -54,6 +56,8 @@ export function BuildingDetails({ buildingId, embedded = false }: { buildingId: 
   const correction = new URL(CORRECTION_URL);
   correction.searchParams.set("title", `Correction: ${name} (${b.id})`);
   correction.searchParams.set("body", `Building ID: ${b.id}\n\nFields shown as Unknown:\n${missing.map((field) => `* ${field}`).join("\n")}\n\nSuggested correction:\n\nSource URL:\n`);
+  // T-23: opens the report flow (Shell's "report" panel) prefilled with this building; floor/room are picked in the form.
+  const handleReportIssue = () => requireAuth(() => select({ kind: "report", id: b.id }));
 
   return (
     <section className="detail" aria-label="Building details">
@@ -77,6 +81,10 @@ export function BuildingDetails({ buildingId, embedded = false }: { buildingId: 
         </tbody>
       </table>
       <p><a href={correction.toString()} target="_blank" rel="noopener noreferrer">Suggest a correction</a></p>
+      <div className="detail__report">
+        <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
+        {!session && <small className="cims-muted">Requires sign-in</small>}
+      </div>
       <InsidePlaces buildingId={b.id} />
       <div className="cims-actions">
         <a className="cims-btn cims-btn--primary" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
