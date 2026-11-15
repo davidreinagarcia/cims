@@ -1,12 +1,13 @@
 /** @file Pure bulletin posts, campus-time labels, filters, counts and deep links. */
-import { formatWindow, nextWindow } from "./events";
+import { campusDateTime, formatWindow, nextWindow } from "./events";
 import { LAYER_CATALOG } from "./layerCatalog";
 import { places, showDrafts } from "./places";
 import type { PlaceCollection, PlaceFeature } from "./places";
 import { searchPlaces } from "./search";
-import type { UserPost } from "./bulletinPosts";
+import type { PostSection, UserPost } from "./bulletinPosts";
 import events from "../data/pois/events.json";
 import orgs from "../data/pois/orgs.json";
+import demo from "../data/bulletinDemo.json";
 
 /** The five supported bulletin filters; unknown source subtypes become community posts. */
 export type PostType = "club" | "campus-org" | "community" | "admin" | "lost-found";
@@ -28,6 +29,8 @@ export interface BulletinPost {
   placeName?: string;
   /** Orgs tab (curated orgs and org accounts) or People tab (student accounts). */
   audience: "org" | "person";
+  /** Alumni posts get their own tab, whoever wrote them. */
+  section: PostSection;
   /** Account that wrote a user post (curated posts have none); drives who may delete it. */
   ownerId?: string;
   /** Poster image (data URL) attached by the author, shown on the board and in BuzzPrint. */
@@ -74,6 +77,29 @@ function postType(value: string | null | undefined): PostType | "all" {
   return POST_TYPES.find((item) => item.id === value)?.id ?? "all";
 }
 
+const campusDay = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York" });
+
+/** Poster files live in public/posters; resolve against the app base so previews under a sub-path still load them. */
+function posterUrl(file: string | undefined): string | undefined {
+  return file ? `${import.meta.env.BASE_URL}${file}` : undefined;
+}
+
+/** Fictional demo posts (People and Alumni tabs, with mock posters) dated relative to today so they never expire. */
+function demoPosts(now: Date): BulletinPost[] {
+  return demo.posts.flatMap((item): BulletinPost[] => {
+    const day = campusDay.format(new Date(now.getTime() + item.dayOffset * 86_400_000));
+    const start = campusDateTime(day, item.start);
+    const end = campusDateTime(day, item.end);
+    if (!start || !end || end <= now) return [];
+    return [{
+      id: item.id, title: item.title, org: item.org, type: "community", audience: item.audience as "org" | "person",
+      section: item.section as PostSection, description: item.description, start, end,
+      when: whenLabel({ start, end }, now), soon: start.getTime() <= now.getTime() + 86_400_000,
+      placeId: item.placeId, placeKind: "place", placeName: item.placeName, isDemo: true, poster: posterUrl(item.poster),
+    }];
+  });
+}
+
 /** Return ongoing and upcoming dated events or org posts (curated plus user-written), with ongoing entries first. */
 export function bulletinPosts(now: Date, written: readonly UserPost[] = []): BulletinPost[] {
   if (!Number.isFinite(now.getTime())) return [];
@@ -103,30 +129,35 @@ export function bulletinPosts(now: Date, written: readonly UserPost[] = []): Bul
       placeId: venue?.id ?? p.id,
       placeKind: "place",
       audience: "org",
+      section: "general",
       placeName: venue?.name,
       isDemo: p.status === "demo",
+      poster: posterUrl((demo.eventPosters as Record<string, string>)[p.id]),
       url: p.url,
       sourceUrl: p.source_url,
     }];
   });
   const mine = written.flatMap((post): BulletinPost[] => post.endsAt > now ? [{
-    id: post.id, title: post.title, org: post.authorName, type: "community", audience: post.audience,
+    id: post.id, title: post.title, org: post.authorName, type: "community", audience: post.audience, section: post.section,
     description: post.description, start: post.startsAt, end: post.endsAt,
     when: whenLabel({ start: post.startsAt, end: post.endsAt }, now),
     soon: post.startsAt.getTime() <= now.getTime() + 86_400_000,
     placeId: post.location.id, placeKind: post.location.kind, placeName: post.location.name,
     isDemo: false, poster: post.poster, ownerId: post.accountId,
   }] : []);
-  return [...curated, ...mine].sort((a, b) => {
+  return [...curated, ...demoPosts(now), ...mine].sort((a, b) => {
     const ongoingA = a.start! <= now && a.end! > now;
     const ongoingB = b.start! <= now && b.end! > now;
     return Number(ongoingB) - Number(ongoingA) || a.start!.getTime() - b.start!.getTime();
   });
 }
 
-/** Keep only the posts of one tab (Orgs or People). */
-export function postsFor(posts: readonly BulletinPost[], audience: "org" | "person"): BulletinPost[] {
-  return posts.filter((post) => post.audience === audience);
+/** The three bulletin tabs. */
+export type BoardTab = "org" | "person" | "alumni";
+
+/** Keep only the posts of one tab: Alumni shows the alumni section, Orgs and People split the rest by author. */
+export function postsFor(posts: readonly BulletinPost[], tab: BoardTab): BulletinPost[] {
+  return posts.filter((post) => tab === "alumni" ? post.section === "alumni" : post.section === "general" && post.audience === tab);
 }
 
 /** Filter posts by type and the shared case/accent-insensitive search, retaining post order. */

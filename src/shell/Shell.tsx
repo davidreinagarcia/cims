@@ -1,5 +1,5 @@
 /** @file Map-first app shell (docs/design/APP-SHELL.md): full-bleed map with rail or tab bar, search pill, chips, a card or sheet for panels, and full-screen Bulletin/BuzzPrint views. */
-import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { Suspense, lazy, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import MapView from "../components/MapView";
 import OfflineBanner from "../components/OfflineBanner";
 import AlertBanner from "../alerts/AlertBanner";
@@ -11,17 +11,13 @@ import SignInDialog from "../panels/account/SignInDialog";
 import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
+import GameHud from "../games/GameHud";
+import { leaveGame, useGames } from "../games/store";
 import HousingGuide from "../panels/culture/HousingGuide";
 import CultureReader from "../panels/culture/CultureReader";
-import BulletinBoard from "../panels/bulletin/BulletinBoard";
+import { useCulture } from "../culture/store";
 import BusesPanel from "../panels/buses/BusesPanel";
 import TipNotifier from "../alerts/TipNotifier";
-import PoliceView from "../panels/police/PoliceView";
-import MaintenanceView from "../panels/maintenance/MaintenanceView";
-import ReportPanel from "../panels/report";
-import RoomsBoard from "../panels/rooms/RoomsBoard";
-import PortfolioPage from "../portfolio/PortfolioPage";
-import StoriesPanel from "../stories/StoriesPanel";
 import { useStories } from "../stories/store";
 import { bulletinUrl, readBulletinParams, type PostType } from "../lib/bulletin";
 import { useAuth } from "../state/auth";
@@ -37,8 +33,18 @@ import RoutePanel from "./RoutePanel";
 import SearchPill from "./SearchPill";
 import "./shell.css";
 
+// Panels nobody sees on first paint load on demand, keeping the first download small.
+const BulletinBoard = lazy(() => import("../panels/bulletin/BulletinBoard"));
+const PoliceView = lazy(() => import("../panels/police/PoliceView"));
+const MaintenanceView = lazy(() => import("../panels/maintenance/MaintenanceView"));
+const RoomsBoard = lazy(() => import("../panels/rooms/RoomsBoard"));
+const PortfolioPage = lazy(() => import("../portfolio/PortfolioPage"));
+const StoriesPanel = lazy(() => import("../stories/StoriesPanel"));
+const GamesPanel = lazy(() => import("../games/GamesPanel"));
+const ReportPanel = lazy(() => import("../panels/report"));
+
 const MOBILE = "(max-width: 767.98px)";
-const PANELS: ShellPanel[] = ["explore", "buses", "rooms", "report", "bulletin", "stories", "route", "buzzprint"];
+const PANELS: ShellPanel[] = ["explore", "buses", "rooms", "report", "bulletin", "stories", "route", "buzzprint", "games"];
 const KINDS: SelectionKind[] = ["building", "place", "room", "report"];
 
 function useIsMobile(): boolean {
@@ -85,7 +91,7 @@ function ComingSoon({ what, hint }: { what: string; hint?: string }) {
 export default function Shell() {
   const mobile = useIsMobile();
   const { selection, select } = useSelection();
-  const { dialogOpen } = useAuth();
+  const { dialogOpen, session } = useAuth();
   const [panel, setPanel] = useState<ShellPanel>(initialPanel);
   const [routeTo, setRouteTo] = useState<Selection | null>(null);
   const [bulletin, setBulletin] = useState(initialBulletin);
@@ -98,6 +104,7 @@ export default function Shell() {
   const [hasQuery, setHasQuery] = useState(false);
   const [snap, setSnap] = useState<SheetSnap>("half");
   const { banners, dismiss } = useAlertBanners();
+  const { game } = useGames();
   // Staff dashboards are full-screen views, deep-linkable with ?view=police or ?view=maintenance.
   const [staffView, setStaffView] = useState<"police" | "maintenance" | null>(() => {
     const v = new URLSearchParams(window.location.search).get("view");
@@ -111,6 +118,16 @@ export default function Shell() {
     setStaffView(view);
   };
   const setPolice = (open: boolean) => openStaff(open ? "police" : null);
+  // Red shield: police get their dashboard; everyone else lands on the "notify police" emergency request.
+  const onEmergency = () => {
+    if (session?.role === "police") { setPolice(true); return; }
+    window.history.pushState(null, "", `${window.location.pathname}?panel=report&kind=police${window.location.hash}`);
+    setBulletin((current) => ({ ...current, open: false }));
+    setBuzzprintOpen(false);
+    select(null);
+    setPanel("report");
+    setSnap("full");
+  };
 
   useEffect(() => {
     // Canonicalize the old panel link once; history navigation never writes over the destination.
@@ -159,12 +176,30 @@ export default function Shell() {
 
   // Picking something on the map (or from the bulletin) always shows it; a "report" selection
   // (a place/building card's "Report an issue") opens the report panel prefilled with it instead.
-  useEffect(() => { if (selection) setPanel(selection.kind === "report" ? "report" : "explore"); }, [selection]);
+  // During a match, tapping places on the map must not kick the player out of the Games tab.
+  useEffect(() => {
+    if (!selection) return;
+    if (game && panel === "games") { select(null); return; }
+    setPanel(selection.kind === "report" ? "report" : "explore");
+  }, [selection]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Leaving the Games tab (any other tab, URL change) ends the match and clears its map layers.
+  useEffect(() => { if (panel !== "games" || bulletin.open || buzzprintOpen || staffView) leaveGame(); }, [panel, bulletin.open, buzzprintOpen, staffView]);
+  // GT Culture is a mode of its own: turning it on closes every panel and card, and while it is on nothing else opens
+  // (the nav, search and route are dimmed and inert; a tap on a building is ignored). The police button stays: safety.
+  const culture = useCulture().on;
+  useEffect(() => {
+    if (!culture) return;
+    setPanel("explore");
+    setBulletin((current) => ({ ...current, open: false }));
+    setBuzzprintOpen(false);
+    if (selection) select(null);
+  }, [culture, selection]); // eslint-disable-line react-hooks/exhaustive-deps
   // "Book this room" on the indoor room card: leave the building and open the reservations panel on it.
   const booking = useBookingRequestSeq();
   useEffect(() => { if (booking) { select(null); setPanel("rooms"); } }, [booking]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const choosePanel = (next: ShellPanel) => {
+    if (culture) return; // blocked while GT Culture is on
     if (next === "bulletin") {
       bulletinOpener.current = document.querySelector<HTMLElement>('[data-nav="bulletin"]');
       writeBulletinUrl("all", true);
@@ -206,10 +241,11 @@ export default function Shell() {
   else if (panel === "report") {
     // Keyed by the selected place/building (when there is one) so the flow resets for a new "Report an issue".
     const reportKey = selection?.kind === "report" ? `report:${selection.id}` : "report";
-    content = { title: "Report", key: reportKey, body: <ReportPanel key={reportKey} onClose={() => setPanel("explore")} /> };
+    content = { title: "Report", key: reportKey, body: <Suspense fallback={<p className="cims-empty" role="status">Loading…</p>}><ReportPanel key={reportKey} onClose={() => setPanel("explore")} /></Suspense> };
   }
+  else if (panel === "games" && !game) content = { title: "Games", key: "games", body: <Suspense fallback={<p className="cims-empty" role="status">Loading…</p>}><GamesPanel /></Suspense> };
   // Desktop "stories" is a full-screen takeover beside the rail (below); phones keep the bottom sheet.
-  else if (panel === "stories" && mobile) content = { title: "Stories", key: "stories", body: <StoriesPanel onShowMap={() => setPanel("explore")} /> };
+  else if (panel === "stories" && mobile) content = { title: "Stories", key: "stories", body: <Suspense fallback={<p className="cims-empty" role="status">Loading…</p>}><StoriesPanel onShowMap={() => setPanel("explore")} /></Suspense> };
   else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel initialSelection={routeTo} onClose={closeContent} /> };
   else if (selection && selection.kind !== "report") content = {
     title: selection.kind === "building" ? "Building" : "Place",
@@ -234,7 +270,7 @@ export default function Shell() {
     if (!lost) return;
     if (!contentKey) {
       const back = opener.current?.isConnected ? opener.current
-        : document.querySelector<HTMLElement>('.shell-navitem[aria-pressed="true"], .shell-search input');
+        : document.querySelector<HTMLElement>('.shell-navitem[aria-pressed="true"], .shell-dockitem[aria-pressed="true"], .shell-search input');
       back?.focus();
     } else if (before) {
       // Replaced while focus was inside it; content shown from nothing with focus nowhere is a page load: leave it.
@@ -256,19 +292,20 @@ export default function Shell() {
   );
 
   return (
-    <div className="app cims" data-layout={mobile ? "mobile" : "desktop"} data-alert={banners.length > 0 ? "true" : undefined}>
+    <div className="app cims" data-layout={mobile ? "mobile" : "desktop"} data-culture={culture || undefined} data-alert={banners.length > 0 ? "true" : undefined}>
       <AlertBanner banners={banners} onDismiss={dismiss} />
       <SignInDialog />
       {!mobile && <Rail panel={bulletin.open ? "bulletin" : buzzprintOpen ? "buzzprint" : panel} onPanel={choosePanel} onPolice={() => setPolice(true)} onMaintenance={() => openStaff("maintenance")} />}
       <div className="stage">
         <MapView />
         <BuildingView />
+        {panel === "games" && <GameHud />}
         <LayersPopover />
         <CultureReader />
         <HousingGuide />
         {mobile && (
           <>
-            <button type="button" className="shell-fab shell-fab--police" aria-label="GTPD alert console" onClick={() => setPolice(true)}>
+            <button type="button" className="shell-fab shell-fab--police" aria-label={session?.role === "police" ? "GTPD alert console" : "Emergency: notify police"} onClick={onEmergency}>
               <Icon name="shield" />
             </button>
             <button type="button" className="shell-fab" aria-label="Route: directions between two places" onClick={() => choosePanel("route")}>
@@ -293,21 +330,21 @@ export default function Shell() {
       {mobile && <MobileTabBar panel={bulletin.open ? "bulletin" : buzzprintOpen ? "buzzprint" : panel} onPanel={choosePanel} />}
       <OfflineBanner />
       {staffView !== "police" && <TipNotifier onOpen={() => openStaff("police")} />}
-      {staffView === "police" && <PoliceView onClose={() => openStaff(null)} />}
-      {staffView === "maintenance" && <MaintenanceView onClose={() => openStaff(null)} />}
+      {staffView === "police" && <Suspense fallback={null}><PoliceView onClose={() => openStaff(null)} /></Suspense>}
+      {staffView === "maintenance" && <Suspense fallback={null}><MaintenanceView onClose={() => openStaff(null)} /></Suspense>}
       {panel === "stories" && !mobile && (
         <section className="stories-full" aria-label="Stories">
           <header className="stories-full__head">
             <h2>Stories</h2>
             <button type="button" className="cims-btn" onClick={closeContent}>Back to map</button>
           </header>
-          <StoriesPanel onShowMap={() => setPanel("explore")} />
+          <Suspense fallback={null}><StoriesPanel onShowMap={() => setPanel("explore")} /></Suspense>
         </section>
       )}
-      {panel === "rooms" && <RoomsBoard onClose={closeContent} />}
-      {bulletin.open && <BulletinBoard type={bulletin.type} onClose={closeBulletin}
-        onType={(type) => { writeBulletinUrl(type); setBulletin({ open: true, type }); }} />}
-      {buzzprintOpen && <PortfolioPage onClose={closeBuzzprint} />}
+      {panel === "rooms" && <Suspense fallback={null}><RoomsBoard onClose={closeContent} /></Suspense>}
+      {bulletin.open && <Suspense fallback={null}><BulletinBoard type={bulletin.type} onClose={closeBulletin}
+        onType={(type) => { writeBulletinUrl(type); setBulletin({ open: true, type }); }} /></Suspense>}
+      {buzzprintOpen && <Suspense fallback={null}><PortfolioPage onClose={closeBuzzprint} /></Suspense>}
     </div>
   );
 }

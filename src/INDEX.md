@@ -11,6 +11,7 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 - [`components/`](components/INDEX.md): React components shared by the shell: map view, glyphs, offline notice. The layout itself lives in src/shell/.
 - [`culture/`](culture/INDEX.md): Culture mode state (layer on/off, West vs East guide open): never saved, so the layer always starts off.
 - [`data/`](data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
+- [`games/`](games/INDEX.md): Games tab (mockup): lobby, two game modes on the campus map, simulated bots and click-to-move GPS. All client…
 - [`indoor/`](indoor/INDEX.md): Building screen, vector schematic renderer and indoor contracts shared by lanes A and B.
 - [`lib/`](lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
 - [`map/`](map/INDEX.md): Everything about the map engine: contract for layers, base style, and the layer auto-loader.
@@ -25,7 +26,7 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 **Files**
 
 - [`App.tsx`](App.tsx): App root: demo auth, selection and layer-filter providers around the map-first shell (src/shell/). · exports `App`
-- [`config.ts`](config.ts): Campus map settings and the base URL for correction issues. · exports `CAMPUS`, `MAP_LIGHT`, `BASEMAP_TILEJSON`, `TILE_ATTRIBUTION`, `CORRECTION_URL`
+- [`config.ts`](config.ts): Campus map settings and the base URL for correction issues. · exports `CAMPUS`, `MAP_LIGHT`, `BASEMAP_TILEJSON`, `TILE_ATTRIBUTION`, `CORRECTION_URL`, `SITE_URL`
 - [`main.tsx`](main.tsx): Entry point: loads fonts, design tokens and styles, mounts React and registers the offline service worker.
 - [`styles.css`](styles.css): * @file Global layout and map-control skin. Colors, type and components come from styles/tokens.css and style…
 - [`types.ts`](types.ts): Shared types for places shown on the map.

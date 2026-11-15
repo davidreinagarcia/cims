@@ -38,23 +38,23 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `placeBuilding(place, index, all)` [src/lib/buildingPlaces.ts:11](../src/lib/buildingPlaces.ts#L11): Resolve explicit footprint ids, legacy seed building ids, then exact-point containment.
 - `loadedBuildings()` [src/lib/buildings.ts:84](../src/lib/buildings.ts#L84): The index if it is already loaded, so callers can answer synchronously.
 - `loadBuildings()` [src/lib/buildings.ts:89](../src/lib/buildings.ts#L89): Loads the footprints once; a failed load is forgotten so the next call retries.
-- `POST_TYPES` [src/lib/bulletin.ts:43](../src/lib/bulletin.ts#L43): Bulletin filters in display order, sharing organization labels with the layer catalog.
-- `bulletinPosts(now, written)` [src/lib/bulletin.ts:78](../src/lib/bulletin.ts#L78): Return ongoing and upcoming dated events or org posts (curated plus user-written), with ongoing entries first.
-- `postsFor(posts, audience)` [src/lib/bulletin.ts:128](../src/lib/bulletin.ts#L128): Keep only the posts of one tab (Orgs or People).
-- `filterPosts(posts, type, query?)` [src/lib/bulletin.ts:133](../src/lib/bulletin.ts#L133): Filter posts by type and the shared case/accent-insensitive search, retaining post order.
-- `countByType(posts)` [src/lib/bulletin.ts:158](../src/lib/bulletin.ts#L158): Count every post type and the unfiltered total, including categories with no posts.
-- `bulletinUrl(type)` [src/lib/bulletin.ts:165](../src/lib/bulletin.ts#L165): Build a bulletin deep link, omitting the type parameter for the all filter.
-- `readBulletinParams(search)` [src/lib/bulletin.ts:172](../src/lib/bulletin.ts#L172): Read bulletin visibility and a validated type filter from a query string.
+- `POST_TYPES` [src/lib/bulletin.ts:46](../src/lib/bulletin.ts#L46): Bulletin filters in display order, sharing organization labels with the layer catalog.
+- `bulletinPosts(now, written)` [src/lib/bulletin.ts:104](../src/lib/bulletin.ts#L104): Return ongoing and upcoming dated events or org posts (curated plus user-written), with ongoing entries first.
+- `postsFor(posts, tab)` [src/lib/bulletin.ts:159](../src/lib/bulletin.ts#L159): Keep only the posts of one tab: Alumni shows the alumni section, Orgs and People split the rest by author.
+- `filterPosts(posts, type, query?)` [src/lib/bulletin.ts:164](../src/lib/bulletin.ts#L164): Filter posts by type and the shared case/accent-insensitive search, retaining post order.
+- `countByType(posts)` [src/lib/bulletin.ts:189](../src/lib/bulletin.ts#L189): Count every post type and the unfiltered total, including categories with no posts.
+- `bulletinUrl(type)` [src/lib/bulletin.ts:196](../src/lib/bulletin.ts#L196): Build a bulletin deep link, omitting the type parameter for the all filter.
+- `readBulletinParams(search)` [src/lib/bulletin.ts:203](../src/lib/bulletin.ts#L203): Read bulletin visibility and a validated type filter from a query string.
 - `loadInterests()` [src/lib/bulletinInterests.ts:13](../src/lib/bulletinInterests.ts#L13): Loads every mark (public counts) and this account's own.
 - `setInterest(postId, on)` [src/lib/bulletinInterests.ts:24](../src/lib/bulletinInterests.ts#L24): Marks or unmarks one post as interesting for this account.
-- `audienceFor(role)` [src/lib/bulletinPosts.ts:38](../src/lib/bulletinPosts.ts#L38): Audience an account role posts under, or null when that role may not post (staff, moderators).
-- `subscribeUserPosts(listener)` [src/lib/bulletinPosts.ts:47](../src/lib/bulletinPosts.ts#L47): Subscribe to changes of the loaded posts; returns the unsubscribe function.
-- `getUserPosts()` [src/lib/bulletinPosts.ts:53](../src/lib/bulletinPosts.ts#L53): Current snapshot of the loaded posts (stable between changes).
-- `refreshUserPosts()` [src/lib/bulletinPosts.ts:56](../src/lib/bulletinPosts.ts#L56): Loads posts that have not ended yet and publishes them; failures keep what is already loaded.
-- `createUserPost(session, input)` [src/lib/bulletinPosts.ts:68](../src/lib/bulletinPosts.ts#L68): Saves a post for the signed-in account and adds it to the live store. Rule rejections (wrong role, too fast)…
-- `canDeletePost(session, post, "accountId">)` [src/lib/bulletinPosts.ts:91](../src/lib/bulletinPosts.ts#L91): Whether this account may delete a post: its author, or a moderator (the server enforces the same rule).
-- `deleteUserPost(id)` [src/lib/bulletinPosts.ts:96](../src/lib/bulletinPosts.ts#L96): Deletes a post and drops it from the live store. Rule rejections reach the caller.
-- `userPostFeatures()` [src/lib/bulletinPosts.ts:105](../src/lib/bulletinPosts.ts#L105): Map anchors for the loaded posts: one orgs-layer point per post at its building's centre (none until footprin…
+- `audienceFor(role)` [src/lib/bulletinPosts.ts:41](../src/lib/bulletinPosts.ts#L41): Audience an account role posts under, or null when that role may not post (staff, moderators).
+- `subscribeUserPosts(listener)` [src/lib/bulletinPosts.ts:50](../src/lib/bulletinPosts.ts#L50): Subscribe to changes of the loaded posts; returns the unsubscribe function.
+- `getUserPosts()` [src/lib/bulletinPosts.ts:56](../src/lib/bulletinPosts.ts#L56): Current snapshot of the loaded posts (stable between changes).
+- `refreshUserPosts()` [src/lib/bulletinPosts.ts:59](../src/lib/bulletinPosts.ts#L59): Loads posts that have not ended yet and publishes them; failures keep what is already loaded.
+- `createUserPost(session, input)` [src/lib/bulletinPosts.ts:71](../src/lib/bulletinPosts.ts#L71): Saves a post for the signed-in account and adds it to the live store. Rule rejections (wrong role, too fast)…
+- `canDeletePost(session, post, "accountId">)` [src/lib/bulletinPosts.ts:95](../src/lib/bulletinPosts.ts#L95): Whether this account may delete a post: its author, or a moderator (the server enforces the same rule).
+- `deleteUserPost(id)` [src/lib/bulletinPosts.ts:100](../src/lib/bulletinPosts.ts#L100): Deletes a post and drops it from the live store. Rule rejections reach the caller.
+- `userPostFeatures()` [src/lib/bulletinPosts.ts:109](../src/lib/bulletinPosts.ts#L109): Map anchors for the loaded posts: one orgs-layer point per post at its building's centre (none until footprin…
 - `bearingDegrees(a, b)` [src/lib/busMotion.ts:21](../src/lib/busMotion.ts#L21): Compass bearing in degrees (0 = north, clockwise) from `a` to `b`.
 - `recordMotion(buses, now = Date.now()` [src/lib/busMotion.ts:36](../src/lib/busMotion.ts#L36): Records one poll's positions, each with the time of its GPS fix, and returns each bus's motion.
 - `stoppedText(stillFor)` [src/lib/busMotion.ts:57](../src/lib/busMotion.ts#L57): "Stopped for 3 min" once a bus has stood still at least 90 seconds (`stillFor` in ms); null while it moves.
@@ -144,14 +144,14 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SUPABASE_REALTIME` [src/lib/supabase.ts:11](../src/lib/supabase.ts#L11): Project URL and anon key for the Realtime socket (same public values as above).
 - `BackendDown` [src/lib/supabase.ts:14](../src/lib/supabase.ts#L14): The backend could not be reached (network, 5xx, sign-in failure): callers fall back to local mocks.
 - `withFallback(run)` [src/lib/supabase.ts:17](../src/lib/supabase.ts#L17): Runs `run` on Supabase; only when the backend is unreachable does it serve `local` instead (rule rejections l…
-- `signInWithPassword(email, password)` [src/lib/supabase.ts:50](../src/lib/supabase.ts#L50): Signs in as one of the pre-created demo accounts (replaces the anonymous guest session in this browser).
-- `signOutSupabase()` [src/lib/supabase.ts:57](../src/lib/supabase.ts#L57): Forgets the chosen account; the next call creates a fresh anonymous guest session.
-- `currentAccount()` [src/lib/supabase.ts:63](../src/lib/supabase.ts#L63): The account currently signed in (null for guests), read from the stored session without a network call.
-- `session()` [src/lib/supabase.ts:70](../src/lib/supabase.ts#L70): Signed-in anonymous session for this browser (created once, refreshed when it is about to expire).
-- `accountId()` [src/lib/supabase.ts:85](../src/lib/supabase.ts#L85): This browser's account id (auth.uid()).
-- `rest(path, init)` [src/lib/supabase.ts:88](../src/lib/supabase.ts#L88): PostgREST call. `path` starts with the table or `rpc/<fn>`; returns parsed JSON (or null for empty).
-- `upload(bucket, blob, ext)` [src/lib/supabase.ts:110](../src/lib/supabase.ts#L110): Uploads a blob under `<uid>/<uuid>.<ext>` in a public bucket and returns the object path.
-- `publicUrl(bucket, path)` [src/lib/supabase.ts:123](../src/lib/supabase.ts#L123): Public URL of an uploaded object.
+- `signInWithPassword(email, password)` [src/lib/supabase.ts:53](../src/lib/supabase.ts#L53): Signs in as one of the pre-created demo accounts (replaces the anonymous guest session in this browser).
+- `signOutSupabase()` [src/lib/supabase.ts:60](../src/lib/supabase.ts#L60): Forgets the chosen account; the next call creates a fresh anonymous guest session.
+- `currentAccount()` [src/lib/supabase.ts:66](../src/lib/supabase.ts#L66): The account currently signed in (null for guests), read from the stored session without a network call.
+- `session()` [src/lib/supabase.ts:73](../src/lib/supabase.ts#L73): Signed-in anonymous session for this browser (created once, refreshed when it is about to expire).
+- `accountId()` [src/lib/supabase.ts:88](../src/lib/supabase.ts#L88): This browser's account id (auth.uid()).
+- `rest(path, init)` [src/lib/supabase.ts:91](../src/lib/supabase.ts#L91): PostgREST call. `path` starts with the table or `rpc/<fn>`; returns parsed JSON (or null for empty).
+- `upload(bucket, blob, ext)` [src/lib/supabase.ts:114](../src/lib/supabase.ts#L114): Uploads a blob under `<uid>/<uuid>.<ext>` in a public bucket and returns the object path.
+- `publicUrl(bucket, path)` [src/lib/supabase.ts:127](../src/lib/supabase.ts#L127): Public URL of an uploaded object.
 - `highlightRoutes(routeIds)` [src/lib/transitHighlight.ts:8](../src/lib/transitHighlight.ts#L8): Spotlights these routes and dims the rest; null (or an empty list) shows every route normally.
 - `onRouteHighlight(listener)` [src/lib/transitHighlight.ts:15](../src/lib/transitHighlight.ts#L15): Calls `listener` now and on every change; returns the unsubscribe function.
 - `loadTransitNetwork()` [src/lib/transitNetwork.ts:19](../src/lib/transitNetwork.ts#L19): Loads the network once; a failed download is forgotten so the next call tries again.
@@ -171,8 +171,20 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Session` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional account selected on this device, with no authentication.
 - `Persona` [src/auth/types.ts:23](../src/auth/types.ts#L23): Fictional identity offered by the demo account picker.
 - `AuthAdapter` [src/auth/types.ts:32](../src/auth/types.ts#L32): Adapter boundary keeps sign-in implementation out of screens.
-- `GlyphId` [src/components/Glyph.tsx:30](../src/components/Glyph.tsx#L30): Known glyph ids: the layer categories plus "building".
+- `GlyphId` [src/components/Glyph.tsx:31](../src/components/Glyph.tsx#L31): Known glyph ids: the layer categories plus "building".
 - `CultureNote` [src/culture/notes.ts:5](../src/culture/notes.ts#L5): One sticky note: a sourced GT tradition pinned where it happens.
+- `GameIconName` [src/games/GameIcons.tsx:17](../src/games/GameIcons.tsx#L17): Names of the Games icons.
+- `GamesState` [src/games/store.ts:8](../src/games/store.ts#L8): Everything the UI and the map layer read.
+- `TeamId` [src/games/types.ts:4](../src/games/types.ts#L4): The two teams of every match.
+- `GameMode` [src/games/types.ts:6](../src/games/types.ts#L6): Game modes: King of the Hill zones or a race for random drops.
+- `LngLat` [src/games/types.ts:8](../src/games/types.ts#L8): Where a point lives on the map.
+- `Profile` [src/games/types.ts:11](../src/games/types.ts#L11): Guest profile kept in localStorage (there are no accounts yet).
+- `LobbyGame` [src/games/types.ts:14](../src/games/types.ts#L14): A match listed in the lobby.
+- `Zone` [src/games/types.ts:17](../src/games/types.ts#L17): A capture zone (Conquest mode). `owner` is null while neutral.
+- `Drop` [src/games/types.ts:19](../src/games/types.ts#L19): A drop target (Drop Race mode). `claimedBy` is the nickname of whoever got it.
+- `Bot` [src/games/types.ts:21](../src/games/types.ts#L21): A simulated player moving on the map.
+- `FeedItem` [src/games/types.ts:24](../src/games/types.ts#L24): One line of the activity feed.
+- `ActiveGame` [src/games/types.ts:27](../src/games/types.ts#L27): A running (or finished) match. Times are in whole seconds.
 - `PlanRoute` [src/indoor/FloorPlan.tsx:129](../src/indoor/FloorPlan.tsx#L129): Everything the plan needs to draw a route: the route, the legs on this level and which step is highlighted.
 - `RoutableIndoorRoom` [src/indoor/availability.ts:13](../src/indoor/availability.ts#L13): A routable (schematic) entry from `registry.ts#indoorRooms`, narrowed from the `IndoorRoom`
 - `BookableRoom` [src/indoor/availability.ts:21](../src/indoor/availability.ts#L21): A room with bookable demo amenities (T-60 reservations), with a ready-to-render display label.
@@ -181,7 +193,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `FreeRoom` [src/indoor/availability.ts:90](../src/indoor/availability.ts#L90): A matching room together with its demo amenities, ready for the results list and selection.
 - `AmenitiesById` [src/indoor/availability.ts:93](../src/indoor/availability.ts#L93): Demo amenities keyed by room selection id, e.g. `roomFinderDemo.ts#roomAmenitiesById`.
 - `DemoSlotPattern` [src/indoor/availability.ts:96](../src/indoor/availability.ts#L96): A fictional weekly booking recurring at campus-local HH:MM times.
-- `BookingRequest` [src/indoor/handoff.ts:5](../src/indoor/handoff.ts#L5): A request to open the reservations panel on one building, coming from an indoor room card.
+- `BookingRequest` [src/indoor/handoff.ts:5](../src/indoor/handoff.ts#L5): A request to open the reservations panel: on one building/room ("Book this room"), or straight on "My booking…
 - `IndoorRoom` [src/indoor/registry.ts:24](../src/indoor/registry.ts#L24): A searchable indoor entry explicitly distinguishes drawn routes from published facts.
 - `Step` [src/indoor/route.ts:5](../src/indoor/route.ts#L5): One accessible instruction and the level on which it happens.
 - `Transition` [src/indoor/route.ts:11](../src/indoor/route.ts#L11): Where the route changes floor: shown on the plan as a badge.
@@ -214,13 +226,15 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingPhoto` [src/lib/buildingPhotos.ts:5](../src/lib/buildingPhotos.ts#L5): One building photo and its attribution.
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
-- `PostType` [src/lib/bulletin.ts:12](../src/lib/bulletin.ts#L12): The five supported bulletin filters; unknown source subtypes become community posts.
-- `BulletinPost` [src/lib/bulletin.ts:15](../src/lib/bulletin.ts#L15): A dated bulletin entry with known source facts and a selectable map location.
+- `PostType` [src/lib/bulletin.ts:13](../src/lib/bulletin.ts#L13): The five supported bulletin filters; unknown source subtypes become community posts.
+- `BulletinPost` [src/lib/bulletin.ts:16](../src/lib/bulletin.ts#L16): A dated bulletin entry with known source facts and a selectable map location.
+- `BoardTab` [src/lib/bulletin.ts:156](../src/lib/bulletin.ts#L156): The three bulletin tabs.
 - `InterestState` [src/lib/bulletinInterests.ts:8](../src/lib/bulletinInterests.ts#L8): This browser's marked post ids plus how many people marked each post.
 - `Audience` [src/lib/bulletinPosts.ts:8](../src/lib/bulletinPosts.ts#L8): Who wrote a post: a registered organization account or a person (student account).
-- `PostLocation` [src/lib/bulletinPosts.ts:11](../src/lib/bulletinPosts.ts#L11): A registered place a post is tied to: a building footprint or a room inside an indoor building ("buildingId:s…
-- `UserPost` [src/lib/bulletinPosts.ts:14](../src/lib/bulletinPosts.ts#L14): One saved post. Times are instants; the poster is a downscaled JPEG data URL.
-- `UserPostInput` [src/lib/bulletinPosts.ts:20](../src/lib/bulletinPosts.ts#L20): What the composer hands over; the server (or the local fallback) decides the audience from the account role.
+- `PostSection` [src/lib/bulletinPosts.ts:11](../src/lib/bulletinPosts.ts#L11): Which part of the bulletin a post belongs to: the Orgs and People tabs ("general") or the Alumni tab.
+- `PostLocation` [src/lib/bulletinPosts.ts:14](../src/lib/bulletinPosts.ts#L14): A registered place a post is tied to: a building footprint or a room inside an indoor building ("buildingId:s…
+- `UserPost` [src/lib/bulletinPosts.ts:17](../src/lib/bulletinPosts.ts#L17): One saved post. Times are instants; the poster is a downscaled JPEG data URL.
+- `UserPostInput` [src/lib/bulletinPosts.ts:23](../src/lib/bulletinPosts.ts#L23): What the composer hands over; the server (or the local fallback) decides the audience from the account role.
 - `Motion` [src/lib/busMotion.ts:31](../src/lib/busMotion.ts#L31): What we know about a bus's motion: how long (ms) its GPS fixes have shown it in the same spot, and its direct…
 - `LiveBus` [src/lib/busPlanner.ts:17](../src/lib/busPlanner.ts#L17): A live bus as the planner needs it; `stillFor` is how long (ms) it has stood in the same spot, if known.
 - `BusOption` [src/lib/busPlanner.ts:20](../src/lib/busPlanner.ts#L20): One way to get there by bus. Times are seconds. `live` is false when no bus is running on the route right now.
@@ -255,6 +269,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SearchMatch` [src/lib/search.ts:10](../src/lib/search.ts#L10): A matching name, alias or category and its highlight ranges.
 - `SearchResult` [src/lib/search.ts:17](../src/lib/search.ts#L17): A ranked place with an extensible group label and matches in displayable fields.
 - `CampusSearchResult` [src/lib/search.ts:137](../src/lib/search.ts#L137): A campus result selects its building, room or place directly.
+- `Bucket` [src/lib/supabase.ts:26](../src/lib/supabase.ts#L26): Storage buckets the app uses.
 - `TransitStop` [src/lib/transitNetwork.ts:5](../src/lib/transitNetwork.ts#L5): One physical bus stop.
 - `RouteStop` [src/lib/transitNetwork.ts:8](../src/lib/transitNetwork.ts#L8): One stop in a route's served order, with the tracker's scheduled seconds to the next stop and at this stop.
 - `TransitRoute` [src/lib/transitNetwork.ts:11](../src/lib/transitNetwork.ts#L11): One bus route: official name, color, service-hours text and its stops in order (routes are loops).
@@ -276,7 +291,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `DuplicateListProps` [src/panels/report/DuplicateList.tsx:6](../src/panels/report/DuplicateList.tsx#L6): Props for the "Already reported?" step.
 - `ReportFlowProps` [src/panels/report/ReportFlow.tsx:11](../src/panels/report/ReportFlow.tsx#L11): Props for the report flow.
 - `ReportFormProps` [src/panels/report/ReportForm.tsx:12](../src/panels/report/ReportForm.tsx#L12): Props for the details step.
-- `ReportStatusViewProps` [src/panels/report/ReportStatusView.tsx:7](../src/panels/report/ReportStatusView.tsx#L7): Props for the status page.
+- `ReportStatusViewProps` [src/panels/report/ReportStatusView.tsx:8](../src/panels/report/ReportStatusView.tsx#L8): Props for the status page.
 - `Navigate` [src/panels/report/index.tsx:13](../src/panels/report/index.tsx#L13): Changes the query string without reloading, so a filed report's status link and the staff team filter stay sh…
 - `BuildingOption` [src/panels/rooms/buildingOptions.ts:4](../src/panels/rooms/buildingOptions.ts#L4): One quick-pick building: `enabled` buildings have a working reservation flow; the rest are real GT buildings…
 - `PortfolioPhoto` [src/portfolio/types.ts:5](../src/portfolio/types.ts#L5): One photo attached to a portfolio entry, kept as a data URL so it survives a page reload without a backend.
@@ -285,8 +300,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PortfolioEntrySeed` [src/portfolio/types.ts:47](../src/portfolio/types.ts#L47): What the Bulletin hook hands the adapter to create one entry; the adapter assigns id/accountId/photos.
 - `PortfolioAdapter` [src/portfolio/types.ts:50](../src/portfolio/types.ts#L50): Storage boundary. The local adapter keeps entries in this browser; a Supabase adapter would sit behind the sa…
 - `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
-- `IconName` [src/shell/icons.tsx:23](../src/shell/icons.tsx#L23): Names of the shell icons.
-- `ShellPanel` [src/shell/icons.tsx:36](../src/shell/icons.tsx#L36): What the floating card / bottom sheet can show besides a map selection.
+- `IconName` [src/shell/icons.tsx:24](../src/shell/icons.tsx#L24): Names of the shell icons.
+- `ShellPanel` [src/shell/icons.tsx:37](../src/shell/icons.tsx#L37): What the floating card / bottom sheet can show besides a map selection.
 - `LayerFiltersApi` [src/state/layerFilters.tsx:23](../src/state/layerFilters.tsx#L23): What useLayerFilters() returns.
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): Selectable map and search entities; room ids use "buildingId:spaceId".
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
@@ -310,28 +325,31 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component.
 - `AlertBanner({ banners, onDismiss })` [src/alerts/AlertBanner.tsx:14](../src/alerts/AlertBanner.tsx#L14): Stack of banners pinned to the top of the app; publishes its height as `--alert-h` so the shell makes room.
 - `TipNotifier({ onOpen })` [src/alerts/TipNotifier.tsx:21](../src/alerts/TipNotifier.tsx#L21): Props: `onOpen` is called with the tip when the toast is pressed (open the console / select the tip).
-- `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:38](../src/components/Glyph.tsx#L38): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
+- `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:39](../src/components/Glyph.tsx#L39): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:16](../src/components/MapView.tsx#L16): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
+- `GameHud()` [src/games/GameHud.tsx:12](../src/games/GameHud.tsx#L12): Compact card over the map while a match runs. Renders nothing outside one.
+- `GIcon({ name, size = 20 })` [src/games/GameIcons.tsx:20](../src/games/GameIcons.tsx#L20): A line icon in currentColor; decorative (aria-hidden).
+- `GamesPanel()` [src/games/GamesPanel.tsx:12](../src/games/GamesPanel.tsx#L12): Lobby: who you are, matches you can join with one click, and a path to create your own.
 - `BuildingView()` [src/indoor/BuildingView.tsx:34](../src/indoor/BuildingView.tsx#L34): Opens registered buildings and resolves room selections straight into a routed building screen.
 - `FloorPlan(…)` [src/indoor/FloorPlan.tsx:132](../src/indoor/FloorPlan.tsx#L132): Renders one available level with controls and brings the route or the selected space into view.
 - `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
 - `StackView(…)` [src/indoor/StackView.tsx:25](../src/indoor/StackView.tsx#L25): Exploded solid floor slabs; select levels or rooms and open the active level's detailed plan.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:8](../src/panels/account/AccountChip.tsx#L8): Shows sign-in or the selected demo persona with a small sign-out disclosure.
 - `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
-- `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:16](../src/panels/building-card/BuildingCard.tsx#L16): Shows the selected building (kind "building"), or nothing when something else is selected.
-- `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:23](../src/panels/building-card/BuildingCard.tsx#L23): Shared building facts and actions for the sidebar and expanded indoor screen.
+- `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:17](../src/panels/building-card/BuildingCard.tsx#L17): Shows the selected building (kind "building"), or nothing when something else is selected.
+- `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:24](../src/panels/building-card/BuildingCard.tsx#L24): Shared building facts and actions for the sidebar and expanded indoor screen.
 - `BuildingLink({ coordinates, buildingId, attached, floorOrRoom })` [src/panels/building-card/BuildingLink.tsx:7](../src/panels/building-card/BuildingLink.tsx#L7): Renders nothing when the place is not inside a known footprint (or the footprints are not loaded).
 - `BuildingPhotoFigure({ buildingId })` [src/panels/building-card/BuildingPhoto.tsx:5](../src/panels/building-card/BuildingPhoto.tsx#L5): Renders the sourced photo for a building, or nothing when there is none.
-- `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:13](../src/panels/building-card/BuildingPreview.tsx#L13): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
+- `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:14](../src/panels/building-card/BuildingPreview.tsx#L14): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
 - `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:12](../src/panels/building-card/InsidePlaces.tsx#L12): Show selectable places grouped by category for a footprint or a legacy seed building.
-- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
+- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:19](../src/panels/building-card/PlaceCard.tsx#L19): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:86](../src/panels/bulletin/BulletinBoard.tsx#L86): Modal cork board with shared interests; the shell owns its URL, type and return focus.
 - `PostComposer(…)` [src/panels/bulletin/PostComposer.tsx:27](../src/panels/bulletin/PostComposer.tsx#L27): Modal form that creates a post for the signed-in account; reports the saved post, or closes without one.
 - `BusList({ here }, number] | null })` [src/panels/buses/BusList.tsx:47](../src/panels/buses/BusList.tsx#L47): Lists every route for the "which buses are around" view; `here` is where you are (resolved by the panel), or…
 - `BusOptions({ origin, destination }, number]; destination, number] })` [src/panels/buses/BusOptions.tsx:19](../src/panels/buses/BusOptions.tsx#L19): Lists bus options from `origin` (your location or a picked place; the panel resolves it) to `destination`.
 - `BusesPanel()` [src/panels/buses/BusesPanel.tsx:39](../src/panels/buses/BusesPanel.tsx#L39): The panel body shown in the floating card (desktop) or bottom sheet (phone).
-- `CultureReader()` [src/panels/culture/CultureReader.tsx:7](../src/panels/culture/CultureReader.tsx#L7): Shown while the culture layer is on; mount once in the shell.
+- `CultureReader()` [src/panels/culture/CultureReader.tsx:8](../src/panels/culture/CultureReader.tsx#L8): Shown while the culture layer is on; mount once in the shell.
 - `HousingGuide()` [src/panels/culture/HousingGuide.tsx:8](../src/panels/culture/HousingGuide.tsx#L8): The West vs East dialog. Mount once in the shell; opens from the layers panel or the map's "West campus?" not…
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:74](../src/panels/layers/LayersPanel.tsx#L74): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `DoorStickers()` [src/panels/maintenance/DoorStickers.tsx:33](../src/panels/maintenance/DoorStickers.tsx#L33): Link and QR generator for the entrance stickers, one list per building.
@@ -344,30 +362,30 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PoliceReportFlow({ tipId, navigate })` [src/panels/report/PoliceReportFlow.tsx:42](../src/panels/report/PoliceReportFlow.tsx#L42): The 1-step form plus its status page (?kind=police&tip=<id>).
 - `ReportFlow({ location, reportId, navigate })` [src/panels/report/ReportFlow.tsx:23](../src/panels/report/ReportFlow.tsx#L23): Report-an-issue flow (PRD US-10.1 to US-10.3). Filing and "+1" need a signed-in demo account (F-21).
 - `ReportForm({ location, draft, busy, onContinue })` [src/panels/report/ReportForm.tsx:22](../src/panels/report/ReportForm.tsx#L22): The details form (PRD US-10.1). Safety hazard shows the emergency banner before everything else.
-- `ReportStatusView({ reportId, justFiled, onAnother })` [src/panels/report/ReportStatusView.tsx:15](../src/panels/report/ReportStatusView.tsx#L15): Status page of one report (PRD US-10.3), always carrying the "Prototype: not sent" label.
+- `ReportStatusView({ reportId, justFiled, onAnother })` [src/panels/report/ReportStatusView.tsx:16](../src/panels/report/ReportStatusView.tsx#L16): Status page of one report (PRD US-10.3), always carrying the "Prototype: not sent" label.
 - `ReportSummary({ report, showLocation = true })` [src/panels/report/ReportSummary.tsx:12](../src/panels/report/ReportSummary.tsx#L12): Category, place, description and tags of a report; used by the duplicates list, status page and staff queue.
 - `StaffQueue({ role })` [src/panels/report/StaffQueue.tsx:26](../src/panels/report/StaffQueue.tsx#L26): Staff view of the report queue. Unlisted in the MVP: reached with ?panel=staff (optionally &team=IT).
 - `UnclaimedReports({ reports, team, className = "" })` [src/panels/report/UnclaimedReports.tsx:8](../src/panels/report/UnclaimedReports.tsx#L8): Lists unclaimed reports for a team's dashboard; `onError` shows a rule rejection (e.g. someone claimed it fir…
 - `ReportPanel({ onClose })` [src/panels/report/index.tsx:19](../src/panels/report/index.tsx#L19): Mounts the 3-step report flow, or (unlisted, ?staff=1) the staff queue; the floating card / bottom
 - `BuildingGlyph({ buildingId })` [src/panels/rooms/BuildingGlyph.tsx:10](../src/panels/rooms/BuildingGlyph.tsx#L10): Renders a flat, ink-outlined elevation sketch with a gold hatch fill and a row of square windows per level ba…
 - `MyBookingsSection({ onCountChange })` [src/panels/rooms/MyBookingsSection.tsx:117](../src/panels/rooms/MyBookingsSection.tsx#L117): Top-level "My bookings": every non-cancelled reservation the signed-in account holds, across Kendeda and CULC.
-- `ReservationGrid({ rooms, onlyAvailable = false })` [src/panels/rooms/ReservationGrid.tsx:49](../src/panels/rooms/ReservationGrid.tsx#L49): Day/time grid, booking flow and favorites for any list of bookable rooms -- one building's rooms
-- `RoomsBoard({ onClose })` [src/panels/rooms/RoomsBoard.tsx:39](../src/panels/rooms/RoomsBoard.tsx#L39): Full-screen "Rooms" takeover, replacing the small floating-card/bottom-sheet `RoomFinderPanel`
+- `ReservationGrid({ rooms, onlyAvailable = false })` [src/panels/rooms/ReservationGrid.tsx:55](../src/panels/rooms/ReservationGrid.tsx#L55): Day/time grid, booking flow and favorites for any list of bookable rooms -- one building's rooms
+- `RoomsBoard({ onClose })` [src/panels/rooms/RoomsBoard.tsx:43](../src/panels/rooms/RoomsBoard.tsx#L43): Full-screen "Rooms" takeover, replacing the small floating-card/bottom-sheet `RoomFinderPanel`
 - `RoomsNearMe({ onBack, onlyAvailable })` [src/panels/rooms/RoomsNearMe.tsx:25](../src/panels/rooms/RoomsNearMe.tsx#L25): Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and
 - `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
 - `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
 - `SearchPanel(…)` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
-- `PortfolioPage({ onClose })` [src/portfolio/PortfolioPage.tsx:102](../src/portfolio/PortfolioPage.tsx#L102): Full-page BuzzPrint view, opened the same way the Bulletin is: its own open flag outside the shell's panel sw…
+- `PortfolioPage({ onClose })` [src/portfolio/PortfolioPage.tsx:148](../src/portfolio/PortfolioPage.tsx#L148): Full-page BuzzPrint view, opened the same way the Bulletin is: its own open flag outside the shell's panel sw…
 - `BottomSheet(…)` [src/shell/BottomSheet.tsx:21](../src/shell/BottomSheet.tsx#L21): Drag or tap the handle (or press Enter/Space on it) to move between snaps; arrow keys step up and down. Opens…
 - `ChipsBar()` [src/shell/ChipsBar.tsx:15](../src/shell/ChipsBar.tsx#L15): One pill per layer category; pressed = layer on. Categories without data stay visible but inert (aria-disable…
 - `FloatingCard(…)` [src/shell/FloatingCard.tsx:6](../src/shell/FloatingCard.tsx#L6): Card with a close button and a ‹ collapse tab on its right edge. Renders nothing visible when its panel rende…
-- `LayersPopover()` [src/shell/LayersPopover.tsx:7](../src/shell/LayersPopover.tsx#L7): Tile that opens the legend popover. Esc or a click outside closes it and returns focus to the tile.
-- `MobileTabBar({ panel, onPanel })` [src/shell/MobileTabBar.tsx:5](../src/shell/MobileTabBar.tsx#L5): Fixed bottom bar above the safe-area inset. Left/right arrows move between tabs.
+- `LayersPopover()` [src/shell/LayersPopover.tsx:8](../src/shell/LayersPopover.tsx#L8): Tile that opens the legend popover. Esc or a click outside closes it and returns focus to the tile.
+- `MobileTabBar({ panel, onPanel })` [src/shell/MobileTabBar.tsx:6](../src/shell/MobileTabBar.tsx#L6): Floating dock above the safe-area inset. Scrolls sideways when it must; the active tab slides into view. Left…
 - `Rail({ panel, onPanel, onPolice, onMaintenance })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
 - `RoutePanel({ initialSelection, onClose })` [src/shell/RoutePanel.tsx:10](../src/shell/RoutePanel.tsx#L10): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:85](../src/shell/Shell.tsx#L85): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
-- `Icon({ name, size = 24 })` [src/shell/icons.tsx:26](../src/shell/icons.tsx#L26): A 24px line icon in currentColor; decorative (aria-hidden).
+- `Shell()` [src/shell/Shell.tsx:91](../src/shell/Shell.tsx#L91): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
+- `Icon({ name, size = 24 })` [src/shell/icons.tsx:27](../src/shell/icons.tsx#L27): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = supabaseAuthAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:36](../src/state/layerFilters.tsx#L36): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
@@ -385,14 +403,15 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `supabaseAuthAdapter` [src/auth/supabaseAdapter.ts:8](../src/auth/supabaseAdapter.ts#L8): Real Supabase sessions for the demo accounts, so every row a person writes belongs to a real account with a s…
 - `STAFF_ROLES` [src/auth/types.ts:7](../src/auth/types.ts#L7): Roles that work the report queue.
 - `staffTeam(role)` [src/auth/types.ts:10](../src/auth/types.ts#L10): The report team a staff role works for; moderators see every team (null).
-- `SUBTYPE_GLYPHS` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): Sub-types that get their own pictogram instead of their category's.
-- `placeGlyph(category, subtype?)` [src/components/Glyph.tsx:25](../src/components/Glyph.tsx#L25): Glyph id for a place: its sub-type's pictogram when it has one, else its category's.
-- `glyphPath(id)` [src/components/Glyph.tsx:33](../src/components/Glyph.tsx#L33): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
+- `SUBTYPE_GLYPHS` [src/components/Glyph.tsx:23](../src/components/Glyph.tsx#L23): Sub-types that get their own pictogram instead of their category's.
+- `placeGlyph(category, subtype?)` [src/components/Glyph.tsx:26](../src/components/Glyph.tsx#L26): Glyph id for a place: its sub-type's pictogram when it has one, else its category's.
+- `glyphPath(id)` [src/components/Glyph.tsx:34](../src/components/Glyph.tsx#L34): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
 - `CAMPUS` [src/config.ts:3](../src/config.ts#L3): Central place for map settings. Change here, not inside components.
 - `MAP_LIGHT` [src/config.ts:18](../src/config.ts#L18): Fixed light for the extruded buildings: anchored to the map so wall shading doesn't change as you rotate.
 - `BASEMAP_TILEJSON` [src/config.ts:21](../src/config.ts#L21): Vector basemap (ADR-0006 step 2): OpenFreeMap, free and keyless, OpenMapTiles schema.
 - `TILE_ATTRIBUTION` [src/config.ts:23](../src/config.ts#L23): Attribution OpenFreeMap and OpenStreetMap require next to the map.
 - `CORRECTION_URL` [src/config.ts:26](../src/config.ts#L26): Base URL for prefilled place correction issues.
+- `SITE_URL` [src/config.ts:29](../src/config.ts#L29): The app's own live production URL (README), used where a share target needs a public link (LinkedIn has no ra…
 - `CULTURE_NOTES` [src/culture/notes.ts:11](../src/culture/notes.ts#L11): Notes in tour order.
 - `CULTURE_AREAS` [src/culture/notes.ts:14](../src/culture/notes.ts#L14): The West / East labels that open the housing guide.
 - `doodleFor(id)` [src/culture/notes.ts:17](../src/culture/notes.ts#L17): Hand-drawn doodle for a note (generated illustrations in public/culture/).
@@ -403,6 +422,32 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `setReader(open)` [src/culture/store.ts:36](../src/culture/store.ts#L36): Show or hide the reader card without leaving culture mode.
 - `setGuide(open)` [src/culture/store.ts:41](../src/culture/store.ts#L41): Open or close the West vs East guide.
 - `useCulture()` [src/culture/store.ts:46](../src/culture/store.ts#L46): React hook for the culture state.
+- `RADIUS_M` [src/games/data.ts:6](../src/games/data.ts#L6): Zone and drop capture radius in meters.
+- `ZONE_POINTS_PER_SECOND` [src/games/data.ts:8](../src/games/data.ts#L8): Points per second for every zone a team holds.
+- `DROP_POINTS` [src/games/data.ts:10](../src/games/data.ts#L10): Points for claiming one drop.
+- `DROP_COUNT` [src/games/data.ts:12](../src/games/data.ts#L12): Drops placed per match.
+- `TEAMS` [src/games/data.ts:15](../src/games/data.ts#L15): Team names and map colors (red matches --route family, blue matches --navy family).
+- `NEUTRAL` [src/games/data.ts:20](../src/games/data.ts#L20): Fill color of an unclaimed zone.
+- `PLAY_AREA` [src/games/data.ts:23](../src/games/data.ts#L23): Where drops may spawn: the central part of campus ([west, south, east, north]), clear of the basemap edges.
+- `START` [src/games/data.ts:25](../src/games/data.ts#L25): Where the guest player starts (Tech Green).
+- `zoneTemplates()` [src/games/data.ts:31](../src/games/data.ts#L31): Capture zones at real campus places; ids missing from the data are skipped.
+- `SEED_LOBBY` [src/games/data.ts:42](../src/games/data.ts#L42): Pre-loaded matches shown in the lobby.
+- `MODE_LABEL` [src/games/data.ts:49](../src/games/data.ts#L49): Display name of a game mode.
+- `BOT_NAMES` [src/games/data.ts:52](../src/games/data.ts#L52): Names for simulated players.
+- `MODE_BLURB` [src/games/data.ts:55](../src/games/data.ts#L55): One-line pitch of each mode, shown on the create screen.
+- `subscribeGames(listener)` [src/games/store.ts:51](../src/games/store.ts#L51): Subscribe to any change (for the map layer). Returns the unsubscribe function.
+- `getGamesState()` [src/games/store.ts:56](../src/games/store.ts#L56): Current snapshot.
+- `useGames()` [src/games/store.ts:60](../src/games/store.ts#L60): React hook over the games store.
+- `setNickname(nickname)` [src/games/store.ts:81](../src/games/store.ts#L81): Changes the guest nickname (trimmed, 2 to 20 characters; ignored otherwise).
+- `setTeam(team)` [src/games/store.ts:89](../src/games/store.ts#L89): Picks the team used for the next match.
+- `joinGame(id)` [src/games/store.ts:134](../src/games/store.ts#L134): Joins a lobby match (a clean simulated session with 2 to 4 bots). Returns false when it is full.
+- `createGame(opts)` [src/games/store.ts:145](../src/games/store.ts#L145): Creates a match, lists it in the lobby and jumps straight into it.
+- `rematch()` [src/games/store.ts:155](../src/games/store.ts#L155): Starts the same match again from zero (new bots, new drops).
+- `leaveGame()` [src/games/store.ts:160](../src/games/store.ts#L160): Leaves the running match and removes every game layer from the map. Safe to call when nothing runs.
+- `setSimulate(on)` [src/games/store.ts:178](../src/games/store.ts#L178): Turns click-to-move on or off; off asks the browser for the real GPS (falls back to click-to-move if refused).
+- `teleport(point)` [src/games/store.ts:198](../src/games/store.ts#L198): Click-to-move: puts the player at a point (only in simulated mode).
+- `capturableZone(s)` [src/games/store.ts:205](../src/games/store.ts#L205): The zone the player stands in that their team does not hold yet (the "Capturar Zona" target), or null.
+- `captureZone()` [src/games/store.ts:212](../src/games/store.ts#L212): Captures the zone under the player for their team.
 - `STACK_VIEW_ENABLED` [src/indoor/StackView.tsx:22](../src/indoor/StackView.tsx#L22): Shows the Plan | Stack toggle in the building header. Set to false to hide the stack view for a demo.
 - `bookableRoomsFor(rooms, amenitiesById, buildingId)` [src/indoor/availability.ts:30](../src/indoor/availability.ts#L30): Every bookable room in one building, sorted alphabetically. The label prefers the published
 - `favoriteRoomsFrom(rooms, amenitiesById, roomIds)` [src/indoor/availability.ts:56](../src/indoor/availability.ts#L56): Bookable rooms in `roomIds` across every building, labeled "Building · Room N" using each
@@ -413,10 +458,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `nowWindow(now, minutes = 30)` [src/indoor/availability.ts:160](../src/indoor/availability.ts#L160): Creates an elapsed-time availability window without changing the supplied instant.
 - `campusTimeToday(now, time)` [src/indoor/availability.ts:195](../src/indoor/availability.ts#L195): Converts a campus-local "HH:MM" time on the same campus day as `now` to an instant, or null if invalid.
 - `expandDemoSlots(pattern, day)` [src/indoor/availability.ts:201](../src/indoor/availability.ts#L201): Expands weekly patterns for one campus-local day, skipping invalid or nonexistent DST times.
-- `requestBooking(buildingId, roomId)` [src/indoor/handoff.ts:12](../src/indoor/handoff.ts#L12): Asks the shell to open the reservations panel on this building (room id is "buildingId:spaceId").
-- `peekBookingRequest()` [src/indoor/handoff.ts:18](../src/indoor/handoff.ts#L18): The latest booking request, if one has not been handled yet.
-- `clearBookingRequest()` [src/indoor/handoff.ts:21](../src/indoor/handoff.ts#L21): Marks the booking request as handled, so opening the panel later starts at its building picker again.
-- `useBookingRequestSeq()` [src/indoor/handoff.ts:24](../src/indoor/handoff.ts#L24): Re-renders when a new booking request arrives; returns its sequence number (0 when none).
+- `requestBooking(buildingId, roomId)` [src/indoor/handoff.ts:19](../src/indoor/handoff.ts#L19): Asks the shell to open the reservations panel on this building (room id is "buildingId:spaceId").
+- `requestBookingsView()` [src/indoor/handoff.ts:24](../src/indoor/handoff.ts#L24): Asks the shell to open the reservations panel straight on "My bookings" -- the quick way back from a room car…
+- `peekBookingRequest()` [src/indoor/handoff.ts:29](../src/indoor/handoff.ts#L29): The latest booking request, if one has not been handled yet.
+- `clearBookingRequest()` [src/indoor/handoff.ts:32](../src/indoor/handoff.ts#L32): Marks the booking request as handled, so opening the panel later starts at its building picker again.
+- `useBookingRequestSeq()` [src/indoor/handoff.ts:35](../src/indoor/handoff.ts#L35): Re-renders when a new booking request arrives; returns its sequence number (0 when none).
 - `openIndoor(buildingId)` [src/indoor/open.ts:9](../src/indoor/open.ts#L9): Opens the full indoor screen of a building.
 - `closeIndoor()` [src/indoor/open.ts:11](../src/indoor/open.ts#L11): Back to the preview card (or the map) without clearing the selection.
 - `useOpenIndoor()` [src/indoor/open.ts:13](../src/indoor/open.ts#L13): The building whose full indoor screen is open, if any.
@@ -481,8 +527,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `recordPortfolioEntry(session, post)` [src/portfolio/store.ts:56](../src/portfolio/store.ts#L56): Records a BuzzPrint entry from a Bulletin post, snapshotting the fields BulletinPost already has
 - `addPortfolioPhoto(accountId, entryId, photo)` [src/portfolio/store.ts:77](../src/portfolio/store.ts#L77): Attaches a photo to one of this account's entries and shows it immediately.
 - `setAdapter(next)` [src/portfolio/store.ts:84](../src/portfolio/store.ts#L84): Backend hook: replace the storage adapter before the first load.
-- `NAV_ITEMS` [src/shell/icons.tsx:39](../src/shell/icons.tsx#L39): The six destinations of the rail (desktop) and the tab bar (phones), in order.
-- `moveFocus(event, vertical)` [src/shell/icons.tsx:50](../src/shell/icons.tsx#L50): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
+- `supabasePortfolioAdapter` [src/portfolio/supabaseAdapter.ts:29](../src/portfolio/supabaseAdapter.ts#L29): BuzzPrint on Supabase: private per account (RLS), one entry per post, photos as files instead of base64 in lo…
+- `NAV_ITEMS` [src/shell/icons.tsx:40](../src/shell/icons.tsx#L40): The six destinations of the rail (desktop) and the tab bar (phones), in order.
+- `moveFocus(event, vertical)` [src/shell/icons.tsx:52](../src/shell/icons.tsx#L52): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 - `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:16](../src/stories/CameraCapture.tsx#L16): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
 - `useLocationPermission()` [src/stories/LocationGate.tsx:10](../src/stories/LocationGate.tsx#L10): Live location permission. Updates by itself when the person flips the switch in the browser settings and come…
 - `ago(ms, now = Date.now()` [src/stories/StoriesPanel.tsx:13](../src/stories/StoriesPanel.tsx#L13): "now", "12m", "3h": how long ago, short like Instagram.
@@ -504,6 +551,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Possible duplicates
 
+- ⚠️ TEAMS (src/games/data.ts:15) ↔ TEAMS (src/lib/issue-routing.ts:33)
 - ⚠️ localAdapter (src/portfolio/localAdapter.ts:36) ↔ localAdapter (src/stories/localAdapter.ts:30)
 - ⚠️ subscribe (src/portfolio/store.ts:22) ↔ subscribe (src/stories/store.ts:32)
 - ⚠️ getState (src/portfolio/store.ts:28) ↔ getState (src/stories/store.ts:38)

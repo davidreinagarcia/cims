@@ -1,0 +1,110 @@
+{
+  "eventPosters": {
+    "demo-robotics-workshop": "posters/robotics-workshop.svg",
+    "demo-study-circle": "posters/study-circle.svg",
+    "demo-movement-meetup": "posters/movement-meetup.svg",
+    "demo-reading-hour": "posters/reading-hour.svg",
+    "demo-welcome-session": "posters/welcome-session.svg",
+    "demo-green-gathering": "posters/green-gathering.svg"
+  },
+  "posts": [
+    {
+      "id": "demo-board-game-night",
+      "title": "Demo: Board game night",
+      "org": "Demo Student",
+      "audience": "person",
+      "section": "general",
+      "description": "Fictional demo post. Bring a board game or learn one.",
+      "dayOffset": 2,
+      "start": "19:00",
+      "end": "22:00",
+      "placeId": "student-center",
+      "placeName": "Stamps Student Center",
+      "poster": "posters/board-game-night.svg"
+    },
+    {
+      "id": "demo-sunrise-run",
+      "title": "Demo: Sunrise run",
+      "org": "Demo Student 2",
+      "audience": "person",
+      "section": "general",
+      "description": "Fictional demo post. An easy 5K loop around campus.",
+      "dayOffset": 3,
+      "start": "07:00",
+      "end": "08:00",
+      "placeId": "tech-green",
+      "placeName": "Tech Green",
+      "poster": "posters/sunrise-run.svg"
+    },
+    {
+      "id": "demo-textbook-swap",
+      "title": "Demo: Textbook swap",
+      "org": "Demo Student",
+      "audience": "person",
+      "section": "general",
+      "description": "Fictional demo post. Leave a book, take a book.",
+      "dayOffset": 4,
+      "start": "12:00",
+      "end": "14:00",
+      "placeId": "library",
+      "placeName": "Price Gilbert Library",
+      "poster": "posters/textbook-swap.svg"
+    },
+    {
+      "id": "demo-alumni-tailgate",
+      "title": "Demo: Alumni tailgate",
+      "org": "Demo Alumni Association",
+      "audience": "org",
+      "section": "alumni",
+      "description": "Fictional demo post. An alumni-oriented event on Tech Green.",
+      "dayOffset": 5,
+      "start": "11:00",
+      "end": "14:00",
+      "placeId": "tech-green",
+      "placeName": "Tech Green",
+      "poster": "posters/alumni-tailgate.svg"
+    },
+    {
+      "id": "demo-alumni-coffee",
+      "title": "Demo: Coffee with an alum",
+      "org": "Demo Student",
+      "audience": "person",
+      "section": "alumni",
+      "description": "Fictional demo post. An alum from the class of 2015 stopped by campus to talk careers.",
+      "dayOffset": 1,
+      "start": "10:00",
+      "end": "11:30",
+      "placeId": "student-center",
+      "placeName": "Stamps Student Center",
+      "poster": "posters/alumni-coffee.svg"
+    },
+    {
+      "id": "demo-alumni-mentor-mixer",
+      "title": "Demo: Alumni mentor mixer",
+      "org": "Demo Career Network",
+      "audience": "org",
+      "section": "alumni",
+      "description": "Fictional demo post. Alumni meet current students.",
+      "dayOffset": 6,
+      "start": "17:30",
+      "end": "19:30",
+      "placeId": "clough",
+      "placeName": "Clough Undergraduate Learning Commons",
+      "poster": "posters/alumni-mentor-mixer.svg"
+    },
+    {
+      "id": "demo-alumni-founder-talk",
+      "title": "Demo: Founder Q&A with an alum",
+      "org": "Demo Student 2",
+      "audience": "person",
+      "section": "alumni",
+      "description": "Fictional demo post. An alum founder visited and shared what they built.",
+      "dayOffset": 8,
+      "start": "16:00",
+      "end": "17:30",
+      "placeId": "clough",
+      "placeName": "Clough Undergraduate Learning Commons",
+      "poster": "posters/alumni-founder-talk.svg"
+    }
+  ]
+}

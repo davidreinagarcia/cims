@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 800" width="600" height="800" role="img" aria-label="Study Circle (demo poster)">
+<rect width="600" height="800" fill="#1f5f4a"/><rect x="24" y="24" width="552" height="752" fill="none" stroke="#f4d35e" stroke-width="6"/>
+<circle cx="240" cy="230" r="100" fill="#f4d35e" opacity=".9"/><circle cx="360" cy="230" r="100" fill="none" stroke="#f4d35e" stroke-width="14"/>
+<text x="300" y="520" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" font-size="78" font-weight="900" letter-spacing="2" fill="#fdf6e3">STUDY</text><text x="300" y="604" text-anchor="middle" font-family="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif" font-size="78" font-weight="900" letter-spacing="2" fill="#fdf6e3">CIRCLE</text>
+<rect x="190" y="664" width="220" height="6" fill="#f4d35e"/>
+<text x="300" y="718" text-anchor="middle" font-family="Georgia, serif" font-size="25" fill="#fdf6e3">Bring a problem set and a friend</text>
+<text x="300" y="740" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" letter-spacing="4" fill="#f4d35e">DEMO LEARNING CIRCLE · DEMO</text>
+</svg>

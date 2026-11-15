@@ -199,7 +199,7 @@
 
 /* ---------- phones ---------- */
 .app[data-layout="mobile"] { --top: calc(env(safe-area-inset-top, 0px) + var(--s2)); --bottom: calc(var(--tabbar-h) + env(safe-area-inset-bottom, 0px)); }
-.app[data-layout="mobile"] .stage { bottom: var(--bottom); }
+.app[data-layout="mobile"] .stage { bottom: 0; } /* the map runs under the floating dock */
 .app[data-layout="mobile"] .shell-left { top: var(--top); left: var(--s2); right: var(--s2); width: auto; max-height: calc(100% - var(--top) - var(--bottom) - var(--s2)); }
 .app[data-layout="mobile"] .shell-search__wordmark { padding: 0 var(--s2) 0 var(--s4); font-size: var(--fs-lg); }
 .app[data-layout="mobile"] .shell-search .search input { padding: 0 var(--s1) 0 var(--s2); min-width: 0; }
@@ -235,12 +235,12 @@
 /* Full sheet: the FAB row takes the strip under the pill, so the chips and the layers button step aside. */
 .app[data-layout="mobile"]:has(.shell-sheet[data-snap="full"] .shell-sheet__body > *) :is(.shell-topbar, .shell-layers) { display: none; }
 .shell-fab {
-  position: absolute; z-index: 3; right: var(--s3); bottom: calc(var(--sheet-h, 0px) + var(--s3));
+  position: absolute; z-index: 3; right: var(--s3); bottom: calc(var(--bottom, 0px) + var(--sheet-h, 0px) + var(--s3));
   display: grid; place-items: center; width: 56px; height: 56px; padding: 0;
   border: 1px solid var(--navy); border-radius: var(--radius-pill); background: var(--navy); color: var(--gold); box-shadow: var(--elev); cursor: pointer;
 }
-.app[data-layout="mobile"] .maplibregl-ctrl-bottom-right { bottom: calc(var(--sheet-h, 0px) + 56px + var(--s3)); }
-.app[data-layout="mobile"] .maplibregl-ctrl-bottom-left { bottom: var(--sheet-h, 0px); }
+.app[data-layout="mobile"] .maplibregl-ctrl-bottom-right { bottom: calc(var(--bottom) + var(--sheet-h, 0px) + 56px + var(--s3)); }
+.app[data-layout="mobile"] .maplibregl-ctrl-bottom-left { bottom: calc(var(--bottom) + var(--sheet-h, 0px)); }
 .app[data-layout="mobile"] .maplibregl-ctrl-group:has(.maplibregl-ctrl-zoom-in) { display: none; } /* pinch to zoom */
 
 .shell-sheet {
@@ -261,10 +261,37 @@
 .shell-sheet__body { flex: 1; min-height: 0; overflow-y: auto; padding: var(--s3) 0; overscroll-behavior: contain; }
 .shell-sheet__body[hidden] { display: none; }
 
+/* Phone dock: a floating pill over the map. The active tab grows to icon + label; the others stay icons. */
 .shell-tabbar {
-  position: absolute; z-index: 9; left: 0; right: 0; bottom: 0; height: var(--bottom); padding-bottom: env(safe-area-inset-bottom, 0px);
-  display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); align-items: center;
-  background: var(--paper); border-top: var(--hairline-muted);
+  position: absolute; z-index: 9; left: 0; right: 0; bottom: 0; height: var(--bottom); padding: 0 var(--s2) calc(env(safe-area-inset-bottom, 0px) + var(--s2));
+  display: flex; align-items: flex-end; justify-content: center; pointer-events: none;
+}
+.shell-dock {
+  pointer-events: auto; display: flex; align-items: center; gap: 2px; max-width: 100%; padding: 6px;
+  overflow-x: auto; scrollbar-width: none; overscroll-behavior-x: contain;
+  background: color-mix(in srgb, var(--paper) 88%, transparent); -webkit-backdrop-filter: saturate(1.4) blur(14px); backdrop-filter: saturate(1.4) blur(14px);
+  border: var(--hairline-muted); border-radius: var(--radius-pill); box-shadow: var(--elev), 0 6px 18px rgba(28, 39, 51, 0.16);
+}
+.shell-dock::-webkit-scrollbar { display: none; }
+.shell-dockitem {
+  flex: none; display: flex; align-items: center; gap: 0; height: 44px; min-width: 44px; padding: 0 11px; justify-content: center;
+  border: 0; border-radius: var(--radius-pill); background: none; color: var(--ink); cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: background-color 200ms ease, gap 260ms cubic-bezier(.3, 1.3, .5, 1), padding 260ms cubic-bezier(.3, 1.3, .5, 1), transform 120ms ease;
+}
+.shell-dockitem:active { transform: scale(.9); }
+.shell-dockitem__icon { display: grid; place-items: center; transition: transform 260ms cubic-bezier(.3, 1.5, .5, 1); }
+.shell-dockitem__label {
+  display: grid; max-width: 0; overflow: hidden; opacity: 0; white-space: nowrap;
+  font: 700 var(--fs-xs)/1 var(--font-display); text-transform: uppercase; letter-spacing: var(--caps-tracking);
+  transition: max-width 280ms cubic-bezier(.3, 1.1, .5, 1), opacity 180ms ease;
+}
+.shell-dockitem[aria-pressed="true"] { background: var(--navy); color: var(--gold); gap: 7px; padding: 0 14px 0 12px; }
+.shell-dockitem[aria-pressed="true"] .shell-dockitem__icon { transform: scale(1.08); }
+.shell-dockitem[aria-pressed="true"] .shell-dockitem__label { max-width: 96px; opacity: 1; }
+.shell-dockitem:focus-visible { outline: 2px solid var(--ink); outline-offset: 1px; }
+@media (prefers-reduced-motion: reduce) {
+  .shell-dockitem, .shell-dockitem__icon, .shell-dockitem__label { transition: none; }
+  .shell-dockitem:active { transform: none; }
 }
 
 /* Indoor on phones: full width between the pill and the tab bar (never over either). */
@@ -283,4 +310,11 @@
 }
 
 /* GTPD console entry on phones: smaller, beside the route button */
-.shell-fab--police { right: calc(var(--s3) + 56px + var(--s2)); width: 44px; height: 44px; bottom: calc(var(--sheet-h, 0px) + var(--s3) + 6px); background: var(--paper); color: #B42318; border-color: #B42318; }
+.shell-fab--police { right: calc(var(--s3) + 56px + var(--s2)); width: 44px; height: 44px; bottom: calc(var(--bottom, 0px) + var(--sheet-h, 0px) + var(--s3) + 6px); background: var(--paper); color: #B42318; border-color: #B42318; }
+
+/* GT Culture mode: everything that would open another panel is dimmed and inert (the layer chips stay: picking one leaves the mode). */
+.app[data-culture] .shell-navitem,
+.app[data-culture] .shell-dockitem,
+.app[data-culture] .shell-left,
+.app[data-culture] .shell-layers,
+.app[data-culture] .shell-fab:not(.shell-fab--police) { opacity: .35; pointer-events: none; }

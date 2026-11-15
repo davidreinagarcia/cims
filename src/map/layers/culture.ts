@@ -115,7 +115,7 @@ const culture: MapLayer = {
 
 /** Room the reader card takes over the map (right column on desktop, bottom sheet on phones), so flights land beside it. */
 function readerPadding() {
-  return window.innerWidth < 600 ? { top: 120, bottom: Math.round(window.innerHeight * 0.45), left: 20, right: 20 } : { top: 80, bottom: 40, left: 40, right: 420 };
+  return window.innerWidth < 600 ? { top: 120, bottom: Math.round(window.innerHeight * 0.4), left: 20, right: 20 } : { top: 80, bottom: 40, left: 40, right: 420 };
 }
 
 export default culture;
