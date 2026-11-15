@@ -35,6 +35,8 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`docs/stickers/`](docs/stickers/INDEX.md): QR codes and the link list for the door stickers that open a building with the entrance preselected.
   - [`docs/testing/`](docs/testing/INDEX.md): Test plans with people (hallway tests).
 - [`public/`](public/INDEX.md): Static assets served as-is at the site root.
+  - [`public/photos/`](public/photos/INDEX.md): Static photos served by the app; each one is credited in a data file under src/data/.
+    - [`public/photos/buildings/`](public/photos/buildings/INDEX.md): Building photos from Wikimedia Commons (free licenses), one per building id; credits in src/data/building-pho…
 - [`scripts/`](scripts/INDEX.md): Dev tooling run with Node (no deps): index generator, Claude hooks, data fetchers.
   - [`scripts/fixtures/`](scripts/fixtures/INDEX.md): Saved official GT tracker responses for reproducible offline transit imports.
 - [`server/`](server/INDEX.md): Real-time alerts backend (Node, no dependencies); see README.md.

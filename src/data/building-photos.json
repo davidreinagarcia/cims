@@ -1,0 +1,115 @@
+{
+  "_note": "Building photos from Wikimedia Commons under free licenses; credit and license are shown on the card. Never add photos from Google Maps or other non-free sources.",
+  "photos": [
+    {
+      "building_id": "lettie-pate-whithead-evans-administration-building",
+      "image": "/photos/buildings/lettie-pate-whithead-evans-administration-building.jpg",
+      "alt": "Tech Tower, a red brick tower with a pointed roof, seen through trees",
+      "credit": "James Emery",
+      "license": "CC BY 2.0",
+      "license_url": "https://creativecommons.org/licenses/by/2.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Lettie_Pate_Whitehead_Evans_Administration_Building_6284.jpg",
+      "verified_at": "2026-11-15",
+      "verified_by": "aria (agent; Tato to confirm)"
+    },
+    {
+      "building_id": "g-wayne-clough-undergraduate-learning-commons",
+      "image": "/photos/buildings/g-wayne-clough-undergraduate-learning-commons.jpg",
+      "alt": "Clough Commons, a glass and brick building with a wide roof canopy",
+      "credit": "Daderot",
+      "license": "CC0",
+      "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source_url": "https://commons.wikimedia.org/wiki/File:G._Wayne_Clough_Undergraduate_Learning_Commons_-_Georgia_Institute_of_Technology_-_DSC00776.JPG",
+      "verified_at": "2026-11-15",
+      "verified_by": "aria (agent; Tato to confirm)"
+    },
+    {
+      "building_id": "price-gilbert-memorial-library",
+      "image": "/photos/buildings/price-gilbert-memorial-library.jpg",
+      "alt": "Front entrance of the Georgia Tech Library",
+      "credit": "Disavian (English Wikipedia)",
+      "license": "CC BY 2.5",
+      "license_url": "https://creativecommons.org/licenses/by/2.5",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Georgia_Tech_Library_Front.jpg",
+      "verified_at": "2026-11-15",
+      "verified_by": "aria (agent; Tato to confirm)"
+    },
+    {
+      "building_id": "dorothy-murray-crosland-tower",
+      "image": "/photos/buildings/dorothy-murray-crosland-tower.jpg",
+      "alt": "Crosland Tower, a glass and brick library tower",
+      "credit": "JJonahJackalope",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Crosland_Tower,_Georgia_Tech.jpg",
+      "verified_at": "2026-11-15",
+      "verified_by": "aria (agent; Tato to confirm)"
+    },
+    {
+      "building_id": "kendeda-building-for-innovative-sustainable-design",
+      "image": "/photos/buildings/kendeda-building-for-innovative-sustainable-design.jpg",
+      "alt": "The Kendeda Building under its large solar canopy",
+      "credit": "KBISD",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Kendeda_Building_Exterior.jpg",
+      "verified_at": "2026-11-15",
+      "verified_by": "aria (agent; Tato to confirm)"
+    },
+    {
+      "building_id": "campus-recreation-center",
+      "image": "/photos/buildings/campus-recreation-center.jpg",
+      "alt": "The Campus Recreation Center behind a lawn",
+      "credit": "Disavian (English Wikipedia)",
+      "license": "CC BY 2.5",
+      "license_url": "https://creativecommons.org/licenses/by/2.5",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Georgia_Tech_CRC_Front.jpg",
+      "verified_at": "2026-11-15",
+      "verified_by": "aria (agent; Tato to confirm)"
+    },
+    {
+      "building_id": "christopher-w-klaus-advanced-computing-building",
+      "image": "/photos/buildings/christopher-w-klaus-advanced-computing-building.jpg",
+      "alt": "The curved front of the Klaus Advanced Computing Building with its entrance stairs",
+      "credit": "Daderot",
+      "license": "CC0",
+      "license_url": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Klaus_Advanced_Computing_Building_-_Georgia_Institute_of_Technology_-_DSC00333.JPG",
+      "verified_at": "2026-11-15",
+      "verified_by": "aria (agent; Tato to confirm)"
+    },
+    {
+      "building_id": "robert-h-ferst-center-for-the-arts",
+      "image": "/photos/buildings/robert-h-ferst-center-for-the-arts.jpg",
+      "alt": "The Ferst Center for the Arts, a brick gable with an arched glass entrance",
+      "credit": "Georgiatecharts",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Ferst_Center_for_the_Arts_exterior_fall_2021.jpg",
+      "verified_at": "2026-11-15",
+      "verified_by": "aria (agent; Tato to confirm)"
+    },
+    {
+      "building_id": "alexander-memorial-coliseum-in-mccamish-pavilion",
+      "image": "/photos/buildings/alexander-memorial-coliseum-in-mccamish-pavilion.jpg",
+      "alt": "McCamish Pavilion's glass facade above wide entrance stairs",
+      "credit": "JJonahJackalope",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:McCamish_Pavilion.jpg",
+      "verified_at": "2026-11-15",
+      "verified_by": "aria (agent; Tato to confirm)"
+    },
+    {
+      "building_id": "college-of-computing-building",
+      "image": "/photos/buildings/college-of-computing-building.jpg",
+      "alt": "The brick College of Computing Building across a paved plaza",
+      "credit": "JJonahJackalope",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+      "source_url": "https://commons.wikimedia.org/wiki/File:College_of_Computing_Building,_Georgia_Tech.jpg",
+      "verified_at": "2026-11-15",
+      "verified_by": "aria (agent; Tato to confirm)"
+    }
+  ]
+}

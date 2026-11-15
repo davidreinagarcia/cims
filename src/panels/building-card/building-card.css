@@ -40,3 +40,8 @@
 .detail.preview .preview__actions { margin-top: var(--s2); }
 .preview__thumb { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
 .preview__thumb:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+.detail__photo { margin: calc(var(--s3) * -1) calc(var(--s4) * -1) var(--s3); }
+.detail__photo img { display: block; width: 100%; height: 170px; object-fit: cover; border-bottom: var(--hairline); }
+.detail__photo figcaption { padding: var(--s1) var(--s4) 0; font-size: var(--fs-xs); }
+.detail__photo a { color: inherit; }
+@media (max-width: 600px) { .detail__photo img { height: 130px; } }

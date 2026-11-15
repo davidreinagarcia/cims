@@ -49,7 +49,15 @@ export default function BusesPanel() {
   }, []);
 
   // Once the From field has shown, keep it: a late location fix must not yank the field away mid-typing.
+  // Only a retry the user asked for ("Try my location again" / "Use my location") closes it when it succeeds.
+  const [retrying, setRetrying] = useState(false);
   useEffect(() => { if (gps.status === "failed") setEditFrom(true); }, [gps.status]);
+  useEffect(() => {
+    if (!retrying || gps.status === "locating") return;
+    if (gps.status === "ok") { setFrom(null); setEditFrom(false); }
+    setRetrying(false);
+  }, [retrying, gps.status]);
+  const retryLocation = () => { setRetrying(true); retry(); };
 
   const fromAt = from ? locate(from, buildings) ?? null : null;
   const here: [number, number] | null = from ? fromAt : gps.status === "ok" ? gps.at : null;
@@ -62,10 +70,10 @@ export default function BusesPanel() {
       <div className="buses__dest">
         <PlaceField label="Where are you now?" placeholder="Search a building or place" buildings={buildings} picked={from} onPick={setFrom} />
         {(from || (editFrom && gps.status !== "failed")) && <button type="button" className="cims-btn"
-          onClick={() => { setFrom(null); if (gps.status === "ok") setEditFrom(false); else retry(); }}>Use my location</button>}
+          onClick={() => { setFrom(null); if (gps.status === "ok") setEditFrom(false); else retryLocation(); }}>Use my location</button>}
       </div>
       {!from && gps.status === "failed" && <p className="buses__hint">{gps.message} Type where you are to see bus times.{" "}
-        <button type="button" className="buses__link" onClick={retry}>Try my location again</button></p>}
+        <button type="button" className="buses__link" onClick={retryLocation}>Try my location again</button></p>}
       {from && !fromAt && <p className="buses__hint">That place has no map position yet. Try a nearby building.</p>}
     </div> : <p className="buses__origin">
       <span className="cims-caps">From</span>{" "}

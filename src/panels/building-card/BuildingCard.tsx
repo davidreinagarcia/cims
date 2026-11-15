@@ -4,8 +4,10 @@ import { CORRECTION_URL } from "../../config";
 import { loadBuildings, loadedBuildings, type BuildingIndex } from "../../lib/buildings";
 import { useAuth } from "../../state/auth";
 import InsidePlaces from "./InsidePlaces";
+import BuildingPhotoFigure from "./BuildingPhoto";
 import { useSelection } from "../../state/selection";
 import { hasIndoor } from "../../indoor/registry";
+import { buildingPhoto } from "../../lib/buildingPhotos";
 import "./building-card.css";
 
 const unknown = <span className="cims-muted">Unknown</span>;
@@ -52,7 +54,7 @@ export function BuildingDetails({ buildingId, embedded = false }: { buildingId: 
     b.heightSource === "osm:height" ? `${b.height} m (OpenStreetMap height)`
     : b.heightSource === "osm:levels" ? `About ${b.height} m (from ${b.levels ?? "?"} levels)`
     : null;
-  const missing = [!b.name && "Name", !b.aliases.length && "Nickname", !b.address && "Address", !height && "Height", "Photo", "Hours", "BuzzCard access"].filter(Boolean);
+  const missing = [!b.name && "Name", !b.aliases.length && "Nickname", !b.address && "Address", !height && "Height", !buildingPhoto(b.id) && "Photo", "Hours", "BuzzCard access"].filter(Boolean);
   const correction = new URL(CORRECTION_URL);
   correction.searchParams.set("title", `Correction: ${name} (${b.id})`);
   correction.searchParams.set("body", `Building ID: ${b.id}\n\nFields shown as Unknown:\n${missing.map((field) => `* ${field}`).join("\n")}\n\nSuggested correction:\n\nSource URL:\n`);
@@ -62,6 +64,7 @@ export function BuildingDetails({ buildingId, embedded = false }: { buildingId: 
   return (
     <section className="detail" aria-label="Building details">
       {!embedded && <>
+        <BuildingPhotoFigure buildingId={b.id} />
         <h2 className="cims-card__name">{name}</h2>
         <p className="cims-card__alias">{b.aliases.length ? b.aliases.join(", ") : unknown}</p>
         <p className="detail__tags">
