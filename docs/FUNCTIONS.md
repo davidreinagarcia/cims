@@ -52,14 +52,16 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `formatDistance(meters)` [src/lib/geolocation.ts:64](../src/lib/geolocation.ts#L64): "~180 m away" / "~1.2 km away": rounds to a sensible precision for an approximate, building-level distance --…
 - `campusDay(now)` [src/lib/hours.ts:11](../src/lib/hours.ts#L11): Returns the hours-contract weekday for an instant in America/New_York.
 - `openStatus(hours, now)` [src/lib/hours.ts:24](../src/lib/hours.ts#L24): Computes campus-local opening status without guessing when today's hours are missing.
-- `planShapeBounds(shape)` [src/lib/indoorPlan.ts:5](../src/lib/indoorPlan.ts#L5): Axis-aligned bounding box of a schematic shape, in plan units.
-- `roomCategory(type)` [src/lib/indoorPlan.ts:18](../src/lib/indoorPlan.ts#L18): Maps a schematic space type to the fill category drawn on the plan.
-- `roomCategoryLabels` [src/lib/indoorPlan.ts:25](../src/lib/indoorPlan.ts#L25): Legend labels per fill category, in legend order.
-- `spaceTypeLabels` [src/lib/indoorPlan.ts:31](../src/lib/indoorPlan.ts#L31): Human label per space type (cards, directory).
-- `spaceDisplayName(space, "name" | "room">)` [src/lib/indoorPlan.ts:37](../src/lib/indoorPlan.ts#L37): The space name without a leading copy of its room number ("152 Distance Learning Classroom" → "Distance Learn…
-- `drawnBounds(levels)` [src/lib/indoorPlan.ts:44](../src/lib/indoorPlan.ts#L44): Bounding box of everything drawn on these levels (outlines and spaces), so every level shares one frame.
-- `levelRank(id)` [src/lib/indoorPlan.ts:57](../src/lib/indoorPlan.ts#L57): Levels sorted bottom to top (basement first).
-- `planNorthUp(building)` [src/lib/indoorPlan.ts:65](../src/lib/indoorPlan.ts#L65): Whether "up" on this building's plans is north, judged only from the data: true when it names a west and an e…
+- `planLabelBounds(shape)` [src/lib/indoorPlan.ts:13](../src/lib/indoorPlan.ts#L13): Largest axis-aligned rectangle wholly inside a room, including concave rooms with notches.
+- `planWalls(level, { available)` [src/lib/indoorPlan.ts:50](../src/lib/indoorPlan.ts#L50): One wall path for a level: collinear touching edges from rooms and outline are painted only once.
+- `planShapeBounds(shape)` [src/lib/indoorPlan.ts:83](../src/lib/indoorPlan.ts#L83): Axis-aligned bounding box of a schematic shape, in plan units.
+- `roomCategory(type)` [src/lib/indoorPlan.ts:96](../src/lib/indoorPlan.ts#L96): Maps a schematic space type to the fill category drawn on the plan.
+- `roomCategoryLabels` [src/lib/indoorPlan.ts:103](../src/lib/indoorPlan.ts#L103): Legend labels per fill category, in legend order.
+- `spaceTypeLabels` [src/lib/indoorPlan.ts:109](../src/lib/indoorPlan.ts#L109): Human label per space type (cards, directory).
+- `spaceDisplayName(space, "name" | "room">)` [src/lib/indoorPlan.ts:115](../src/lib/indoorPlan.ts#L115): The space name without a leading copy of its room number ("152 Distance Learning Classroom" → "Distance Learn…
+- `drawnBounds(levels)` [src/lib/indoorPlan.ts:122](../src/lib/indoorPlan.ts#L122): Bounding box of everything drawn on these levels (outlines and spaces), so every level shares one frame.
+- `levelRank(id)` [src/lib/indoorPlan.ts:135](../src/lib/indoorPlan.ts#L135): Levels sorted bottom to top (basement first).
+- `planNorthUp(building)` [src/lib/indoorPlan.ts:140](../src/lib/indoorPlan.ts#L140): Whether entrance names and positions support showing north up on this schematic.
 - `TEAMS` [src/lib/issue-routing.ts:31](../src/lib/issue-routing.ts#L31): All teams, in the order the staff view lists them.
 - `SAFETY_CATEGORY` [src/lib/issue-routing.ts:34](../src/lib/issue-routing.ts#L34): Category that must show the emergency banner before the form.
 - `hasVerifiedRouting` [src/lib/issue-routing.ts:69](../src/lib/issue-routing.ts#L69): Whether verified routing data (T-31) was found at build time.
@@ -114,7 +116,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Persona` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional identity offered by the demo account picker.
 - `AuthAdapter` [src/auth/types.ts:22](../src/auth/types.ts#L22): Adapter boundary keeps sign-in implementation out of screens.
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
-- `PlanRoute` [src/indoor/FloorPlan.tsx:93](../src/indoor/FloorPlan.tsx#L93): Everything the plan needs to draw a route: the route, the legs on this level and which step is highlighted.
+- `PlanRoute` [src/indoor/FloorPlan.tsx:129](../src/indoor/FloorPlan.tsx#L129): Everything the plan needs to draw a route: the route, the legs on this level and which step is highlighted.
 - `RoutableIndoorRoom` [src/indoor/availability.ts:13](../src/indoor/availability.ts#L13): A routable (schematic) entry from `registry.ts#indoorRooms`, narrowed from the `IndoorRoom`
 - `BookableRoom` [src/indoor/availability.ts:21](../src/indoor/availability.ts#L21): A room with bookable demo amenities (T-60 reservations), with a ready-to-render display label.
 - `TimeWindow` [src/indoor/availability.ts:70](../src/indoor/availability.ts#L70): A half-open interval of instants: start is included and end is excluded.
@@ -158,7 +160,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BulletinPost` [src/lib/bulletin.ts:14](../src/lib/bulletin.ts#L14): A dated bulletin entry with known source facts and a selectable map location.
 - `GeolocationFailureReason` [src/lib/geolocation.ts:4](../src/lib/geolocation.ts#L4): Every real-world way `getCurrentPosition` can fail, each with its own honest, human message.
 - `Coordinates` [src/lib/geolocation.ts:24](../src/lib/geolocation.ts#L24): A GPS fix: WGS84 degrees plus the device's own reported accuracy radius in meters.
-- `RoomCategory` [src/lib/indoorPlan.ts:15](../src/lib/indoorPlan.ts#L15): Fill category for a space type: the `cims-room--<category>` class and its legend swatch.
+- `RoomCategory` [src/lib/indoorPlan.ts:93](../src/lib/indoorPlan.ts#L93): Fill category for a space type: the `cims-room--<category>` class and its legend swatch.
 - `Team` [src/lib/issue-routing.ts:5](../src/lib/issue-routing.ts#L5): Team a report is routed to (simulated in the MVP).
 - `IssueCategory` [src/lib/issue-routing.ts:8](../src/lib/issue-routing.ts#L8): The ten report categories from PRD US-10.1.
 - `IssueRoute` [src/lib/issue-routing.ts:21](../src/lib/issue-routing.ts#L21): Where a category goes: team plus the official contact, null until verified data exists.
@@ -229,7 +231,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `MapView()` [src/components/MapView.tsx:16](../src/components/MapView.tsx#L16): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
 - `BuildingView()` [src/indoor/BuildingView.tsx:34](../src/indoor/BuildingView.tsx#L34): Opens registered buildings and resolves room selections straight into a routed building screen.
-- `FloorPlan(…)` [src/indoor/FloorPlan.tsx:96](../src/indoor/FloorPlan.tsx#L96): Renders one available level with controls and brings the route or the selected space into view.
+- `FloorPlan(…)` [src/indoor/FloorPlan.tsx:132](../src/indoor/FloorPlan.tsx#L132): Renders one available level with controls and brings the route or the selected space into view.
 - `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
 - `StackView(…)` [src/indoor/StackView.tsx:26](../src/indoor/StackView.tsx#L26): Every available level as a plate in one CSS 3D scene; click a plate to make it the active level.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:7](../src/panels/account/AccountChip.tsx#L7): Shows sign-in or the selected demo persona with a small sign-out disclosure.

@@ -1,6 +1,6 @@
 /** @file Exploded "stack" view (concept B): every drawn level as a plate in one CSS 3D scene, with the route and its vertical links. */
 import { useLayoutEffect, useRef, useState } from "react";
-import { drawnBounds, levelRank, roomCategory } from "../lib/indoorPlan";
+import { drawnBounds, levelRank, planWalls, roomCategory } from "../lib/indoorPlan";
 import type { IndoorRoute } from "./route";
 import type { IndoorBuilding, IndoorLevel, IndoorSpace } from "./types";
 import "./StackView.css";
@@ -105,7 +105,7 @@ export default function StackView({ building, levels, activeId, selected, route,
                 : shape.kind === "circle" ? <circle key={space.id} className={cls} cx={shape.cx} cy={shape.cy} r={shape.r} />
                 : <polygon key={space.id} className={cls} points={shape.points} />;
             })}
-            <path d={level.outline} className="stack__outline" />
+            <path d={planWalls(level)} className="stack__outline" />
             {legs.map((leg, i) => <polyline key={i} className="stack__route" points={leg.points.map((p) => p.join(",")).join(" ")} />)}
           </svg>
           {/* anchors: right edge for the level label, and every route node for the vertical links */}

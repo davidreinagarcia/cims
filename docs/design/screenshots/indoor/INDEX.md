@@ -6,33 +6,42 @@ Indoor screen polish (concepts A and D): production build at 1440, 1280, 390 and
 
 **Files**
 
+- [`1280x800_in_culc.png`](1280x800_in_culc.png): image
 - [`1280x800_in_culc_door_e1_n.png`](1280x800_in_culc_door_e1_n.png): image
+- [`1280x800_in_culc_indoor_stack.png`](1280x800_in_culc_indoor_stack.png): image
 - [`1280x800_in_kendeda.png`](1280x800_in_kendeda.png): image
 - [`1280x800_in_kendeda_indoor_stack.png`](1280x800_in_kendeda_indoor_stack.png): image
 - [`1280x800_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242.png`](1280x800_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242.png): image
 - [`1280x800_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242_indoor_stack.png`](1280x800_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242_indoor_stack.png): image
 - [`1280x800_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1.png`](1280x800_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1.png): image
 - [`1280x800_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1_indoor_stack.png`](1280x800_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1_indoor_stack.png): image
+- [`1440x900_in_culc.png`](1440x900_in_culc.png): image
 - [`1440x900_in_culc_door_e1_n.png`](1440x900_in_culc_door_e1_n.png): image
+- [`1440x900_in_culc_indoor_stack.png`](1440x900_in_culc_indoor_stack.png): image
 - [`1440x900_in_kendeda.png`](1440x900_in_kendeda.png): image
 - [`1440x900_in_kendeda_indoor_stack.png`](1440x900_in_kendeda_indoor_stack.png): image
 - [`1440x900_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242.png`](1440x900_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242.png): image
 - [`1440x900_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242_indoor_stack.png`](1440x900_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242_indoor_stack.png): image
 - [`1440x900_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1.png`](1440x900_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1.png): image
 - [`1440x900_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1_indoor_stack.png`](1440x900_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1_indoor_stack.png): image
+- [`360x740_in_culc.png`](360x740_in_culc.png): image
 - [`360x740_in_culc_door_e1_n.png`](360x740_in_culc_door_e1_n.png): image
+- [`360x740_in_culc_indoor_stack.png`](360x740_in_culc_indoor_stack.png): image
 - [`360x740_in_kendeda.png`](360x740_in_kendeda.png): image
 - [`360x740_in_kendeda_indoor_stack.png`](360x740_in_kendeda_indoor_stack.png): image
 - [`360x740_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242.png`](360x740_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242.png): image
 - [`360x740_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242_indoor_stack.png`](360x740_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242_indoor_stack.png): image
 - [`360x740_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1.png`](360x740_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1.png): image
 - [`360x740_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1_indoor_stack.png`](360x740_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1_indoor_stack.png): image
+- [`390x844_in_culc.png`](390x844_in_culc.png): image
 - [`390x844_in_culc_door_e1_n.png`](390x844_in_culc_door_e1_n.png): image
+- [`390x844_in_culc_indoor_stack.png`](390x844_in_culc_indoor_stack.png): image
 - [`390x844_in_kendeda.png`](390x844_in_kendeda.png): image
 - [`390x844_in_kendeda_indoor_stack.png`](390x844_in_kendeda_indoor_stack.png): image
 - [`390x844_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242.png`](390x844_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242.png): image
 - [`390x844_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242_indoor_stack.png`](390x844_select_room_g_wayne_clough_undergraduate_learning_commons_culc_242_indoor_stack.png): image
 - [`390x844_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1.png`](390x844_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1.png): image
 - [`390x844_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1_indoor_stack.png`](390x844_select_room_kendeda_building_for_innovative_sustainable_design_classroom_1_indoor_stack.png): image
+- [`VERIFICATION.md`](VERIFICATION.md): Validación de la limpieza indoor: geometría, cuatro rondas visuales, salida completa de shoot.mjs y comprobac…
 
 <!-- AUTO:END -->
