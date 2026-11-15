@@ -6,6 +6,7 @@ Read-only upcoming events in campus time with map selection and explicit fiction
 
 **Files**
 
+- [`BulletinBoard.tsx`](BulletinBoard.tsx): Full-screen Campus Bulletin: cork board with masonry note cards, type filters with counts, search and deep li… · exports `BulletinBoard`
 - [`BulletinPanel.tsx`](BulletinPanel.tsx): Read-only upcoming event bulletin with campus times and map selection. · exports `BulletinPanel`
 - [`bulletin.css`](bulletin.css): * @file Bulletin rows using the existing survey palette and controls.
 
