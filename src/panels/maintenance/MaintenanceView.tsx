@@ -1,10 +1,11 @@
-/** @file Maintenance dashboard (full screen): live Facilities board in three colored columns (To do, In progress, Done), crew filter with live counts, claim box for reports open to all teams. */
+/** @file Maintenance dashboard (full screen): Reports tab with the live Facilities board in three colored columns (To do, In progress, Done), crew filter with live counts, claim box for reports open to all teams; Door stickers tab with the link/QR generator. */
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useAuth } from "../../state/auth";
 import { CREWS, crewOf, useLiveReports } from "../../lib/liveReports";
 import { routeFor } from "../../lib/issue-routing";
 import { STATUS_LABEL, reportsService, type IssueReport, type ReportStatus } from "../../lib/reports";
 import { locationParts } from "../report/location";
+import DoorStickers from "./DoorStickers";
 import UnclaimedReports from "../report/UnclaimedReports";
 import "./maintenance.css";
 
@@ -66,6 +67,7 @@ export default function MaintenanceView({ onClose }: MaintenanceViewProps) {
   const { session, openDialog } = useAuth();
   const allowed = !!session && staffRoles.includes(session.role);
   const { reports, fresh, error } = useLiveReports("Facilities");
+  const [tab, setTab] = useState<"reports" | "stickers">("reports");
   const [crew, setCrew] = useState(ALL);
   const [problem, setProblem] = useState<string | null>(null);
   const root = useRef<HTMLDivElement>(null);
@@ -98,6 +100,10 @@ export default function MaintenanceView({ onClose }: MaintenanceViewProps) {
     <div className="maint" ref={root} tabIndex={-1} role="dialog" aria-modal="true" aria-label="Maintenance dashboard">
       <header className="maint__bar">
         <h1 className="maint__title">Maintenance dashboard</h1>
+        <nav className="maint__tabs" aria-label="Section">
+          <button type="button" aria-pressed={tab === "reports"} onClick={() => setTab("reports")}>Reports</button>
+          <button type="button" aria-pressed={tab === "stickers"} onClick={() => setTab("stickers")}>Door stickers</button>
+        </nav>
         <span className="maint__live" role="status">{error ? "Offline" : reports ? "Live" : "Connecting…"}</span>
         <button type="button" className="cims-btn" onClick={onClose}>Back to map</button>
       </header>
@@ -108,6 +114,8 @@ export default function MaintenanceView({ onClose }: MaintenanceViewProps) {
           <p>Sign in with the maintenance demo account to see the Facilities queue.</p>
           <button type="button" className="cims-btn cims-btn--primary" onClick={openDialog}>Sign in</button>
         </div>
+      ) : tab === "stickers" ? (
+        <div className="maint__stickers"><DoorStickers /></div>
       ) : (
         <div className="maint__body">
           <nav className="maint__crews" aria-label="Crew">

@@ -60,3 +60,40 @@
   .maint__help, .maint__legend { display: none; }
   .maint__board { grid-template-columns: 1fr; }
 }
+
+/* Tabs in the header */
+.maint__tabs { display: flex; gap: var(--s1); }
+.maint__tabs button { padding: var(--s1) var(--s3); background: transparent; color: var(--white); border: 1px solid transparent; font: 600 var(--fs-sm) var(--font-body); text-transform: uppercase; letter-spacing: var(--caps-tracking); cursor: pointer; }
+.maint__tabs button[aria-pressed="true"] { background: var(--gold); color: var(--navy); }
+
+/* Door sticker generator */
+.maint__stickers { flex: 1; min-height: 0; overflow-y: auto; padding: var(--s3) var(--s4); }
+.stickers { display: grid; gap: var(--s3); max-width: 980px; }
+.stickers__tools { display: grid; gap: var(--s2); padding: var(--s3); background: var(--white); border: var(--hairline-muted); border-left: 8px solid var(--navy); }
+.stickers__bulk { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.stickers__note { margin: 0; color: var(--cat-free); font-weight: 600; }
+.stickers__list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--s2); }
+.stickers__item { display: grid; grid-template-columns: auto 120px minmax(0, 1fr); gap: var(--s3); align-items: start; padding: var(--s3); background: var(--white); border: var(--hairline-muted); }
+.stickers__qr svg { width: 120px; height: 120px; display: block; border: var(--hairline-muted); }
+.stickers__name { margin: 0; font: 700 var(--fs-lg)/1.15 var(--font-display); text-transform: uppercase; }
+.stickers__info { display: grid; gap: var(--s2); min-width: 0; }
+.stickers__info p { margin: 0; }
+.stickers__link { width: 100%; padding: var(--s2); border: var(--hairline); background: var(--paper); font: 400 var(--fs-sm) var(--font-mono); box-sizing: border-box; }
+.stickers__pick input { width: 20px; height: 20px; }
+.stickers__help { font-size: var(--fs-sm); }
+@media (max-width: 640px) { .stickers__item { grid-template-columns: auto 1fr; } .stickers__info { grid-column: 1 / -1; } }
+
+/* Print sheet: only the stickers are printed */
+#sticker-print { display: none; }
+@media print {
+  body > #root { display: none !important; }
+  #sticker-print { display: grid !important; grid-template-columns: repeat(2, 1fr); gap: 8mm; padding: 10mm; background: #fff; color: #000; }
+  .sticker { margin: 0; padding: 6mm; border: 1px dashed #888; display: grid; justify-items: center; gap: 3mm; text-align: center; break-inside: avoid; font: 12pt/1.3 var(--font-body, sans-serif); }
+  .sticker__qr svg { width: 55mm; height: 55mm; }
+  .sticker figcaption { display: grid; gap: 1mm; }
+  .sticker strong { font-size: 13pt; color: #003057; }
+  .sticker__line { font-weight: 700; }
+  .sticker__url { font: 10pt monospace; }
+}
+.stickers__tools .maint__status { display: grid; gap: var(--s1); font-size: var(--fs-sm); max-width: 560px; }
+.stickers__tools .maint__status select { min-height: var(--tap); padding: var(--s2) var(--s3); border: var(--hairline); background: var(--white); font: inherit; }

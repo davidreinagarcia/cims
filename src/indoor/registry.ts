@@ -5,6 +5,11 @@ import type { IndoorBuilding, IndoorLevel, IndoorSpace, RoomFact } from "./types
 
 const buildings = [kendeda, culc] as unknown as IndoorBuilding[];
 
+/** Every building with an indoor model and its entrances, in registry order (for the maintenance sticker generator). */
+export function indoorBuildings(): IndoorBuilding[] {
+  return buildings;
+}
+
 /** Returns the curated indoor model for this footprint id, if supported. */
 export function indoorFor(buildingId: string): IndoorBuilding | undefined {
   return buildings.find((building) => building.building_id === buildingId);

@@ -25,6 +25,7 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`preferredRooms.mock.ts`](preferredRooms.mock.ts): Mock PreferredRoomsService backed by localStorage. Prototype only: favorites don't sync across devices. · exports `createLocalPreferredRoomsService`
 - [`preferredRooms.supabase.ts`](preferredRooms.supabase.ts): PreferredRoomsService on Supabase (one row per heart, private to the browser's account); local mock only if t… · exports `createSupabasePreferredRoomsService`
 - [`preferredRooms.ts`](preferredRooms.ts): Preferred ("favorite") rooms contracts (T-60) and the one place that picks the backend adapter. · exports `preferredRoomsService`
+- [`qr.ts`](qr.ts): QR codes for door stickers: link in, navy SVG or PNG out (no network, works offline). · exports `qrSvg`, `qrPng`
 - [`realtime.ts`](realtime.ts): Minimal Supabase Realtime client (Phoenix websocket, no SDK): calls back whenever a table changes, so dashboa… · exports `watchTable`
 - [`reports.mock.ts`](reports.mock.ts): Mock ReportsService backed by localStorage, with labeled sample reports. Prototype only: nothing leaves the b… · exports `metersBetween`, `samePlace`, `createLocalReportsService`
 - [`reports.supabase.ts`](reports.supabase.ts): ReportsService backed by Supabase (reports table, +1 votes, photos in Storage); falls back to the local mock… · exports `createSupabaseReportsService`
