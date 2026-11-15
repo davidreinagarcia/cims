@@ -7,7 +7,7 @@ const SOURCE = "stories";
 const HEAT = "stories-heat";
 const FOCUS_SOURCE = "stories-focus";
 const FOCUS = "stories-focus-ring";
-const PIN_LAYERS = ["places-pin", "places-pin-selected", "places-cluster"];
+const PIN_LAYERS = ["places-pin", "places-pin-selected", "places-cluster", "places-attached", "places-attached-count"];
 /** Blob radius in screen px by zoom; shared by the paint and the click test so what you see is what you can click. */
 const RADIUS: [number, number][] = [[14, 22], [15, 32], [17, 60], [19, 110]];
 

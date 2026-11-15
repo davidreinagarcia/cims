@@ -1,0 +1,860 @@
+[
+  {
+    "item": "Naugle Writing and Communication Center",
+    "status": "unconfirmed",
+    "finding": "Centro aproximado del edificio, sin posición interior propia en OSM. Clough 447, cuarta planta. Dentro del límite indicado.",
+    "evidence_url": "https://communicationcenter.gatech.edu/",
+    "quote": "located in 447 Clough",
+    "osm_type": "relation",
+    "osm_id": 3178622,
+    "lat": 33.774666,
+    "lon": -84.396375,
+    "osm_name": "G. Wayne Clough Undergraduate Learning Commons",
+    "coord_precision": "building",
+    "notes": "Centro aproximado del edificio, sin posición interior propia en OSM. Clough 447, cuarta planta. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/relation/3178622",
+        "quote": "G. Wayne Clough Undergraduate Learning Commons"
+      },
+      {
+        "url": "https://communicationcenter.gatech.edu/",
+        "quote": "located in 447 Clough"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "BuzzCard Center",
+    "status": "unconfirmed",
+    "finding": "unconfirmed: OSM contiene dos polígonos The Pavilion y no se confirmó cuál contiene BuzzCard. Nominatim y Overpass no identificaron un punto inequívoco.",
+    "evidence_url": "https://www.buzzcard.gatech.edu/terms-conditions/",
+    "quote": "The Pavilion, 410 4th Street NW.",
+    "osm_type": null,
+    "osm_id": null,
+    "lat": null,
+    "lon": null,
+    "osm_name": null,
+    "coord_precision": null,
+    "notes": "unconfirmed: OSM contiene dos polígonos The Pavilion y no se confirmó cuál contiene BuzzCard. Nominatim y Overpass no identificaron un punto inequívoco.",
+    "evidence": [
+      {
+        "url": "https://www.buzzcard.gatech.edu/terms-conditions/",
+        "quote": "The Pavilion, 410 4th Street NW."
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Bursar's Office",
+    "status": "unconfirmed",
+    "finding": "Centro aproximado del edificio, sin posición interior propia en OSM. Suite 111. Dentro del límite indicado.",
+    "evidence_url": "https://bursar.gatech.edu/office_information",
+    "quote": "Lyman Hall, Suite 111",
+    "osm_type": "way",
+    "osm_id": 42706703,
+    "lat": 33.772988,
+    "lon": -84.394143,
+    "osm_name": "Lyman Hall Building",
+    "coord_precision": "building",
+    "notes": "Centro aproximado del edificio, sin posición interior propia en OSM. Suite 111. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/42706703",
+        "quote": "Lyman Hall Building"
+      },
+      {
+        "url": "https://bursar.gatech.edu/office_information",
+        "quote": "Lyman Hall, Suite 111"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Office of Disability Services",
+    "status": "unconfirmed",
+    "finding": "Centro aproximado del edificio, sin posición interior propia en OSM. Suite indicada de forma contradictoria por fuentes; confirmar planta. Dentro del límite indicado.",
+    "evidence_url": "https://syllabus.gatech.edu/sites/default/files/2026-04/MGT3659_Syllabus_Fall2026_1.pdf",
+    "quote": "Smithgall Student Services Building, 353 Ferst Drive, Suite 221",
+    "osm_type": "way",
+    "osm_id": 42831367,
+    "lat": 33.774350,
+    "lon": -84.399545,
+    "osm_name": "Flag Building (Charles A. Smithgall Jr. Building)",
+    "coord_precision": "building",
+    "notes": "Centro aproximado del edificio, sin posición interior propia en OSM. Suite indicada de forma contradictoria por fuentes; confirmar planta. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/42831367",
+        "quote": "Flag Building (Charles A. Smithgall Jr. Building)"
+      },
+      {
+        "url": "https://syllabus.gatech.edu/sites/default/files/2026-04/MGT3659_Syllabus_Fall2026_1.pdf",
+        "quote": "Smithgall Student Services Building, 353 Ferst Drive, Suite 221"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Belonging and Student Support",
+    "status": "unconfirmed",
+    "finding": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. No se repite el centro de Smithgall utilizado para Disability Services.",
+    "evidence_url": "https://support.belonging.gatech.edu/",
+    "quote": "Smithgall Student Services",
+    "osm_type": null,
+    "osm_id": null,
+    "lat": null,
+    "lon": null,
+    "osm_name": null,
+    "coord_precision": null,
+    "notes": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. No se repite el centro de Smithgall utilizado para Disability Services.",
+    "evidence": [
+      {
+        "url": "https://support.belonging.gatech.edu/",
+        "quote": "Smithgall Student Services"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "PTS Customer Service Center",
+    "status": "unconfirmed",
+    "finding": "Centro aproximado del edificio, sin posición interior propia en OSM. La ubicación de la oficina dentro del aparcamiento no está cartografiada; confirmar acceso. Dentro del límite indicado.",
+    "evidence_url": "https://www.pts.gatech.edu/contact/",
+    "quote": "Located on the Ground Level of the E81-Tech Square/GT Hotel parking deck",
+    "osm_type": "relation",
+    "osm_id": 3321074,
+    "lat": 33.775602,
+    "lon": -84.389552,
+    "osm_name": "Technology Square Parking Deck",
+    "coord_precision": "building",
+    "notes": "Centro aproximado del edificio, sin posición interior propia en OSM. La ubicación de la oficina dentro del aparcamiento no está cartografiada; confirmar acceso. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/relation/3321074",
+        "quote": "Technology Square Parking Deck"
+      },
+      {
+        "url": "https://www.pts.gatech.edu/contact/",
+        "quote": "Located on the Ground Level of the E81-Tech Square/GT Hotel parking deck"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Wreck Techs East Campus",
+    "status": "unconfirmed",
+    "finding": "Centro aproximado del edificio, sin posición interior propia en OSM. Fuente de 2023, confirmar vigencia. Dentro del límite indicado.",
+    "evidence_url": "https://wrecktechs.gatech.edu/author/ahuynh38/",
+    "quote": "Howell Lounge",
+    "osm_type": "way",
+    "osm_id": 42706750,
+    "lat": 33.772120,
+    "lon": -84.390983,
+    "osm_name": "Clark Howell Residence Hall",
+    "coord_precision": "building",
+    "notes": "Centro aproximado del edificio, sin posición interior propia en OSM. Fuente de 2023, confirmar vigencia. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/42706750",
+        "quote": "Clark Howell Residence Hall"
+      },
+      {
+        "url": "https://wrecktechs.gatech.edu/author/ahuynh38/",
+        "quote": "Howell Lounge"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Wreck Techs West Campus",
+    "status": "unconfirmed",
+    "finding": "Centro aproximado del edificio, sin posición interior propia en OSM. OSM divide West Village en dos polígonos; el local no tiene punto identificado. Fuente de 2023, confirmar vigencia. Dentro del límite indicado.",
+    "evidence_url": "https://wrecktechs.gatech.edu/author/ahuynh38/",
+    "quote": "West Village Commons",
+    "osm_type": "way",
+    "osm_id": 516716114,
+    "lat": 33.779184,
+    "lon": -84.404457,
+    "osm_name": "West Village Dining Commons",
+    "coord_precision": "building",
+    "notes": "Centro aproximado del edificio, sin posición interior propia en OSM. OSM divide West Village en dos polígonos; el local no tiene punto identificado. Fuente de 2023, confirmar vigencia. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/516716114",
+        "quote": "West Village Dining Commons"
+      },
+      {
+        "url": "https://wrecktechs.gatech.edu/author/ahuynh38/",
+        "quote": "West Village Commons"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Montgomery Machining Mall",
+    "status": "unconfirmed",
+    "finding": "Centro aproximado del edificio, sin posición interior propia en OSM. MRDC, segunda planta. Dentro del límite indicado.",
+    "evidence_url": "https://safety.me.gatech.edu/makerspaces/",
+    "quote": "Montgomery Machining Mall  | Wepfer Design Commons (MRDC 2nd Floor)",
+    "osm_type": "way",
+    "osm_id": 42872689,
+    "lat": 33.776976,
+    "lon": -84.400485,
+    "osm_name": "Manufacturing Related Disciplines Complex",
+    "coord_precision": "building",
+    "notes": "Centro aproximado del edificio, sin posición interior propia en OSM. MRDC, segunda planta. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/42872689",
+        "quote": "Manufacturing Related Disciplines Complex"
+      },
+      {
+        "url": "https://safety.me.gatech.edu/makerspaces/",
+        "quote": "Montgomery Machining Mall  | Wepfer Design Commons (MRDC 2nd Floor)"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Ken Byers Tennis Complex",
+    "status": "confirmed",
+    "finding": "Centro de la extensión OSM, no necesariamente una entrada. OSM representa el complejo con otro polígono adicional 42877787. Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/way/42789686",
+    "quote": "Ken Byers Tennis Complex",
+    "osm_type": "way",
+    "osm_id": 42789686,
+    "lat": 33.780644,
+    "lon": -84.394330,
+    "osm_name": "Ken Byers Tennis Complex",
+    "coord_precision": "exact",
+    "notes": "Centro de la extensión OSM, no necesariamente una entrada. OSM representa el complejo con otro polígono adicional 42877787. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/42789686",
+        "quote": "Ken Byers Tennis Complex"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "CRC Bike Shop",
+    "status": "unconfirmed",
+    "finding": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. No se asigna el centro del CRC, reservado a Wilderness Outpost; la tienda interior no se ha identificado.",
+    "evidence_url": "https://www.sga.gatech.edu/graduate-campus-services/",
+    "quote": "The Bike Shop provides affordable repairs",
+    "osm_type": null,
+    "osm_id": null,
+    "lat": null,
+    "lon": null,
+    "osm_name": null,
+    "coord_precision": null,
+    "notes": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. No se asigna el centro del CRC, reservado a Wilderness Outpost; la tienda interior no se ha identificado.",
+    "evidence": [
+      {
+        "url": "https://www.sga.gatech.edu/graduate-campus-services/",
+        "quote": "The Bike Shop provides affordable repairs"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "ORGT Wilderness Outpost",
+    "status": "unconfirmed",
+    "finding": "Centro aproximado del edificio, sin posición interior propia en OSM. Entrada posterior, nivel inferior, sin punto OSM confirmado. Dentro del límite indicado.",
+    "evidence_url": "https://crc.gatech.edu/wilderness-outpost/",
+    "quote": "Wilderness Outpost is located downstairs in the Campus Recreation Center.",
+    "osm_type": "way",
+    "osm_id": 179224195,
+    "lat": 33.775530,
+    "lon": -84.403955,
+    "osm_name": "Campus Recreation Center",
+    "coord_precision": "building",
+    "notes": "Centro aproximado del edificio, sin posición interior propia en OSM. Entrada posterior, nivel inferior, sin punto OSM confirmado. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/179224195",
+        "quote": "Campus Recreation Center"
+      },
+      {
+        "url": "https://crc.gatech.edu/wilderness-outpost/",
+        "quote": "Wilderness Outpost is located downstairs in the Campus Recreation Center."
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Boho Taco",
+    "status": "confirmed",
+    "finding": " Dentro del límite indicado.",
+    "evidence_url": "https://www.dining.gatech.edu/location/boho-taco",
+    "quote": "22 5th Street NW",
+    "osm_type": "node",
+    "osm_id": 535031257,
+    "lat": 33.776654,
+    "lon": -84.387903,
+    "osm_name": "Boho Taco",
+    "coord_precision": "exact",
+    "notes": " Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/node/535031257",
+        "quote": "Boho Taco"
+      },
+      {
+        "url": "https://www.dining.gatech.edu/location/boho-taco",
+        "quote": "22 5th Street NW"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Conference Dining Room",
+    "status": "unconfirmed",
+    "finding": "Centro aproximado del edificio, sin posición interior propia en OSM. Asignado al hotel y centro de conferencias; falta verificar posición interior. Dentro del límite indicado.",
+    "evidence_url": "https://www.dining.gatech.edu/location/conference-dining-room",
+    "quote": "800 Spring St NW, Atlanta, GA 30308",
+    "osm_type": "relation",
+    "osm_id": 3321072,
+    "lat": 33.776359,
+    "lon": -84.389330,
+    "osm_name": "Georgia Tech Hotel & Conference Center",
+    "coord_precision": "building",
+    "notes": "Centro aproximado del edificio, sin posición interior propia en OSM. Asignado al hotel y centro de conferencias; falta verificar posición interior. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/relation/3321072",
+        "quote": "Georgia Tech Hotel & Conference Center"
+      },
+      {
+        "url": "https://www.dining.gatech.edu/location/conference-dining-room",
+        "quote": "800 Spring St NW, Atlanta, GA 30308"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Moe's Midtown",
+    "status": "confirmed",
+    "finding": " Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/node/535057009",
+    "quote": "Moe's Southwest Grill",
+    "osm_type": "node",
+    "osm_id": 535057009,
+    "lat": 33.777019,
+    "lon": -84.389885,
+    "osm_name": "Moe's Southwest Grill",
+    "coord_precision": "exact",
+    "notes": " Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/node/535057009",
+        "quote": "Moe's Southwest Grill"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Ray's Pizza",
+    "status": "confirmed",
+    "finding": "OSM combina Ray’s y Cedar’s en el mismo nodo; no separa los establecimientos. Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/node/535031255",
+    "quote": "Ray's NY Pizza, Cedar's Mediterranean",
+    "osm_type": "node",
+    "osm_id": 535031255,
+    "lat": 33.776654,
+    "lon": -84.388102,
+    "osm_name": "Ray's NY Pizza, Cedar's Mediterranean",
+    "coord_precision": "exact",
+    "notes": "OSM combina Ray’s y Cedar’s en el mismo nodo; no separa los establecimientos. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/node/535031255",
+        "quote": "Ray's NY Pizza, Cedar's Mediterranean"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Sankranti",
+    "status": "confirmed",
+    "finding": " Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/node/535031280",
+    "quote": "Sankranti Indian Kitchen",
+    "osm_type": "node",
+    "osm_id": 535031280,
+    "lat": 33.777023,
+    "lon": -84.390258,
+    "osm_name": "Sankranti Indian Kitchen",
+    "coord_precision": "exact",
+    "notes": " Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/node/535031280",
+        "quote": "Sankranti Indian Kitchen"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Tin Drum Asian Kitchen",
+    "status": "confirmed",
+    "finding": " Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/node/2466973843",
+    "quote": "Tin Drum",
+    "osm_type": "node",
+    "osm_id": 2466973843,
+    "lat": 33.776698,
+    "lon": -84.390049,
+    "osm_name": "Tin Drum",
+    "coord_precision": "exact",
+    "notes": " Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/node/2466973843",
+        "quote": "Tin Drum"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Tech Square Tavern",
+    "status": "unconfirmed",
+    "finding": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. No se encontró objeto homónimo.",
+    "evidence_url": "https://www.dining.gatech.edu/",
+    "quote": "Tech Square Tavern",
+    "osm_type": null,
+    "osm_id": null,
+    "lat": null,
+    "lon": null,
+    "osm_name": null,
+    "coord_precision": null,
+    "notes": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. No se encontró objeto homónimo.",
+    "evidence": [
+      {
+        "url": "https://www.dining.gatech.edu/",
+        "quote": "Tech Square Tavern"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Kaldi's Coffee (Tech Square)",
+    "status": "unconfirmed",
+    "finding": "Centro aproximado del edificio, sin posición interior propia en OSM. No confundir con el nodo Kaldi’s de Clough. Dentro del límite indicado.",
+    "evidence_url": "https://dining.gatech.edu/location/kaldis-coffee-tech-square",
+    "quote": "55 5th Street NW",
+    "osm_type": "way",
+    "osm_id": 1355836113,
+    "lat": 33.777240,
+    "lon": -84.388061,
+    "osm_name": "George Tower | Scheller Tower",
+    "coord_precision": "building",
+    "notes": "Centro aproximado del edificio, sin posición interior propia en OSM. No confundir con el nodo Kaldi’s de Clough. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/1355836113",
+        "quote": "George Tower | Scheller Tower"
+      },
+      {
+        "url": "https://dining.gatech.edu/location/kaldis-coffee-tech-square",
+        "quote": "55 5th Street NW"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Student Competition Center",
+    "status": "confirmed",
+    "finding": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence_url": "https://safety.me.gatech.edu/makerspaces/",
+    "quote": "Student Competition Center (14th Street)",
+    "osm_type": "way",
+    "osm_id": 43329453,
+    "lat": 33.786768,
+    "lon": -84.406262,
+    "osm_name": "Student Competition Center",
+    "coord_precision": "exact",
+    "notes": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/43329453",
+        "quote": "Student Competition Center"
+      },
+      {
+        "url": "https://safety.me.gatech.edu/makerspaces/",
+        "quote": "Student Competition Center (14th Street)"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "IDEA Lab",
+    "status": "unconfirmed",
+    "finding": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. MRDC 2101. No se reutiliza el centro del MRDC asignado a Montgomery.",
+    "evidence_url": "https://2110.me.gatech.edu/idea-laboratory/",
+    "quote": "second floor of the MRDC Building in Room 2101",
+    "osm_type": null,
+    "osm_id": null,
+    "lat": null,
+    "lon": null,
+    "osm_name": null,
+    "coord_precision": null,
+    "notes": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. MRDC 2101. No se reutiliza el centro del MRDC asignado a Montgomery.",
+    "evidence": [
+      {
+        "url": "https://2110.me.gatech.edu/idea-laboratory/",
+        "quote": "second floor of the MRDC Building in Room 2101"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "GT Prototyping Lab",
+    "status": "unconfirmed",
+    "finding": "Centro aproximado del edificio, sin posición interior propia en OSM. TSRB sótano S21. Dentro del límite indicado.",
+    "evidence_url": "https://research.gatech.edu/ipat/protolab",
+    "quote": "Technology Square Research Building (TSRB) basement, room S21",
+    "osm_type": "way",
+    "osm_id": 42706824,
+    "lat": 33.777375,
+    "lon": -84.390097,
+    "osm_name": "Technology Square Research Building (TSRB)",
+    "coord_precision": "building",
+    "notes": "Centro aproximado del edificio, sin posición interior propia en OSM. TSRB sótano S21. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/42706824",
+        "quote": "Technology Square Research Building (TSRB)"
+      },
+      {
+        "url": "https://research.gatech.edu/ipat/protolab",
+        "quote": "Technology Square Research Building (TSRB) basement, room S21"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Georgia Tech Police Department HQ",
+    "status": "confirmed",
+    "finding": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence_url": "https://police.gatech.edu/general-information",
+    "quote": "Our mailing address is: 965 Hemphill Avenue NW",
+    "osm_type": "way",
+    "osm_id": 751387123,
+    "lat": 33.781217,
+    "lon": -84.403324,
+    "osm_name": "Georgia Tech Police",
+    "coord_precision": "exact",
+    "notes": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/751387123",
+        "quote": "Georgia Tech Police"
+      },
+      {
+        "url": "https://police.gatech.edu/general-information",
+        "quote": "Our mailing address is: 965 Hemphill Avenue NW"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Visitor Parking Area 4",
+    "status": "unconfirmed",
+    "finding": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. No se identificó con certeza el polígono de la zona.",
+    "evidence_url": "https://www.pts.gatech.edu/parking/visitor-parking/",
+    "quote": "Visitor Area 4: State Street & Ferst Drive",
+    "osm_type": null,
+    "osm_id": null,
+    "lat": null,
+    "lon": null,
+    "osm_name": null,
+    "coord_precision": null,
+    "notes": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. No se identificó con certeza el polígono de la zona.",
+    "evidence": [
+      {
+        "url": "https://www.pts.gatech.edu/parking/visitor-parking/",
+        "quote": "Visitor Area 4: State Street & Ferst Drive"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Visitor Parking Area 10",
+    "status": "corrected",
+    "finding": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. La descripción IPST/RAB W31 no coincide con la ubicación oficial.",
+    "evidence_url": "https://www.pts.gatech.edu/parking/visitor-parking/",
+    "quote": "Visitor Area 10: 8th St. (at Fowler St.)",
+    "osm_type": null,
+    "osm_id": null,
+    "lat": null,
+    "lon": null,
+    "osm_name": null,
+    "coord_precision": null,
+    "notes": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. La descripción IPST/RAB W31 no coincide con la ubicación oficial.",
+    "evidence": [
+      {
+        "url": "https://www.pts.gatech.edu/parking/visitor-parking/",
+        "quote": "Visitor Area 10: 8th St. (at Fowler St.)"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Visitor Parking Area 11",
+    "status": "unconfirmed",
+    "finding": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. No se identificó el objeto ni la ubicación oficial de forma inequívoca.",
+    "evidence_url": "https://www.pts.gatech.edu/parking/visitor-parking/",
+    "quote": "Visitor Parking Locations",
+    "osm_type": null,
+    "osm_id": null,
+    "lat": null,
+    "lon": null,
+    "osm_name": null,
+    "coord_precision": null,
+    "notes": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. No se identificó el objeto ni la ubicación oficial de forma inequívoca.",
+    "evidence": [
+      {
+        "url": "https://www.pts.gatech.edu/parking/visitor-parking/",
+        "quote": "Visitor Parking Locations"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Visitor Parking Area 12",
+    "status": "corrected",
+    "finding": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. La descripción IPST/RAB W31 no coincide con la ubicación oficial. No se identificó el polígono.",
+    "evidence_url": "https://www.pts.gatech.edu/parking/visitor-parking/",
+    "quote": "Visitor Area 12 – 555/575 14th Street",
+    "osm_type": null,
+    "osm_id": null,
+    "lat": null,
+    "lon": null,
+    "osm_name": null,
+    "coord_precision": null,
+    "notes": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. La descripción IPST/RAB W31 no coincide con la ubicación oficial. No se identificó el polígono.",
+    "evidence": [
+      {
+        "url": "https://www.pts.gatech.edu/parking/visitor-parking/",
+        "quote": "Visitor Area 12 – 555/575 14th Street"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "EV charging Visitor Area 4",
+    "status": "unconfirmed",
+    "finding": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. La fuente oficial confirma cargadores, pero no se identificó un objeto OSM específico.",
+    "evidence_url": "https://www.pts.gatech.edu/parking/electric-vehicle-charging/",
+    "quote": "Area 4: Visitor Lot (Ferst Drive/State Street): 6 spaces",
+    "osm_type": null,
+    "osm_id": null,
+    "lat": null,
+    "lon": null,
+    "osm_name": null,
+    "coord_precision": null,
+    "notes": "unconfirmed: búsqueda por nombre en Nominatim y elementos con nombre en Overpass dentro del área; no se confirmó un objeto OSM inequívoco con punto propio. La fuente oficial confirma cargadores, pero no se identificó un objeto OSM específico.",
+    "evidence": [
+      {
+        "url": "https://www.pts.gatech.edu/parking/electric-vehicle-charging/",
+        "quote": "Area 4: Visitor Lot (Ferst Drive/State Street): 6 spaces"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "MARTA Midtown Station",
+    "status": "confirmed",
+    "finding": "Nodo ferroviario de estación; no representa una entrada concreta. Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/node/69286872",
+    "quote": "Midtown",
+    "osm_type": "node",
+    "osm_id": 69286872,
+    "lat": 33.781110,
+    "lon": -84.386286,
+    "osm_name": "Midtown",
+    "coord_precision": "exact",
+    "notes": "Nodo ferroviario de estación; no representa una entrada concreta. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/node/69286872",
+        "quote": "Midtown"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "MARTA North Avenue Station",
+    "status": "confirmed",
+    "finding": "Nodo ferroviario de estación; no representa una entrada concreta. Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/node/69286902",
+    "quote": "North Avenue",
+    "osm_type": "node",
+    "osm_id": 69286902,
+    "lat": 33.772592,
+    "lon": -84.386965,
+    "osm_name": "North Avenue",
+    "coord_precision": "exact",
+    "notes": "Nodo ferroviario de estación; no representa una entrada concreta. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/node/69286902",
+        "quote": "North Avenue"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Kessler Campanile",
+    "status": "confirmed",
+    "finding": " Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/node/11698623873",
+    "quote": "Kessler Campanile",
+    "osm_type": "node",
+    "osm_id": 11698623873,
+    "lat": 33.774304,
+    "lon": -84.398183,
+    "osm_name": "Kessler Campanile",
+    "coord_precision": "exact",
+    "notes": " Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/node/11698623873",
+        "quote": "Kessler Campanile"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Tech Green",
+    "status": "confirmed",
+    "finding": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/way/178721865",
+    "quote": "Tech Green",
+    "osm_type": "way",
+    "osm_id": 178721865,
+    "lat": 33.774662,
+    "lon": -84.397329,
+    "osm_name": "Tech Green",
+    "coord_precision": "exact",
+    "notes": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/178721865",
+        "quote": "Tech Green"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Ferst Center for the Arts",
+    "status": "confirmed",
+    "finding": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/way/43332730",
+    "quote": "Robert H. Ferst Center for the Arts",
+    "osm_type": "way",
+    "osm_id": 43332730,
+    "lat": 33.775101,
+    "lon": -84.399213,
+    "osm_name": "Robert H. Ferst Center for the Arts",
+    "coord_precision": "exact",
+    "notes": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/43332730",
+        "quote": "Robert H. Ferst Center for the Arts"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "McCamish Pavilion",
+    "status": "confirmed",
+    "finding": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/way/42726641",
+    "quote": "Alexander Memorial Coliseum in McCamish Pavilion",
+    "osm_type": "way",
+    "osm_id": 42726641,
+    "lat": 33.780609,
+    "lon": -84.392766,
+    "osm_name": "Alexander Memorial Coliseum in McCamish Pavilion",
+    "coord_precision": "exact",
+    "notes": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/42726641",
+        "quote": "Alexander Memorial Coliseum in McCamish Pavilion"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Bobby Dodd Stadium",
+    "status": "confirmed",
+    "finding": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/way/618966004",
+    "quote": "Bobby Dodd Stadium",
+    "osm_type": "way",
+    "osm_id": 618966004,
+    "lat": 33.772551,
+    "lon": -84.392961,
+    "osm_name": "Bobby Dodd Stadium",
+    "coord_precision": "exact",
+    "notes": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/618966004",
+        "quote": "Bobby Dodd Stadium"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Exhibition Hall",
+    "status": "confirmed",
+    "finding": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence_url": "https://www.openstreetmap.org/way/837935643",
+    "quote": "Exhibition Hall",
+    "osm_type": "way",
+    "osm_id": 837935643,
+    "lat": 33.774602,
+    "lon": -84.401646,
+    "osm_name": "Exhibition Hall",
+    "coord_precision": "exact",
+    "notes": "Centro de la extensión OSM, no necesariamente una entrada. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/way/837935643",
+        "quote": "Exhibition Hall"
+      }
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Library Audio Recording Studio",
+    "status": "unconfirmed",
+    "finding": "Centro aproximado del edificio, sin posición interior propia en OSM. Sala 3286; figura cerrada por reparaciones. Dentro del límite indicado.",
+    "evidence_url": "https://www.library.gatech.edu/spaces-technology/media-scholarship-commons/studio-reservations",
+    "quote": "The Audio Recording Studio is currently CLOSED for repairs and updates.",
+    "osm_type": "relation",
+    "osm_id": 3178630,
+    "lat": 33.774363,
+    "lon": -84.395710,
+    "osm_name": "Price Gilbert Memorial Library",
+    "coord_precision": "building",
+    "notes": "Centro aproximado del edificio, sin posición interior propia en OSM. Sala 3286; figura cerrada por reparaciones. Dentro del límite indicado.",
+    "evidence": [
+      {
+        "url": "https://www.openstreetmap.org/relation/3178630",
+        "quote": "Price Gilbert Memorial Library"
+      },
+      {
+        "url": "https://www.library.gatech.edu/spaces-technology/media-scholarship-commons/studio-reservations",
+        "quote": "The Audio Recording Studio is currently CLOSED for repairs and updates."
+      }
+    ],
+    "checked_on": "2026-11-14"
+  }
+]

@@ -1,0 +1,3856 @@
+Gemini
+Georgia Tech Campus Map Inventory for Fall 2026
+
+This inventory documents 101 sourced campus and near-campus places for an interactive Georgia Tech map as of November 14, 2026 (Fall 2026), built strictly from institutional pages (gatech.edu subsystems) alongside official partner/facility sites (bmemakerspaces.com, codatechsquare.com). Category counts across the 101 features are: food (10), support (14), printing (13), makerspace (6), exercise (5), health (5), transport (21), and extra (27).   
+
+Within the 101 sourced entries, 21 carry high confidence because their official sources are explicitly dated for Fall 2026: Tech Dining pages showing November 22–28, 2026 Thanksgiving hours, Campus Recreation Center (CRC) and Ken Byers Tennis Complex Fall 2026 schedules, Student Center daily operations (Nov. 2026 / Dec. 2026 schedules), Parking and Transportation Services (PTS) bike-room updates modified October 14, 2026, CoC TSO IT Support, Flowers Invention Studio and The Hive Fall 2026 schedules, and the Center for Mental Health Care and Resources (CMHCR) supported by Fall 2026 syllabi and group listings. The remaining 80 entries carry medium confidence because they rely on undated official pages (Georgia Tech Library computing and study-space guides, EOC Title IX lactation listings, Stamps Health Services hours, OIT/student-service desks) or older-term official records—specifically Stinger route announcements from Fall 2025 and Spring 2026, an embedded College of Sciences clinician schedule from Fall 2025–Spring 2026, and Bursar/Financial Aid advising hours from a Fall 2019 orientation packet.   
+
+Several operational shifts and inventory gaps affect completeness. First, no retrieved source explicitly states geographic coordinates for individual campus buildings or entrances inside the -84.42 to -84.375 longitude and 33.76 to 33.79 latitude bounding box; therefore, geometry and coord_source are null across all 101 GeoJSON features rather than estimated. Second, student printing runs on OIT/ECE/CoC Pharos and Central-PS systems rather than PaperCut; CARE and the Counseling Center consolidated into CMHCR; Pharmabox relocated to Clough Commons 3rd floor; and PTS updated its Stinger shuttle network in October 2025 (moving the Blue Route westbound stop from the Weber turnaround to the Ferst Drive shelter and listing seven weekday routes without a separate Trolley route, though undated OIT directions still reference the Yellow Express/Trolley). Major missing items include North Ave Dining Hall hours/address, Wreck Stop, Wreck Techs, regular Housing Area Office hours, the Registrar's building location, Relay bike share stations, outdoor athletic fields (Roe Stamps / SAC Fields), and verified point locations for all-gender restrooms, water-refill stations, and accessible entrances (detailed in Section 3).   
+
+Sourced Inventory by Category
+Food
+
+Tech Dining retail and residential dining halls accept Dining Dollars tax-free campuswide, whereas standard Meal Swipes apply only to the three all-you-care-to-eat dining halls (Brittain, North Ave, and West Village); Flex Swipes carry a $9 retail value. Tech Dining's summary listings contained several unlabelled Fall 2026 hour schedules whose venue headers were truncated; only venues with explicitly paired schedules are included below.   
+
+Name	Subtype	Building / Floor	Hours Summary	Confidence	Source
+Brittain Dining Hall	dining-hall	Brittain Dining Hall	Mon–Fri 11:00–23:00; Sat–Sun closed (Thanksgiving week: Sun–Tue 11:00–23:00, Wed–Sat closed)	high	
+
+Tech Dining
+
+
+West Village Dining Hall	dining-hall	West Village Dining Commons	Mon–Fri 07:00–23:00; Sat–Sun 09:00–21:00 (Nov 25 09:00–15:00; closed Nov 26–28)	high	
+
+Tech Dining
+
+
+Big Chicken	restaurant	John Lewis Student Center	Mon–Fri 10:30–21:00; Sat 12:00–16:00; Sun 10:30–17:00 (Nov 25 10:30–17:00; closed Nov 26–28)	high	
+
+Tech Dining
+
+
+Blenz Bowls	restaurant	John Lewis Student Center	Mon–Thu 09:00–18:00; Fri 09:00–17:00; Sat closed; Sun 12:00–18:00	medium	
+
+Tech Dining
+
+
+Boho Taco	restaurant	Building unspecified (22 5th St NW, Tech Square)	Daily 11:00–22:00	medium	
+
+Tech Dining
+
+
+Dunkin'	coffee	John Lewis Student Center	Mon–Thu 07:00–20:00; Fri 07:00–19:00; Sat 08:00–17:00; Sun 09:00–16:00 (Nov 25 07:00–17:00; closed Nov 26–28)	high	
+
+Tech Dining
+
+
+Panda Express	restaurant	Unspecified in current listing	Mon–Thu 10:00–21:00; Fri 10:00–19:00; Sat 11:00–16:00; Sun 11:00–17:00 (Nov 25 10:30–16:00; closed Nov 26–28)	high	
+
+Tech Dining
+
+
+Kaldi's Coffee	coffee	Unspecified on hours page (Campus listings note John Lewis Student Center and Clough 1st Fl)	Mon–Fri 07:00–19:00; Sat–Sun closed	medium	
+
+Tech Dining
+
+
+Tech Square Tavern	restaurant	Georgia Tech Hotel and Conference Center	Daily 16:00–23:00	medium	
+
+Tech Dining / GT Hotel
+
+
+The Collective Food Hall	cafeteria	Coda Building	Daily 11:00–21:30	medium	
+
+Coda Tech Square
+
+  
+Support
+
+Support entries cover IT help desks, Student Center service counters, administrative and student-support offices, library archives, campus safety, and PTS customer service. Conflicting BuzzCard Center hours across official pages (08:00–17:00 vs. 09:00–13:00 and 14:00–17:00) and Fall 2019 Bursar/Financial Aid schedules are flagged.   
+
+Name	Subtype	Building / Floor	Hours Summary	Confidence	Source
+College of Computing TSO Help Desk	it-help-desk	College of Computing Building, Room 225D	Mon–Fri 08:00–16:00; Sat–Sun closed	high	
+
+CoC TSO
+
+
+OIT Administrative Services Center (ASC) Walk-Up Support	it-help-desk	Clough Undergraduate Learning Commons, Room 215	Mon–Fri 08:00–17:00; Sat–Sun closed	medium	
+
+OIT / CoC TSO
+
+
+John Lewis Student Center Information Desk	info-desk	John Lewis Student Center	Mon–Thu 08:00–19:00; Fri 08:00–17:00; Sat–Sun 09:00–15:00	high	
+
+Student Center
+
+
+Georgia Tech Post Office	mail-center	John Lewis Student Center	Mon/Wed/Fri 08:30–17:00; Tue/Thu 08:30–18:00; Sat 09:00–12:00; Sun closed	high	
+
+Student Center
+
+
+Student and Campus Event Centers Administration and Event Services	student-services	John Lewis Student Center, 3rd Floor	Mon–Fri 08:00–17:00; Sat–Sun closed	medium	
+
+Student Center
+
+
+BuzzCard Center	student-services	John Lewis Student Center, 2nd Floor (next to Info Desk)	Mon–Fri 08:00–17:00 (Student Center page notes 09:00–13:00, 14:00–17:00); Sat–Sun closed	medium	
+
+BuzzCard / Student Center
+
+
+Office of the Bursar	administrative	Lyman Hall, Suite 111	Mon–Fri 08:30–16:00 (Fall 2019 source); 24/7 check/money-order drop box	medium	
+
+Bursar
+
+
+Office of Scholarships and Financial Aid (OSFA)	administrative	Bill Moore Student Success Center, 3rd Floor	Mon–Fri 09:30–15:30 advising hours (Fall 2019 source); Sat–Sun closed	medium	
+
+OSFA / Bursar
+
+
+Georgia Tech Career Center	student-services	Bill Moore Student Success Center	Regular hours unstated (Campus Closet Mon 09:00–15:30, Tue 09:00–12:00)	medium	
+
+Career Center
+
+
+Office of International Education (OIE)	student-services	Savant Building, Suite 211	Mon–Fri 08:30–16:30 front desk (08:00–17:00 office); Sat–Sun closed	medium	
+
+OIE
+
+
+Office of Disability Services (ODS)	student-services	Smithgall Student Services Building, Suite 123	Mon–Fri 08:00–17:00 (Testing Center exams 08:30–16:45; finals 08:00–20:45)	medium	
+
+ODS
+
+
+Library Archives and Special Collections	library-desk	Main Library (Crosland Tower and Price Gilbert), 1st Floor	Mon–Fri 11:00–16:00; Sat–Sun closed	medium	
+
+GT Library
+
+
+Georgia Tech Police Department (GTPD)	safety	Unspecified (879 Hemphill Ave NW)	Walk-in lobby hours unstated; 24/7 emergency police dispatch	medium	
+
+GT Mental Health Appendix
+
+
+Parking and Transportation Services (PTS) Customer Service Center	transit-office	E81: Tech Square Parking Deck, Ground Level	Walk-in counter hours unstated; 24/7 Operations Dispatch Center	medium	
+
+PTS
+
+  
+Printing
+
+All library and instructional student printing uses OIT/CoC/ECE Pharos stations or Central-PS (myprintcenter.gatech.edu / print.gatech.edu) paid via BuzzCard. Library printing allocations do not transfer to CoC or ECE Pharos queues.   
+
+Name	Subtype	Building / Floor	Hours Summary	Confidence	Source
+Crosland Tower Grove Level Printers and Copier/Scanner	pharos-printer	Dorothy Crosland Tower, Grove Level (near exterior doors)	24/7 when school is in session (break exceptions)	medium	
+
+GT Library
+
+
+Crosland Tower 2nd Floor B&W Printer	pharos-printer	Dorothy Crosland Tower, 2nd Floor (near yellow staircase)	24/7 when school is in session (break exceptions)	medium	
+
+GT Library
+
+
+Crosland Tower 6th Floor Color Printer	pharos-printer	Dorothy Crosland Tower, 6th Floor (inside Graduate Student Community)	24/7 when school is in session (grad BuzzCard required)	medium	
+
+GT Library
+
+
+Library Print Studio	poster-printer	Price Gilbert Memorial Library, 3rd Floor	Mon–Fri 10:00–22:00; Sat 12:00–18:00; Sun 10:00–22:00 (Fall & Spring staffed)	medium	
+
+GT Library
+
+
+Price Gilbert 3rd Floor Purple Zone Color Printer	pharos-printer	Price Gilbert Memorial Library, 3rd Floor (Purple Zone)	24/7 when school is in session (break exceptions)	medium	
+
+GT Library
+
+
+Clough Commons 2nd Floor Color Printer	pharos-printer	Clough Undergraduate Learning Commons, 2nd Floor (near Room 215)	24/7 when school is in session (break exceptions)	medium	
+
+GT Library
+
+
+Clough Commons 3rd Floor B&W Printer	pharos-printer	Clough Undergraduate Learning Commons, 3rd Floor (near Room 385, Pink Computing Zone)	24/7 when school is in session (break exceptions)	medium	
+
+GT Library
+
+
+Clough Commons 4th Floor B&W Printer	pharos-printer	Clough Undergraduate Learning Commons, 4th Floor (near stairs)	24/7 when school is in session (break exceptions)	medium	
+
+GT Library
+
+
+College of Computing Building 1st Floor Pharos Station	pharos-printer	College of Computing Building, 1st Floor (outside CCB 148)	Unstated	medium	
+
+CoC TSO
+
+
+College of Computing Building Ground Floor Pharos Station	pharos-printer	College of Computing Building, Ground Floor (near CCB 16)	Unstated	medium	
+
+CoC TSO
+
+
+Klaus ECE Public Lab Pharos Printers	pharos-printer	Christopher W. Klaus Advanced Computing Building, Rooms 1446, 1448, and 2440	24/7 via BuzzCard (UA staffed 10:00–22:00 normal; 09:00–17:00 finals)	medium	
+
+ECE Labs
+
+
+Van Leer C257 ECE Public Lab Pharos Printer	pharos-printer	Van Leer Building, Room C257	24/7 via BuzzCard (UA staffed 10:00–22:00 normal; 09:00–17:00 finals)	medium	
+
+ECE Labs
+
+
+Architecture West Plotter Printers	poster-printer	Architecture West, 3rd Floor, Room 359A	Mon & Wed 08:00–18:00; Fri 08:00–16:00; Sun 13:00–18:00 (Tue/Thu/Sat unlisted)	medium	
+
+School of Industrial Design
+
+  
+Makerspace
+
+Campus makerspaces are open across majors, with training requirements ranging from optional walk-in mentor assistance (The Hive, Yang AMS) to required orientation or machine sign-offs (BME Design Shop, Flowers Invention Studio). Paper & Clay is included as an open-access student craft and ceramics studio.   
+
+Name	Subtype	Building / Floor	Hours Summary	Confidence	Source
+Flowers Invention Studio	makerspace	Manufacturing Related Disciplines Complex (MRDC), 2nd Floor	Mon–Fri 10:00–16:00 open hours (After-Hours Training Mon–Thu 17:00–18:00; closed Thanksgiving week & after Dec 4)	high	
+
+Invention Studio
+
+
+The Hive Makerspace	makerspace	Van Leer Building, 2nd Floor (north side of Tech Green)	Mon–Fri 10:00–18:00 (Fall 2026: Sept 8–Dec 2); Sat–Sun closed	high	
+
+The Hive
+
+
+Yang Aero Maker Space (AMS)	makerspace	Paul Weber Space Science and Technology Building (SST1)	Mon–Fri 10:00–18:00 (Fall & Spring); Sat–Sun closed	medium	
+
+Aero Maker Space
+
+
+The MILL (Materials Innovation and Learning Laboratory)	makerspace	J. Erskine Love Manufacturing Building, 1st and 3rd Floors (Main Lab Love 176)	Mon–Fri 09:00–17:00; Sat–Sun closed	medium	
+
+The MILL
+
+
+BME Design Shop	makerspace	Whitaker Building, Room 0250	Shop Mon–Fri 08:30–17:30 (Design Vault Tue–Thu 08:30–17:30); Sat–Sun closed	medium	
+
+BME Makerspaces
+
+
+Paper & Clay	craft-studio	Pavilion West (The Pavilions)	Mon–Sat 11:00–22:00; Sun closed	high	
+
+Student Center
+
+  
+Exercise
+
+CRC Fall 2026 building hours list Sunday opening at 09:00, whereas the CRC main homepage lists 10:00; the explicitly dated Fall 2026 schedule is used below, with aquatics and climbing sub-facilities separated due to distinct operating windows.   
+
+Name	Subtype	Building / Floor	Hours Summary	Confidence	Source
+Campus Recreation Center (CRC)	recreation-center	Campus Recreation Center, Floors 1–5	Mon–Thu 05:30–24:00; Fri 05:30–21:00; Sat 09:00–19:00; Sun 09:00–22:00 (Nov 25 05:30–14:00; closed Nov 26–28)	high	
+
+CRC
+
+
+Coach Herb McAuley Aquatic Center Competition Pool	pool	Campus Recreation Center	Mon/Wed/Fri 09:00–14:00; Tue/Thu 06:00–09:00 & 12:00–15:00; Sat–Sun closed	high	
+
+CRC
+
+
+Vernon D. and Helen D. Crawford Leisure Pool	pool	Campus Recreation Center	Lap Lanes Mon/Wed/Fri 06:00–09:00 & 14:00–20:00, Tue/Thu 06:00–12:00 & 14:00–20:00, Sat 13:00–18:00, Sun 12:00–18:00	high	
+
+CRC
+
+
+CRC Indoor Climbing Wall	climbing-wall	Campus Recreation Center	Staffed Mon–Thu 17:00–21:00, Fri 14:00–16:45 (unstaffed bouldering/Kilter reservations outside group closures)	high	
+
+CRC
+
+
+Ken Byers Tennis Complex	tennis-courts	Ken Byers Tennis Complex	Fall 2026 student hours Mon–Fri 17:00–22:00; Sat 10:00–14:00; Sun closed	high	
+
+CRC
+
+  
+Health
+
+Stamps Health Services' main hours page is undated (medium confidence, though Fall 2026 flu clinic dates appear on its influenza page), and its Pharmacy closes 12:30–13:30 daily with a 16:30 business close on Contact Us despite a 14:00–17:00 busy window noted in Pharmacy FAQs. CMHCR's Fall 2026 hours are corroborated by Fall 2026 syllabi, whereas the embedded College of Sciences clinician hours are from Fall 2025–Spring 2026.   
+
+Name	Subtype	Building / Floor	Hours Summary	Confidence	Source
+Stamps Health Services (SHS)	clinic	Joseph Brown Whitehead Building	Mon–Wed & Fri 08:00–17:00; Thu 09:00–17:00; Sat–Sun closed (Appt Desk closes 16:30)	medium	
+
+Stamps Health Services
+
+
+Stamps Health Services Pharmacy	pharmacy	Joseph Brown Whitehead Building	Mon–Wed & Fri 08:00–12:30, 13:30–16:30; Thu 09:00–12:30, 13:30–16:30; Sat–Sun closed	medium	
+
+Stamps Health Services
+
+
+Pharmabox (Clough Commons)	vending-health	Clough Undergraduate Learning Commons, 3rd Floor (before Price Gilbert entrance)	24/7 when school is in session (break exceptions)	medium	
+
+Stamps Health Services
+
+
+Center for Mental Health Care and Resources (CMHCR)	counseling	Charles A. Smithgall, Jr. Student Services Building, Suite 238	Mon–Fri 08:00–17:00; Sat–Sun closed (24/7 crisis on-call counselor)	high	
+
+CMHCR / Fall 2026 Syllabi
+
+
+CMHCR Embedded Clinician Office - College of Sciences	counseling	Molecular Science and Engineering Building (MoSE), Room 1120B	Mon–Tue 08:00–16:00; Wed–Fri 07:00–15:00 (Fall 2025–Spring 2026; prior term)	medium	
+
+College of Sciences
+
+  
+Transport
+
+Transport covers campus and Tech Square parking decks, the W02 and W22 bike rooms/repair stations (updated October 14, 2026), nearby MARTA rail stations, and Stinger shuttle stop names (route schedules omitted because live route feeds exist). Note that the Stinger stop names derive from Fall 2025 (September 2025) and Spring 2026 (March 2026) PTS route updates rather than Fall 2026 posts, so they carry medium confidence.   
+
+Name	Subtype	Building / Floor	Hours Summary	Confidence	Source
+W02: Student Center Parking Deck	parking-deck	W02 Student Center Parking Deck	Unstated	medium	
+
+PTS
+
+
+W22: Dalney Parking Deck	parking-deck	W22 Dalney Parking Deck (Dalney St)	Unstated	medium	
+
+PTS
+
+
+E81: Tech Square Parking Deck	parking-deck	E81 Tech Square Parking Deck (770 Spring St)	Unstated	medium	
+
+PTS
+
+
+E82: Centergy Parking Deck	parking-deck	E82 Centergy Parking Deck (5th & Williams St)	Unstated	medium	
+
+OIT / Coda Directions
+
+
+Coda Building Parking Garage	parking-deck	Coda Building	Unstated	medium	
+
+OIT / Coda Directions
+
+
+W02 Bike Room and Bike Repair Station	bike-repair	W02 Student Center Parking Deck (pathway behind BuzzCard office)	Unstated (outdoor repair free; bike room secure access)	high	
+
+PTS
+
+
+W22 Dalney Bike Room and Fix-It Station	bike-repair	W22 Dalney Parking Deck (via Dalney St)	Unstated (outdoor repair free; bike room secure access)	high	
+
+PTS
+
+
+MARTA North Avenue Station	marta-station	713 West Peachtree Street	Unstated	medium	
+
+OIT / Coda Directions
+
+
+MARTA Midtown Station	marta-station	Midtown MARTA Station	Unstated	medium	
+
+PTS
+
+
+Weber Building Turnaround / Ferst Drive Shelter	stinger-stop	Adjacent to Weber Building (281 Ferst Dr)	Live route data (Blue westbound uses Ferst Dr shelter)	medium	
+
+PTS
+
+
+Clough Commons Turnaround	stinger-stop	Clough Commons (266 4th St NW)	Live route data	medium	
+
+PTS
+
+
+Midtown MARTA Station (Stinger Stop)	stinger-stop	Midtown MARTA Station	Live route data	medium	
+
+PTS
+
+
+Publix / Spring Street	stinger-stop	Spring Street	Live route data	medium	
+
+PTS
+
+
+Fifth Street (Tech Square)	stinger-stop	Fifth Street / Tech Square	Live route data	medium	
+
+PTS
+
+
+Couch Park	stinger-stop	Couch Park (West Campus)	Live route data	medium	
+
+PTS
+
+
+Ferst and Hemphill Ave	stinger-stop	Ferst Drive and Hemphill Avenue	Live route data	medium	
+
+PTS
+
+
+Center Street Apartments and Hemphill Avenue	stinger-stop	Center Street Apartments / Hemphill Avenue	Live route data	medium	
+
+PTS
+
+
+Georgia Tech Police Department (GTPD) Stop	stinger-stop	879 Hemphill Ave NW	Live route data	medium	
+
+PTS
+
+
+Paper Tricentennial	stinger-stop	Paper Tricentennial	Live route data	medium	
+
+PTS
+
+
+Cherry Emerson	stinger-stop	Cherry Emerson	Live route data	medium	
+
+PTS
+
+
+NARA / Science Square	stinger-stop	NARA / Science Square	Live route data	medium	
+
+PTS
+
+  
+Extra
+
+This layer captures Library and Student Center study/reflection spaces, the 15 EOC Title IX lactation locations (room numbers are omitted on the public EOC page), Student Center ATMs, and CRC lockers.   
+
+Name	Subtype	Building / Floor	Hours Summary	Confidence	Source
+Crosland Tower 6th and 7th Floor Quiet Reading Rooms	quiet-study	Dorothy Crosland Tower, 6th and 7th Floors	24/7 when school is in session (break exceptions)	medium	
+
+GT Library
+
+
+Graduate Student Community (Crosland 6th Floor)	quiet-study	Dorothy Crosland Tower, 6th Floor	24/7 when Library is open (grad BuzzCard required)	medium	
+
+GT Library
+
+
+Crosland Tower Grove Level Study Space	study-space	Dorothy Crosland Tower, Grove Level	24/7 when Library is open (Crosland Terrace 07:00–21:00)	medium	
+
+GT Library
+
+
+Clough Commons Reservable Group Study Rooms	group-study-room	Clough Commons, Floors 2–5 (15 rooms)	24/7 when school is in session (LibCal booking)	medium	
+
+GT Library
+
+
+Crosland Tower Reservable Group Study Rooms	group-study-room	Dorothy Crosland Tower, Floors 2, 4, 6 (9 rooms)	24/7 when school is in session (LibCal booking)	medium	
+
+GT Library
+
+
+Price Gilbert Reservable Group Study Rooms	group-study-room	Price Gilbert Memorial Library, Grove, 2nd & 3rd Floors (6 rooms)	24/7 when school is in session (LibCal booking)	medium	
+
+GT Library
+
+
+Clough Commons Rooftop	study-space	Clough Undergraduate Learning Commons, Rooftop	Mon–Fri 09:00–17:00; Sat–Sun closed	medium	
+
+GT Library
+
+
+Graduate Student Lounge	study-space	John Lewis Student Center	24/7 via grad BuzzCard (staffed daily 10:00–21:00)	high	
+
+Student Center
+
+
+Beth Cabrera Reflection Space	chapel/reflection-room	Unspecified (Student Center Community Hubs)	Staffed daily 10:00–21:00 (BuzzCard access when unstaffed)	medium	
+
+Student Center
+
+
+Georgia Tech Library Wellness Room	chapel/reflection-room	Main Library (Crosland Tower and Price Gilbert)	24/7 when Library is open (lactation/prayer/respite; LibCal)	medium	
+
+GT Library
+
+
+Crosland Tower Lactation Space	lactation-room	Dorothy M. Crosland Tower	24/7 when Library is open (BuzzCard + 24/7 staff to open)	medium	
+
+EOC / GT Library
+
+
+Evans Administration Building (Tech Tower) Lactation Space	lactation-room	Evans Administration Building (Tech Tower)	Unstated (BuzzCard required)	medium	
+
+EOC
+
+
+Exhibition Hall Lactation Space	lactation-room	Exhibition Hall	Building access daily 07:00–23:00 (no after-hours access)	medium	
+
+EOC / Student Center
+
+
+Global Learning Center Lactation Space	lactation-room	Global Learning Center	Unstated	medium	
+
+EOC
+
+
+Stephen C. Hall Building Lactation Space	lactation-room	Stephen C. Hall Building	Unstated	medium	
+
+EOC
+
+
+John Lewis Student Center Lactation Space	lactation-room	John Lewis Student Center	Building access daily 07:00–23:00 (BuzzCard after hours)	medium	
+
+EOC / Student Center
+
+
+Kendeda Building Lactation Space	lactation-room	Kendeda Building for Innovative Sustainable Design	Unstated	medium	
+
+EOC
+
+
+Klaus Advanced Computing Building Lactation Space	lactation-room	Christopher W. Klaus Advanced Computing Building	Unstated (BuzzCard required)	medium	
+
+EOC
+
+
+O'Keefe Main Building Lactation Space	lactation-room	O'Keefe Building	Unstated	medium	
+
+EOC / Facilities
+
+
+Scheller College of Business Lactation Space	lactation-room	Scheller College of Business	Unstated	medium	
+
+EOC
+
+
+Technology Square Research Building Lactation Space	lactation-room	Technology Square Research Building	Unstated	medium	
+
+EOC
+
+
+Instructional Building Lactation Space	lactation-room	Instructional Building	Unstated	medium	
+
+EOC
+
+
+Krone Engineered Biosystems Building (EBB) Lactation Space	lactation-room	Krone Engineered Biosystems Building (EBB)	Unstated	medium	
+
+EOC
+
+
+755 Marietta Street Lactation Space	lactation-room	755 Marietta Street	Unstated (BuzzCard required)	medium	
+
+EOC
+
+
+793 Marietta Street Lactation Space	lactation-room	793 Marietta Street	Unstated (BuzzCard required)	medium	
+
+EOC
+
+
+John Lewis Student Center ATMs	atm	John Lewis Student Center, 1st Floor (near Room 1216)	Building access daily 07:00–23:00 (BuzzCard after hours)	medium	
+
+Student Center / OIE
+
+
+CRC Day and Rental Lockers	lockers	Campus Recreation Center, 1st Fl Lobby, Locker Rooms & 4th Fl Gym	Mon–Thu 05:30–24:00; Fri 05:30–21:00; Sat 09:00–19:00; Sun 09:00–22:00	high	
+
+CRC
+
+  
+Places Found Without Sufficient Sourcing
+
+The following places appeared in retrieved material but lacked current Fall 2026 hours, mappable physical buildings/addresses, public-access details, or primary-source confirmation, or fell outside the geographic bounding box:
+
+North Ave Dining Hall: Confirmed open as a swipe and Dining Dollars all-you-care-to-eat dining hall with GoFood takeout, but no Fall 2026 hours or street address were captured (only 2018 move-in dates appeared).   
+
+Unmatched Tech Dining Venues: Jimmy John's (JLSC), Sideways Cafe (by Blue Donkey) (JLSC / Exhibition Hall), Kaldi's Coffee @ Tech Square (800 Spring St NW), Kaldi's Coffee (Clough 1st Floor / Exhibition Hall), Burdell's (JLSC; only Jan 26, 2026 modified-ops closure found), Conference Dining Room, Moe's Midtown At Georgia Tech, Ray's Pizza, Sankranti, Tin Drum Asian Kitchen, Taim Mediterranean Kitchen, Carnegie Kitchen (Carnegie Building), and Highland Bakery (only 2018 hours found) appeared without paired Fall 2026 schedules; Tech Dining's summary listings also contained several unlabelled Fall 2026 hour blocks whose venue headers were truncated. Wreck Stop did not appear in any retrieved source.   
+
+Barnes & Noble @ Georgia Tech & Starbucks (48 5th St NW): Confirmed address and integrated Starbucks, but only January 26, 2026 modified-operations hours (12:00–17:00) and 2018 regular hours were found.   
+
+Off-Campus Coffee & Diner Spots: Waffle House (Tech Square) (unlabelled 66 5th St NW entry and a Reddit discussion asking if it remains 24/7) lacked an official business source, as did an unlabelled Midtown Alliance concierge entry at 848 Spring St NW. Off-campus cafes from the SGA StudyHive guide—Apotheos Coffee Midtown (740 W Peachtree St NW), Land of a Thousand Hills Coffee (715 Peachtree St NE), Prevail Union Atlanta (867 W Peachtree St NW, with an inconsistent Star Metals Building note), Urban Grind (962 Marietta St NW), and four unlabelled street-address venues (859 Spring St NW, 95 8th St NW, 888 W Peachtree St NW, 93 5th St NW)—lacked official operating hours.   
+
+Office of the Registrar: Official hours (Mon–Fri 09:00–16:00 ET) are published, but the campus location line was truncated in the retrieved page, leaving the building and street address unverified.   
+
+Wreck Techs & CoC TSO Satellite Desks (KACB 3123, TSRB 347): Wreck Techs appeared only in a 2023 welcome post without office locations or hours. The KACB and TSRB TSO desks appeared on an undated development subdomain (support-dev.cc.gatech.edu) and are absent from current Fall 2026 TSO help-desk tables.   
+
+Housing Area Offices & Main Housing Office: North Avenue, ECHO, WCHO, and GLC/Tenth and Home Area Offices had only January 26, 2026 modified-operations hours and post-20:00 RA-on-Duty instructions; the Main Housing Office (Student Services Building, 1st Floor) came from a 2023–24 handbook without hours.   
+
+Student Life, Academic & Wellness Support Offices: Dean of Students (only modified-ops opening noted), Office of Student Integrity, New Student & Transfer Programs, Belonging & Student Support, Parent & Family Programs, STAR, Veterans Resource Center, Women's Resource Center, LGBTQIA Resource Center, OMED, VOICE, Wellness Empowerment Center (inside Stamps Health Services building), Library INFODesk (Price Gilbert Grove Level), O'Keefe Lock Shop / Facilities Customer Service (151 6th St NW), and Clough Commons units (Academic Success & Advising / OUE, Experiential & Engaged Learning, Center for Teaching & Learning, Naugle Writing and Communication Center) lacked complete room numbers and/or regular Fall 2026 hours.   
+
+Additional Makerspaces, Recreation, Event & Study Spaces: AI Makerspace and College of Design Shop lacked locations, hours, and training rules; ME Instructional Labs / Intelligent Systems Makerspace (MRDC 3317, 3321, 3330, 3334) are course-specific without open-access hours; Starter Bikes lacked location and hours; Grass Field in Front of CRC and Leadership Challenge Course lacked drop-in hours; Tech Rec (JLSC 1st Floor; Mon–Thu 10:00–22:00, Fri 12:00–24:00, Sat 14:00–23:00, closed Sun) is bowling and billiards rather than exercise or study; Exhibition Hall (daily 07:00–23:00, no after-hours access) and Historic Academy of Medicine are event-reservation centers (Exhibition Hall's lactation room is included in extra); Southern Company Multicultural Lounge lacked hours; and Kendeda Building nooks, Boggs basement, and Barnes & Noble 2nd floor lacked hours and room numbers.   
+
+Pre-Renovation Venues & Missing Infrastructure Layers: Pre-renovation 2014/2018 Student Center venues (Wing Zone, Subway, Freshens, Edge, old 2nd-floor Student Center printing) were excluded as historical. No specific locations were found for Relay bike share stations, Roe Stamps Field / SAC Fields, all-gender restrooms, water-refill stations, or accessible entrances.   
+
+Out-of-Bounds Locations Excluded: Library Service Center (1260 Briarcliff Rd, by appointment Mon–Fri 08:30–16:30), Emory Stinger stops (HSRB – Andrews, Woodruff Circle), and Midtown Promenade (985 Monroe Dr NE) fall east of -84.375 longitude.   
+
+GeoJSON FeatureCollection
+JSON
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "brittain-dining-hall",
+        "name": "Brittain Dining Hall",
+        "aliases": ["Brittain"],
+        "category": "food",
+        "subtype": "dining-hall",
+        "status": "draft",
+        "building": "Brittain Dining Hall",
+        "floor_or_room": null,
+        "address": "649 Techwood Dr NW, Atlanta, GA 30330",
+        "description": "All-you-care-to-eat residential dining hall with seven rotating food stations.",
+        "hours": {
+          "mon": [["11:00", "23:00"]],
+          "tue": [["11:00", "23:00"]],
+          "wed": [["11:00", "23:00"]],
+          "thu": [["11:00", "23:00"]],
+          "fri": [["11:00", "23:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Special Thanksgiving week hours (Nov 22-28, 2026): Sun-Tue 11:00-23:00, Wed-Sat closed.",
+        "dining_dollars": true,
+        "meal_swipes": true,
+        "menu_url": null,
+        "buzzcard": {
+          "required": false,
+          "note": "Required for meal plan swipes or Dining Dollars; public door rates also accepted."
+        },
+        "url": "https://dining.gatech.edu/location/brittain-dining-hall-0",
+        "source_url": "https://dining.gatech.edu/location/brittain-dining-hall-0",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "west-village-dining-hall",
+        "name": "West Village Dining Hall",
+        "aliases": ["West Village", "West Village Dining Commons"],
+        "category": "food",
+        "subtype": "dining-hall",
+        "status": "draft",
+        "building": "West Village Dining Commons",
+        "floor_or_room": null,
+        "address": null,
+        "description": "All-you-care-to-eat residential dining hall on West Campus.",
+        "hours": {
+          "mon": [["07:00", "23:00"]],
+          "tue": [["07:00", "23:00"]],
+          "wed": [["07:00", "23:00"]],
+          "thu": [["07:00", "23:00"]],
+          "fri": [["07:00", "23:00"]],
+          "sat": [["09:00", "21:00"]],
+          "sun": [["09:00", "21:00"]]
+        },
+        "hours_note": "Special Thanksgiving week hours (Nov 22-28, 2026): Sun 09:00-21:00, Mon-Tue 07:00-23:00, Wed 09:00-15:00, Thu-Sat closed.",
+        "dining_dollars": true,
+        "meal_swipes": true,
+        "menu_url": null,
+        "buzzcard": {
+          "required": false,
+          "note": "Required for meal plan swipes or Dining Dollars; public door rates also accepted."
+        },
+        "url": "https://dining.gatech.edu/location/west-village-dining-hall",
+        "source_url": "https://dining.gatech.edu/location/west-village-dining-hall",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "big-chicken-jlsc",
+        "name": "Big Chicken",
+        "aliases": [],
+        "category": "food",
+        "subtype": "restaurant",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": null,
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "Tech Dining retail restaurant serving chicken sandwiches, tenders, mac and cheese, and shakes.",
+        "hours": {
+          "mon": [["10:30", "21:00"]],
+          "tue": [["10:30", "21:00"]],
+          "wed": [["10:30", "21:00"]],
+          "thu": [["10:30", "21:00"]],
+          "fri": [["10:30", "21:00"]],
+          "sat": [["12:00", "16:00"]],
+          "sun": [["10:30", "17:00"]]
+        },
+        "hours_note": "Special Thanksgiving week hours (Nov 22-28, 2026): Sun 10:30-17:00, Mon-Tue 10:30-21:00, Wed 10:30-17:00, Thu-Sat closed.",
+        "dining_dollars": true,
+        "meal_swipes": false,
+        "menu_url": null,
+        "buzzcard": {
+          "required": false,
+          "note": "Accepts BuzzCard Funds, Dining Dollars, credit/debit, Grubhub, and $9 Flex Swipes; standard dining-hall meal swipes do not apply."
+        },
+        "url": "https://dining.gatech.edu/dining-locations",
+        "source_url": "https://dining.gatech.edu/dining-locations",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "blenz-bowls-jlsc",
+        "name": "Blenz Bowls",
+        "aliases": [],
+        "category": "food",
+        "subtype": "restaurant",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": null,
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "Tech Dining retail smoothie and acai bowl counter in the John Lewis Student Center.",
+        "hours": {
+          "mon": [["09:00", "18:00"]],
+          "tue": [["09:00", "18:00"]],
+          "wed": [["09:00", "18:00"]],
+          "thu": [["09:00", "18:00"]],
+          "fri": [["09:00", "17:00"]],
+          "sat": [],
+          "sun": [["12:00", "18:00"]]
+        },
+        "hours_note": "Listed on Fall 2026 Tech Dining directory without separate Thanksgiving week exceptions.",
+        "dining_dollars": true,
+        "meal_swipes": false,
+        "menu_url": null,
+        "buzzcard": {
+          "required": false,
+          "note": "Accepts BuzzCard Funds, Dining Dollars, credit/debit, Grubhub, and $9 Flex Swipes."
+        },
+        "url": "https://dining.gatech.edu/dining-locations",
+        "source_url": "https://dining.gatech.edu/dining-locations",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "boho-taco-tech-square",
+        "name": "Boho Taco",
+        "aliases": [],
+        "category": "food",
+        "subtype": "restaurant",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": "22 5th Street NW, Atlanta, GA 30308",
+        "description": "Georgia Tech Partner fast-casual taco restaurant in Tech Square.",
+        "hours": {
+          "mon": [["11:00", "22:00"]],
+          "tue": [["11:00", "22:00"]],
+          "wed": [["11:00", "22:00"]],
+          "thu": [["11:00", "22:00"]],
+          "fri": [["11:00", "22:00"]],
+          "sat": [["11:00", "22:00"]],
+          "sun": [["11:00", "22:00"]]
+        },
+        "hours_note": "No break exceptions printed on the directory block.",
+        "dining_dollars": true,
+        "meal_swipes": false,
+        "menu_url": null,
+        "buzzcard": {
+          "required": false,
+          "note": "Accepts Dining Dollars, BuzzCard Funds, and credit/debit; Dining Dollars and BuzzCard cannot purchase alcohol."
+        },
+        "url": "https://dining.gatech.edu/dining-locations",
+        "source_url": "https://dining.gatech.edu/dining-locations",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "dunkin-jlsc",
+        "name": "Dunkin'",
+        "aliases": ["Dunkin' Donuts"],
+        "category": "food",
+        "subtype": "coffee",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": null,
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "Campus coffee, donut, and breakfast sandwich counter in the John Lewis Student Center.",
+        "hours": {
+          "mon": [["07:00", "20:00"]],
+          "tue": [["07:00", "20:00"]],
+          "wed": [["07:00", "20:00"]],
+          "thu": [["07:00", "20:00"]],
+          "fri": [["07:00", "19:00"]],
+          "sat": [["08:00", "17:00"]],
+          "sun": [["09:00", "16:00"]]
+        },
+        "hours_note": "Special Thanksgiving week hours (Nov 22-28, 2026): Sun 09:00-16:00, Mon-Tue 07:00-20:00, Wed 07:00-17:00, Thu-Sat closed.",
+        "dining_dollars": true,
+        "meal_swipes": false,
+        "menu_url": null,
+        "buzzcard": {
+          "required": false,
+          "note": "Accepts Dining Dollars and $9 Flex Swipes per Tech Dining policy; standard dining-hall meal swipes do not apply."
+        },
+        "url": "https://dining.gatech.edu/location/dunkin",
+        "source_url": "https://dining.gatech.edu/location/dunkin",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "panda-express",
+        "name": "Panda Express",
+        "aliases": [],
+        "category": "food",
+        "subtype": "restaurant",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "Tech Dining retail Chinese fast-casual restaurant (building and street address omitted on current Fall 2026 location page).",
+        "hours": {
+          "mon": [["10:00", "21:00"]],
+          "tue": [["10:00", "21:00"]],
+          "wed": [["10:00", "21:00"]],
+          "thu": [["10:00", "21:00"]],
+          "fri": [["10:00", "19:00"]],
+          "sat": [["11:00", "16:00"]],
+          "sun": [["11:00", "17:00"]]
+        },
+        "hours_note": "Special Thanksgiving week hours (Nov 22-28, 2026): Sun 11:00-17:00, Mon-Tue 10:00-21:00, Wed 10:30-16:00, Thu-Sat closed.",
+        "dining_dollars": true,
+        "meal_swipes": false,
+        "menu_url": null,
+        "buzzcard": {
+          "required": false,
+          "note": "Accepts Dining Dollars and $9 Flex Swipes per Tech Dining policy; standard dining-hall meal swipes do not apply."
+        },
+        "url": "https://dining.gatech.edu/location/panda-express",
+        "source_url": "https://dining.gatech.edu/location/panda-express",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "kaldis-coffee-campus",
+        "name": "Kaldi's Coffee",
+        "aliases": ["Kaldi's"],
+        "category": "food",
+        "subtype": "coffee",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "Campus coffee bar serving espresso, drip coffee, tea, and pastries (Tech Dining home lists John Lewis Student Center while Library lists a Clough 1st floor location; hours page omits building).",
+        "hours": {
+          "mon": [["07:00", "19:00"]],
+          "tue": [["07:00", "19:00"]],
+          "wed": [["07:00", "19:00"]],
+          "thu": [["07:00", "19:00"]],
+          "fri": [["07:00", "19:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Official location page provides weekday hours without explicit building designation or break dates.",
+        "dining_dollars": true,
+        "meal_swipes": false,
+        "menu_url": "https://dining.gatech.edu/menu/kaldis-menu-page",
+        "buzzcard": {
+          "required": false,
+          "note": "Accepts Dining Dollars per Tech Dining policy."
+        },
+        "url": "https://dining.gatech.edu/location/kaldis-coffee",
+        "source_url": "https://dining.gatech.edu/location/kaldis-coffee",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tech-square-tavern",
+        "name": "Tech Square Tavern",
+        "aliases": [],
+        "category": "food",
+        "subtype": "restaurant",
+        "status": "draft",
+        "building": "Georgia Tech Hotel and Conference Center",
+        "floor_or_room": null,
+        "address": "800 Spring St NW, Atlanta, GA 30308",
+        "description": "Evening restaurant inside the Georgia Tech Hotel and Conference Center listed as an active Tech Dining retail location.",
+        "hours": {
+          "mon": [["16:00", "23:00"]],
+          "tue": [["16:00", "23:00"]],
+          "wed": [["16:00", "23:00"]],
+          "thu": [["16:00", "23:00"]],
+          "fri": [["16:00", "23:00"]],
+          "sat": [["16:00", "23:00"]],
+          "sun": [["16:00", "23:00"]]
+        },
+        "hours_note": "Evening dining hours confirmed on Tech Dining and Georgia Tech Hotel sites; no break dates printed.",
+        "dining_dollars": true,
+        "meal_swipes": false,
+        "menu_url": "https://www.gatechhotel.com/gallery/tech-square-tavern-menu",
+        "buzzcard": {
+          "required": false,
+          "note": "Listed as an open Tech Dining campus retail location (accepts Dining Dollars per Tech Dining policy)."
+        },
+        "url": "https://dining.gatech.edu/location/tech-square-tavern",
+        "source_url": "https://dining.gatech.edu/location/tech-square-tavern",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "collective-food-hall-coda",
+        "name": "The Collective Food Hall",
+        "aliases": ["Coda Food Hall"],
+        "category": "food",
+        "subtype": "cafeteria",
+        "status": "draft",
+        "building": "Coda Building",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Multi-vendor food hall inside the Coda Building in Tech Square.",
+        "hours": {
+          "mon": [["11:00", "21:30"]],
+          "tue": [["11:00", "21:30"]],
+          "wed": [["11:00", "21:30"]],
+          "thu": [["11:00", "21:30"]],
+          "fri": [["11:00", "21:30"]],
+          "sat": [["11:00", "21:30"]],
+          "sun": [["11:00", "21:30"]]
+        },
+        "hours_note": "Undated official business site schedule; individual stall hours may vary.",
+        "dining_dollars": null,
+        "meal_swipes": false,
+        "menu_url": null,
+        "buzzcard": {
+          "required": false,
+          "note": "Commercial Tech Square food hall open to the public; Tech Dining payment acceptance not stated."
+        },
+        "url": "https://codatechsquare.com/the-collective-food-hall/",
+        "source_url": "https://codatechsquare.com/the-collective-food-hall/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "coc-tso-help-desk",
+        "name": "College of Computing TSO Help Desk",
+        "aliases": ["TSO", "TSO Help Desk", "CoC IT Support"],
+        "category": "support",
+        "subtype": "it-help-desk",
+        "status": "draft",
+        "building": "College of Computing Building",
+        "floor_or_room": "Room 225D",
+        "address": "801 Atlantic Dr NW, Atlanta, GA 30332",
+        "description": "Walk-up IT help desk for the College of Computing community.",
+        "hours": {
+          "mon": [["08:00", "16:00"]],
+          "tue": [["08:00", "16:00"]],
+          "wed": [["08:00", "16:00"]],
+          "thu": [["08:00", "16:00"]],
+          "fri": [["08:00", "16:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Fall 2026 site activity confirmed via Sept 3, 2026 remote-support notice and Nov 10, 2026 news; after-hours emergency support is limited to CoC faculty and staff critical services.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open walk-in desk during business hours; contact 404-894-7065 or helpdesk@cc.gatech.edu."
+        },
+        "url": "https://support.cc.gatech.edu/services/helpdesk",
+        "source_url": "https://support.cc.gatech.edu/",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "oit-asc-walk-up-support",
+        "name": "OIT Administrative Services Center (ASC) Walk-Up Support",
+        "aliases": ["ASC", "OIT Technology Support Center", "Administrative Services Center"],
+        "category": "support",
+        "subtype": "it-help-desk",
+        "status": "draft",
+        "building": "Clough Undergraduate Learning Commons",
+        "floor_or_room": "Room 215",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "description": "Central OIT walk-up technology, account, OS, Wi-Fi, software, and administrative services support desk.",
+        "hours": {
+          "mon": [["08:00", "17:00"]],
+          "tue": [["08:00", "17:00"]],
+          "wed": [["08:00", "17:00"]],
+          "thu": [["08:00", "17:00"]],
+          "fri": [["08:00", "17:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "24/7 phone/ticket support via 404-385-1111 or support@oit.gatech.edu; walk-up desk in Clough 215 operates Mon-Fri 08:00-17:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "Walk-up support during business hours; GT login required for online ticket/chat portal."
+        },
+        "url": "https://techsupport.gatech.edu/contact-us",
+        "source_url": "https://support.cc.gatech.edu/services/helpdesk",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "jlsc-information-desk",
+        "name": "John Lewis Student Center Information Desk",
+        "aliases": ["Student Center Info Desk"],
+        "category": "support",
+        "subtype": "info-desk",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": null,
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "Central visitor and student information desk inside the John Lewis Student Center.",
+        "hours": {
+          "mon": [["08:00", "19:00"]],
+          "tue": [["08:00", "19:00"]],
+          "wed": [["08:00", "19:00"]],
+          "thu": [["08:00", "19:00"]],
+          "fri": [["08:00", "17:00"]],
+          "sat": [["09:00", "15:00"]],
+          "sun": [["09:00", "15:00"]]
+        },
+        "hours_note": "Fall Break schedule adjusts Mon-Tue hours to 08:00-17:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "Publicly accessible during Student Center building hours (07:00-23:00)."
+        },
+        "url": "https://studentcenter.gatech.edu/hours",
+        "source_url": "https://www.studentcenter.gatech.edu/",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "georgia-tech-post-office",
+        "name": "Georgia Tech Post Office",
+        "aliases": ["GT Post Office", "Student Center Post Office", "Campus Mail Center"],
+        "category": "support",
+        "subtype": "mail-center",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": null,
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "Campus student and department mail center providing package pickup and outgoing USPS shipping.",
+        "hours": {
+          "mon": [["08:30", "17:00"]],
+          "tue": [["08:30", "18:00"]],
+          "wed": [["08:30", "17:00"]],
+          "thu": [["08:30", "18:00"]],
+          "fri": [["08:30", "17:00"]],
+          "sat": [["09:00", "12:00"]],
+          "sun": []
+        },
+        "hours_note": "Outgoing shipping is via USPS only; break schedules vary.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required for campus mail/package retrieval."
+        },
+        "url": "https://studentcenter.gatech.edu/georgia-tech-post-office",
+        "source_url": "https://studentcenter.gatech.edu/hours",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "scec-event-services-office",
+        "name": "Student and Campus Event Centers Administration and Event Services",
+        "aliases": ["Student Center Event Services Suite"],
+        "category": "support",
+        "subtype": "student-services",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": "3rd Floor",
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "Administration and Event Services front desk handling Student Center, Exhibition Hall, classroom, and outdoor reservations.",
+        "hours": {
+          "mon": [["08:00", "17:00"]],
+          "tue": [["08:00", "17:00"]],
+          "wed": [["08:00", "17:00"]],
+          "thu": [["08:00", "17:00"]],
+          "fri": [["08:00", "17:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Undated official office hours.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open weekday office hours; call 404-894-2828 for event reservations."
+        },
+        "url": "https://studentcenter.gatech.edu/our-professional-team",
+        "source_url": "https://studentcenter.gatech.edu/our-professional-team",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "buzzcard-center",
+        "name": "BuzzCard Center",
+        "aliases": ["BuzzCard Office"],
+        "category": "support",
+        "subtype": "student-services",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": "2nd Floor (next to Information Desk)",
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "Campus ID card issuance, replacement, and BuzzCard Funds support office.",
+        "hours": {
+          "mon": [["08:00", "17:00"]],
+          "tue": [["08:00", "17:00"]],
+          "wed": [["08:00", "17:00"]],
+          "thu": [["08:00", "17:00"]],
+          "fri": [["08:00", "17:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "BuzzCard contact page lists Mon-Fri 08:00-17:00; Student Center overview lists weekday walk-up window as 09:00-13:00 and 14:00-17:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "Walk-in ID card center; phone 404-894-2470."
+        },
+        "url": "https://www.buzzcard.gatech.edu/contact/",
+        "source_url": "https://www.buzzcard.gatech.edu/contact/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "bursars-office",
+        "name": "Office of the Bursar",
+        "aliases": ["Bursar's Office"],
+        "category": "support",
+        "subtype": "administrative",
+        "status": "draft",
+        "building": "Lyman Hall",
+        "floor_or_room": "Suite 111",
+        "address": "225 North Avenue, Atlanta, GA 30332-0255",
+        "description": "Student tuition and fee billing, cashier windows, and 24-hour check/money-order drop box.",
+        "hours": {
+          "mon": [["08:30", "16:00"]],
+          "tue": [["08:30", "16:00"]],
+          "wed": [["08:30", "16:00"]],
+          "thu": [["08:30", "16:00"]],
+          "fri": [["08:30", "16:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Flagged older-term hours: cashier hours from Fall 2019 FASET orientation packet; entry vestibule drop box (no cash) is accessible 24/7.",
+        "buzzcard": {
+          "required": false,
+          "note": "Public administrative office; credit cards not accepted at cashier windows."
+        },
+        "url": "https://bursar.gatech.edu/payment-options",
+        "source_url": "https://bursar.gatech.edu/PDF/Fall_2019_OSFA_and_Bursar_FASET.pdf",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "financial-aid-office",
+        "name": "Office of Scholarships and Financial Aid (OSFA)",
+        "aliases": ["Financial Aid", "OSFA"],
+        "category": "support",
+        "subtype": "administrative",
+        "status": "draft",
+        "building": "Bill Moore Student Success Center",
+        "floor_or_room": "3rd Floor",
+        "address": "219 Uncle Heinie Way, Atlanta, GA 30332",
+        "description": "Student scholarship and financial aid advising office.",
+        "hours": {
+          "mon": [["09:30", "15:30"]],
+          "tue": [["09:30", "15:30"]],
+          "wed": [["09:30", "15:30"]],
+          "thu": [["09:30", "15:30"]],
+          "fri": [["09:30", "15:30"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Flagged older-term hours: advising hours (09:30-15:30) taken from Fall 2019 FASET orientation packet; 3rd floor location verified on current OSFA contact page.",
+        "buzzcard": {
+          "required": false,
+          "note": "Advisors assigned by student last name; phone 404-894-4160."
+        },
+        "url": "https://finaid.gatech.edu/contacting-our-office",
+        "source_url": "https://bursar.gatech.edu/PDF/Fall_2019_OSFA_and_Bursar_FASET.pdf",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "career-center",
+        "name": "Georgia Tech Career Center",
+        "aliases": ["Career Center", "Campus Closet"],
+        "category": "support",
+        "subtype": "student-services",
+        "status": "draft",
+        "building": "Bill Moore Student Success Center",
+        "floor_or_room": null,
+        "address": "219 Uncle Heinie Way, Atlanta, GA 30332-0105",
+        "description": "Campus career advising, employer recruiting interviews, and the Campus Closet professional attire service.",
+        "hours": null,
+        "hours_note": "Main Career Center walk-in hours not published in retrieved sources; Campus Closet operates Mon 09:00-15:30 and Tue 09:00-12:00 (other days truncated); interview building opens 08:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "Serves Georgia Tech students and alumni; phone 404-894-3320."
+        },
+        "url": "https://career.gatech.edu/contact-us/",
+        "source_url": "https://career.gatech.edu/contact-us/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "office-of-international-education",
+        "name": "Office of International Education (OIE)",
+        "aliases": ["OIE", "ISSS"],
+        "category": "support",
+        "subtype": "student-services",
+        "status": "draft",
+        "building": "Savant Building",
+        "floor_or_room": "Suite 211",
+        "address": "631 Cherry Street, Atlanta, GA 30332-0284",
+        "description": "International student and scholar visa advising, study abroad support, and front-desk services.",
+        "hours": {
+          "mon": [["08:30", "16:30"]],
+          "tue": [["08:30", "16:30"]],
+          "wed": [["08:30", "16:30"]],
+          "thu": [["08:30", "16:30"]],
+          "fri": [["08:30", "16:30"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "OIE Front Desk operates 08:30-16:30 Mon-Fri; general office hours are 08:00-17:00 Mon-Fri.",
+        "buzzcard": {
+          "required": false,
+          "note": "Front desk walk-in/phone support at 404-894-7475."
+        },
+        "url": "https://oie.gatech.edu/directions",
+        "source_url": "https://oie.gatech.edu/directions",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "office-of-disability-services",
+        "name": "Office of Disability Services (ODS)",
+        "aliases": ["ODS", "Disability Services", "ODS Testing Center"],
+        "category": "support",
+        "subtype": "student-services",
+        "status": "draft",
+        "building": "Charles A. Smithgall, Jr. Student Services Building",
+        "floor_or_room": "Suite 123",
+        "address": "353 Ferst Drive",
+        "description": "Academic accommodations and proctored exam Testing Center (a division of the Dean of Students).",
+        "hours": {
+          "mon": [["08:00", "17:00"]],
+          "tue": [["08:00", "17:00"]],
+          "wed": [["08:00", "17:00"]],
+          "thu": [["08:00", "17:00"]],
+          "fri": [["08:00", "17:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "ODS Testing Center exam hours run 08:30-16:45 Fall/Spring (08:00-20:45 during finals); closed institutional holidays and reading days.",
+        "buzzcard": {
+          "required": false,
+          "note": "Virtual appointments available; phone 404-894-2563 or 404-894-1664 TTY."
+        },
+        "url": "https://disabilityservices.gatech.edu/about/contact-us",
+        "source_url": "https://disabilityservices.gatech.edu/about/contact-us",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "library-archives-special-collections",
+        "name": "Library Archives and Special Collections",
+        "aliases": ["Georgia Tech Archives"],
+        "category": "support",
+        "subtype": "library-desk",
+        "status": "draft",
+        "building": "Main Library (Crosland Tower and Price Gilbert)",
+        "floor_or_room": "1st Floor",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Georgia Tech Library archives, rare books, and special collections reading room.",
+        "hours": {
+          "mon": [["11:00", "16:00"]],
+          "tue": [["11:00", "16:00"]],
+          "wed": [["11:00", "16:00"]],
+          "thu": [["11:00", "16:00"]],
+          "fri": [["11:00", "16:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Closed weekends.",
+        "buzzcard": {
+          "required": false,
+          "note": "Contact 404-894-4586 for collections inquiries."
+        },
+        "url": "https://library.gatech.edu/about/locations",
+        "source_url": "https://library.gatech.edu/about/locations",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "gtpd-headquarters",
+        "name": "Georgia Tech Police Department (GTPD)",
+        "aliases": ["GTPD", "Campus Police"],
+        "category": "support",
+        "subtype": "safety",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": "879 Hemphill Ave NW, Atlanta, GA 30318",
+        "description": "Campus police headquarters, 24/7 emergency dispatch, lost-and-found high-value storage, and safety services.",
+        "hours": null,
+        "hours_note": "24/7 emergency dispatch and VOICE/counselor transfer via 404-894-2500; walk-in administrative lobby hours not stated in source.",
+        "buzzcard": {
+          "required": false,
+          "note": "Emergency campus police dispatch available 24/7 at 404-894-2500."
+        },
+        "url": null,
+        "source_url": "https://president.gatech.edu/sites/default/files/documents/gt-student-mental-health-appendix-a.pdf",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pts-customer-service-center",
+        "name": "Parking and Transportation Services (PTS) Customer Service Center",
+        "aliases": ["PTS", "PTS Customer Service Center"],
+        "category": "support",
+        "subtype": "transit-office",
+        "status": "draft",
+        "building": "E81: Tech Square Parking Deck",
+        "floor_or_room": "Ground Level",
+        "address": "770 Spring Street, Atlanta, GA 30332",
+        "description": "Customer service center for campus parking permits, shuttle inquiries, and $12 bike helmets.",
+        "hours": null,
+        "hours_note": "Walk-in counter hours not published on retrieved pages; 24/7 Operations Dispatch Center operates at 404-385-7275.",
+        "buzzcard": {
+          "required": false,
+          "note": "Walk-in transit and parking customer center; email support@pts.gatech.edu."
+        },
+        "url": "https://www.pts.gatech.edu/parking/parking-zones/",
+        "source_url": "https://www.pts.gatech.edu/author/bhoang34/page/3/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crosland-grove-printers",
+        "name": "Crosland Tower Grove Level Printers and Copier/Scanner",
+        "aliases": [],
+        "category": "printing",
+        "subtype": "pharos-printer",
+        "status": "draft",
+        "building": "Dorothy Crosland Tower",
+        "floor_or_room": "Grove Level (near exterior doors)",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Self-service black-and-white printer and color printer with scanner/copier on Crosland Grove level.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Open 24/7 when school is in session; reduced or closed during semester breaks and holidays.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required to release print jobs and pay for copies ($0.04/copy B&W, $0.19/copy color)."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crosland-2f-bw-printer",
+        "name": "Crosland Tower 2nd Floor B&W Printer",
+        "aliases": [],
+        "category": "printing",
+        "subtype": "pharos-printer",
+        "status": "draft",
+        "building": "Dorothy Crosland Tower",
+        "floor_or_room": "2nd Floor (near yellow staircase)",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Black-and-white Pharos printer located near the yellow staircase on Crosland 2nd floor.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required to release print jobs."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crosland-6f-gsc-color-printer",
+        "name": "Crosland Tower 6th Floor Color Printer (Graduate Student Community)",
+        "aliases": ["GSC Printer"],
+        "category": "printing",
+        "subtype": "pharos-printer",
+        "status": "draft",
+        "building": "Dorothy Crosland Tower",
+        "floor_or_room": "6th Floor (Graduate Student Community)",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Color printer located inside the graduate-student-only study community on Crosland 6th floor.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Open 24/7 when Library is open; break exceptions apply.",
+        "buzzcard": {
+          "required": true,
+          "note": "Graduate student BuzzCard required to enter the Graduate Student Community and release prints."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "price-gilbert-print-studio",
+        "name": "Library Print Studio",
+        "aliases": ["Price Gilbert Print Shop", "Print Studio"],
+        "category": "printing",
+        "subtype": "poster-printer",
+        "status": "draft",
+        "building": "Price Gilbert Memorial Library",
+        "floor_or_room": "3rd Floor",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Staffed library printing hub offering walk-up matte poster plotters ($1.50/sq ft), color printer/copier/scanner, and computing support.",
+        "hours": {
+          "mon": [["10:00", "22:00"]],
+          "tue": [["10:00", "22:00"]],
+          "wed": [["10:00", "22:00"]],
+          "thu": [["10:00", "22:00"]],
+          "fri": [["10:00", "22:00"]],
+          "sat": [["12:00", "18:00"]],
+          "sun": [["10:00", "22:00"]]
+        },
+        "hours_note": "Fall and Spring staffed hours (Summer Sat-Sun 14:00-18:00). Posters must be submitted 30 minutes before close; closed on holidays/library closures. Industrial Design also notes 24/7 gloss-paper plotters on the Library 3rd floor.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard (with funds loaded) or submitted departmental funding ticket required for poster payment."
+        },
+        "url": "https://library.gatech.edu/print-studio",
+        "source_url": "https://library.gatech.edu/print-studio",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "price-gilbert-3f-purple-zone-printer",
+        "name": "Price Gilbert 3rd Floor Purple Zone Color Printer",
+        "aliases": [],
+        "category": "printing",
+        "subtype": "pharos-printer",
+        "status": "draft",
+        "building": "Price Gilbert Memorial Library",
+        "floor_or_room": "3rd Floor (Purple Zone)",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Self-service color printer in the Price Gilbert 3rd floor Purple Computing Zone.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required to release print jobs."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "clough-2f-color-printer",
+        "name": "Clough Commons 2nd Floor Color Printer",
+        "aliases": ["CULC 2nd Floor Printer"],
+        "category": "printing",
+        "subtype": "pharos-printer",
+        "status": "draft",
+        "building": "Clough Undergraduate Learning Commons",
+        "floor_or_room": "2nd Floor (near Room 215)",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "description": "Self-service color printer near Clough Room 215.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required to release print jobs and for after-hours/modified building access."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "clough-3f-pink-zone-printer",
+        "name": "Clough Commons 3rd Floor B&W Printer (Pink Computing Zone)",
+        "aliases": ["CULC 3rd Floor Printer"],
+        "category": "printing",
+        "subtype": "pharos-printer",
+        "status": "draft",
+        "building": "Clough Undergraduate Learning Commons",
+        "floor_or_room": "3rd Floor (near Room 385, Pink Computing Zone)",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "description": "Self-service black-and-white printer near Clough Room 385 in the Pink Computing Zone.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required to release print jobs."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "clough-4f-bw-printer",
+        "name": "Clough Commons 4th Floor B&W Printer",
+        "aliases": ["CULC 4th Floor Printer"],
+        "category": "printing",
+        "subtype": "pharos-printer",
+        "status": "draft",
+        "building": "Clough Undergraduate Learning Commons",
+        "floor_or_room": "4th Floor (near stairs)",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "description": "Self-service black-and-white printer near the stairs on Clough 4th floor.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required to release print jobs."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ccb-1f-pharos-printer",
+        "name": "College of Computing Building 1st Floor Pharos Station",
+        "aliases": ["CCB 148 Printer"],
+        "category": "printing",
+        "subtype": "pharos-printer",
+        "status": "draft",
+        "building": "College of Computing Building",
+        "floor_or_room": "1st Floor (outside CCB 148)",
+        "address": "801 Atlantic Dr NW, Atlanta, GA 30332",
+        "description": "CoC instructional Pharos pay-for-print station ($0.04/page, jobs held 60 minutes).",
+        "hours": null,
+        "hours_note": "Building/lab hours not stated on CoC Pharos FAQ.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard funds required ($0.04/page); Library weekly free print allocation does not apply."
+        },
+        "url": "https://support.cc.gatech.edu/faq/pharos-faq",
+        "source_url": "https://support.cc.gatech.edu/faq/pharos-faq",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ccb-ground-pharos-printer",
+        "name": "College of Computing Building Ground Floor Pharos Station",
+        "aliases": ["CCB 16 Printer"],
+        "category": "printing",
+        "subtype": "pharos-printer",
+        "status": "draft",
+        "building": "College of Computing Building",
+        "floor_or_room": "Ground Floor (near CCB 16)",
+        "address": "801 Atlantic Dr NW, Atlanta, GA 30332",
+        "description": "CoC instructional Pharos pay-for-print station ($0.04/page, jobs held 60 minutes).",
+        "hours": null,
+        "hours_note": "Building/lab hours not stated on CoC Pharos FAQ.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard funds required ($0.04/page); Library weekly free print allocation does not apply."
+        },
+        "url": "https://support.cc.gatech.edu/faq/pharos-faq",
+        "source_url": "https://support.cc.gatech.edu/faq/pharos-faq",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "klaus-ece-public-lab-printers",
+        "name": "Klaus ECE Public Lab Pharos Printers",
+        "aliases": ["Klaus 1446/1448/2440 Printers"],
+        "category": "printing",
+        "subtype": "pharos-printer",
+        "status": "draft",
+        "building": "Christopher W. Klaus Advanced Computing Building",
+        "floor_or_room": "Rooms 1446, 1448, and 2440",
+        "address": "266 Ferst Dr",
+        "description": "24-hour ECE public computing labs with ECE Pharos black-and-white and color print queues (ECE_Black, ECE_Color_Xerox, ECE_Color_Dell).",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Labs open 24 hours via BuzzCard; User Assistants staffed 10:00-22:00 normally and 09:00-17:00 during finals week (unstaffed between semesters/holidays).",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required for 24h lab entry and Pharos release; OIT print quota does not transfer to ECE queues."
+        },
+        "url": "https://help.ece.gatech.edu/labs",
+        "source_url": "https://help.ece.gatech.edu/labs",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "van-leer-c257-ece-lab-printer",
+        "name": "Van Leer C257 ECE Public Lab Pharos Printer",
+        "aliases": [],
+        "category": "printing",
+        "subtype": "pharos-printer",
+        "status": "draft",
+        "building": "Van Leer Building",
+        "floor_or_room": "Room C257",
+        "address": null,
+        "description": "24-hour ECE public thin-client lab connected to ECE Pharos black-and-white and color print queues.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Open 24 hours via BuzzCard; User Assistants staffed 10:00-22:00 normally and 09:00-17:00 during finals week.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required for 24h lab entry and Pharos release; OIT print quota does not transfer to ECE queues."
+        },
+        "url": "https://help.ece.gatech.edu/labs",
+        "source_url": "https://help.ece.gatech.edu/labs",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "architecture-west-359a-plotters",
+        "name": "Architecture West Plotter Printers",
+        "aliases": ["ID Plotters"],
+        "category": "printing",
+        "subtype": "poster-printer",
+        "status": "draft",
+        "building": "Architecture West",
+        "floor_or_room": "3rd Floor, Room 359A",
+        "address": null,
+        "description": "School of Industrial Design large-format plotter printers.",
+        "hours": {
+          "mon": [["08:00", "18:00"]],
+          "tue": [],
+          "wed": [["08:00", "18:00"]],
+          "thu": [],
+          "fri": [["08:00", "16:00"]],
+          "sat": [],
+          "sun": [["13:00", "18:00"]]
+        },
+        "hours_note": "Undated School of Industrial Design plotter schedule lists Mon, Wed, Fri, and Sun only; Tue/Thu/Sat unlisted.",
+        "buzzcard": {
+          "required": false,
+          "note": "Access rules beyond posted plotter hours not specified in source."
+        },
+        "url": "https://id.gatech.edu/printing-resources",
+        "source_url": "https://id.gatech.edu/printing-resources",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "flowers-invention-studio",
+        "name": "Flowers Invention Studio",
+        "aliases": ["Invention Studio"],
+        "category": "makerspace",
+        "subtype": "makerspace",
+        "status": "draft",
+        "building": "Manufacturing Related Disciplines Complex (MRDC)",
+        "floor_or_room": "2nd Floor",
+        "address": "801 Ferst Drive, Atlanta, GA 30332",
+        "description": "Student-run prototyping makerspace featuring wood/metal shops, welding, casting, waterjet, laser cutters, electronics, and 3D printers.",
+        "hours": {
+          "mon": [["10:00", "16:00"]],
+          "tue": [["10:00", "16:00"]],
+          "wed": [["10:00", "16:00"]],
+          "thu": [["10:00", "16:00"]],
+          "fri": [["10:00", "16:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Fall 2026: Open hours Mon-Fri 10:00-16:00; After-Hours Training Mon-Thu 17:00-18:00. Closed week of Thanksgiving and closes for the semester Dec 4, 2026.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open to the GT community; Prototyping Instructors train and test users on equipment (training available during open hours and Mon-Thu 17:00-18:00 After Hours)."
+        },
+        "url": "https://inventionstudio.gatech.edu/",
+        "source_url": "https://inventionstudio.gatech.edu/",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "the-hive-makerspace",
+        "name": "The Hive Makerspace",
+        "aliases": ["The Hive", "Interdisciplinary Design Commons", "IDC"],
+        "category": "makerspace",
+        "subtype": "makerspace",
+        "status": "draft",
+        "building": "Van Leer Building",
+        "floor_or_room": "2nd Floor (north side of Tech Green entrance)",
+        "address": null,
+        "description": "Student-run electronics-oriented makerspace offering free 3D printing, PCB fabrication, soldering/RF benches, machine shop, and crafts.",
+        "hours": {
+          "mon": [["10:00", "18:00"]],
+          "tue": [["10:00", "18:00"]],
+          "wed": [["10:00", "18:00"]],
+          "thu": [["10:00", "18:00"]],
+          "fri": [["10:00", "18:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Fall 2026 Hours: Sept 8-Dec 2, 2026. No after-hours access for general users (24/7 access restricted to active Peer Instructors).",
+        "buzzcard": {
+          "required": true,
+          "note": "Open to all GT students free of charge with no prior training required (Peer Instructors assist); BuzzCard required to sign in at 2nd floor entrance."
+        },
+        "url": "https://hive.ece.gatech.edu/",
+        "source_url": "https://hive.ece.gatech.edu/",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "yang-aero-maker-space",
+        "name": "Yang Aero Maker Space (AMS)",
+        "aliases": ["Aero Maker Space", "AMS"],
+        "category": "makerspace",
+        "subtype": "makerspace",
+        "status": "draft",
+        "building": "Paul Weber Space Science and Technology Building (SST1)",
+        "floor_or_room": null,
+        "address": "281 Ferst Drive",
+        "description": "Student-run aerospace makerspace with Prusa MK4 3D printers, laser cutters, electronics, wood shop, and CNC/Tormach equipment.",
+        "hours": {
+          "mon": [["10:00", "18:00"]],
+          "tue": [["10:00", "18:00"]],
+          "wed": [["10:00", "18:00"]],
+          "thu": [["10:00", "18:00"]],
+          "fri": [["10:00", "18:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Fall and Spring hours Mon-Fri 10:00-18:00; summer hours limited (Mon/Fri 09:00-12:00, Wed/Thu 11:00-13:00).",
+        "buzzcard": {
+          "required": false,
+          "note": "Students, faculty, and public welcome under mentor supervision with no prior training; training required for unsupervised machine operation and CNC/Tormach."
+        },
+        "url": "https://ams.gatech.edu/",
+        "source_url": "https://ams.gatech.edu/faq/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "the-mill-mse-makerspace",
+        "name": "The MILL (Materials Innovation and Learning Laboratory)",
+        "aliases": ["The MILL", "MSE Makerspace"],
+        "category": "makerspace",
+        "subtype": "makerspace",
+        "status": "draft",
+        "building": "J. Erskine Love Manufacturing Building",
+        "floor_or_room": "1st and 3rd Floors (Main Lab Room 176)",
+        "address": "771 Ferst Drive Northwest, Atlanta, GA 30332",
+        "description": "Materials science makerspace with 50+ characterization and fabrication instruments freely accessible to GT students, faculty, and staff.",
+        "hours": {
+          "mon": [["09:00", "17:00"]],
+          "tue": [["09:00", "17:00"]],
+          "wed": [["09:00", "17:00"]],
+          "thu": [["09:00", "17:00"]],
+          "fri": [["09:00", "17:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "No general after-hours access outside MILL staff/approved lab TAs.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open to all GT students, faculty, and staff; users must sign in at Main Lab (Love 176) and reserve equipment via SUMS (training rules not detailed in retrieved snippets)."
+        },
+        "url": "https://mill.mse.gatech.edu/",
+        "source_url": "https://mill.mse.gatech.edu/take-a-t-make-a-t/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "bme-design-shop",
+        "name": "BME Design Shop",
+        "aliases": ["The BME Design Shop", "BME Makerspaces", "Design Vault"],
+        "category": "makerspace",
+        "subtype": "makerspace",
+        "status": "draft",
+        "building": "Whitaker Building",
+        "floor_or_room": "Room 0250",
+        "address": "313 Ferst Drive, Atlanta, GA",
+        "description": "Biomedical engineering fabrication and 3D-printing makerspace open to the full Georgia Tech community.",
+        "hours": {
+          "mon": [["08:30", "17:30"]],
+          "tue": [["08:30", "17:30"]],
+          "wed": [["08:30", "17:30"]],
+          "thu": [["08:30", "17:30"]],
+          "fri": [["08:30", "17:30"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Design Shop open Mon-Fri 08:30-17:30; Design Vault open Tue-Thu 08:30-17:30.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open to the whole GT community; orientation walkthrough required before first build."
+        },
+        "url": "https://shop.bme.gatech.edu/",
+        "source_url": "https://bmemakerspaces.com/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "paper-and-clay",
+        "name": "Paper & Clay",
+        "aliases": ["Paper and Clay"],
+        "category": "makerspace",
+        "subtype": "craft-studio",
+        "status": "draft",
+        "building": "Pavilion West (The Pavilions)",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Campus arts and crafts studio with eight pottery wheels, ceramics glazing, large-format printing, and craft supplies.",
+        "hours": {
+          "mon": [["11:00", "22:00"]],
+          "tue": [["11:00", "22:00"]],
+          "wed": [["11:00", "22:00"]],
+          "thu": [["11:00", "22:00"]],
+          "fri": [["11:00", "22:00"]],
+          "sat": [["11:00", "22:00"]],
+          "sun": []
+        },
+        "hours_note": "Special Fall Break hours noted Oct 5-11, 2026; Summer hours Mon-Thu 10:00-19:00, Fri-Sun 12:00-18:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open to students and guests; training requirements not stated in source."
+        },
+        "url": "https://studentcenter.gatech.edu/paper-clay",
+        "source_url": "https://studentcenter.gatech.edu/hours",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "campus-recreation-center",
+        "name": "Campus Recreation Center (CRC)",
+        "aliases": ["CRC"],
+        "category": "exercise",
+        "subtype": "recreation-center",
+        "status": "draft",
+        "building": "Campus Recreation Center",
+        "floor_or_room": "Floors 1-5",
+        "address": null,
+        "description": "Main student recreation center featuring weights/cardio floor, 4 racquetball/squash courts, 6-court Main Gym, Auxiliary Gym, 4 studios, and 5th-floor indoor track (6.5 laps/mile).",
+        "hours": {
+          "mon": [["05:30", "24:00"]],
+          "tue": [["05:30", "24:00"]],
+          "wed": [["05:30", "24:00"]],
+          "thu": [["05:30", "24:00"]],
+          "fri": [["05:30", "21:00"]],
+          "sat": [["09:00", "19:00"]],
+          "sun": [["09:00", "22:00"]]
+        },
+        "hours_note": "Fall 2026 hours (CRC homepage lists Sun 10:00-22:00). Thanksgiving 2026: Wed 11/25 05:30-14:00, Thu 11/26-Sat 11/28 closed, Sun 11/29 09:00-17:00; Winter Break Dec 18-Jan 9 adjusted/closed Dec 25-Jan 3.",
+        "buzzcard": {
+          "required": true,
+          "note": "Valid CRC membership and active BuzzCard required (up to 2 forgotten-ID lookups/semester before fee; non-member guests require member sponsor + $10 pass)."
+        },
+        "url": "https://crc.gatech.edu/",
+        "source_url": "https://crc.gatech.edu/hours/",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "mcauley-competition-pool",
+        "name": "Coach Herb McAuley Aquatic Center Competition Pool",
+        "aliases": ["Competition Pool", "McAuley Aquatic Center"],
+        "category": "exercise",
+        "subtype": "pool",
+        "status": "draft",
+        "building": "Campus Recreation Center",
+        "floor_or_room": null,
+        "address": null,
+        "description": "1996 Olympic competition swimming pool inside the CRC open during designated recreational swim hours.",
+        "hours": {
+          "mon": [["09:00", "14:00"]],
+          "tue": [["06:00", "09:00"], ["12:00", "15:00"]],
+          "wed": [["09:00", "14:00"]],
+          "thu": [["06:00", "09:00"], ["12:00", "15:00"]],
+          "fri": [["09:00", "14:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Short Course Mon, Long Course Wed/Fri; closed for special swim meets (e.g. Nov 14-15, 2026) and CRC holiday closures.",
+        "buzzcard": {
+          "required": true,
+          "note": "Valid CRC membership and BuzzCard required for entry."
+        },
+        "url": "https://crc.gatech.edu/locations/",
+        "source_url": "https://crc.gatech.edu/hours/",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crawford-leisure-pool",
+        "name": "Vernon D. and Helen D. Crawford Leisure Pool",
+        "aliases": ["Crawford Leisure Pool", "Leisure Pool"],
+        "category": "exercise",
+        "subtype": "pool",
+        "status": "draft",
+        "building": "Campus Recreation Center",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Recreational pool inside the CRC with six 25-yard lap lanes, 184-foot water slide, current channel, 16-person spa, and outdoor patio.",
+        "hours": {
+          "mon": [["06:00", "09:00"], ["14:00", "20:00"]],
+          "tue": [["06:00", "12:00"], ["14:00", "20:00"]],
+          "wed": [["06:00", "09:00"], ["14:00", "20:00"]],
+          "thu": [["06:00", "12:00"], ["14:00", "20:00"]],
+          "fri": [["06:00", "09:00"], ["14:00", "20:00"]],
+          "sat": [["13:00", "18:00"]],
+          "sun": [["12:00", "18:00"]]
+        },
+        "hours_note": "Lap-lane schedule shown (Sat Nov 14, 2026 LP lanes open 13:00-18:00 due to Swim Atlanta meet). Crawford Rec Area & Water Slide operates Mon-Fri 16:00-20:00, Sat 10:00-18:00, Sun 12:00-18:00; closes at least 1 hr before CRC.",
+        "buzzcard": {
+          "required": true,
+          "note": "Valid CRC membership and BuzzCard required for entry."
+        },
+        "url": "https://crc.gatech.edu/locations/",
+        "source_url": "https://crc.gatech.edu/hours/",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crc-indoor-climbing-wall",
+        "name": "CRC Indoor Climbing Wall",
+        "aliases": ["CRC Climbing Wall"],
+        "category": "exercise",
+        "subtype": "climbing-wall",
+        "status": "draft",
+        "building": "Campus Recreation Center",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Indoor climbing and bouldering facility with Kilter Board inside the CRC.",
+        "hours": {
+          "mon": [["17:00", "21:00"]],
+          "tue": [["17:00", "21:00"]],
+          "wed": [["17:00", "21:00"]],
+          "thu": [["17:00", "21:00"]],
+          "fri": [["14:00", "16:45"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Staffed hours shown. Unstaffed bouldering (<13.5 ft) and Kilter Board slots available during CRC hours with online reservation; closed to groups Thu 12:00-14:00 & 21:30-23:30 and Fri 12:00-14:00.",
+        "buzzcard": {
+          "required": true,
+          "note": "CRC BuzzCard plus free online Climbing Wall Membership waiver required; check in at 1st floor Main Issue desk during unstaffed hours."
+        },
+        "url": "https://crc.gatech.edu/locations/",
+        "source_url": "https://crc.gatech.edu/hours/",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ken-byers-tennis-complex",
+        "name": "Ken Byers Tennis Complex",
+        "aliases": ["Byers Tennis Complex"],
+        "category": "exercise",
+        "subtype": "tennis-courts",
+        "status": "draft",
+        "building": "Ken Byers Tennis Complex",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Georgia Tech Athletics tennis courts open to students during designated Fall 2026 recreational hours.",
+        "hours": {
+          "mon": [["17:00", "22:00"]],
+          "tue": [["17:00", "22:00"]],
+          "wed": [["17:00", "22:00"]],
+          "thu": [["17:00", "22:00"]],
+          "fri": [["17:00", "22:00"]],
+          "sat": [["10:00", "14:00"]],
+          "sun": []
+        },
+        "hours_note": "Explicit Fall 2026 student recreational hours; closes during inclement weather.",
+        "buzzcard": {
+          "required": true,
+          "note": "Active student BuzzCard required; first-come, first-served with no reservations."
+        },
+        "url": "https://crc.gatech.edu/locations/",
+        "source_url": "https://crc.gatech.edu/locations/",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stamps-health-services",
+        "name": "Stamps Health Services (SHS)",
+        "aliases": ["SHS", "Stamps", "Student Health Center"],
+        "category": "health",
+        "subtype": "clinic",
+        "status": "draft",
+        "building": "Joseph Brown Whitehead Building",
+        "floor_or_room": null,
+        "address": "740 Ferst Drive, Atlanta, GA 30332-0110",
+        "description": "Campus student medical clinic offering primary care, women's health, psychiatry, immunizations, lab/radiology, and nutrition.",
+        "hours": {
+          "mon": [["08:00", "17:00"]],
+          "tue": [["08:00", "17:00"]],
+          "wed": [["08:00", "17:00"]],
+          "thu": [["09:00", "17:00"]],
+          "fri": [["08:00", "17:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Main hours page is undated (Fall 2026 flu clinics dated Sept-Oct 2026 on sibling page). Closed official Institute holidays; Appointment Desk closes at 16:30 Mon-Fri; Summer 08:00-16:30; after-hours Nurse Advice Line 404-894-1420 runs 17:00-08:00 weekdays and 24h weekends.",
+        "buzzcard": {
+          "required": false,
+          "note": "Student clinic; appointments via 404-894-1420."
+        },
+        "url": "https://health.gatech.edu/",
+        "source_url": "https://health.gatech.edu/hours/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stamps-pharmacy",
+        "name": "Stamps Health Services Pharmacy",
+        "aliases": ["SHS Pharmacy"],
+        "category": "health",
+        "subtype": "pharmacy",
+        "status": "draft",
+        "building": "Joseph Brown Whitehead Building",
+        "floor_or_room": null,
+        "address": "740 Ferst Drive, Atlanta, GA 30332-0110",
+        "description": "Licensed retail pharmacy serving GT students, faculty, and staff with prescription fills/transfers and OTC medications.",
+        "hours": {
+          "mon": [["08:00", "12:30"], ["13:30", "16:30"]],
+          "tue": [["08:00", "12:30"], ["13:30", "16:30"]],
+          "wed": [["08:00", "12:30"], ["13:30", "16:30"]],
+          "thu": [["09:00", "12:30"], ["13:30", "16:30"]],
+          "fri": [["08:00", "12:30"], ["13:30", "16:30"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Closed daily 12:30-13:30 for lunch. Contact Us page lists 16:30 business close, while Pharmacy FAQ notes 14:00-17:00 busy window.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open to GT students, faculty, and staff; accepts most insurance plans; call 404-894-1430 ext 5."
+        },
+        "url": "https://health.gatech.edu/pharmacy/",
+        "source_url": "https://health.gatech.edu/contact-us/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "pharmabox-clough",
+        "name": "Pharmabox (Clough Commons)",
+        "aliases": ["Pharmabox"],
+        "category": "health",
+        "subtype": "vending-health",
+        "status": "draft",
+        "building": "Clough Undergraduate Learning Commons",
+        "floor_or_room": "3rd Floor (vending area before Price Gilbert entrance)",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "description": "Automated kiosk dispensing over-the-counter medications and personal care items (relocated to Clough 3rd floor).",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Accessible 24/7 while Clough Commons is open during academic terms; break exceptions apply.",
+        "buzzcard": {
+          "required": false,
+          "note": "Inside Clough Commons (BuzzCard required for after-hours/modified building access)."
+        },
+        "url": "https://health.gatech.edu/pharmabox/",
+        "source_url": "https://health.gatech.edu/pharmabox/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cmhcr-smithgall",
+        "name": "Center for Mental Health Care and Resources (CMHCR)",
+        "aliases": ["CARE", "Counseling Center", "CMHCR", "GT Counseling Center"],
+        "category": "health",
+        "subtype": "counseling",
+        "status": "draft",
+        "building": "Charles A. Smithgall, Jr. Student Services Building",
+        "floor_or_room": "Suite 238",
+        "address": "353 Ferst Dr NW, Atlanta, GA 30332-0285",
+        "description": "Central student mental health clinic providing initial assessments, crisis walk-ins, individual/group/couples counseling, and Stamps psychiatry referrals.",
+        "hours": {
+          "mon": [["08:00", "17:00"]],
+          "tue": [["08:00", "17:00"]],
+          "wed": [["08:00", "17:00"]],
+          "thu": [["08:00", "17:00"]],
+          "fri": [["08:00", "17:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Fall 2026 hours corroborated by Fall 2026 syllabi and Fall 2026 Groups page; 24/7 after-hours crisis counselor available at 404-894-2575 or 404-894-2204.",
+        "buzzcard": {
+          "required": false,
+          "note": "Free crisis and counseling services for Georgia Tech students; walk in or call 404-894-2575."
+        },
+        "url": "https://mentalhealth.gatech.edu/",
+        "source_url": "https://mentalhealth.gatech.edu/about/hours-operation",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cmhcr-cos-mose-1120b",
+        "name": "CMHCR Embedded Clinician Office - College of Sciences",
+        "aliases": ["CoS Mental Health Clinician"],
+        "category": "health",
+        "subtype": "counseling",
+        "status": "draft",
+        "building": "Molecular Science and Engineering Building (MoSE)",
+        "floor_or_room": "Room 1120B",
+        "address": "901 Atlantic Dr NW, Atlanta, GA 30332",
+        "description": "Embedded College of Sciences mental health clinician office affiliated with CMHCR.",
+        "hours": {
+          "mon": [["08:00", "16:00"]],
+          "tue": [["08:00", "16:00"]],
+          "wed": [["07:00", "15:00"]],
+          "thu": [["07:00", "15:00"]],
+          "fri": [["07:00", "15:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Flagged prior-term schedule (Fall 2025-Spring 2026): Office hours Mon-Tue 08:00-16:00, Wed-Fri 07:00-15:00; Consultation hours Tue/Thu 11:00-13:00, Fri 11:00-12:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "Contact 404-894-2575 or tara.holdampf@studentlife.gatech.edu."
+        },
+        "url": "https://sciences.gatech.edu/mental-health-counseling",
+        "source_url": "https://sciences.gatech.edu/mental-health-counseling",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "w02-student-center-parking-deck",
+        "name": "W02: Student Center Parking Deck",
+        "aliases": ["W02", "Student Center Deck"],
+        "category": "transport",
+        "subtype": "parking-deck",
+        "status": "draft",
+        "building": "W02: Student Center Parking Deck",
+        "floor_or_room": null,
+        "address": null,
+        "description": "West/central campus parking deck adjacent to the John Lewis Student Center and Exhibition Hall.",
+        "hours": null,
+        "hours_note": "Operating/visitor hours not specified in retrieved PTS sources.",
+        "buzzcard": {
+          "required": false,
+          "note": "Permit or visitor parking; BuzzCard/PTS gate credentials per parking zone rules."
+        },
+        "url": "https://www.pts.gatech.edu/parking/parking-zones/",
+        "source_url": "https://www.pts.gatech.edu/2025/10/30/new-bike-room-in-w02-student-center-parking-deck/",
+        "source_updated": "2026-10-14",
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "w22-dalney-parking-deck",
+        "name": "W22: Dalney Parking Deck",
+        "aliases": ["W22", "Dalney Deck"],
+        "category": "transport",
+        "subtype": "parking-deck",
+        "status": "draft",
+        "building": "W22: Dalney Parking Deck",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Campus parking deck accessed via Dalney Street.",
+        "hours": null,
+        "hours_note": "Operating/visitor hours not specified in retrieved PTS sources.",
+        "buzzcard": {
+          "required": false,
+          "note": "Permit or visitor parking per PTS parking zone rules."
+        },
+        "url": "https://www.pts.gatech.edu/parking/parking-zones/",
+        "source_url": "https://www.pts.gatech.edu/2025/10/30/new-bike-room-in-w02-student-center-parking-deck/",
+        "source_updated": "2026-10-14",
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e81-tech-square-parking-deck",
+        "name": "E81: Tech Square Parking Deck",
+        "aliases": ["E81", "Tech Square Parking Deck"],
+        "category": "transport",
+        "subtype": "parking-deck",
+        "status": "draft",
+        "building": "E81: Tech Square Parking Deck",
+        "floor_or_room": null,
+        "address": "770 Spring Street, Atlanta, GA 30332",
+        "description": "Hourly visitor and permit parking deck in Tech Square housing the PTS Customer Service Center on the ground level.",
+        "hours": null,
+        "hours_note": "Deck operating hours not explicitly stated in retrieved PTS posts.",
+        "buzzcard": {
+          "required": false,
+          "note": "Hourly visitor parking and permit access available."
+        },
+        "url": "https://www.pts.gatech.edu/parking/parking-zones/",
+        "source_url": "https://www.pts.gatech.edu/author/bhoang34/page/3/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "e82-centergy-parking-deck",
+        "name": "E82: Centergy Parking Deck",
+        "aliases": ["E82", "Centergy Deck"],
+        "category": "transport",
+        "subtype": "parking-deck",
+        "status": "draft",
+        "building": "E82: Centergy Parking Deck",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Tech Square parking deck at 5th Street and Williams Street offering hourly visitor parking.",
+        "hours": null,
+        "hours_note": "Operating hours not stated in source.",
+        "buzzcard": {
+          "required": false,
+          "note": "Hourly visitor parking available."
+        },
+        "url": "https://techsupport.gatech.edu/contact-us",
+        "source_url": "https://techsupport.gatech.edu/contact-us",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "coda-parking-garage",
+        "name": "Coda Building Parking Garage",
+        "aliases": ["Coda Deck"],
+        "category": "transport",
+        "subtype": "parking-deck",
+        "status": "draft",
+        "building": "Coda Building",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Hourly parking garage serving the Coda Building in Tech Square.",
+        "hours": null,
+        "hours_note": "Operating hours not stated in source.",
+        "buzzcard": {
+          "required": false,
+          "note": "Public hourly parking available."
+        },
+        "url": "https://techsupport.gatech.edu/contact-us",
+        "source_url": "https://techsupport.gatech.edu/contact-us",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "w02-bike-room-fix-it",
+        "name": "W02 Bike Room and Bike Repair Station",
+        "aliases": ["Student Center Bike Room"],
+        "category": "transport",
+        "subtype": "bike-repair",
+        "status": "draft",
+        "building": "W02: Student Center Parking Deck",
+        "floor_or_room": "Pathway between Exhibition Hall and Student Center (behind BuzzCard office)",
+        "address": null,
+        "description": "Secure bike parking room and public bike repair station equipped with a pump, screwdriver, and Allen key set.",
+        "hours": null,
+        "hours_note": "Outdoor bike repair facilities are free; specific hours not stated.",
+        "buzzcard": {
+          "required": false,
+          "note": "Fix-it repair station is free outside; secure bike room access requires PTS bike room enrollment."
+        },
+        "url": "https://www.pts.gatech.edu/2025/10/30/new-bike-room-in-w02-student-center-parking-deck/",
+        "source_url": "https://www.pts.gatech.edu/2025/10/30/new-bike-room-in-w02-student-center-parking-deck/",
+        "source_updated": "2026-10-14",
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "w22-bike-room-fix-it",
+        "name": "W22 Dalney Bike Room and Fix-It Station",
+        "aliases": ["Dalney Bike Room"],
+        "category": "transport",
+        "subtype": "bike-repair",
+        "status": "draft",
+        "building": "W22: Dalney Parking Deck",
+        "floor_or_room": "Dalney Street access",
+        "address": null,
+        "description": "Bike parking room and Dero Fix-It public bike repair station at Dalney Parking Deck.",
+        "hours": null,
+        "hours_note": "Outdoor bike repair facilities are free; specific hours not stated.",
+        "buzzcard": {
+          "required": false,
+          "note": "Fix-it station is free; secure bike room access requires PTS enrollment."
+        },
+        "url": "https://www.pts.gatech.edu/commute/commute-options/bicycling-pmds/",
+        "source_url": "https://www.pts.gatech.edu/2025/10/30/new-bike-room-in-w02-student-center-parking-deck/",
+        "source_updated": "2026-10-14",
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "marta-north-avenue-station",
+        "name": "MARTA North Avenue Station",
+        "aliases": ["North Avenue MARTA"],
+        "category": "transport",
+        "subtype": "marta-station",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": "713 West Peachtree Street",
+        "description": "MARTA Red/Gold rail station just south of Tech Square and Coda serving Georgia Tech.",
+        "hours": null,
+        "hours_note": "MARTA rail operating hours not stated in campus sources.",
+        "buzzcard": {
+          "required": false,
+          "note": "Public transit station requiring MARTA Breeze fare."
+        },
+        "url": "https://techsupport.gatech.edu/contact-us",
+        "source_url": "https://techsupport.gatech.edu/contact-us",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "marta-midtown-station",
+        "name": "MARTA Midtown Station",
+        "aliases": ["Midtown MARTA"],
+        "category": "transport",
+        "subtype": "marta-station",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "MARTA Red/Gold rail station directly connected to campus via seven Stinger shuttle buses.",
+        "hours": null,
+        "hours_note": "MARTA rail operating hours not stated in campus sources; sourced from Fall 2025 PTS route update.",
+        "buzzcard": {
+          "required": false,
+          "note": "Public transit station requiring MARTA Breeze fare."
+        },
+        "url": "https://www.pts.gatech.edu/2025/09/29/stinger-route-update-oct-6-25/",
+        "source_url": "https://www.pts.gatech.edu/2025/09/29/stinger-route-update-oct-6-25/",
+        "source_updated": "2025-09-29",
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stinger-stop-weber-ferst-shelter",
+        "name": "Weber Building Turnaround / Ferst Drive Shelter",
+        "aliases": ["Weber Turnaround", "Ferst Dr adjacent to Weber"],
+        "category": "transport",
+        "subtype": "stinger-stop",
+        "status": "draft",
+        "building": "Paul Weber Space Science and Technology Building (SST1)",
+        "floor_or_room": null,
+        "address": "281 Ferst Drive",
+        "description": "Main campus Stinger shuttle hub; Oct 2025 update moved the Blue Route westbound stop to the Ferst Drive shelter adjacent to Weber Building.",
+        "hours": null,
+        "hours_note": "Stop name only; real-time schedules handled by live route data. Sourced from Sept 29, 2025 (Fall 2025) PTS route update.",
+        "buzzcard": {
+          "required": false,
+          "note": "Outdoor shuttle stop; GT BuzzCard or campus affiliation for Stinger boarding."
+        },
+        "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+        "source_url": "https://www.pts.gatech.edu/2025/09/29/stinger-route-update-oct-6-25/",
+        "source_updated": "2025-09-29",
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stinger-stop-clough-commons",
+        "name": "Clough Commons Turnaround",
+        "aliases": ["CULC Stinger Stop"],
+        "category": "transport",
+        "subtype": "stinger-stop",
+        "status": "draft",
+        "building": "Clough Undergraduate Learning Commons",
+        "floor_or_room": null,
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "description": "Main central-campus Stinger shuttle turnaround serving Clough Commons and Midtown MARTA/Tech Square connections.",
+        "hours": null,
+        "hours_note": "Stop name only; handled by live route data. Sourced from Sept 29, 2025 (Fall 2025) PTS route update.",
+        "buzzcard": {
+          "required": false,
+          "note": "Outdoor shuttle stop."
+        },
+        "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+        "source_url": "https://www.pts.gatech.edu/2025/09/29/stinger-route-update-oct-6-25/",
+        "source_updated": "2025-09-29",
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stinger-stop-midtown-marta",
+        "name": "Midtown MARTA Station (Stinger Stop)",
+        "aliases": ["MARTA Midtown Stop"],
+        "category": "transport",
+        "subtype": "stinger-stop",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "Stinger shuttle transfer bay at Midtown MARTA Station.",
+        "hours": null,
+        "hours_note": "Stop name only; handled by live route data. Sourced from Sept 29, 2025 (Fall 2025) PTS route update.",
+        "buzzcard": {
+          "required": false,
+          "note": "Public transit transfer stop."
+        },
+        "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+        "source_url": "https://www.pts.gatech.edu/2025/09/29/stinger-route-update-oct-6-25/",
+        "source_updated": "2025-09-29",
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stinger-stop-publix-spring-st",
+        "name": "Publix / Spring Street",
+        "aliases": ["Publix Stinger Stop"],
+        "category": "transport",
+        "subtype": "stinger-stop",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "Midtown grocery and residential corridor Stinger stop on Spring Street.",
+        "hours": null,
+        "hours_note": "Stop name only; handled by live route data. Sourced from Sept 29, 2025 (Fall 2025) PTS route update.",
+        "buzzcard": {
+          "required": false,
+          "note": "Outdoor shuttle stop."
+        },
+        "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+        "source_url": "https://www.pts.gatech.edu/2025/09/29/stinger-route-update-oct-6-25/",
+        "source_updated": "2025-09-29",
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stinger-stop-fifth-street",
+        "name": "Fifth Street (Tech Square)",
+        "aliases": ["5th Street Stinger Stop", "Tech Square Stinger Stop"],
+        "category": "transport",
+        "subtype": "stinger-stop",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "Tech Square Stinger shuttle stop along Spring Street and Fifth Street.",
+        "hours": null,
+        "hours_note": "Stop name only; handled by live route data. Sourced from Sept 29, 2025 (Fall 2025) PTS route update.",
+        "buzzcard": {
+          "required": false,
+          "note": "Outdoor shuttle stop."
+        },
+        "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+        "source_url": "https://www.pts.gatech.edu/2025/09/29/stinger-route-update-oct-6-25/",
+        "source_updated": "2025-09-29",
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stinger-stop-couch-park",
+        "name": "Couch Park",
+        "aliases": ["Couch Park Stop"],
+        "category": "transport",
+        "subtype": "stinger-stop",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "West Campus Stinger shuttle stop near Couch Park.",
+        "hours": null,
+        "hours_note": "Stop name only; handled by live route data. Sourced from Spring 2026 PTS service notices.",
+        "buzzcard": {
+          "required": false,
+          "note": "Outdoor shuttle stop."
+        },
+        "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+        "source_url": "https://www.pts.gatech.edu/category/uncategorized/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stinger-stop-ferst-hemphill",
+        "name": "Ferst and Hemphill Ave",
+        "aliases": ["Ferst & Hemphill"],
+        "category": "transport",
+        "subtype": "stinger-stop",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "Main Stinger shuttle stop at the intersection of Ferst Drive and Hemphill Avenue.",
+        "hours": null,
+        "hours_note": "Stop name only; handled by live route data. Sourced from Spring 2026 PTS service notices.",
+        "buzzcard": {
+          "required": false,
+          "note": "Outdoor shuttle stop."
+        },
+        "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+        "source_url": "https://www.pts.gatech.edu/author/bhoang34/page/2/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stinger-stop-center-st-hemphill",
+        "name": "Center Street Apartments and Hemphill Avenue",
+        "aliases": ["Center Street Apartments Stop"],
+        "category": "transport",
+        "subtype": "stinger-stop",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "West/north campus housing corridor Stinger stop on Hemphill Avenue (subject to occasional Spring 2026 roadwork detours).",
+        "hours": null,
+        "hours_note": "Stop name only; handled by live route data. Sourced from Spring 2026 PTS service notices.",
+        "buzzcard": {
+          "required": false,
+          "note": "Outdoor shuttle stop."
+        },
+        "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+        "source_url": "https://www.pts.gatech.edu/author/bhoang34/page/2/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stinger-stop-gtpd",
+        "name": "Georgia Tech Police Department (GTPD) Stop",
+        "aliases": ["GTPD Stinger Stop"],
+        "category": "transport",
+        "subtype": "stinger-stop",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": "879 Hemphill Ave NW, Atlanta, GA 30318",
+        "description": "Stinger shuttle stop serving the GTPD and Hemphill Avenue corridor.",
+        "hours": null,
+        "hours_note": "Stop name only; handled by live route data. Sourced from Spring 2026 PTS service notices.",
+        "buzzcard": {
+          "required": false,
+          "note": "Outdoor shuttle stop."
+        },
+        "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+        "source_url": "https://www.pts.gatech.edu/author/bhoang34/page/2/",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stinger-stop-paper-tricentennial",
+        "name": "Paper Tricentennial",
+        "aliases": ["Paper Tricentennial Stop"],
+        "category": "transport",
+        "subtype": "stinger-stop",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "North-side campus Stinger stop serving the Paper Tricentennial / 10th Street corridor.",
+        "hours": null,
+        "hours_note": "Stop name only; handled by live route data. Sourced from March 5, 2026 (Spring 2026) PTS notice.",
+        "buzzcard": {
+          "required": false,
+          "note": "Outdoor shuttle stop."
+        },
+        "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+        "source_url": "https://www.pts.gatech.edu/2026/03/05/stinger-modified-routes-march-5/",
+        "source_updated": "2026-03-05",
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stinger-stop-cherry-emerson",
+        "name": "Cherry Emerson",
+        "aliases": ["Cherry Emerson Stinger Stop"],
+        "category": "transport",
+        "subtype": "stinger-stop",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "Stinger Emory-route campus stop at Cherry Emerson Building.",
+        "hours": null,
+        "hours_note": "Stop name only; handled by live route data. Sourced from Sept 29, 2025 (Fall 2025) PTS route update.",
+        "buzzcard": {
+          "required": false,
+          "note": "Outdoor shuttle stop."
+        },
+        "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+        "source_url": "https://www.pts.gatech.edu/2025/09/29/stinger-route-update-oct-6-25/",
+        "source_updated": "2025-09-29",
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "stinger-stop-nara-science-square",
+        "name": "NARA / Science Square",
+        "aliases": ["Science Square Stinger Stop"],
+        "category": "transport",
+        "subtype": "stinger-stop",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "Stinger shuttle destination serving NARA and Science Square.",
+        "hours": null,
+        "hours_note": "Stop name only; handled by live route data. Sourced from Sept 29, 2025 (Fall 2025) PTS route update.",
+        "buzzcard": {
+          "required": false,
+          "note": "Outdoor shuttle stop."
+        },
+        "url": "https://www.pts.gatech.edu/shuttles/stinger/",
+        "source_url": "https://www.pts.gatech.edu/2025/09/29/stinger-route-update-oct-6-25/",
+        "source_updated": "2025-09-29",
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crosland-6f-7f-quiet-reading-rooms",
+        "name": "Crosland Tower 6th and 7th Floor Quiet Reading Rooms",
+        "aliases": ["Crosland Quiet Floors"],
+        "category": "extra",
+        "subtype": "quiet-study",
+        "status": "draft",
+        "building": "Dorothy Crosland Tower",
+        "floor_or_room": "6th and 7th Floors",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Open quiet-study reading rooms with ample power/data ports and Midtown Atlanta views.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Open 24/7 when school is in session; semester break exceptions apply.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open to anyone during regular hours; BuzzCard required during after-hours/modified operations."
+        },
+        "url": "https://library.gatech.edu/study-spaces",
+        "source_url": "https://library.gatech.edu/study-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crosland-6f-graduate-student-community",
+        "name": "Graduate Student Community (Crosland 6th Floor)",
+        "aliases": ["GSC", "Grad Community"],
+        "category": "extra",
+        "subtype": "quiet-study",
+        "status": "draft",
+        "building": "Dorothy Crosland Tower",
+        "floor_or_room": "6th Floor",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Dedicated BuzzCard-accessible quiet study area and 36 dual-monitor docking stations for Georgia Tech graduate students.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Available whenever the Library is open (24/7 during semester; break exceptions apply).",
+        "buzzcard": {
+          "required": true,
+          "note": "Active Georgia Tech graduate student BuzzCard required."
+        },
+        "url": "https://library.gatech.edu/study-spaces",
+        "source_url": "https://library.gatech.edu/study-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crosland-grove-level-study-space",
+        "name": "Crosland Tower Grove Level Study Space",
+        "aliases": ["Grove Level"],
+        "category": "extra",
+        "subtype": "study-space",
+        "status": "draft",
+        "building": "Dorothy Crosland Tower",
+        "floor_or_room": "Grove Level",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Collaborative reading room and open tiered staircase study seating with power and data ports.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Open 24/7 when school is in session; adjacent Crosland Terrace hours are 07:00-21:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "BuzzCard required during after-hours/modified operations."
+        },
+        "url": "https://library.gatech.edu/study-spaces",
+        "source_url": "https://library.gatech.edu/study-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "clough-group-study-rooms",
+        "name": "Clough Commons Reservable Group Study Rooms",
+        "aliases": ["CULC Study Rooms"],
+        "category": "extra",
+        "subtype": "group-study-room",
+        "status": "draft",
+        "building": "Clough Undergraduate Learning Commons",
+        "floor_or_room": "Floors 2-5 (Rooms 242, 244, 246, 252, 315, 317, 344, 421, 445, 455, 572A-D, 585)",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "description": "Fifteen reservable group study rooms (capacity 4-9 people) booked via Georgia Tech Library LibCal.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Follows Clough Commons 24/7 in-session schedule; break exceptions apply.",
+        "buzzcard": {
+          "required": false,
+          "note": "Online LibCal reservation required for guaranteed room access; BuzzCard required after-hours during modified operations."
+        },
+        "url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+        "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crosland-group-study-rooms",
+        "name": "Crosland Tower Reservable Group Study Rooms",
+        "aliases": ["Crosland Study Rooms"],
+        "category": "extra",
+        "subtype": "group-study-room",
+        "status": "draft",
+        "building": "Dorothy Crosland Tower",
+        "floor_or_room": "Floors 2, 4, and 6 (Rooms 2111, 2117, 2151, 2157, 4111, 4117, 6111, 6117, 6157)",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Nine reservable group study rooms (capacity 5-12 people) booked via Georgia Tech Library LibCal.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Follows Main Library 24/7 in-session schedule; break exceptions apply.",
+        "buzzcard": {
+          "required": false,
+          "note": "LibCal booking required; 6th floor rooms may require graduate BuzzCard access if inside GSC."
+        },
+        "url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+        "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "price-gilbert-group-study-rooms",
+        "name": "Price Gilbert Reservable Group Study Rooms",
+        "aliases": ["PG Study Rooms"],
+        "category": "extra",
+        "subtype": "group-study-room",
+        "status": "draft",
+        "building": "Price Gilbert Memorial Library",
+        "floor_or_room": "Grove, 2nd, and 3rd Floors (Rooms G192, G194, 2202, 2204, 2216, 3204)",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Six reservable individual/group study rooms (capacity 2-12 people) booked via Georgia Tech Library LibCal.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Follows Main Library 24/7 in-session schedule; break exceptions apply.",
+        "buzzcard": {
+          "required": false,
+          "note": "Online LibCal reservation required."
+        },
+        "url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+        "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "clough-rooftop-garden",
+        "name": "Clough Commons Rooftop",
+        "aliases": ["CULC Roof", "Clough Roof"],
+        "category": "extra",
+        "subtype": "study-space",
+        "status": "draft",
+        "building": "Clough Undergraduate Learning Commons",
+        "floor_or_room": "Rooftop",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "description": "Outdoor rooftop seating and green terrace atop Clough Undergraduate Learning Commons.",
+        "hours": {
+          "mon": [["09:00", "17:00"]],
+          "tue": [["09:00", "17:00"]],
+          "wed": [["09:00", "17:00"]],
+          "thu": [["09:00", "17:00"]],
+          "fri": [["09:00", "17:00"]],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Closed weekends and semester breaks.",
+        "buzzcard": {
+          "required": false,
+          "note": "Publicly accessible during weekday rooftop hours."
+        },
+        "url": "https://library.gatech.edu/about/locations",
+        "source_url": "https://library.gatech.edu/about/locations",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "jlsc-graduate-student-lounge",
+        "name": "Graduate Student Lounge",
+        "aliases": ["Grad Lounge"],
+        "category": "extra",
+        "subtype": "study-space",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": null,
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "Graduate student community hub with study/soft seating, semi-private huddle room, billiards table, TVs, and kitchenette.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Accessible 24/7 to graduate students with active BuzzCard; staffed daily 10:00-21:00.",
+        "buzzcard": {
+          "required": true,
+          "note": "Active graduate student BuzzCard required for 24-hour entry."
+        },
+        "url": "https://studentcenter.gatech.edu/graduate-student-lounge",
+        "source_url": "https://studentcenter.gatech.edu/graduate-student-lounge",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "beth-cabrera-reflection-space",
+        "name": "Beth Cabrera Reflection Space",
+        "aliases": ["Reflection Space", "Beth Cabrera Reflection Room"],
+        "category": "extra",
+        "subtype": "chapel/reflection-room",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "Student and Campus Event Centers Community Hub designated for quiet reflection, meditation, and prayer (exact building/room omitted in retrieved source).",
+        "hours": {
+          "mon": [["10:00", "21:00"]],
+          "tue": [["10:00", "21:00"]],
+          "wed": [["10:00", "21:00"]],
+          "thu": [["10:00", "21:00"]],
+          "fri": [["10:00", "21:00"]],
+          "sat": [["10:00", "21:00"]],
+          "sun": [["10:00", "21:00"]]
+        },
+        "hours_note": "Staffed hours 10:00-21:00 daily; accessible to the entire GT community with BuzzCard when unstaffed or doors are locked.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required when unstaffed or when doors are locked."
+        },
+        "url": "https://studentcenter.gatech.edu/beth-cabrera-reflection-room",
+        "source_url": "https://studentcenter.gatech.edu/beth-cabrera-reflection-room",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "library-wellness-room",
+        "name": "Georgia Tech Library Wellness Room",
+        "aliases": ["Library Wellness Room"],
+        "category": "extra",
+        "subtype": "chapel/reflection-room",
+        "status": "draft",
+        "building": "Main Library (Crosland Tower and Price Gilbert)",
+        "floor_or_room": null,
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Reservable private library room for prayer, meditation, lactation, or temporary health respite.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "Available during Main Library 24/7 in-session hours via LibCal reservation.",
+        "buzzcard": {
+          "required": false,
+          "note": "LibCal booking required; BuzzCard access rules apply during breaks/modified operations."
+        },
+        "url": "https://library.gatech.edu/spaces-technology/reserve/wellness-room",
+        "source_url": "https://library.gatech.edu/spaces-technology/reserve/wellness-room",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-crosland-tower",
+        "name": "Crosland Tower Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Dorothy M. Crosland Tower",
+        "floor_or_room": null,
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Title IX lactation room with chair, table, lighting, cleaning supplies, and nearby sink.",
+        "hours": {
+          "mon": [["00:00", "24:00"]],
+          "tue": [["00:00", "24:00"]],
+          "wed": [["00:00", "24:00"]],
+          "thu": [["00:00", "24:00"]],
+          "fri": [["00:00", "24:00"]],
+          "sat": [["00:00", "24:00"]],
+          "sun": [["00:00", "24:00"]]
+        },
+        "hours_note": "EOC directory notes 24/7 staff available to open room during Library hours.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard access, with staff available 24/7 to open the room."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-tech-tower",
+        "name": "Evans Administration Building (Tech Tower) Lactation Space",
+        "aliases": ["Tech Tower Lactation Room"],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Evans Administration Building (Tech Tower)",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room with chair, table, lighting, cleaning supplies, and nearby sink.",
+        "hours": null,
+        "hours_note": "Specific lactation room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard access required."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-exhibition-hall",
+        "name": "Exhibition Hall Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Exhibition Hall",
+        "floor_or_room": null,
+        "address": "460 4th St NW, Atlanta, GA 30332",
+        "description": "Title IX lactation room inside Exhibition Hall with chair, table, lighting, cleaning supplies, and nearby sink.",
+        "hours": {
+          "mon": [["07:00", "23:00"]],
+          "tue": [["07:00", "23:00"]],
+          "wed": [["07:00", "23:00"]],
+          "thu": [["07:00", "23:00"]],
+          "fri": [["07:00", "23:00"]],
+          "sat": [["07:00", "23:00"]],
+          "sun": [["07:00", "23:00"]]
+        },
+        "hours_note": "Reflects Exhibition Hall building access hours (no after-hours access); room-specific schedule not published.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager; no after-hours access."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-global-learning-center",
+        "name": "Global Learning Center Lactation Space",
+        "aliases": ["GLC Lactation Room"],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Global Learning Center",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room in the Global Learning Center (listed with Georgia Tech Hotel on EOC directory).",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-stephen-c-hall",
+        "name": "Stephen C. Hall Building Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Stephen C. Hall Building",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room inside the Stephen C. Hall Building.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-jlsc",
+        "name": "John Lewis Student Center Lactation Space",
+        "aliases": ["Student Center Lactation Room"],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": null,
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "Title IX lactation room inside the John Lewis Student Center.",
+        "hours": {
+          "mon": [["07:00", "23:00"]],
+          "tue": [["07:00", "23:00"]],
+          "wed": [["07:00", "23:00"]],
+          "thu": [["07:00", "23:00"]],
+          "fri": [["07:00", "23:00"]],
+          "sat": [["07:00", "23:00"]],
+          "sun": [["07:00", "23:00"]]
+        },
+        "hours_note": "Reflects Student Center normal building access hours (BuzzCard accessible after hours); room-specific schedule not published.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager; BuzzCard required for Student Center entry after 23:00."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-kendeda-building",
+        "name": "Kendeda Building Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Kendeda Building for Innovative Sustainable Design",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room inside the Kendeda Building.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-klaus-building",
+        "name": "Klaus Advanced Computing Building Lactation Space",
+        "aliases": ["Klaus Lactation Room"],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Christopher W. Klaus Advanced Computing Building",
+        "floor_or_room": null,
+        "address": "266 Ferst Dr",
+        "description": "Title IX lactation room inside Klaus Advanced Computing Building.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard access required."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-okeefe-building",
+        "name": "O'Keefe Main Building Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "O'Keefe Building",
+        "floor_or_room": null,
+        "address": "151 6th Street NW, Atlanta, GA 30313",
+        "description": "Title IX lactation room inside the O'Keefe Main Building (main public entry via west Lock Shop rear entrance).",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-scheller",
+        "name": "Scheller College of Business Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Scheller College of Business",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room inside Scheller College of Business in Tech Square.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-tsrb",
+        "name": "Technology Square Research Building Lactation Space",
+        "aliases": ["TSRB Lactation Room"],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Technology Square Research Building",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room inside Technology Square Research Building (TSRB).",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-instructional-building",
+        "name": "Instructional Building Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Instructional Building",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room listed under Instructional Building on the EOC directory.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-ebb",
+        "name": "Krone Engineered Biosystems Building (EBB) Lactation Space",
+        "aliases": ["EBB Lactation Room"],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Krone Engineered Biosystems Building (EBB)",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room inside the Krone Engineered Biosystems Building.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-755-marietta",
+        "name": "755 Marietta Street Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "755 Marietta Street",
+        "floor_or_room": null,
+        "address": "755 Marietta Street",
+        "description": "Title IX lactation room at Georgia Tech's 755 Marietta Street facility.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard access required."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-793-marietta",
+        "name": "793 Marietta Street Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "793 Marietta Street",
+        "floor_or_room": null,
+        "address": "793 Marietta Street",
+        "description": "Title IX lactation room at Georgia Tech's 793 Marietta Street facility.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard access required."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "jlsc-atms",
+        "name": "John Lewis Student Center ATMs",
+        "aliases": ["Student Center ATMs"],
+        "category": "extra",
+        "subtype": "atm",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": "1st Floor (near Room 1216 / Piedmont)",
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "ATM machines located on the 1st floor of the John Lewis Student Center near Room 1216 (bank operator unspecified).",
+        "hours": {
+          "mon": [["07:00", "23:00"]],
+          "tue": [["07:00", "23:00"]],
+          "wed": [["07:00", "23:00"]],
+          "thu": [["07:00", "23:00"]],
+          "fri": [["07:00", "23:00"]],
+          "sat": [["07:00", "23:00"]],
+          "sun": [["07:00", "23:00"]]
+        },
+        "hours_note": "Reflects John Lewis Student Center normal building access hours; BuzzCard accessible after hours.",
+        "buzzcard": {
+          "required": false,
+          "note": "Publicly accessible during normal Student Center hours; BuzzCard required after hours."
+        },
+        "url": "https://studentcenter.gatech.edu/student-center/space/piedmont",
+        "source_url": "https://studentcenter.gatech.edu/student-center/space/piedmont",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crc-lockers",
+        "name": "CRC Day and Rental Lockers",
+        "aliases": ["CRC Lockers", "CRC Cubbies"],
+        "category": "extra",
+        "subtype": "lockers",
+        "status": "draft",
+        "building": "Campus Recreation Center",
+        "floor_or_room": "1st Floor Lobby Cubbies, Locker Rooms, and 4th Floor Main Gym",
+        "address": null,
+        "description": "Day-use lockers, 1st-floor lobby cubbies, and rentable lockers inside the CRC (bring your own lock or purchase at Member Services).",
+        "hours": {
+          "mon": [["05:30", "24:00"]],
+          "tue": [["05:30", "24:00"]],
+          "wed": [["05:30", "24:00"]],
+          "thu": [["05:30", "24:00"]],
+          "fri": [["05:30", "21:00"]],
+          "sat": [["09:00", "19:00"]],
+          "sun": [["09:00", "22:00"]]
+        },
+        "hours_note": "Follows Fall 2026 CRC building hours (Thanksgiving/Winter Break adjustments apply).",
+        "buzzcard": {
+          "required": true,
+          "note": "Active BuzzCard and CRC membership required to enter the building."
+        },
+        "url": "https://crc.gatech.edu/locations/",
+        "source_url": "https://crc.gatech.edu/hours/",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    }
+  ]
+}
+
+Report unsafe content
+Opens in a new window
+About Gemini
+Subscriptions
+For Business
+Sign in

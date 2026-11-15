@@ -7,11 +7,13 @@ Curated points of interest, one file per category (drafts by Codex pending verif
 **Files**
 
 - [`events.json`](events.json): GeoJSON, 6 features
-- [`exercise.json`](exercise.json): GeoJSON, 9 features
-- [`food.json`](food.json): GeoJSON, 18 features
-- [`health.json`](health.json): GeoJSON, 4 features
+- [`exercise.json`](exercise.json): GeoJSON, 10 features
+- [`food.json`](food.json): GeoJSON, 21 features
+- [`health.json`](health.json): GeoJSON, 6 features
 - [`makerspace.json`](makerspace.json): GeoJSON, 6 features
 - [`orgs.json`](orgs.json): GeoJSON, 13 features
-- [`printing.json`](printing.json): GeoJSON, 6 features
+- [`printing.json`](printing.json): GeoJSON, 18 features
+- [`support.json`](support.json): GeoJSON, 10 features
+- [`transport.json`](transport.json): GeoJSON, 8 features
 
 <!-- AUTO:END -->
