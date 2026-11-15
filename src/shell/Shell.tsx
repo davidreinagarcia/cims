@@ -208,7 +208,8 @@ export default function Shell() {
     const reportKey = selection?.kind === "report" ? `report:${selection.id}` : "report";
     content = { title: "Report", key: reportKey, body: <ReportPanel key={reportKey} onClose={() => setPanel("explore")} /> };
   }
-  else if (panel === "stories") content = { title: "Stories", key: "stories", body: <StoriesPanel onShowMap={() => setPanel("explore")} /> };
+  // Desktop "stories" is a full-screen takeover beside the rail (below); phones keep the bottom sheet.
+  else if (panel === "stories" && mobile) content = { title: "Stories", key: "stories", body: <StoriesPanel onShowMap={() => setPanel("explore")} /> };
   else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel initialSelection={routeTo} onClose={closeContent} /> };
   else if (selection && selection.kind !== "report") content = {
     title: selection.kind === "building" ? "Building" : "Place",
@@ -294,6 +295,15 @@ export default function Shell() {
       {staffView !== "police" && <TipNotifier onOpen={() => openStaff("police")} />}
       {staffView === "police" && <PoliceView onClose={() => openStaff(null)} />}
       {staffView === "maintenance" && <MaintenanceView onClose={() => openStaff(null)} />}
+      {panel === "stories" && !mobile && (
+        <section className="stories-full" aria-label="Stories">
+          <header className="stories-full__head">
+            <h2>Stories</h2>
+            <button type="button" className="cims-btn" onClick={closeContent}>Back to map</button>
+          </header>
+          <StoriesPanel onShowMap={() => setPanel("explore")} />
+        </section>
+      )}
       {panel === "rooms" && <RoomsBoard onClose={closeContent} />}
       {bulletin.open && <BulletinBoard type={bulletin.type} onClose={closeBulletin}
         onType={(type) => { writeBulletinUrl(type); setBulletin({ open: true, type }); }} />}
