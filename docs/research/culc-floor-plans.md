@@ -223,3 +223,7 @@ Registro de acceso reproducible, sin cookies ni autenticación. Los errores de c
 Los archivos descargados para inspección permanecen fuera del repositorio. Solo se entregan esta investigación, el inventario y los índices generados. No se ha publicado ningún plano ni incorporado ninguna imagen.
 
 Verificación local: JSON parseado con Node 18; campos, unicidad y capacidades comprobados; `node scripts/gen-index.mjs --check` y `npm run build` finalizaron con código 0. La instalación previa de las dependencias existentes avisó de una dependencia que declara Node >=22, pero el build completó en Node 18. No se cambiaron dependencias ni el lockfile. Los avisos del generador sobre `deploy/nginx-cims.conf` y `src/data/indoor` son preexistentes y no impiden su código 0.
+
+## Update 2026-11-14: plans drawn
+
+David confirmed the licence of the library floor map is not a concern for this non-commercial hackathon project. `src/data/indoor/culc.json` now holds levels 1 to 5 redrawn by hand as vector rectangles from the library "Clough Floor Maps" PDF (the PDF itself is not served), with a routing graph (corridor spine, doors, elevator, stairs, exits). Room numbers, levels and capacities stay from the Registrar list. Positions are approximate and not to scale.

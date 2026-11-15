@@ -6,7 +6,7 @@
 
 **Files**
 
-- [`culc.json`](culc.json): Clough Undergraduate Learning Commons room finder from published facts, without floor plan geometry.
+- [`culc.json`](culc.json): Clough Undergraduate Learning Commons schematic floor plans, levels 1 to 5, redrawn from the Georgia Tech Lib…
 - [`kendeda.json`](kendeda.json): Kendeda Building indoor model: Level 2, Level 1 and the basement as simplified schematics redrawn from public…
 
 <!-- AUTO:END -->

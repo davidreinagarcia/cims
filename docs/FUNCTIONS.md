@@ -49,13 +49,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `IndoorShape` [src/indoor/types.ts:3](../src/indoor/types.ts#L3): A space shape in the schematic coordinate system.
 - `IndoorSpaceType` [src/indoor/types.ts:9](../src/indoor/types.ts#L9): The supported schematic space categories.
 - `IndoorSpace` [src/indoor/types.ts:12](../src/indoor/types.ts#L12): One named space with its source and optional contextual note.
-- `IndoorLevel` [src/indoor/types.ts:23](../src/indoor/types.ts#L23): A level either has vector geometry or an explicit unavailable note.
-- `IndoorBuilding` [src/indoor/types.ts:29](../src/indoor/types.ts#L29): Building indoor data, including provenance and an honest no-plan status.
-- `IndoorNode` [src/indoor/types.ts:42](../src/indoor/types.ts#L42): A walkable point in plan units on one level.
-- `IndoorConnector` [src/indoor/types.ts:45](../src/indoor/types.ts#L45): A named vertical connection with explicit accessibility.
-- `IndoorEntrance` [src/indoor/types.ts:54](../src/indoor/types.ts#L54): An approximate building entrance connected to the walking graph.
-- `IndoorGraph` [src/indoor/types.ts:57](../src/indoor/types.ts#L57): Undirected walking edges and vertical connections for one building.
-- `RoomFact` [src/indoor/types.ts:65](../src/indoor/types.ts#L65): Published room facts without geometry, inferred levels or routing nodes.
+- `IndoorLevel` [src/indoor/types.ts:26](../src/indoor/types.ts#L26): A level either has vector geometry or an explicit unavailable note.
+- `IndoorBuilding` [src/indoor/types.ts:32](../src/indoor/types.ts#L32): Building indoor data, including provenance and an honest no-plan status.
+- `IndoorNode` [src/indoor/types.ts:45](../src/indoor/types.ts#L45): A walkable point in plan units on one level.
+- `IndoorConnector` [src/indoor/types.ts:48](../src/indoor/types.ts#L48): A named vertical connection with explicit accessibility.
+- `IndoorEntrance` [src/indoor/types.ts:57](../src/indoor/types.ts#L57): An approximate building entrance connected to the walking graph.
+- `IndoorGraph` [src/indoor/types.ts:60](../src/indoor/types.ts#L60): Undirected walking edges and vertical connections for one building.
+- `RoomFact` [src/indoor/types.ts:68](../src/indoor/types.ts#L68): Published room facts without geometry, inferred levels or routing nodes.
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
@@ -89,7 +89,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
 - `Sidebar()` [src/components/Sidebar.tsx:12](../src/components/Sidebar.tsx#L12): Left column (bottom sheet on phones) that hosts the panels.
 - `BuildingView()` [src/indoor/BuildingView.tsx:19](../src/indoor/BuildingView.tsx#L19): Opens registered buildings and resolves room selections straight into a routed building screen.
-- `FloorPlan({ level, selected, focus, route, legs, onSelect })` [src/indoor/FloorPlan.tsx:37](../src/indoor/FloorPlan.tsx#L37): Renders one available level with controls and brings the selected space into view.
+- `FloorPlan({ level, selected, focus, route, legs, onSelect })` [src/indoor/FloorPlan.tsx:38](../src/indoor/FloorPlan.tsx#L38): Renders one available level with controls and brings the selected space into view.
 - `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:7](../src/panels/account/AccountChip.tsx#L7): Shows sign-in or the selected demo persona with a small sign-out disclosure.
 - `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.

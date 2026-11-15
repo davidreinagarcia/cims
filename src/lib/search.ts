@@ -152,7 +152,8 @@ export function searchCampus(query: string, items: readonly PlaceFeature[], buil
       name: building.name ?? "Unnamed building", meta: building.aliases.join(", "), aliases: building.aliases, matches: [] })),
     ...indoorRooms().map(({ id, building, level, space, routable }) => {
       const footprint = buildings.find((item) => item.id === building.building_id);
-      const fact = "room" in space ? space : undefined;
+      const fact = "room" in space && space.room ? { room: space.room, capacity: space.capacity ?? null,
+        name: space.name.replace(/^(Room )?\w+ ?/, "") || space.name } : undefined;
       const buildingName = fact ? building.title.replace(/^G\. Wayne /, "")
         : footprint?.aliases.find((alias) => alias.endsWith(" Building")) ?? footprint?.aliases[0] ?? building.title;
       return { kind: "room" as const, id, group: "Rooms" as const, name: fact ? `Room ${fact.room}` : space.name,

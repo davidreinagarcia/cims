@@ -68,6 +68,8 @@ export function findRoute(graph: IndoorGraph, fromNodeId: string, toNodeId: stri
   const steps: Step[] = [{ level: nodes[0].level, text: `Start at ${options.fromLabel ?? nodes[0].label ?? "selected start"}` }];
   const connectorsUsed: IndoorConnector[] = [];
   let straightStep = -1;
+  let connectorStep = -1;
+  let connectorStepId = "";
   const connectorNodes = new Set(graph.connectors.flatMap((connector) => Object.values(connector.nodes)));
   const walkLabel = (node: IndoorNode) => (connectorNodes.has(node.id) ? undefined : node.label); // "Elevator" is not a corridor
   for (let i = 0; i < nodes.length; i++) {
@@ -78,10 +80,13 @@ export function findRoute(graph: IndoorGraph, fromNodeId: string, toNodeId: stri
       const connector = previous.get(node.id)!.connector!;
       if (!connectorsUsed.some((item) => item.id === connector.id)) connectorsUsed.push(connector);
       const direction = levelOrder(node.level) > levelOrder(before.level) ? "up" : "down";
+      const named = connector.name.toLowerCase() === connector.kind || connector.name.toLowerCase() === "elevator" ? "" : ` (${connector.name})`;
       const text = connector.kind === "elevator"
-        ? `Take the elevator to ${levelName(node.level)} (${connector.name})`
-        : `Take the stairs ${direction} to ${levelName(node.level)} (${connector.name})`;
-      steps.push({ level: before.level, text });
+        ? `Take the elevator to ${levelName(node.level)}${named}`
+        : `Take the stairs ${direction} to ${levelName(node.level)}${named}`;
+      // Riding one connector through several floors is a single instruction.
+      if (steps.length - 1 === connectorStep && connectorStepId === connector.id) steps[connectorStep].text = text;
+      else { connectorStep = steps.length; connectorStepId = connector.id; steps.push({ level: before.level, text }); }
       straightStep = -1;
     }
     if (!after || after.level !== node.level) continue;
