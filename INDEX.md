@@ -34,7 +34,9 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`docs/testing/`](docs/testing/INDEX.md): Test plans with people (hallway tests).
 - [`public/`](public/INDEX.md): Static assets served as-is at the site root.
 - [`scripts/`](scripts/INDEX.md): Dev tooling run with Node (no deps): index generator, Claude hooks, data fetchers.
+- [`server/`](server/INDEX.md): Real-time alerts backend (Node, no dependencies); see README.md.
 - [`src/`](src/INDEX.md): The web app (Vite + React + TypeScript + MapLibre). Entry: main.tsx → App.tsx.
+  - [`src/alerts/`](src/alerts/INDEX.md): Top-of-page banner for live GTPD alarms and the all-clear.
   - [`src/auth/`](src/auth/INDEX.md): Replaceable demo sign-in contract, fictional personas and local session persistence.
   - [`src/components/`](src/components/INDEX.md): React components shared by the shell: map view, glyphs, offline notice. The layout itself lives in src/shell/.
   - [`src/data/`](src/data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
@@ -52,6 +54,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
     - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
     - [`src/panels/layers/`](src/panels/layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
+    - [`src/panels/police/`](src/panels/police/INDEX.md): GTPD console: draw the danger circle, launch and end alarms, work citizen police tips.
     - [`src/panels/report/`](src/panels/report/INDEX.md): Report-an-issue flow (F-10) and staff queue; mounted in Shell's "report" slot (src/shell/Shell.tsx). Owner: T…
     - [`src/panels/rooms/`](src/panels/rooms/INDEX.md): Reserve a room (F-11/F-20): pick a Kendeda or CULC building (or jump to favorited rooms), book/renew/cancel a…
     - [`src/panels/search/`](src/panels/search/INDEX.md): Search box and list of places (rooms and buildings join in T-14).

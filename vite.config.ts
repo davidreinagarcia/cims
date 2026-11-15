@@ -29,4 +29,6 @@ function serviceWorker(): Plugin {
 
 export default defineConfig({
   plugins: [react(), serviceWorker()],
+  // Live alerts backend (server/alerts-server.mjs): `CIMS_POLICE_KEY=test node server/alerts-server.mjs`.
+  server: { proxy: { "/api": { target: "http://localhost:8787" } } },
 });

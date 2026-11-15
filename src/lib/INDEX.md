@@ -6,6 +6,7 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 
 **Files**
 
+- [`alerts.ts`](alerts.ts): Campus alerts (GTPD alarms) and citizen police tips: types, geometry, and a live store that talks to the real… · exports `ALERT_KINDS`, `TIP_CATEGORIES`, `AlertsError`, `circleRing`, `insideAlert`, `alertKindLabel`, `useAlerts`, `subscribeAlerts`, `setPoliceKey`, `currentPoliceKey`, `launchAlert`, `endAlert`, `submitTip`, `tipStatus`, `setTipStatus`, `focusAlert`
 - [`buildingPlaces.ts`](buildingPlaces.ts): Building association and location metadata shared by POI pins and detail cards. · exports `locationDetails`, `placeBuilding`
 - [`buildings.ts`](buildings.ts): Building footprints (OSM, src/data/buildings.geojson): loaded once on demand, with a point-in-footprint looku… · exports `loadedBuildings`, `loadBuildings`
 - [`bulletin.ts`](bulletin.ts): Pure bulletin posts, campus-time labels, filters, counts and deep links. · exports `POST_TYPES`, `bulletinPosts`, `filterPosts`, `countByType`, `bulletinUrl`, `readBulletinParams`
@@ -14,8 +15,10 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`hours.ts`](hours.ts): Pure opening status and weekday lookup in the campus timezone. · exports `campusDay`, `openStatus`
 - [`indoorPlan.ts`](indoorPlan.ts): Indoor plan helpers shared by the plan, the stack view and the building screen: shape bounds, room categories… · exports `planShapeBounds`, `roomCategory`, `roomCategoryLabels`, `spaceTypeLabels`, `spaceDisplayName`, `drawnBounds`, `levelRank`, `planNorthUp`
 - [`issue-routing.ts`](issue-routing.ts): Issue categories and their routing (category → team + official contact), from src/data/issue-routing.json whe… · exports `TEAMS`, `SAFETY_CATEGORY`, `hasVerifiedRouting`, `issueRoutes`, `routeFor`
-- [`layerCatalog.ts`](layerCatalog.ts): The toggleable map layers (PRD F-02): id, label, color token and sub-types. Add a layer or sub-type here. · exports `LAYER_CATALOG`, `categoryColor`
+- [`layerCatalog.ts`](layerCatalog.ts): The toggleable map layers (PRD F-02): id, label, color token and sub-types. Add a layer or sub-type here. · exports `LAYER_CATALOG`, `OVERLAY_CATALOG`, `categoryColor`
 - [`localStore.ts`](localStore.ts): Tiny localStorage JSON helpers shared by the mock backend adapters (prototype persistence only; see ADR-0005). · exports `readLocal`, `writeLocal`
+- [`nearestPlace.ts`](nearestPlace.ts): Finds the curated place (building) closest to a GPS point, so location-aware forms can name where someone is. · exports `nearestPlace`
+- [`photo.ts`](photo.ts): Shrinks a picked photo to a small JPEG data URL, shared by the maintenance and police report forms. · exports `photoToDataUrl`
 - [`places.ts`](places.ts): Typed access to every curated place: seed file plus src/data/pois/*.json, drafts hidden unless ?drafts=1. · exports `showDrafts`, `places`
 - [`preferredRooms.mock.ts`](preferredRooms.mock.ts): Mock PreferredRoomsService backed by localStorage. Prototype only: favorites don't sync across devices. · exports `createLocalPreferredRoomsService`
 - [`preferredRooms.ts`](preferredRooms.ts): Preferred ("favorite") rooms contracts (T-60) and the one place that picks the backend adapter. · exports `preferredRoomsService`
@@ -25,5 +28,6 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`reservations.ts`](reservations.ts): Room reservation contracts (T-60/T-61/F-20) and the one place that picks the backend adapter. Kendeda + CULC… · exports `SLOT_MINUTES`, `MIN_DURATION_MINUTES`, `MAX_DURATION_MINUTES`, `CHECKIN_WINDOW_MINUTES`, `CHECKIN_RADIUS_METERS`, `END_REMINDER_MINUTES`, `REBOOK_COOLDOWN_MINUTES`, `checkinDeadline`, `reservationBusyWindow`, `isReservationActive`, `reservationStatus`, `reservationsService`
 - [`search.ts`](search.ts): Ranked building, room and place search with accent folding and original-text match ranges. · exports `searchPlaces`, `searchCampus`
 - [`suggest.ts`](suggest.ts): Search-as-you-type suggestions (short ranked list, nothing until typed) and where a result sits on the map. · exports `suggest`, `locate`, `recents`, `remember`
+- [`useGpsFix.ts`](useGpsFix.ts): React hook around the one-shot GPS fix: request on demand (or on mount), with idle / locating / ok / error st… · exports `useGpsFix`
 
 <!-- AUTO:END -->

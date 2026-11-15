@@ -7,6 +7,7 @@ Auto-deploy of `main` to the live site on Alexandria (cron + Docker build + rsyn
 **Files**
 
 - [`README.md`](README.md): How Alexandria auto-deploys main (cron, Docker build, rsync, logs).
+- [`alerts-api.md`](alerts-api.md): Steps to host the live alerts server on Alexandria (compose service + nginx /api proxy). Not applied automati…
 - [`deploy.sh`](deploy.sh): Auto-deploy for Alexandria. Run from cron every minute (see deploy/README.md).
 - [`nginx-cims.conf`](nginx-cims.conf): CIMS frontend (cims.queenalexandria.online). Copy kept in the repo at deploy/nginx-cims.conf.
 

@@ -5,7 +5,7 @@ import { useAuth } from "../state/auth";
 import { Icon, NAV_ITEMS, moveFocus, type ShellPanel } from "./icons";
 
 /** Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight. */
-export default function Rail({ panel, onPanel }: { panel: ShellPanel; onPanel: (panel: ShellPanel) => void }) {
+export default function Rail({ panel, onPanel, onPolice }: { panel: ShellPanel; onPanel: (panel: ShellPanel) => void; onPolice: () => void }) {
   const [menu, setMenu] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   return (
@@ -25,12 +25,12 @@ export default function Rail({ panel, onPanel }: { panel: ShellPanel; onPanel: (
           </button>
         ))}
       </div>
-      {menu && <Drawer onClose={() => { setMenu(false); menuButton.current?.focus(); }} />}
+      {menu && <Drawer onPolice={onPolice} onClose={() => { setMenu(false); menuButton.current?.focus(); }} />}
     </nav>
   );
 }
 
-function Drawer({ onClose }: { onClose: () => void }) {
+function Drawer({ onClose, onPolice }: { onClose: () => void; onPolice: () => void }) {
   const { session, openDialog, signOut } = useAuth();
   const root = useRef<HTMLDivElement>(null);
   const [about, setAbout] = useState(false);
@@ -54,6 +54,7 @@ function Drawer({ onClose }: { onClose: () => void }) {
       {session
         ? <button type="button" className="shell-drawer__item" onClick={() => { onClose(); void signOut(); }}>Sign out <span className="cims-status">DEMO</span></button>
         : <button type="button" className="shell-drawer__item" onClick={() => { onClose(); openDialog(); }}>Sign in <span className="cims-status">DEMO</span></button>}
+      <button type="button" className="shell-drawer__item" onClick={() => { onClose(); onPolice(); }}>GTPD alert console</button>
       <a className="shell-drawer__item" href={CORRECTION_URL} target="_blank" rel="noopener noreferrer">Data corrections</a>
     </div>
   );

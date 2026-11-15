@@ -22,3 +22,7 @@
   .layers__panel { margin-top: var(--s2); }
   .layers__list { max-height: none; }
 }
+
+/* Live overlays (police alerts, social heat map) */
+.layers__overlays { border-top: var(--hairline); }
+.layers__hint { display: block; font-size: var(--fs-xs); }

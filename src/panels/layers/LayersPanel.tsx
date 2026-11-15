@@ -1,9 +1,10 @@
 /** @file Layer panel (PRD F-02): category toggles, sub-type tree and legend. Chips row on phones. */
 import { useMemo, useState, type CSSProperties } from "react";
 import Glyph from "../../components/Glyph";
-import { LAYER_CATALOG, type LayerCategory } from "../../lib/layerCatalog";
+import { LAYER_CATALOG, OVERLAY_CATALOG, type LayerCategory, type OverlayLayer } from "../../lib/layerCatalog";
 import { places } from "../../lib/places";
 import { OTHER_SUBTYPE } from "../../map/layerFilters";
+import { setHeat, useStories } from "../../stories/store";
 import { useLayerFilters } from "../../state/layerFilters";
 import "./layers.css";
 
@@ -22,6 +23,42 @@ function useCounts() {
     }
     return { byCat, bySub };
   }, []);
+}
+
+const overlayStyle = (o: OverlayLayer) => ({ "--cat": `var(${o.cssVar})` }) as CSSProperties;
+
+/** Small line icon for an overlay: warning triangle for alerts, a soft blob for the heat map. */
+function OverlayGlyph({ id }: { id: OverlayLayer["id"] }) {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      {id === "alerts"
+        ? <><circle cx="12" cy="12" r="9" strokeDasharray="3 2" /><path d="M12 7.5v5M12 15.5v.5" /></>
+        : <><circle cx="12" cy="12" r="3" /><circle cx="12" cy="12" r="6.5" opacity="0.65" /><circle cx="12" cy="12" r="9.5" opacity="0.35" /></>}
+    </svg>
+  );
+}
+
+/** Toggle list for the live overlays (police alerts, social heat map): same look as the place layers. */
+function Overlays() {
+  const { isOn, toggleCategory } = useLayerFilters();
+  const { heat } = useStories();
+  const on = (o: OverlayLayer) => (o.id === "stories-heat" ? heat : isOn(o.id));
+  const toggle = (o: OverlayLayer) => (o.id === "stories-heat" ? setHeat(!heat) : toggleCategory(o.id));
+  return (
+    <ul className="layers__list layers__overlays" aria-label="Live overlays">
+      {OVERLAY_CATALOG.map((o) => (
+        <li key={o.id} style={overlayStyle(o)}>
+          <div className="cims-layer">
+            <input id={`layer-${o.id}`} type="checkbox" className="cims-check" checked={on(o)} onChange={() => toggle(o)} />
+            <span className="cims-glyph"><OverlayGlyph id={o.id} /></span>
+            <label htmlFor={`layer-${o.id}`} className="cims-layer__label">
+              {o.label} <span className="cims-muted layers__hint">{o.hint}</span>
+            </label>
+          </div>
+        </li>
+      ))}
+    </ul>
+  );
 }
 
 /**
@@ -124,6 +161,7 @@ export default function LayersPanel() {
             })}
           </ul>
         )}
+        {open && <Overlays />}
       </section>
     </div>
   );

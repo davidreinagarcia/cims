@@ -2,6 +2,8 @@
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import MapView from "../components/MapView";
 import OfflineBanner from "../components/OfflineBanner";
+import AlertBanner from "../alerts/AlertBanner";
+import { useAlertBanners } from "../alerts/useAlertBanners";
 import BuildingView from "../indoor/BuildingView";
 import { useBookingRequestSeq } from "../indoor/handoff";
 import AccountChip from "../panels/account/AccountChip";
@@ -10,6 +12,7 @@ import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinBoard from "../panels/bulletin/BulletinBoard";
+import PoliceView from "../panels/police/PoliceView";
 import ReportPanel from "../panels/report";
 import RoomFinderPanel from "../panels/rooms/RoomFinderPanel";
 import StoriesPanel from "../stories/StoriesPanel";
@@ -84,6 +87,16 @@ export default function Shell() {
   const bulletinWasOpen = useRef(false);
   const [hasQuery, setHasQuery] = useState(false);
   const [snap, setSnap] = useState<SheetSnap>("half");
+  const { banners, dismiss } = useAlertBanners();
+  // The GTPD console is a full-screen view, deep-linkable with ?view=police.
+  const [policeOpen, setPoliceOpen] = useState(() => new URLSearchParams(window.location.search).get("view") === "police");
+  const setPolice = (open: boolean) => {
+    const params = new URLSearchParams(window.location.search);
+    if (open) params.set("view", "police"); else params.delete("view");
+    const query = params.toString();
+    window.history.replaceState(window.history.state, "", `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`);
+    setPoliceOpen(open);
+  };
 
   useEffect(() => {
     // Canonicalize the old panel link once; history navigation never writes over the destination.
@@ -208,17 +221,23 @@ export default function Shell() {
   );
 
   return (
-    <div className="app cims" data-layout={mobile ? "mobile" : "desktop"}>
+    <div className="app cims" data-layout={mobile ? "mobile" : "desktop"} data-alert={banners.length > 0 ? "true" : undefined}>
+      <AlertBanner banners={banners} onDismiss={dismiss} />
       <SignInDialog />
-      {!mobile && <Rail panel={bulletin.open ? "bulletin" : panel} onPanel={choosePanel} />}
+      {!mobile && <Rail panel={bulletin.open ? "bulletin" : panel} onPanel={choosePanel} onPolice={() => setPolice(true)} />}
       <div className="stage">
         <MapView />
         <BuildingView />
         <LayersPopover />
         {mobile && (
-          <button type="button" className="shell-fab" aria-label="Route: directions between two places" onClick={() => choosePanel("route")}>
-            <Icon name="route" />
-          </button>
+          <>
+            <button type="button" className="shell-fab shell-fab--police" aria-label="GTPD alert console" onClick={() => setPolice(true)}>
+              <Icon name="shield" />
+            </button>
+            <button type="button" className="shell-fab" aria-label="Route: directions between two places" onClick={() => choosePanel("route")}>
+              <Icon name="route" />
+            </button>
+          </>
         )}
       </div>
       <div className="shell-left">
@@ -236,6 +255,7 @@ export default function Shell() {
       )}
       {mobile && <MobileTabBar panel={bulletin.open ? "bulletin" : panel} onPanel={choosePanel} />}
       <OfflineBanner />
+      {policeOpen && <PoliceView onClose={() => setPolice(false)} />}
       {bulletin.open && <BulletinBoard type={bulletin.type} onClose={closeBulletin}
         onType={(type) => { writeBulletinUrl(type); setBulletin({ open: true, type }); }} />}
     </div>
