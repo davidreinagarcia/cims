@@ -10,6 +10,7 @@ BuzzPrint (T-71): a signed-in account's permanent record of Bulletin posts marke
 - [`localAdapter.ts`](localAdapter.ts): Permanent local storage for BuzzPrint: one localStorage array, scoped per account, no expiry (unlike Stories). · exports `MAX_PHOTO_BYTES`, `localAdapter`
 - [`portfolio.css`](portfolio.css): * @file Full-screen BuzzPrint: landing folder with a shrink animation, then day-grouped activity cards. Surve…
 - [`store.ts`](store.ts): BuzzPrint state without a provider: entries for the signed-in account, kept separate from the ephemeral Stori… · exports `subscribe`, `getState`, `ensureLoaded`, `usePortfolio`, `recordPortfolioEntry`, `addPortfolioPhoto`, `setAdapter`
+- [`supabaseAdapter.ts`](supabaseAdapter.ts): BuzzPrint adapter on Supabase: entries in `portfolio_entries`, photos in the `portfolio` bucket; falls back t… · exports `supabasePortfolioAdapter`
 - [`types.ts`](types.ts): BuzzPrint (portfolio) contracts: a permanent record of a Bulletin post you were interested in, plus photos yo…
 
 <!-- AUTO:END -->

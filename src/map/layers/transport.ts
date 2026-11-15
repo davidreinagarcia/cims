@@ -1,5 +1,6 @@
 /** @file Transport layer (F-09): GT bus routes in official colors, stops with a popup linking to the official tracker, and live buses polled while the layer is on. */
-import maplibregl, { type FilterSpecification, type GeoJSONSource, type MapLayerMouseEvent } from "maplibre-gl";
+import type { FilterSpecification, GeoJSONSource, MapLayerMouseEvent, Popup } from "maplibre-gl";
+import { loadMapLibre } from "../maplibre";
 import type { MapLayer } from "../types";
 import { buildMapFilter, isVisible } from "../layerFilters";
 import { INK, PAPER, SAGE } from "../palette";
@@ -49,7 +50,9 @@ const transport: MapLayer = {
     const routeNames = new Map<number, string>();
     const routeIcons = new Map<number, string>();
     const images = new Set<string>();
-    const popup = new maplibregl.Popup({ className: "cims-stop-popup", offset: 8, maxWidth: "260px" });
+    // MapLibre is already loaded (the map exists); resolving it here keeps it out of the main bundle.
+    let popup: Popup | undefined;
+    void loadMapLibre().then((m) => { popup = new m.Popup({ className: "cims-stop-popup", offset: 8, maxWidth: "260px" }); });
 
     map.addSource(SOURCE, { type: "geojson", data: EMPTY });
     map.addSource(LIVE, { type: "geojson", data: EMPTY });
@@ -245,7 +248,7 @@ const transport: MapLayer = {
     const show = (at: [number, number], ...children: HTMLElement[]) => {
       const box = document.createElement("div");
       box.append(...children);
-      popup.setLngLat(at).setDOMContent(box).addTo(map);
+      popup?.setLngLat(at).setDOMContent(box).addTo(map);
     };
 
     // Stop: the next bus of each route that serves it, estimated from live positions (soonest first).
@@ -311,14 +314,14 @@ const transport: MapLayer = {
         if (on) start();
         else {
           stop();
-          popup.remove();
+          popup?.remove();
         }
       },
       remove() {
         removed = true;
         offHighlight();
         stop();
-        popup.remove();
+        popup?.remove();
         document.removeEventListener("visibilitychange", onVisibility);
         map.off("click", BUSES, onBusClick);
         map.off("mouseenter", BUSES, onEnter);

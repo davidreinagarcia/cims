@@ -144,14 +144,14 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SUPABASE_REALTIME` [src/lib/supabase.ts:11](../src/lib/supabase.ts#L11): Project URL and anon key for the Realtime socket (same public values as above).
 - `BackendDown` [src/lib/supabase.ts:14](../src/lib/supabase.ts#L14): The backend could not be reached (network, 5xx, sign-in failure): callers fall back to local mocks.
 - `withFallback(run)` [src/lib/supabase.ts:17](../src/lib/supabase.ts#L17): Runs `run` on Supabase; only when the backend is unreachable does it serve `local` instead (rule rejections l…
-- `signInWithPassword(email, password)` [src/lib/supabase.ts:50](../src/lib/supabase.ts#L50): Signs in as one of the pre-created demo accounts (replaces the anonymous guest session in this browser).
-- `signOutSupabase()` [src/lib/supabase.ts:57](../src/lib/supabase.ts#L57): Forgets the chosen account; the next call creates a fresh anonymous guest session.
-- `currentAccount()` [src/lib/supabase.ts:63](../src/lib/supabase.ts#L63): The account currently signed in (null for guests), read from the stored session without a network call.
-- `session()` [src/lib/supabase.ts:70](../src/lib/supabase.ts#L70): Signed-in anonymous session for this browser (created once, refreshed when it is about to expire).
-- `accountId()` [src/lib/supabase.ts:85](../src/lib/supabase.ts#L85): This browser's account id (auth.uid()).
-- `rest(path, init)` [src/lib/supabase.ts:88](../src/lib/supabase.ts#L88): PostgREST call. `path` starts with the table or `rpc/<fn>`; returns parsed JSON (or null for empty).
-- `upload(bucket, blob, ext)` [src/lib/supabase.ts:110](../src/lib/supabase.ts#L110): Uploads a blob under `<uid>/<uuid>.<ext>` in a public bucket and returns the object path.
-- `publicUrl(bucket, path)` [src/lib/supabase.ts:123](../src/lib/supabase.ts#L123): Public URL of an uploaded object.
+- `signInWithPassword(email, password)` [src/lib/supabase.ts:53](../src/lib/supabase.ts#L53): Signs in as one of the pre-created demo accounts (replaces the anonymous guest session in this browser).
+- `signOutSupabase()` [src/lib/supabase.ts:60](../src/lib/supabase.ts#L60): Forgets the chosen account; the next call creates a fresh anonymous guest session.
+- `currentAccount()` [src/lib/supabase.ts:66](../src/lib/supabase.ts#L66): The account currently signed in (null for guests), read from the stored session without a network call.
+- `session()` [src/lib/supabase.ts:73](../src/lib/supabase.ts#L73): Signed-in anonymous session for this browser (created once, refreshed when it is about to expire).
+- `accountId()` [src/lib/supabase.ts:88](../src/lib/supabase.ts#L88): This browser's account id (auth.uid()).
+- `rest(path, init)` [src/lib/supabase.ts:91](../src/lib/supabase.ts#L91): PostgREST call. `path` starts with the table or `rpc/<fn>`; returns parsed JSON (or null for empty).
+- `upload(bucket, blob, ext)` [src/lib/supabase.ts:114](../src/lib/supabase.ts#L114): Uploads a blob under `<uid>/<uuid>.<ext>` in a public bucket and returns the object path.
+- `publicUrl(bucket, path)` [src/lib/supabase.ts:127](../src/lib/supabase.ts#L127): Public URL of an uploaded object.
 - `highlightRoutes(routeIds)` [src/lib/transitHighlight.ts:8](../src/lib/transitHighlight.ts#L8): Spotlights these routes and dims the rest; null (or an empty list) shows every route normally.
 - `onRouteHighlight(listener)` [src/lib/transitHighlight.ts:15](../src/lib/transitHighlight.ts#L15): Calls `listener` now and on every change; returns the unsubscribe function.
 - `loadTransitNetwork()` [src/lib/transitNetwork.ts:19](../src/lib/transitNetwork.ts#L19): Loads the network once; a failed download is forgotten so the next call tries again.
@@ -269,6 +269,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SearchMatch` [src/lib/search.ts:10](../src/lib/search.ts#L10): A matching name, alias or category and its highlight ranges.
 - `SearchResult` [src/lib/search.ts:17](../src/lib/search.ts#L17): A ranked place with an extensible group label and matches in displayable fields.
 - `CampusSearchResult` [src/lib/search.ts:137](../src/lib/search.ts#L137): A campus result selects its building, room or place directly.
+- `Bucket` [src/lib/supabase.ts:26](../src/lib/supabase.ts#L26): Storage buckets the app uses.
 - `TransitStop` [src/lib/transitNetwork.ts:5](../src/lib/transitNetwork.ts#L5): One physical bus stop.
 - `RouteStop` [src/lib/transitNetwork.ts:8](../src/lib/transitNetwork.ts#L8): One stop in a route's served order, with the tracker's scheduled seconds to the next stop and at this stop.
 - `TransitRoute` [src/lib/transitNetwork.ts:11](../src/lib/transitNetwork.ts#L11): One bus route: official name, color, service-hours text and its stops in order (routes are loops).
@@ -383,7 +384,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Rail({ panel, onPanel, onPolice, onMaintenance })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
 - `RoutePanel({ initialSelection, onClose })` [src/shell/RoutePanel.tsx:10](../src/shell/RoutePanel.tsx#L10): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:89](../src/shell/Shell.tsx#L89): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
+- `Shell()` [src/shell/Shell.tsx:91](../src/shell/Shell.tsx#L91): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
 - `Icon({ name, size = 24 })` [src/shell/icons.tsx:27](../src/shell/icons.tsx#L27): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = supabaseAuthAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:36](../src/state/layerFilters.tsx#L36): Provides the layer filters to the app. Mount once, in App.
@@ -526,6 +527,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `recordPortfolioEntry(session, post)` [src/portfolio/store.ts:56](../src/portfolio/store.ts#L56): Records a BuzzPrint entry from a Bulletin post, snapshotting the fields BulletinPost already has
 - `addPortfolioPhoto(accountId, entryId, photo)` [src/portfolio/store.ts:77](../src/portfolio/store.ts#L77): Attaches a photo to one of this account's entries and shows it immediately.
 - `setAdapter(next)` [src/portfolio/store.ts:84](../src/portfolio/store.ts#L84): Backend hook: replace the storage adapter before the first load.
+- `supabasePortfolioAdapter` [src/portfolio/supabaseAdapter.ts:29](../src/portfolio/supabaseAdapter.ts#L29): BuzzPrint on Supabase: private per account (RLS), one entry per post, photos as files instead of base64 in lo…
 - `NAV_ITEMS` [src/shell/icons.tsx:40](../src/shell/icons.tsx#L40): The six destinations of the rail (desktop) and the tab bar (phones), in order.
 - `moveFocus(event, vertical)` [src/shell/icons.tsx:52](../src/shell/icons.tsx#L52): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 - `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:16](../src/stories/CameraCapture.tsx#L16): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
