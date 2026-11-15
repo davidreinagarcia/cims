@@ -2,7 +2,7 @@
 import { createContext, useContext, useMemo, useReducer, type ReactNode } from "react";
 
 /** Selectable map and search entities; room ids use "buildingId:spaceId". */
-export type SelectionKind = "building" | "place" | "room" | "report";
+export type SelectionKind = "building" | "place" | "room" | "report" | "stop";
 
 /** One selected thing: what kind it is and its id inside that kind's data. */
 export interface Selection {

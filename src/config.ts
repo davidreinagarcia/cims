@@ -24,3 +24,8 @@ export const TILE_ATTRIBUTION = "© <a href=\"https://openfreemap.org\" target=\
 
 /** Base URL for prefilled place correction issues. */
 export const CORRECTION_URL = "https://github.com/davidreinagarcia/cims/issues/new";
+
+/** Official GT tracker page for live arrivals. */
+export const TRACKER_URL = "https://bus.gatech.edu/";
+/** Official vehicle endpoint; positions are fetched fresh and never cached. */
+export const TRANSIT_VEHICLES_URL = "https://bus.gatech.edu/Services/JSONPRelay.svc/GetMapVehiclePoints";

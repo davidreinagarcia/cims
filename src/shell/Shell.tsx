@@ -7,6 +7,7 @@ import AccountChip from "../panels/account/AccountChip";
 import SignInDialog from "../panels/account/SignInDialog";
 import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
+import StopCard from "../panels/building-card/StopCard";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinPanel from "../panels/bulletin/BulletinPanel";
 import StoriesPanel from "../stories/StoriesPanel";
@@ -26,7 +27,7 @@ import "./shell.css";
 
 const MOBILE = "(max-width: 767.98px)";
 const PANELS: ShellPanel[] = ["explore", "rooms", "report", "bulletin", "stories", "route"];
-const KINDS: SelectionKind[] = ["building", "place", "room", "report"];
+const KINDS: SelectionKind[] = ["building", "place", "room", "report", "stop"];
 
 function useIsMobile(): boolean {
   return useSyncExternalStore((onChange) => {
@@ -102,9 +103,9 @@ export default function Shell() {
   else if (panel === "stories") content = { title: "Stories", key: "stories", body: <StoriesPanel onShowMap={() => setPanel("explore")} /> };
   else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel initialSelection={routeTo} onClose={closeContent} /> };
   else if (selection) content = {
-    title: selection.kind === "building" ? "Building" : "Place",
+    title: selection.kind === "stop" ? "Bus stop" : selection.kind === "building" ? "Building" : "Place",
     key: `${selection.kind}:${selection.id}`,
-    body: <><PlaceCard /><BuildingPreview /><BuildingCard /></>,
+    body: <><StopCard /><PlaceCard /><BuildingPreview /><BuildingCard /></>,
   };
   const showResults = hasQuery && !selection && panel === "explore";
 

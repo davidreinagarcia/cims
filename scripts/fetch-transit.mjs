@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 /** @file Fetches Georgia Tech bus routes and stops from the official live tracker (bus.gatech.edu) into src/data/transit.geojson (T-42). */
 // Usage: node scripts/fetch-transit.mjs [--from <routes.json>]
 //   One GET to the tracker's own route endpoint (the data bus.gatech.edu draws). Writes route lines (decoded
@@ -7,9 +6,9 @@
 //   The older wrapper gtbuses.herokuapp.com is dead for GT (NextBus feed ended 2019): don't use it.
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { execSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const ROOT = execSync("git rev-parse --show-toplevel").toString().trim();
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const OUT = join(ROOT, "src/data/transit.geojson");
 const SOURCE_URL = "https://bus.gatech.edu/";
 const ENDPOINT = "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine";

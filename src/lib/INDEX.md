@@ -15,5 +15,6 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`places.ts`](places.ts): Typed access to every curated place: seed file plus src/data/pois/*.json, drafts hidden unless ?drafts=1. · exports `showDrafts`, `places`
 - [`search.ts`](search.ts): Ranked building, room and place search with accent folding and original-text match ranges. · exports `searchPlaces`, `searchCampus`
 - [`suggest.ts`](suggest.ts): Search-as-you-type suggestions (short ranked list, nothing until typed) and where a result sits on the map. · exports `suggest`, `locate`, `recents`, `remember`
+- [`transit.ts`](transit.ts): Bundled official GT routes and stops, shared by the map, stop card and layer controls. · exports `transit`, `transitStops`
 
 <!-- AUTO:END -->

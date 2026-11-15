@@ -2,6 +2,7 @@
 import { useMemo, useState, type CSSProperties } from "react";
 import Glyph from "../../components/Glyph";
 import { LAYER_CATALOG, type LayerCategory } from "../../lib/layerCatalog";
+import { transitStops } from "../../lib/transit";
 import { places } from "../../lib/places";
 import { OTHER_SUBTYPE } from "../../map/layerFilters";
 import { useLayerFilters } from "../../state/layerFilters";
@@ -20,6 +21,8 @@ function useCounts() {
       const key = `${category}/${subtype ?? OTHER_SUBTYPE}`;
       bySub[key] = (bySub[key] ?? 0) + 1;
     }
+    byCat.transport = (byCat.transport ?? 0) + transitStops.length;
+    bySub[`transport/${OTHER_SUBTYPE}`] = (bySub[`transport/${OTHER_SUBTYPE}`] ?? 0) + transitStops.length;
     return { byCat, bySub };
   }, []);
 }

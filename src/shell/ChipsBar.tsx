@@ -2,11 +2,13 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Glyph from "../components/Glyph";
 import { LAYER_CATALOG } from "../lib/layerCatalog";
+import { transitStops } from "../lib/transit";
 import { places } from "../lib/places";
 import { useLayerFilters } from "../state/layerFilters";
 import { Icon } from "./icons";
 
 const withData = new Set(places.features.map((feature) => feature.properties.category));
+if (transitStops.length) withData.add("transport");
 // Chips with data first, then the "no data yet" ones; catalog order kept within each group.
 const ordered = [...LAYER_CATALOG].sort((a, b) => Number(!withData.has(a.id)) - Number(!withData.has(b.id)));
 

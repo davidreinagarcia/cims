@@ -27,6 +27,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
     - [`docs/design/screenshots/`](docs/design/screenshots/INDEX.md): Before/after screenshots of the real app, taken for PRs (production build, headless Chromium). Named <task-<s…
       - [`docs/design/screenshots/app-shell/`](docs/design/screenshots/app-shell/INDEX.md): Map-first shell (APP-SHELL.md), production build in headless Chromium at 1440, 1280, 390 and 360 px: empty ma…
       - [`docs/design/screenshots/data-attach/`](docs/design/screenshots/data-attach/INDEX.md): Production screenshots with drafts visible at 1440, 1280, 390 and 360 pixels.
+      - [`docs/design/screenshots/transport/`](docs/design/screenshots/transport/INDEX.md): Production screenshots of the shared Transport toggle and survey map at 1440, 1280, 390 and 360 pixels.
   - [`docs/research/`](docs/research/INDEX.md): Fuentes y dudas pendientes de las investigaciones de datos del campus.
   - [`docs/stickers/`](docs/stickers/INDEX.md): QR codes and the link list for the door stickers that open a building with the entrance preselected.
   - [`docs/testing/`](docs/testing/INDEX.md): Test plans with people (hallway tests).

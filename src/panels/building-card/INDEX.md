@@ -11,6 +11,7 @@ Detail card for the selected place (grows into the building card, T-11).
 - [`BuildingPreview.tsx`](BuildingPreview.tsx): Short card for a building with an indoor map: name, thumbnail of the entrance floor, key facts and the button… · exports `BuildingPreview`
 - [`InsidePlaces.tsx`](InsidePlaces.tsx): Category-grouped places inside a footprint, with sourced rooms and current opening status. · exports `InsidePlaces`
 - [`PlaceCard.tsx`](PlaceCard.tsx): Selected place card with hours, access, provenance, contained places and map directions. · exports `PlaceCard`
+- [`StopCard.tsx`](StopCard.tsx): Small selected bus stop card using the existing detail card styles and selection. · exports `StopCard`
 - [`building-card.css`](building-card.css): * @file Detail card layout. Look comes from .cims-card__* / .cims-tag / .cims-btn (styles/cims-ui.css); `orde…
 
 <!-- AUTO:END -->
