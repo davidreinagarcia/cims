@@ -8,7 +8,7 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 
 - [`alerts.ts`](alerts.ts): Campus alerts (GTPD alarms) and citizen police tips: types, geometry, and a live store on Supabase (Realtime)… · exports `ALERT_KINDS`, `TIP_CATEGORIES`, `AlertsError`, `circleRing`, `insideAlert`, `alertKindLabel`, `refreshAlerts`, `useAlerts`, `subscribeAlerts`, `launchAlert`, `endAlert`, `submitTip`, `tipStatus`, `setTipStatus`, `focusAlert`
 - [`buildingPhotos.ts`](buildingPhotos.ts): Free-licensed building photos (Wikimedia Commons) keyed by building id, with the credit the card must show. · exports `buildingPhoto`
-- [`buildingPlaces.ts`](buildingPlaces.ts): Building association and location metadata shared by POI pins and detail cards. · exports `locationDetails`, `placeBuilding`
+- [`buildingPlaces.ts`](buildingPlaces.ts): Building association and location metadata shared by POI pins and detail cards. · exports `locationDetails`, `placeBuilding`, `buildingIdForPlace`
 - [`buildings.ts`](buildings.ts): Building footprints (OSM, src/data/buildings.geojson): loaded once on demand, with a point-in-footprint looku… · exports `loadedBuildings`, `loadBuildings`
 - [`bulletin.ts`](bulletin.ts): Pure bulletin posts, campus-time labels, filters, counts and deep links. · exports `POST_TYPES`, `bulletinPosts`, `postsFor`, `filterPosts`, `countByType`, `bulletinUrl`, `readBulletinParams`
 - [`bulletinInterests.ts`](bulletinInterests.ts): Bulletin "Interested" marks on Supabase (shared counts, one mark per account and post); localStorage only whe… · exports `loadInterests`, `setInterest`
