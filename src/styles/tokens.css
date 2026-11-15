@@ -27,6 +27,17 @@
   --cat-free: #3F7D4E;        /* door / clock */
   --route: #A33B2B;           /* dashed walking route */
 
+  /* basemap (ADR-0006 step 2): mirrored in src/map/palette.ts, change both together */
+  --map-campus: #D2DCC0;
+  --map-grass: #A8BB94;
+  --map-wood: #93A985;
+  --map-water: #A3B9C9;
+  --map-road-major: #D9C38E;
+  --map-road-minor: #FFFFFF;
+  --map-walkway: #D49C7F;   /* lighter than --route, so a drawn route stays on top */
+  --map-rail: #7D7766;
+  --map-building-context: #E4DCC8;
+
   /* indoor room fills (solid, not transparent tints; ink text on all ≥ 6:1) */
   --room-classroom: #CBD5C0;
   --room-study: #E8D9B5;
@@ -53,4 +64,11 @@
   --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px;
   --tap: 44px;               /* minimum touch target */
   --panel-w: 340px;
+
+  /* map-first shell (docs/design/APP-SHELL.md): rounding is for floating surfaces only, never inside cards */
+  --radius-pill: 999px;      /* search pill, chips, FAB, active rail/tab highlight */
+  --radius-card: 16px;       /* floating card, popovers, bottom sheet (top corners) */
+  --elev: 0 1px 0 rgba(28, 39, 51, 0.28); /* 1px letterpress line under a floating surface; never a blur */
+  --rail-w: 72px;            /* desktop left rail */
+  --tabbar-h: 64px;          /* mobile bottom tab bar (plus safe-area inset) */
 }

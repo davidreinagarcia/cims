@@ -30,6 +30,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `places` [src/lib/places.ts:19](../src/lib/places.ts#L19): The places the app shows: seed, demo and verified records, plus drafts only with ?drafts=1.
 - `searchPlaces(query, items)` [src/lib/search.ts:113](../src/lib/search.ts#L113): Searches name, aliases and category; queries under two characters preserve the full input order.
 - `searchCampus(query, items, buildings)` [src/lib/search.ts:148](../src/lib/search.ts#L148): Searches footprints and published rooms alongside places, including building aliases in room queries.
+- `suggest(query, buildings, limit = 6)` [src/lib/suggest.ts:7](../src/lib/suggest.ts#L7): Few, ranked suggestions like a map app: nothing for an empty or one letter query, never the whole campus.
+- `locate(result, "kind" | "id">, buildings)` [src/lib/suggest.ts:13](../src/lib/suggest.ts#L13): The [lng, lat] of a building, room (its building) or place result.
+- `recents()` [src/lib/suggest.ts:21](../src/lib/suggest.ts#L21): Last picked results, newest first, kept only in this browser.
+- `remember(result)` [src/lib/suggest.ts:25](../src/lib/suggest.ts#L25): Remembers a picked result (five at most).
 - `useAuth()` [src/state/auth.tsx:63](../src/state/auth.tsx#L63): Reads the demo session and sign-in controls inside AuthProvider.
 - `useLayerFilters()` [src/state/layerFilters.tsx:72](../src/state/layerFilters.tsx#L72): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
@@ -43,9 +47,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
 - `IndoorRoom` [src/indoor/registry.ts:19](../src/indoor/registry.ts#L19): A searchable indoor entry explicitly distinguishes drawn routes from published facts.
 - `Step` [src/indoor/route.ts:5](../src/indoor/route.ts#L5): One accessible instruction and the level on which it happens.
-- `RouteLeg` [src/indoor/route.ts:7](../src/indoor/route.ts#L7): A continuous portion of the route on one floor.
-- `IndoorRoute` [src/indoor/route.ts:9](../src/indoor/route.ts#L9): A shortest path with drawing geometry and human readable instructions.
-- `RouteOptions` [src/indoor/route.ts:11](../src/indoor/route.ts#L11): Routing preferences and optional endpoint names supplied by the directory.
+- `Transition` [src/indoor/route.ts:7](../src/indoor/route.ts#L7): Where the route changes floor: shown on the plan as a badge.
+- `RouteLeg` [src/indoor/route.ts:9](../src/indoor/route.ts#L9): A continuous portion of the route on one floor.
+- `IndoorRoute` [src/indoor/route.ts:11](../src/indoor/route.ts#L11): A shortest path with drawing geometry and human readable instructions.
+- `RouteOptions` [src/indoor/route.ts:13](../src/indoor/route.ts#L13): Routing preferences and optional endpoint names supplied by the directory.
 - `IndoorShape` [src/indoor/types.ts:3](../src/indoor/types.ts#L3): A space shape in the schematic coordinate system.
 - `IndoorSpaceType` [src/indoor/types.ts:9](../src/indoor/types.ts#L9): The supported schematic space categories.
 - `IndoorSpace` [src/indoor/types.ts:12](../src/indoor/types.ts#L12): One named space with its source and optional contextual note.
@@ -70,6 +75,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
 - `MapLayer` [src/map/types.ts:36](../src/map/types.ts#L36): A self-contained piece of the map. Drop a file in src/map/layers/ that default-exports one of
+- `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
+- `IconName` [src/shell/icons.tsx:19](../src/shell/icons.tsx#L19): Names of the shell icons.
+- `ShellPanel` [src/shell/icons.tsx:32](../src/shell/icons.tsx#L32): What the floating card / bottom sheet can show besides a map selection.
 - `LayerFiltersApi` [src/state/layerFilters.tsx:20](../src/state/layerFilters.tsx#L20): What useLayerFilters() returns.
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): Selectable map and search entities; room ids use "buildingId:spaceId".
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
@@ -83,12 +91,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Components
 
-- `App()` [src/App.tsx:12](../src/App.tsx#L12): Root component.
+- `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component.
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:15](../src/components/MapView.tsx#L15): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
-- `Sidebar()` [src/components/Sidebar.tsx:12](../src/components/Sidebar.tsx#L12): Left column (bottom sheet on phones) that hosts the panels.
-- `BuildingView()` [src/indoor/BuildingView.tsx:19](../src/indoor/BuildingView.tsx#L19): Opens registered buildings and resolves room selections straight into a routed building screen.
+- `BuildingView()` [src/indoor/BuildingView.tsx:20](../src/indoor/BuildingView.tsx#L20): Opens registered buildings and resolves room selections straight into a routed building screen.
 - `FloorPlan({ level, selected, focus, route, legs, onSelect })` [src/indoor/FloorPlan.tsx:38](../src/indoor/FloorPlan.tsx#L38): Renders one available level with controls and brings the selected space into view.
 - `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:7](../src/panels/account/AccountChip.tsx#L7): Shows sign-in or the selected demo persona with a small sign-out disclosure.
@@ -96,10 +103,23 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:13](../src/panels/building-card/BuildingCard.tsx#L13): Shows the selected building (kind "building"), or nothing when something else is selected.
 - `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:20](../src/panels/building-card/BuildingCard.tsx#L20): Shared building facts and actions for the sidebar and expanded indoor screen.
 - `BuildingLink({ coordinates })` [src/panels/building-card/BuildingLink.tsx:7](../src/panels/building-card/BuildingLink.tsx#L7): Renders nothing when the place is not inside a known footprint (or the footprints are not loaded).
+- `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:10](../src/panels/building-card/BuildingPreview.tsx#L10): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:16](../src/panels/building-card/PlaceCard.tsx#L16): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinPanel({ onShowMap })` [src/panels/bulletin/BulletinPanel.tsx:9](../src/panels/bulletin/BulletinPanel.tsx#L9): Show upcoming events independently of layer filters and return to Explore on selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
+- `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
+- `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
 - `SearchPanel()` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
+- `BottomSheet(…)` [src/shell/BottomSheet.tsx:19](../src/shell/BottomSheet.tsx#L19): Drag or tap the handle to move between snaps; arrow keys on the handle do the same. Opens at half.
+- `ChipsBar()` [src/shell/ChipsBar.tsx:14](../src/shell/ChipsBar.tsx#L14): One pill per layer category; pressed = layer on. Categories without data stay visible but inert (aria-disable…
+- `FloatingCard(…)` [src/shell/FloatingCard.tsx:6](../src/shell/FloatingCard.tsx#L6): Card with a close button and a ‹ collapse tab on its right edge. Renders nothing visible when its panel rende…
+- `LayersPopover()` [src/shell/LayersPopover.tsx:7](../src/shell/LayersPopover.tsx#L7): Tile that opens the legend popover. Esc or a click outside closes it and returns focus to the tile.
+- `MobileTabBar({ panel, onPanel })` [src/shell/MobileTabBar.tsx:5](../src/shell/MobileTabBar.tsx#L5): Fixed bottom bar above the safe-area inset. Left/right arrows move between tabs.
+- `Rail({ panel, onPanel })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
+- `RoutePanel({ onClose })` [src/shell/RoutePanel.tsx:7](../src/shell/RoutePanel.tsx#L7): Loads the building index and hosts the directions fields inside the floating card or sheet.
+- `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
+- `Shell()` [src/shell/Shell.tsx:53](../src/shell/Shell.tsx#L53): Lays out the map and every floating surface; panels are mounted unchanged inside the card (desktop) or sheet…
+- `Icon({ name, size = 24 })` [src/shell/icons.tsx:22](../src/shell/icons.tsx#L22): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = mockAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
@@ -111,9 +131,12 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `glyphPath(id)` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
 - `CAMPUS` [src/config.ts:3](../src/config.ts#L3): Central place for map settings. Change here, not inside components.
 - `MAP_LIGHT` [src/config.ts:18](../src/config.ts#L18): Fixed light for the extruded buildings: anchored to the map so wall shading doesn't change as you rotate.
-- `TILE_URL` [src/config.ts:22](../src/config.ts#L22): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
-- `TILE_ATTRIBUTION` [src/config.ts:24](../src/config.ts#L24): Attribution text OSM requires next to the tiles.
-- `CORRECTION_URL` [src/config.ts:27](../src/config.ts#L27): Base URL for prefilled place correction issues.
+- `BASEMAP_TILEJSON` [src/config.ts:21](../src/config.ts#L21): Vector basemap (ADR-0006 step 2): OpenFreeMap, free and keyless, OpenMapTiles schema.
+- `TILE_ATTRIBUTION` [src/config.ts:23](../src/config.ts#L23): Attribution OpenFreeMap and OpenStreetMap require next to the map.
+- `CORRECTION_URL` [src/config.ts:26](../src/config.ts#L26): Base URL for prefilled place correction issues.
+- `openIndoor(buildingId)` [src/indoor/open.ts:9](../src/indoor/open.ts#L9): Opens the full indoor screen of a building.
+- `closeIndoor()` [src/indoor/open.ts:11](../src/indoor/open.ts#L11): Back to the preview card (or the map) without clearing the selection.
+- `useOpenIndoor()` [src/indoor/open.ts:13](../src/indoor/open.ts#L13): The building whose full indoor screen is open, if any.
 - `indoorFor(buildingId)` [src/indoor/registry.ts:9](../src/indoor/registry.ts#L9): Returns the curated indoor model for this footprint id, if supported.
 - `hasIndoor(id)` [src/indoor/registry.ts:14](../src/indoor/registry.ts#L14): Whether a building opens the indoor screen instead of the sidebar card.
 - `indoorRooms()` [src/indoor/registry.ts:25](../src/indoor/registry.ts#L25): Lists routable schematic spaces and rooms without geometry for search and selection.
@@ -121,8 +144,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `indoorBySlug(slug)` [src/indoor/registry.ts:41](../src/indoor/registry.ts#L41): Finds an indoor building by its sticker slug (or full footprint id).
 - `doorLink()` [src/indoor/registry.ts:46](../src/indoor/registry.ts#L46): A door sticker link: ?in=<building slug>&door=<entrance id>, read once when the app opens.
 - `doorUrl(origin, building, entranceId)` [src/indoor/registry.ts:56](../src/indoor/registry.ts#L56): The sticker link for one entrance, for printing QR codes and programming NFC tags.
-- `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:22](../src/indoor/route.ts#L22): Finds the least cost walk, filtering inaccessible connectors before searching.
-- `baseStyle` [src/map/baseStyle.ts:7](../src/map/baseStyle.ts#L7): Base style every layer is added on top of.
+- `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:24](../src/indoor/route.ts#L24): Finds the least cost walk, filtering inaccessible connectors before searching.
+- `baseStyle` [src/map/baseStyle.ts:69](../src/map/baseStyle.ts#L69): Base style every layer is added on top of.
 - `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.
 - `ScaleBox` [src/map/furniture/ScaleBox.ts:22](../src/map/furniture/ScaleBox.ts#L22): MapLibre control: a four-segment scale bar in feet and the map center's latitude/longitude, updated as the ma…
 - `ViewToggle` [src/map/furniture/ViewToggle.ts:9](../src/map/furniture/ViewToggle.ts#L9): MapLibre control: "2D" / "3D" button. The label is the view you get by pressing it.
@@ -137,10 +160,23 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `WHITE` [src/map/palette.ts:10](../src/map/palette.ts#L10): --white: building roofs.
 - `GOLD` [src/map/palette.ts:12](../src/map/palette.ts#L12): --gold: selected roof, selected hatch ground.
 - `GOLD_INK` [src/map/palette.ts:14](../src/map/palette.ts#L14): --gold-ink: gold linework on paper (selected hatch lines).
+- `MAP_CAMPUS` [src/map/palette.ts:18](../src/map/palette.ts#L18): --map-campus: university/college land, a sage tint so campus reads as one place.
+- `MAP_GRASS` [src/map/palette.ts:20](../src/map/palette.ts#L20): --map-grass: lawns, parks, pitches.
+- `MAP_WOOD` [src/map/palette.ts:22](../src/map/palette.ts#L22): --map-wood: trees and wooded areas, a step darker than grass.
+- `MAP_WATER` [src/map/palette.ts:24](../src/map/palette.ts#L24): --map-water: ponds, fountains, streams.
+- `MAP_ROAD_MAJOR` [src/map/palette.ts:26](../src/map/palette.ts#L26): --map-road-major: motorways and arterials (old-gold family, lighter than --gold).
+- `MAP_ROAD_MAJOR_CASE` [src/map/palette.ts:28](../src/map/palette.ts#L28): Casing for major roads.
+- `MAP_ROAD_MINOR` [src/map/palette.ts:30](../src/map/palette.ts#L30): --map-road-minor: streets and service roads (white with a hairline casing, like a drafted plan).
+- `MAP_ROAD_MINOR_CASE` [src/map/palette.ts:32](../src/map/palette.ts#L32): Casing for minor roads.
+- `MAP_WALKWAY` [src/map/palette.ts:34](../src/map/palette.ts#L34): --map-walkway: footways, pedestrian paths and steps (terracotta, lighter than the brick --route so routes sta…
+- `MAP_RAIL` [src/map/palette.ts:36](../src/map/palette.ts#L36): --map-rail: rail and tram lines.
+- `MAP_BUILDING_CONTEXT` [src/map/palette.ts:38](../src/map/palette.ts#L38): --map-building-context: off-campus buildings, flat (ours are the extruded, hatched ones).
 - `HATCH_GOLD` [src/map/patterns/index.ts:7](../src/map/patterns/index.ts#L7): Image id of the gold hatch (selected building walls).
 - `addHatchPatterns(map)` [src/map/patterns/index.ts:38](../src/map/patterns/index.ts#L38): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
 - `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
+- `NAV_ITEMS` [src/shell/icons.tsx:35](../src/shell/icons.tsx#L35): The four destinations of the rail (desktop) and the tab bar (phones), in order.
+- `moveFocus(event, vertical)` [src/shell/icons.tsx:43](../src/shell/icons.tsx#L43): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 
 ### Possible duplicates
 

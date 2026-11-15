@@ -23,7 +23,7 @@ src/
       pois.ts          places: filtered clusters and shared-location picker, survey pins/labels, independent gold selection
   components/
     MapView.tsx        host: creates the map, loads layers, passes them the selection
-    Sidebar.tsx(+css)  shell: header + keyboard Explore/Bulletin tabs + panels
+  shell/               map-first shell (docs/design/APP-SHELL.md): rail / tab bar, search pill, chips, floating card / bottom sheet, layers popover
   panels/
     account/           AccountChip + SignInDialog: DEMO sign-in theater, no authentication or permissions
     bulletin/          read-only upcoming events, independent of layer toggles; Show on map selects a place and returns to Explore
@@ -59,7 +59,7 @@ src/
   properties; a category listed in `lib/layerCatalog.ts` becomes a toggle, any other stays always visible.
 - **Indoor** opens for registered building and `buildingId:spaceId` room selections inside `.stage`, above the continuously mounted map. Back or Escape clears selection and returns focus to the map; places inside reuse the shared selection. `BuildingDetails` is shared with the sidebar card.
 - **Indoor routing** uses `indoor/route.ts`: Euclidean plan units for same level edges, elevator cost 40 and stairs cost 25 per level hop. Step-free routes exclude inaccessible connectors. `BuildingView` routes immediately from its entrance or chosen start when a room or step-free preference changes; `RoomSearch` browses every level in one keyboard accessible combobox; `FloorPlan` draws decorative route legs and fits its camera to the stage or current leg. Add buildings as JSON using the same typed schema and register them in `indoor/registry.ts`; buildings without a graph hide directions. CULC uses `rooms-only` facts with no geometry or routing: 104 sourced entries, five unavailable plan levels, a level browser and room cards. `indoorRooms()` marks these entries `routable: false`; exact room numbers lead global search and resolve through the existing room selection. Unknown levels remain null. Explicit textual floor names in the inventory are normalized to 1, 4 and 5.
-- **Panels** are components in `src/panels/<name>/`, mounted in `components/Sidebar.tsx`.
+- **Panels** are components in `src/panels/<name>/`, mounted in `shell/Shell.tsx` (floating card on desktop, bottom sheet on phones).
 
 ## Where things go
 
@@ -68,7 +68,7 @@ src/
 | Add a building / place         | Add a Feature to `src/data/places.json`                                    |
 | Add a category                 | Extend `Category` in `src/types.ts`                                        |
 | Add a new map layer            | New file in `src/map/layers/` default-exporting a `MapLayer`; data in `src/data/` |
-| Add a new panel                | New folder in `src/panels/<name>/`, mount it in `components/Sidebar.tsx`   |
+| Add a new panel                | New folder in `src/panels/<name>/`, mount it in `shell/Shell.tsx`          |
 | Add a toggleable layer / sub-type | Add it to `src/lib/layerCatalog.ts` and give features that `category` (and `subtype`) |
 | React to what is selected      | `useSelection()` in a panel, or `update(selection)` in a layer             |
 | Add a backend / API            | Create `server/` and proxy `/api` in `vite.config.ts` and nginx            |

@@ -4,7 +4,6 @@ import Glyph from "../../components/Glyph";
 import { loadBuildings, loadedBuildings, type BuildingIndex } from "../../lib/buildings";
 import type { MatchRange } from "../../lib/search";
 import { recents, remember, suggest } from "../../lib/suggest";
-import DirectionsBox from "./DirectionsBox";
 import { useSelection } from "../../state/selection";
 import "./search.css";
 
@@ -38,7 +37,6 @@ export default function SearchPanel() {
       .catch(() => { if (mounted.current) setFailed(true); })
       .finally(() => { if (mounted.current) setLoading(false); });
   };
-  const [directions, setDirections] = useState(false);
   const typed = query.trim().length >= 2;
   // Like a map app: nothing until you type, then a handful of ranked suggestions; recent picks show on an empty focus.
   const results = useMemo(() => typed ? suggest(query, buildings, 8) : focused ? recents() : [], [query, buildings, typed, focused]);
@@ -81,7 +79,6 @@ export default function SearchPanel() {
     }
   }
 
-  if (directions) return <DirectionsBox buildings={buildings} onClose={() => setDirections(false)} />;
   return (
     <>
       <div className="search search--row">
@@ -107,9 +104,6 @@ export default function SearchPanel() {
           </svg>
         </span>
       </div>
-      <button type="button" className="cims-btn search__directions" aria-label="Directions" title="Directions" onClick={() => { ensureBuildings(); setDirections(true); }}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"><path d="M12 3l9 9-9 9-9-9z" /><path d="M8 12h7m-3-3l3 3-3 3" /></svg>
-      </button>
       </div>
       {(loading || failed) && <p className="search-status cims-muted" role="status">{loading ? "Loading buildings..." : "Buildings could not be loaded. Focus search to retry."}</p>}
       <div className="list cims-results" id={listId} role="listbox" aria-label="Search results" ref={listRef}>

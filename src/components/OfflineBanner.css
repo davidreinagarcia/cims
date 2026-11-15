@@ -1,5 +1,5 @@
-/** @file Position of the offline notice: top of the map area, clear of the zoom controls. */
-.offline-banner { position: fixed; z-index: 30; top: var(--s3); left: calc(var(--panel-w) + var(--s3)); right: 64px; width: fit-content; max-width: calc(100vw - var(--panel-w) - 80px); }
-@media (max-width: 700px) {
-  .offline-banner { left: var(--s3); right: 64px; max-width: none; top: var(--s3); }
+/** @file Position of the offline notice: top of the map, under the floating search pill so it never covers it. */
+.offline-banner { position: fixed; z-index: 30; top: 68px; left: calc(var(--rail-w) + 424px + var(--s3)); right: 64px; width: fit-content; max-width: calc(100vw - var(--rail-w) - 424px - 80px); }
+@media (max-width: 767.98px) {
+  .offline-banner { left: var(--s3); right: 64px; max-width: none; top: calc(env(safe-area-inset-top, 0px) + 112px); }
 }
