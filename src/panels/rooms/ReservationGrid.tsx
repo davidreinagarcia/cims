@@ -1,5 +1,5 @@
 /** @file Step 2 of reserving a room (T-60/T-61/T-62): day/time grid of 30-minute slots per bookable room (own building, a cross-building favorites list, or a "rooms near me" list), the booking flow and an optional "only free right now" filter. "My bookings" (check-in, cancel, directions) is a top-level section, `MyBookingsSection.tsx`. */
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { campusTimeToday, expandDemoSlots, isRoomFree, type BookableRoom } from "../../indoor/availability";
 import { demoSlotPatterns } from "../../indoor/roomFinderDemo";
 import type { AvailabilitySlot } from "../../indoor/types";
@@ -123,6 +123,7 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
   }
 
   function onSlotClick(roomId: string, index: number) {
+    if (didDragRef.current) { didDragRef.current = false; return; } // the click that follows a drag's pointerup; the drag already set the selection
     if (!cellFree(roomId, index) || cellPast(index)) return;
     setError(null);
     setNotice(null);
@@ -136,6 +137,44 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
       if (index === current.startIndex - 1 && span < MAX_SLOTS) return { ...current, startIndex: index }; // extend backward
       return { room: roomId, dayIndex: selectedDayIndex, startIndex: index, endIndex: index + 1 }; // start fresh elsewhere
     });
+  }
+
+  // Drag-to-select (mouse/pen): press a free slot, drag across adjacent free slots to extend the
+  // selection continuously instead of tapping each one. Stops growing at the first busy/past cell
+  // or at the 2-hour cap (MAX_SLOTS) in whichever direction the drag is heading -- same caps as the
+  // tap-to-extend path in onSlotClick above, just applied live as the pointer moves.
+  const dragAnchor = useRef<{ room: string; index: number } | null>(null);
+  const didDragRef = useRef(false);
+  useEffect(() => {
+    const onUp = () => { dragAnchor.current = null; };
+    window.addEventListener("pointerup", onUp);
+    return () => window.removeEventListener("pointerup", onUp);
+  }, []);
+
+  function onSlotPointerDown(roomId: string, index: number) {
+    if (!cellFree(roomId, index) || cellPast(index)) return;
+    dragAnchor.current = { room: roomId, index };
+    didDragRef.current = false;
+  }
+
+  function onSlotPointerEnter(roomId: string, index: number, event: ReactPointerEvent<HTMLButtonElement>) {
+    const anchor = dragAnchor.current;
+    if (!anchor || anchor.room !== roomId || event.buttons !== 1) return;
+    didDragRef.current = true;
+    setError(null);
+    setNotice(null);
+    let startIndex: number;
+    let endIndex: number;
+    if (index >= anchor.index) {
+      startIndex = anchor.index;
+      endIndex = Math.min(index + 1, anchor.index + MAX_SLOTS);
+      for (let i = anchor.index; i < endIndex; i++) { if (!cellFree(roomId, i) || cellPast(i)) { endIndex = i; break; } }
+    } else {
+      endIndex = anchor.index + 1;
+      startIndex = Math.max(index, anchor.index + 1 - MAX_SLOTS);
+      for (let i = anchor.index; i >= startIndex; i--) { if (!cellFree(roomId, i) || cellPast(i)) { startIndex = i + 1; break; } }
+    }
+    setSelection({ room: roomId, dayIndex: selectedDayIndex, startIndex, endIndex });
   }
 
   const activeSelection = selection?.dayIndex === selectedDayIndex ? selection : null;
@@ -254,6 +293,8 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
                         aria-pressed={selected}
                         aria-label={`${room.label}, ${timeFmt.format(start)}, ${cappedNeighbor ? "2-hour maximum reached" : status}`}
                         title={cappedNeighbor ? "2-hour maximum reached" : undefined}
+                        onPointerDown={() => onSlotPointerDown(room.id, index)}
+                        onPointerEnter={(event) => onSlotPointerEnter(room.id, index, event)}
                         onClick={() => onSlotClick(room.id, index)} />
                     );
                   })}

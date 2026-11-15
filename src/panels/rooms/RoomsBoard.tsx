@@ -43,6 +43,10 @@ export default function RoomsBoard({ onClose }: { onClose: () => void }) {
   useEffect(() => clearBookingRequest(), []);
   const [onlyAvailable, setOnlyAvailable] = useState(false);
   const [comingSoon, setComingSoon] = useState<string | null>(null);
+  const [buildingQuery, setBuildingQuery] = useState("");
+  const buildingMatches = buildingQuery.trim()
+    ? BUILDING_OPTIONS.filter((option) => option.label.toLowerCase().includes(buildingQuery.trim().toLowerCase()))
+    : [];
   const [favorites, setFavorites] = useState<PreferredRoom[]>([]);
   const [bookingsCount, setBookingsCount] = useState(0);
 
@@ -75,10 +79,14 @@ export default function RoomsBoard({ onClose }: { onClose: () => void }) {
   };
 
   function pickBuilding(option: { id: string; label: string; enabled: boolean }) {
+    setBuildingQuery("");
     if (!option.enabled) { setComingSoon(option.label); return; }
     setComingSoon(null);
     setSection({ kind: "building", buildingId: option.id });
   }
+
+  const currentBuildingLabel = section.kind === "building"
+    ? BUILDING_OPTIONS.find((option) => option.id === section.buildingId)?.label : undefined;
 
   const building = section.kind === "building" ? indoorFor(section.buildingId) : undefined;
   const rooms = section.kind === "building" && building
@@ -107,19 +115,28 @@ export default function RoomsBoard({ onClose }: { onClose: () => void }) {
         </p>
       </div>
       <div className="rooms-board__surface">
+        <div className="rooms-board__search">
+          <div className="cims-field">
+            <input type="text" value={buildingQuery} placeholder={currentBuildingLabel ?? "Search a building..."}
+              aria-label="Search a building" role="combobox" aria-expanded={buildingMatches.length > 0}
+              onChange={(event) => setBuildingQuery(event.target.value)} />
+          </div>
+          {buildingMatches.length > 0 && (
+            <ul className="rooms-board__search-results" role="listbox">
+              {buildingMatches.map((option) => (
+                <li key={option.id}>
+                  <button type="button" className="rooms-board__search-result" role="option" onClick={() => pickBuilding(option)}>
+                    {option.label}
+                    {option.enabled
+                      ? <span className="rooms-board__count">{bookableRoomsFor(indoorRooms(), roomAmenitiesById, option.id).length}</span>
+                      : <span className="cims-tag cims-tag--alert">Coming soon</span>}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
         <div className="rooms-board__chips" role="group" aria-label="Filter rooms">
-          {BUILDING_OPTIONS.map((option) => (
-            <button key={option.id} type="button" className="rooms-board__chip"
-              aria-pressed={section.kind === "building" && section.buildingId === option.id}
-              aria-disabled={!option.enabled}
-              title={option.enabled ? undefined : "Coming soon -- no indoor data for this building yet"}
-              onClick={() => pickBuilding(option)}>
-              {option.label}
-              {option.enabled
-                ? <span className="rooms-board__count">{bookableRoomsFor(indoorRooms(), roomAmenitiesById, option.id).length}</span>
-                : <span className="cims-tag cims-tag--alert">Coming soon</span>}
-            </button>
-          ))}
           <button type="button" className="rooms-board__chip" aria-pressed={section.kind === "favorites"} onClick={() => setSection({ kind: "favorites" })}>
             Favorites <span className="rooms-board__count">{favorites.length}</span>
           </button>
