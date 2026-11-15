@@ -33,6 +33,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `tipStatus(id)` [src/lib/alerts.ts:287](../src/lib/alerts.ts#L287): Citizen: current status of a tip they sent.
 - `setTipStatus(id, status)` [src/lib/alerts.ts:299](../src/lib/alerts.ts#L299): Police: moves a tip along the queue.
 - `focusAlert(alert)` [src/lib/alerts.ts:308](../src/lib/alerts.ts#L308): Asks the map to fly to an alarm (the banner's "Show on map").
+- `buildingPhoto(buildingId)` [src/lib/buildingPhotos.ts:10](../src/lib/buildingPhotos.ts#L10): The photo for a building footprint id, if one has been sourced.
 - `locationDetails(place)` [src/lib/buildingPlaces.ts:6](../src/lib/buildingPlaces.ts#L6): Read sourced location metadata without assuming an exact point or inventing a room.
 - `placeBuilding(place, index, all)` [src/lib/buildingPlaces.ts:11](../src/lib/buildingPlaces.ts#L11): Resolve explicit footprint ids, legacy seed building ids, then exact-point containment.
 - `loadedBuildings()` [src/lib/buildings.ts:84](../src/lib/buildings.ts#L84): The index if it is already loaded, so callers can answer synchronously.
@@ -207,6 +208,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `AlertsSnapshot` [src/lib/alerts.ts:80](../src/lib/alerts.ts#L80): Everything the app knows right now. `tips` stays empty unless a police or moderator account is signed in.
 - `AlertsStatus` [src/lib/alerts.ts:88](../src/lib/alerts.ts#L88): Connection state shown in the police view.
 - `AlertsState` [src/lib/alerts.ts:91](../src/lib/alerts.ts#L91): The store state React and map layers read.
+- `BuildingPhoto` [src/lib/buildingPhotos.ts:5](../src/lib/buildingPhotos.ts#L5): One building photo and its attribution.
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
 - `PostType` [src/lib/bulletin.ts:12](../src/lib/bulletin.ts#L12): The five supported bulletin filters; unknown source subtypes become community posts.
@@ -314,10 +316,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `StackView(…)` [src/indoor/StackView.tsx:25](../src/indoor/StackView.tsx#L25): Exploded solid floor slabs; select levels or rooms and open the active level's detailed plan.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:8](../src/panels/account/AccountChip.tsx#L8): Shows sign-in or the selected demo persona with a small sign-out disclosure.
 - `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
-- `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:14](../src/panels/building-card/BuildingCard.tsx#L14): Shows the selected building (kind "building"), or nothing when something else is selected.
-- `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:21](../src/panels/building-card/BuildingCard.tsx#L21): Shared building facts and actions for the sidebar and expanded indoor screen.
+- `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:16](../src/panels/building-card/BuildingCard.tsx#L16): Shows the selected building (kind "building"), or nothing when something else is selected.
+- `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:23](../src/panels/building-card/BuildingCard.tsx#L23): Shared building facts and actions for the sidebar and expanded indoor screen.
 - `BuildingLink({ coordinates, buildingId, attached, floorOrRoom })` [src/panels/building-card/BuildingLink.tsx:7](../src/panels/building-card/BuildingLink.tsx#L7): Renders nothing when the place is not inside a known footprint (or the footprints are not loaded).
-- `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:12](../src/panels/building-card/BuildingPreview.tsx#L12): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
+- `BuildingPhotoFigure({ buildingId })` [src/panels/building-card/BuildingPhoto.tsx:5](../src/panels/building-card/BuildingPhoto.tsx#L5): Renders the sourced photo for a building, or nothing when there is none.
+- `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:13](../src/panels/building-card/BuildingPreview.tsx#L13): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
 - `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:12](../src/panels/building-card/InsidePlaces.tsx#L12): Show selectable places grouped by category for a footprint or a legacy seed building.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:86](../src/panels/bulletin/BulletinBoard.tsx#L86): Modal cork board with shared interests; the shell owns its URL, type and return focus.
