@@ -26,3 +26,7 @@ Link format: `https://cims.queenalexandria.online/?in=<building>&door=<entrance 
 - Test each sticker with a phone before sticking it. NFC tags need the link written as a URL record.
 - QR codes encode the production address, so they only work once the branch is merged to `main`.
 - Add a short readable line under the QR, for example "Find your room: cims.queenalexandria.online".
+
+## For maintenance staff
+
+Until the maintenance page lists the stickers itself (planned, see US-10.5 in [the PRD](../03-prd.md)), install from this folder: the table above gives each door's name, level and link, and the matching `.svg` is the QR to print. Scan every sticker after sticking it; if it opens the wrong door, tell the CIMS team the door name so the entrance is renamed or moved in the data.
