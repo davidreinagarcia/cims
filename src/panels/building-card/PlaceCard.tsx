@@ -6,6 +6,7 @@ import { formatWindow, nextWindow } from "../../lib/events";
 import { campusDay, openStatus } from "../../lib/hours";
 import { LAYER_CATALOG } from "../../lib/layerCatalog";
 import { places } from "../../lib/places";
+import { openReportPanel } from "../report";
 import { useAuth } from "../../state/auth";
 import { useSelection } from "../../state/selection";
 import "./building-card.css";
@@ -16,7 +17,6 @@ const unknown = <span className="cims-muted">Unknown</span>;
 export default function PlaceCard() {
   const { selection, select } = useSelection();
   const { session, requireAuth } = useAuth();
-  const [reportPlaceId, setReportPlaceId] = useState<string | null>(null);
   const [now, setNow] = useState(() => new Date());
   useEffect(() => {
     setNow(new Date());
@@ -51,9 +51,9 @@ export default function PlaceCard() {
   const [lng, lat] = place.geometry.coordinates;
   const directions = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
 
-  // T-23 replaces only this placeholder action with its report flow.
+  // T-23: opens the report flow prefilled with this place (src/panels/report/).
   function handleReportIssue() {
-    requireAuth(() => setReportPlaceId(p.id));
+    requireAuth(() => openReportPanel({ panel: "report", building: p.id }));
   }
 
   return (
@@ -109,7 +109,6 @@ export default function PlaceCard() {
         <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
         {!session && <small className="cims-muted">Requires sign-in</small>}
       </div>
-      {reportPlaceId === p.id && <p role="status">Report form arrives with T-23. Prototype: nothing is sent.</p>}
       <div className="cims-actions">
         <a className="cims-btn cims-btn--primary" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
         <button type="button" className="cims-btn" onClick={() => select(null)}>Close</button>

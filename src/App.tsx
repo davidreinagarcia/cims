@@ -5,6 +5,7 @@ import BuildingView from "./indoor/BuildingView";
 import MapView from "./components/MapView";
 import OfflineBanner from "./components/OfflineBanner";
 import Sidebar from "./components/Sidebar";
+import ReportPanelRoute from "./panels/report";
 import { LayerFiltersProvider } from "./state/layerFilters";
 import { SelectionProvider } from "./state/selection";
 
@@ -22,6 +23,7 @@ export default function App() {
               <BuildingView />
             </div>
             <OfflineBanner />
+            <ReportPanelRoute />
           </div>
         </LayerFiltersProvider>
       </SelectionProvider>

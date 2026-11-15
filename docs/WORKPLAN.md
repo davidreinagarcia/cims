@@ -177,6 +177,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 - [ ] **T-23 Report an issue** (F-10) · UI can start on mocks after T-02; real data needs T-22
   Prefilled location, category → team ("routes to IT"), duplicates + "Me too", status page,
   staff view, "Prototype: not sent to Facilities/IT" label (Risk R-14). Every write (report, +1) goes through the T-25 sign-in gate; the staff view needs the staff role (no unlisted URL).
+  *Report flow (location, category grid with routing, safety banner, photo), duplicate "+1", shareable status page and the staff queue are built against a `localStorage` mock, gated by T-25 sign-in and the staff role; opened from the place card's "Report an issue" button (`openReportPanel`). Branch `feat/T23-report-issue`, not yet merged. Deferred: the open-reports map-pin layer (US-10.3) and real data (needs T-22).*
 - [ ] **T-24 Room finder** (F-11, Must since Q6) · needs T-20, T-21
   Availability seed for Kendeda rooms, filters (capacity, features), map + floor highlight, Book deep link.
 - [x] **T-25 Sign-in mock + posting gate** (F-21, [ADR-0007](adr/0007-gt-sign-in-simulated.md)) · A · *hotspot PR (`App.tsx`, `src/state/`)* · needs T-01; land it before T-23 and the T-15 posting UI
