@@ -128,7 +128,13 @@ export class LocateControl implements IControl {
 
   private resize = () => {
     if (!this.map || !this.marker || !this.fix) return;
-    // Fixed on-screen size at every zoom: the ring is a "you are here" icon, not a GPS accuracy circle.
+    // Scales with the map like the buildings (about 10 m wide), but clamped so it is never tiny or huge.
+    const metersPerPixel = 40_075_016.686 * Math.cos(this.fix.latitude * Math.PI / 180) / (512 * 2 ** this.map.getZoom());
+    const scale = Math.max(0.35, Math.min(0.8, 10 / metersPerPixel / 34));
+    const ring = this.marker.getElement().querySelector<SVGElement>("svg");
+    if (ring) ring.style.transform = `scale(${scale})`;
+    const pin = this.pin?.getElement().querySelector<SVGElement>("svg");
+    if (pin) { pin.style.transformOrigin = "50% 100%"; pin.style.transform = `scale(${Math.max(0.6, scale * 1.2)})`; }
     const arrow = this.marker.getElement().querySelector<SVGElement>("[data-heading]");
     if (arrow) {
       const heading = this.fix.heading;
@@ -182,6 +188,7 @@ export class LocateControl implements IControl {
     </svg>`;
     this.pin = new Marker({ element: pin, anchor: "bottom", pitchAlignment: "viewport", rotationAlignment: "viewport" });
     map.on("pitch", this.tilt);
+    map.on("zoom", this.resize);
     this.ready = true;
     if (this.button) this.button.disabled = false;
     void this.request(true);
@@ -215,6 +222,7 @@ export class LocateControl implements IControl {
     document.removeEventListener("visibilitychange", this.visibility);
     this.map?.off("load", this.loaded);
     this.map?.off("pitch", this.tilt);
+    this.map?.off("zoom", this.resize);
     this.marker = undefined;
     this.pin = undefined;
     this.button?.removeEventListener("click", this.click);
