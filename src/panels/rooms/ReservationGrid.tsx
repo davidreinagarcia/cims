@@ -287,6 +287,10 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
                       && (index === activeSelection.endIndex || index === activeSelection.startIndex - 1));
                     const { start } = boundaries[selectedDayIndex][index];
                     const status = selected ? "selected" : past ? "past" : free ? "free" : "busy";
+                    // On-the-hour slots (every other one, since cells are 30 min) show the hour as a
+                    // compact in-circle label -- a quick visual anchor without labeling all 30 cells.
+                    const onTheHour = index % 2 === 0;
+                    const hour12 = onTheHour ? (((start.getHours() + 11) % 12) + 1) : null;
                     return (
                       <button key={index} type="button" className={slotClass(room.id, index, free, past)}
                         disabled={(!free || past || cappedNeighbor) && !selected}
@@ -295,7 +299,9 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
                         title={cappedNeighbor ? "2-hour maximum reached" : undefined}
                         onPointerDown={() => onSlotPointerDown(room.id, index)}
                         onPointerEnter={(event) => onSlotPointerEnter(room.id, index, event)}
-                        onClick={() => onSlotClick(room.id, index)} />
+                        onClick={() => onSlotClick(room.id, index)}>
+                        {hour12 !== null && <span className="reserve-slot__hour" aria-hidden="true">{hour12}</span>}
+                      </button>
                     );
                   })}
                 </div>
