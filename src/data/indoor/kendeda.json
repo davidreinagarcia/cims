@@ -1,0 +1,32 @@
+{
+  "description": "Kendeda Building indoor model: Level 1 as a simplified schematic redrawn from the public schematic design drawing; other levels not drawn yet.",
+  "building_id": "kendeda-building-for-innovative-sustainable-design",
+  "title": "The Kendeda Building for Innovative Sustainable Design",
+  "status": "schematic",
+  "credit": "Level 1 layout redrawn and simplified from the public schematic design drawing \"Level 1 - Floor Plan\" (The Miller Hull Partnership and Lord Aeck Sargent, 2016, published by the Kendeda Fund). Schematic only: not an official plan, not to scale, room numbers unknown.",
+  "source_url": "https://livingbuilding.kendedafund.org/2016/12/16/georgia-tech-living-building-schematic-design-floor-plan/index.html",
+  "levels": [
+    { "id": "2", "label": "2", "name": "Level 2", "available": false, "note": "Classrooms, laboratories and the roof garden. No plan drawn yet." },
+    {
+      "id": "1",
+      "label": "1",
+      "name": "Level 1",
+      "available": true,
+      "viewBox": [0, 0, 900, 540],
+      "outline": "M168 240 L248 240 L248 110 L515 110 L515 182 L560 182 L735 182 L735 290 L685 290 L685 322 L565 322 L565 365 L168 365 Z",
+      "spaces": [
+        { "id": "maker-space", "name": "Maker space", "type": "lab", "shape": { "kind": "rect", "x": 248, "y": 110, "w": 97, "h": 75 }, "source": "label in the drawing" },
+        { "id": "student-commons", "name": "Student commons areas", "type": "study", "shape": { "kind": "rect", "x": 345, "y": 110, "w": 170, "h": 75 }, "source": "label in the drawing" },
+        { "id": "breakout-study", "name": "Breakout and group study", "type": "study", "shape": { "kind": "rect", "x": 297, "y": 185, "w": 218, "h": 55 }, "source": "label in the drawing" },
+        { "id": "lobby-circulation", "name": "Lobby and circulation", "type": "circulation", "shape": { "kind": "rect", "x": 168, "y": 240, "w": 392, "h": 45 }, "source": "label in the drawing" },
+        { "id": "concierge-desk", "name": "Concierge desk", "type": "service", "shape": { "kind": "circle", "cx": 300, "cy": 266, "r": 14 }, "source": "label in the drawing" },
+        { "id": "teaching-lab", "name": "Teaching lab", "type": "lab", "shape": { "kind": "rect", "x": 168, "y": 285, "w": 80, "h": 80 }, "source": "label in the drawing" },
+        { "id": "teaching-lab-support", "name": "Teaching lab support", "type": "lab", "shape": { "kind": "rect", "x": 248, "y": 285, "w": 50, "h": 80 }, "source": "label in the drawing" },
+        { "id": "offices-support", "name": "Offices and support", "type": "office", "shape": { "kind": "rect", "x": 298, "y": 290, "w": 167, "h": 75 }, "source": "label in the drawing" },
+        { "id": "building-core", "name": "Building core", "type": "core", "shape": { "kind": "rect", "x": 467, "y": 287, "w": 98, "h": 78 }, "source": "label in the drawing" },
+        { "id": "auditorium", "name": "Auditorium", "type": "auditorium", "shape": { "kind": "polygon", "points": "560,182 735,182 735,290 685,290 685,322 565,322 565,290 560,290" }, "source": "label in the drawing" }
+      ]
+    },
+    { "id": "B", "label": "B", "name": "Basement", "available": false, "note": "Cistern and service spaces. No plan drawn yet." }
+  ]
+}
