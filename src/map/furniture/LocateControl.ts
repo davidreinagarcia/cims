@@ -127,7 +127,7 @@ export class LocateControl implements IControl {
     // Web Mercator uses 512 CSS pixels per world tile, independent of device pixel ratio.
     const metersPerPixel = 40_075_016.686 * Math.cos(this.fix.latitude * Math.PI / 180)
       / (512 * 2 ** this.map.getZoom());
-    const radius = Math.max(56, Math.min(112, this.fix.accuracy / metersPerPixel));
+    const radius = Math.max(34, Math.min(60, this.fix.accuracy / metersPerPixel));
     const element = this.marker.getElement();
     element.querySelector("[data-accuracy]")?.setAttribute("r", String(radius));
     const arrow = element.querySelector<SVGElement>("[data-heading]");
@@ -148,23 +148,23 @@ export class LocateControl implements IControl {
     element.className = "cims-location-marker";
     element.setAttribute("role", "img");
     element.setAttribute("aria-label", "Your location; outer ring shows approximate GPS accuracy");
-    element.innerHTML = `<svg width="256" height="256" viewBox="-128 -128 256 256" aria-hidden="true">
-      <g class="cims-location-marker__rings" fill="none" stroke-width="5">
-        <circle data-accuracy r="56" stroke="#E3D7B0"/>
-        <circle r="46" stroke="#9AA8B4"/>
-        <circle r="38" stroke="#F3EEE2"/>
-        <circle r="30" stroke="#6E8090"/>
-        <circle r="22" stroke="#E3D7B0"/>
+    element.innerHTML = `<svg width="128" height="128" viewBox="-64 -64 128 128" aria-hidden="true">
+      <g class="cims-location-marker__rings" fill="none" stroke-width="3">
+        <circle data-accuracy r="34" stroke="#E3D7B0"/>
+        <circle r="28" stroke="#9AA8B4"/>
+        <circle r="23" stroke="#F3EEE2"/>
+        <circle r="18" stroke="#6E8090"/>
+        <circle r="14" stroke="#E3D7B0"/>
       </g>
       <g data-heading style="display:none">
-        <path d="M0 -7 5 6 0 3 -5 6Z" fill="#435563" stroke="#003057" stroke-width="1"/>
+        <path d="M0 -5 4 4 0 2 -4 4Z" fill="#435563" stroke="#003057" stroke-width="1"/>
       </g>
-      <circle cy="3" r="14" fill="#001E36"/>
-      <path d="M-14 0v3M14 0v3" stroke="#001E36" stroke-width="1"/>
-      <circle r="14" fill="#003057"/>
-      <circle r="11" fill="none" stroke="var(--gold, #B3A369)" stroke-width="1.5"/>
-      <text y="3.5" text-anchor="middle" fill="var(--gold, #B3A369)"
-        font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="10">CIMS</text>
+      <circle cy="2" r="10" fill="#001E36"/>
+      <path d="M-10 0v2M10 0v2" stroke="#001E36" stroke-width="1"/>
+      <circle r="10" fill="#003057"/>
+      <circle r="8" fill="none" stroke="var(--gold, #B3A369)" stroke-width="1.2"/>
+      <text y="2.4" text-anchor="middle" fill="var(--gold, #B3A369)"
+        font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="7">CIMS</text>
     </svg>`;
     this.marker = new Marker({ element, anchor: "center", pitchAlignment: "map", rotationAlignment: "map" });
     map.on("zoom", this.resize);

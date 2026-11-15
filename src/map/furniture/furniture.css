@@ -15,7 +15,7 @@
 .cims-locate__status:not(:empty) { position: absolute; right: 52px; bottom: 0; width: 220px; padding: var(--s2); border: var(--hairline); background: var(--paper); color: var(--ink); font: var(--fs-sm) var(--font-body); }
 
 
-.cims-location-marker { width: 256px; height: 256px; pointer-events: none; }
+.cims-location-marker { width: 128px; height: 128px; pointer-events: none; }
 .cims-location-marker svg { display: block; overflow: visible; }
 @media (prefers-reduced-motion: no-preference) {
   .cims-location-marker__rings { animation: cims-location-rings 2.5s ease-in-out infinite; transform-origin: 0 0; }
