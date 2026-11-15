@@ -66,3 +66,10 @@
 .story-gate ol { padding-left: 1.2em; }
 .story-gate .cims-btn { justify-self: start; }
 .stories__heat { font-size: var(--fs-sm); display: flex; gap: var(--s2); align-items: center; }
+
+/* Desktop: the Stories tab covers everything right of the rail instead of floating as a small card. */
+.stories-full { position: fixed; z-index: 20; top: 0; bottom: 0; right: 0; left: var(--rail-w); display: flex; flex-direction: column; background: var(--white); overflow: auto; }
+.stories-full__head { display: flex; align-items: center; justify-content: space-between; padding: var(--s3) var(--s4); border-bottom: var(--hairline); }
+.stories-full__head h2 { margin: 0; font-size: var(--fs-lg, 1.25rem); }
+.stories-full .stories { flex: 1; min-height: 0; width: 100%; max-width: 720px; margin: 0 auto; padding: var(--s3) var(--s4) var(--s4); align-content: start; }
+.stories-full .story-view { --h: calc(100dvh - 230px); }
