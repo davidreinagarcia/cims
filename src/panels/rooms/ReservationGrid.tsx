@@ -31,7 +31,7 @@ function HeartIcon({ filled }: { filled: boolean }) {
     <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">
       <path
         d="M12 20.2s-7.2-4.4-9.6-8.9C.8 7.8 2.1 4.3 5.5 4.3c2 0 3.4 1.2 4.2 2.4.1.2.3.2.6 0 .8-1.2 2.2-2.4 4.2-2.4 3.4 0 4.7 3.5 3.1 7-2.4 4.5-9.6 8.9-9.6 8.9z"
-        fill={filled ? "var(--gold)" : "none"} stroke="var(--ink)" strokeWidth="1.5" strokeLinejoin="round" />
+        fill={filled ? "var(--cat-issues)" : "none"} stroke="var(--ink)" strokeWidth="1.5" strokeLinejoin="round" />
     </svg>
   );
 }
@@ -249,16 +249,6 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
         </p>
       ) : (
         <div className="reserve-grid" role="group" aria-label={`Availability for ${dayFmt.format(days[selectedDayIndex])}`}>
-          <div className="reserve-grid__row reserve-grid__row--header">
-            <div className="reserve-grid__roomcell" aria-hidden="true" />
-            <div className="reserve-grid__cells" aria-hidden="true">
-              {DISPLAY_TIMES.map((_, index) => (
-                <span key={index} className="reserve-grid__hour">
-                  {index % 2 === 0 ? hourFmt.format(boundaries[selectedDayIndex][index].start).replace(" ", "") : ""}
-                </span>
-              ))}
-            </div>
-          </div>
           {visibleRooms.map((room) => {
             const favorited = favoriteIds.has(room.id);
             return (
@@ -287,6 +277,11 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
                       && (index === activeSelection.endIndex || index === activeSelection.startIndex - 1));
                     const { start } = boundaries[selectedDayIndex][index];
                     const status = selected ? "selected" : past ? "past" : free ? "free" : "busy";
+                    // On-the-hour slots (every other one, since cells are 30 min) show the hour and
+                    // AM/PM inside the circle -- a quick visual anchor without labeling all 30 cells,
+                    // and without a separate header row above the grid.
+                    const onTheHour = index % 2 === 0;
+                    const [hourNum, meridiem] = onTheHour ? hourFmt.format(start).split(" ") : [null, null];
                     return (
                       <button key={index} type="button" className={slotClass(room.id, index, free, past)}
                         disabled={(!free || past || cappedNeighbor) && !selected}
@@ -295,7 +290,14 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
                         title={cappedNeighbor ? "2-hour maximum reached" : undefined}
                         onPointerDown={() => onSlotPointerDown(room.id, index)}
                         onPointerEnter={(event) => onSlotPointerEnter(room.id, index, event)}
-                        onClick={() => onSlotClick(room.id, index)} />
+                        onClick={() => onSlotClick(room.id, index)}>
+                        {hourNum !== null && (
+                          <span className="reserve-slot__hour" aria-hidden="true">
+                            <span className="reserve-slot__hour-num">{hourNum}</span>
+                            <span className="reserve-slot__hour-meridiem">{meridiem}</span>
+                          </span>
+                        )}
+                      </button>
                     );
                   })}
                 </div>
