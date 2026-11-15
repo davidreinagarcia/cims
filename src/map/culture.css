@@ -1,50 +1,89 @@
-/** @file Sticky-note look for the Culture layer: paper post-its with tape or pin, folded corner, ruled lines and marker handwriting. Survey ink for text. */
-.culture-note {
-  --note: #FBE98A; --note-2: #F4D866; --fold: #E6C94E;
-  position: relative; display: block; width: 146px; padding: 16px 10px 10px; border: 0; border-radius: 1px 1px 14px 1px;
-  background: linear-gradient(165deg, var(--note) 0%, var(--note) 55%, var(--note-2) 100%); color: #1C2733; text-align: left; cursor: pointer;
-  transform: rotate(var(--tilt, 0deg)); transform-origin: 50% 0;
-  box-shadow: 0 1px 1px rgba(28, 39, 51, 0.25), 3px 6px 8px -2px rgba(28, 39, 51, 0.35);
-  font: 600 14px/1.25 "Bradley Hand", "Segoe Print", "Marker Felt", "Comic Sans MS", cursive;
+/** @file Culture layer look: small taped post-its with a pen doodle and handwritten title, the hand-lettered West / East labels, and the reader card (welcome letter + one note at a time). Flat paper colors, 1px ink lines, hard offset shadows only. */
+:root {
+  --note-yellow: #F8E58C; --note-pink: #F6C6CF; --note-blue: #C9E1F2;
+  --hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
 }
-.culture-note--pink { --note: #FAC3D0; --note-2: #F2A5B8; --fold: #E58FA6; }
-.culture-note--blue { --note: #C4E0F5; --note-2: #A3CDEB; --fold: #8BBBDD; }
-.culture-note::after { /* curled bottom-right corner */
-  content: ""; position: absolute; right: 0; bottom: 0; width: 18px; height: 18px; border-radius: 0 0 14px 0;
-  background: linear-gradient(135deg, transparent 50%, var(--fold) 50%); box-shadow: -2px -2px 3px rgba(28, 39, 51, 0.12);
+
+/* ---- map stamps ---- */
+
+.culture-stamp-wrap[data-hidden="true"], .culture-area[data-hidden="true"] { visibility: hidden; pointer-events: none; } /* MapLibre owns the marker's inline opacity */
+.culture-stamp-wrap[data-active="true"] { z-index: 3; }
+.culture-stamp {
+  --note: var(--note-yellow);
+  position: relative; display: flex; flex-direction: column; align-items: center; width: 84px; padding: 6px 6px 5px; margin-bottom: 9px;
+  border: 1px solid rgba(28, 39, 51, .45); background: var(--note); color: var(--ink, #1C2733); cursor: pointer;
+  transform: rotate(var(--tilt, 0deg)); box-shadow: 2px 3px 0 rgba(28, 39, 51, .18);
 }
-.culture-note__pin { /* tape */
-  position: absolute; top: -9px; left: 50%; width: 52px; height: 16px; transform: translateX(-50%) rotate(-3deg);
-  background: rgba(255, 255, 255, 0.6); border-left: 1px dashed rgba(28, 39, 51, 0.2); border-right: 1px dashed rgba(28, 39, 51, 0.2);
-  box-shadow: 0 1px 1px rgba(28, 39, 51, 0.12);
+.culture-stamp--pink { --note: var(--note-pink); }
+.culture-stamp--blue { --note: var(--note-blue); }
+.culture-stamp::before { /* tape */
+  content: ""; position: absolute; top: -7px; left: 50%; width: 34px; height: 12px; transform: translateX(-50%) rotate(-4deg);
+  background: rgba(243, 238, 226, .75); border: 1px solid rgba(28, 39, 51, .15);
 }
-.culture-note--pink .culture-note__pin { /* red pushpin instead of tape */
-  top: -8px; width: 16px; height: 16px; border: 0; border-radius: 50%; transform: translateX(-50%);
-  background: radial-gradient(circle at 35% 30%, #ff8a8a, #c62828 60%); box-shadow: 1px 3px 3px rgba(28, 39, 51, 0.4);
+.culture-stamp::after { /* the pin that marks the exact spot */
+  content: ""; position: absolute; bottom: -10px; left: 50%; width: 7px; height: 7px; margin-left: -4px; border-radius: 50%;
+  background: var(--ink, #1C2733); box-shadow: 0 0 0 2px var(--paper, #F3EEE2);
 }
-.culture-note__head { display: flex; align-items: center; gap: 6px; }
-.culture-note__emoji { font-size: 22px; line-height: 1; filter: drop-shadow(0 1px 0 rgba(255, 255, 255, 0.5)); }
-.culture-note__title { font-size: 16px; line-height: 1.15; background: linear-gradient(transparent 70%, rgba(255, 255, 255, 0.55) 70%); }
-.culture-note__tag {
-  display: inline-block; margin-top: 7px; padding: 1px 8px; border: 1.5px solid #1C2733; border-radius: 99px; transform: rotate(-2deg);
-  font: 700 10px/1.4 "IBM Plex Mono", ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.06em;
+.culture-stamp img { width: 56px; height: 56px; mix-blend-mode: multiply; pointer-events: none; }
+.culture-stamp__title {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  font: 700 15px/1 var(--hand); text-align: center;
 }
-.culture-note__more { display: none; margin-top: 8px; }
-.culture-note__row { display: block; margin-bottom: 4px; font-size: 13px; font-weight: 500; }
-.culture-note__row b { font-weight: 800; text-decoration: underline wavy rgba(28, 39, 51, 0.35); text-underline-offset: 3px; }
-.culture-note__text { display: block; margin: 8px 0; font-size: 13.5px; font-weight: 500; line-height: 1.35; }
-.culture-note__facts { margin: 0 0 8px; padding: 0 0 0 18px; list-style: none; font-size: 12.5px; font-weight: 500; line-height: 1.3; }
-.culture-note__facts li { position: relative; margin: 0 0 4px; }
-.culture-note__facts li::before { content: "★"; position: absolute; left: -16px; font-size: 10px; top: 2px; }
-.culture-note__tip { display: block; margin: 8px 0 6px; padding: 5px 8px; border-left: 3px solid #1C2733; background: rgba(255, 255, 255, 0.4); font-style: normal; font-size: 13px; }
-.culture-note__src { font-size: 11px; color: #1C2733; text-decoration: underline; }
-.culture-note[aria-expanded="true"] { width: 270px; max-height: 340px; overflow-y: auto; z-index: 5; padding-bottom: 18px; }
-.culture-note[aria-expanded="true"] .culture-note__more { display: block; }
-.culture-note:hover:not([aria-expanded="true"]) { transform: rotate(0deg) scale(1.05); }
-.culture-note:focus-visible, .culture-area:focus-visible { outline: 2px solid #1C2733; outline-offset: 3px; }
+.culture-stamp:hover, .culture-stamp-wrap[data-active="true"] .culture-stamp { transform: rotate(0deg) scale(1.12); }
+.culture-stamp-wrap[data-active="true"] .culture-stamp { outline: 2px solid var(--ink, #1C2733); outline-offset: 2px; }
+.culture-stamp:focus-visible, .culture-area:focus-visible { outline: 2px solid var(--navy, #003057); outline-offset: 3px; }
+@media (prefers-reduced-motion: no-preference) { .culture-stamp { transition: transform .15s ease; } }
+@media (max-width: 600px) {
+  .culture-stamp { width: 68px; padding: 5px 4px 4px; }
+  .culture-stamp img { width: 44px; height: 44px; }
+  .culture-stamp__title { font-size: 13px; }
+}
+
 .culture-area {
-  padding: 4px 12px; border: 2px dashed #1C2733; border-radius: 4px; background: rgba(243, 238, 226, 0.9); color: #1C2733; cursor: pointer;
-  font: 700 17px/1.2 "Bradley Hand", "Segoe Print", "Marker Felt", "Comic Sans MS", cursive; transform: rotate(-2deg);
+  padding: 2px 12px 4px; border: 1.5px dashed var(--ink, #1C2733); background: rgba(243, 238, 226, .92); color: var(--ink, #1C2733); cursor: pointer;
+  font: 700 22px/1 var(--hand); transform: rotate(-3deg);
 }
-@media (prefers-reduced-motion: no-preference) { .culture-note { transition: transform 0.15s ease, width 0.15s ease; } }
-.culture-area small { display: block; font: 600 11px/1.2 "Bradley Hand", "Segoe Print", cursive; opacity: 0.75; }
+.culture-area small { display: block; font: 600 15px/1.1 var(--hand); opacity: .8; }
+
+/* ---- reader card ---- */
+.culture-reader {
+  position: absolute; z-index: 20; top: 76px; right: 64px; width: 360px; max-height: calc(100% - 190px); overflow-y: auto;
+  padding: 22px 22px 16px; border: 1px solid var(--ink, #1C2733); color: var(--ink, #1C2733);
+  /* ruled notebook paper, flat lines only */
+  background: var(--paper, #F3EEE2) repeating-linear-gradient(transparent 0 27px, rgba(0, 48, 87, .13) 27px 28px);
+  background-attachment: local; box-shadow: 4px 4px 0 rgba(28, 39, 51, .2);
+}
+.culture-reader::before { /* red margin line */
+  content: ""; position: absolute; top: 0; bottom: 0; left: 14px; border-left: 1px solid rgba(165, 52, 44, .35);
+}
+.culture-reader__close { position: absolute; top: 6px; right: 6px; width: 36px; height: 36px; border: 0; background: none; font-size: 24px; line-height: 1; color: inherit; cursor: pointer; }
+.culture-reader__count { margin: 0 0 4px; font: 500 12px/1 var(--font-mono, "IBM Plex Mono", monospace); text-transform: uppercase; letter-spacing: .08em; opacity: .7; }
+.culture-reader__head { display: flex; align-items: center; gap: 12px; }
+.culture-reader__head img { flex: none; width: 88px; height: 88px; mix-blend-mode: multiply; }
+.culture-reader h2 { margin: 0; font: 700 34px/.95 var(--hand); }
+.culture-reader__tag { display: inline-block; margin-top: 6px; padding: 1px 8px; border: 1px solid currentColor; font: 500 11px/1.5 var(--font-mono, "IBM Plex Mono", monospace); text-transform: uppercase; letter-spacing: .06em; }
+.culture-reader__hand { margin: 12px 0; font: 500 21px/1.3 var(--hand); }
+.culture-reader__row { margin: 6px 0; font-size: 14px; }
+.culture-reader__row b { font: 700 18px/1 var(--hand); margin-right: 4px; }
+.culture-reader__text { margin: 10px 0; font-size: 14.5px; line-height: 1.5; }
+.culture-reader__facts { margin: 8px 0; padding-left: 20px; font-size: 14px; line-height: 1.45; }
+.culture-reader__tip { margin: 12px 0; padding: 6px 10px; background: var(--note-yellow); border: 1px solid rgba(28, 39, 51, .3); font: 600 20px/1.2 var(--hand); transform: rotate(-1deg); }
+.culture-reader__src { font-size: 12px; }
+.culture-reader__src a, .culture-reader a { color: var(--navy, #003057); }
+.culture-reader__sign { margin: 12px 0 0; font: 700 22px/1 var(--hand); text-align: right; }
+.culture-reader__nav { position: sticky; bottom: -16px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px -22px -16px; padding: 10px 22px 16px; background: var(--paper, #F3EEE2); border-top: 1px solid rgba(28, 39, 51, .25); }
+.culture-reader__nav .cims-btn--primary { color: var(--gold, #B3A369); }
+.culture-reader__nav .culture-reader__wide { grid-column: 1 / -1; }
+.culture-reader__reopen {
+  position: absolute; z-index: 20; top: 76px; right: 64px; padding: 6px 14px; border: 1px solid var(--ink, #1C2733); background: var(--note-yellow);
+  font: 700 20px/1 var(--hand); color: var(--ink, #1C2733); cursor: pointer; transform: rotate(2deg); box-shadow: 2px 3px 0 rgba(28, 39, 51, .18);
+}
+@media (max-width: 600px) {
+  .culture-reader { top: auto; right: 8px; left: 8px; bottom: calc(var(--tabbar-h, 64px) + 8px); width: auto; max-height: 46vh; padding: 16px 16px 12px; }
+  .culture-reader__head img { width: 64px; height: 64px; }
+  .culture-reader h2 { font-size: 28px; }
+  .culture-reader__hand { font-size: 18px; margin: 8px 0; }
+  .culture-reader__nav { bottom: -12px; margin: 10px -16px -12px; padding: 8px 16px 12px; }
+  .culture-reader__nav .cims-btn { min-height: 40px; }
+  .culture-reader__reopen { top: auto; right: 12px; bottom: calc(var(--tabbar-h, 64px) + 84px); }
+}

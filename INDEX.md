@@ -35,6 +35,9 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`docs/stickers/`](docs/stickers/INDEX.md): QR codes and the link list for the door stickers that open a building with the entrance preselected.
   - [`docs/testing/`](docs/testing/INDEX.md): Test plans with people (hallway tests).
 - [`public/`](public/INDEX.md): Static assets served as-is at the site root.
+  - [`public/culture/`](public/culture/INDEX.md): Hand-drawn doodles for the GT Culture sticky notes and the "big sib" welcome letter, one per note id. AI-gene…
+  - [`public/photos/`](public/photos/INDEX.md): Static photos served by the app; each one is credited in a data file under src/data/.
+    - [`public/photos/buildings/`](public/photos/buildings/INDEX.md): Building photos from Wikimedia Commons (free licenses), one per building id; credits in src/data/building-pho…
 - [`scripts/`](scripts/INDEX.md): Dev tooling run with Node (no deps): index generator, Claude hooks, data fetchers.
   - [`scripts/fixtures/`](scripts/fixtures/INDEX.md): Saved official GT tracker responses for reproducible offline transit imports.
 - [`server/`](server/INDEX.md): Real-time alerts backend (Node, no dependencies); see README.md.
@@ -56,13 +59,16 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`src/panels/`](src/panels/INDEX.md): Panels, one folder per panel, shown in the floating card / bottom sheet. Mount new ones in shell/Shell.tsx.
     - [`src/panels/account/`](src/panels/account/INDEX.md): Account chip and accessible DEMO sign-in theater using the existing survey map design.
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
-    - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
+    - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Upcoming events in campus time (Orgs and People tabs), posting with a required registered building or room an…
+    - [`src/panels/buses/`](src/panels/buses/INDEX.md): Buses panel (T-42): GT bus routes, live next-bus times, trip options to a destination and the Stingerette.
     - [`src/panels/culture/`](src/panels/culture/INDEX.md): West vs East guide dialog for people deciding where to live (opens from the Culture layer and the layers pane…
     - [`src/panels/layers/`](src/panels/layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
+    - [`src/panels/maintenance/`](src/panels/maintenance/INDEX.md): Maintenance dashboard: live Facilities report board by crew, claim box for reports open to all teams, and the…
     - [`src/panels/police/`](src/panels/police/INDEX.md): GTPD console: draw the danger circle, launch and end alarms, work citizen police tips.
     - [`src/panels/report/`](src/panels/report/INDEX.md): Report-an-issue flow (F-10) and staff queue; mounted in Shell's "report" slot (src/shell/Shell.tsx). Owner: T…
-    - [`src/panels/rooms/`](src/panels/rooms/INDEX.md): Reserve a room (F-11/F-20): pick a Kendeda or CULC building (or jump to favorited rooms), book/renew/cancel a…
+    - [`src/panels/rooms/`](src/panels/rooms/INDEX.md): Full-page Rooms board (F-11/F-20, T-62): top filter-chip bar (a building, Favorites, Rooms near me, My bookin…
     - [`src/panels/search/`](src/panels/search/INDEX.md): Search box and list of places (rooms and buildings join in T-14).
+  - [`src/portfolio/`](src/portfolio/INDEX.md): BuzzPrint (T-71): a signed-in account's permanent record of Bulletin posts marked "Interested", with photos y…
   - [`src/pwa/`](src/pwa/INDEX.md): Offline support: the service worker template. vite.config.ts fills in the precache list and emits it as /sw.j…
   - [`src/shell/`](src/shell/INDEX.md): Map-first app shell (docs/design/APP-SHELL.md): rail / tab bar, search pill, chips, floating card / bottom sh…
   - [`src/state/`](src/state/INDEX.md): Shared app state. Today only the current selection.
@@ -82,7 +88,6 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): Branching, commits, PRs, code review, data contributions, local dev.
 - [`README.md`](README.md): Project overview, quick start, team rules and the map of all docs.
 - [`index.html`](index.html): HTML entry · CIMS | Campus Interactive Map System
-- [`node_modules`](node_modules): _no summary_
 - [`package-lock.json`](package-lock.json): npm lockfile (don't read; don't hand-edit)
 - [`package.json`](package.json): npm manifest · scripts: dev, build, preview, index, index:check, setup:hooks, data:check, data:verify, data:list, db:check, db:status, db:apply, db:accounts
 - [`tsconfig.json`](tsconfig.json): TypeScript compiler config

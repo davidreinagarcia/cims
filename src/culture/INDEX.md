@@ -6,6 +6,7 @@ Culture mode state (layer on/off, West vs East guide open): never saved, so the 
 
 **Files**
 
-- [`store.ts`](store.ts): Culture mode state (never saved): is the sticky-note layer on, and is the West vs East guide open. A tiny ext… · exports `getCulture`, `subscribeCulture`, `setCulture`, `setGuide`, `useCulture`
+- [`notes.ts`](notes.ts): The culture notes from src/data/culture.json, typed, in tour order, each with its hand-drawn doodle. · exports `CULTURE_NOTES`, `CULTURE_AREAS`, `doodleFor`
+- [`store.ts`](store.ts): Culture mode state (never saved): is the sticky-note layer on, which note is open in the reader, is the reade… · exports `getCulture`, `subscribeCulture`, `setCulture`, `setNote`, `setReader`, `setGuide`, `useCulture`
 
 <!-- AUTO:END -->

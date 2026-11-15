@@ -1,76 +1,44 @@
-/** @file Culture layer: sticky notes pinned on the map like a brother's annotations (traditions, Freshman Hill, Mini 500) plus West/East labels. Always starts off; while on, every other layer hides. */
+/** @file Culture layer: small sticky notes with a hand-drawn doodle pinned where each GT tradition happens, plus the West / East labels. Notes that would overlap hide until you zoom in; tapping one opens it in the reader. Always starts off; while on, every other layer hides. */
 import type { Marker, Map as MapLibreMap } from "maplibre-gl";
 import type { MapLayer } from "../types";
-import data from "../../data/culture.json";
-import { getCulture, setGuide, subscribeCulture } from "../../culture/store";
+import { getCulture, setGuide, setNote, subscribeCulture } from "../../culture/store";
+import { CULTURE_AREAS, CULTURE_NOTES, doodleFor, type CultureNote } from "../../culture/notes";
 import { loadMapLibre } from "../maplibre";
 import "../culture.css";
 
-interface Note {
-  id: string; title: string; color: string; rotate: number; lng: number; lat: number; text: string; tip?: string; source_url: string;
-  anywhere?: boolean; emoji?: string; tag?: string; when?: string; where?: string; facts?: string[];
-}
+const CAMPUS_CENTER: [number, number] = [-84.3975, 33.7766];
 
-/** Tiny element helper: tag, class and text in one call. */
-function el(tag: string, cls: string, text = ""): HTMLElement {
-  const e = document.createElement(tag);
-  e.className = cls;
-  if (text) e.textContent = text;
-  return e;
-}
-
-/** Build one sticky note: a closed post-it (emoji, title, tag) that opens into a full card (when, where, story, facts, tip, source). */
-function noteEl(n: Note): HTMLElement {
-  const root = el("button", `culture-note culture-note--${n.color}`);
-  (root as HTMLButtonElement).type = "button";
-  root.style.setProperty("--tilt", `${n.rotate}deg`);
-  root.setAttribute("aria-expanded", "false");
-  root.append(el("span", "culture-note__pin"));
-  const head = el("span", "culture-note__head");
-  head.append(el("span", "culture-note__emoji", n.emoji ?? "📝"), el("strong", "culture-note__title", n.title));
-  root.append(head);
-  if (n.tag) root.append(el("span", "culture-note__tag", n.tag));
-  const more = el("span", "culture-note__more");
-  if (n.when) { const r = el("span", "culture-note__row"); r.append(el("b", "", "When "), n.when); more.append(r); }
-  const where = n.where ?? (n.anywhere ? "Not one spot, it's everywhere" : "");
-  if (where) { const r = el("span", "culture-note__row"); r.append(el("b", "", "Where "), where); more.append(r); }
-  more.append(el("span", "culture-note__text", n.text));
-  if (n.facts?.length) {
-    const ul = el("ul", "culture-note__facts");
-    for (const f of n.facts) ul.append(el("li", "", f));
-    more.append(ul);
-  }
-  if (n.tip) more.append(el("em", "culture-note__tip", `psst: ${n.tip}`));
-  const src = el("a", "culture-note__src", "source") as HTMLAnchorElement;
-  src.href = n.source_url;
-  src.target = "_blank";
-  src.rel = "noopener";
-  src.addEventListener("click", (e) => e.stopPropagation());
-  more.append(src);
-  root.append(more);
-  root.addEventListener("click", () => {
-    const open = root.getAttribute("aria-expanded") !== "true";
-    root.setAttribute("aria-expanded", String(open));
-    root.parentElement?.style.setProperty("z-index", open ? "5" : ""); // marker element sits above its neighbours while open
-  });
+/** A tilted post-it with tape, the note's doodle and its title in handwriting. */
+function stampEl(n: CultureNote): HTMLElement {
+  const root = document.createElement("div");
+  root.className = "culture-stamp-wrap";
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = `culture-stamp culture-stamp--${n.color}`;
+  button.style.setProperty("--tilt", `${n.rotate}deg`);
+  button.setAttribute("aria-label", `Note: ${n.title}`);
+  const img = document.createElement("img");
+  img.src = doodleFor(n.id);
+  img.alt = "";
+  img.loading = "lazy";
+  const title = document.createElement("span");
+  title.className = "culture-stamp__title";
+  title.textContent = n.title;
+  button.append(img, title);
+  // The map listens for clicks on its container; keep a note tap from also selecting a building or opening stories.
+  button.addEventListener("click", (e) => { e.stopPropagation(); setNote(n.id); });
+  root.append(button);
   return root;
 }
 
-/** MapLibre positions the marker element with an inline transform, so the styled (tilted, relative) note lives inside a plain wrapper. */
-function wrap(inner: HTMLElement): HTMLElement {
-  const el = document.createElement("div");
-  el.append(inner);
-  return el;
-}
-
-/** Hand-drawn "WEST / EAST" label; opens the guide. */
+/** Hand-lettered "West campus?" label; opens the West vs East guide. */
 function areaEl(label: string, blurb = ""): HTMLElement {
   const el = document.createElement("button");
   el.type = "button";
   el.className = "culture-area";
   el.append(`${label} campus?`);
   if (blurb) el.append(Object.assign(document.createElement("small"), { textContent: blurb }));
-  el.addEventListener("click", () => setGuide(true));
+  el.addEventListener("click", (e) => { e.stopPropagation(); setGuide(true); });
   return el;
 }
 
@@ -78,25 +46,79 @@ const culture: MapLayer = {
   id: "culture",
   order: 60, // above pins
   addTo(map: MapLibreMap) {
-    let markers: Marker[] = [];
+    let stamps: { note: CultureNote; marker: Marker }[] = [];
+    let areas: Marker[] = [];
     let token = 0;
-    const clear = () => { markers.forEach((m) => m.remove()); markers = []; };
+    let frame = 0;
+    let lastNote: string | null = null;
+
+    /** Greedy declutter in screen space: the open note first, then tour order; a stamp that would overlap one already shown hides. */
+    const declutter = () => {
+      frame = 0;
+      const open = getCulture().note;
+      const placed: DOMRect[] = [];
+      const order = [...stamps].sort((a, b) => Number(b.note.id === open) - Number(a.note.id === open));
+      for (const { note, marker } of order) {
+        const el = marker.getElement();
+        const r = el.getBoundingClientRect();
+        const box = new DOMRect(r.x + 6, r.y + 6, r.width - 12, r.height - 12);
+        const hit = placed.some((p) => box.x < p.right && box.right > p.x && box.y < p.bottom && box.bottom > p.y);
+        el.dataset.hidden = String(hit);
+        el.dataset.active = String(note.id === open);
+        if (!hit) placed.push(box);
+      }
+      // The West / East labels give way to notes (they are approximate areas, the notes are exact spots).
+      for (const marker of areas) {
+        const el = marker.getElement();
+        const r = el.getBoundingClientRect();
+        const hit = placed.some((p) => r.x < p.right && r.right > p.x && r.y < p.bottom && r.bottom > p.y);
+        el.dataset.hidden = String(hit);
+        if (!hit) placed.push(r);
+      }
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(declutter); };
+
+    const clear = () => {
+      stamps.forEach((s) => s.marker.remove());
+      areas.forEach((m) => m.remove());
+      stamps = [];
+      areas = [];
+      map.off("move", schedule);
+    };
+
     const sync = () => {
       const mine = ++token;
-      if (!getCulture().on) { clear(); return; }
-      if (markers.length) return;
+      const { on, note } = getCulture();
+      if (!on) { clear(); lastNote = null; return; }
+      if (stamps.length) {
+        // Flying to the open note keeps the tour on the map; the welcome letter shows the whole campus.
+        if (note !== lastNote) {
+          lastNote = note;
+          const target = CULTURE_NOTES.find((n) => n.id === note);
+          if (target) map.flyTo({ center: [target.lng, target.lat], zoom: Math.max(map.getZoom(), 16), pitch: 0, duration: 900, padding: readerPadding() });
+        }
+        schedule();
+        return;
+      }
       void loadMapLibre().then((ml) => {
-        if (mine !== token || !getCulture().on) return;
-        for (const n of data.notes as Note[]) markers.push(new ml.Marker({ element: wrap(noteEl(n)), anchor: "bottom" }).setLngLat([n.lng, n.lat]).addTo(map));
-        for (const a of data.areas) markers.push(new ml.Marker({ element: wrap(areaEl(a.label, a.blurb)), anchor: "center" }).setLngLat([a.lng, a.lat]).addTo(map));
-        // Frame the whole campus top-down so every note is on screen (fitBounds proved unreliable here).
-        map.easeTo({ center: [-84.3975, 33.7766], zoom: window.innerWidth < 600 ? 14.1 : 14.8, pitch: 0, bearing: 0, duration: 1200 });
+        if (mine !== token || !getCulture().on || stamps.length) return;
+        stamps = CULTURE_NOTES.map((n) => ({ note: n, marker: new ml.Marker({ element: stampEl(n), anchor: "bottom" }).setLngLat([n.lng, n.lat]).addTo(map) }));
+        areas = CULTURE_AREAS.map((a) => new ml.Marker({ element: areaEl(a.label, a.blurb), anchor: "center" }).setLngLat([a.lng, a.lat]).addTo(map));
+        map.on("move", schedule);
+        lastNote = getCulture().note;
+        map.easeTo({ center: CAMPUS_CENTER, zoom: window.innerWidth < 600 ? 14.6 : 15.2, pitch: 0, bearing: 0, duration: 1200, padding: readerPadding() });
+        schedule();
       });
     };
     const unsubscribe = subscribeCulture(sync);
     sync(); // culture may already be on if the user toggled it before the map style finished loading
-    return { remove() { unsubscribe(); token++; clear(); } };
+    return { remove() { unsubscribe(); token++; if (frame) cancelAnimationFrame(frame); clear(); } };
   },
 };
+
+/** Room the reader card takes over the map (right column on desktop, bottom sheet on phones), so flights land beside it. */
+function readerPadding() {
+  return window.innerWidth < 600 ? { top: 120, bottom: Math.round(window.innerHeight * 0.45), left: 20, right: 20 } : { top: 80, bottom: 40, left: 40, right: 420 };
+}
 
 export default culture;

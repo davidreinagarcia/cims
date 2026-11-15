@@ -1,9 +1,9 @@
-/** @file Culture mode state (never saved): is the sticky-note layer on, and is the West vs East guide open. A tiny external store like src/stories/store.ts. */
+/** @file Culture mode state (never saved): is the sticky-note layer on, which note is open in the reader, is the reader shown, and is the West vs East guide open. A tiny external store like src/stories/store.ts. */
 import { useSyncExternalStore } from "react";
 
-interface State { on: boolean; guide: boolean }
+interface State { on: boolean; guide: boolean; note: string | null; reader: boolean }
 
-let state: State = { on: false, guide: false };
+let state: State = { on: false, guide: false, note: null, reader: false };
 const listeners = new Set<() => void>();
 
 function set(patch: Partial<State>) {
@@ -22,9 +22,19 @@ export function subscribeCulture(l: () => void): () => void {
   return () => listeners.delete(l);
 }
 
-/** Turn the culture layer on or off. On means every other layer hides; off brings the user's own layers back. */
+/** Turn the culture layer on or off. On means every other layer hides and the welcome letter opens; off closes everything. */
 export function setCulture(on: boolean) {
-  set({ on });
+  set(on ? { on, note: null, reader: true } : { on, note: null, reader: false, guide: false });
+}
+
+/** Open a note in the reader (null shows the welcome letter). */
+export function setNote(id: string | null) {
+  set({ note: id, reader: true });
+}
+
+/** Show or hide the reader card without leaving culture mode. */
+export function setReader(open: boolean) {
+  set({ reader: open });
 }
 
 /** Open or close the West vs East guide. */

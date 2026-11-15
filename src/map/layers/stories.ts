@@ -84,7 +84,7 @@ const stories: MapLayer = {
       return layers.length > 0 && map.queryRenderedFeatures([point.x, point.y], { layers }).length > 0;
     };
     const onClick = (e: { point: { x: number; y: number } }) => {
-      if (!getState().heat || overPin(e.point)) return;
+      if (!getState().heat || getCulture().on || overPin(e.point)) return;
       const hits = storiesNear(e.point);
       if (!hits.length) return;
       ctx.select(null); // the building under the blob must not steal the panel
