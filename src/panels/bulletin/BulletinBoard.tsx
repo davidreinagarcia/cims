@@ -1,5 +1,6 @@
 /** @file Full-screen Campus Bulletin: cork board with masonry note cards, type filters with counts, search and deep link. */
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type CSSProperties, type KeyboardEvent } from "react";
+import { buildingIdForPlace } from "../../lib/buildingPlaces";
 import { loadInterests, setInterest } from "../../lib/bulletinInterests";
 import { canDeletePost, deleteUserPost, getUserPosts, refreshUserPosts, subscribeUserPosts, audienceFor, type UserPost } from "../../lib/bulletinPosts";
 import { POST_TYPES, bulletinPosts, countByType, filterPosts, postsFor, type BoardTab, type BulletinPost, type PostType } from "../../lib/bulletin";
@@ -87,6 +88,12 @@ export default function BulletinBoard({ type, onType, onClose }: {
   type: PostType | "all"; onType: (type: PostType | "all") => void; onClose: () => void;
 }) {
   const { select } = useSelection();
+  // A venue place (e.g. "clough") opens its building card, which has the photo; anything else opens as picked.
+  const showOnMap = async (post: BulletinPost) => {
+    const building = post.placeKind === "place" || !post.placeKind ? await buildingIdForPlace(post.placeId!).catch(() => undefined) : undefined;
+    select(building ? { kind: "building", id: building } : { kind: post.placeKind ?? "place", id: post.placeId! });
+    onClose();
+  };
   const { requireAuth, dialogOpen, session } = useAuth();
   const root = useRef<HTMLDialogElement>(null);
   const [query, setQuery] = useState("");
@@ -213,7 +220,7 @@ export default function BulletinBoard({ type, onType, onClose }: {
                 <NoteCard key={post.id} post={post} index={index} interested={interests.has(post.id)} count={interestCounts[post.id] ?? 0}
                   onInterest={() => toggleInterest(post.id)}
                   onDelete={post.ownerId !== undefined && canDeletePost(session, { accountId: post.ownerId }) ? () => removePost(post) : undefined}
-                  onShow={(post) => { select({ kind: post.placeKind ?? "place", id: post.placeId! }); onClose(); }} />
+                  onShow={(post) => void showOnMap(post)} />
               ))}
             </ul>
           )}

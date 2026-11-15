@@ -34,8 +34,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `setTipStatus(id, status)` [src/lib/alerts.ts:299](../src/lib/alerts.ts#L299): Police: moves a tip along the queue.
 - `focusAlert(alert)` [src/lib/alerts.ts:308](../src/lib/alerts.ts#L308): Asks the map to fly to an alarm (the banner's "Show on map").
 - `buildingPhoto(buildingId)` [src/lib/buildingPhotos.ts:10](../src/lib/buildingPhotos.ts#L10): The photo for a building footprint id, if one has been sourced.
-- `locationDetails(place)` [src/lib/buildingPlaces.ts:6](../src/lib/buildingPlaces.ts#L6): Read sourced location metadata without assuming an exact point or inventing a room.
-- `placeBuilding(place, index, all)` [src/lib/buildingPlaces.ts:11](../src/lib/buildingPlaces.ts#L11): Resolve explicit footprint ids, legacy seed building ids, then exact-point containment.
+- `locationDetails(place)` [src/lib/buildingPlaces.ts:7](../src/lib/buildingPlaces.ts#L7): Read sourced location metadata without assuming an exact point or inventing a room.
+- `placeBuilding(place, index, all)` [src/lib/buildingPlaces.ts:12](../src/lib/buildingPlaces.ts#L12): Resolve explicit footprint ids, legacy seed building ids, then exact-point containment.
+- `buildingIdForPlace(placeId)` [src/lib/buildingPlaces.ts:24](../src/lib/buildingPlaces.ts#L24): The footprint (building) id a venue place stands for, so "Show on map" opens the building card with its photo
 - `loadedBuildings()` [src/lib/buildings.ts:84](../src/lib/buildings.ts#L84): The index if it is already loaded, so callers can answer synchronously.
 - `loadBuildings()` [src/lib/buildings.ts:89](../src/lib/buildings.ts#L89): Loads the footprints once; a failed load is forgotten so the next call retries.
 - `POST_TYPES` [src/lib/bulletin.ts:46](../src/lib/bulletin.ts#L46): Bulletin filters in display order, sharing organization labels with the layer catalog.
@@ -344,7 +345,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:14](../src/panels/building-card/BuildingPreview.tsx#L14): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
 - `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:12](../src/panels/building-card/InsidePlaces.tsx#L12): Show selectable places grouped by category for a footprint or a legacy seed building.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:19](../src/panels/building-card/PlaceCard.tsx#L19): Shows the selected place's known details and correction link, or nothing without a place selection.
-- `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:86](../src/panels/bulletin/BulletinBoard.tsx#L86): Modal cork board with shared interests; the shell owns its URL, type and return focus.
+- `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:87](../src/panels/bulletin/BulletinBoard.tsx#L87): Modal cork board with shared interests; the shell owns its URL, type and return focus.
 - `PostComposer(…)` [src/panels/bulletin/PostComposer.tsx:27](../src/panels/bulletin/PostComposer.tsx#L27): Modal form that creates a post for the signed-in account; reports the saved post, or closes without one.
 - `BusList({ here }, number] | null })` [src/panels/buses/BusList.tsx:47](../src/panels/buses/BusList.tsx#L47): Lists every route for the "which buses are around" view; `here` is where you are (resolved by the panel), or…
 - `BusOptions({ origin, destination }, number]; destination, number] })` [src/panels/buses/BusOptions.tsx:19](../src/panels/buses/BusOptions.tsx#L19): Lists bus options from `origin` (your location or a picked place; the panel resolves it) to `destination`.
