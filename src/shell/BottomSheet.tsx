@@ -1,5 +1,5 @@
 /** @file Phone bottom sheet above the tab bar: hosts the same panels as the desktop card, with peek / half / full snaps. */
-import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type MouseEvent, type PointerEvent, type ReactNode } from "react";
 import { Icon } from "./icons";
 
 /** Sheet heights, smallest first. */
@@ -15,7 +15,7 @@ function snapHeights(sheet: HTMLElement): Record<SheetSnap, number> {
   return { peek: PEEK_PX, half: Math.min(full, Math.round(window.innerHeight * 0.5)), full };
 }
 
-/** Drag or tap the handle to move between snaps; arrow keys on the handle do the same. Opens at half. */
+/** Drag or tap the handle (or press Enter/Space on it) to move between snaps; arrow keys step up and down. Opens at half. */
 export default function BottomSheet({ title, contentKey, snap, onSnap, onClose, children }: {
   title: string;
   /** Changes when the content changes, so the sheet reopens at half. */
@@ -31,7 +31,16 @@ export default function BottomSheet({ title, contentKey, snap, onSnap, onClose, 
   useEffect(() => onSnap("half"), [contentKey]);
 
   const step = (direction: 1 | -1) => onSnap(ORDER[Math.min(2, Math.max(0, ORDER.indexOf(snap) + direction))]);
+  // Tap, Enter, Space and screen-reader activation all arrive as a click; a click that ends a drag is swallowed.
+  const dragged = useRef(false);
+  const click = (event: MouseEvent<HTMLButtonElement>) => {
+    const afterDrag = dragged.current;
+    dragged.current = false;
+    if (afterDrag && event.detail !== 0) return; // detail 0 = keyboard / assistive tech, never part of a drag
+    onSnap(snap === "full" ? "peek" : ORDER[ORDER.indexOf(snap) + 1]);
+  };
   const down = (event: PointerEvent<HTMLButtonElement>) => {
+    dragged.current = false;
     drag.current = { y: event.clientY, h: sheet.current!.getBoundingClientRect().height, moved: false };
     event.currentTarget.setPointerCapture(event.pointerId);
   };
@@ -42,11 +51,11 @@ export default function BottomSheet({ title, contentKey, snap, onSnap, onClose, 
     if (Math.abs(dy) > 6) d.moved = true;
     if (d.moved) setDragHeight(Math.max(PEEK_PX, Math.min(snapHeights(sheet.current!).full, d.h + dy)));
   };
-  const up = () => {
+  const up = (event: PointerEvent<HTMLButtonElement>) => {
     const d = drag.current;
     drag.current = null;
-    if (!d) return;
-    if (!d.moved) { onSnap(snap === "full" ? "peek" : ORDER[ORDER.indexOf(snap) + 1]); return; }
+    if (!d || !d.moved) return; // a plain tap: the click handler does it
+    dragged.current = event.type === "pointerup"; // a cancelled drag gets no click to swallow
     const heights = snapHeights(sheet.current!);
     const current = dragHeight ?? d.h;
     setDragHeight(null);
@@ -58,7 +67,7 @@ export default function BottomSheet({ title, contentKey, snap, onSnap, onClose, 
       style={dragHeight == null ? undefined : { height: dragHeight, transition: "none" }}>
       <header className="shell-sheet__head">
         <button type="button" className="shell-sheet__handle" aria-label={`${title}: ${snap === "full" ? "collapse" : "expand"} sheet`}
-          onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up}
+          onClick={click} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up}
           onKeyDown={(event) => {
             if (event.key === "ArrowUp") { event.preventDefault(); step(1); }
             else if (event.key === "ArrowDown") { event.preventDefault(); step(-1); }
