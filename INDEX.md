@@ -20,12 +20,14 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`docs/adr/`](docs/adr/INDEX.md): Architecture Decision Records: one decision per file, immutable once Accepted.
   - [`docs/brainstorm/`](docs/brainstorm/INDEX.md): Raw inputs: Miro board transcription and the three SGA challenge prompts. Read only when you need the origina…
   - [`docs/data/`](docs/data/INDEX.md): Curated POI schema, verification workflow and generated checklist.
+    - [`docs/data/research/`](docs/data/research/INDEX.md): Research reports behind the POI dataset. Not data and not verified.
   - [`docs/demo/`](docs/demo/INDEX.md): Demo runbook: script readiness, pre-flight checklist and plan B.
   - [`docs/design/`](docs/design/INDEX.md): Visual direction and UI references: the chosen "survey map" style, tokens and how to build it.
     - [`docs/design/references/`](docs/design/references/INDEX.md): Reference images (Gemini mockups). Mood references, not specs; their data is fake.
     - [`docs/design/screenshots/`](docs/design/screenshots/INDEX.md): Before/after screenshots of the real app, taken for PRs (production build, headless Chromium). Named <task-<s…
       - [`docs/design/screenshots/app-shell/`](docs/design/screenshots/app-shell/INDEX.md): Map-first shell (APP-SHELL.md), production build in headless Chromium at 1440, 1280, 390 and 360 px: empty ma…
   - [`docs/research/`](docs/research/INDEX.md): Fuentes y dudas pendientes de las investigaciones de datos del campus.
+  - [`docs/stickers/`](docs/stickers/INDEX.md): QR codes and the link list for the door stickers that open a building with the entrance preselected.
   - [`docs/testing/`](docs/testing/INDEX.md): Test plans with people (hallway tests).
 - [`public/`](public/INDEX.md): Static assets served as-is at the site root.
 - [`scripts/`](scripts/INDEX.md): Dev tooling run with Node (no deps): index generator, Claude hooks, data fetchers.
@@ -33,7 +35,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`src/auth/`](src/auth/INDEX.md): Replaceable demo sign-in contract, fictional personas and local session persistence.
   - [`src/components/`](src/components/INDEX.md): React components shared by the shell: map view, glyphs, offline notice. The layout itself lives in src/shell/.
   - [`src/data/`](src/data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
-    - [`src/data/indoor/`](src/data/indoor/INDEX.md): _no description yet_
+    - [`src/data/indoor/`](src/data/indoor/INDEX.md): Indoor models per building: schematic levels, rooms, walking graph and entrances.
     - [`src/data/pois/`](src/data/pois/INDEX.md): Curated points of interest, one file per category (drafts by Codex pending verification, plus demo events). H…
   - [`src/indoor/`](src/indoor/INDEX.md): Building screen, vector schematic renderer and indoor contracts shared by lanes A and B.
   - [`src/lib/`](src/lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.

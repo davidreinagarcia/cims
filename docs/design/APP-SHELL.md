@@ -33,7 +33,8 @@
    The rail replaces the Explore/Bulletin tabs. ☰ opens a slim drawer: About, Sign in/out, Data corrections.
 2. **Search pill** (green), floating top-left next to the rail, ~400px: small `CIMS` wordmark (text only,
    no GT logo), input, search button, and a **Route** button (opens David's From/To directions box).
-   Suggestions drop down from the pill itself.
+   Suggestions and recent picks drop down from the pill itself. Route opens the From/To box in the
+   floating card and prefills To with the selected place or building.
 3. **Category chips** (blue), one floating row to the right of the pill, horizontally scrollable with a
    › arrow: Food, Support, Makerspaces, Exercise, Orgs & Events, Transport, Printing, Health. Each chip
    = category glyph (its color) + label; pressed = navy fill, white/gold label. Chips are the quick
@@ -73,7 +74,8 @@
   Respect `env(safe-area-inset-bottom)`.
 - **Bottom sheet** above the tab bar for all content: peek (handle + title), half, full; drag or tap
   the handle. Empty state = no sheet.
-- **Route FAB** bottom-right above the sheet; locate button above it. Zoom buttons hidden (pinch).
+- **Route FAB** bottom-right above the sheet opens the same From/To box inside the sheet, prefilling
+  To with the selected place or building. A full sheet leaves a row free for the FAB. Zoom buttons hidden (pinch).
 - Nothing may overlap the search pill or the tab bar. 44px minimum tap targets.
 
 ## Visual rules for floating UI ("modern, not blocky")
@@ -94,6 +96,6 @@ Tokens to add in `src/styles/tokens.css`: `--radius-pill: 999px; --radius-card: 
 
 ## What must not change
 
-Panel internals and behavior: search ranking/suggestions/directions (David's `feat/search-gmaps`),
+Panel internals and behavior: search ranking, grouped suggestions, recent picks and From/To directions,
 building/place cards, room finder, report flow, bulletin, indoor viewer, layer filter state, map layers,
 pins, basemap. The shell only changes **where** they're mounted and their outer container.

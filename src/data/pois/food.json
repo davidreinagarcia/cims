@@ -54,7 +54,41 @@
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "dining-hall",
         "address": "649 Techwood Dr NW, Atlanta, GA 30330",
-        "coord_source": "OSM way 42706747 (Marion L. Brittain Dining Hall), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 42706747 (Marion L. Brittain Dining Hall), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "11:00",
+              "23:00"
+            ]
+          ],
+          "tue": [
+            [
+              "11:00",
+              "23:00"
+            ]
+          ],
+          "wed": [
+            [
+              "11:00",
+              "23:00"
+            ]
+          ],
+          "thu": [
+            [
+              "11:00",
+              "23:00"
+            ]
+          ],
+          "fri": [
+            [
+              "11:00",
+              "23:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",
@@ -157,7 +191,51 @@
         "description": "Sandwiches at the campus Pavilions.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
-        "coord_source": "OSM way 974793135 (Jimmy John's), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 974793135 (Jimmy John's), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "10:00",
+              "20:00"
+            ]
+          ],
+          "tue": [
+            [
+              "10:00",
+              "20:00"
+            ]
+          ],
+          "wed": [
+            [
+              "10:00",
+              "20:00"
+            ]
+          ],
+          "thu": [
+            [
+              "10:00",
+              "20:00"
+            ]
+          ],
+          "fri": [
+            [
+              "10:00",
+              "19:00"
+            ]
+          ],
+          "sat": [
+            [
+              "10:00",
+              "17:00"
+            ]
+          ],
+          "sun": [
+            [
+              "10:00",
+              "16:00"
+            ]
+          ]
+        }
       },
       "geometry": {
         "type": "Point",
@@ -262,7 +340,51 @@
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "dining-hall",
         "address": "120 North Avenue NW, Atlanta, GA 30313",
-        "coord_source": "OSM relation 4041026 (North Avenue Dining Hall), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM relation 4041026 (North Avenue Dining Hall), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "tue": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "wed": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "thu": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "fri": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "sat": [
+            [
+              "09:00",
+              "21:00"
+            ]
+          ],
+          "sun": [
+            [
+              "09:00",
+              "21:00"
+            ]
+          ]
+        }
       },
       "geometry": {
         "type": "Point",
@@ -284,7 +406,51 @@
         "subtype": "restaurant",
         "building_id": "student-center",
         "floor_or_suite": "1st floor",
-        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "10:00",
+              "21:00"
+            ]
+          ],
+          "tue": [
+            [
+              "10:00",
+              "21:00"
+            ]
+          ],
+          "wed": [
+            [
+              "10:00",
+              "21:00"
+            ]
+          ],
+          "thu": [
+            [
+              "10:00",
+              "21:00"
+            ]
+          ],
+          "fri": [
+            [
+              "10:00",
+              "19:00"
+            ]
+          ],
+          "sat": [
+            [
+              "11:00",
+              "16:00"
+            ]
+          ],
+          "sun": [
+            [
+              "11:00",
+              "17:00"
+            ]
+          ]
+        }
       },
       "geometry": {
         "type": "Point",
@@ -350,7 +516,41 @@
         "subtype": "restaurant",
         "building_id": "student-center",
         "floor_or_suite": "2nd floor",
-        "coord_source": "OSM node 14224945528 (Twisted Taco), named venue point returned by Nominatim lookup"
+        "coord_source": "OSM node 14224945528 (Twisted Taco), named venue point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "10:30",
+              "19:00"
+            ]
+          ],
+          "tue": [
+            [
+              "10:30",
+              "19:00"
+            ]
+          ],
+          "wed": [
+            [
+              "10:30",
+              "19:00"
+            ]
+          ],
+          "thu": [
+            [
+              "10:30",
+              "19:00"
+            ]
+          ],
+          "fri": [
+            [
+              "10:30",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",
@@ -371,7 +571,51 @@
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "dining-hall",
         "address": "532 8th St NW, Atlanta, GA 30318",
-        "coord_source": "OSM way 516716115 (West Village Dining Commons), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 516716115 (West Village Dining Commons), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "tue": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "wed": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "thu": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "fri": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "sat": [
+            [
+              "09:00",
+              "21:00"
+            ]
+          ],
+          "sun": [
+            [
+              "09:00",
+              "21:00"
+            ]
+          ]
+        }
       },
       "geometry": {
         "type": "Point",

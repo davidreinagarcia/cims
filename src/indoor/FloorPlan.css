@@ -32,3 +32,10 @@
 
 .floor-plan__toolbar { min-height: 68px; box-sizing: border-box; align-items: center; }
 @media (max-width: 700px) { .floor-plan__toolbar .cims-btn { padding: 0 10px; } }
+
+.floor-plan__transition rect { fill: var(--gold); stroke: var(--navy); stroke-width: 2; }
+.floor-plan__transition--stairs rect { fill: var(--route); stroke: var(--white); }
+.floor-plan__transition path { fill: none; stroke: var(--navy); stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+.floor-plan__transition--stairs path { stroke: var(--white); }
+.floor-plan__transition--elevator path { fill: var(--navy); }
+.floor-plan__transition text { font: bold 13px var(--font-body); fill: var(--navy); paint-order: stroke; stroke: var(--white); stroke-width: 4px; stroke-linejoin: round; }

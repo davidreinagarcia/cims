@@ -35,7 +35,57 @@
         "aliases": [
           "Invention Studio"
         ],
-        "coord_source": "OSM way 42872689 (Manufacturing Related Disciplines Complex), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 42872689 (Manufacturing Related Disciplines Complex), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "10:00",
+              "16:00"
+            ],
+            [
+              "17:00",
+              "18:00"
+            ]
+          ],
+          "tue": [
+            [
+              "10:00",
+              "16:00"
+            ],
+            [
+              "17:00",
+              "18:00"
+            ]
+          ],
+          "wed": [
+            [
+              "10:00",
+              "16:00"
+            ],
+            [
+              "17:00",
+              "18:00"
+            ]
+          ],
+          "thu": [
+            [
+              "10:00",
+              "16:00"
+            ],
+            [
+              "17:00",
+              "18:00"
+            ]
+          ],
+          "fri": [
+            [
+              "10:00",
+              "16:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",
@@ -59,7 +109,41 @@
           "The Hive",
           "Interdisciplinary Design Commons"
         ],
-        "coord_source": "OSM way 42706132 (Van Leer Building), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 42706132 (Van Leer Building), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "10:00",
+              "18:00"
+            ]
+          ],
+          "tue": [
+            [
+              "10:00",
+              "18:00"
+            ]
+          ],
+          "wed": [
+            [
+              "10:00",
+              "18:00"
+            ]
+          ],
+          "thu": [
+            [
+              "10:00",
+              "18:00"
+            ]
+          ],
+          "fri": [
+            [
+              "10:00",
+              "18:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",

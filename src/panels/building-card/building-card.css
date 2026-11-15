@@ -23,3 +23,8 @@
 
 .detail__link { padding: 0; border: 0; background: none; color: var(--navy); font: inherit; text-align: left; text-decoration: underline; cursor: pointer; overflow-wrap: anywhere; }
 .detail__link:hover { background: var(--paper-2); }
+
+.preview__plan { display: block; width: 100%; height: 150px; margin: var(--s2) 0; background: var(--paper-2); border: var(--hairline-muted); }
+.preview__outline { fill: var(--white); stroke: var(--navy); stroke-width: 6; }
+.preview__space { fill: var(--cat, #c9d3c0); stroke: var(--navy); stroke-width: 1.5; opacity: .85; }
+.detail.preview .cims-actions { grid-template-columns: 1fr 1fr; }

@@ -6,10 +6,11 @@ import BuildingView from "../indoor/BuildingView";
 import AccountChip from "../panels/account/AccountChip";
 import SignInDialog from "../panels/account/SignInDialog";
 import BuildingCard from "../panels/building-card/BuildingCard";
+import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinPanel from "../panels/bulletin/BulletinPanel";
 import { useAuth } from "../state/auth";
-import { useSelection, type SelectionKind } from "../state/selection";
+import { useSelection, type Selection, type SelectionKind } from "../state/selection";
 import BottomSheet, { type SheetSnap } from "./BottomSheet";
 import ChipsBar from "./ChipsBar";
 import FloatingCard from "./FloatingCard";
@@ -17,6 +18,7 @@ import { Icon, type ShellPanel } from "./icons";
 import LayersPopover from "./LayersPopover";
 import MobileTabBar from "./MobileTabBar";
 import Rail from "./Rail";
+import RoutePanel from "./RoutePanel";
 import SearchPill from "./SearchPill";
 import "./shell.css";
 
@@ -53,6 +55,7 @@ export default function Shell() {
   const { selection, select } = useSelection();
   const { dialogOpen } = useAuth();
   const [panel, setPanel] = useState<ShellPanel>(initialPanel);
+  const [routeTo, setRouteTo] = useState<Selection | null>(null);
   const [hasQuery, setHasQuery] = useState(false);
   const [snap, setSnap] = useState<SheetSnap>("half");
 
@@ -67,7 +70,11 @@ export default function Shell() {
 
   const choosePanel = (next: ShellPanel) => {
     if (next !== "explore" && next === panel) setPanel("explore"); // pressing the open item again closes it
-    else { setPanel(next); if (next !== "explore") select(null); }
+    else {
+      if (next === "route") setRouteTo(selection);
+      setPanel(next);
+      if (next !== "explore") select(null);
+    }
   };
   const closeContent = () => { if (panel === "explore") select(null); else setPanel("explore"); };
 
@@ -85,13 +92,11 @@ export default function Shell() {
   if (panel === "bulletin") content = { title: "Bulletin", key: "bulletin", body: <BulletinPanel onShowMap={() => setPanel("explore")} /> };
   else if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <ComingSoon what="Room finder" hint="You can already search a room number in the search bar." /> };
   else if (panel === "report") content = { title: "Report", key: "report", body: <ComingSoon what="Report an issue" /> };
-  // TODO(route): mount David's From/To directions box here once feat/search-gmaps merges. Until then the desktop
-  // Route button (SearchPill) and the phone FAB both go through choosePanel("route") and land on this one placeholder.
-  else if (panel === "route") content = { title: "Route", key: "route", body: <ComingSoon what="Directions between two places" /> };
+  else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel initialSelection={routeTo} onClose={closeContent} /> };
   else if (selection) content = {
     title: selection.kind === "building" ? "Building" : "Place",
     key: `${selection.kind}:${selection.id}`,
-    body: <><PlaceCard /><BuildingCard /></>,
+    body: <><PlaceCard /><BuildingPreview /><BuildingCard /></>,
   };
   const showResults = hasQuery && !selection && panel === "explore";
 

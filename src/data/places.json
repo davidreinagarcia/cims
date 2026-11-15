@@ -2,12 +2,184 @@
   "type": "FeatureCollection",
   "_note": "SEED DATA: approximate coordinates, to be replaced/extended by the team. Add features here and they appear on the map and in the sidebar automatically.",
   "features": [
-    { "type": "Feature", "properties": { "id": "tech-tower", "name": "Tech Tower", "category": "landmark", "status": "seed", "description": "Georgia Tech's iconic administration building." }, "geometry": { "type": "Point", "coordinates": [-84.3947, 33.7727] } },
-    { "type": "Feature", "properties": { "id": "clough", "name": "Clough Undergraduate Learning Commons", "aliases": ["CULC", "Clough"], "category": "academic", "status": "seed", "description": "Classrooms, study space and collaboration areas." }, "geometry": { "type": "Point", "coordinates": [-84.3964, 33.7750] } },
-    { "type": "Feature", "properties": { "id": "student-center", "name": "Stamps Student Center", "aliases": ["Student Center"], "category": "food", "status": "seed", "description": "Food, services and student organizations." }, "geometry": { "type": "Point", "coordinates": [-84.3990, 33.7739] } },
-    { "type": "Feature", "properties": { "id": "crc", "name": "Campus Recreation Center", "aliases": ["CRC"], "category": "exercise", "status": "seed", "description": "Gym, pool and climbing wall." }, "geometry": { "type": "Point", "coordinates": [-84.4040, 33.7755] } },
-    { "type": "Feature", "properties": { "id": "bobby-dodd", "name": "Bobby Dodd Stadium", "aliases": ["Bobby Dodd"], "category": "landmark", "status": "seed", "description": "Home of Yellow Jackets football." }, "geometry": { "type": "Point", "coordinates": [-84.3928, 33.7724] } },
-    { "type": "Feature", "properties": { "id": "library", "name": "Price Gilbert Library", "aliases": ["Library"], "category": "academic", "status": "seed", "description": "Main campus library." }, "geometry": { "type": "Point", "coordinates": [-84.3955, 33.7745] } },
-    { "type": "Feature", "properties": { "id": "tech-green", "name": "Tech Green", "category": "landmark", "status": "seed", "description": "Central lawn of campus." }, "geometry": { "type": "Point", "coordinates": [-84.3989, 33.7727] } }
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tech-tower",
+        "name": "Tech Tower",
+        "category": "landmark",
+        "status": "seed",
+        "description": "Georgia Tech's iconic administration building."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3947,
+          33.7727
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "clough",
+        "name": "Clough Undergraduate Learning Commons",
+        "aliases": [
+          "CULC",
+          "Clough"
+        ],
+        "category": "academic",
+        "status": "seed",
+        "description": "Classrooms, study space and collaboration areas."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3964,
+          33.775
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "student-center",
+        "name": "Stamps Student Center",
+        "aliases": [
+          "Student Center"
+        ],
+        "category": "food",
+        "status": "seed",
+        "description": "Food, services and student organizations."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.399,
+          33.7739
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crc",
+        "name": "Campus Recreation Center",
+        "aliases": [
+          "CRC"
+        ],
+        "category": "exercise",
+        "status": "seed",
+        "description": "Gym, pool and climbing wall.",
+        "hours": {
+          "mon": [
+            [
+              "05:30",
+              "23:59"
+            ]
+          ],
+          "tue": [
+            [
+              "05:30",
+              "23:59"
+            ]
+          ],
+          "wed": [
+            [
+              "05:30",
+              "23:59"
+            ]
+          ],
+          "thu": [
+            [
+              "05:30",
+              "23:59"
+            ]
+          ],
+          "fri": [
+            [
+              "05:30",
+              "21:00"
+            ]
+          ],
+          "sat": [
+            [
+              "09:00",
+              "19:00"
+            ]
+          ],
+          "sun": [
+            [
+              "09:00",
+              "22:00"
+            ]
+          ]
+        }
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.404,
+          33.7755
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "bobby-dodd",
+        "name": "Bobby Dodd Stadium",
+        "aliases": [
+          "Bobby Dodd"
+        ],
+        "category": "landmark",
+        "status": "seed",
+        "description": "Home of Yellow Jackets football."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3928,
+          33.7724
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "library",
+        "name": "Price Gilbert Library",
+        "aliases": [
+          "Library"
+        ],
+        "category": "academic",
+        "status": "seed",
+        "description": "Main campus library."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3955,
+          33.7745
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tech-green",
+        "name": "Tech Green",
+        "category": "landmark",
+        "status": "seed",
+        "description": "Central lawn of campus."
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3989,
+          33.7727
+        ]
+      }
+    }
   ]
 }
