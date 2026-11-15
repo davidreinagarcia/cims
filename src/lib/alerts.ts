@@ -157,12 +157,15 @@ const toTip = (r: TipRow): PoliceTip => ({
 const isPoliceAccount = () => { const r = currentAccount()?.role; return r === "police" || r === "moderator"; };
 
 /** Reads alarms (and tips, for police) from Supabase. Throws BackendDown when it is unreachable. */
+let fetchSeq = 0;
 async function fetchRemote(): Promise<void> {
+  const seq = ++fetchSeq; // several refreshes can be in flight (one per realtime event): only the newest answer may update the state
   const police = isPoliceAccount();
   const [alerts, tips] = await Promise.all([
     rest<AlertRow[]>("alerts?select=*&order=created_at.desc&limit=100"),
     police ? rest<TipRow[]>("police_tips?select=*&order=created_at.desc&limit=200") : Promise.resolve([] as TipRow[]),
   ]);
+  if (seq !== fetchSeq) return;
   set({ alerts: alerts.map(toAlert), tips: tips.map(toTip), police, status: "live" });
 }
 

@@ -80,7 +80,9 @@ export function addAlertsOverlay(map: MapLibreMap, options: AlertsOverlayOptions
         geometry: { type: "Point", coordinates: a.center },
       })),
     });
-    if (reduced) src(RIPPLE)?.setData(EMPTY);
+    // The animation loop only runs while an alarm is live, so wipe its last frame (and the breathing fill) as soon as none is.
+    if (reduced || active.length === 0) src(RIPPLE)?.setData(EMPTY);
+    if (active.length === 0) map.setPaintProperty("cims-alert-fill", "fill-opacity", 0.26);
   };
 
   const unsubscribe = subscribeAlerts((state) => {
