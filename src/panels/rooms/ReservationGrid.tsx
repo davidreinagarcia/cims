@@ -249,21 +249,6 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
         </p>
       ) : (
         <div className="reserve-grid" role="group" aria-label={`Availability for ${dayFmt.format(days[selectedDayIndex])}`}>
-          <div className="reserve-grid__row reserve-grid__row--header">
-            <div className="reserve-grid__roomcell" aria-hidden="true" />
-            <div className="reserve-grid__cells" aria-hidden="true">
-              {DISPLAY_TIMES.map((_, index) => {
-                if (index % 2 !== 0) return <span key={index} className="reserve-grid__hour" />;
-                const [num, meridiem] = hourFmt.format(boundaries[selectedDayIndex][index].start).split(" ");
-                return (
-                  <span key={index} className="reserve-grid__hour">
-                    <span className="reserve-grid__hour-num">{num}</span>
-                    <span className="reserve-grid__hour-meridiem">{meridiem}</span>
-                  </span>
-                );
-              })}
-            </div>
-          </div>
           {visibleRooms.map((room) => {
             const favorited = favoriteIds.has(room.id);
             return (
@@ -292,10 +277,11 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
                       && (index === activeSelection.endIndex || index === activeSelection.startIndex - 1));
                     const { start } = boundaries[selectedDayIndex][index];
                     const status = selected ? "selected" : past ? "past" : free ? "free" : "busy";
-                    // On-the-hour slots (every other one, since cells are 30 min) show the hour as a
-                    // compact in-circle label -- a quick visual anchor without labeling all 30 cells.
+                    // On-the-hour slots (every other one, since cells are 30 min) show the hour and
+                    // AM/PM inside the circle -- a quick visual anchor without labeling all 30 cells,
+                    // and without a separate header row above the grid.
                     const onTheHour = index % 2 === 0;
-                    const hour12 = onTheHour ? (((start.getHours() + 11) % 12) + 1) : null;
+                    const [hourNum, meridiem] = onTheHour ? hourFmt.format(start).split(" ") : [null, null];
                     return (
                       <button key={index} type="button" className={slotClass(room.id, index, free, past)}
                         disabled={(!free || past || cappedNeighbor) && !selected}
@@ -305,7 +291,12 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
                         onPointerDown={() => onSlotPointerDown(room.id, index)}
                         onPointerEnter={(event) => onSlotPointerEnter(room.id, index, event)}
                         onClick={() => onSlotClick(room.id, index)}>
-                        {hour12 !== null && <span className="reserve-slot__hour" aria-hidden="true">{hour12}</span>}
+                        {hourNum !== null && (
+                          <span className="reserve-slot__hour" aria-hidden="true">
+                            <span className="reserve-slot__hour-num">{hourNum}</span>
+                            <span className="reserve-slot__hour-meridiem">{meridiem}</span>
+                          </span>
+                        )}
                       </button>
                     );
                   })}
