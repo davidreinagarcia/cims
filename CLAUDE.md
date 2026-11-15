@@ -15,9 +15,10 @@ CIMS: Georgia Tech campus map (Vite + React 18 + TS + MapLibre). Two humans (Dav
   push, open a **draft** PR. Rules: [docs/MERGING-TO-MAIN.md](docs/MERGING-TO-MAIN.md).
 - **Stay in your task's lane and files** ([WORKPLAN §2–3](docs/WORKPLAN.md)). Need another file? Stop and ask.
 - **Hotspots** (`src/App.tsx`, `src/components/MapView.tsx`, `src/types/*`, `src/state/*`,
-  `src/styles.css`, `src/config.ts`, `package.json`, lockfile, `.github/`, `.claude/`, `deploy/`): only if the task says so.
+  `src/styles.css`, `src/config.ts`, `src/lib/supabase.ts`, `src/auth/`, `supabase/migrations/` (new files only), `package.json`, lockfile, `.github/`, `.claude/`, `deploy/`): only if the task says so.
 - **No new dependencies** unless the task says so. **No secrets** in code (`.env` + `.env.example`).
 - **Never invent data** (hours, locations, rooms). Records in `src/data/` need `source_url`, `verified_at`, `verified_by`.
+- **Supabase (one shared project, all branch previews hit live data):** never run SQL/CLI/dashboard against it and never look for tokens. Schema change = a new, expand-only migration file in your PR (`npm run db:check`), flagged `Needs DB migration` for David to apply. Full rules: [docs/SUPABASE.md](docs/SUPABASE.md#changing-the-database-from-a-branch-read-this-before-touching-supabase). Accounts are the pre-made demo ones; **no sign-up flow**.
 - `npm run build` must pass before you say you're done.
 
 ## Docs you must keep current (hooks will remind you)

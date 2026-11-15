@@ -42,7 +42,7 @@ or open a tiny separate PR they review.
 ### Hotspot files (shared, see §3)
 
 `src/App.tsx` · `src/components/MapView.tsx` · `src/types/*` · `src/state/*` · `src/styles.css` ·
-`src/config.ts` · `package.json` + `package-lock.json` · `.github/` · `.claude/` · `scripts/gen-index.mjs` · `deploy/`
+`src/config.ts` · `src/lib/supabase.ts` · `supabase/migrations/` (add files only, see [SUPABASE.md](SUPABASE.md)) · `package.json` + `package-lock.json` · `.github/` · `.claude/` · `scripts/gen-index.mjs` · `deploy/`
 
 **Generated files** (`INDEX.md` everywhere, `docs/FUNCTIONS.md`) are *not* hotspots: nobody edits
 them by hand, conflicts resolve themselves, and they're regenerated on every commit

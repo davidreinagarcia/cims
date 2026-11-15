@@ -20,7 +20,7 @@ export async function withFallback<T>(run: () => Promise<T>, local: () => Promis
 }
 
 const AUTH_KEY = "cims.supabase.auth.v1";
-interface Auth { access_token: string; refresh_token: string; expires_at: number; user: { id: string } }
+interface Auth { access_token: string; refresh_token: string; expires_at: number; user: { id: string; is_anonymous?: boolean; email?: string; app_metadata?: { role?: string } }; password?: string }
 
 let auth: Auth | null = null;
 let signing: Promise<Auth> | null = null;
@@ -39,8 +39,28 @@ async function authCall(path: string, body: unknown): Promise<Auth> {
   }).catch((e) => { throw new BackendDown(String(e)); });
   if (!res.ok) throw new BackendDown(`auth ${res.status}`);
   const a = await res.json();
-  saveAuth({ ...a, expires_at: a.expires_at ?? Math.floor(Date.now() / 1000) + (a.expires_in ?? 3600) });
+  saveAuth({ ...a, expires_at: a.expires_at ?? Math.floor(Date.now() / 1000) + (a.expires_in ?? 3600), password: auth?.password });
   return auth as Auth;
+}
+
+/** Signs in as one of the pre-created demo accounts (replaces the anonymous guest session in this browser). */
+export async function signInWithPassword(email: string, password: string): Promise<Auth> {
+  const a = await authCall("token?grant_type=password", { email, password });
+  saveAuth({ ...a, password });
+  return auth as Auth;
+}
+
+/** Forgets the chosen account; the next call creates a fresh anonymous guest session. */
+export function signOutSupabase(): void {
+  auth = null; signing = null;
+  try { localStorage.removeItem(AUTH_KEY); } catch { /* nothing stored */ }
+}
+
+/** The account currently signed in (null for guests), read from the stored session without a network call. */
+export function currentAccount(): { id: string; email: string; role: string } | null {
+  const a = auth ?? loadAuth();
+  if (!a || a.user.is_anonymous || !a.user.email) return null;
+  return { id: a.user.id, email: a.user.email, role: a.user.app_metadata?.role ?? "student" };
 }
 
 /** Signed-in anonymous session for this browser (created once, refreshed when it is about to expire). */
@@ -52,6 +72,7 @@ export function session(): Promise<Auth> {
     if (auth?.refresh_token) {
       try { return await authCall("token?grant_type=refresh_token", { refresh_token: auth.refresh_token }); } catch { /* sign in again */ }
     }
+    if (auth?.user.email && auth.password) return signInWithPassword(auth.user.email, auth.password); // keep the chosen account
     return authCall("signup", {});
   })().finally(() => { signing = null; });
   return signing;

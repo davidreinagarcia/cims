@@ -66,6 +66,10 @@ Example: `feat(map): highlight building on first tap`.
 - Prefix comments: **`blocker:`** must fix · **`suggestion:`** optional · **`nit:`** cosmetic · **`question:`**.
 - Approve when it's good enough to ship, not when it's perfect.
 
+## Changing the database
+
+One shared Supabase project serves `main` and every branch preview. Do not touch it directly: add an expand-only migration file under `supabase/migrations/`, run `npm run db:check`, and write `Needs DB migration: <file>` in your PR so David can apply it. Details and rules: [docs/SUPABASE.md](docs/SUPABASE.md#changing-the-database-from-a-branch-read-this-before-touching-supabase).
+
 ## Contributing data
 
 Curated data lives in `src/data/` (see [ADR-0004](docs/adr/0004-curated-data-as-versioned-geojson.md)

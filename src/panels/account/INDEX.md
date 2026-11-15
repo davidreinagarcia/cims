@@ -7,7 +7,7 @@ Account chip and accessible DEMO sign-in theater using the existing survey map d
 **Files**
 
 - [`AccountChip.tsx`](AccountChip.tsx): Header account control with fictional identity labels and demo sign-out. · exports `AccountChip`
-- [`SignInDialog.tsx`](SignInDialog.tsx): Accessible sign-in theater with a fake redirect, fictional accounts and community rules. · exports `SignInDialog`
+- [`SignInDialog.tsx`](SignInDialog.tsx): Accessible account picker: choose one of the pre-created demo accounts (no sign-up), plus community rules. · exports `SignInDialog`
 - [`account.css`](account.css): * @file Layout for the square DEMO sign-in dialog and header account disclosure.
 
 <!-- AUTO:END -->

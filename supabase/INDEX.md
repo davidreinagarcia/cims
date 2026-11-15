@@ -10,7 +10,8 @@
 
 **Files**
 
-- [`README.md`](README.md): How the Supabase project is set up: migrations, keys, and what is public vs secret.
+- [`README.md`](README.md): How the Supabase project is set up: migrations, accounts, keys, and who may apply what.
+- [`project.json`](project.json): JSON: ref, name, region
 - [`seed.sql`](seed.sql): _no summary_
 
 <!-- AUTO:END -->

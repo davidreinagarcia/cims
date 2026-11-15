@@ -1,0 +1,47 @@
+[
+  {
+    "email": "student@demo.cims.app",
+    "displayName": "Demo Student",
+    "role": "student",
+    "description": "Reports issues, books rooms, posts stories, marks events as interesting."
+  },
+  {
+    "email": "student2@demo.cims.app",
+    "displayName": "Demo Student 2",
+    "role": "student",
+    "description": "A second student, to see how two people share the same rooms and reports."
+  },
+  {
+    "email": "org@demo.cims.app",
+    "displayName": "Demo Org Account",
+    "role": "officer",
+    "description": "A student organization account (event posting is coming)."
+  },
+  {
+    "email": "maintenance@demo.cims.app",
+    "displayName": "Demo Maintenance",
+    "role": "maintenance",
+    "team": "Facilities",
+    "description": "Facilities staff: works the Facilities report queue."
+  },
+  {
+    "email": "it@demo.cims.app",
+    "displayName": "Demo IT Support",
+    "role": "it",
+    "team": "IT",
+    "description": "IT staff: works the IT report queue."
+  },
+  {
+    "email": "police@demo.cims.app",
+    "displayName": "Demo GTPD Officer",
+    "role": "police",
+    "team": "Emergency",
+    "description": "Campus police: works the Emergency report queue."
+  },
+  {
+    "email": "moderator@demo.cims.app",
+    "displayName": "Demo Moderator",
+    "role": "moderator",
+    "description": "Sees every team's queue and can hide content."
+  }
+]
