@@ -21,6 +21,9 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`docs/brainstorm/`](docs/brainstorm/INDEX.md): Raw inputs: Miro board transcription and the three SGA challenge prompts. Read only when you need the origina…
   - [`docs/data/`](docs/data/INDEX.md): Curated POI schema, verification workflow and generated checklist.
     - [`docs/data/research/`](docs/data/research/INDEX.md): Research reports behind the POI dataset. Not data and not verified.
+      - [`docs/data/research/codex-review/`](docs/data/research/codex-review/INDEX.md): _no description yet_
+        - [`docs/data/research/codex-review/reports/`](docs/data/research/codex-review/reports/INDEX.md): _no description yet_
+      - [`docs/data/research/transit/`](docs/data/research/transit/INDEX.md): _no description yet_
   - [`docs/demo/`](docs/demo/INDEX.md): Demo runbook: script readiness, pre-flight checklist and plan B.
   - [`docs/design/`](docs/design/INDEX.md): Visual direction and UI references: the chosen "survey map" style, tokens and how to build it.
     - [`docs/design/references/`](docs/design/references/INDEX.md): Reference images (Gemini mockups). Mood references, not specs; their data is fake.

@@ -1,0 +1,678 @@
+[
+  {
+    "item": "taïm",
+    "status": "confirmed",
+    "finding": "Figura en la lista actual de John Lewis Student Center. La ficha muestra «location is open» y publica el horario de la semana indicado. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/taim-mediterranean-kitchen",
+    "quote": "Monday: 10:30 am - 9:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "tue": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "wed": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "thu": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "fri": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "sat": [
+        [
+          "10:30",
+          "17:00"
+        ]
+      ],
+      "sun": [
+        [
+          "10:30",
+          "17:00"
+        ]
+      ]
+    },
+    "listed_in": "https://dining.gatech.edu/dining-locations/john-lewis-student-center",
+    "availability_badge": "open",
+    "closure_scope": "no cierre permanente publicado",
+    "special_hours_note": "Bloque separado November 22nd - November 28th. No se ha mezclado con Normal Hours; incluye Thanksgiving.",
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Tech It To Go",
+    "status": "confirmed",
+    "finding": "Figura en la lista actual de John Lewis Student Center. La ficha muestra «location is closed», pero conserva horario lun a vie de 09:00 a 16:00. La etiqueta aislada no acredita cierre permanente: no sustituir la semana por siete días cerrados. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026. La noticia de agosto anunciaba una futura transición cashierless según horas del edificio; no acredita que esa transición se completase.",
+    "evidence_url": "https://dining.gatech.edu/location/tech-it-go",
+    "quote": "Monday: 9:00 am - 4:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ],
+      "tue": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ],
+      "wed": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ],
+      "thu": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ],
+      "fri": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    },
+    "listed_in": "https://dining.gatech.edu/dining-locations/john-lewis-student-center",
+    "availability_badge": "closed",
+    "closure_scope": "instantáneo/no permanente demostrado",
+    "evidence": [
+      {
+        "url": "https://dining.gatech.edu/location/tech-it-go",
+        "quote": "location is closed"
+      }
+    ],
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Chick-fil-A",
+    "status": "confirmed",
+    "finding": "Figura en la lista actual de John Lewis Student Center. La ficha muestra «location is open» y publica el horario de la semana indicado. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/chick-fil",
+    "quote": "Monday: 7:00 am - 10:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "tue": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "wed": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "thu": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "fri": [
+        [
+          "07:00",
+          "19:00"
+        ]
+      ],
+      "sat": [
+        [
+          "09:00",
+          "17:00"
+        ]
+      ],
+      "sun": []
+    },
+    "listed_in": "https://dining.gatech.edu/dining-locations/john-lewis-student-center",
+    "availability_badge": "open",
+    "closure_scope": "no cierre permanente publicado",
+    "special_hours_note": "Bloque separado November 22nd - November 28th. No se ha mezclado con Normal Hours; incluye Thanksgiving.",
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Dancing Goats",
+    "status": "confirmed",
+    "finding": "Figura en la lista actual de John Lewis Student Center. La ficha muestra «location is open» y publica el horario de la semana indicado. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/dancing-goats",
+    "quote": "Monday: 7:00 am - 9:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "07:00",
+          "21:00"
+        ]
+      ],
+      "tue": [
+        [
+          "07:00",
+          "21:00"
+        ]
+      ],
+      "wed": [
+        [
+          "07:00",
+          "21:00"
+        ]
+      ],
+      "thu": [
+        [
+          "07:00",
+          "21:00"
+        ]
+      ],
+      "fri": [
+        [
+          "07:00",
+          "21:00"
+        ]
+      ],
+      "sat": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ],
+      "sun": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ]
+    },
+    "listed_in": "https://dining.gatech.edu/dining-locations/john-lewis-student-center",
+    "availability_badge": "open",
+    "closure_scope": "no cierre permanente publicado",
+    "special_hours_note": "Bloque separado November 22nd - November 28th. No se ha mezclado con Normal Hours; incluye Thanksgiving.",
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Panda Express",
+    "status": "confirmed",
+    "finding": "Figura en la lista actual de John Lewis Student Center. La ficha muestra «location is open» y publica el horario de la semana indicado. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/panda-express",
+    "quote": "Monday: 10:00 am - 9:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "tue": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "wed": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "thu": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "fri": [
+        [
+          "10:00",
+          "19:00"
+        ]
+      ],
+      "sat": [
+        [
+          "11:00",
+          "16:00"
+        ]
+      ],
+      "sun": [
+        [
+          "11:00",
+          "17:00"
+        ]
+      ]
+    },
+    "listed_in": "https://dining.gatech.edu/dining-locations/john-lewis-student-center",
+    "availability_badge": "open",
+    "closure_scope": "no cierre permanente publicado",
+    "special_hours_note": "Bloque separado November 22nd - November 28th. No se ha mezclado con Normal Hours; incluye Thanksgiving.",
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Twisted Taco",
+    "status": "confirmed",
+    "finding": "Figura en la lista actual de John Lewis Student Center. La ficha muestra «location is open» y publica el horario de la semana indicado. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/twisted-taco",
+    "quote": "Monday: 10:30 am - 7:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "10:30",
+          "19:00"
+        ]
+      ],
+      "tue": [
+        [
+          "10:30",
+          "19:00"
+        ]
+      ],
+      "wed": [
+        [
+          "10:30",
+          "19:00"
+        ]
+      ],
+      "thu": [
+        [
+          "10:30",
+          "19:00"
+        ]
+      ],
+      "fri": [
+        [
+          "10:30",
+          "17:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    },
+    "listed_in": "https://dining.gatech.edu/dining-locations/john-lewis-student-center",
+    "availability_badge": "open",
+    "closure_scope": "no cierre permanente publicado",
+    "special_hours_note": "Bloque separado November 22nd - November 28th. No se ha mezclado con Normal Hours; incluye Thanksgiving.",
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Big Chicken",
+    "status": "confirmed",
+    "finding": "Figura en la lista actual de John Lewis Student Center. La ficha muestra «location is open» y publica el horario de la semana indicado. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/big-chicken",
+    "quote": "Monday: 10:30 am - 9:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "tue": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "wed": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "thu": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "fri": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "sat": [
+        [
+          "12:00",
+          "16:00"
+        ]
+      ],
+      "sun": [
+        [
+          "10:30",
+          "17:00"
+        ]
+      ]
+    },
+    "listed_in": "https://dining.gatech.edu/dining-locations/john-lewis-student-center",
+    "availability_badge": "open",
+    "closure_scope": "no cierre permanente publicado",
+    "special_hours_note": "Bloque separado November 22nd - November 28th. No se ha mezclado con Normal Hours; incluye Thanksgiving.",
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Blenz Bowls",
+    "status": "confirmed",
+    "finding": "Figura en la lista actual de John Lewis Student Center. La ficha muestra «location is open» y publica el horario de la semana indicado. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/blenz-bowls",
+    "quote": "Monday: 9:00 am - 6:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "09:00",
+          "18:00"
+        ]
+      ],
+      "tue": [
+        [
+          "09:00",
+          "18:00"
+        ]
+      ],
+      "wed": [
+        [
+          "09:00",
+          "18:00"
+        ]
+      ],
+      "thu": [
+        [
+          "09:00",
+          "18:00"
+        ]
+      ],
+      "fri": [
+        [
+          "09:00",
+          "17:00"
+        ]
+      ],
+      "sat": [],
+      "sun": [
+        [
+          "12:00",
+          "18:00"
+        ]
+      ]
+    },
+    "listed_in": "https://dining.gatech.edu/dining-locations/john-lewis-student-center",
+    "availability_badge": "open",
+    "closure_scope": "no cierre permanente publicado",
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Fresh Brothers Pizza",
+    "status": "confirmed",
+    "finding": "Figura en la lista actual de John Lewis Student Center. La ficha muestra «location is open» y publica el horario de la semana indicado. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/fresh-brothers-pizza",
+    "quote": "Monday: 10:30 am - 11:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "10:30",
+          "23:00"
+        ]
+      ],
+      "tue": [
+        [
+          "10:30",
+          "23:00"
+        ]
+      ],
+      "wed": [
+        [
+          "10:30",
+          "23:00"
+        ]
+      ],
+      "thu": [
+        [
+          "10:30",
+          "23:00"
+        ]
+      ],
+      "fri": [
+        [
+          "10:30",
+          "23:00"
+        ]
+      ],
+      "sat": [
+        [
+          "12:00",
+          "16:00"
+        ]
+      ],
+      "sun": [
+        [
+          "10:30",
+          "19:00"
+        ]
+      ]
+    },
+    "listed_in": "https://dining.gatech.edu/dining-locations/john-lewis-student-center",
+    "availability_badge": "open",
+    "closure_scope": "no cierre permanente publicado",
+    "special_hours_note": "Bloque separado November 22nd - November 28th. No se ha mezclado con Normal Hours; incluye Thanksgiving.",
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Kinnamōns",
+    "status": "confirmed",
+    "finding": "Figura en la lista actual de John Lewis Student Center. La ficha muestra «location is open» y publica el horario de la semana indicado. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/kinnamons",
+    "quote": "Monday: 10:30 am - 9:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "tue": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "wed": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "thu": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "fri": [
+        [
+          "10:30",
+          "21:00"
+        ]
+      ],
+      "sat": [
+        [
+          "10:30",
+          "17:00"
+        ]
+      ],
+      "sun": [
+        [
+          "10:30",
+          "17:00"
+        ]
+      ]
+    },
+    "listed_in": "https://dining.gatech.edu/dining-locations/john-lewis-student-center",
+    "availability_badge": "open",
+    "closure_scope": "no cierre permanente publicado",
+    "special_hours_note": "Bloque separado November 22nd - November 28th. No se ha mezclado con Normal Hours; incluye Thanksgiving.",
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Krafted | Wander Dawgs | Benny's Cheesesteaks",
+    "status": "confirmed",
+    "finding": "Figura en la lista actual de John Lewis Student Center. La ficha muestra «location is open» y publica el horario de la semana indicado. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026. Primer tramo de cada día: desayuno; segundo tramo: servicio posterior.",
+    "evidence_url": "https://dining.gatech.edu/location/krafted-wander-dawgs-bennys-cheesesteaks",
+    "quote": "Breakfast hours on left",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "08:30",
+          "10:30"
+        ],
+        [
+          "10:30",
+          "23:00"
+        ]
+      ],
+      "tue": [
+        [
+          "08:30",
+          "10:30"
+        ],
+        [
+          "10:30",
+          "23:00"
+        ]
+      ],
+      "wed": [
+        [
+          "08:30",
+          "10:30"
+        ],
+        [
+          "10:30",
+          "23:00"
+        ]
+      ],
+      "thu": [
+        [
+          "08:30",
+          "10:30"
+        ],
+        [
+          "10:30",
+          "23:00"
+        ]
+      ],
+      "fri": [
+        [
+          "08:30",
+          "10:30"
+        ],
+        [
+          "10:30",
+          "23:00"
+        ]
+      ],
+      "sat": [
+        [
+          "10:30",
+          "12:00"
+        ],
+        [
+          "12:00",
+          "19:00"
+        ]
+      ],
+      "sun": [
+        [
+          "10:30",
+          "12:00"
+        ],
+        [
+          "12:00",
+          "19:00"
+        ]
+      ]
+    },
+    "listed_in": "https://dining.gatech.edu/dining-locations/john-lewis-student-center",
+    "availability_badge": "open",
+    "closure_scope": "no cierre permanente publicado",
+    "special_hours_note": "Bloque separado November 22nd - November 28th. No se ha mezclado con Normal Hours; incluye Thanksgiving.",
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Marrakech Express",
+    "status": "confirmed",
+    "finding": "Figura en la lista actual de John Lewis Student Center. La ficha muestra «location is open» y publica el horario de la semana indicado. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/marrakech-express",
+    "quote": "Monday: 11:00 am - 6:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "11:00",
+          "18:00"
+        ]
+      ],
+      "tue": [
+        [
+          "11:00",
+          "18:00"
+        ]
+      ],
+      "wed": [
+        [
+          "11:00",
+          "18:00"
+        ]
+      ],
+      "thu": [
+        [
+          "11:00",
+          "18:00"
+        ]
+      ],
+      "fri": [
+        [
+          "11:00",
+          "18:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    },
+    "listed_in": "https://dining.gatech.edu/dining-locations/john-lewis-student-center",
+    "availability_badge": "open",
+    "closure_scope": "no cierre permanente publicado",
+    "special_hours_note": "Bloque separado November 22nd - November 28th. No se ha mezclado con Normal Hours; incluye Thanksgiving.",
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  }
+]

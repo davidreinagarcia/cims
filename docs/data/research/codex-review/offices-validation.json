@@ -1,0 +1,10 @@
+{
+  "files": 36,
+  "objects": 122,
+  "states": {
+    "confirmed": 75,
+    "unconfirmed": 46,
+    "corrected": 1
+  },
+  "validation_errors": []
+}

@@ -106,6 +106,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Other exported functions & constants
 
+- `decodePolyline(text)` [docs/data/research/transit/fetch-transit.mjs:11](../docs/data/research/transit/fetch-transit.mjs#L11): Decodes a Google encoded polyline (precision 5) into [lon, lat] pairs.
+- `buildGeoJson(routes)` [docs/data/research/transit/fetch-transit.mjs:33](../docs/data/research/transit/fetch-transit.mjs#L33): Turns the relay's route list into the two GeoJSON collections we publish.
 - `DEMO_PERSONAS` [src/auth/mockAdapter.ts:7](../src/auth/mockAdapter.ts#L7): Demo role descriptions describe possible future capabilities, never enforced permissions.
 - `mockAdapter` [src/auth/mockAdapter.ts:15](../src/auth/mockAdapter.ts#L15): Pretends to sign in with fictional accounts; storage failure never blocks the demo.
 - `glyphPath(id)` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…

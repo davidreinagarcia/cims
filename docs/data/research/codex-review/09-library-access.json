@@ -1,0 +1,194 @@
+[
+  {
+    "item": "Clough Commons: acceso edificio durante semestre",
+    "status": "confirmed",
+    "finding": "24/7 para comunidadGT durante clases, con excepciones en descansos semestrales. No confundir con terraza ni con horario de atención o café.",
+    "evidence_url": "https://library.gatech.edu/quick",
+    "quote": "All three buildings are open seven days a week, 24 hours a day when school is in session.",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "tue": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "wed": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "thu": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "fri": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "sat": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "sun": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Crosland Tower: acceso comunidadGT",
+    "status": "confirmed",
+    "finding": "24/7 para estudiantes, profesores y personalGT durante semestre; descansos tienen excepciones. BuzzCard para entrar18:00-07:00. El horario nocturno no equivale a entrada libre para público general.",
+    "evidence_url": "https://library.gatech.edu/about/hours",
+    "quote": "The Library is open to all current Georgia Tech students, faculty and staff 24 hours a day, except during semester breaks.",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "tue": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "wed": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "thu": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "fri": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "sat": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "sun": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ]
+    },
+    "evidence": [
+      {
+        "evidence_url": "https://library.gatech.edu/about/hours",
+        "quote": "BuzzCards are required for entrance from 6pm to 7am."
+      }
+    ]
+  },
+  {
+    "item": "Crosland: visitantes no afiliadosGT",
+    "status": "confirmed",
+    "finding": "Lun-vie07:30-18:00; sáb/dom09:00-17:00.",
+    "evidence_url": "https://library.gatech.edu/about/hours",
+    "quote": "Visitor Hours (not affiliated with GT); Monday - Friday 7:30 am to 6:00 pm; Saturday & Sunday 9:00 am to 5:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "07:30",
+          "18:00"
+        ]
+      ],
+      "tue": [
+        [
+          "07:30",
+          "18:00"
+        ]
+      ],
+      "wed": [
+        [
+          "07:30",
+          "18:00"
+        ]
+      ],
+      "thu": [
+        [
+          "07:30",
+          "18:00"
+        ]
+      ],
+      "fri": [
+        [
+          "07:30",
+          "18:00"
+        ]
+      ],
+      "sat": [
+        [
+          "09:00",
+          "17:00"
+        ]
+      ],
+      "sun": [
+        [
+          "09:00",
+          "17:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Impresoras Clough/Crosland: ubicaciones",
+    "status": "confirmed",
+    "finding": "LibAnswers identifica impresoras en Crosland Grove, segunda y sexta planta; Clough segunda, tercera y cuarta. Esta FAQ fue actualizada11agosto2023; confirma ubicaciones publicadas, no funcionamiento físico actual ni disponibilidad horaria.",
+    "evidence_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+    "quote": "Crosland: Grove level: Black and white printer and Color printer with scanner/copier",
+    "checked_on": "2026-11-14",
+    "evidence": [
+      {
+        "evidence_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "quote": "Clough: Second Floor: Color printer, near room 215"
+      }
+    ]
+  },
+  {
+    "item": "Impresoras ordinarias: disponibilidad24/7",
+    "status": "unconfirmed",
+    "finding": "El acceso24/7 al edificio está confirmado; las páginas /about/hours, /quick, /computing y FAQ389103/374781 no afirman expresamente que las impresoras operen24/7. No convertir acceso al edificio en garantía de impresoras o de asistencia24/7. Las impresoras requieren BuzzCard. Se consultó LibAnswers, incluido grupo Technology (Computers/Printing).",
+    "evidence_url": "https://library.gatech.edu/computing",
+    "quote": "All printers use your BuzzCard.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Poster printing: no24/7",
+    "status": "confirmed",
+    "finding": "Print Studio no ofrece impresión de pósteres24/7: requiere estudio abierto y con personal. Su horario está en01-print-studio.json.",
+    "evidence_url": "https://library.gatech.edu/print-studio",
+    "quote": "Poster printing is only available while the Print Studio is open and staffed.",
+    "checked_on": "2026-11-14"
+  }
+]

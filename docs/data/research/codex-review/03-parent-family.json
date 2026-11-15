@@ -1,0 +1,92 @@
+[
+  {
+    "item": "phone",
+    "status": "confirmed",
+    "finding": "Parent and Family Programs: teléfono departamental 404-385-1396.",
+    "evidence_url": "https://parents.gatech.edu/contact-us",
+    "quote": "Phone 404.385.1396",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "postal_address_suite",
+    "status": "unconfirmed",
+    "finding": "Un formulario oficial histórico para patrocinios 2021/2022 indica GT Parent & Family Programs, 353 Ferst Drive, Suite 221, Atlanta, GA 30332-0285. Se abrió la página, pero su contexto antiguo impide confirmar vigencia en otoño de 2026. Contact Us actual no da dirección.",
+    "evidence_url": "https://parents.gatech.edu/form/sponsorship-agreement-form",
+    "quote": "353 Ferst Drive, Suite 221 Atlanta, GA 30332 – 0285",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "official_building",
+    "status": "confirmed",
+    "finding": "Nombre y número del directorio Facilities: Charles A. Smithgall Jr. Student Services, 123. Esta fila confirma la identidad del edificio candidato, no la ocupación actual por esta oficina.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025Basemap-11x17Published.pdf",
+    "quote": "123 Charles A. Smithgall Jr. Student Services",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "building_street_address",
+    "status": "confirmed",
+    "finding": "Dirección del edificio Smithgall: 353 Ferst Drive. La fuente Facilities no da código postal en esta fila. Esta fila confirma la identidad del edificio candidato, no la ocupación actual por esta oficina.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "123 Student Services 353 Ferst Drive",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "current_building",
+    "status": "unconfirmed",
+    "finding": "Smithgall sería coherente con la dirección histórica, pero no se confirma ocupación actual de Parent and Family Programs desde una página departamental actual. Se revisaron portada y Contact Us.",
+    "evidence_url": "https://parents.gatech.edu/contact-us",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "regular_office_hours",
+    "status": "confirmed",
+    "finding": "Parent and Family Programs: horario habitual publicado, lunes a viernes 08:00 a 17:00; sábado y domingo cerrado. La página distingue Regular Hours de la excepción Labor Day del 7 de septiembre de 2026. No certifica por separado todo el semestre de otoño.",
+    "evidence_url": "https://students.gatech.edu/content/hours-operation",
+    "quote": "8 a.m. – 5 p.m.",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "tue": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "wed": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "thu": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "fri": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    }
+  },
+  {
+    "item": "in_person_access",
+    "status": "unconfirmed",
+    "finding": "No se publica explícitamente atención presencial sin cita ni horario presencial distinto del horario general.",
+    "evidence_url": "https://parents.gatech.edu/contact-us",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  }
+]

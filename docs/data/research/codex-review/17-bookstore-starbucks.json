@@ -1,0 +1,104 @@
+[
+  {
+    "item": "Librería horario entre semana",
+    "status": "confirmed",
+    "finding": "La tienda oficial publica lunes a viernes 09:00 a 19:00. No lo etiqueta explícitamente otoño 2026; es el horario ordinario mostrado, no un calendario histórico de todo el semestre.",
+    "evidence_url": "https://gatech.bncollege.com/",
+    "quote": "Mon: 9:00 AM - 7:00 PM",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "09:00",
+          "19:00"
+        ]
+      ],
+      "tue": [
+        [
+          "09:00",
+          "19:00"
+        ]
+      ],
+      "wed": [
+        [
+          "09:00",
+          "19:00"
+        ]
+      ],
+      "thu": [
+        [
+          "09:00",
+          "19:00"
+        ]
+      ],
+      "fri": [
+        [
+          "09:00",
+          "19:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Librería horario fin de semana",
+    "status": "confirmed",
+    "finding": "La tienda oficial publica sábado y domingo 10:00 a 18:00. Sin etiqueta explícita de semestre.",
+    "evidence_url": "https://gatech.bncollege.com/",
+    "quote": "Sat: 10:00 AM - 6:00 PM",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "sat": [
+        [
+          "10:00",
+          "18:00"
+        ]
+      ],
+      "sun": [
+        [
+          "10:00",
+          "18:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Dirección tienda",
+    "status": "confirmed",
+    "finding": "48 5th Street, NW, Atlanta GA 30308.",
+    "evidence_url": "https://gatech.bncollege.com/customer-service",
+    "quote": "48 5th Street, NW",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Teléfono tienda",
+    "status": "confirmed",
+    "finding": "(404) 894-2515, teléfono local de la librería; no confundir con números nacionales de soporte de pedidos.",
+    "evidence_url": "https://gatech.bncollege.com/customer-service",
+    "quote": "Phone (404) 894-2515",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Starbucks horario otoño 2026",
+    "status": "unconfirmed",
+    "finding": "La portada y Customer Care actuales no publican un horario separado del Starbucks. La búsqueda encontró una guía Family Weekend 2021 con apertura 07:00 entre semana y 08:00 fines de semana, pero es antigua y no se usa para 2026. Modified Operations enero 2026 es especial y tampoco sirve para horario normal. Se requiere confirmación actual del operador.",
+    "evidence_url": "https://gatech.bncollege.com/customer-service",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Nombre y número oficial edificio; sala",
+    "status": "unconfirmed",
+    "finding": "El listado Facilities consultado no contiene una fila identificable como Barnes & Noble/48 Fifth St. No se asigna Scheller ni un número próximo por inferencia. No se ha confirmado sala/suite de librería ni Starbucks.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Starbucks teléfono y suite",
+    "status": "unconfirmed",
+    "finding": "Las páginas actuales de librería y Customer Care consultadas no documentan teléfono propio ni sala/suite de Starbucks. El teléfono 404-894-2515 corresponde a la librería.",
+    "evidence_url": "https://gatech.bncollege.com/",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  }
+]

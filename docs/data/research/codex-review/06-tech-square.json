@@ -1,0 +1,334 @@
+[
+  {
+    "item": "Moe’s Midtown At Georgia Tech",
+    "status": "corrected",
+    "finding": "85 5th St NW, Atlanta, GA 30308. El operador publica 10:00 a 23:00 los siete días; corrige Tech Dining, que muestra 10:30 a 22:00. Se prioriza la ficha del operador para el horario comercial actual. La fuente no etiqueta otoño 2026.",
+    "evidence_url": "https://locations.moes.com/ga/atlanta/85-5th-st-nw",
+    "quote": "Monday 10:00 AM - 11:00 PM",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "10:00",
+          "23:00"
+        ]
+      ],
+      "tue": [
+        [
+          "10:00",
+          "23:00"
+        ]
+      ],
+      "wed": [
+        [
+          "10:00",
+          "23:00"
+        ]
+      ],
+      "thu": [
+        [
+          "10:00",
+          "23:00"
+        ]
+      ],
+      "fri": [
+        [
+          "10:00",
+          "23:00"
+        ]
+      ],
+      "sat": [
+        [
+          "10:00",
+          "23:00"
+        ]
+      ],
+      "sun": [
+        [
+          "10:00",
+          "23:00"
+        ]
+      ]
+    },
+    "evidence": [
+      {
+        "url": "https://locations.moes.com/ga/atlanta/85-5th-st-nw",
+        "quote": "85 5th St. NW Atlanta, GA (Georgia) 30308"
+      },
+      {
+        "url": "https://dining.gatech.edu/location/moes-midtown-georgia-tech",
+        "quote": "Monday: 10:30 am - 10:00 pm"
+      }
+    ],
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Ray’s Pizza",
+    "status": "confirmed",
+    "finding": "26 5th Street NW, Atlanta, GA 30308. Diario 11:00 a 22:00, coinciden operador y Tech Dining. La fuente no etiqueta otoño 2026.",
+    "evidence_url": "https://www.raysnewyorkpizza.com/",
+    "quote": "Mon–Sun 11am–10pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ],
+      "tue": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ],
+      "wed": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ],
+      "thu": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ],
+      "fri": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ],
+      "sat": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ],
+      "sun": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ]
+    },
+    "evidence": [
+      {
+        "url": "https://www.raysnewyorkpizza.com/",
+        "quote": "26 5th Street NW, Atlanta, GA 30308"
+      }
+    ],
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Sankranti",
+    "status": "unconfirmed",
+    "finding": "Dirección confirmada en Tech Dining: 85 5th Street, Suite A, Atlanta, GA 30308. Horario sin resolver: Dining muestra apertura 11:00 y cierre 01:00 domingo a jueves, 03:00 viernes y sábado, representados en dos tramos alrededor de medianoche. sankranti.com respondió 200 pero solo entregó una aplicación JavaScript sin horarios extraíbles; se intentó también navegador Playwright, ocupado por otra sesión, sin interrumpirlo. Una página antigua en Squarespace con marca y contacto Sankranti publica 11:00 a 23:00 diario, pero no se pudo acreditar vigencia ni vinculación actual. No se elige una semana definitiva.",
+    "evidence_url": "https://dining.gatech.edu/location/sankranti",
+    "quote": "85 5th Street, Suite A Atlanta, GA 30308",
+    "checked_on": "2026-11-14",
+    "evidence": [
+      {
+        "url": "https://dining.gatech.edu/location/sankranti",
+        "quote": "Friday: 11:00 am - 12:00 am, 12:00 am - 3:00 am"
+      },
+      {
+        "url": "https://seahorse-heron.squarespace.com/",
+        "quote": "Monday-Sunday: 11:00am-11:00pm"
+      }
+    ],
+    "attempted_urls": [
+      "https://sankranti.com/",
+      "https://seahorse-heron.squarespace.com/"
+    ],
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Tin Drum Asian Kitchen",
+    "status": "confirmed",
+    "finding": "88 5th St NW, Atlanta, GA 30308. Diario 11:00 a 21:00, coinciden operador y Dining. La fuente no etiqueta otoño 2026.",
+    "evidence_url": "https://www.tindrumasiankitchen.com/georgia-tech-atlanta-ga",
+    "quote": "Monday - Sunday: 11:00 am - 9:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "11:00",
+          "21:00"
+        ]
+      ],
+      "tue": [
+        [
+          "11:00",
+          "21:00"
+        ]
+      ],
+      "wed": [
+        [
+          "11:00",
+          "21:00"
+        ]
+      ],
+      "thu": [
+        [
+          "11:00",
+          "21:00"
+        ]
+      ],
+      "fri": [
+        [
+          "11:00",
+          "21:00"
+        ]
+      ],
+      "sat": [
+        [
+          "11:00",
+          "21:00"
+        ]
+      ],
+      "sun": [
+        [
+          "11:00",
+          "21:00"
+        ]
+      ]
+    },
+    "evidence": [
+      {
+        "url": "https://www.tindrumasiankitchen.com/georgia-tech-atlanta-ga",
+        "quote": "88 5th St NW Atlanta, GA 30308"
+      }
+    ],
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Tech Square Tavern",
+    "status": "unconfirmed",
+    "finding": "800 Spring St NW, Atlanta, GA 30308. Tres tablas oficiales incompatibles: Tech Dining 16:00 a 23:00 diario y etiqueta location is closed al consultar; ficha del hotel lunes a viernes 11:00 a 14:00 y sábado/domingo 16:00 a 23:00; menú del propio hotel lunes a jueves 11:00 a 14:00 y 16:00 a 23:00, viernes 11:00 a 14:00 y 16:00 a 24:00, sábado 16:00 a 24:00, domingo 16:00 a 23:00. No hay fechas que permitan elegir. La etiqueta closed no demuestra cierre permanente.",
+    "evidence_url": "https://dining.gatech.edu/location/tech-square-tavern",
+    "quote": "800 Spring St NW, Atlanta, GA 30308",
+    "checked_on": "2026-11-14",
+    "evidence": [
+      {
+        "url": "https://www.gatechhotel.com/dining/tech-square-tavern",
+        "quote": "Monday - Friday 11am - 2pm Saturday - Sunday 4pm - 11pm"
+      },
+      {
+        "url": "https://www.gatechhotel.com/gallery/tech-square-tavern-menu",
+        "quote": "Friday: 11am-2pm and 4pm-12am Saturday: 4pm-12am"
+      }
+    ],
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Kaldi’s Coffee @ Tech Square",
+    "status": "confirmed",
+    "finding": "55 5th Street NW, Building #220, Atlanta, GA 30308. Tech Dining publica lunes a viernes 08:00 a 17:00, fines de semana cerrado. El operador confirma la dirección pero no da horarios en su directorio. No confundir con Clough. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/kaldis-coffee-tech-square",
+    "quote": "Monday: 8:00 am - 5:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "tue": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "wed": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "thu": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "fri": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    },
+    "evidence": [
+      {
+        "url": "https://kaldiscoffee.com/pages/kaldis-locations",
+        "quote": "55 5th Street NW Building #220 Atlanta, GA 30308"
+      }
+    ],
+    "special_hours_note": "Se excluye November 22nd - November 28th, incluido el miércoles especial 07:00 a 17:00.",
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Boho Taco",
+    "status": "confirmed",
+    "finding": "22 5th Street NW, Atlanta, GA 30308. Diario 11:00 a 22:00, coinciden operador y Dining. La fuente no etiqueta otoño 2026.",
+    "evidence_url": "https://www.eatboho.com/",
+    "quote": "MON—SUN 11A—10PM",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ],
+      "tue": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ],
+      "wed": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ],
+      "thu": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ],
+      "fri": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ],
+      "sat": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ],
+      "sun": [
+        [
+          "11:00",
+          "22:00"
+        ]
+      ]
+    },
+    "evidence": [
+      {
+        "url": "https://www.eatboho.com/",
+        "quote": "22 5th Street NW, Atlanta, Georgia, 30308"
+      }
+    ],
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  }
+]

@@ -1,0 +1,50 @@
+[
+  {
+    "item": "office_location_address_suite_phone_hours",
+    "status": "unconfirmed",
+    "finding": "No se pudo abrir career.gatech.edu: web open devolvió 502; requests devolvió RemoteDisconnected para HTTPS, HTTP, www y query alternativa; Playwright devolvió Browser is already in use. Quedan sin confirmar edificio de oficina, sala/suite, dirección postal, teléfono departamental y horario de oficina.",
+    "evidence_url": "https://career.gatech.edu/contact/",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "drop_in_hours",
+    "status": "unconfirmed",
+    "finding": "El índice de búsqueda de la página Career Advising muestra drop-ins presenciales lunes a viernes 13:00 a 15:00 en Bill Moore Student Success Center, Basement Festival Level Lobby, durante fall/spring; no se pudo abrir para confirmar. Otro snippet Career Peer Advisors dice 14:00 a 16:00, por lo que tampoco se selecciona una única franja.",
+    "evidence_url": "https://career.gatech.edu/career-advising/",
+    "quote": "Monday through Friday from 1:00-3:00pm",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "drop_in_conflict",
+    "status": "unconfirmed",
+    "finding": "El snippet de contratación Career Peer Advisors menciona lunes a viernes 14:00 a 16:00. No es una confirmación del horario de atención y no se pudo abrir la página.",
+    "evidence_url": "https://career.gatech.edu/career-peer-advisors/",
+    "quote": "drop-ins (Monday-Friday 2-4pm)",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "fall_2026_specificity",
+    "status": "unconfirmed",
+    "finding": "No se ha confirmado una página abierta con horario drop-in de otoño 2026. No se incluyen como horario habitual cancelaciones por ferias, eventos, vacaciones o exámenes que aparecen en el snippet.",
+    "evidence_url": "https://career.gatech.edu/career-advising/",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "candidate_building_directory",
+    "status": "confirmed",
+    "finding": "El directorio Facilities identifica Bill Moore Student Success Center como edificio 031. Esto confirma la identidad del edificio candidato, no su ocupación por Career Center.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025Basemap-11x17Published.pdf",
+    "quote": "031 Bill Moore Student Success Center",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "candidate_building_address",
+    "status": "confirmed",
+    "finding": "Facilities identifica Success Center 031 en 219 Uncle Heinie. Esta fila abreviada no es dirección postal departamental completa.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "031 Success Center 219 Uncle Heinie",
+    "checked_on": "2026-11-14"
+  }
+]

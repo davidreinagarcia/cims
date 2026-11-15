@@ -1,0 +1,62 @@
+[
+  {
+    "item": "Print Studio: horario habitual otoño y primavera",
+    "status": "confirmed",
+    "finding": "Gemini acertó: lun-vie 10:00-22:00, sáb 12:00-18:00, dom 10:00-22:00. El sábado más corto está publicado expresamente. La página dice Fall & Spring sin año específico.",
+    "evidence_url": "https://library.gatech.edu/print-studio",
+    "quote": "Fall & Spring Hours: Monday - Friday, 10am-10pm Saturday, 12pm-6pm Sunday, 10am-10pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "10:00",
+          "22:00"
+        ]
+      ],
+      "tue": [
+        [
+          "10:00",
+          "22:00"
+        ]
+      ],
+      "wed": [
+        [
+          "10:00",
+          "22:00"
+        ]
+      ],
+      "thu": [
+        [
+          "10:00",
+          "22:00"
+        ]
+      ],
+      "fri": [
+        [
+          "10:00",
+          "22:00"
+        ]
+      ],
+      "sat": [
+        [
+          "12:00",
+          "18:00"
+        ]
+      ],
+      "sun": [
+        [
+          "10:00",
+          "22:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Print Studio: excepciones",
+    "status": "confirmed",
+    "finding": "Cierra festivos y días de cierre de la biblioteca; no son el horario semanal normal.",
+    "evidence_url": "https://library.gatech.edu/print-studio",
+    "quote": "The Print Studio will be closed on all holidays and any day the Library is also closed.",
+    "checked_on": "2026-11-14"
+  }
+]

@@ -1,0 +1,134 @@
+[
+  {
+    "item": "Belonging & Student Support actual",
+    "status": "confirmed",
+    "finding": "Existe públicamente Belonging & Student Support, con sede indicada como Smithgall Student Services, Flag Building, Suite 102 A & B. No se equipara automáticamente con OMED ni se afirma que sustituya a todos los centros anteriores.",
+    "evidence_url": "https://support.belonging.gatech.edu/",
+    "quote": "Suite 102 A & B",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Belonging edificio número y dirección",
+    "status": "confirmed",
+    "finding": "El edificio de Student Services es el 123, 353 Ferst Drive, según Facilities. La página departamental no da código postal específico de oficina.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "123 Student Services 353 Ferst Drive",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Belonging horario y teléfono departamental",
+    "status": "unconfirmed",
+    "finding": "La portada abierta no publica horario presencial normal ni teléfono departamental; no se aplica el horario remoto de modified operations como horario presencial.",
+    "evidence_url": "https://support.belonging.gatech.edu/",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Southern Company Multicultural Lounge actual",
+    "status": "confirmed",
+    "finding": "La sala existe y publica staffed hours de domingo a sábado 10:00 a 21:00. Es horario con personal, no una garantía de disponibilidad sin reserva; no se etiqueta explícitamente otoño 2026.",
+    "evidence_url": "https://www.studentcenter.gatech.edu/multicultural-programs-lounge",
+    "quote": "Sunday-Saturday: 10am-9pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "tue": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "wed": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "thu": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "fri": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "sat": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "sun": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Lounge edificio",
+    "status": "confirmed",
+    "finding": "La página del John Lewis Student Center y Stamps Commons incluye Southern Co. Multicultural Lounge entre sus espacios.",
+    "evidence_url": "https://www.techrec.gatech.edu/student-center",
+    "quote": "Southern Co. Multicultural Lounge",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Lounge contacto",
+    "status": "confirmed",
+    "finding": "Para asistencia durante horas con personal, Community Hubs Support Line: 404-894-9055.",
+    "evidence_url": "https://www.studentcenter.gatech.edu/multicultural-programs-lounge",
+    "quote": "404-894-9055",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Lounge número de sala y correo postal",
+    "status": "unconfirmed",
+    "finding": "Las páginas abiertas del lounge y Student Center no dan sala ni dirección postal específica del lounge. Student Center aparece en Facilities 351 Ferst Drive N.W. con identificadores 104 y 214.",
+    "evidence_url": "https://www.studentcenter.gatech.edu/multicultural-programs-lounge",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "OMED ubicación, sala, horario, teléfono y existencia actual",
+    "status": "unconfirmed",
+    "finding": "Se intentaron portada, contact y academic-support/tutors-schedule con HTTP, sin respuesta o 502; about-omed/omed-team redirige a GT Login. Los resultados de búsqueda antiguos mencionan Chapin y tutoría de otoño/primavera, pero no acreditan su operación actual ni otoño 2026. No se convierte ese texto indexado en hecho confirmado.",
+    "evidence_url": "https://omed.gatech.edu/about-omed/omed-team/",
+    "quote": "Georgia Tech Login Service",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "OMED posible edificio histórico",
+    "status": "confirmed",
+    "finding": "Facilities lista Chapin, edificio 025, 681 Cherry St. Esto acredita el edificio, no una ocupación actual de OMED.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "025 Chapin",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Otros antiguos centros multiculturales",
+    "status": "unconfirmed",
+    "finding": "Esta revisión no acredita ubicaciones y horarios actuales de cada antiguo centro LGBTQIA, Women o Multicultural Programs por separado. La existencia del lounge y Belonging & Student Support no basta para declarar cierres, fusiones o traslados de esos centros.",
+    "evidence_url": "https://support.belonging.gatech.edu/",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Belonging dirección postal completa",
+    "status": "unconfirmed",
+    "finding": "La portada documentada da Smithgall y suite 102 A & B, y Facilities 353 Ferst Drive; no se ha acreditado una dirección postal completa departamental con ciudad y ZIP.",
+    "evidence_url": "https://support.belonging.gatech.edu/",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  }
+]

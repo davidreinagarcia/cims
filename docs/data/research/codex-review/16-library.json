@@ -1,0 +1,50 @@
+[
+  {
+    "item": "Dirección común vigente publicada",
+    "status": "corrected",
+    "finding": "Library Locations agrupa Crosland Tower & Price Gilbert como Main Library: 260 4th Street, NW, Atlanta GA 30332. Se resuelve a favor de 260 4th para la ficha de ambos edificios; no se confirma 704 Cherry como dirección actual.",
+    "evidence_url": "https://library.gatech.edu/about/locations",
+    "quote": "260 4th Street, NW",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Teléfono principal",
+    "status": "confirmed",
+    "finding": "(404) 894-4500 o 1-888-225-7804.",
+    "evidence_url": "https://library.gatech.edu/about/locations",
+    "quote": "(404) 894-4500 or 1-888-225-7804",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Price Gilbert: edificio y número oficial",
+    "status": "confirmed",
+    "finding": "Facilities registra 077 Gilbert Library, 260 Fourth Street N.W. Es el nombre corto del directorio para Price Gilbert.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "077 Gilbert Library 260 Fourth Street N.W.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Crosland: edificio y número oficial",
+    "status": "confirmed",
+    "finding": "Facilities registra 100 Crosland Tower, 260 Fourth Street N.W.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "100 Crosland Tower 260 Fourth Street N.W.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Origen o vigencia de 704 Cherry",
+    "status": "unconfirmed",
+    "finding": "Se contrastaron Library Locations, Library Directions y la lista Facilities. Las fuentes consultadas apoyan 260 Fourth para ambos; no acreditan por qué una fuente anterior usaba 704 Cherry. No se afirma que esa dirección histórica nunca fuese válida.",
+    "evidence_url": "https://library.gatech.edu/about/locations",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Sala y horario de atención de oficina",
+    "status": "unconfirmed",
+    "finding": "Esta ficha documenta dirección común, teléfono y edificios; no se ha acreditado en ella sala de una oficina administrativa ni horario presencial de oficina. No equiparar acceso al edificio con atención administrativa.",
+    "evidence_url": "https://library.gatech.edu/about/locations",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  }
+]

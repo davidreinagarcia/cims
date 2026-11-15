@@ -1,0 +1,256 @@
+{
+  "checked_on": "2026-11-14",
+  "scope": [
+    "01-print-studio",
+    "02-crc",
+    "03-brittain",
+    "04-pharmacy",
+    "05-conference-dining",
+    "06-tech-square",
+    "07-student-center",
+    "08-campus-coffee",
+    "09-library-access"
+  ],
+  "passed": true,
+  "total_objects": 53,
+  "status_counts": {
+    "confirmed": 36,
+    "unconfirmed": 14,
+    "corrected": 3
+  },
+  "files": [
+    {
+      "file": "01-print-studio.json",
+      "objects": 2,
+      "status_counts": {
+        "confirmed": 2
+      }
+    },
+    {
+      "file": "02-crc.json",
+      "objects": 12,
+      "status_counts": {
+        "confirmed": 5,
+        "unconfirmed": 7
+      }
+    },
+    {
+      "file": "03-brittain.json",
+      "objects": 5,
+      "status_counts": {
+        "confirmed": 2,
+        "corrected": 2,
+        "unconfirmed": 1
+      }
+    },
+    {
+      "file": "04-pharmacy.json",
+      "objects": 2,
+      "status_counts": {
+        "unconfirmed": 1,
+        "confirmed": 1
+      }
+    },
+    {
+      "file": "05-conference-dining.json",
+      "objects": 3,
+      "status_counts": {
+        "unconfirmed": 2,
+        "confirmed": 1
+      }
+    },
+    {
+      "file": "06-tech-square.json",
+      "objects": 7,
+      "status_counts": {
+        "corrected": 1,
+        "confirmed": 4,
+        "unconfirmed": 2
+      }
+    },
+    {
+      "file": "07-student-center.json",
+      "objects": 12,
+      "status_counts": {
+        "confirmed": 12
+      }
+    },
+    {
+      "file": "08-campus-coffee.json",
+      "objects": 4,
+      "status_counts": {
+        "confirmed": 4
+      }
+    },
+    {
+      "file": "09-library-access.json",
+      "objects": 6,
+      "status_counts": {
+        "confirmed": 5,
+        "unconfirmed": 1
+      }
+    }
+  ],
+  "errors": [],
+  "closed_day_entries": [
+    {
+      "file": "02-crc.json",
+      "item": "Competition Pool: recreación habitual",
+      "day": "sat",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "02-crc.json",
+      "item": "Competition Pool: recreación habitual",
+      "day": "sun",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "03-brittain.json",
+      "item": "Brittain: horario habitual",
+      "day": "sat",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "03-brittain.json",
+      "item": "Brittain: horario habitual",
+      "day": "sun",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "03-brittain.json",
+      "item": "Brittain: desayuno",
+      "day": "mon",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "03-brittain.json",
+      "item": "Brittain: desayuno",
+      "day": "tue",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "03-brittain.json",
+      "item": "Brittain: desayuno",
+      "day": "wed",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "03-brittain.json",
+      "item": "Brittain: desayuno",
+      "day": "thu",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "03-brittain.json",
+      "item": "Brittain: desayuno",
+      "day": "fri",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "03-brittain.json",
+      "item": "Brittain: desayuno",
+      "day": "sat",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "03-brittain.json",
+      "item": "Brittain: desayuno",
+      "day": "sun",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "06-tech-square.json",
+      "item": "Kaldi’s Coffee @ Tech Square",
+      "day": "sat",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "06-tech-square.json",
+      "item": "Kaldi’s Coffee @ Tech Square",
+      "day": "sun",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "07-student-center.json",
+      "item": "Tech It To Go",
+      "day": "sat",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "07-student-center.json",
+      "item": "Tech It To Go",
+      "day": "sun",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "07-student-center.json",
+      "item": "Chick-fil-A",
+      "day": "sun",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "07-student-center.json",
+      "item": "Twisted Taco",
+      "day": "sat",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "07-student-center.json",
+      "item": "Twisted Taco",
+      "day": "sun",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "07-student-center.json",
+      "item": "Blenz Bowls",
+      "day": "sat",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "07-student-center.json",
+      "item": "Marrakech Express",
+      "day": "sat",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "07-student-center.json",
+      "item": "Marrakech Express",
+      "day": "sun",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "08-campus-coffee.json",
+      "item": "Chick-fil-A (Student Center)",
+      "day": "sun",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "08-campus-coffee.json",
+      "item": "Kaldi’s Coffee (Clough)",
+      "day": "sat",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    },
+    {
+      "file": "08-campus-coffee.json",
+      "item": "Kaldi’s Coffee (Clough)",
+      "day": "sun",
+      "basis": "Closed en Normal Hours de fuente local o cierre explícito del servicio"
+    }
+  ],
+  "manual_semantic_checks": [
+    "[] solo para cierre del servicio acreditado; quitados [] no acreditados de Climbing Wall y Wilderness Outpost",
+    "Badge open/closed separado de cierre permanente; TechItToGo mantiene semana normal",
+    "Otoño2026 explícito solo donde fuente lo identifica; alcance temporal limitado en otras fichas",
+    "No se mezclan horas especiales con habituales; sábado lap lanes Crawford queda unconfirmed"
+  ],
+  "limitations": [
+    "Validación estructural y revisión acotada de fuentes ya recopiladas; sin nueva investigación",
+    "Citas principales son extractos cortos; el resto de horas está en la página oficial enlazada y fuentes locales disponibles",
+    "Estado confirmed significa dato publicado, no garantía de vigencia para todo otoño2026 si la ficha no lo dice"
+  ],
+  "automatic_artifacts_outside_out": [
+    ".playwright-mcp/page-2026-11-15T02-39-40-554Z.yml",
+    ".playwright-mcp/console-2026-11-15T02-39-38-260Z.log"
+  ]
+}

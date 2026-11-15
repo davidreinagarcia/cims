@@ -1,0 +1,82 @@
+[
+  {
+    "item": "operator_location",
+    "status": "confirmed",
+    "finding": "El centro vigente es The Children’s Campus @ Georgia Tech (TCC), gestionado por Bright Horizons, Building F del alojamiento de estudiantes de posgrado.",
+    "evidence_url": "https://www.mystuff.gatech.edu/child-care",
+    "quote": "Building F of graduate student housing.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "postal_address",
+    "status": "confirmed",
+    "finding": "Dirección del operador: 251 10th Street, Building F, Atlanta, GA 30318. Building F es la identificación del edificio, no una sala.",
+    "evidence_url": "https://child-care-preschool.brighthorizons.com/ga/atlanta/gtchildrenscampus",
+    "quote": "251 10th Street, Building F",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "official_building",
+    "status": "confirmed",
+    "finding": "Nombre y número del directorio Facilities: Family Apartments, 180.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025Basemap-11x17Published.pdf",
+    "quote": "180 Family Apartments",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "building_address",
+    "status": "confirmed",
+    "finding": "Facilities identifica Family Apartments 180 en 251 Tenth St, correspondiente al complejo de la dirección del operador. No se encontró un número Facilities separado para Building F.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "180 Family Apts 251 Tenth St",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "phone",
+    "status": "confirmed",
+    "finding": "Georgia Tech publica 404-385-2248 para Bright Horizons @ Georgia Tech Leadership Team. La página del operador muestra además 470-437-4278 como contacto del centro.",
+    "evidence_url": "https://www.mystuff.gatech.edu/child-care",
+    "quote": "404-385-2248",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "operator_phone",
+    "status": "confirmed",
+    "finding": "El operador publica 470-437-4278; no se verifica si es una línea de captación o recepción interna.",
+    "evidence_url": "https://child-care-preschool.brighthorizons.com/ga/atlanta/gtchildrenscampus",
+    "quote": "470-437-4278",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "regular_hours",
+    "status": "unconfirmed",
+    "finding": "La cabecera del operador publica lunes a viernes 07:00 a 18:00, pero su FAQ dice que el centro cierra a las 18:30. No se confirma la hora de cierre ni se equipara horario del centro con recepción administrativa. La página no fecha otoño 2026.",
+    "evidence_url": "https://child-care-preschool.brighthorizons.com/ga/atlanta/gtchildrenscampus",
+    "quote": "7:00 AM - 6:00 PM. Mon to Fri",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "conflicting_close_time",
+    "status": "unconfirmed",
+    "finding": "FAQ del mismo operador: cierre a las 18:30. Contradice las 18:00 de la cabecera.",
+    "evidence_url": "https://child-care-preschool.brighthorizons.com/ga/atlanta/gtchildrenscampus",
+    "quote": "The Center closes at 6:30 p.m.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "old_center",
+    "status": "confirmed",
+    "finding": "R. Kirk Landon Learning Center cerró como centro Georgia Tech en mayo de 2024; la noticia anuncia consolidación en TCC. No usar Landon como oficina/centro vigente.",
+    "evidence_url": "https://campusservices.gatech.edu/news/transitioning-child-care-and-family-support-services-georgia-tech",
+    "quote": "Georgia Tech’s R. Kirk Landon Learning Center will officially close in May.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "room_suite_and_front_desk_hours",
+    "status": "unconfirmed",
+    "finding": "Las páginas Georgia Tech y Bright Horizons documentadas identifican Building F, no sala o suite. No se confirma sala administrativa ni horario de atención presencial de recepción; el horario del centro tiene además conflicto de cierre 18:00/18:30.",
+    "evidence_url": "https://www.mystuff.gatech.edu/child-care",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  }
+]

@@ -1,0 +1,70 @@
+[
+  {
+    "item": "Ubicación y teléfono",
+    "status": "confirmed",
+    "finding": "El operador identifica Waffle House #1885, 66 5th street, Atlanta GA 30308, +1 404-872-0028. Su rótulo de dirección no añade NW.",
+    "evidence_url": "https://locations.wafflehouse.com/atlanta-ga-1885/",
+    "quote": "66 5th street",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Horario",
+    "status": "confirmed",
+    "finding": "La ficha del operador dice Open 24 Hours en cada día de la semana y lo confirma para fechas 8 a 22 de noviembre de 2026. Se representa 24 horas como 00:00 a 24:00, donde 24:00 significa el final del mismo día.",
+    "evidence_url": "https://locations.wafflehouse.com/atlanta-ga-1885/",
+    "quote": "Saturday, 2026-11-14: Open 24 Hours",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "tue": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "wed": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "thu": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "fri": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "sat": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ],
+      "sun": [
+        [
+          "00:00",
+          "24:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Edificio oficial y suite",
+    "status": "unconfirmed",
+    "finding": "Facilities no lista una entrada Waffle House ni 66 Fifth Street. No se asigna un número oficial de edificio ni sala/suite por proximidad geográfica. El identificador 1885 es el número de restaurante del operador, no de edificio de Georgia Tech.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  }
+]

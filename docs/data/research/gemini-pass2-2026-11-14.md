@@ -17,7 +17,7 @@ Deep research run by David with Gemini to collect locations and opening hours fo
 | --- | --- |
 | Panda Express (Student Center, 1st floor) and Twisted Taco (2nd floor) | Exist. Our earlier suspicion was wrong. |
 | Jimmy John's | At The Pavilions (410 4th St NW), **not** the Student Center. Matches `jimmy-johns-pavilions` already in `food.json`. |
-| Brittain Dining Hall | Mon to Fri 11:00 to 23:00, closed weekends. No meal period split found, and the "two year renovation, reopened Fall 2026" claim is **not backed** by the retrieved pages. |
+| Brittain Dining Hall | Mon to Fri 11:00 to 23:00, closed weekends. Codex later confirmed the reopening on 17 Aug 2026 after a two year renovation (this report first doubted it). |
 | Women's Resource Center and LGBTQIA Resource Center | Merged into **Belonging & Student Support**. Do not map them as two offices. |
 | Counseling | Center for Mental Health Care & Resources, 404-894-2575, Smithgall Suite 238. |
 | Wellness Empowerment Center | Mon to Fri 08:00 to 17:00. No dedicated Health Initiatives page found. |
@@ -117,19 +117,25 @@ Coordinates, ids and `source_url` were not touched. All stay `draft`. Gemini's s
 | food | `brittain-dining-hall` | Mon to Fri 11:00 to 23:00. Meal periods and the "reopened after renovation" claim are unconfirmed. |
 | food | `north-avenue-dining-hall`, `west-village-dining-hall` | From dining.gatech.edu. |
 | food | `jimmy-johns-pavilions` | Pavilions only, no Student Center location. |
-| orgs | `office-registrar`, `office-international-education`, `scholarships-financial-aid`, `center-student-engagement` | Weekday office hours. |
+| orgs | `office-registrar` | 09:00 to 16:00 (the Codex check corrected Gemini's 08:00 to 16:30). |
+| orgs | `office-international-education`, `scholarships-financial-aid`, `center-student-engagement` | Weekday office hours, from Gemini only. |
 | health | `stamps-health-services` | Thursday opens 09:00. |
-| health | `mental-health-care-resources`, `wellness-empowerment-center` | Mon to Fri 08:00 to 17:00. |
+| health | `mental-health-care-resources` | Mon to Fri 08:00 to 17:00. |
+| health | `wellness-empowerment-center` | Thursday left out: two official pages disagree (08:00 or 09:00). |
 | makerspace | `flowers-invention-studio` | After-hours slot (17:00 to 18:00) is training only. |
 | makerspace | `hive-makerspace` | Mon to Fri 10:00 to 18:00. |
-| printing | `print-studio-price-gilbert` | **Check:** Saturday 12:00 to 18:00 but Sunday 10:00 to 22:00 looks odd. |
+| printing | `print-studio-price-gilbert` | Saturday 12:00 to 18:00 and Sunday 10:00 to 22:00. Looks odd, but Codex confirmed it on the official page. |
 | printing | `crosland-printing` | 24/7 for GT affiliates, BuzzCard 18:00 to 07:00. |
 | printing | `printing-copying-services-marietta` | Hours came from the architecture student guide, not an OIT page. |
-| exercise | `crc` (in `places.json`) | **Conflict:** Sunday 09:00 on crc.gatech.edu/hours, 10:00 elsewhere. 09:00 used. |
-| exercise | `crc-climbing-wall` | Staffed hours only. |
+| exercise | `crc` (in `places.json`) | Sunday 09:00 confirmed for Fall 2026. A central page says 10:00. |
+| exercise | `crc-climbing-wall` | Staffed hours only, weekdays. Weekends left unknown. |
 | exercise | `crc-competition-pool`, `crc-crawford-pool` | Recreational swim hours. The Nov 14 swim meet hours were left out. |
 
 Left out on purpose: pharmacy hours (Gemini calculated them, the page does not list them), Clough printing ("typically 24/7"), and every first pass hour not re-confirmed in pass 2.
+
+## Follow up review by Codex
+
+We asked Codex to re-check the doubtful points. Results, with what they confirmed and refuted, are in [`codex-review/`](codex-review/README.md). It also found OSM points for 28 of the venues below, and the bus data is in [`transit/`](transit/README.md). Two of this report's earlier worries were wrong: Brittain really did reopen after a renovation, and the Print Studio Saturday is real. The 3:15 a.m. bus service is over.
 
 ## Pending: new venues, need coordinates before they can be added
 
@@ -156,14 +162,14 @@ Hours below are as Gemini reported them from the cited official page. All Mon to
 
 Not mappable yet (no building or room published): STAR, Office of Student Integrity, Parent and Family Programs, New Student and Transition Programs, Housing Help Desk, Child Care Services.
 
-Hours conflict to settle for transit: the Aug 2025 PTS notice says Gold, Red and Blue run until 3:15 a.m., but the Fall 2026 update lists earlier ends (Red and Blue 22:00).
+Transit: the 3:15 a.m. service from the 2025 notice is over. Fall 2026 is Gold to midnight, Red and Blue to 22:00 (see `transit/README.md`).
 
 ## Next steps
 
 1. Look up OSM coordinates for the "Pending" venues. Never reuse one point for two venues. Add them as `draft` with `source_url`.
-2. Check the three flagged hours (Print Studio Saturday, CRC Sunday, transit end time) against the live pages.
+2. Open items nobody has settled are listed in `codex-review/README.md` (Career Center, SGA, OMED, Starbucks, VRC building, Belonging suite).
 3. Run `npm run data:verify -- <id> --by <name>` per record once hours, address and point are checked.
-4. Decide how to show bus routes (needs LineString geometry plus stops).
+4. Draw the bus routes. Line and stop data now exist in `transit/` (not wired into the app).
 
 ## Sources used by Gemini
 

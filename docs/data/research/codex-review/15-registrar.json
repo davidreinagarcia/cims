@@ -1,0 +1,98 @@
+[
+  {
+    "item": "Edificio, planta y calle",
+    "status": "confirmed",
+    "finding": "Administration Building, Tech Tower; 225 North Avenue; First Floor. La página no añade NW a la línea de calle, por lo que no se inventa ese sufijo.",
+    "evidence_url": "https://registrar.gatech.edu/about",
+    "quote": "225 North Avenue",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Dirección de correo",
+    "status": "confirmed",
+    "finding": "Georgia Institute of Technology, Registrar's Office, Atlanta, Georgia 30332-0315. Es el formato postal publicado, separado de Campus Location.",
+    "evidence_url": "https://registrar.gatech.edu/about",
+    "quote": "Atlanta, Georgia 30332-0315",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Teléfono departamental",
+    "status": "confirmed",
+    "finding": "404-894-4150.",
+    "evidence_url": "https://registrar.gatech.edu/about",
+    "quote": "404-894-4150",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Horario presencial publicado",
+    "status": "confirmed",
+    "finding": "Horario de oficina lunes a viernes 09:00 a 16:00 Eastern. No se etiqueta explícitamente otoño 2026; no usar el antiguo 08:00 a 16:30 del SCO para esta oficina. No se ha acreditado cierre de fin de semana.",
+    "evidence_url": "https://registrar.gatech.edu/about",
+    "quote": "9:00 am to 4:00 pm Eastern Time",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ],
+      "tue": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ],
+      "wed": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ],
+      "thu": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ],
+      "fri": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Número oficial",
+    "status": "confirmed",
+    "finding": "Facilities: edificio 035, Administration, 225 North Avenue.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "035 Administration",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Sala específica",
+    "status": "unconfirmed",
+    "finding": "About the Registrar publica primera planta pero no sala de atención general. No se aplica Room 104 de Veterans Certification a toda la oficina.",
+    "evidence_url": "https://registrar.gatech.edu/about",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Horario sábados y domingos",
+    "status": "unconfirmed",
+    "finding": "La fuente consultada solo publica business/office hours de lunes a viernes. No afirma expresamente cerrado sábados y domingos; hours omite esos días para no codificar [] sin prueba.",
+    "evidence_url": "https://registrar.gatech.edu/about",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Atención presencial sin cita",
+    "status": "unconfirmed",
+    "finding": "About the Registrar publica horario de oficina y ubicación física, pero no confirma explícitamente atención presencial sin cita durante toda la franja.",
+    "evidence_url": "https://registrar.gatech.edu/about",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  }
+]

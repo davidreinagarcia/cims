@@ -1,0 +1,26 @@
+[
+  {
+    "item": "Oficina, dirección y teléfono SGA",
+    "status": "unconfirmed",
+    "finding": "El buscador devuelve una página Contact Us que menciona Smithgall Student Services Building, 353 Ferst Dr NW, Atlanta GA 30313 y (404) 681-8814. No se confirma: abrirla con www produjo timeout repetido; sin www fue inaccesible; HTTP directo cerró conexión. Se conserva como pista y no como dato listo para importar.",
+    "evidence_url": "https://www.sga.gatech.edu/contact-us/",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Edificio candidato",
+    "status": "confirmed",
+    "finding": "Facilities acredita que Student Services es el edificio 123 y su dirección 353 Ferst Drive. No demuestra por sí solo la ocupación de SGA.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "123 Student Services",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Sala y horario presencial SGA",
+    "status": "unconfirmed",
+    "finding": "No se pudo abrir la página departamental. Los resultados sobre sala 117 corresponden a reuniones legislativas o documentos antiguos, no acreditan que sea la oficina de atención actual. No se asigna 117 como oficina.",
+    "evidence_url": "https://www.sga.gatech.edu/contact-us/",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  }
+]

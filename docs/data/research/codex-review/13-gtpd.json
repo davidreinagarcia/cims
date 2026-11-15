@@ -1,0 +1,98 @@
+[
+  {
+    "item": "Sede física",
+    "status": "confirmed",
+    "finding": "965 Hemphill Avenue NW, Atlanta GA 30318; sede en la esquina de 10th Street y Hemphill Avenue NW.",
+    "evidence_url": "https://police.gatech.edu/general-information",
+    "quote": "965 Hemphill Avenue NW, Atlanta GA 30318.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Dirección postal",
+    "status": "confirmed",
+    "finding": "965 Hemphill Avenue NW, Atlanta GA 30332-0440. La página distingue el código postal de correo del de ubicación física.",
+    "evidence_url": "https://police.gatech.edu/general-information",
+    "quote": "965 Hemphill Avenue NW, Atlanta GA 30332-0440.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Teléfono departamental",
+    "status": "confirmed",
+    "finding": "404.894.2500 para emergencias y no emergencias.",
+    "evidence_url": "https://police.gatech.edu/general-information",
+    "quote": "404.894.2500",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Administración y atención ordinaria",
+    "status": "confirmed",
+    "finding": "Business hours lunes a viernes 08:00 a 16:00; la página también declara personal 365/24/7. No dice que la recepción pública esté abierta 24 horas. No etiqueta el horario como exclusivo de otoño 2026. El fin de semana administrativo no se codifica como cerrado sin afirmación explícita.",
+    "evidence_url": "https://police.gatech.edu/general-information",
+    "quote": "Monday through Friday from 8am to 4pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "08:00",
+          "16:00"
+        ]
+      ],
+      "tue": [
+        [
+          "08:00",
+          "16:00"
+        ]
+      ],
+      "wed": [
+        [
+          "08:00",
+          "16:00"
+        ]
+      ],
+      "thu": [
+        [
+          "08:00",
+          "16:00"
+        ]
+      ],
+      "fri": [
+        [
+          "08:00",
+          "16:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Recepción presencial",
+    "status": "unconfirmed",
+    "finding": "No se halló en General Information un horario de recepción o lobby diferenciado. Se buscó police.gatech.edu lobby hours. Tener personal 24/7 no confirma acceso presencial al vestíbulo 24/7.",
+    "evidence_url": "https://police.gatech.edu/general-information",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Edificio oficial",
+    "status": "confirmed",
+    "finding": "Facilities identifica Police Department como edificio 211, en 965 Hemphill Avenue, N.W.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "211 Police Department",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Sala/suite",
+    "status": "unconfirmed",
+    "finding": "La página de sede no publica sala o suite para la recepción ni administración.",
+    "evidence_url": "https://police.gatech.edu/general-information",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Horario sábados y domingos",
+    "status": "unconfirmed",
+    "finding": "La fuente consultada solo publica business/office hours de lunes a viernes. No afirma expresamente cerrado sábados y domingos; hours omite esos días para no codificar [] sin prueba.",
+    "evidence_url": "https://police.gatech.edu/general-information",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  }
+]

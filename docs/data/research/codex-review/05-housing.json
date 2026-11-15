@@ -1,0 +1,90 @@
+[
+  {
+    "item": "helpdesk_location",
+    "status": "confirmed",
+    "finding": "El punto presencial central para consultas de Housing es Swarm Support at Buzz STOP, en The Pavilions, enfrente de Dunkin’ Donuts. Dirección: 410 4th Street NW, Atlanta, GA 30332.",
+    "evidence_url": "https://www.mystuff.gatech.edu/buzz-stop",
+    "quote": "Located in The Pavilions, across from Dunkin’ Donuts",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "postal_address_phone",
+    "status": "confirmed",
+    "finding": "Buzz STOP: 410 4th Street NW, Atlanta, GA 30332. Teléfono 404-894-2470.",
+    "evidence_url": "https://www.mystuff.gatech.edu/buzz-stop",
+    "quote": "410 4th Street NW, Atlanta, GA 30332",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "official_building",
+    "status": "confirmed",
+    "finding": "Nombre y número del directorio Facilities: Pavilion, 216.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025Basemap-11x17Published.pdf",
+    "quote": "216 Pavilion",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "building_address",
+    "status": "confirmed",
+    "finding": "Facilities confirma Pavilion 216 en 410 Fourth St., N.W.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "216 Pavilion 410 Fourth St., N.W.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "phone_chat_hours",
+    "status": "confirmed",
+    "finding": "Housing publica lunes a viernes 08:00 a 17:00 para teléfono y chat de Buzz STOP. No extrapolar a visitas presenciales; no publica horario de fin de semana para estos canales.",
+    "evidence_url": "https://housing.gatech.edu/contact",
+    "quote": "Monday – Friday 8:00 a.m. – 5:00 p.m.",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "tue": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "wed": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "thu": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "fri": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "in_person_hours_suite_central_admin",
+    "status": "unconfirmed",
+    "finding": "Se confirma el punto presencial Buzz STOP, pero las páginas Help & Support y Buzz STOP no publican horario presencial, suite o ubicación de administración interna central de Housing. No sustituirlo por la oficina Campus Services en Smithgall.",
+    "evidence_url": "https://www.mystuff.gatech.edu/buzz-stop",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "phone",
+    "status": "confirmed",
+    "finding": "Teléfono Buzz STOP: 404-894-2470.",
+    "evidence_url": "https://www.mystuff.gatech.edu/buzz-stop",
+    "quote": "404-894-2470",
+    "checked_on": "2026-11-14"
+  }
+]

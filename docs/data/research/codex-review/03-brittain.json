@@ -1,0 +1,91 @@
+[
+  {
+    "item": "Brittain: dirección",
+    "status": "confirmed",
+    "finding": "Se confirma 649 Techwood Dr NW, Atlanta. La ficha imprime GA 30330; se conserva literalmente, sin corregir el código postal por intuición. 680 Cherry St no es la dirección que publica esta ficha.",
+    "evidence_url": "https://dining.gatech.edu/location/brittain-dining-hall-0",
+    "quote": "649 Techwood Dr NW, Atlanta, GA 30330",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Brittain: horario habitual",
+    "status": "corrected",
+    "finding": "Lunes a viernes 11:00 a 23:00; sábado y domingo cerrado. Horario de la reapertura de otoño 2026. El domingo abierto 22 de noviembre pertenece al bloque especial y no al habitual.",
+    "evidence_url": "https://dining.gatech.edu/location/brittain-dining-hall-0",
+    "quote": "Monday: 11:00 am - 11:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "11:00",
+          "23:00"
+        ]
+      ],
+      "tue": [
+        [
+          "11:00",
+          "23:00"
+        ]
+      ],
+      "wed": [
+        [
+          "11:00",
+          "23:00"
+        ]
+      ],
+      "thu": [
+        [
+          "11:00",
+          "23:00"
+        ]
+      ],
+      "fri": [
+        [
+          "11:00",
+          "23:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    }
+  },
+  {
+    "item": "Brittain: desayuno",
+    "status": "corrected",
+    "finding": "No sirve desayuno ni abre los fines de semana. No aplicar antiguas franjas de desayuno de antes del cierre.",
+    "evidence_url": "https://www.gatech.edu/news/2026/08/12/brittain-dining-hall-reopening-following-two-year-renovation",
+    "quote": "Brittain will not open for breakfast or on weekends",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [],
+      "tue": [],
+      "wed": [],
+      "thu": [],
+      "fri": [],
+      "sat": [],
+      "sun": []
+    }
+  },
+  {
+    "item": "Brittain: franjas de almuerzo y cena",
+    "status": "unconfirmed",
+    "finding": "La ficha actual solo publica apertura continua 11:00 a 23:00. No publica una frontera horaria entre almuerzo y cena. Se abrió la ficha, Hours of Operation y noticia de reapertura y se buscó Brittain Lunch en dining.gatech.edu; los resultados con franjas eran antiguos (2018 o anteriores). No se inventan franjas.",
+    "evidence_url": "https://dining.gatech.edu/location/brittain-dining-hall-0",
+    "quote": "Normal Hours",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Brittain: reapertura y reforma",
+    "status": "confirmed",
+    "finding": "Reabrió el 17 de agosto de 2026 tras la reforma de dos años. La noticia del 12 de agosto anunciaba la reapertura; la del 21 de agosto confirma que se produjo.",
+    "evidence_url": "https://www.gatech.edu/news/2026/08/21/whats-new-tech-dining",
+    "quote": "Closed for renovation in 2024, Brittain reopened on Aug. 17.",
+    "checked_on": "2026-11-14",
+    "evidence": [
+      {
+        "url": "https://www.gatech.edu/news/2026/08/12/brittain-dining-hall-reopening-following-two-year-renovation",
+        "quote": "After an extensive two-year renovation"
+      }
+    ]
+  }
+]

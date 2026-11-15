@@ -1,0 +1,454 @@
+[
+  {
+    "item": "CRC edificio: otoño 2026",
+    "status": "confirmed",
+    "finding": "Gemini acertó, incluido domingo09:00. La página departamental abierta en navegador dice FALL2026; students publica domingo10:00 sin identificar semestre. Prima el horario departamental específico de otoño2026, corroborado en la portada CRC.",
+    "evidence_url": "https://crc.gatech.edu/hours/",
+    "quote": "FALL 2026 HOURS; Mon – Thu: 5:30 a.m. – 12 a.m.; Fri: 5:30 a.m. – 9 p.m.; Sat: 9 a.m. – 7 p.m.; Sun: 9 a.m. – 10 p.m.",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "05:30",
+          "24:00"
+        ]
+      ],
+      "tue": [
+        [
+          "05:30",
+          "24:00"
+        ]
+      ],
+      "wed": [
+        [
+          "05:30",
+          "24:00"
+        ]
+      ],
+      "thu": [
+        [
+          "05:30",
+          "24:00"
+        ]
+      ],
+      "fri": [
+        [
+          "05:30",
+          "21:00"
+        ]
+      ],
+      "sat": [
+        [
+          "09:00",
+          "19:00"
+        ]
+      ],
+      "sun": [
+        [
+          "09:00",
+          "22:00"
+        ]
+      ]
+    },
+    "evidence": [
+      {
+        "evidence_url": "https://crc.gatech.edu/",
+        "quote": "Fall 2026 Hours of Operation; Sunday: 9 a.m. – 10 p.m."
+      },
+      {
+        "evidence_url": "https://students.gatech.edu/content/hours-operation",
+        "quote": "Sun | 10 a.m. - 10:00 p.m."
+      }
+    ]
+  },
+  {
+    "item": "Fitness Floor: horario independiente",
+    "status": "unconfirmed",
+    "finding": "La página de instalaciones describe este espacio pero no publica un horario semanal propio ni afirma expresamente que sea idéntico al edificio. No trasladar automáticamente las horas del CRC; el gimnasio depende además de reservas. Se abrieron /locations/ y /hours/ con navegador, incluidos paneles ocultos.",
+    "evidence_url": "https://crc.gatech.edu/locations/",
+    "quote": "1st Floor (Fitness Floor): Includes a variety of weights and machines.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Indoor Track: horario independiente",
+    "status": "unconfirmed",
+    "finding": "La página de instalaciones describe este espacio pero no publica un horario semanal propio ni afirma expresamente que sea idéntico al edificio. No trasladar automáticamente las horas del CRC; el gimnasio depende además de reservas. Se abrieron /locations/ y /hours/ con navegador, incluidos paneles ocultos.",
+    "evidence_url": "https://crc.gatech.edu/locations/",
+    "quote": "The 5th floor is home to our indoor track.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Main Gymnasium: horario independiente",
+    "status": "unconfirmed",
+    "finding": "La página de instalaciones describe este espacio pero no publica un horario semanal propio ni afirma expresamente que sea idéntico al edificio. No trasladar automáticamente las horas del CRC; el gimnasio depende además de reservas. Se abrieron /locations/ y /hours/ con navegador, incluidos paneles ocultos.",
+    "evidence_url": "https://crc.gatech.edu/locations/",
+    "quote": "These courts are available for free play and can also be reserved by groups.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Climbing Wall: horas con personal",
+    "status": "unconfirmed",
+    "finding": "Horas con personal publicadas: lun-jue 17:00-21:00, vie 14:00-16:45. No se publican sesiones de fin de semana ni un cierre expreso, así que sábado y domingo quedan sin confirmar y se omite hours. Las horas sin personal corresponden a otro servicio con reserva.",
+    "evidence_url": "https://crc.gatech.edu/hours/",
+    "quote": "Staffed Hours: Mon – Thu: 5 – 9 p.m. Fri: 2 – 4:45 p.m.",
+    "checked_on": "2026-11-14",
+    "published_weekday_hours": {
+      "mon": [
+        [
+          "17:00",
+          "21:00"
+        ]
+      ],
+      "tue": [
+        [
+          "17:00",
+          "21:00"
+        ]
+      ],
+      "wed": [
+        [
+          "17:00",
+          "21:00"
+        ]
+      ],
+      "thu": [
+        [
+          "17:00",
+          "21:00"
+        ]
+      ],
+      "fri": [
+        [
+          "14:00",
+          "16:45"
+        ]
+      ]
+    },
+    "unconfirmed_days": [
+      "sat",
+      "sun"
+    ]
+  },
+  {
+    "item": "Competition Pool: recreación habitual",
+    "status": "confirmed",
+    "finding": "Lun/mié/vie09:00-14:00; mar/jue06:00-09:00 y12:00-15:00; sáb/domcerrado a rec swim. Disponibilidad de calles variable. No confundir con entrenamientos/equipos.",
+    "evidence_url": "https://crc.gatech.edu/hours/",
+    "quote": "Mon, Weds, Fri 9am-2pm; Tues & Thurs 6am-9am 12pm-3pm; Sat & Sun CLOSED, See Leisure Pool Hours",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "09:00",
+          "14:00"
+        ]
+      ],
+      "tue": [
+        [
+          "06:00",
+          "09:00"
+        ],
+        [
+          "12:00",
+          "15:00"
+        ]
+      ],
+      "wed": [
+        [
+          "09:00",
+          "14:00"
+        ]
+      ],
+      "thu": [
+        [
+          "06:00",
+          "09:00"
+        ],
+        [
+          "12:00",
+          "15:00"
+        ]
+      ],
+      "fri": [
+        [
+          "09:00",
+          "14:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    }
+  },
+  {
+    "item": "Crawford Leisure Pool: lap lanes",
+    "status": "unconfirmed",
+    "finding": "La tabla LAP LANES ONLY publica lun/mié/vie06:00-09:00 y14:00-20:00, mar/jue06:00-12:00 y14:00-20:00, sáb13:00-18:00, dom12:00-18:00. Pero el mismo documento identifica sáb14nov13:00-18:00 como excepción del meet, así que no queda acreditado que el sábado13:00 sea habitual. Se conserva la tabla como evidencia y se omite hours para no cargar una excepción como horario normal.",
+    "evidence_url": "https://crc.gatech.edu/hours/",
+    "quote": "LAP LANES ONLY; Sat 1pm-6pm; Sun 12pm-6pm; Sat, 11/14 LP Lanes 1pm-6pm",
+    "checked_on": "2026-11-14",
+    "published_weekday_hours": {
+      "mon": [
+        [
+          "06:00",
+          "09:00"
+        ],
+        [
+          "14:00",
+          "20:00"
+        ]
+      ],
+      "tue": [
+        [
+          "06:00",
+          "12:00"
+        ],
+        [
+          "14:00",
+          "20:00"
+        ]
+      ],
+      "wed": [
+        [
+          "06:00",
+          "09:00"
+        ],
+        [
+          "14:00",
+          "20:00"
+        ]
+      ],
+      "thu": [
+        [
+          "06:00",
+          "12:00"
+        ],
+        [
+          "14:00",
+          "20:00"
+        ]
+      ],
+      "fri": [
+        [
+          "06:00",
+          "09:00"
+        ],
+        [
+          "14:00",
+          "20:00"
+        ]
+      ],
+      "sun": [
+        [
+          "12:00",
+          "18:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Crawford Leisure Pool: rec area y tobogán",
+    "status": "confirmed",
+    "finding": "Lun-vie16:00-20:00; sáb10:00-18:00; dom12:00-18:00. Es distinto de las calles para largos.",
+    "evidence_url": "https://crc.gatech.edu/hours/",
+    "quote": "CRAWFORD REC AREA & WATER SLIDE; Mon-Fri 4pm-8pm; Sat 10am-6pm; Sun 12pm-6pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "16:00",
+          "20:00"
+        ]
+      ],
+      "tue": [
+        [
+          "16:00",
+          "20:00"
+        ]
+      ],
+      "wed": [
+        [
+          "16:00",
+          "20:00"
+        ]
+      ],
+      "thu": [
+        [
+          "16:00",
+          "20:00"
+        ]
+      ],
+      "fri": [
+        [
+          "16:00",
+          "20:00"
+        ]
+      ],
+      "sat": [
+        [
+          "10:00",
+          "18:00"
+        ]
+      ],
+      "sun": [
+        [
+          "12:00",
+          "18:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Bike Shop: semana completa",
+    "status": "unconfirmed",
+    "finding": "La página actual publica Monday-Friday14:00-18:00, a diferencia del resultado cacheado del buscador que mostraba solo lunes/miércoles/viernes. No publica sábado ni domingo ni dice closed: ambos días quedan sin confirmar; no se rellenan con [].",
+    "evidence_url": "https://crc.gatech.edu/bike-shop/",
+    "quote": "BIKE SHOP HOURS OF OPERATION; Monday – Friday 2 – 6 p.m.",
+    "checked_on": "2026-11-14",
+    "published_weekday_hours": {
+      "mon": [
+        [
+          "14:00",
+          "18:00"
+        ]
+      ],
+      "tue": [
+        [
+          "14:00",
+          "18:00"
+        ]
+      ],
+      "wed": [
+        [
+          "14:00",
+          "18:00"
+        ]
+      ],
+      "thu": [
+        [
+          "14:00",
+          "18:00"
+        ]
+      ],
+      "fri": [
+        [
+          "14:00",
+          "18:00"
+        ]
+      ]
+    },
+    "unconfirmed_days": [
+      "sat",
+      "sun"
+    ]
+  },
+  {
+    "item": "Wilderness Outpost: otoño y primavera",
+    "status": "unconfirmed",
+    "finding": "Horas de otoño/primavera publicadas: lun-jue 14:00-19:00, incluido miércoles; vie 14:00-17:00. No se publica horario general sáb/dom; ambos quedan sin confirmar. Sí se confirma expresamente que no hay recogidas/devoluciones sáb/dom. La sección específica de recogidas/devoluciones limita ese servicio entre semana a14:00-17:00; no sustituye las horas de atención general.",
+    "evidence_url": "https://crc.gatech.edu/wilderness-outpost/",
+    "quote": "Fall and Spring Hours: Mondays 2-7 p.m Tuesdays 2-7 p.m Wednesdays 2-7 p.m. Thursdays 2-7 p.m Fridays – 2-5 p.m",
+    "checked_on": "2026-11-14",
+    "evidence": [
+      {
+        "evidence_url": "https://crc.gatech.edu/wilderness-outpost/",
+        "quote": "Saturday and Sunday pick-ups/returns are not available"
+      }
+    ],
+    "published_weekday_hours": {
+      "mon": [
+        [
+          "14:00",
+          "19:00"
+        ]
+      ],
+      "tue": [
+        [
+          "14:00",
+          "19:00"
+        ]
+      ],
+      "wed": [
+        [
+          "14:00",
+          "19:00"
+        ]
+      ],
+      "thu": [
+        [
+          "14:00",
+          "19:00"
+        ]
+      ],
+      "fri": [
+        [
+          "14:00",
+          "17:00"
+        ]
+      ]
+    },
+    "unconfirmed_days": [
+      "sat",
+      "sun"
+    ]
+  },
+  {
+    "item": "Member Services",
+    "status": "confirmed",
+    "finding": "Lun-jue10:00-21:00; vie10:00-18:00; sáb11:00-18:00; dom10:00-20:00.",
+    "evidence_url": "https://crc.gatech.edu/hours/",
+    "quote": "Member Services; Mon – Thu: 10 a.m. – 9 p.m.; Fri: 10 a.m. – 6 p.m.; Sat: 11 a.m. – 6 p.m.; Sun: 10 a.m. – 8 p.m.",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "tue": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "wed": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "thu": [
+        [
+          "10:00",
+          "21:00"
+        ]
+      ],
+      "fri": [
+        [
+          "10:00",
+          "18:00"
+        ]
+      ],
+      "sat": [
+        [
+          "11:00",
+          "18:00"
+        ]
+      ],
+      "sun": [
+        [
+          "10:00",
+          "20:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "CRC: horas especiales separadas",
+    "status": "confirmed",
+    "finding": "Thanksgiving:25nov05:30-14:00;26-28novcerrado;29nov09:00-17:00. No incorporado al horario habitual. Meet14-15nov: el14nov las calles de Leisure abren13:00; tampoco usarlo para inferir sábados normales.",
+    "evidence_url": "https://crc.gatech.edu/hours/",
+    "quote": "Wed, 11/25 (Thanksgiving Week) 5:30 a.m. – 2 p.m.; Thu, 11/26 – Sat, 11/28 (Thanksgiving Week) Closed; Sun, 11/29 (Thanksgiving Week) 9 a.m. – 5 p.m.",
+    "checked_on": "2026-11-14"
+  }
+]

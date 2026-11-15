@@ -1,0 +1,158 @@
+[
+  {
+    "item": "Horario del edificio",
+    "status": "confirmed",
+    "finding": "Normal Hours: todos los días 07:00 a 23:00. La página indica acceso con BuzzCard fuera de esas horas. Horario habitual publicado, sin etiqueta explícita otoño 2026.",
+    "evidence_url": "https://www.studentcenter.gatech.edu/hours",
+    "quote": "Monday: 7:00 am - 11:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "07:00",
+          "23:00"
+        ]
+      ],
+      "tue": [
+        [
+          "07:00",
+          "23:00"
+        ]
+      ],
+      "wed": [
+        [
+          "07:00",
+          "23:00"
+        ]
+      ],
+      "thu": [
+        [
+          "07:00",
+          "23:00"
+        ]
+      ],
+      "fri": [
+        [
+          "07:00",
+          "23:00"
+        ]
+      ],
+      "sat": [
+        [
+          "07:00",
+          "23:00"
+        ]
+      ],
+      "sun": [
+        [
+          "07:00",
+          "23:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Horario Information Desk lunes a jueves",
+    "status": "confirmed",
+    "finding": "Normal Hours del Information Desk: lunes a jueves 08:00 a 19:00. La página no etiqueta explícitamente el semestre de otoño 2026.",
+    "evidence_url": "https://www.studentcenter.gatech.edu/hours",
+    "quote": "Monday: 8:00 am - 7:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "08:00",
+          "19:00"
+        ]
+      ],
+      "tue": [
+        [
+          "08:00",
+          "19:00"
+        ]
+      ],
+      "wed": [
+        [
+          "08:00",
+          "19:00"
+        ]
+      ],
+      "thu": [
+        [
+          "08:00",
+          "19:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Horario Information Desk viernes",
+    "status": "confirmed",
+    "finding": "Normal Hours del Information Desk: viernes 08:00 a 17:00; sin etiqueta explícita de semestre.",
+    "evidence_url": "https://www.studentcenter.gatech.edu/hours",
+    "quote": "Friday: 8:00 am - 5:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "fri": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Horario Information Desk fin de semana",
+    "status": "confirmed",
+    "finding": "Normal Hours del Information Desk: sábado y domingo 09:00 a 15:00; sin etiqueta explícita de semestre.",
+    "evidence_url": "https://www.studentcenter.gatech.edu/hours",
+    "quote": "Saturday: 9:00 am - 3:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "sat": [
+        [
+          "09:00",
+          "15:00"
+        ]
+      ],
+      "sun": [
+        [
+          "09:00",
+          "15:00"
+        ]
+      ]
+    }
+  },
+  {
+    "item": "Ubicación Information Desk",
+    "status": "confirmed",
+    "finding": "Segunda planta del Student Center. La página no da número de sala; el servicio se denomina Information Desk, no una segunda oficina Welcome Desk.",
+    "evidence_url": "https://www.techrec.gatech.edu/student-center",
+    "quote": "Located on the 2nd floor of the Student Center",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Teléfono Information Desk",
+    "status": "confirmed",
+    "finding": "404.385.4275.",
+    "evidence_url": "https://www.techrec.gatech.edu/student-center",
+    "quote": "404.385.4275",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Dirección y números Facilities",
+    "status": "confirmed",
+    "finding": "Facilities registra Student Center en 351 Ferst Drive N.W.; aparecen dos identificadores, 104 y 214, con ese nombre y dirección. No se elige uno como identificador único sin resolverlo en mapa.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "104 Student Center 351 Ferst Drive N.W.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Número oficial único, sala y código postal",
+    "status": "unconfirmed",
+    "finding": "El PDF de Facilities duplica 104/214 para Student Center. Las páginas abiertas no acreditan una sala del desk ni un código postal específico de correo; no usar el pie genérico North Avenue como dirección del edificio.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "214 Student Center 351 Ferst Drive N.W.",
+    "checked_on": "2026-11-14"
+  }
+]

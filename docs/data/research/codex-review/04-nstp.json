@@ -1,0 +1,92 @@
+[
+  {
+    "item": "location_suite",
+    "status": "confirmed",
+    "finding": "NSTP: Smithgall Student Services (Flag Building), Suite 141. La página invita a pasar por la oficina.",
+    "evidence_url": "https://transitionprograms.gatech.edu/welcome",
+    "quote": "Smithgall Student Services (Flag Building), Suite 141",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "official_building",
+    "status": "confirmed",
+    "finding": "Nombre y número del directorio Facilities: Charles A. Smithgall Jr. Student Services, 123.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025Basemap-11x17Published.pdf",
+    "quote": "123 Charles A. Smithgall Jr. Student Services",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "building_street_address",
+    "status": "confirmed",
+    "finding": "Dirección del edificio Smithgall: 353 Ferst Drive. La fuente Facilities no da código postal en esta fila.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "123 Student Services 353 Ferst Drive",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "phone",
+    "status": "confirmed",
+    "finding": "Teléfono departamental publicado en la página NSTP Sponsorship Program Overview con patrocinadores de 2026: 404-894-6897.",
+    "evidence_url": "https://transitionprograms.gatech.edu/sponsorship-program/program-overview",
+    "quote": "contact us at (404) 894-6897",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "regular_office_hours",
+    "status": "confirmed",
+    "finding": "New Student Transition Programs: horario habitual publicado, lunes a viernes 08:00 a 17:00; sábado y domingo cerrado. La página distingue Regular Hours de la excepción Labor Day del 7 de septiembre de 2026. No certifica por separado todo el semestre de otoño.",
+    "evidence_url": "https://students.gatech.edu/content/hours-operation",
+    "quote": "8 a.m. – 5 p.m.",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "tue": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "wed": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "thu": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "fri": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    }
+  },
+  {
+    "item": "postal_address",
+    "status": "unconfirmed",
+    "finding": "La página de bienvenida confirma Smithgall Suite 141 y Facilities confirma 353 Ferst Drive. No se encontró una dirección postal completa departamental con ciudad/ZIP en las páginas abiertas.",
+    "evidence_url": "https://transitionprograms.gatech.edu/welcome",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "in_person_hours",
+    "status": "unconfirmed",
+    "finding": "La página de bienvenida invita a pasar por Suite 141 y SEWB publica horario general, pero las fuentes documentadas no garantizan atención presencial durante toda la franja sin cita. No se ha confirmado un horario presencial específico de otoño 2026.",
+    "evidence_url": "https://transitionprograms.gatech.edu/welcome",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  }
+]

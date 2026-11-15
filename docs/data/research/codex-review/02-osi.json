@@ -1,0 +1,84 @@
+[
+  {
+    "item": "official_building",
+    "status": "confirmed",
+    "finding": "Nombre y número del directorio Facilities: Charles A. Smithgall Jr. Student Services, 123.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025Basemap-11x17Published.pdf",
+    "quote": "123 Charles A. Smithgall Jr. Student Services",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "postal_address_phone",
+    "status": "confirmed",
+    "finding": "OSI: Charles A. Smithgall, Jr. Student Services Building, 353 Ferst Drive, Atlanta, GA 30332-0285. Teléfono departamental 404-894-2566.",
+    "evidence_url": "https://osi.gatech.edu/about/contact-us",
+    "quote": "353 Ferst Drive Atlanta, GA 30332-0285",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "room_suite",
+    "status": "unconfirmed",
+    "finding": "La página oficial de contacto no publica sala o suite. Se abrió también la portada de OSI.",
+    "evidence_url": "https://osi.gatech.edu/about/contact-us",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "department_office_hours",
+    "status": "unconfirmed",
+    "finding": "La página departamental publica 08:00 a 17:00 solo con cita previa, sin días explícitos; contradice el inicio a las 09:00 del directorio SEWB. No se fija una única franja presencial.",
+    "evidence_url": "https://osi.gatech.edu/about/contact-us",
+    "quote": "8 a.m. - 5 p.m. (By Appointment Only)",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "directory_office_hours",
+    "status": "unconfirmed",
+    "finding": "El directorio SEWB publica lunes a viernes 09:00 a 17:00 y fines de semana cerrado para OSI. Conflicto con la página departamental: 08:00 a 17:00.",
+    "evidence_url": "https://students.gatech.edu/content/hours-operation",
+    "quote": "9 a.m. – 5 p.m.",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "09:00",
+          "17:00"
+        ]
+      ],
+      "tue": [
+        [
+          "09:00",
+          "17:00"
+        ]
+      ],
+      "wed": [
+        [
+          "09:00",
+          "17:00"
+        ]
+      ],
+      "thu": [
+        [
+          "09:00",
+          "17:00"
+        ]
+      ],
+      "fri": [
+        [
+          "09:00",
+          "17:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    }
+  },
+  {
+    "item": "phone",
+    "status": "confirmed",
+    "finding": "Teléfono departamental OSI: 404-894-2566.",
+    "evidence_url": "https://osi.gatech.edu/about/contact-us",
+    "quote": "404.894.2566",
+    "checked_on": "2026-11-14"
+  }
+]

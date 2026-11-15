@@ -1,0 +1,34 @@
+[
+  {
+    "item": "Dirección y ubicación",
+    "status": "confirmed",
+    "finding": "La página propia del VRC confirma Georgia Tech Biotech Quad, 311 Ferst Dr, Atlanta, Georgia 30332. Por tanto, esta afirmación concreta de Gemini sí tiene respaldo oficial.",
+    "evidence_url": "https://veterans.gatech.edu/connect-with-us",
+    "quote": "Georgia Tech Biotech Quad, 311 Ferst Dr, Atlanta, Georgia, 30332.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Teléfono",
+    "status": "confirmed",
+    "finding": "404.385.2067, publicado para el director del VRC. No se identifica como centralita separada.",
+    "evidence_url": "https://veterans.gatech.edu/connect-with-us",
+    "quote": "404.385.2067",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Edificio y número oficial",
+    "status": "unconfirmed",
+    "finding": "La lista Facilities asocia 311 Ferst Dr al edificio 147, ES&T. Eso acredita el edificio de esa dirección, pero no que el VRC ocupe ES&T: su propia página dice Biotech Quad. No asignar 147 al VRC sin comprobar el punto exacto en map.gatech.edu.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "147 ES&T 311 Ferst Dr",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Sala y horario presencial otoño 2026",
+    "status": "unconfirmed",
+    "finding": "La página de contacto abierta no publica sala ni horario habitual. Se consultaron también la portada y resultados de Registrar Veterans Contacts; no se ha confirmado un horario presencial de otoño 2026. Los horarios del School Certifying Official no son los del VRC.",
+    "evidence_url": "https://veterans.gatech.edu/connect-with-us",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  }
+]

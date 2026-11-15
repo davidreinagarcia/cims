@@ -1,0 +1,28 @@
+[
+  {
+    "item": "Stamps Pharmacy: horario completo real",
+    "status": "unconfirmed",
+    "finding": "La fuente propia contact-us publica Business Hours lun-mié/vie08:00-16:30, jueves09:00-16:30 y cierre farmacia12:30-13:30 diario. students publica mismo horario del centro pero cierre farmacia12:00-12:30. Conflicto oficial real: ambas páginas abiertas. pharmacy/ no publica semana ni resuelve mediodía; health/ actual tampoco publica horario. No se puede certificar una semana real inequívoca ni cierres sáb/dom; se omite hours. Si se prioriza la página propia, sus franjas entre semana serían08:00-12:30 y13:30-16:30, jueves09:00-12:30 y13:30-16:30; son horario publicado, no verificación operativa.",
+    "evidence_url": "https://health.gatech.edu/contact-us/",
+    "quote": "The Pharmacy will be closed from 12:30 pm to 1:30 pm daily.",
+    "checked_on": "2026-11-14",
+    "evidence": [
+      {
+        "evidence_url": "https://students.gatech.edu/content/hours-operation",
+        "quote": "Pharmacy Hours: Closed for lunch daily from 12 p.m. – 12:30 p.m."
+      },
+      {
+        "evidence_url": "https://health.gatech.edu/contact-us/",
+        "quote": "Mon – Wed: 8:00 am – 4:30 pm; Thursday: 9:00 am – 4:30 pm; Friday: 8:00 am – 4:30 pm"
+      }
+    ]
+  },
+  {
+    "item": "Stamps Pharmacy: solicitudes automáticas",
+    "status": "confirmed",
+    "finding": "Solicitar renovaciones mediante teléfono automático o formulario es24/7; no implica recogida o mostrador abierto24/7.",
+    "evidence_url": "https://health.gatech.edu/pharmacy/",
+    "quote": "You can refill prescriptions 24/7 via the automated refill line",
+    "checked_on": "2026-11-14"
+  }
+]

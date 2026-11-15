@@ -1,0 +1,199 @@
+[
+  {
+    "item": "Dunkin’ (The Pavilions)",
+    "status": "confirmed",
+    "finding": "Horario Normal Hours, separado del bloque especial November 22nd - November 28th. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/dunkin",
+    "quote": "Monday: 7:00 am - 8:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "07:00",
+          "20:00"
+        ]
+      ],
+      "tue": [
+        [
+          "07:00",
+          "20:00"
+        ]
+      ],
+      "wed": [
+        [
+          "07:00",
+          "20:00"
+        ]
+      ],
+      "thu": [
+        [
+          "07:00",
+          "20:00"
+        ]
+      ],
+      "fri": [
+        [
+          "07:00",
+          "19:00"
+        ]
+      ],
+      "sat": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "sun": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ]
+    },
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Chick-fil-A (Student Center)",
+    "status": "confirmed",
+    "finding": "Horario Normal Hours, separado del bloque especial November 22nd - November 28th. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/chick-fil",
+    "quote": "Monday: 7:00 am - 10:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "tue": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "wed": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "thu": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "fri": [
+        [
+          "07:00",
+          "19:00"
+        ]
+      ],
+      "sat": [
+        [
+          "09:00",
+          "17:00"
+        ]
+      ],
+      "sun": []
+    },
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Dancing Goats (Student Center)",
+    "status": "confirmed",
+    "finding": "Horario Normal Hours, separado del bloque especial November 22nd - November 28th. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/dancing-goats",
+    "quote": "Monday: 7:00 am - 9:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "07:00",
+          "21:00"
+        ]
+      ],
+      "tue": [
+        [
+          "07:00",
+          "21:00"
+        ]
+      ],
+      "wed": [
+        [
+          "07:00",
+          "21:00"
+        ]
+      ],
+      "thu": [
+        [
+          "07:00",
+          "21:00"
+        ]
+      ],
+      "fri": [
+        [
+          "07:00",
+          "21:00"
+        ]
+      ],
+      "sat": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ],
+      "sun": [
+        [
+          "09:00",
+          "16:00"
+        ]
+      ]
+    },
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  },
+  {
+    "item": "Kaldi’s Coffee (Clough)",
+    "status": "confirmed",
+    "finding": "Horario Normal Hours, separado del bloque especial November 22nd - November 28th. Horario habitual publicado al consultar; la ficha no identifica expresamente el semestre de otoño de 2026.",
+    "evidence_url": "https://dining.gatech.edu/location/kaldis-coffee",
+    "quote": "Monday: 7:00 am - 7:00 pm",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "07:00",
+          "19:00"
+        ]
+      ],
+      "tue": [
+        [
+          "07:00",
+          "19:00"
+        ]
+      ],
+      "wed": [
+        [
+          "07:00",
+          "19:00"
+        ]
+      ],
+      "thu": [
+        [
+          "07:00",
+          "19:00"
+        ]
+      ],
+      "fri": [
+        [
+          "07:00",
+          "19:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    },
+    "temporal_scope": "Horario habitual actualmente publicado; vigencia específica otoño2026 no expresada en la ficha."
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "item": "location",
+    "status": "confirmed",
+    "finding": "STAR está en la primera planta de Smithgall Student Services Building, según el boletín oficial del 29 de enero de 2026.",
+    "evidence_url": "https://students.gatech.edu/vp-letter/vpsewb-newsletter-social-connection-services-and-surveys",
+    "quote": "is located on the first floor of the Smithgall Student Services Building.",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "official_building",
+    "status": "confirmed",
+    "finding": "Nombre y número del directorio Facilities: Charles A. Smithgall Jr. Student Services, 123.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025Basemap-11x17Published.pdf",
+    "quote": "123 Charles A. Smithgall Jr. Student Services",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "building_street_address",
+    "status": "confirmed",
+    "finding": "Dirección del edificio Smithgall: 353 Ferst Drive. La fuente Facilities no da código postal en esta fila.",
+    "evidence_url": "https://facilities.gatech.edu/system/files/forms_files/2025MaintenanceMap24x36.pdf",
+    "quote": "123 Student Services 353 Ferst Drive",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "room_suite_postal_address",
+    "status": "unconfirmed",
+    "finding": "La página de contacto de STAR solo publica personas y teléfonos; no confirma sala/suite ni dirección postal completa propia. No convertir la planta en una suite. Se comprobaron contacto, portada y boletín oficial.",
+    "evidence_url": "https://star.studentlife.gatech.edu/contact",
+    "quote": "STAR Program Director",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "phone",
+    "status": "confirmed",
+    "finding": "Contacto oficial de STAR: 404-894-7827, publicado bajo STAR Program Director. No se identifica como centralita independiente.",
+    "evidence_url": "https://star.studentlife.gatech.edu/contact",
+    "quote": "(404) 894-STAR (7827)",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "regular_office_hours",
+    "status": "confirmed",
+    "finding": "STAR: horario habitual publicado, lunes a viernes 08:00 a 17:00; sábado y domingo cerrado. La página distingue Regular Hours de la excepción Labor Day del 7 de septiembre de 2026. No certifica por separado todo el semestre de otoño.",
+    "evidence_url": "https://students.gatech.edu/content/hours-operation",
+    "quote": "8 a.m. – 5 p.m.",
+    "checked_on": "2026-11-14",
+    "hours": {
+      "mon": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "tue": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "wed": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "thu": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "fri": [
+        [
+          "08:00",
+          "17:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    }
+  },
+  {
+    "item": "in_person_access",
+    "status": "unconfirmed",
+    "finding": "El directorio publica horario de oficina pero no especifica si STAR acepta visitas sin cita durante toda esa franja.",
+    "evidence_url": "https://students.gatech.edu/content/hours-operation",
+    "quote": "",
+    "checked_on": "2026-11-14"
+  }
+]

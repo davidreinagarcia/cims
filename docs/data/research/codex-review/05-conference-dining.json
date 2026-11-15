@@ -1,0 +1,32 @@
+[
+  {
+    "item": "Conference Dining Room: acceso público",
+    "status": "unconfirmed",
+    "finding": "El operador lo anuncia como restaurante, invita a los comensales y acepta Buzz Cards. No se encontró condición de huésped o evento, pero tampoco una frase expresa que confirme acceso libre a no huéspedes. Se abrieron su ficha, Dining, FAQ y resultados sobre acceso público. Es razonable inferir apertura a clientes externos, pero no elevarlo a hecho confirmado.",
+    "evidence_url": "https://www.gatechhotel.com/dining/conference-dining-room",
+    "quote": "We proudly accept Buzz Cards at this location!",
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Conference Dining Room: horario",
+    "status": "unconfirmed",
+    "finding": "Conflicto oficial sin fecha que permita resolverlo: el operador publica Typical Operational Hours lunes a viernes 11:00 a 14:00; Tech Dining publica todos los días 07:00 a 23:00, anotando desayuno 07:00 a 11:00, almuerzo 11:30 a 14:00 y cena 16:00 a 23:00. No se adopta esa tabla como horario público único. El operador no especifica fines de semana: desconocido, no cerrado.",
+    "evidence_url": "https://www.gatechhotel.com/dining/conference-dining-room",
+    "quote": "Monday-Friday 11am - 2pm",
+    "checked_on": "2026-11-14",
+    "evidence": [
+      {
+        "url": "https://dining.gatech.edu/location/conference-dining-room",
+        "quote": "Breakfast: 7-11, Lunch: 11:30-2, Dinner: 4-11"
+      }
+    ]
+  },
+  {
+    "item": "Conference Dining Room: dirección",
+    "status": "confirmed",
+    "finding": "800 Spring St NW, Atlanta, GA 30308.",
+    "evidence_url": "https://dining.gatech.edu/location/conference-dining-room",
+    "quote": "800 Spring St NW, Atlanta, GA 30308",
+    "checked_on": "2026-11-14"
+  }
+]

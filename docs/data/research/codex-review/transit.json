@@ -1,0 +1,771 @@
+[
+  {
+    "item": "Red",
+    "status": "confirmed",
+    "finding": {
+      "feed_infotext": "Red 1: 7:00am-10:00pm\nRed 2: 7:30am-8:00pm\nRed 3: 7:15am-5:00pm\n",
+      "route_id": 20,
+      "feed_stop_count": 18,
+      "stops_outside_bounding_box": [],
+      "duplicates_by_description_addressid_routestopid": {
+        "Description": [],
+        "AddressID": [],
+        "RouteStopID": []
+      },
+      "duplicate_exact_coordinates": [],
+      "is_running_at_capture": true,
+      "has_encoded_polyline": true,
+      "pts_hours": "lunes a viernes 07:00–22:00",
+      "pts_frequency": "28 min 07:00–07:15; 14 min 07:15–07:30; 10 min 07:30–17:00; 14 min 17:00–20:00; 28 min 20:00–22:00",
+      "comparison": "Coincide el intervalo global y los tres vehículos.",
+      "hours_convention": "00:00 indica medianoche al final del día de servicio; festivos y horarios especiales excluidos."
+    },
+    "hours": {
+      "mon": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "tue": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "wed": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "thu": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "fri": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    },
+    "evidence_url": [
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine",
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetStops",
+      "https://www.pts.gatech.edu/shuttles/stinger/",
+      "https://www.pts.gatech.edu/2026/08/17/transportation-update-for-fall-2026/"
+    ],
+    "quote": [
+      "Red 1: 7:00am-10:00pm\nRed 2: 7:30am-8:00pm\nRed 3: 7:15am-5:00pm",
+      "Time: 7:00 a.m. – 10 p.m."
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Blue",
+    "status": "corrected",
+    "finding": {
+      "feed_infotext": "Blue 1: 7:00am-10:00pm\nBlue 2: 7:20am-8:00pm\nBlue 3: 7:15am-5:00pm\n",
+      "route_id": 21,
+      "feed_stop_count": 13,
+      "stops_outside_bounding_box": [],
+      "duplicates_by_description_addressid_routestopid": {
+        "Description": [],
+        "AddressID": [],
+        "RouteStopID": []
+      },
+      "duplicate_exact_coordinates": [],
+      "is_running_at_capture": true,
+      "has_encoded_polyline": true,
+      "pts_hours": "lunes a viernes 07:00–22:00",
+      "pts_frequency": "28 min 07:00–07:15; 14 min 07:15–07:30; 10 min 07:30–17:00; 14 min 17:00–20:00; 28 min 20:00–22:00",
+      "comparison": "Coincide el intervalo global, pero el feed inicia Blue 2 a las 07:20 y la tabla PTS implica 07:30.",
+      "hours_convention": "00:00 indica medianoche al final del día de servicio; festivos y horarios especiales excluidos."
+    },
+    "hours": {
+      "mon": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "tue": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "wed": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "thu": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "fri": [
+        [
+          "07:00",
+          "22:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    },
+    "evidence_url": [
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine",
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetStops",
+      "https://www.pts.gatech.edu/shuttles/stinger/",
+      "https://www.pts.gatech.edu/2026/08/17/transportation-update-for-fall-2026/"
+    ],
+    "quote": [
+      "Blue 1: 7:00am-10:00pm\nBlue 2: 7:20am-8:00pm\nBlue 3: 7:15am-5:00pm",
+      "Time: 7:00 a.m. – 10 p.m."
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Green",
+    "status": "confirmed",
+    "finding": {
+      "feed_infotext": "Green 1: 6:45am-7:00pm\nGreen 2: 8:15am-7:00pm\n",
+      "route_id": 17,
+      "feed_stop_count": 10,
+      "stops_outside_bounding_box": [],
+      "duplicates_by_description_addressid_routestopid": {
+        "Description": [],
+        "AddressID": [],
+        "RouteStopID": []
+      },
+      "duplicate_exact_coordinates": [],
+      "is_running_at_capture": false,
+      "has_encoded_polyline": true,
+      "pts_hours": "lunes a viernes 06:45–19:00",
+      "pts_frequency": "25 min 06:45–08:15; 12 min 08:15–19:00",
+      "comparison": "Coincide globalmente y por vehículo.",
+      "hours_convention": "00:00 indica medianoche al final del día de servicio; festivos y horarios especiales excluidos."
+    },
+    "hours": {
+      "mon": [
+        [
+          "06:45",
+          "19:00"
+        ]
+      ],
+      "tue": [
+        [
+          "06:45",
+          "19:00"
+        ]
+      ],
+      "wed": [
+        [
+          "06:45",
+          "19:00"
+        ]
+      ],
+      "thu": [
+        [
+          "06:45",
+          "19:00"
+        ]
+      ],
+      "fri": [
+        [
+          "06:45",
+          "19:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    },
+    "evidence_url": [
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine",
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetStops",
+      "https://www.pts.gatech.edu/shuttles/stinger/",
+      "https://www.pts.gatech.edu/2026/08/17/transportation-update-for-fall-2026/"
+    ],
+    "quote": [
+      "Green 1: 6:45am-7:00pm\nGreen 2: 8:15am-7:00pm",
+      "Time: 6:45 a.m. – 7 p.m"
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Emory",
+    "status": "confirmed",
+    "finding": {
+      "feed_infotext": "Emory: 7:15am-7:15pm",
+      "route_id": 18,
+      "feed_stop_count": 11,
+      "stops_outside_bounding_box": [
+        {
+          "name": "Piedmont Road EB",
+          "lat": 33.791475,
+          "lon": -84.374274
+        },
+        {
+          "name": "Clifton Road at Wesley EB",
+          "lat": 33.803435,
+          "lon": -84.333579
+        },
+        {
+          "name": "HSRB Emory",
+          "lat": 33.7941132676,
+          "lon": -84.3172316994
+        },
+        {
+          "name": "Woodruff Circle Transit Hub",
+          "lat": 33.792915,
+          "lon": -84.321659
+        },
+        {
+          "name": "Clifton Road at Wesley WB",
+          "lat": 33.803577,
+          "lon": -84.333504
+        },
+        {
+          "name": "Piedmont Road WB",
+          "lat": 33.79188,
+          "lon": -84.374156
+        }
+      ],
+      "duplicates_by_description_addressid_routestopid": {
+        "Description": [],
+        "AddressID": [],
+        "RouteStopID": []
+      },
+      "duplicate_exact_coordinates": [],
+      "is_running_at_capture": false,
+      "has_encoded_polyline": true,
+      "pts_hours": "lunes a viernes 07:15–19:15",
+      "pts_frequency": "PTS no declara frecuencia; las salidas publicadas desde Cherry Emerson están separadas 80 min, inferencia aritmética.",
+      "comparison": "Coincide globalmente; última llegada publicada 19:12.",
+      "hours_convention": "00:00 indica medianoche al final del día de servicio; festivos y horarios especiales excluidos."
+    },
+    "hours": {
+      "mon": [
+        [
+          "07:15",
+          "19:15"
+        ]
+      ],
+      "tue": [
+        [
+          "07:15",
+          "19:15"
+        ]
+      ],
+      "wed": [
+        [
+          "07:15",
+          "19:15"
+        ]
+      ],
+      "thu": [
+        [
+          "07:15",
+          "19:15"
+        ]
+      ],
+      "fri": [
+        [
+          "07:15",
+          "19:15"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    },
+    "evidence_url": [
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine",
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetStops",
+      "https://www.pts.gatech.edu/shuttles/stinger/"
+    ],
+    "quote": [
+      "Emory: 7:15am-7:15pm",
+      "Time: 7:15 a.m. – 7:15 p.m."
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Gold",
+    "status": "confirmed",
+    "finding": {
+      "feed_infotext": "Gold 1: 5:15am-10:00pm\nGold 2: 6:30am-5:30pm\nGold 3: 7:00am-7:00pm\nGold 4: 8:00am-12:00am\n",
+      "route_id": 29,
+      "feed_stop_count": 21,
+      "stops_outside_bounding_box": [],
+      "duplicates_by_description_addressid_routestopid": {
+        "Description": [],
+        "AddressID": [],
+        "RouteStopID": []
+      },
+      "duplicate_exact_coordinates": [],
+      "is_running_at_capture": true,
+      "has_encoded_polyline": true,
+      "pts_hours": "lunes a viernes 05:15–00:00",
+      "pts_frequency": "40 min 05:15–06:30; 20 min 06:30–07:00; 14 min 07:00–08:00; 10 min 08:00–17:30; 14 min 17:30–19:00; 20 min 19:00–22:00; 40 min 22:00–00:00",
+      "comparison": "Coinciden globalmente y por vehículo.",
+      "hours_convention": "00:00 indica medianoche al final del día de servicio; festivos y horarios especiales excluidos."
+    },
+    "hours": {
+      "mon": [
+        [
+          "05:15",
+          "00:00"
+        ]
+      ],
+      "tue": [
+        [
+          "05:15",
+          "00:00"
+        ]
+      ],
+      "wed": [
+        [
+          "05:15",
+          "00:00"
+        ]
+      ],
+      "thu": [
+        [
+          "05:15",
+          "00:00"
+        ]
+      ],
+      "fri": [
+        [
+          "05:15",
+          "00:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    },
+    "evidence_url": [
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine",
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetStops",
+      "https://www.pts.gatech.edu/shuttles/stinger/",
+      "https://www.pts.gatech.edu/2026/08/17/transportation-update-for-fall-2026/"
+    ],
+    "quote": [
+      "Gold 1: 5:15am-10:00pm\nGold 2: 6:30am-5:30pm\nGold 3: 7:00am-7:00pm\nGold 4: 8:00am-12:00am",
+      "Time: 5:15 a.m. – Midnight"
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Clough",
+    "status": "corrected",
+    "finding": {
+      "feed_infotext": "Clough 1: 7:00am-5:30pm\nClough 2: 7:45am-10:00pm\nClough 3: 10:00am-12:00am\n",
+      "route_id": 28,
+      "feed_stop_count": 11,
+      "stops_outside_bounding_box": [],
+      "duplicates_by_description_addressid_routestopid": {
+        "Description": [],
+        "AddressID": [],
+        "RouteStopID": []
+      },
+      "duplicate_exact_coordinates": [],
+      "is_running_at_capture": false,
+      "has_encoded_polyline": true,
+      "pts_hours": "lunes a viernes 07:30–00:00",
+      "pts_frequency": "22 min 07:30–07:45; 12 min 07:45–10:00; 8 min 10:00–17:30; 12 min 17:30–22:00; 22 min 22:00–00:00",
+      "comparison": "No coincide el inicio: feed 07:00; PTS 07:30.",
+      "hours_convention": "00:00 indica medianoche al final del día de servicio; festivos y horarios especiales excluidos."
+    },
+    "hours": {
+      "mon": [
+        [
+          "07:30",
+          "00:00"
+        ]
+      ],
+      "tue": [
+        [
+          "07:30",
+          "00:00"
+        ]
+      ],
+      "wed": [
+        [
+          "07:30",
+          "00:00"
+        ]
+      ],
+      "thu": [
+        [
+          "07:30",
+          "00:00"
+        ]
+      ],
+      "fri": [
+        [
+          "07:30",
+          "00:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    },
+    "evidence_url": [
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine",
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetStops",
+      "https://www.pts.gatech.edu/shuttles/stinger/",
+      "https://www.pts.gatech.edu/2026/08/17/transportation-update-for-fall-2026/"
+    ],
+    "quote": [
+      "Clough 1: 7:00am-5:30pm\nClough 2: 7:45am-10:00pm\nClough 3: 10:00am-12:00am",
+      "Time: 7:30 a.m. – Midnight"
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Northside Dr. - Atlantic Station",
+    "status": "confirmed",
+    "finding": {
+      "feed_infotext": "Northside/AS: 7:15am - 7:00pm",
+      "route_id": 26,
+      "feed_stop_count": 9,
+      "stops_outside_bounding_box": [
+        {
+          "name": "MARTA Stop (17th & State)",
+          "lat": 33.7913832611,
+          "lon": -84.399303096
+        },
+        {
+          "name": "MARTA Stop (17th & Bishop)",
+          "lat": 33.791028,
+          "lon": -84.40475
+        }
+      ],
+      "duplicates_by_description_addressid_routestopid": {
+        "Description": [],
+        "AddressID": [],
+        "RouteStopID": []
+      },
+      "duplicate_exact_coordinates": [],
+      "is_running_at_capture": false,
+      "has_encoded_polyline": true,
+      "pts_hours": "lunes a viernes 07:15–19:00",
+      "pts_frequency": "20 min fuera de hora punta; 30 min en hora punta, sin franjas definidas.",
+      "comparison": "Coincide globalmente.",
+      "hours_convention": "00:00 indica medianoche al final del día de servicio; festivos y horarios especiales excluidos."
+    },
+    "hours": {
+      "mon": [
+        [
+          "07:15",
+          "19:00"
+        ]
+      ],
+      "tue": [
+        [
+          "07:15",
+          "19:00"
+        ]
+      ],
+      "wed": [
+        [
+          "07:15",
+          "19:00"
+        ]
+      ],
+      "thu": [
+        [
+          "07:15",
+          "19:00"
+        ]
+      ],
+      "fri": [
+        [
+          "07:15",
+          "19:00"
+        ]
+      ],
+      "sat": [],
+      "sun": []
+    },
+    "evidence_url": [
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine",
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetStops",
+      "https://www.pts.gatech.edu/shuttles/stinger/",
+      "https://www.pts.gatech.edu/2026/08/17/transportation-update-for-fall-2026/"
+    ],
+    "quote": [
+      "Northside/AS: 7:15am - 7:00pm",
+      "Off-peak traffic every 20 mins"
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Weekend Atlantic Station",
+    "status": "confirmed",
+    "finding": {
+      "feed_infotext": "Weekend Atlantic Station: 12:00 pm-4:30pm",
+      "route_id": 23,
+      "feed_stop_count": 15,
+      "stops_outside_bounding_box": [
+        {
+          "name": "MARTA Stop (Twelve Hotel)",
+          "lat": 33.791328,
+          "lon": -84.398494
+        },
+        {
+          "name": "MARTA Stop (17th & Bishop)",
+          "lat": 33.791028,
+          "lon": -84.40475
+        }
+      ],
+      "duplicates_by_description_addressid_routestopid": {
+        "Description": [],
+        "AddressID": [],
+        "RouteStopID": []
+      },
+      "duplicate_exact_coordinates": [],
+      "is_running_at_capture": false,
+      "has_encoded_polyline": true,
+      "pts_hours": "sábado y domingo 12:00–16:30",
+      "pts_frequency": "45 min",
+      "comparison": "Coincide globalmente.",
+      "hours_convention": "00:00 indica medianoche al final del día de servicio; festivos y horarios especiales excluidos."
+    },
+    "hours": {
+      "mon": [],
+      "tue": [],
+      "wed": [],
+      "thu": [],
+      "fri": [],
+      "sat": [
+        [
+          "12:00",
+          "16:30"
+        ]
+      ],
+      "sun": [
+        [
+          "12:00",
+          "16:30"
+        ]
+      ]
+    },
+    "evidence_url": [
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine",
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetStops",
+      "https://www.pts.gatech.edu/shuttles/stinger/"
+    ],
+    "quote": [
+      "Weekend Atlantic Station: 12:00 pm-4:30pm",
+      "Time: 12:00 p.m. – 4:30 p.m."
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Weekend Midtown",
+    "status": "confirmed",
+    "finding": {
+      "feed_infotext": "Weekend Midtown: 12:00pm-4:30pm",
+      "route_id": 24,
+      "feed_stop_count": 18,
+      "stops_outside_bounding_box": [],
+      "duplicates_by_description_addressid_routestopid": {
+        "Description": [],
+        "AddressID": [],
+        "RouteStopID": []
+      },
+      "duplicate_exact_coordinates": [],
+      "is_running_at_capture": false,
+      "has_encoded_polyline": true,
+      "pts_hours": "sábado y domingo 12:00–16:30",
+      "pts_frequency": "45 min",
+      "comparison": "Coincide globalmente.",
+      "hours_convention": "00:00 indica medianoche al final del día de servicio; festivos y horarios especiales excluidos."
+    },
+    "hours": {
+      "mon": [],
+      "tue": [],
+      "wed": [],
+      "thu": [],
+      "fri": [],
+      "sat": [
+        [
+          "12:00",
+          "16:30"
+        ]
+      ],
+      "sun": [
+        [
+          "12:00",
+          "16:30"
+        ]
+      ]
+    },
+    "evidence_url": [
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine",
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetStops",
+      "https://www.pts.gatech.edu/shuttles/stinger/"
+    ],
+    "quote": [
+      "Weekend Midtown: 12:00pm-4:30pm",
+      "Time: 12:00 p.m. – 4:30 p.m."
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Charter",
+    "status": "confirmed",
+    "finding": {
+      "feed_infotext": "",
+      "route_id": 11,
+      "feed_stop_count": 0,
+      "stops_outside_bounding_box": [],
+      "duplicates_by_description_addressid_routestopid": {
+        "Description": [],
+        "AddressID": [],
+        "RouteStopID": []
+      },
+      "duplicate_exact_coordinates": [],
+      "is_running_at_capture": true,
+      "has_encoded_polyline": false
+    },
+    "evidence_url": [
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine",
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetStops"
+    ],
+    "quote": [
+      "\"Description\": \"Charter\"",
+      "\"EncodedPolyline\": \"\"",
+      "\"IsRunning\": true"
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Precedencia 2025 frente a otoño 2026",
+    "status": "corrected",
+    "finding": "El aviso de 2026 sustituye expresamente el servicio ampliado de 2025. De lunes a viernes Red y Blue terminan 22:00, Gold y Clough a medianoche y ya no se combinan a las 21:00. El sábado y domingo la página de rutas publica Gold, Red y Blue de 20:00 a medianoche; no figuran como rutas separadas en el feed capturado. PTS es preferible para horario planificado por ser operador y publicar una modificación posterior explícita; el feed informa del estado capturado y tiene conflictos concretos. No se puede garantizar la operación real por cada minuto.",
+    "evidence_url": [
+      "https://www.pts.gatech.edu/2026/08/17/transportation-update-for-fall-2026/",
+      "https://www.pts.gatech.edu/2025/08/06/new-stinger-and-stingerette-routes-2025/",
+      "https://www.pts.gatech.edu/shuttles/stinger/"
+    ],
+    "quote": [
+      "Blue Route: 7 a.m. – 10 p.m.",
+      "Gold Route: 5:15 a.m. – midnight",
+      "The Gold, Red, and Blue Routes will now operate until 3:15 a.m."
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Stingerette y transporte posterior a medianoche",
+    "status": "corrected",
+    "finding": "Servicio a demanda todos los días 16:30–00:00; aviso 2026 precisa 16:30–23:59. Yellow Jacket Voucher vía Uber 00:00–03:00 con restricciones; no es un autobús de ruta. El aviso de 2026 detalla franjas 16:30–19:00 y 19:00–23:59; la página Stingerette muestra mapas con divisiones 16:30–18:45, 18:45–20:00 y 20:00–medianoche, por lo que la cobertura exacta de cada franja requiere confirmación.",
+    "hours": {
+      "mon": [
+        [
+          "16:30",
+          "00:00"
+        ]
+      ],
+      "tue": [
+        [
+          "16:30",
+          "00:00"
+        ]
+      ],
+      "wed": [
+        [
+          "16:30",
+          "00:00"
+        ]
+      ],
+      "thu": [
+        [
+          "16:30",
+          "00:00"
+        ]
+      ],
+      "fri": [
+        [
+          "16:30",
+          "00:00"
+        ]
+      ],
+      "sat": [
+        [
+          "16:30",
+          "00:00"
+        ]
+      ],
+      "sun": [
+        [
+          "16:30",
+          "00:00"
+        ]
+      ]
+    },
+    "evidence_url": [
+      "https://www.pts.gatech.edu/shuttles/stingerette/",
+      "https://www.pts.gatech.edu/2026/08/17/transportation-update-for-fall-2026/"
+    ],
+    "quote": [
+      "available seven days a week from 4:30 p.m. – midnight",
+      "Yellow Jacket Voucher Program via Uber (Midnight – 3 a.m.)"
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Estado instantáneo y trazado",
+    "status": "confirmed",
+    "finding": "IsRunning=false: Green, Emory, Clough, Northside/Atlantic Station, Weekend Atlantic Station y Weekend Midtown. IsRunning=true: Red, Blue, Gold y Charter. No se conoce hora exacta de captura ni significado contractual del campo; el sábado y la hora pueden explicarlo parcialmente, pero no permiten concluir que no presten servicio. Charter no tiene puntos, paradas ni InfoText pese a IsRunning=true.",
+    "evidence_url": [
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine",
+      "https://www.pts.gatech.edu/shuttles/stinger/"
+    ],
+    "quote": [
+      "\"Description\": \"Charter\"",
+      "\"IsRunning\": true",
+      "Days of Operation: Saturday and Sunday"
+    ],
+    "checked_on": "2026-11-14"
+  },
+  {
+    "item": "Endpoints del relay utilizados por el código público",
+    "status": "confirmed",
+    "finding": {
+      "base": "https://bus.gatech.edu/Services/JSONPRelay.svc/",
+      "read_only_get": {
+        "GetMapConfig": "configuración del mapa",
+        "GetMapVehiclePoints": "posiciones de vehículos",
+        "GetRouteGroupsWithRoutes": "agrupaciones de rutas",
+        "GetRoutesForMapWithScheduleWithEncodedLine": "rutas, horarios, paradas y trazados",
+        "GetStopArrivalTimes": "estimaciones de llegada por ruta o parada",
+        "GetVehicleCapacities": "ocupación/capacidad de vehículos",
+        "GetVehicleRouteStopEstimates": "estimaciones de llegada por vehículo",
+        "GetTwitterJSON": "datos de Twitter; finalidad exacta no confirmada"
+      },
+      "not_in_js": "GetStops no aparece en el bundle inspeccionado, pero se suministró una captura del endpoint. Otros endpoints map/... pertenecen a una API alternativa; oauth/token es POST y no se ha llamado. No se han ejecutado endpoints de escritura.",
+      "limits": "Nombres y propósito inferidos de las llamadas y uso en el bundle; no se ha probado disponibilidad actual de cada endpoint."
+    },
+    "evidence_url": [
+      "https://bus.gatech.edu/static/main.047848f9b27e3e765732.js",
+      "https://bus.gatech.edu/Services/JSONPRelay.svc/GetStops"
+    ],
+    "quote": [
+      "F.get(\"GetMapVehiclePoints\"",
+      "F.get(\"GetStopArrivalTimes\"",
+      "F.get(\"GetVehicleRouteStopEstimates\""
+    ],
+    "checked_on": "2026-11-14"
+  }
+]
