@@ -36,3 +36,23 @@ export function indoorRooms(): IndoorRoom[] {
 export function resolveRoom(id: string) {
   return indoorRooms().find((room) => room.id === id);
 }
+
+/** Finds an indoor building by its sticker slug (or full footprint id). */
+export function indoorBySlug(slug: string): IndoorBuilding | undefined {
+  return buildings.find((building) => building.slug === slug || building.building_id === slug);
+}
+
+/** A door sticker link: ?in=<building slug>&door=<entrance id>, read once when the app opens. */
+export function doorLink(): { building: IndoorBuilding; entranceId?: string } | undefined {
+  if (typeof location === "undefined") return undefined;
+  const params = new URLSearchParams(location.search);
+  const building = indoorBySlug(params.get("in") ?? "");
+  if (!building) return undefined;
+  const door = params.get("door") ?? undefined;
+  return { building, entranceId: building.graph?.entrances.some((entrance) => entrance.id === door) ? door : undefined };
+}
+
+/** The sticker link for one entrance, for printing QR codes and programming NFC tags. */
+export function doorUrl(origin: string, building: IndoorBuilding, entranceId: string): string {
+  return `${origin}/?in=${building.slug ?? building.building_id}&door=${entranceId}`;
+}

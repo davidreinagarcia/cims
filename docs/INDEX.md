@@ -12,6 +12,7 @@ All project documentation: product (charter → PRD), engineering (architecture,
 - [`demo/`](demo/INDEX.md): Demo runbook: script readiness, pre-flight checklist and plan B.
 - [`design/`](design/INDEX.md): Visual direction and UI references: the chosen "survey map" style, tokens and how to build it.
 - [`research/`](research/INDEX.md): Fuentes y dudas pendientes de las investigaciones de datos del campus.
+- [`stickers/`](stickers/INDEX.md): QR codes and the link list for the door stickers that open a building with the entrance preselected.
 - [`testing/`](testing/INDEX.md): Test plans with people (hallway tests).
 
 **Files**

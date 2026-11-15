@@ -1,6 +1,7 @@
 {
  "description": "Clough Undergraduate Learning Commons schematic floor plans, levels 1 to 5, redrawn from the Georgia Tech Library floor maps.",
  "building_id": "g-wayne-clough-undergraduate-learning-commons",
+ "slug": "culc",
  "title": "G. Wayne Clough Undergraduate Learning Commons",
  "status": "schematic",
  "credit": "Layout redrawn by hand from the Georgia Tech Library \"Clough Floor Maps\" (2019); room numbers, levels and capacities from the Registrar Spring 27 room list. Schematic and approximate, not to scale.",

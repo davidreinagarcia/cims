@@ -7,7 +7,7 @@ import { useAuth } from "../state/auth";
 import FloorPlan from "./FloorPlan";
 import RoomSearch from "./RoomSearch";
 import { findRoute } from "./route";
-import { indoorFor, resolveRoom } from "./registry";
+import { doorLink, indoorFor, resolveRoom } from "./registry";
 import type { IndoorBuilding, IndoorSpace, IndoorSpaceType, RoomFact } from "./types";
 import "./BuildingView.css";
 
@@ -17,7 +17,9 @@ const typeLabels: Record<IndoorSpaceType, string> = {
 
 /** Opens registered buildings and resolves room selections straight into a routed building screen. */
 export default function BuildingView() {
-  const { selection } = useSelection();
+  const { selection, select } = useSelection();
+  // A door sticker (QR or NFC) opens the page on this building with the entrance you are standing at.
+  useEffect(() => { const link = doorLink(); if (link) select({ kind: "building", id: link.building.building_id }); }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const room = selection?.kind === "room" ? resolveRoom(selection.id) : undefined;
   const building = selection?.kind === "building" ? indoorFor(selection.id) : room?.building;
   return building ? <BuildingScreen key={building.building_id} building={building} initialRoom={room?.routable ? room.space : undefined} initialFact={room && !room.routable ? room.space : undefined} /> : null;
@@ -29,9 +31,11 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
   const graph = building.graph;
   const destinations = useMemo(() => building.levels.flatMap((level) => level.available
     ? level.spaces.filter((space) => space.type !== "void").map((space) => ({ ...space, level: level.id })) : []), [building]);
-  const [levelId, setLevelId] = useState(graph?.entrances[0]?.level ?? building.levels.find((level) => level.available)?.id);
+  const sticker = useMemo(() => { const link = doorLink(); return link?.building.building_id === building.building_id ? link.entranceId : undefined; }, [building]);
+  const doorEntrance = graph?.entrances.find((entrance) => entrance.id === sticker) ?? graph?.entrances[0];
+  const [levelId, setLevelId] = useState(doorEntrance?.level ?? building.levels.find((level) => level.available)?.id);
   const [selected, setSelected] = useState<IndoorSpace | undefined>(initialRoom);
-  const [from, setFrom] = useState(graph?.entrances[0] ? `entrance:${graph.entrances[0].id}` : "");
+  const [from, setFrom] = useState(doorEntrance ? `entrance:${doorEntrance.id}` : "");
   const [to, setTo] = useState(initialRoom?.id ?? "");
   const [stepFree, setStepFree] = useState(false);
   const [routeVersion, setRouteVersion] = useState(0);
@@ -79,8 +83,13 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
   useEffect(() => {
     const map = screen.current?.parentElement?.querySelector<HTMLElement>(".map");
     if (map) { map.inert = true; map.setAttribute("aria-hidden", "true"); }
-    back.current?.focus();
+    // From a door sticker the next thing you do is say where you are going.
+    if (sticker) screen.current?.querySelector<HTMLInputElement>(".building-view__search input")?.focus();
+    else back.current?.focus();
     return () => {
+      // Leaving the building ends the sticker session: a later visit starts from the default entrance.
+      const url = new URL(location.href);
+      if (url.searchParams.has("in") || url.searchParams.has("door")) { url.searchParams.delete("in"); url.searchParams.delete("door"); history.replaceState(null, "", url); }
       if (map) {
         map.inert = false; map.removeAttribute("aria-hidden"); map.tabIndex = -1;
         map.setAttribute("aria-label", "Campus map"); map.focus({ preventScroll: true });
