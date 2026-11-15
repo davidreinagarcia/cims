@@ -49,7 +49,14 @@
           ],
           "sat": [],
           "sun": []
-        }
+        },
+        "hours_note": "Fall 2026 hours corroborated by Fall 2026 syllabi and Fall 2026 Groups page; 24/7 after-hours crisis counselor available at 404-894-2575 or 404-894-2204.",
+        "buzzcard": {
+          "required": false,
+          "note": "Free crisis and counseling services for Georgia Tech students; walk in or call 404-894-2575."
+        },
+        "url": "https://mentalhealth.gatech.edu/",
+        "floor_or_room": "Suite 238"
       },
       "geometry": {
         "type": "Point",
@@ -104,6 +111,11 @@
           ],
           "sat": [],
           "sun": []
+        },
+        "hours_note": "Main hours page is undated (Fall 2026 flu clinics dated Sept-Oct 2026 on sibling page). Closed official Institute holidays; Appointment Desk closes at 16:30 Mon-Fri; Summer 08:00-16:30; after-hours Nurse Advice Line 404-894-1420 runs 17:00-08:00 weekdays and 24h weekends.",
+        "buzzcard": {
+          "required": false,
+          "note": "Student clinic; appointments via 404-894-1420."
         }
       },
       "geometry": {
@@ -123,7 +135,67 @@
         "status": "draft",
         "description": "Prescription and over-the-counter medicines for the Georgia Tech community.",
         "source_url": "https://health.gatech.edu/pharmacy/",
-        "coord_source": "OSM way 42872500 (Whitehead - Pharmacy), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 42872500 (Whitehead - Pharmacy), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "12:30"
+            ],
+            [
+              "13:30",
+              "16:30"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "12:30"
+            ],
+            [
+              "13:30",
+              "16:30"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "12:30"
+            ],
+            [
+              "13:30",
+              "16:30"
+            ]
+          ],
+          "thu": [
+            [
+              "09:00",
+              "12:30"
+            ],
+            [
+              "13:30",
+              "16:30"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "12:30"
+            ],
+            [
+              "13:30",
+              "16:30"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Closed daily 12:30-13:30 for lunch. Contact Us page lists 16:30 business close, while Pharmacy FAQ notes 14:00-17:00 busy window.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open to GT students, faculty, and staff; accepts most insurance plans; call 404-894-1430 ext 5."
+        },
+        "url": "https://health.gatech.edu/pharmacy/"
       },
       "geometry": {
         "type": "Point",
@@ -187,6 +259,152 @@
           -84.4031106,
           33.7748254
         ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3963859,
+          33.7746478
+        ]
+      },
+      "properties": {
+        "id": "pharmabox-clough",
+        "name": "Pharmabox (Clough Commons)",
+        "category": "health",
+        "status": "draft",
+        "aliases": [
+          "Pharmabox"
+        ],
+        "description": "Automated kiosk dispensing over-the-counter medications and personal care items (relocated to Clough 3rd floor).",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "building": "Clough Undergraduate Learning Commons",
+        "hours_note": "Accessible 24/7 while Clough Commons is open during academic terms; break exceptions apply.",
+        "buzzcard": {
+          "required": false,
+          "note": "Inside Clough Commons (BuzzCard required for after-hours/modified building access)."
+        },
+        "url": "https://health.gatech.edu/pharmabox/",
+        "floor_or_room": "3rd Floor (vending area before Price Gilbert entrance)",
+        "source_url": "https://health.gatech.edu/pharmabox/",
+        "confidence": "medium",
+        "building_id": "g-wayne-clough-undergraduate-learning-commons",
+        "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3966922,
+          33.7798425
+        ]
+      },
+      "properties": {
+        "id": "cmhcr-cos-mose-1120b",
+        "name": "CMHCR Embedded Clinician Office - College of Sciences",
+        "category": "health",
+        "status": "draft",
+        "aliases": [
+          "CoS Mental Health Clinician"
+        ],
+        "description": "Embedded College of Sciences mental health clinician office affiliated with CMHCR.",
+        "address": "901 Atlantic Dr NW, Atlanta, GA 30332",
+        "building": "Molecular Science and Engineering Building (MoSE)",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "wed": [
+            [
+              "07:00",
+              "15:00"
+            ]
+          ],
+          "thu": [
+            [
+              "07:00",
+              "15:00"
+            ]
+          ],
+          "fri": [
+            [
+              "07:00",
+              "15:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Flagged prior-term schedule (Fall 2025-Spring 2026): Office hours Mon-Tue 08:00-16:00, Wed-Fri 07:00-15:00; Consultation hours Tue/Thu 11:00-13:00, Fri 11:00-12:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "Contact 404-894-2575 or tara.holdampf@studentlife.gatech.edu."
+        },
+        "url": "https://sciences.gatech.edu/mental-health-counseling",
+        "floor_or_room": "Room 1120B",
+        "source_url": "https://sciences.gatech.edu/mental-health-counseling",
+        "confidence": "medium",
+        "building_id": "glen-p-robinson-jr-building",
+        "coord_source": "building centroid: glen-p-robinson-jr-building",
+        "coord_precision": "building"
       }
     }
   ]

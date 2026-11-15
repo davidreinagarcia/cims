@@ -1,0 +1,1409 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crosland-6f-7f-quiet-reading-rooms",
+        "name": "Crosland Tower 6th and 7th Floor Quiet Reading Rooms",
+        "aliases": [
+          "Crosland Quiet Floors"
+        ],
+        "category": "extra",
+        "subtype": "quiet-study",
+        "status": "draft",
+        "building": "Dorothy Crosland Tower",
+        "floor_or_room": "6th and 7th Floors",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Open quiet-study reading rooms with ample power/data ports and Midtown Atlanta views.",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        },
+        "hours_note": "Open 24/7 when school is in session; semester break exceptions apply.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open to anyone during regular hours; BuzzCard required during after-hours/modified operations."
+        },
+        "url": "https://library.gatech.edu/study-spaces",
+        "source_url": "https://library.gatech.edu/study-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crosland-6f-graduate-student-community",
+        "name": "Graduate Student Community (Crosland 6th Floor)",
+        "aliases": [
+          "GSC",
+          "Grad Community"
+        ],
+        "category": "extra",
+        "subtype": "quiet-study",
+        "status": "draft",
+        "building": "Dorothy Crosland Tower",
+        "floor_or_room": "6th Floor",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Dedicated BuzzCard-accessible quiet study area and 36 dual-monitor docking stations for Georgia Tech graduate students.",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        },
+        "hours_note": "Available whenever the Library is open (24/7 during semester; break exceptions apply).",
+        "buzzcard": {
+          "required": true,
+          "note": "Active Georgia Tech graduate student BuzzCard required."
+        },
+        "url": "https://library.gatech.edu/study-spaces",
+        "source_url": "https://library.gatech.edu/study-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crosland-grove-level-study-space",
+        "name": "Crosland Tower Grove Level Study Space",
+        "aliases": [
+          "Grove Level"
+        ],
+        "category": "extra",
+        "subtype": "study-space",
+        "status": "draft",
+        "building": "Dorothy Crosland Tower",
+        "floor_or_room": "Grove Level",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Collaborative reading room and open tiered staircase study seating with power and data ports.",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        },
+        "hours_note": "Open 24/7 when school is in session; adjacent Crosland Terrace hours are 07:00-21:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "BuzzCard required during after-hours/modified operations."
+        },
+        "url": "https://library.gatech.edu/study-spaces",
+        "source_url": "https://library.gatech.edu/study-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "clough-group-study-rooms",
+        "name": "Clough Commons Reservable Group Study Rooms",
+        "aliases": [
+          "CULC Study Rooms"
+        ],
+        "category": "extra",
+        "subtype": "group-study-room",
+        "status": "draft",
+        "building": "Clough Undergraduate Learning Commons",
+        "floor_or_room": "Floors 2-5 (Rooms 242, 244, 246, 252, 315, 317, 344, 421, 445, 455, 572A-D, 585)",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "description": "Fifteen reservable group study rooms (capacity 4-9 people) booked via Georgia Tech Library LibCal.",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        },
+        "hours_note": "Follows Clough Commons 24/7 in-session schedule; break exceptions apply.",
+        "buzzcard": {
+          "required": false,
+          "note": "Online LibCal reservation required for guaranteed room access; BuzzCard required after-hours during modified operations."
+        },
+        "url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+        "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crosland-group-study-rooms",
+        "name": "Crosland Tower Reservable Group Study Rooms",
+        "aliases": [
+          "Crosland Study Rooms"
+        ],
+        "category": "extra",
+        "subtype": "group-study-room",
+        "status": "draft",
+        "building": "Dorothy Crosland Tower",
+        "floor_or_room": "Floors 2, 4, and 6 (Rooms 2111, 2117, 2151, 2157, 4111, 4117, 6111, 6117, 6157)",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Nine reservable group study rooms (capacity 5-12 people) booked via Georgia Tech Library LibCal.",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        },
+        "hours_note": "Follows Main Library 24/7 in-session schedule; break exceptions apply.",
+        "buzzcard": {
+          "required": false,
+          "note": "LibCal booking required; 6th floor rooms may require graduate BuzzCard access if inside GSC."
+        },
+        "url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+        "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "price-gilbert-group-study-rooms",
+        "name": "Price Gilbert Reservable Group Study Rooms",
+        "aliases": [
+          "PG Study Rooms"
+        ],
+        "category": "extra",
+        "subtype": "group-study-room",
+        "status": "draft",
+        "building": "Price Gilbert Memorial Library",
+        "floor_or_room": "Grove, 2nd, and 3rd Floors (Rooms G192, G194, 2202, 2204, 2216, 3204)",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Six reservable individual/group study rooms (capacity 2-12 people) booked via Georgia Tech Library LibCal.",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        },
+        "hours_note": "Follows Main Library 24/7 in-session schedule; break exceptions apply.",
+        "buzzcard": {
+          "required": false,
+          "note": "Online LibCal reservation required."
+        },
+        "url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+        "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "clough-rooftop-garden",
+        "name": "Clough Commons Rooftop",
+        "aliases": [
+          "CULC Roof",
+          "Clough Roof"
+        ],
+        "category": "extra",
+        "subtype": "study-space",
+        "status": "draft",
+        "building": "Clough Undergraduate Learning Commons",
+        "floor_or_room": "Rooftop",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "description": "Outdoor rooftop seating and green terrace atop Clough Undergraduate Learning Commons.",
+        "hours": {
+          "mon": [
+            [
+              "09:00",
+              "17:00"
+            ]
+          ],
+          "tue": [
+            [
+              "09:00",
+              "17:00"
+            ]
+          ],
+          "wed": [
+            [
+              "09:00",
+              "17:00"
+            ]
+          ],
+          "thu": [
+            [
+              "09:00",
+              "17:00"
+            ]
+          ],
+          "fri": [
+            [
+              "09:00",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Closed weekends and semester breaks.",
+        "buzzcard": {
+          "required": false,
+          "note": "Publicly accessible during weekday rooftop hours."
+        },
+        "url": "https://library.gatech.edu/about/locations",
+        "source_url": "https://library.gatech.edu/about/locations",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "jlsc-graduate-student-lounge",
+        "name": "Graduate Student Lounge",
+        "aliases": [
+          "Grad Lounge"
+        ],
+        "category": "extra",
+        "subtype": "study-space",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": null,
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "Graduate student community hub with study/soft seating, semi-private huddle room, billiards table, TVs, and kitchenette.",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        },
+        "hours_note": "Accessible 24/7 to graduate students with active BuzzCard; staffed daily 10:00-21:00.",
+        "buzzcard": {
+          "required": true,
+          "note": "Active graduate student BuzzCard required for 24-hour entry."
+        },
+        "url": "https://studentcenter.gatech.edu/graduate-student-lounge",
+        "source_url": "https://studentcenter.gatech.edu/graduate-student-lounge",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "beth-cabrera-reflection-space",
+        "name": "Beth Cabrera Reflection Space",
+        "aliases": [
+          "Reflection Space",
+          "Beth Cabrera Reflection Room"
+        ],
+        "category": "extra",
+        "subtype": "chapel/reflection-room",
+        "status": "draft",
+        "building": null,
+        "floor_or_room": null,
+        "address": null,
+        "description": "Student and Campus Event Centers Community Hub designated for quiet reflection, meditation, and prayer (exact building/room omitted in retrieved source).",
+        "hours": {
+          "mon": [
+            [
+              "10:00",
+              "21:00"
+            ]
+          ],
+          "tue": [
+            [
+              "10:00",
+              "21:00"
+            ]
+          ],
+          "wed": [
+            [
+              "10:00",
+              "21:00"
+            ]
+          ],
+          "thu": [
+            [
+              "10:00",
+              "21:00"
+            ]
+          ],
+          "fri": [
+            [
+              "10:00",
+              "21:00"
+            ]
+          ],
+          "sat": [
+            [
+              "10:00",
+              "21:00"
+            ]
+          ],
+          "sun": [
+            [
+              "10:00",
+              "21:00"
+            ]
+          ]
+        },
+        "hours_note": "Staffed hours 10:00-21:00 daily; accessible to the entire GT community with BuzzCard when unstaffed or doors are locked.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required when unstaffed or when doors are locked."
+        },
+        "url": "https://studentcenter.gatech.edu/beth-cabrera-reflection-room",
+        "source_url": "https://studentcenter.gatech.edu/beth-cabrera-reflection-room",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "library-wellness-room",
+        "name": "Georgia Tech Library Wellness Room",
+        "aliases": [
+          "Library Wellness Room"
+        ],
+        "category": "extra",
+        "subtype": "chapel/reflection-room",
+        "status": "draft",
+        "building": "Main Library (Crosland Tower and Price Gilbert)",
+        "floor_or_room": null,
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Reservable private library room for prayer, meditation, lactation, or temporary health respite.",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        },
+        "hours_note": "Available during Main Library 24/7 in-session hours via LibCal reservation.",
+        "buzzcard": {
+          "required": false,
+          "note": "LibCal booking required; BuzzCard access rules apply during breaks/modified operations."
+        },
+        "url": "https://library.gatech.edu/spaces-technology/reserve/wellness-room",
+        "source_url": "https://library.gatech.edu/spaces-technology/reserve/wellness-room",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-crosland-tower",
+        "name": "Crosland Tower Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Dorothy M. Crosland Tower",
+        "floor_or_room": null,
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "description": "Title IX lactation room with chair, table, lighting, cleaning supplies, and nearby sink.",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        },
+        "hours_note": "EOC directory notes 24/7 staff available to open room during Library hours.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard access, with staff available 24/7 to open the room."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-tech-tower",
+        "name": "Evans Administration Building (Tech Tower) Lactation Space",
+        "aliases": [
+          "Tech Tower Lactation Room"
+        ],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Evans Administration Building (Tech Tower)",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room with chair, table, lighting, cleaning supplies, and nearby sink.",
+        "hours": null,
+        "hours_note": "Specific lactation room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard access required."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-exhibition-hall",
+        "name": "Exhibition Hall Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Exhibition Hall",
+        "floor_or_room": null,
+        "address": "460 4th St NW, Atlanta, GA 30332",
+        "description": "Title IX lactation room inside Exhibition Hall with chair, table, lighting, cleaning supplies, and nearby sink.",
+        "hours": {
+          "mon": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "tue": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "wed": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "thu": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "fri": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "sat": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "sun": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ]
+        },
+        "hours_note": "Reflects Exhibition Hall building access hours (no after-hours access); room-specific schedule not published.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager; no after-hours access."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-global-learning-center",
+        "name": "Global Learning Center Lactation Space",
+        "aliases": [
+          "GLC Lactation Room"
+        ],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Global Learning Center",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room in the Global Learning Center (listed with Georgia Tech Hotel on EOC directory).",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-stephen-c-hall",
+        "name": "Stephen C. Hall Building Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Stephen C. Hall Building",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room inside the Stephen C. Hall Building.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-jlsc",
+        "name": "John Lewis Student Center Lactation Space",
+        "aliases": [
+          "Student Center Lactation Room"
+        ],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": null,
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "Title IX lactation room inside the John Lewis Student Center.",
+        "hours": {
+          "mon": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "tue": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "wed": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "thu": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "fri": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "sat": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "sun": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ]
+        },
+        "hours_note": "Reflects Student Center normal building access hours (BuzzCard accessible after hours); room-specific schedule not published.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager; BuzzCard required for Student Center entry after 23:00."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-kendeda-building",
+        "name": "Kendeda Building Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Kendeda Building for Innovative Sustainable Design",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room inside the Kendeda Building.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-klaus-building",
+        "name": "Klaus Advanced Computing Building Lactation Space",
+        "aliases": [
+          "Klaus Lactation Room"
+        ],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Christopher W. Klaus Advanced Computing Building",
+        "floor_or_room": null,
+        "address": "266 Ferst Dr",
+        "description": "Title IX lactation room inside Klaus Advanced Computing Building.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard access required."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-okeefe-building",
+        "name": "O'Keefe Main Building Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "O'Keefe Building",
+        "floor_or_room": null,
+        "address": "151 6th Street NW, Atlanta, GA 30313",
+        "description": "Title IX lactation room inside the O'Keefe Main Building (main public entry via west Lock Shop rear entrance).",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-scheller",
+        "name": "Scheller College of Business Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Scheller College of Business",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room inside Scheller College of Business in Tech Square.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-tsrb",
+        "name": "Technology Square Research Building Lactation Space",
+        "aliases": [
+          "TSRB Lactation Room"
+        ],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Technology Square Research Building",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room inside Technology Square Research Building (TSRB).",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-instructional-building",
+        "name": "Instructional Building Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Instructional Building",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room listed under Instructional Building on the EOC directory.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-ebb",
+        "name": "Krone Engineered Biosystems Building (EBB) Lactation Space",
+        "aliases": [
+          "EBB Lactation Room"
+        ],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "Krone Engineered Biosystems Building (EBB)",
+        "floor_or_room": null,
+        "address": null,
+        "description": "Title IX lactation room inside the Krone Engineered Biosystems Building.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": false,
+          "note": "Operated by building manager."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-755-marietta",
+        "name": "755 Marietta Street Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "755 Marietta Street",
+        "floor_or_room": null,
+        "address": "755 Marietta Street",
+        "description": "Title IX lactation room at Georgia Tech's 755 Marietta Street facility.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard access required."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lactation-793-marietta",
+        "name": "793 Marietta Street Lactation Space",
+        "aliases": [],
+        "category": "extra",
+        "subtype": "lactation-room",
+        "status": "draft",
+        "building": "793 Marietta Street",
+        "floor_or_room": null,
+        "address": "793 Marietta Street",
+        "description": "Title IX lactation room at Georgia Tech's 793 Marietta Street facility.",
+        "hours": null,
+        "hours_note": "Room hours not published on EOC directory.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard access required."
+        },
+        "url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_url": "https://eoc.gatech.edu/title-ix-sexual-misconduct/lactation-spaces",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "jlsc-atms",
+        "name": "John Lewis Student Center ATMs",
+        "aliases": [
+          "Student Center ATMs"
+        ],
+        "category": "extra",
+        "subtype": "atm",
+        "status": "draft",
+        "building": "John Lewis Student Center",
+        "floor_or_room": "1st Floor (near Room 1216 / Piedmont)",
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "description": "ATM machines located on the 1st floor of the John Lewis Student Center near Room 1216 (bank operator unspecified).",
+        "hours": {
+          "mon": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "tue": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "wed": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "thu": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "fri": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "sat": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ],
+          "sun": [
+            [
+              "07:00",
+              "23:00"
+            ]
+          ]
+        },
+        "hours_note": "Reflects John Lewis Student Center normal building access hours; BuzzCard accessible after hours.",
+        "buzzcard": {
+          "required": false,
+          "note": "Publicly accessible during normal Student Center hours; BuzzCard required after hours."
+        },
+        "url": "https://studentcenter.gatech.edu/student-center/space/piedmont",
+        "source_url": "https://studentcenter.gatech.edu/student-center/space/piedmont",
+        "source_updated": null,
+        "confidence": "medium",
+        "coord_source": null
+      },
+      "geometry": null
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "crc-lockers",
+        "name": "CRC Day and Rental Lockers",
+        "aliases": [
+          "CRC Lockers",
+          "CRC Cubbies"
+        ],
+        "category": "extra",
+        "subtype": "lockers",
+        "status": "draft",
+        "building": "Campus Recreation Center",
+        "floor_or_room": "1st Floor Lobby Cubbies, Locker Rooms, and 4th Floor Main Gym",
+        "address": null,
+        "description": "Day-use lockers, 1st-floor lobby cubbies, and rentable lockers inside the CRC (bring your own lock or purchase at Member Services).",
+        "hours": {
+          "mon": [
+            [
+              "05:30",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "05:30",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "05:30",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "05:30",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "05:30",
+              "21:00"
+            ]
+          ],
+          "sat": [
+            [
+              "09:00",
+              "19:00"
+            ]
+          ],
+          "sun": [
+            [
+              "09:00",
+              "22:00"
+            ]
+          ]
+        },
+        "hours_note": "Follows Fall 2026 CRC building hours (Thanksgiving/Winter Break adjustments apply).",
+        "buzzcard": {
+          "required": true,
+          "note": "Active BuzzCard and CRC membership required to enter the building."
+        },
+        "url": "https://crc.gatech.edu/locations/",
+        "source_url": "https://crc.gatech.edu/hours/",
+        "source_updated": null,
+        "confidence": "high",
+        "coord_source": null
+      },
+      "geometry": null
+    }
+  ]
+}

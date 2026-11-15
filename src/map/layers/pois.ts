@@ -1,6 +1,7 @@
 /** @file Filtered place clusters, survey pins and labels, with a separate gold selected pin and a shared-location picker. */
 import type { ExpressionSpecification, GeoJSONSource, MapLayerMouseEvent, Popup, SymbolLayerSpecification } from "maplibre-gl";
 import { loadMapLibre } from "../maplibre";
+import { locationDetails } from "../../lib/buildingPlaces";
 import type { MapLayer } from "../types";
 import { isVisible } from "../layerFilters";
 import { addPins, pinImageId } from "../pins";
@@ -8,6 +9,9 @@ import { LAYER_CATALOG } from "../../lib/layerCatalog";
 import { places, type PlaceCollection } from "../../lib/places";
 import "./pois.css";
 
+const ATTACHED = "places-attached";
+const ATTACHED_COUNT = "places-attached-count";
+const ATTACHED_HIGHLIGHT = "places-attached-highlight";
 const SOURCE = "places";
 const PIN = "places-pin";
 const LABEL = "places-label";
@@ -47,12 +51,40 @@ const pois: MapLayer = {
     let request = 0;
     let removed = false;
     map.addSource(SOURCE, {
-      type: "geojson", data: places, promoteId: "id",
+      type: "geojson", data: { ...places, features: places.features.filter(f => locationDetails(f).coord_precision !== "building") }, promoteId: "id",
       cluster: true, clusterRadius: 40, clusterMaxZoom: CLUSTER_MAX_ZOOM,
       // Keep the cluster tree available at the map's maximum zoom (default 22).
       maxzoom: CLUSTER_MAX_ZOOM + 1, // MapLibre requires maxzoom > clusterMaxZoom
     });
     const source = map.getSource(SOURCE) as GeoJSONSource;
+    const attachedData = (features: typeof places.features): GeoJSON.FeatureCollection<GeoJSON.Point> => {
+      const groups = new Map<string, { place: typeof features[number]; count: number }>();
+      for (const place of features) {
+        if (locationDetails(place).coord_precision !== "building" || !place.properties.building_id) continue;
+        const key = `${place.properties.building_id}:${place.properties.category}`;
+        const group = groups.get(key);
+        if (group) group.count++; else groups.set(key, { place, count: 1 });
+      }
+      const categories = new Map<string, string[]>();
+      for (const { place } of groups.values()) {
+        const id = place.properties.building_id!;
+        categories.set(id, [...(categories.get(id) ?? []), place.properties.category].sort());
+      }
+      return { type: "FeatureCollection", features: [...groups.entries()].map(([id, { place, count }]) => {
+        const cats = categories.get(place.properties.building_id!)!;
+        const offset = (cats.indexOf(place.properties.category) - (cats.length - 1) / 2) * 30;
+        return { type: "Feature", geometry: place.geometry, properties: {
+          id, building_id: place.properties.building_id, category: place.properties.category,
+          name: `${place.properties.category} inside building`, count, iconOffset: [offset / 0.8, 0], textOffset: [(offset + 12) / 11, -2.5],
+        } };
+      }) };
+    };
+    map.addSource(ATTACHED, { type: "geojson", data: attachedData(places.features) });
+    const attachedSource = map.getSource(ATTACHED) as GeoJSONSource;
+    // An association outline remains reliable even when a centroid falls in a courtyard.
+    map.addLayer({ id: ATTACHED_HIGHLIGHT, type: "line", source: "buildings",
+      filter: ["==", ["get", "id"], ""], paint: { "line-color": "#B3A369", "line-width": 5 } });
+
     const empty: PlaceCollection = { type: "FeatureCollection", features: [] };
     map.addSource(SELECTED_SOURCE, { type: "geojson", data: empty, promoteId: "id" });
     const selectedSource = map.getSource(SELECTED_SOURCE) as GeoJSONSource;
@@ -103,6 +135,21 @@ const pois: MapLayer = {
       paint: labelPaint,
     });
 
+
+    map.addLayer({ id: ATTACHED, type: "symbol", source: ATTACHED,
+      layout: { "icon-image": iconFor(false), "icon-anchor": "bottom", "icon-size": 0.8,
+        "icon-allow-overlap": true, "icon-offset": ["get", "iconOffset"] } });
+    map.addLayer({ id: ATTACHED_COUNT, type: "symbol", source: ATTACHED,
+      filter: [">", ["get", "count"], 1],
+      layout: { "text-field": ["to-string", ["get", "count"]], "text-size": 11,
+        "text-font": labelLayout["text-font"], "text-allow-overlap": true,
+        "text-offset": ["get", "textOffset"] }, paint: labelPaint });
+    const onAttachedClick = (e: MapLayerMouseEvent) => {
+      const id = e.features?.[0]?.properties?.building_id;
+      if (typeof id === "string") ctx.select({ kind: "building", id });
+    };
+    map.on("click", ATTACHED, onAttachedClick);
+    map.on("click", ATTACHED_COUNT, onAttachedClick);
     const onClick = (e: MapLayerMouseEvent) => {
       // The selected pin is on top of either an ordinary pin or a cluster.
       if (e.features?.[0]?.layer.id !== SELECTED && map.queryRenderedFeatures(e.point, { layers: [SELECTED] }).length) return;
@@ -171,15 +218,19 @@ const pois: MapLayer = {
         ++request;
         popup?.remove();
         const sel = places.features.find((f) => f.properties.id === selectedId);
-        selectedSource.setData({ type: "FeatureCollection", features: sel ? [sel] : [] });
+        selectedSource.setData({ type: "FeatureCollection", features: sel && locationDetails(sel).coord_precision !== "building" ? [sel] : [] });
+        map.setFilter(ATTACHED_HIGHLIGHT, ["==", ["get", "id"],
+          sel && locationDetails(sel).coord_precision === "building" ? sel.properties.building_id ?? "" : ""]);
         if (sel) map.flyTo({ center: sel.geometry.coordinates as [number, number], zoom: 17, duration: 800 });
       },
       setFilters(filters) {
         ++request;
         popup?.remove();
+        const visible = places.features.filter(f => isVisible(filters, f.properties.category, f.properties.subtype));
+        attachedSource.setData(attachedData(visible));
         source.setData({
           type: "FeatureCollection",
-          features: places.features.filter((f) => isVisible(filters, f.properties.category, f.properties.subtype)),
+          features: visible.filter(f => locationDetails(f).coord_precision !== "building"),
         });
       },
       remove() {
@@ -193,6 +244,12 @@ const pois: MapLayer = {
           map.off("mouseenter", layer, onEnter);
           map.off("mouseleave", layer, onLeave);
         }
+        map.off("click", ATTACHED, onAttachedClick);
+        map.off("click", ATTACHED_COUNT, onAttachedClick);
+        map.removeLayer(ATTACHED_COUNT);
+        map.removeLayer(ATTACHED);
+        map.removeLayer(ATTACHED_HIGHLIGHT);
+        map.removeSource(ATTACHED);
         map.removeLayer(SELECTED);
         map.removeLayer(LABEL);
         map.removeLayer(PIN);

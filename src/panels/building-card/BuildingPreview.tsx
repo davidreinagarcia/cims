@@ -5,6 +5,7 @@ import { openIndoor, useOpenIndoor } from "../../indoor/open";
 import { indoorFor } from "../../indoor/registry";
 import { useAuth } from "../../state/auth";
 import { useSelection } from "../../state/selection";
+import InsidePlaces from "./InsidePlaces";
 import "./building-card.css";
 
 /** Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is open. */
@@ -52,6 +53,7 @@ export default function BuildingPreview() {
         <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
         {!session && <small className="cims-muted">Requires sign-in</small>}
       </div>
+      <InsidePlaces buildingId={building.building_id} />
       <div className="cims-actions">
         <button type="button" className="cims-btn cims-btn--primary" onClick={() => openIndoor(building.building_id)}>Open building map</button>
         {directions ? <a className="cims-btn" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>

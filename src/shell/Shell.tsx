@@ -1,5 +1,5 @@
 /** @file Map-first app shell (docs/design/APP-SHELL.md): full-bleed map with rail or tab bar, search pill, chips, and a card or sheet for panels. */
-import { useEffect, useState, useSyncExternalStore, type ReactNode } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import MapView from "../components/MapView";
 import OfflineBanner from "../components/OfflineBanner";
 import BuildingView from "../indoor/BuildingView";
@@ -10,8 +10,11 @@ import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinPanel from "../panels/bulletin/BulletinPanel";
 import ReportPanel from "../panels/report";
+import RoomFinderPanel from "../panels/rooms/RoomFinderPanel";
+import StoriesPanel from "../stories/StoriesPanel";
+import { useStories } from "../stories/store";
 import { useAuth } from "../state/auth";
-import { useSelection, type SelectionKind } from "../state/selection";
+import { useSelection, type Selection, type SelectionKind } from "../state/selection";
 import BottomSheet, { type SheetSnap } from "./BottomSheet";
 import ChipsBar from "./ChipsBar";
 import FloatingCard from "./FloatingCard";
@@ -24,7 +27,7 @@ import SearchPill from "./SearchPill";
 import "./shell.css";
 
 const MOBILE = "(max-width: 767.98px)";
-const PANELS: ShellPanel[] = ["explore", "rooms", "report", "bulletin", "route"];
+const PANELS: ShellPanel[] = ["explore", "rooms", "report", "bulletin", "stories", "route"];
 const KINDS: SelectionKind[] = ["building", "place", "room", "report"];
 
 function useIsMobile(): boolean {
@@ -56,6 +59,7 @@ export default function Shell() {
   const { selection, select } = useSelection();
   const { dialogOpen } = useAuth();
   const [panel, setPanel] = useState<ShellPanel>(initialPanel);
+  const [routeTo, setRouteTo] = useState<Selection | null>(null);
   const [hasQuery, setHasQuery] = useState(false);
   const [snap, setSnap] = useState<SheetSnap>("half");
 
@@ -65,13 +69,22 @@ export default function Shell() {
     if (KINDS.includes(kind as SelectionKind) && rest.length) select({ kind: kind as SelectionKind, id: rest.join(":") });
   }, []); // once, on load
 
+  // Clicking the story heat map opens the stories under it; phones show them tall.
+  const { viewer } = useStories();
+  useEffect(() => { if (viewer) setPanel("stories"); }, [viewer]);
+  useEffect(() => { if (panel === "stories" && mobile) setSnap("full"); }, [panel, mobile]);
+
   // Picking something on the map (or from the bulletin) always shows it; a "report" selection
   // (a place/building card's "Report an issue") opens the report panel prefilled with it instead.
   useEffect(() => { if (selection) setPanel(selection.kind === "report" ? "report" : "explore"); }, [selection]);
 
   const choosePanel = (next: ShellPanel) => {
     if (next !== "explore" && next === panel) setPanel("explore"); // pressing the open item again closes it
-    else { setPanel(next); if (next !== "explore") select(null); }
+    else {
+      if (next === "route") setRouteTo(selection);
+      setPanel(next);
+      if (next !== "explore") select(null);
+    }
   };
   const closeContent = () => { if (panel === "explore") select(null); else setPanel("explore"); };
 
@@ -87,13 +100,14 @@ export default function Shell() {
 
   let content: { title: string; key: string; body: ReactNode } | null = null;
   if (panel === "bulletin") content = { title: "Bulletin", key: "bulletin", body: <BulletinPanel onShowMap={() => setPanel("explore")} /> };
-  else if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <ComingSoon what="Room finder" hint="You can already search a room number in the search bar." /> };
+  else if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <RoomFinderPanel /> };
   else if (panel === "report") {
     // Keyed by the selected place/building (when there is one) so the flow resets for a new "Report an issue".
     const reportKey = selection?.kind === "report" ? `report:${selection.id}` : "report";
     content = { title: "Report", key: reportKey, body: <ReportPanel key={reportKey} onClose={() => setPanel("explore")} /> };
   }
-  else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel onClose={() => setPanel("explore")} /> };
+  else if (panel === "stories") content = { title: "Stories", key: "stories", body: <StoriesPanel onShowMap={() => setPanel("explore")} /> };
+  else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel initialSelection={routeTo} onClose={closeContent} /> };
   else if (selection && selection.kind !== "report") content = {
     title: selection.kind === "building" ? "Building" : "Place",
     key: `${selection.kind}:${selection.id}`,
@@ -101,9 +115,39 @@ export default function Shell() {
   };
   const showResults = hasQuery && !selection && panel === "explore";
 
+  // Focus follows the content. When the focused control unmounts (a card's "Show on map", its close button, Esc
+  // from inside it), focus moves to the new card/sheet, or back to whatever opened the content once it closes.
+  // Focus that is still somewhere (map canvas, search field, nav item) is never stolen.
+  const contentKey = content?.key ?? null;
+  const shownKey = useRef<string | null>(null);
+  const opener = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    const before = shownKey.current;
+    shownKey.current = contentKey;
+    if (before === contentKey) return;
+    const active = document.activeElement;
+    const lost = !(active instanceof HTMLElement) || active === document.body;
+    if (!lost && contentKey && !before) opener.current = active;
+    if (!lost) return;
+    if (!contentKey) {
+      const back = opener.current?.isConnected ? opener.current
+        : document.querySelector<HTMLElement>('.shell-navitem[aria-pressed="true"], .shell-search input');
+      back?.focus();
+    } else if (before) {
+      // Replaced while focus was inside it; content shown from nothing with focus nowhere is a page load: leave it.
+      document.querySelector<HTMLElement>(".shell-card, .shell-sheet")?.focus();
+    }
+  }, [contentKey]);
+
   const pill = (
     <SearchPill showResults={showResults}
-      onQuery={(q) => { setHasQuery(q); if (q && panel !== "explore") setPanel("explore"); }}
+      onQuery={(q) => {
+        setHasQuery(q);
+        if (!q) return;
+        // A new query replaces whatever was showing, so its suggestions are visible (and Enter acts on what is seen).
+        if (panel !== "explore") setPanel("explore");
+        if (selection) select(null);
+      }}
       onRoute={mobile ? undefined : () => choosePanel("route")}
       trailing={mobile ? <AccountChip /> : undefined} />
   );

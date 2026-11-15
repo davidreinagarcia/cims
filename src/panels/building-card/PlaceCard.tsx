@@ -1,6 +1,8 @@
 /** @file Selected place card with hours, access, provenance, contained places and map directions. */
 import { useEffect, useState, type CSSProperties } from "react";
 import { CORRECTION_URL } from "../../config";
+import InsidePlaces from "./InsidePlaces";
+import { locationDetails } from "../../lib/buildingPlaces";
 import BuildingLink from "./BuildingLink";
 import { formatWindow, nextWindow } from "../../lib/events";
 import { campusDay, openStatus } from "../../lib/hours";
@@ -29,7 +31,6 @@ export default function PlaceCard() {
   if (p.kind === "event" && !eventWindow) return null;
   const status = openStatus(p.hours, now);
   const today = p.hours?.[campusDay(now)];
-  const inside = places.features.filter((f) => f.properties.building_id === p.id && f.properties.id !== p.id);
   const isEvent = p.kind === "event";
   const category = LAYER_CATALOG.find((layer) => layer.id === p.category);
   const missing = [
@@ -85,7 +86,7 @@ export default function PlaceCard() {
       <table className="cims-infotable" aria-label="Place information">
         <tbody>
           <tr><th scope="row">Address</th><td>{p.address || unknown}</td></tr>
-          <BuildingLink coordinates={place.geometry.coordinates} />
+          <BuildingLink coordinates={place.geometry.coordinates} buildingId={p.building_id} attached={locationDetails(place).coord_precision === "building"} floorOrRoom={locationDetails(place).floor_or_room} />
           {!isEvent && <tr><th scope="row">Today's hours</th><td>{today ? today.length ? today.map(([start, end]) => `${start} to ${end}`).join(", ") : "Closed" : unknown}</td></tr>}
           {!isEvent && <tr><th scope="row">BuzzCard</th><td>{p.buzzcard ? p.buzzcard.required ? "Required: Yes" : "Required: No" : unknown}{(p.buzzcard?.required || p.buzzcard?.note) && <><br />Note: {p.buzzcard?.note || unknown}</>}</td></tr>}
           <tr><th scope="row">Website</th><td>{p.url ? <a href={p.url} target="_blank" rel="noopener noreferrer">{p.url}</a> : unknown}</td></tr>
@@ -96,14 +97,7 @@ export default function PlaceCard() {
         </tbody>
       </table>
       <p><a href={correction.toString()} target="_blank" rel="noopener noreferrer">Suggest a correction</a></p>
-      {inside.length > 0 && (
-        <div className="detail__inside">
-          <h3 className="cims-caps">Inside</h3>
-          <ul>{inside.map((item) => (
-            <li key={item.properties.id}><button type="button" onClick={() => select({ kind: "place", id: item.properties.id })}>{item.properties.name}</button></li>
-          ))}</ul>
-        </div>
-      )}
+      {locationDetails(place).coord_precision !== "building" && <InsidePlaces buildingId={p.id} excludeId={p.id} />}
       <div className="detail__report">
         <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
         {!session && <small className="cims-muted">Requires sign-in</small>}

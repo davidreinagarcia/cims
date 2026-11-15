@@ -12,6 +12,19 @@
       "set": { "aliases": ["CULC", "Clough"] },
       "verified_at": null,
       "verified_by": null
+    },
+    {
+      "match": { "osm_id": "way/1355836113", "name": "George Tower | Scheller Tower" },
+      "set": { "levels": 18, "height": 10.5 },
+      "note": "OSM tags one footprint with 3 levels (the podium). Tech Square Phase III: 3-floor shared podium, George Tower 18 stories, Scheller Tower 14 (Georgia Tech / Scheller sources). Part polygons are SCHEMATIC, drawn inside the OSM footprint from the architect's massing diagram (George north, Scheller south, shared core between); replace with real footprints when OSM maps the towers.",
+      "source": "https://scheller.gatech.edu/about-scheller/tech-square/tech-square-phase-3.html",
+      "parts": [
+        { "key": "george", "name": "George Tower", "min_levels": 3, "levels": 18, "polygon": [[-84.388623, 33.777278], [-84.387719, 33.777278], [-84.387719, 33.777532], [-84.388623, 33.777532], [-84.388623, 33.777278]] },
+        { "key": "core", "name": "Shared core", "min_levels": 3, "levels": 15, "polygon": [[-84.388183, 33.777189], [-84.387914, 33.777189], [-84.387914, 33.777278], [-84.388183, 33.777278], [-84.388183, 33.777189]] },
+        { "key": "scheller", "name": "Scheller Tower", "min_levels": 3, "levels": 14, "polygon": [[-84.388305, 33.776954], [-84.387487, 33.776954], [-84.387487, 33.777189], [-84.388305, 33.777189], [-84.388305, 33.776954]] }
+      ],
+      "verified_at": "2026-11-14",
+      "verified_by": "tato"
     }
   ]
 }

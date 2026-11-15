@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import { CORRECTION_URL } from "../../config";
 import { loadBuildings, loadedBuildings, type BuildingIndex } from "../../lib/buildings";
-import { places } from "../../lib/places";
 import { useAuth } from "../../state/auth";
+import InsidePlaces from "./InsidePlaces";
 import { useSelection } from "../../state/selection";
 import { hasIndoor } from "../../indoor/registry";
 import "./building-card.css";
@@ -45,7 +45,6 @@ export function BuildingDetails({ buildingId, embedded = false }: { buildingId: 
     );
   }
 
-  const inside = places.features.filter((f) => index!.at(f.geometry.coordinates[0], f.geometry.coordinates[1])?.id === b.id);
   const [lng, lat] = b.center;
   const directions = `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
   const name = b.name ?? "Unnamed building";
@@ -86,14 +85,7 @@ export function BuildingDetails({ buildingId, embedded = false }: { buildingId: 
         <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
         {!session && <small className="cims-muted">Requires sign-in</small>}
       </div>
-      {inside.length > 0 && (
-        <div className="detail__inside">
-          <h3 className="cims-caps">{embedded ? "Places inside" : "Inside"} ({inside.length})</h3>
-          <ul>{inside.map((item) => (
-            <li key={item.properties.id}><button type="button" onClick={() => select({ kind: "place", id: item.properties.id })}>{item.properties.name}</button></li>
-          ))}</ul>
-        </div>
-      )}
+      <InsidePlaces buildingId={b.id} />
       <div className="cims-actions">
         <a className="cims-btn cims-btn--primary" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
         <button type="button" className="cims-btn" onClick={() => select(null)}>Close</button>

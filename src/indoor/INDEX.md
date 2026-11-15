@@ -12,8 +12,10 @@ Building screen, vector schematic renderer and indoor contracts shared by lanes 
 - [`FloorPlan.css`](FloorPlan.css): * @file Vector plan canvas, survey controls and room interaction states.
 - [`FloorPlan.tsx`](FloorPlan.tsx): Crisp SVG schematic with keyboard space selection, pointer pan and bounded pointer-centered zoom. · exports `FloorPlan`
 - [`RoomSearch.tsx`](RoomSearch.tsx): One keyboard accessible room picker across every available building level. · exports `RoomSearch`
+- [`availability.ts`](availability.ts): Pure room-finder queries (F-11) and campus-local expansion of fictional weekly demo slots. · exports `bookableRoomsFor`, `favoriteRoomsFrom`, `crossBuildingBookableRooms`, `isRoomFree`, `findFreeRooms`, `freeUntil`, `nowWindow`, `campusTimeToday`, `expandDemoSlots`
 - [`open.ts`](open.ts): Which indoor building screen is open: picking a building shows a preview card first, this opens its full scre… · exports `openIndoor`, `closeIndoor`, `useOpenIndoor`
 - [`registry.ts`](registry.ts): Registry of buildings with an indoor screen, including explicit no-plan placeholders. · exports `indoorFor`, `hasIndoor`, `indoorRooms`, `resolveRoom`, `indoorBySlug`, `doorLink`, `doorUrl`
+- [`roomFinderDemo.ts`](roomFinderDemo.ts): Loads the Kendeda + CULC room finder/reservation demo seeds (F-11/F-20, T-24/T-60) and indexes them by select… · exports `roomAmenitiesById`, `demoSlotPatterns`
 - [`route.ts`](route.ts): Dependency free shortest indoor paths and plan relative walking instructions. · exports `findRoute`
 - [`types.ts`](types.ts): Indoor schematic contracts matching the curated JSON, without inferred room facts.
 

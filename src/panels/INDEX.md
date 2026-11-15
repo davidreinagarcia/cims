@@ -11,6 +11,7 @@ Panels, one folder per panel, shown in the floating card / bottom sheet. Mount n
 - [`bulletin/`](bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
 - [`layers/`](layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
 - [`report/`](report/INDEX.md): Report-an-issue flow (F-10) and staff queue; mounted in Shell's "report" slot (src/shell/Shell.tsx). Owner: T…
+- [`rooms/`](rooms/INDEX.md): Reserve a room (F-11/F-20): pick a Kendeda or CULC building (or jump to favorited rooms), book/renew/cancel a…
 - [`search/`](search/INDEX.md): Search box and list of places (rooms and buildings join in T-14).
 
 <!-- AUTO:END -->
