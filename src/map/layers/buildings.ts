@@ -40,6 +40,10 @@ function loadCenters(): Promise<Map<string, Center>> {
         out.set(f.properties.id, [(Math.min(...xs) + Math.max(...xs)) / 2, (Math.min(...ys) + Math.max(...ys)) / 2]);
       }
       return out;
+    })
+    .catch((err) => {
+      centers = null; // a failed download must not be cached: the next selection tries again
+      throw err;
     });
   return centers;
 }
@@ -51,7 +55,7 @@ const buildings: MapLayer = {
   id: "buildings",
   order: 5, // below the pins (pois = 10)
   addTo(map, ctx) {
-    const patternIds = addHatchPatterns(map);
+    const removePatterns = addHatchPatterns(map);
     let selectedId: string | null = null;
     let pickedOnMap = false;
     let removed = false;
@@ -169,10 +173,12 @@ const buildings: MapLayer = {
         map.setFilter(WALLS_SELECTED, isSelected(next));
         // Picked in a panel (search, card): bring it into view. Picked on the map: it is already there.
         if (next && !fromMap) {
-          void loadCenters().then((byId) => {
-            const center = byId.get(next);
-            if (center && !removed && selectedId === next) map.flyTo({ center, zoom: Math.max(map.getZoom(), 16.5), duration: 800 });
-          });
+          loadCenters()
+            .then((byId) => {
+              const center = byId.get(next);
+              if (center && !removed && selectedId === next) map.flyTo({ center, zoom: Math.max(map.getZoom(), 16.5), duration: 800 });
+            })
+            .catch(() => {}); // offline: the building is still highlighted, the map just doesn't move
         }
       },
       remove() {
@@ -186,7 +192,7 @@ const buildings: MapLayer = {
         map.off("pitch", syncPitch);
         for (const layer of [LABEL, ROOF, RIM, WALLS_SELECTED, WALLS, OUTLINE, FLAT]) map.removeLayer(layer);
         map.removeSource(SOURCE);
-        for (const id of patternIds) if (map.hasImage(id)) map.removeImage(id);
+        removePatterns();
       },
     };
   },

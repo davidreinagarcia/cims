@@ -33,10 +33,12 @@ function pixels(ground: string, hatch?: HTMLImageElement): ImageData {
 
 /**
  * Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
- * away) and gets its hatch lines as soon as the SVG decodes. Returns the image ids added.
+ * away) and gets its hatch lines as soon as the SVG decodes. Returns a cleanup that removes the images
+ * and cancels any decode still pending (the map may be gone by the time it finishes).
  */
-export function addHatchPatterns(map: maplibregl.Map): string[] {
+export function addHatchPatterns(map: maplibregl.Map): () => void {
   const added: string[] = [];
+  const pending: HTMLImageElement[] = [];
   for (const v of VARIANTS) {
     if (map.hasImage(v.id)) continue;
     map.addImage(v.id, pixels(v.ground), { pixelRatio: RATIO });
@@ -45,7 +47,11 @@ export function addHatchPatterns(map: maplibregl.Map): string[] {
     img.onload = () => {
       if (map.hasImage(v.id)) map.updateImage(v.id, pixels(v.ground, img));
     };
+    pending.push(img);
     img.src = "data:image/svg+xml," + encodeURIComponent(hatchSvg.replace("<svg ", `<svg color="${v.line}" `).replace('width="8" height="8"', `width="${W * RATIO}" height="${H * RATIO}"`));
   }
-  return added;
+  return () => {
+    for (const img of pending) img.onload = null;
+    for (const id of added) if (map.hasImage(id)) map.removeImage(id);
+  };
 }

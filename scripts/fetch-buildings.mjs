@@ -79,8 +79,11 @@ function inside([x, y], r) {
  */
 function stitchRings(members) {
   const key = (p) => `${p.lon},${p.lat}`;
-  const open = members.filter((m) => m.geometry?.length >= 2).map((m) => [...m.geometry]);
-  const rings = [];
+  const ways = members.filter((m) => m.geometry?.length >= 2).map((m) => [...m.geometry]);
+  const isClosed = (line) => key(line[0]) === key(line[line.length - 1]);
+  // Ways that are already rings stay as they are: chaining could otherwise swallow one that touches an open outline.
+  const rings = ways.filter((w) => w.length >= 4 && isClosed(w)).map(ring);
+  const open = ways.filter((w) => !isClosed(w));
   while (open.length) {
     let line = open.pop();
     for (let grew = true; grew && key(line[0]) !== key(line[line.length - 1]); ) {
