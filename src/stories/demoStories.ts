@@ -1,14 +1,14 @@
-/** @file Fictional seed stories clustered around busy buildings, so the heat map and viewer can be shown before anyone has posted. */
+/** @file Fictional seed stories clustered around the Greek housing area, so the heat map and viewer can be shown before anyone has posted. */
 import { loadBuildings } from "../lib/buildings";
 import type { Story } from "./types";
 
 /** Where the fake activity is, and how much: real building ids, invented story counts. */
 const HOTSPOTS: { buildingId: string; count: number; hue: number }[] = [
-  { buildingId: "g-wayne-clough-undergraduate-learning-commons", count: 10, hue: 210 },
-  { buildingId: "john-lewis-student-center", count: 7, hue: 28 },
-  { buildingId: "campus-recreation-center", count: 5, hue: 150 },
-  { buildingId: "price-gilbert-memorial-library", count: 4, hue: 280 },
-  { buildingId: "kendeda-building-for-innovative-sustainable-design", count: 2, hue: 100 },
+  { buildingId: "sigma-chi", count: 10, hue: 210 },
+  { buildingId: "kappa-alpha", count: 7, hue: 28 },
+  { buildingId: "beta-theta-pi", count: 5, hue: 150 },
+  { buildingId: "phi-delta-theta", count: 4, hue: 280 },
+  { buildingId: "alpha-tau-omega", count: 2, hue: 100 },
 ];
 const CAPTIONS = ["Quiet corner on floor 2", "Line is out the door", "Free pizza inside", "Sunset from here", "Study group, come join", "Great light today", undefined, undefined];
 
