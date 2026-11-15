@@ -10,7 +10,7 @@ Sidebar panels, one folder per panel. Mount new ones in components/Sidebar.tsx.
 - [`building-card/`](building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
 - [`bulletin/`](bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
 - [`layers/`](layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
-- [`rooms/`](rooms/INDEX.md): Room finder (F-11): filter bookable rooms by time, capacity and features; results open on the floor plan.
+- [`rooms/`](rooms/INDEX.md): Reserve a room (F-11/F-20): pick a Kendeda or CULC building, then book, renew or cancel a real (prototype) sl…
 - [`search/`](search/INDEX.md): Search box and list of places (rooms and buildings join in T-14).
 
 <!-- AUTO:END -->

@@ -166,6 +166,12 @@ and location so that I can act on them.
 
 ### F-11 Room finder — **Must** *(P3 Improved Room Reservations)*
 
+> **Team, 2026-11-14:** F-20 "Unified booking" (below, Could) is promoted to an in-scope **prototype** for
+> Kendeda and CULC only (T-60): reserving, renewing and cancelling a room now happens inside CIMS instead
+> of only deep-linking out. US-11.1's "we don't book inside CIMS" line stays true for every *other*
+> building, and for Kendeda/CULC the **Book** deep link is replaced by the reservation flow described
+> under F-20 below.
+
 **US-11.1** As a **student who needs a room on short notice**, I want to see which rooms are free right
 now so that I don't check several booking systems one by one.
 - **Given** the Rooms tab, **when** I pick **Available now** (default) or a time window, **then** free
@@ -208,6 +214,24 @@ contract, so swapping in the real one later changes one adapter, not the app ([A
 ### F-12 – F-20 — **Could**
 
 Tracked in the [Roadmap](05-roadmap.md); stories will be written when promoted.
+
+**F-20 Unified booking — promoted to an in-scope prototype for Kendeda/CULC only (Team, 2026-11-14, T-60).**
+Real GT SSO-backed booking across every campus system is still out of scope (that part of F-20 stays on the
+roadmap); what shipped is a working reservation flow *inside* CIMS, scoped to the only two buildings with
+indoor data:
+- A "Reserve a room" entry point with a building search + quick-pick chips; only Kendeda and CULC go past
+  the picker, three more real GT buildings show disabled "Coming soon" rather than invented ones.
+- A day + 30-minute-slot grid per bookable room (free/busy reuse the existing map legend colors), fixed
+  bookings from 30 minutes up to a hard 2-hour cap the UI enforces while selecting, not just on submit.
+- An open-ended mode with no fixed end time, kept alive by tapping **Renew** every 30 minutes from the
+  reservation's own status view — an honest prototype stand-in for the presence check F-18 "No-show
+  release" (Should, not yet built) would eventually automate with QR/NFC; missing a renewal silently frees
+  the room again.
+- Every write (reserve, renew, cancel) requires the F-21 sign-in gate, same as F-10's reports.
+- No real backend yet (ADR-0005 still open): `src/lib/reservations.ts` + a localStorage mock, so bookings
+  don't sync across devices or browsers. Kendeda's capacity/features/schedule stay the fictional "Demo
+  data" seeded for T-24; CULC's room capacities are real (sourced in `src/data/indoor/culc.json`), only its
+  schedule and booking policy are seeded demo data layered on top.
 
 ## 4. Non-functional requirements
 

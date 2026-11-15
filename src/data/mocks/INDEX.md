@@ -6,6 +6,7 @@ Fictional fixtures layered on top of real building data, always labeled "Demo da
 
 **Files**
 
+- [`culc-room-reservation-demo.json`](culc-room-reservation-demo.json): Demo data for the CULC room finder/reservation flow (F-11/F-20, T-60). `capacity` on every room below is copi…
 - [`kendeda-room-finder-demo.json`](kendeda-room-finder-demo.json): FICTIONAL demo data for the Kendeda room finder (F-11/T-24): capacity, features, booking policy/link and the…
 
 <!-- AUTO:END -->

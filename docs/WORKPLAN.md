@@ -179,6 +179,18 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   staff view, "Prototype: not sent to Facilities/IT" label (Risk R-14). Every write (report, +1) goes through the T-25 sign-in gate; the staff view needs the staff role (no unlisted URL).
 - [ ] **T-24 Room finder** (F-11, Must since Q6) · needs T-20, T-21
   Availability seed for Kendeda rooms, filters (capacity, features), map + floor highlight, Book deep link.
+- [ ] **T-60 Room reservations** (F-20, promoted from Could to in-scope prototype, "Team, 2026-11-14") · B · needs T-24
+  Replaces the Book-deep-link panel with a real (prototype) reservation flow for Kendeda and CULC: building
+  picker with quick-pick chips (three more real GT buildings shown disabled "Coming soon"), a schematic
+  survey-style building glyph, a day + 30-minute-slot grid per bookable room (green/gray reusing the
+  existing "free rooms" token), tap-to-extend selection capped at 2 hours, and an open-ended "renew every
+  30 min" mode standing in for F-18's unbuilt no-show check-in. Every write (reserve, renew, cancel) goes
+  through the T-25 sign-in gate. `src/lib/reservations.ts` + `reservations.mock.ts` (localStorage, same
+  pattern as T-23's reports service) — no real backend yet (T-22 undecided), so bookings don't sync across
+  devices. CULC rooms reuse real sourced capacities from the schematic (`src/data/indoor/culc.json`); the
+  weekly busy schedule and booking policy stay fictional "Demo data" for both buildings, same as T-24's
+  Kendeda seed. **Done when:** a signed-in user can book a 30-min and a 2-hour slot in both buildings, an
+  open-ended booking can be renewed or lapses back to free, and a signed-out write opens the T-25 dialog.
 - [x] **T-25 Sign-in mock + posting gate** (F-21, [ADR-0007](adr/0007-gt-sign-in-simulated.md)) · A · *hotspot PR (`App.tsx`, `src/state/`)* · needs T-01; land it before T-23 and the T-15 posting UI
   **Deliberately theater: looks real, enforces nothing; roles only change labels.** `src/auth/`: `AuthAdapter` interface (`signIn(persona)`, `signOut()`, `session`) with a **mock** adapter (localStorage; demo personas Student / Club officer / Facilities staff / Moderator). `AuthProvider` + `useAuth()` in `src/state/`, `SignInDialog` ("Sign in with Georgia Tech (demo)": never asks for credentials, community-rules checkbox, DEMO badge), a `requireAuth(action)` gate that opens the dialog and resumes the action, an account chip in the header. Types `Session { accountId, role, provider }` in `src/types/`. **Done when:** a signed-out write opens the dialog and continues after sign-in; a reload keeps the session; sign-out clears it; every screen says "Demo sign-in".
 
