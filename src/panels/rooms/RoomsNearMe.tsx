@@ -7,7 +7,7 @@ import { loadBuildings, loadedBuildings } from "../../lib/buildings";
 import { formatDistance, getCurrentPosition, GeolocationError, haversineMeters } from "../../lib/geolocation";
 import ReservationGrid from "./ReservationGrid";
 
-/** The only two buildings with indoor/bookable data (see `BuildingPicker.tsx`) -- real ids verified in `src/data/buildings.geojson`. */
+/** The only two buildings with indoor/bookable data (see `buildingOptions.ts`) -- real ids verified in `src/data/buildings.geojson`. */
 const NEARBY_BUILDING_IDS = ["kendeda-building-for-innovative-sustainable-design", "g-wayne-clough-undergraduate-learning-commons"] as const;
 
 type Status =
@@ -15,8 +15,14 @@ type Status =
   | { kind: "error"; retryable: boolean; message: string }
   | { kind: "ready"; rooms: BookableRoom[] };
 
-/** Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and hands the result to the shared reservation grid -- or shows a clear, honest fallback for every way that can fail. */
-export default function RoomsNearMe({ onBack }: { onBack: () => void }) {
+/**
+ * Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and
+ * hands the result to the shared reservation grid -- or shows a clear, honest fallback for every way
+ * that can fail. `onBack` is omitted when mounted as a top-level section of `RoomsBoard.tsx` (T-62),
+ * whose chip bar already doubles as navigation; `onlyAvailable` passes the board's "Only available
+ * rooms" toggle straight through to the grid.
+ */
+export default function RoomsNearMe({ onBack, onlyAvailable }: { onBack?: () => void; onlyAvailable?: boolean }) {
   const [attempt, setAttempt] = useState(0);
   const [status, setStatus] = useState<Status>({ kind: "requesting" });
 
@@ -55,12 +61,14 @@ export default function RoomsNearMe({ onBack }: { onBack: () => void }) {
 
   return (
     <>
-      <div className="reserve-building">
-        <div className="reserve-building__info">
-          <h3 className="reserve-building__title">Rooms near me</h3>
-          <button type="button" className="cims-btn cims-btn--small" onClick={onBack}>Back</button>
+      {onBack && (
+        <div className="reserve-building">
+          <div className="reserve-building__info">
+            <h3 className="reserve-building__title">Rooms near me</h3>
+            <button type="button" className="cims-btn cims-btn--small" onClick={onBack}>Back</button>
+          </div>
         </div>
-      </div>
+      )}
 
       {status.kind === "requesting" && <p className="cims-muted" role="status">Requesting your location…</p>}
 
@@ -69,7 +77,7 @@ export default function RoomsNearMe({ onBack }: { onBack: () => void }) {
           <p className="reserve-grid__error"><strong>Couldn't use your location:</strong> {status.message}</p>
           <div className="cims-actions">
             {status.retryable && <button type="button" className="cims-btn" onClick={() => setAttempt((a) => a + 1)}>Try again</button>}
-            <button type="button" className="cims-btn" onClick={onBack}>Back to building picker</button>
+            {onBack && <button type="button" className="cims-btn" onClick={onBack}>Back to building picker</button>}
           </div>
         </div>
       )}
@@ -80,7 +88,7 @@ export default function RoomsNearMe({ onBack }: { onBack: () => void }) {
             Distance is to the building's location on the map, not to the room itself -- there's no indoor positioning. Nearest
             first, Kendeda and CULC only.
           </p>
-          <ReservationGrid rooms={status.rooms} />
+          <ReservationGrid rooms={status.rooms} onlyAvailable={onlyAvailable} />
         </>
       )}
     </>

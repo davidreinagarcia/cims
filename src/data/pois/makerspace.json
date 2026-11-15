@@ -7,7 +7,7 @@
         "id": "bme-design-shop",
         "name": "BME Design Shop",
         "category": "makerspace",
-        "status": "draft",
+        "status": "verified",
         "description": "A staffed prototyping shop in Whitaker with a required safety orientation.",
         "source_url": "https://shop.bme.gatech.edu/",
         "floor_or_suite": "Room 0250 (basement)",
@@ -53,7 +53,9 @@
           "required": false,
           "note": "Open to the whole GT community; orientation walkthrough required before first build."
         },
-        "floor_or_room": "Room 0250"
+        "floor_or_room": "Room 0250",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -69,7 +71,7 @@
         "id": "flowers-invention-studio",
         "name": "Flowers Invention Studio",
         "category": "makerspace",
-        "status": "draft",
+        "status": "verified",
         "description": "Student-run fabrication space in MRDC for academic and personal projects.",
         "source_url": "https://coe.gatech.edu/academics/makerspaces",
         "aliases": [
@@ -132,7 +134,9 @@
           "note": "Open to the GT community; Prototyping Instructors train and test users on equipment (training available during open hours and Mon-Thu 17:00-18:00 After Hours)."
         },
         "url": "https://inventionstudio.gatech.edu/",
-        "floor_or_room": "2nd Floor"
+        "floor_or_room": "2nd Floor",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -148,7 +152,7 @@
         "id": "hive-makerspace",
         "name": "The Hive Makerspace",
         "category": "makerspace",
-        "status": "draft",
+        "status": "verified",
         "description": "Free student makerspace in the Van Leer rotunda, open to all majors.",
         "source_url": "https://hive.ece.gatech.edu/about/",
         "address": "777 Atlantic Dr, Atlanta, GA 30332-0250",
@@ -197,7 +201,9 @@
           "note": "Open to all GT students free of charge with no prior training required (Peer Instructors assist); BuzzCard required to sign in at 2nd floor entrance."
         },
         "url": "https://hive.ece.gatech.edu/",
-        "floor_or_room": "2nd Floor (north side of Tech Green entrance)"
+        "floor_or_room": "2nd Floor (north side of Tech Green entrance)",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -213,11 +219,13 @@
         "id": "innovation-ideation-studio",
         "name": "Innovation & Ideation Studio",
         "category": "makerspace",
-        "status": "draft",
+        "status": "verified",
         "description": "A low-tech space for model building and collaborative projects in Crosland Tower.",
         "source_url": "https://library.gatech.edu/innovation-ideation",
         "floor_or_suite": "2nd floor",
-        "coord_source": "OSM relation 3178620 (Dorothy Murray Crosland Tower), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM relation 3178620 (Dorothy Murray Crosland Tower), building representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -233,7 +241,7 @@
         "id": "mill-makerspace",
         "name": "Materials Innovation and Learning Laboratory",
         "category": "makerspace",
-        "status": "draft",
+        "status": "verified",
         "description": "Open-access materials processing and measurement space in Love, Room 176.",
         "source_url": "https://mill.mse.gatech.edu/about-us/",
         "floor_or_suite": "Room 176",
@@ -281,7 +289,9 @@
           "note": "Open to all GT students, faculty, and staff; users must sign in at Main Lab (Love 176) and reserve equipment via SUMS (training rules not detailed in retrieved snippets)."
         },
         "url": "https://mill.mse.gatech.edu/",
-        "floor_or_room": "1st and 3rd Floors (Main Lab Room 176)"
+        "floor_or_room": "1st and 3rd Floors (Main Lab Room 176)",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -297,7 +307,7 @@
         "id": "yang-aero-maker-space",
         "name": "Yang Aero Maker Space",
         "category": "makerspace",
-        "status": "draft",
+        "status": "verified",
         "description": "Free prototyping and fabrication tools for all majors in Weber SST.",
         "source_url": "https://ams.gatech.edu/",
         "aliases": [
@@ -344,7 +354,9 @@
           "required": false,
           "note": "Students, faculty, and public welcome under mentor supervision with no prior training; training required for unsupervised machine operation and CNC/Tormach."
         },
-        "url": "https://ams.gatech.edu/"
+        "url": "https://ams.gatech.edu/",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",

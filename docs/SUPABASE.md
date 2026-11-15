@@ -1,7 +1,21 @@
 <!-- summary: What we need Supabase for (stories, reports, fullness, events, reservations, auth), proposed schema, RLS, storage, and the migration plan from today's mock adapters. -->
 # Supabase plan
 
-Status: **not set up yet**. Every feature below runs today on a mock or local adapter, so the demo never depends on it ([ADR-0005](adr/0005-backend-supabase.md), [ADR-0007](adr/0007-gt-sign-in-simulated.md)). This file is the shopping list for when we plug it in.
+Status (2026-11-15): **live** for Reports (F-10), Stories (T-70), Room reservations + preferred rooms (T-60/61), Bulletin interests (F-07) and **accounts with roles**. Project `CISM` (us-east-1, ref in `supabase/project.json`), migrations in `supabase/migrations/`, adapters `*.supabase.ts` next to each service (plain `fetch` via `src/lib/supabase.ts`, no SDK). Booking rules (overlap, 30-120 min, cooldown, check-in window, owner-only cancel) and role checks run in Postgres. If the backend is unreachable (not when it rejects a rule) every service falls back to its local mock, so the demo never depends on it. Still local: fullness reports, posting events/orgs (the Add post button is "coming soon"), police alarms and tips (own server, see PR #52), recent searches and map layer prefs (per-device by design)
+
+## Accounts and roles (no sign-up flow, by decision)
+There is **no create-account process**. The login button lists pre-created accounts, one per role (`src/auth/accounts.json`, created in Supabase Auth by `npm run db:accounts`). They share the password in `src/auth/accounts.ts` (demo-grade on purpose). The role lives in the signed JWT (`app_metadata.role`, plus `team` for staff), which only the service key can set, so a browser cannot promote itself.
+
+| Account | Role | Can do beyond a student |
+|---|---|---|
+| student@, student2@ | `student` | report, book rooms, stories, favorites, "Interested" |
+| org@ | `officer` | (student rights; event posting is not built yet) |
+| maintenance@ | `maintenance` (team Facilities) | work the Facilities queue |
+| it@ | `it` (team IT) | work the IT queue |
+| police@ | `police` (team Emergency) | work the Emergency queue |
+| moderator@ | `moderator` | any team's queue; see and hide/unhide reports and stories |
+
+(all `@demo.cims.app`). Guests get an anonymous Supabase session so reads and basic writes work before login; the UI still asks to sign in for posting. In SQL use `public.app_role()` and `public.app_team()`; never trust a role sent by the client. A new role means editing `accounts.json` and asking David to run `npm run db:accounts`.
 
 ## Why Supabase
 Postgres + PostGIS (radius queries), Row Level Security (clients write directly, no custom API), Storage (photos and videos), Realtime (live heat map), free tier. Standard Postgres, so we can leave.
@@ -86,3 +100,20 @@ Demo personas become real accounts in two steps: (1) Supabase Auth with magic li
 - Who owns the Supabase project and its billing/limits.
 - Retention: 24 h for stories confirmed? Reports kept how long?
 - Moderation: who is the moderator during the hackathon.
+
+
+## Changing the database from a branch (read this before touching `supabase/`)
+
+There is **one shared project** (`CISM`). Production (`main`) and **every branch preview** talk to it, so branch code runs against live data. Supabase branching is paid, so we use rules instead:
+
+1. **Never run SQL, the Supabase CLI or the dashboard against the project, and never look for or ask for tokens/keys.** Only the anon key is in the code. David's agent on Alexandria holds the management token.
+2. **A schema change is a new file** `supabase/migrations/<YYYYMMDDHHMMSS>_<what_it_does>.sql` in your branch's PR. Never edit or delete an existing migration (applied ones are immutable). Run `npm run db:check` (offline) before pushing.
+3. **Expand only.** Add tables, nullable or defaulted columns, indexes, functions, policies. After your migration, the code on `main` and on every other branch must still work. No drop, rename, retype, truncate or delete of data. If it is truly needed, put `-- allow-destructive: <why>` in the file, say so at the top of the PR, and wait for David.
+4. **Every new table has RLS on** and policies: writes tied to `auth.uid()`, role checks with `app_role()` / `app_team()`. Public read only for non-sensitive data. Business rules (limits, overlaps, ownership) go in an RPC or trigger, not only in the UI.
+5. **How it gets applied:** write `Needs DB migration: <file>` in the PR. David's agent reviews and runs `npm run db:apply`. Because migrations are expand-only, it is applied **before the merge** so your preview can use it; the `schema_migrations` table remembers it, so the merge applies nothing twice. Until it is applied, your preview will not see the new schema (the app falls back to the local mock).
+6. **Two branches, same table?** Timestamps keep files ordered. Whoever merges second rebases their migration (renaming an unapplied file is fine) and re-checks that it applies on top of the first.
+7. **Frontend:** use the helpers in `src/lib/supabase.ts` (`rest`, `upload`, `withFallback`); no new SDK dependency. Put the adapter next to the contract as `<name>.supabase.ts` and keep the local mock as the offline fallback. Buckets and policies are created in migrations, files go to `<auth.uid()>/<uuid>`.
+8. **Test data:** fake and clearly labeled (`sample` flag or `e2e`/`test` prefix), and delete it when you finish. The anon key is public, so assume anyone can call the API: RLS is the only protection.
+9. **Never commit** tokens, the service-role key, `sb_secret_*`, or a DB password. `db:check` rejects migrations that look like they contain one.
+
+Possible later upgrade: a second free Supabase project (`CISM-staging`) that previews point at, so risky migrations can be tried away from live data. Until it exists, rule 3 is what keeps `main` safe.

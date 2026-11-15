@@ -28,6 +28,7 @@ or open a tiny separate PR they review.
 |------|-------|
 | `src/map/layers/buildings.ts`, `pois.ts`, `orgs.ts`, `transport.ts` | A (David) |
 | `src/panels/building-card/`, `src/panels/search/`, `src/panels/layers/`, `src/panels/bulletin/` | A (David) |
+| `src/portfolio/` (BuzzPrint, T-71) | A (David) — hooks off `bulletin/BulletinBoard.tsx`'s "Interested" toggle |
 | `src/data/buildings.geojson`, `src/data/orgs.json` | A (David) |
 | `src/auth/**` (sign-in mock, adapter), `src/panels/account/` | A (David) |
 | `src/indoor/` (viewer, level selector, directory) | B (Tato) |
@@ -42,7 +43,7 @@ or open a tiny separate PR they review.
 ### Hotspot files (shared, see §3)
 
 `src/App.tsx` · `src/components/MapView.tsx` · `src/types/*` · `src/state/*` · `src/styles.css` ·
-`src/config.ts` · `package.json` + `package-lock.json` · `.github/` · `.claude/` · `scripts/gen-index.mjs` · `deploy/`
+`src/config.ts` · `src/lib/supabase.ts` · `supabase/migrations/` (add files only, see [SUPABASE.md](SUPABASE.md)) · `package.json` + `package-lock.json` · `.github/` · `.claude/` · `scripts/gen-index.mjs` · `deploy/`
 
 **Generated files** (`INDEX.md` everywhere, `docs/FUNCTIONS.md`) are *not* hotspots: nobody edits
 them by hand, conflicts resolve themselves, and they're regenerated on every commit
@@ -160,6 +161,22 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Buildings + aliases + places + rooms; "Kendeda <room>" opens indoor view on the right floor.
 - [x] **T-15 Orgs & events layer + bulletin tab** (F-07) · needs T-12, data T-32 *Read-only done (Bulletin tab, event and org cards, weekly demo events, 13 draft real orgs). Officer posting (US-07.2, Should) not started; the sign-in gate (T-25) exists.*
   Read-only bulletin and fictional weekly demo events implemented in Lane A. Posting waits for the sign-in gate T-25.
+- [x] **T-71 BuzzPrint** (new feature, not in the original SGA prompts/PRD F-list — decided this session, "Team, 2026-11-15") · A · needs T-15, T-25
+  A personal campus-activity portfolio for students: every Bulletin post you mark "Interested" on is saved as a
+  permanent entry (day, time, location and what the event was — snapshotted from the post at that moment, so a
+  later edit or removal of the post never changes your record; un-marking "Interested" does **not** delete the
+  entry, since this is a history of what you engaged with, not a mirror of your current interest list). New
+  `src/portfolio/` (`types.ts`, `store.ts` + `localAdapter.ts`, mirroring `src/stories/`'s shape but **independent**:
+  permanent, no 24 h expiry, account-scoped). Photos you attach per entry are kept as base64 in `localStorage` (no
+  backend, no camera-capture reuse from Stories — a plain file picker); a large photo still shows for the session
+  but may not survive a reload if the browser's storage quota is tight (stated inline in the UI). `PortfolioPage.tsx`
+  is a new full-screen view wired into the shell exactly like the Bulletin board (`src/shell/Shell.tsx`, `Rail.tsx`,
+  `MobileTabBar.tsx`, `icons.tsx`): a big ink-line folder on the landing state that plays a CSS shrink animation on
+  click (skipped under `prefers-reduced-motion`) before revealing the day-grouped entry list. The only edit to
+  Lane A's `BulletinBoard.tsx` is a small additive hook: turning "Interested" **on** calls
+  `recordPortfolioEntry(session, post)` when signed in; a signed-out click still toggles the interest but records
+  nothing (no account to scope an entry to) and does not crash. Viewing your own BuzzPrint needs no account (F-21's
+  "reading is open" rule); recording an entry does.
 
 **Lane B: Inside + Actions (Tato)**
 
@@ -222,6 +239,35 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Ported onto `main` after the app-shell restructure (`feat/T61-shell-integration`, 2026-11-14): the old
   `Sidebar` tab this was built against is gone, so `RoomFinderPanel` now mounts unchanged inside the
   shell's "Rooms" floating card (desktop) / bottom sheet (mobile), same as `BulletinPanel`.
+  *Superseded by T-62: `RoomFinderPanel` is gone, replaced by the full-page `RoomsBoard`.*
+- [x] **T-62 Rooms full-page board** (F-11/F-20, "session, 2026-11-15") · B · needs T-24/T-60/T-61
+  Gives Rooms the same full-screen treatment Bulletin already has, instead of a small floating-card/bottom-sheet
+  panel: `src/shell/Shell.tsx` mounts the new `RoomsBoard` whenever `panel === "rooms"`, outside the
+  `FloatingCard`/`BottomSheet` system — the same pattern `BulletinBoard` uses, just keyed off the existing
+  `panel` state (Rooms needed no second "open" flag the way Bulletin's type filter did) — so `?panel=rooms`,
+  the rail/tab-bar item and `useBookingRequestSeq()`'s "Book this room" handoff all keep working unchanged.
+  `RoomsBoard.tsx` adds a Bulletin-style top chip bar: one chip per entry in `buildingOptions.ts` (the single
+  list of bookable/"Coming soon" buildings, lifted out of the old `BuildingPicker.tsx` so both the chip bar and
+  `RoomsNearMe.tsx` share it), Favorites, Rooms near me and My bookings as mutually-exclusive sections, plus an
+  independent **Only available rooms** toggle — narrows whichever section is showing to rooms free *right now*
+  (the current 30-minute slot on today's grid, not "for the rest of today": simpler and matches what someone
+  walking up right now actually wants), reusing `ReservationGrid`'s own `isRoomFree`/`expandDemoSlots` calls
+  rather than a second availability engine. **My bookings** is promoted to that top-level section
+  (`MyBookingsSection.tsx`, replacing `ReservationGrid`'s old inline "My reservations here" list) with a richer
+  card per booking: room/building/floor pulled from `indoor/registry.ts` (never invented), the existing
+  `BuildingGlyph` schematic icon, capacity and the reserved window, and five actions — Show on map
+  (`select({ kind: "building", id })`, the same selection mechanism `BulletinBoard`/`PlaceCard` use), Check in
+  (`lib/reservations.ts#checkInNearby`, the exact 15-minute/150 m logic factored out of `ReservationGrid` so
+  both call sites stay identical), external Directions (Google Maps link to the building, `PlaceCard`'s exact
+  pattern), Guide inside building (`select({ kind: "room", id })`, opening the existing routed indoor screen —
+  kept as a separate label from Directions so the external-vs-in-app distinction is clear), and Report
+  (`select({ kind: "report", id: buildingId })`, prefilled via `report/location.ts#locationForId` and handled by
+  the shell's normal Report panel). Cancel stayed on the card too (existing capability, not one of the
+  five above, but dropping it would have been a regression). The day/slot grid's cells (`rooms.css`) changed
+  from a small circle to solid rectangular cells flush edge-to-edge, with a diagonal ink hatch
+  (`repeating-linear-gradient` on `--ink`/`--paper-2`) on busy cells instead of a flat gray fill — closer to a
+  real room-booking calendar grid and reusing this app's own hatching motif instead of a new color or asset.
+  Still Kendeda + CULC only, still mock/localStorage persistence, no backend work.
 - [x] **T-25 Sign-in mock + posting gate** (F-21, [ADR-0007](adr/0007-gt-sign-in-simulated.md)) · A · *hotspot PR (`App.tsx`, `src/state/`)* · needs T-01; land it before T-23 and the T-15 posting UI
   **Deliberately theater: looks real, enforces nothing; roles only change labels.** `src/auth/`: `AuthAdapter` interface (`signIn(persona)`, `signOut()`, `session`) with a **mock** adapter (localStorage; demo personas Student / Club officer / Facilities staff / Moderator). `AuthProvider` + `useAuth()` in `src/state/`, `SignInDialog` ("Sign in with Georgia Tech (demo)": never asks for credentials, community-rules checkbox, DEMO badge), a `requireAuth(action)` gate that opens the dialog and resumes the action, an account chip in the header. Types `Session { accountId, role, provider }` in `src/types/`. **Done when:** a signed-out write opens the dialog and continues after sign-in; a reload keeps the session; sign-out clears it; every screen says "Demo sign-in".
 

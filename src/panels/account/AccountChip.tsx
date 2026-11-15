@@ -1,4 +1,5 @@
 /** @file Header account control with fictional identity labels and demo sign-out. */
+import { STAFF_ROLES } from "../../auth/types";
 import { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../state/auth";
 import "./account.css";
@@ -28,7 +29,8 @@ export default function AccountChip() {
         <span className="cims-status">DEMO</span>
       </button>
       {expanded && <div id="account-options" className="account-chip__menu">
-        <p className="cims-muted">DEMO role: {session.role}</p>
+        <p className="cims-muted">Role: {session.role}</p>
+        {STAFF_ROLES.includes(session.role) && <a className="cims-btn cims-btn--block" href="?panel=report&staff=1">Open staff queue</a>}
         <button type="button" className="cims-btn cims-btn--block" onClick={() => { setExpanded(false); void signOut(); }}>Sign out</button>
       </div>}
     </> : <button type="button" data-account-trigger className="cims-btn account-chip__trigger" onClick={openDialog}>Sign in <span className="cims-status">DEMO</span></button>}

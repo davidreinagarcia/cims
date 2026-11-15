@@ -33,7 +33,7 @@ function write(key: string, value: unknown): boolean {
 const norm = (value: string | null) => (value ?? "").trim().toLowerCase();
 
 /** Distance in meters between two [lng, lat] points (haversine). */
-function metersBetween(a: [number, number], b: [number, number]): number {
+export function metersBetween(a: [number, number], b: [number, number]): number {
   const rad = Math.PI / 180;
   const dLat = (b[1] - a[1]) * rad;
   const dLng = (b[0] - a[0]) * rad;
@@ -42,7 +42,7 @@ function metersBetween(a: [number, number], b: [number, number]): number {
 }
 
 /** Same place: same building + floor + room indoors, or within 25 m for outdoor pins. */
-function samePlace(a: ReportLocation, b: ReportLocation): boolean {
+export function samePlace(a: ReportLocation, b: ReportLocation): boolean {
   if (a.buildingId || b.buildingId) {
     return a.buildingId === b.buildingId && norm(a.floor) === norm(b.floor) && norm(a.room) === norm(b.room);
   }

@@ -7,13 +7,15 @@
         "id": "couch-park-south-field",
         "name": "Couch Park South Field",
         "category": "exercise",
-        "status": "draft",
+        "status": "verified",
         "description": "The former Burger Bowl field supports informal outdoor recreation.",
         "source_url": "https://crc.gatech.edu/locations/",
         "aliases": [
           "Burger Bowl Field"
         ],
-        "coord_source": "OSM way 34775492 (Burger Bowl Field), field representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 34775492 (Burger Bowl Field), field representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -29,7 +31,7 @@
         "id": "crc-climbing-wall",
         "name": "CRC Climbing Wall",
         "category": "exercise",
-        "status": "draft",
+        "status": "verified",
         "description": "Indoor climbing with bouldering, top-rope and lead routes.",
         "source_url": "https://crc.gatech.edu/locations/",
         "building_id": "crc",
@@ -74,7 +76,9 @@
           "required": true,
           "note": "CRC BuzzCard plus free online Climbing Wall Membership waiver required; check in at 1st floor Main Issue desk during unstaffed hours."
         },
-        "url": "https://crc.gatech.edu/locations/"
+        "url": "https://crc.gatech.edu/locations/",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -90,7 +94,7 @@
         "id": "crc-competition-pool",
         "name": "Coach Herb McAuley Aquatic Center",
         "category": "exercise",
-        "status": "draft",
+        "status": "verified",
         "description": "The CRC competition pool hosts recreational swimming as well as varsity teams.",
         "source_url": "https://crc.gatech.edu/locations/",
         "building_id": "crc",
@@ -142,7 +146,9 @@
           "required": true,
           "note": "Valid CRC membership and BuzzCard required for entry."
         },
-        "url": "https://crc.gatech.edu/locations/"
+        "url": "https://crc.gatech.edu/locations/",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -158,7 +164,7 @@
         "id": "crc-crawford-pool",
         "name": "Vernon D. & Helen D. Crawford Pool",
         "category": "exercise",
-        "status": "draft",
+        "status": "verified",
         "description": "A CRC leisure pool with six lap lanes and a current channel.",
         "source_url": "https://crc.gatech.edu/locations/",
         "building_id": "crc",
@@ -212,7 +218,9 @@
           "required": true,
           "note": "Valid CRC membership and BuzzCard required for entry."
         },
-        "url": "https://crc.gatech.edu/locations/"
+        "url": "https://crc.gatech.edu/locations/",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -228,12 +236,14 @@
         "id": "crc-fitness-floor",
         "name": "CRC Fitness Floor",
         "category": "exercise",
-        "status": "draft",
+        "status": "verified",
         "description": "The first-floor fitness area provides weights and cardio machines.",
         "source_url": "https://crc.gatech.edu/locations/",
         "building_id": "crc",
         "floor_or_suite": "1st floor",
-        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -249,12 +259,14 @@
         "id": "crc-indoor-track",
         "name": "CRC Indoor Track",
         "category": "exercise",
-        "status": "draft",
+        "status": "verified",
         "description": "A fifth-floor running track with 6.5 laps per mile.",
         "source_url": "https://crc.gatech.edu/locations/",
         "building_id": "crc",
         "floor_or_suite": "5th floor",
-        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -270,12 +282,14 @@
         "id": "crc-main-gymnasium",
         "name": "CRC Main Gymnasium",
         "category": "exercise",
-        "status": "draft",
+        "status": "verified",
         "description": "Six multipurpose courts for basketball, volleyball, badminton and fencing.",
         "source_url": "https://crc.gatech.edu/locations/",
         "building_id": "crc",
         "floor_or_suite": "4th floor",
-        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -291,10 +305,12 @@
         "id": "peters-deck-courts",
         "name": "Peters Parking Deck Courts",
         "category": "exercise",
-        "status": "draft",
+        "status": "verified",
         "description": "Outdoor basketball, tennis and pickleball courts on Peters Parking Deck.",
         "source_url": "https://crc.gatech.edu/locations/",
-        "coord_source": "OSM way 42706659 (Peters Parking Deck), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 42706659 (Peters Parking Deck), building representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -310,10 +326,12 @@
         "id": "roe-stamps-recreation-fields",
         "name": "Roe Stamps Recreation Fields and Track",
         "category": "exercise",
-        "status": "draft",
+        "status": "verified",
         "description": "Fields beside the CRC used for recreation, sport clubs and intramurals.",
         "source_url": "https://crc.gatech.edu/locations/",
-        "coord_source": "OSM way 42877981 (Roe Stamps Field), field representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 42877981 (Roe Stamps Field), field representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -336,7 +354,7 @@
         "id": "ken-byers-tennis-complex",
         "name": "Ken Byers Tennis Complex",
         "category": "exercise",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "Byers Tennis Complex"
         ],
@@ -391,7 +409,9 @@
         "confidence": "high",
         "building_id": "ken-byers-tennis-complex",
         "coord_source": "OSM way 42789686 (David research)",
-        "coord_precision": "exact"
+        "coord_precision": "exact",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     }
   ]

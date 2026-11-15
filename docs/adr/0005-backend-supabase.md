@@ -1,7 +1,7 @@
 <!-- summary: Proposed/open: Supabase vs server/ on Alexandria for reports, density, availability. -->
 # ADR-0005: Supabase for user-generated data
 
-- **Status:** Proposed
+- **Status:** Accepted (David, 2026-11-15; Tato to confirm)
 - **Date:** 2026-11-14
 - **Deciders:** _TBD_ (ratify at M0)
 - **Related:** F-07 (posting), F-08, F-10, F-11; Risks R-05, R-09, R-14

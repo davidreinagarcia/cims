@@ -14,7 +14,7 @@
         "id": "w02-student-center-parking-deck",
         "name": "W02: Student Center Parking Deck",
         "category": "transport",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "W02",
           "Student Center Deck"
@@ -32,7 +32,9 @@
         "confidence": "medium",
         "building_id": "student-center-parking-deck",
         "coord_source": "building centroid: student-center-parking-deck",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -48,7 +50,7 @@
         "id": "w22-dalney-parking-deck",
         "name": "W22: Dalney Parking Deck",
         "category": "transport",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "W22",
           "Dalney Deck"
@@ -66,7 +68,9 @@
         "confidence": "medium",
         "building_id": "dalney-street-parking-deck",
         "coord_source": "building centroid: dalney-street-parking-deck",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -82,7 +86,7 @@
         "id": "e81-tech-square-parking-deck",
         "name": "E81: Tech Square Parking Deck",
         "category": "transport",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "E81",
           "Tech Square Parking Deck"
@@ -100,7 +104,9 @@
         "confidence": "medium",
         "building_id": "technology-square-parking-deck",
         "coord_source": "building centroid: technology-square-parking-deck",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -116,7 +122,7 @@
         "id": "coda-parking-garage",
         "name": "Coda Building Parking Garage",
         "category": "transport",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "Coda Deck"
         ],
@@ -132,7 +138,9 @@
         "confidence": "medium",
         "building_id": "coda",
         "coord_source": "building centroid: coda",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -148,7 +156,7 @@
         "id": "w02-bike-room-fix-it",
         "name": "W02 Bike Room and Bike Repair Station",
         "category": "transport",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "Student Center Bike Room"
         ],
@@ -166,7 +174,9 @@
         "confidence": "high",
         "building_id": "student-center-parking-deck",
         "coord_source": "building centroid: student-center-parking-deck",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -182,7 +192,7 @@
         "id": "w22-bike-room-fix-it",
         "name": "W22 Dalney Bike Room and Fix-It Station",
         "category": "transport",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "Dalney Bike Room"
         ],
@@ -200,7 +210,9 @@
         "confidence": "high",
         "building_id": "dalney-street-parking-deck",
         "coord_source": "building centroid: dalney-street-parking-deck",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -216,7 +228,7 @@
         "id": "marta-north-avenue-station",
         "name": "MARTA North Avenue Station",
         "category": "transport",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "North Avenue MARTA"
         ],
@@ -231,7 +243,9 @@
         "source_url": "https://techsupport.gatech.edu/contact-us",
         "confidence": "medium",
         "coord_source": "OSM node 69286902 (David research)",
-        "coord_precision": "exact"
+        "coord_precision": "exact",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -247,7 +261,7 @@
         "id": "marta-midtown-station",
         "name": "MARTA Midtown Station",
         "category": "transport",
-        "status": "draft",
+        "status": "verified",
         "aliases": [
           "Midtown MARTA"
         ],
@@ -262,7 +276,9 @@
         "source_updated": "2025-09-29",
         "confidence": "medium",
         "coord_source": "OSM node 69286872 (David research)",
-        "coord_precision": "exact"
+        "coord_precision": "exact",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     }
   ]

@@ -1,6 +1,6 @@
-/** @file Demo session context with cancellable sign-in and one pending action to resume. */
+/** @file Session context over Supabase demo accounts with cancellable sign-in and one pending action to resume. */
 import { createContext, useCallback, useContext, useMemo, useRef, useState, type ReactNode } from "react";
-import { mockAdapter } from "../auth/mockAdapter";
+import { supabaseAuthAdapter } from "../auth/supabaseAdapter";
 import type { AuthAdapter, Persona, Session } from "../auth/types";
 
 type AuthApi = {
@@ -15,7 +15,7 @@ type AuthApi = {
 const AuthContext = createContext<AuthApi | null>(null);
 
 /** Provides demo identity and resumes a requested action after the success screen. */
-export function AuthProvider({ children, adapter = mockAdapter }: { children: ReactNode; adapter?: AuthAdapter }) {
+export function AuthProvider({ children, adapter = supabaseAuthAdapter }: { children: ReactNode; adapter?: AuthAdapter }) {
   const [session, setSession] = useState(() => adapter.restore());
   const [dialogOpen, setDialogOpen] = useState(false);
   const pending = useRef<(() => void) | null>(null);

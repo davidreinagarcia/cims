@@ -1,4 +1,4 @@
-/** @file Map-first app shell (docs/design/APP-SHELL.md): full-bleed map with rail or tab bar, search pill, chips, and a card or sheet for panels. */
+/** @file Map-first app shell (docs/design/APP-SHELL.md): full-bleed map with rail or tab bar, search pill, chips, a card or sheet for panels, and full-screen Bulletin/BuzzPrint views. */
 import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import MapView from "../components/MapView";
 import OfflineBanner from "../components/OfflineBanner";
@@ -14,7 +14,8 @@ import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinBoard from "../panels/bulletin/BulletinBoard";
 import PoliceView from "../panels/police/PoliceView";
 import ReportPanel from "../panels/report";
-import RoomFinderPanel from "../panels/rooms/RoomFinderPanel";
+import RoomsBoard from "../panels/rooms/RoomsBoard";
+import PortfolioPage from "../portfolio/PortfolioPage";
 import StoriesPanel from "../stories/StoriesPanel";
 import { useStories } from "../stories/store";
 import { bulletinUrl, readBulletinParams, type PostType } from "../lib/bulletin";
@@ -32,7 +33,7 @@ import SearchPill from "./SearchPill";
 import "./shell.css";
 
 const MOBILE = "(max-width: 767.98px)";
-const PANELS: ShellPanel[] = ["explore", "rooms", "report", "bulletin", "stories", "route"];
+const PANELS: ShellPanel[] = ["explore", "rooms", "report", "bulletin", "stories", "route", "buzzprint"];
 const KINDS: SelectionKind[] = ["building", "place", "room", "report"];
 
 function useIsMobile(): boolean {
@@ -43,10 +44,10 @@ function useIsMobile(): boolean {
   }, () => window.matchMedia(MOBILE).matches);
 }
 
-/** Read a shareable shell panel; legacy bulletin links open the full-screen board instead. */
+/** Read a shareable shell panel; bulletin and buzzprint are full-screen views with their own open flag, not a `panel` value. */
 function initialPanel(): ShellPanel {
   const panel = new URLSearchParams(window.location.search).get("panel") as ShellPanel | null;
-  return panel && panel !== "bulletin" && PANELS.includes(panel) ? panel : "explore";
+  return panel && panel !== "bulletin" && panel !== "buzzprint" && PANELS.includes(panel) ? panel : "explore";
 }
 
 function initialBulletin() {
@@ -85,6 +86,10 @@ export default function Shell() {
   const [bulletin, setBulletin] = useState(initialBulletin);
   const bulletinOpener = useRef<HTMLElement | null>(null);
   const bulletinWasOpen = useRef(false);
+  // BuzzPrint (T-71) is a full-screen view like the bulletin, with its own open flag outside `panel`.
+  const [buzzprintOpen, setBuzzprintOpen] = useState(false);
+  const buzzprintOpener = useRef<HTMLElement | null>(null);
+  const buzzprintWasOpen = useRef(false);
   const [hasQuery, setHasQuery] = useState(false);
   const [snap, setSnap] = useState<SheetSnap>("half");
   const { banners, dismiss } = useAlertBanners();
@@ -122,6 +127,17 @@ export default function Shell() {
   };
 
   useEffect(() => {
+    if (buzzprintWasOpen.current && !buzzprintOpen) {
+      const opener = buzzprintOpener.current;
+      const target = opener?.isConnected ? opener : document.querySelector<HTMLElement>('[data-nav="buzzprint"]');
+      target?.focus();
+    }
+    buzzprintWasOpen.current = buzzprintOpen;
+  }, [buzzprintOpen]);
+
+  const closeBuzzprint = () => setBuzzprintOpen(false);
+
+  useEffect(() => {
     const raw = new URLSearchParams(window.location.search).get("select");
     const [kind, ...rest] = raw?.split(":") ?? [];
     if (KINDS.includes(kind as SelectionKind) && rest.length) select({ kind: kind as SelectionKind, id: rest.join(":") });
@@ -148,6 +164,13 @@ export default function Shell() {
       select(null);
       return;
     }
+    if (next === "buzzprint") {
+      buzzprintOpener.current = document.querySelector<HTMLElement>('[data-nav="buzzprint"]');
+      setBuzzprintOpen(true);
+      setPanel("explore");
+      select(null);
+      return;
+    }
     if (next !== "explore" && next === panel) setPanel("explore"); // pressing the open item again closes it
     else {
       if (next === "route") setRouteTo(selection);
@@ -159,7 +182,8 @@ export default function Shell() {
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (event.key !== "Escape" || event.defaultPrevented || dialogOpen || bulletin.open) return;
+      // Rooms and BuzzPrint are modal dialogs (like BulletinBoard) that handle their own Escape via onCancel.
+      if (event.key !== "Escape" || event.defaultPrevented || dialogOpen || bulletin.open || panel === "rooms" || buzzprintOpen) return;
       if (document.querySelector(".building-view")) return; // the indoor screen handles its own Esc
       if (panel !== "explore" || selection) { event.preventDefault(); closeContent(); }
     };
@@ -168,8 +192,8 @@ export default function Shell() {
   });
 
   let content: { title: string; key: string; body: ReactNode } | null = null;
-  if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <RoomFinderPanel /> };
-  else if (panel === "report") {
+  // "rooms" is a full-screen takeover like the bulletin board (RoomsBoard, below), not a floating-card panel.
+  if (panel === "report") {
     // Keyed by the selected place/building (when there is one) so the flow resets for a new "Report an issue".
     const reportKey = selection?.kind === "report" ? `report:${selection.id}` : "report";
     content = { title: "Report", key: reportKey, body: <ReportPanel key={reportKey} onClose={() => setPanel("explore")} /> };
@@ -224,7 +248,7 @@ export default function Shell() {
     <div className="app cims" data-layout={mobile ? "mobile" : "desktop"} data-alert={banners.length > 0 ? "true" : undefined}>
       <AlertBanner banners={banners} onDismiss={dismiss} />
       <SignInDialog />
-      {!mobile && <Rail panel={bulletin.open ? "bulletin" : panel} onPanel={choosePanel} onPolice={() => setPolice(true)} />}
+      {!mobile && <Rail panel={bulletin.open ? "bulletin" : buzzprintOpen ? "buzzprint" : panel} onPanel={choosePanel} onPolice={() => setPolice(true)} />}
       <div className="stage">
         <MapView />
         <BuildingView />
@@ -253,11 +277,13 @@ export default function Shell() {
       {mobile && content && (
         <BottomSheet title={content.title} contentKey={content.key} snap={snap} onSnap={setSnap} onClose={closeContent}>{content.body}</BottomSheet>
       )}
-      {mobile && <MobileTabBar panel={bulletin.open ? "bulletin" : panel} onPanel={choosePanel} />}
+      {mobile && <MobileTabBar panel={bulletin.open ? "bulletin" : buzzprintOpen ? "buzzprint" : panel} onPanel={choosePanel} />}
       <OfflineBanner />
       {policeOpen && <PoliceView onClose={() => setPolice(false)} />}
+      {panel === "rooms" && <RoomsBoard onClose={closeContent} />}
       {bulletin.open && <BulletinBoard type={bulletin.type} onClose={closeBulletin}
         onType={(type) => { writeBulletinUrl(type); setBulletin({ open: true, type }); }} />}
+      {buzzprintOpen && <PortfolioPage onClose={closeBuzzprint} />}
     </div>
   );
 }

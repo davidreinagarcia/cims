@@ -3,13 +3,10 @@ import type { AuthAdapter, Persona, Session } from "./types";
 
 const SESSION_KEY = "cims.session.v1";
 
-/** Demo role descriptions describe possible future capabilities, never enforced permissions. */
-export const DEMO_PERSONAS: readonly Persona[] = [
-  { displayName: "Demo Student", role: "student", description: "Would post reports, add +1 votes and share fullness updates." },
-  { displayName: "Demo Club Officer", role: "officer", description: "Would share club events and organisation updates." },
-  { displayName: "Demo Facilities Staff", role: "staff", description: "Would update maintenance reports and repair progress." },
-  { displayName: "Demo Moderator", role: "moderator", description: "Would review community posts and handle flagged content." },
-];
+import { DEMO_ACCOUNTS } from "./accounts";
+
+/** Offline fallback list: the same accounts as Supabase, used only if the backend is unreachable. */
+export const DEMO_PERSONAS: readonly Persona[] = DEMO_ACCOUNTS;
 
 /** Pretends to sign in with fictional accounts; storage failure never blocks the demo. */
 export const mockAdapter: AuthAdapter = {
