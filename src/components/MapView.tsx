@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import { CAMPUS } from "../config";
 import { baseStyle } from "../map/baseStyle";
+import { LocateControl } from "../map/furniture/LocateControl";
 import { NorthArrow } from "../map/furniture/NorthArrow";
 import { ScaleBox } from "../map/furniture/ScaleBox";
 import { ViewToggle } from "../map/furniture/ViewToggle";
@@ -53,6 +54,7 @@ export default function MapView() {
       m.addControl(new ScaleBox(), "bottom-right");
       m.addControl(new maplibregl.NavigationControl({ showZoom: false }), "bottom-right");
       m.addControl(new ViewToggle(), "bottom-right");
+      m.addControl(new LocateControl(), "bottom-right");
       m.addControl(new maplibregl.NavigationControl({ showCompass: false }), "bottom-right");
       m.addControl(new NorthArrow(), "bottom-left");
 

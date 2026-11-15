@@ -1,15 +1,16 @@
 #!/usr/bin/env node
 /** @file Generates folder INDEX.md files, the global INDEX.md and docs/FUNCTIONS.md from the repo. Zero deps. */
-// Usage: node scripts/gen-index.mjs [--check] [--quiet] [--json]
+// Usage: node scripts/gen-index.mjs [--check] [--quiet] [--json] [--files-from <file>]
 //   (no flag)  regenerate everything in place
 //   --check    don't write; exit 1 if anything is stale or a relative link is broken (CI)
 //   --json     print a machine-readable report (used by the Claude Stop hook)
 // Hand-written text OUTSIDE the AUTO markers is preserved. Never edit inside them.
 import { execSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join, posix, basename, extname } from "node:path";
 
-const ROOT = execSync("git rev-parse --show-toplevel").toString().trim();
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const args = new Set(process.argv.slice(2));
 const CHECK = args.has("--check");
 const QUIET = args.has("--quiet");
@@ -31,8 +32,12 @@ const CODE = new Set([".ts", ".tsx", ".js", ".mjs", ".cjs"]);
 const MAX = 110;
 
 // ---------- file list (respects .gitignore, includes untracked) ----------
-const files = execSync("git ls-files -co --exclude-standard", { cwd: ROOT })
-  .toString().split("\n").filter(Boolean)
+// --files-from accepts a newline-separated inventory when git use is disallowed.
+const inventoryAt = process.argv.indexOf("--files-from");
+const inventory = inventoryAt > 0
+  ? readFileSync(process.argv[inventoryAt + 1], "utf8")
+  : execSync("git ls-files -co --exclude-standard", { cwd: ROOT }).toString();
+const files = inventory.split("\n").filter(Boolean)
   .filter((f) => existsSync(join(ROOT, f)))
   .filter((f) => !isGenerated(f))
   .filter((f) => !SKIP_DIRS.some((d) => f.startsWith(d + "/")))
@@ -96,6 +101,7 @@ function jsonSummary(f, text) {
 }
 
 function summarize(f) {
+  if (basename(f) === "package-lock.json") return "npm lockfile (don't read; don't hand-edit)";
   const ext = extname(f).toLowerCase();
   if ([".png", ".jpg", ".jpeg", ".gif", ".webp", ".ico"].includes(ext)) return "image";
   if (ext === ".svg") return "SVG image";

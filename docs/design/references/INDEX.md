@@ -14,6 +14,7 @@ Reference images (Gemini mockups). Mood references, not specs; their data is fak
 - [`indoor-concept-D-mobile.jpg`](indoor-concept-D-mobile.jpg): image
 - [`indoor-current-2026-11-14.jpg`](indoor-current-2026-11-14.jpg): image
 - [`layers-legend-01.webp`](layers-legend-01.webp): image
+- [`locate-marker-ref.webp`](locate-marker-ref.webp): image
 - [`map-direction-01.webp`](map-direction-01.webp): image
 - [`map-variations-01.webp`](map-variations-01.webp): image
 - [`search-01.webp`](search-01.webp): image

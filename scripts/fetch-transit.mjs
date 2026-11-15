@@ -7,9 +7,9 @@
 //   The older wrapper gtbuses.herokuapp.com is dead for GT (NextBus feed ended 2019): don't use it.
 import { readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { execSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 
-const ROOT = execSync("git rev-parse --show-toplevel").toString().trim();
+const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const OUT = join(ROOT, "src/data/transit.geojson");
 const SOURCE_URL = "https://bus.gatech.edu/";
 const ENDPOINT = "https://bus.gatech.edu/Services/JSONPRelay.svc/GetRoutesForMapWithScheduleWithEncodedLine";
@@ -61,7 +61,7 @@ for (const r of routes.filter((x) => x.IsVisibleOnMap && x.EncodedPolyline).sort
   const name = clean(r.Description);
   features.push({
     type: "Feature",
-    properties: { id: `route-${r.RouteID}`, kind: "route", category: "transport", route_id: r.RouteID, name, service_hours: clean(r.InfoText.replace(/\n/g, " · ")).replace(/ ·$/, "") || null, ...provenance },
+    properties: { id: `route-${r.RouteID}`, kind: "route", category: "transport", route_id: r.RouteID, name, color: /^#[0-9a-f]{6}$/i.test(r.MapLineColor ?? "") ? r.MapLineColor.toLowerCase() : null, service_hours: clean(r.InfoText.replace(/\n/g, " · ")).replace(/ ·$/, "") || null, ...provenance },
     geometry: { type: "LineString", coordinates: decodePolyline(r.EncodedPolyline) },
   });
   for (const s of r.Stops ?? []) {

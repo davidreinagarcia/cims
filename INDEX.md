@@ -29,11 +29,14 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
       - [`docs/design/screenshots/bulletin/`](docs/design/screenshots/bulletin/INDEX.md): Production screenshots at 1440, 1280, 390 and 360 px: map, full-screen cork board and the empty Lost & Found…
       - [`docs/design/screenshots/data-attach/`](docs/design/screenshots/data-attach/INDEX.md): Production screenshots with drafts visible at 1440, 1280, 390 and 360 pixels.
       - [`docs/design/screenshots/indoor/`](docs/design/screenshots/indoor/INDEX.md): Indoor screen polish (concepts A and D): production build at 1440, 1280, 390 and 360 px for Kendeda, a CULC d…
+      - [`docs/design/screenshots/locate/`](docs/design/screenshots/locate/INDEX.md): Production screenshots of the ground-aligned CIMS location marker at 1440×900 and 390×844, including isolated…
+      - [`docs/design/screenshots/transport/`](docs/design/screenshots/transport/INDEX.md): Production transport screenshots at 1440, 1280, 390 and 360 px; official route colors and the locate control.
   - [`docs/research/`](docs/research/INDEX.md): Fuentes y dudas pendientes de las investigaciones de datos del campus.
   - [`docs/stickers/`](docs/stickers/INDEX.md): QR codes and the link list for the door stickers that open a building with the entrance preselected.
   - [`docs/testing/`](docs/testing/INDEX.md): Test plans with people (hallway tests).
 - [`public/`](public/INDEX.md): Static assets served as-is at the site root.
 - [`scripts/`](scripts/INDEX.md): Dev tooling run with Node (no deps): index generator, Claude hooks, data fetchers.
+  - [`scripts/fixtures/`](scripts/fixtures/INDEX.md): Saved official GT tracker responses for reproducible offline transit imports.
 - [`server/`](server/INDEX.md): Real-time alerts backend (Node, no dependencies); see README.md.
 - [`src/`](src/INDEX.md): The web app (Vite + React + TypeScript + MapLibre). Entry: main.tsx → App.tsx.
   - [`src/alerts/`](src/alerts/INDEX.md): Top-of-page banner for live GTPD alarms and the all-clear.
