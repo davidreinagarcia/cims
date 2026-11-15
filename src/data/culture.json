@@ -326,8 +326,8 @@
     {
       "id": "east",
       "label": "East",
-      "lng": -84.3875,
-      "lat": 33.7742,
+      "lng": -84.3898,
+      "lat": 33.7718,
       "approx": true,
       "blurb": "the heart of the action"
     }

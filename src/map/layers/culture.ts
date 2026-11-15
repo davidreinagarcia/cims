@@ -6,7 +6,7 @@ import { CULTURE_AREAS, CULTURE_NOTES, doodleFor, type CultureNote } from "../..
 import { loadMapLibre } from "../maplibre";
 import "../culture.css";
 
-const CAMPUS_CENTER: [number, number] = [-84.3975, 33.7766];
+const CAMPUS_CENTER: [number, number] = [-84.3975, 33.7761];
 
 /** A tilted post-it with tape, the note's doodle and its title in handwriting. */
 function stampEl(n: CultureNote): HTMLElement {
