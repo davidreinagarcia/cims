@@ -1,9 +1,1087 @@
 {
-  "description": "Clough Undergraduate Learning Commons indoor model: no floor-plan source found yet, so no levels.",
+  "description": "Clough Undergraduate Learning Commons room finder from published facts, without floor plan geometry.",
   "building_id": "g-wayne-clough-undergraduate-learning-commons",
   "title": "G. Wayne Clough Undergraduate Learning Commons",
-  "status": "no-plan",
-  "credit": "",
+  "status": "rooms-only",
+  "credit": "Room numbers, levels and capacities as published by Georgia Tech (Registrar Spring 27 centrally scheduled room list, A/V Services, Library reservation pages). No floor plan is shown: no drawing with a licence we can use was found.",
   "source_url": "",
-  "levels": []
+  "levels": [
+    {
+      "id": "1",
+      "label": "1",
+      "name": "Level 1",
+      "available": false,
+      "note": "No plan drawn yet"
+    },
+    {
+      "id": "2",
+      "label": "2",
+      "name": "Level 2",
+      "available": false,
+      "note": "No plan drawn yet"
+    },
+    {
+      "id": "3",
+      "label": "3",
+      "name": "Level 3",
+      "available": false,
+      "note": "No plan drawn yet"
+    },
+    {
+      "id": "4",
+      "label": "4",
+      "name": "Level 4",
+      "available": false,
+      "note": "No plan drawn yet"
+    },
+    {
+      "id": "5",
+      "label": "5",
+      "name": "Level 5",
+      "available": false,
+      "note": "No plan drawn yet"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "culc-102",
+      "room": "102",
+      "level": "1",
+      "name": "Distance Learning Classroom",
+      "type": "classroom",
+      "capacity": 70,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 102; CAPACITY 70; DLPE - Integrated Active & Distance Learning. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-106",
+      "room": "106",
+      "level": null,
+      "name": "Classroom Service",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Classroom Service > 106; Seating: None. La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-123",
+      "room": "123",
+      "level": "1",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 30,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 123; CAPACITY 30; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-125",
+      "room": "125",
+      "level": "1",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 30,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 125; CAPACITY 30; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-127",
+      "room": "127",
+      "level": "1",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 32,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 127; CAPACITY 32; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-129",
+      "room": "129",
+      "level": "1",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 36,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 129; CAPACITY 36; Integrated     Active Learning. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-131",
+      "room": "131",
+      "level": "1",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 30,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 131; CAPACITY 30; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-142",
+      "room": "142",
+      "level": null,
+      "name": "Classroom Service",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Classroom Service > 142; Seating: None. La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-144",
+      "room": "144",
+      "level": "1",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 305,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 144; CAPACITY 305; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-144a",
+      "room": "144A",
+      "level": null,
+      "name": "Classroom Service",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Classroom Service > 144A; Seating: None. La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-144b",
+      "room": "144B",
+      "level": null,
+      "name": "Classroom Service",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Classroom Service > 144B; Seating: None. La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-146",
+      "room": "146",
+      "level": "1",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 12,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 146; CAPACITY 12; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-148",
+      "room": "148",
+      "level": null,
+      "name": "Classroom Service",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Classroom Service > 148; Seating: None. La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-150",
+      "room": "150",
+      "level": "1",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 12,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 150; CAPACITY 12; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-152",
+      "room": "152",
+      "level": "1",
+      "name": "Distance Learning Classroom",
+      "type": "classroom",
+      "capacity": 305,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 152; CAPACITY 305; DLPE - Integrated Distance Learning. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-152a",
+      "room": "152A",
+      "level": null,
+      "name": "Classroom Service",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Classroom Service > 152A; Seating: None. La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-152b",
+      "room": "152B",
+      "level": null,
+      "name": "Classroom Service",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Classroom Service > 152B; Seating: None. La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-154",
+      "room": "154",
+      "level": null,
+      "name": "Classroom Service",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Classroom Service > 154; Seating: None. La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-205",
+      "room": "205",
+      "level": "2",
+      "name": "Academic Services",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 2, número 205. Leyenda y pictograma de Academic Services."
+    },
+    {
+      "id": "culc-215",
+      "room": "215",
+      "level": "2",
+      "name": "Technology Support",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://w1.calendar.oit.gatech.edu/event/2024/11/26/drop-support-duo-phone-call-2fa-phase-out-0",
+      "source_note": "Evento del 26 de noviembre de 2024: Location Clough 215 y párrafo de atención técnica presencial. Referencia histórica, no horario actual. Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-242",
+      "room": "242",
+      "level": "2",
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 6,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 242 (Capacity 6). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Rango literal 242–252, sin crear las salas intermedias ausentes de otras fuentes."
+    },
+    {
+      "id": "culc-244",
+      "room": "244",
+      "level": "2",
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 6,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 244 (Capacity 6). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Rango literal 242–252, sin crear las salas intermedias ausentes de otras fuentes."
+    },
+    {
+      "id": "culc-246",
+      "room": "246",
+      "level": "2",
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 6,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 246 (Capacity 6). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Rango literal 242–252, sin crear las salas intermedias ausentes de otras fuentes."
+    },
+    {
+      "id": "culc-248",
+      "room": "248",
+      "level": "2",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 8,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 248; CAPACITY 8; Limited      Offline Until Further Notice. Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Rango literal 242–252, sin crear las salas intermedias ausentes de otras fuentes. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-250",
+      "room": "250",
+      "level": "2",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 8,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 250; CAPACITY 8; Limited. Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Rango literal 242–252, sin crear las salas intermedias ausentes de otras fuentes. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-252",
+      "room": "252",
+      "level": "2",
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 6,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 252 (Capacity 6). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Rango literal 242–252, sin crear las salas intermedias ausentes de otras fuentes."
+    },
+    {
+      "id": "culc-262",
+      "room": "262",
+      "level": "2",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 36,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 262; CAPACITY 36; Integrated     Active Learning. Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-272",
+      "room": "272",
+      "level": "2",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 32,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 272; CAPACITY 32; Integrated     Restricted Use (after 1:30 PM). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-273",
+      "room": "273",
+      "level": "2",
+      "name": "Academic Services",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 2, número 273. Leyenda y pictograma de Academic Services."
+    },
+    {
+      "id": "culc-274",
+      "room": "274",
+      "level": "2",
+      "name": "Room 274",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 2, número 274. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
+    },
+    {
+      "id": "culc-277",
+      "room": "277",
+      "level": "2",
+      "name": "Academic Services",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 2, número 277. Leyenda y pictograma de Academic Services."
+    },
+    {
+      "id": "culc-278",
+      "room": "278",
+      "level": "2",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 30,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 278; CAPACITY 30; Integrated     Restricted Use (after 12:30 PM). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-280",
+      "room": "280",
+      "level": "2",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 27,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 280; CAPACITY 27; Integrated     Restricted Use (after 12:30 PM). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-283",
+      "room": "283",
+      "level": "2",
+      "name": "Academic Services",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 2, número 283. Leyenda y pictograma de Academic Services."
+    },
+    {
+      "id": "culc-285",
+      "room": "285",
+      "level": "2",
+      "name": "Room 285",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 2, número 285. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
+    },
+    {
+      "id": "culc-305",
+      "room": "305",
+      "level": "3",
+      "name": "Room 305",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 3, número 305. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
+    },
+    {
+      "id": "culc-307",
+      "room": "307",
+      "level": "3",
+      "name": "Room 307",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 3, número 307. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
+    },
+    {
+      "id": "culc-315",
+      "room": "315",
+      "level": "3",
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 6,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 315 (Capacity 6). Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-317",
+      "room": "317",
+      "level": "3",
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 6,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 317 (Capacity 6). Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-323",
+      "room": "323",
+      "level": "3",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 24,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 323; CAPACITY 24; Integrated. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-325",
+      "room": "325",
+      "level": "3",
+      "name": "General Classroom",
+      "type": "classroom",
+      "capacity": 30,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 325; CAPACITY 30; Integrated. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-331",
+      "room": "331",
+      "level": "3",
+      "name": "Room 331",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 3, número 331. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
+    },
+    {
+      "id": "culc-333",
+      "room": "333",
+      "level": "3",
+      "name": "Room 333",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 3, número 333. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
+    },
+    {
+      "id": "culc-335",
+      "room": "335",
+      "level": "3",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 335; Seating: 24. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-341",
+      "room": "341",
+      "level": "3",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 341; Seating: 24. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-342",
+      "room": "342",
+      "level": "3",
+      "name": "Podcast Room",
+      "type": "study",
+      "capacity": 6,
+      "source_url": "https://libcal.library.gatech.edu/reserve/podcast",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 342 (Capacity 6). Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-344",
+      "room": "344",
+      "level": "3",
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 6,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 344 (Capacity 6). Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-346",
+      "room": "346",
+      "level": "3",
+      "name": "Class Laboratory - Dry",
+      "type": "lab",
+      "capacity": 30,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Dry > 346; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-357",
+      "room": "357",
+      "level": "3",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 357; Seating: 24. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-362",
+      "room": "362",
+      "level": "3",
+      "name": "Class Laboratory - Dry",
+      "type": "lab",
+      "capacity": 30,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Dry > 362; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-363",
+      "room": "363",
+      "level": "3",
+      "name": "Lab Space",
+      "type": "lab",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 3, número 363. Leyenda y pictograma de Lab Space."
+    },
+    {
+      "id": "culc-365",
+      "room": "365",
+      "level": "3",
+      "name": "Room 365",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 3, número 365. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
+    },
+    {
+      "id": "culc-367",
+      "room": "367",
+      "level": "3",
+      "name": "Meeting Space",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 3, número 367. Leyenda y pictograma de Meeting Space."
+    },
+    {
+      "id": "culc-372",
+      "room": "372",
+      "level": "3",
+      "name": "Class Laboratory - Dry",
+      "type": "lab",
+      "capacity": 30,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Dry > 372; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-373",
+      "room": "373",
+      "level": "3",
+      "name": "Class Laboratory - Dry",
+      "type": "lab",
+      "capacity": 30,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Dry > 373; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-375",
+      "room": "375",
+      "level": "3",
+      "name": "Class Laboratory - Dry",
+      "type": "lab",
+      "capacity": 30,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Dry > 375; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-381",
+      "room": "381",
+      "level": "3",
+      "name": "Room 381",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 3, número 381. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
+    },
+    {
+      "id": "culc-382",
+      "room": "382",
+      "level": "3",
+      "name": "Class Laboratory - Dry",
+      "type": "lab",
+      "capacity": 30,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Dry > 382; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-383",
+      "room": "383",
+      "level": "3",
+      "name": "Class Laboratory - Dry",
+      "type": "lab",
+      "capacity": 30,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Dry > 383; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-385",
+      "room": "385",
+      "level": "3",
+      "name": "Room 385",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 3, número 385. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
+    },
+    {
+      "id": "culc-387",
+      "room": "387",
+      "level": "3",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 30,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 387; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-421",
+      "room": "421",
+      "level": "4",
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 6,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 421 (Capacity 6). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-423",
+      "room": "423",
+      "level": "4",
+      "name": "Distance Learning Classroom",
+      "type": "classroom",
+      "capacity": 44,
+      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
+      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 423; CAPACITY 44; DLPE - Integrated Active & Distance Learning. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
+    },
+    {
+      "id": "culc-423a",
+      "room": "423A",
+      "level": null,
+      "name": "Classroom Service",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Classroom Service > 423A; Seating: None. La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-441",
+      "room": "441",
+      "level": "4",
+      "name": "IBM Room",
+      "type": "other",
+      "capacity": 8,
+      "source_url": "https://libcal.library.gatech.edu/reserve/clough_rehearsal_rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 441 (IBM Room) (Capacity 8). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-443",
+      "room": "443",
+      "level": "4",
+      "name": "McKinsey Room",
+      "type": "other",
+      "capacity": 8,
+      "source_url": "https://libcal.library.gatech.edu/reserve/clough_rehearsal_rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 443 (McKinsey Room) (Capacity 8). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-445",
+      "room": "445",
+      "level": "4",
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 9,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 445 (Capacity 9). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-447",
+      "room": "447",
+      "level": "4",
+      "name": "Naugle Writing and Communication Center",
+      "type": "office",
+      "capacity": null,
+      "source_url": "https://www.communicationcenter.gatech.edu/",
+      "source_note": "Location and Hours: located in 447 Clough; indicaciones al salir de los ascensores on the 4th floor. Fall 2026 hours. No aforo publicado."
+    },
+    {
+      "id": "culc-448",
+      "room": "448",
+      "level": "4",
+      "name": "Ben & Jerry’s/Greenscreen Room",
+      "type": "other",
+      "capacity": 6,
+      "source_url": "https://libcal.library.gatech.edu/reserve/clough_rehearsal_rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 448 (Ben & Jerry’s/Greenscreen Room) (Capacity 6). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-450",
+      "room": "450",
+      "level": "4",
+      "name": "Google Room",
+      "type": "other",
+      "capacity": 6,
+      "source_url": "https://libcal.library.gatech.edu/reserve/clough_rehearsal_rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 450 (Google Room) (Capacity 6). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-455",
+      "room": "455",
+      "level": "4",
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 9,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 455 (Capacity 9). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-457",
+      "room": "457",
+      "level": "4",
+      "name": "Office Space",
+      "type": "office",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 4, número 457. Leyenda y pictograma de Office Space."
+    },
+    {
+      "id": "culc-462",
+      "room": "462",
+      "level": "4",
+      "name": "Room 462",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 4, número 462. Número visible sin pictograma de uso propio inequívoco; no se infiere función por color o proximidad."
+    },
+    {
+      "id": "culc-464",
+      "room": "464",
+      "level": "4",
+      "name": "Room 464",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 4, número 464. Número visible sin pictograma de uso propio inequívoco; no se infiere función por color o proximidad."
+    },
+    {
+      "id": "culc-466",
+      "room": "466",
+      "level": "4",
+      "name": "Room 466",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 4, número 466. Número visible sin pictograma de uso propio inequívoco; no se infiere función por color o proximidad."
+    },
+    {
+      "id": "culc-469",
+      "room": "469",
+      "level": "4",
+      "name": "Conference Room",
+      "type": "other",
+      "capacity": 20,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Conference Room > 469; Seating: 20. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-473",
+      "room": "473",
+      "level": "4",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 473; Seating: 24. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-474",
+      "room": "474",
+      "level": "4",
+      "name": "Room 474",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 4, número 474. Número visible sin pictograma de uso propio inequívoco; no se infiere función por color o proximidad."
+    },
+    {
+      "id": "culc-475",
+      "room": "475",
+      "level": "4",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 475; Seating: 24. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-478",
+      "room": "478",
+      "level": "4",
+      "name": "Lab Space",
+      "type": "lab",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 4, número 478. Leyenda y pictograma de Lab Space."
+    },
+    {
+      "id": "culc-479",
+      "room": "479",
+      "level": "4",
+      "name": "Room 479",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 4, número 479. Número visible sin pictograma de uso propio inequívoco; no se infiere función por color o proximidad."
+    },
+    {
+      "id": "culc-481",
+      "room": "481",
+      "level": "4",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 481; Seating: 24. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-483",
+      "room": "483",
+      "level": "4",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 483; Seating: 24. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-487",
+      "room": "487",
+      "level": "4",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 487; Seating: 24. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-489",
+      "room": "489",
+      "level": "4",
+      "name": "Office Space",
+      "type": "office",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 4, número 489. Leyenda y pictograma de Office Space."
+    },
+    {
+      "id": "culc-571",
+      "room": "571",
+      "level": "5",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 571; Seating: 24. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-572",
+      "room": "572",
+      "level": "5",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 28,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 572; Seating: 28. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-572a",
+      "room": "572A",
+      "level": null,
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 4,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 572A (Capacity 4). La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-572b",
+      "room": "572B",
+      "level": null,
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 4,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 572B (Capacity 4). La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-572c",
+      "room": "572C",
+      "level": null,
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 4,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 572C (Capacity 4). La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-572d",
+      "room": "572D",
+      "level": null,
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 4,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 572D (Capacity 4). La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-573",
+      "room": "573",
+      "level": "5",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 573; Seating: 24. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-575",
+      "room": "575",
+      "level": "5",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 575; Seating: 24. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-578",
+      "room": "578",
+      "level": "5",
+      "name": "Lab Space",
+      "type": "lab",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 5, número 578. Leyenda y pictograma de Lab Space."
+    },
+    {
+      "id": "culc-581",
+      "room": "581",
+      "level": "5",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 581; Seating: 24. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-584",
+      "room": "584",
+      "level": "5",
+      "name": "Lab Space",
+      "type": "lab",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 5, número 584. Leyenda y pictograma de Lab Space."
+    },
+    {
+      "id": "culc-585",
+      "room": "585",
+      "level": null,
+      "name": "Study Room",
+      "type": "study",
+      "capacity": 4,
+      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+      "source_note": "Recurso de la cuadrícula de reservas: Clough 585 (Capacity 4). La fuente no declara la planta; no se deduce del número."
+    },
+    {
+      "id": "culc-587",
+      "room": "587",
+      "level": "5",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 587; Seating: 24. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-589",
+      "room": "589",
+      "level": "5",
+      "name": "Class Laboratory - Wet",
+      "type": "lab",
+      "capacity": 24,
+      "source_url": "https://avservices.gatech.edu/building/166/",
+      "source_note": "Rooms in this Building > Class Laboratory - Wet > 589; Seating: 24. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
+    },
+    {
+      "id": "culc-kaldi-s-coffee",
+      "room": "Kaldi's Coffee",
+      "level": "1",
+      "name": "Kaldi's Coffee",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://library.gatech.edu/clough",
+      "source_note": "Services & Resources > Kaldi’s Coffee: explicitly located on the first floor. Conflicto con el Starbucks de segunda planta del PDF antiguo."
+    },
+    {
+      "id": "culc-main-atrium",
+      "room": "Main Atrium",
+      "level": "1",
+      "name": "Main Atrium",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 1: etiqueta Main Atrium."
+    },
+    {
+      "id": "culc-roof-garden",
+      "room": "Roof garden",
+      "level": "5",
+      "name": "Roof garden",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://repository.gatech.edu/server/api/core/bitstreams/1d05bf36-84d2-4d12-9b6d-be36dff0457e/content",
+      "source_note": "Apéndice, página impresa 18: Fifth Floor > Access to roof garden. Descripción de 2014, sin aforo actual."
+    },
+    {
+      "id": "culc-shipping-receiving",
+      "room": "Shipping & Receiving",
+      "level": "1",
+      "name": "Shipping & Receiving",
+      "type": "service",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 1: etiqueta Shipping & Receiving."
+    },
+    {
+      "id": "culc-winsett-gallery",
+      "room": "Winsett Gallery",
+      "level": "3",
+      "name": "Winsett Gallery",
+      "type": "other",
+      "capacity": null,
+      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+      "source_note": "Página 3: etiqueta Winsett Gallery."
+    }
+  ]
 }

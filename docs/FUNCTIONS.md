@@ -29,7 +29,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `showDrafts` [src/lib/places.ts:14](../src/lib/places.ts#L14): True when the page was opened with ?drafts=1: unverified drafts become visible (for reviewers and previews).
 - `places` [src/lib/places.ts:19](../src/lib/places.ts#L19): The places the app shows: seed, demo and verified records, plus drafts only with ?drafts=1.
 - `searchPlaces(query, items)` [src/lib/search.ts:113](../src/lib/search.ts#L113): Searches name, aliases and category; queries under two characters preserve the full input order.
-- `searchCampus(query, items, buildings)` [src/lib/search.ts:147](../src/lib/search.ts#L147): Searches footprints and routable rooms alongside places, including building aliases in room queries.
+- `searchCampus(query, items, buildings)` [src/lib/search.ts:148](../src/lib/search.ts#L148): Searches footprints and published rooms alongside places, including building aliases in room queries.
 - `useAuth()` [src/state/auth.tsx:63](../src/state/auth.tsx#L63): Reads the demo session and sign-in controls inside AuthProvider.
 - `useLayerFilters()` [src/state/layerFilters.tsx:72](../src/state/layerFilters.tsx#L72): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
@@ -41,6 +41,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Persona` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional identity offered by the demo account picker.
 - `AuthAdapter` [src/auth/types.ts:22](../src/auth/types.ts#L22): Adapter boundary keeps sign-in implementation out of screens.
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
+- `IndoorRoom` [src/indoor/registry.ts:19](../src/indoor/registry.ts#L19): A searchable indoor entry explicitly distinguishes drawn routes from published facts.
 - `Step` [src/indoor/route.ts:5](../src/indoor/route.ts#L5): One accessible instruction and the level on which it happens.
 - `RouteLeg` [src/indoor/route.ts:7](../src/indoor/route.ts#L7): A continuous portion of the route on one floor.
 - `IndoorRoute` [src/indoor/route.ts:9](../src/indoor/route.ts#L9): A shortest path with drawing geometry and human readable instructions.
@@ -50,10 +51,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `IndoorSpace` [src/indoor/types.ts:12](../src/indoor/types.ts#L12): One named space with its source and optional contextual note.
 - `IndoorLevel` [src/indoor/types.ts:23](../src/indoor/types.ts#L23): A level either has vector geometry or an explicit unavailable note.
 - `IndoorBuilding` [src/indoor/types.ts:29](../src/indoor/types.ts#L29): Building indoor data, including provenance and an honest no-plan status.
-- `IndoorNode` [src/indoor/types.ts:41](../src/indoor/types.ts#L41): A walkable point in plan units on one level.
-- `IndoorConnector` [src/indoor/types.ts:44](../src/indoor/types.ts#L44): A named vertical connection with explicit accessibility.
-- `IndoorEntrance` [src/indoor/types.ts:53](../src/indoor/types.ts#L53): An approximate building entrance connected to the walking graph.
-- `IndoorGraph` [src/indoor/types.ts:56](../src/indoor/types.ts#L56): Undirected walking edges and vertical connections for one building.
+- `IndoorNode` [src/indoor/types.ts:42](../src/indoor/types.ts#L42): A walkable point in plan units on one level.
+- `IndoorConnector` [src/indoor/types.ts:45](../src/indoor/types.ts#L45): A named vertical connection with explicit accessibility.
+- `IndoorEntrance` [src/indoor/types.ts:54](../src/indoor/types.ts#L54): An approximate building entrance connected to the walking graph.
+- `IndoorGraph` [src/indoor/types.ts:57](../src/indoor/types.ts#L57): Undirected walking edges and vertical connections for one building.
+- `RoomFact` [src/indoor/types.ts:65](../src/indoor/types.ts#L65): Published room facts without geometry, inferred levels or routing nodes.
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
@@ -88,7 +90,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Sidebar()` [src/components/Sidebar.tsx:12](../src/components/Sidebar.tsx#L12): Left column (bottom sheet on phones) that hosts the panels.
 - `BuildingView()` [src/indoor/BuildingView.tsx:19](../src/indoor/BuildingView.tsx#L19): Opens registered buildings and resolves room selections straight into a routed building screen.
 - `FloorPlan({ level, selected, focus, route, legs, onSelect })` [src/indoor/FloorPlan.tsx:37](../src/indoor/FloorPlan.tsx#L37): Renders one available level with controls and brings the selected space into view.
-- `RoomSearch({ building, onChoose })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and routes immediately when a room is chosen.
+- `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:7](../src/panels/account/AccountChip.tsx#L7): Shows sign-in or the selected demo persona with a small sign-out disclosure.
 - `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
 - `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:13](../src/panels/building-card/BuildingCard.tsx#L13): Shows the selected building (kind "building"), or nothing when something else is selected.
@@ -114,8 +116,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `CORRECTION_URL` [src/config.ts:27](../src/config.ts#L27): Base URL for prefilled place correction issues.
 - `indoorFor(buildingId)` [src/indoor/registry.ts:9](../src/indoor/registry.ts#L9): Returns the curated indoor model for this footprint id, if supported.
 - `hasIndoor(id)` [src/indoor/registry.ts:14](../src/indoor/registry.ts#L14): Whether a building opens the indoor screen instead of the sidebar card.
-- `indoorRooms()` [src/indoor/registry.ts:19](../src/indoor/registry.ts#L19): Lists routable spaces with their building, level and globally unique selection id.
-- `resolveRoom(id)` [src/indoor/registry.ts:26](../src/indoor/registry.ts#L26): Resolves a room selection id without guessing a building or room.
+- `indoorRooms()` [src/indoor/registry.ts:25](../src/indoor/registry.ts#L25): Lists routable schematic spaces and rooms without geometry for search and selection.
+- `resolveRoom(id)` [src/indoor/registry.ts:36](../src/indoor/registry.ts#L36): Resolves a room selection id without guessing a building or room.
 - `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:22](../src/indoor/route.ts#L22): Finds the least cost walk, filtering inaccessible connectors before searching.
 - `baseStyle` [src/map/baseStyle.ts:7](../src/map/baseStyle.ts#L7): Base style every layer is added on top of.
 - `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.

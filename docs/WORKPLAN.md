@@ -168,6 +168,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   permitted, or a walking survey drawn as schematic blocks (Risk R-03). Include room capacity +
   features for F-11.
 - [ ] **T-21 Indoor viewer** (F-06) · needs T-01, T-02 (mock rooms until T-20)
+  CULC room finder from published facts: 104 sourced entries, level browsing, source-linked room cards and exact room-number global search, without a floor plan or indoor directions.
   Level selector, rooms layer filtered by level, directory by room type, highlight selected room.
   First indoor building view: Kendeda Level 1 vector schematic and CULC no-plan placeholder, shared Lane A/B. Includes directory, space selection and pan/zoom; 3D remains future work.
   Wayfinding v1 on Kendeda: multilevel schematic routes, stairs or step-free elevator, accessible directions, route leg navigation and responsive plan fitting; CULC has no plan or graph.

@@ -1,7 +1,7 @@
 /** @file Registry of buildings with an indoor screen, including explicit no-plan placeholders. */
 import kendeda from "../data/indoor/kendeda.json";
 import culc from "../data/indoor/culc.json";
-import type { IndoorBuilding } from "./types";
+import type { IndoorBuilding, IndoorLevel, IndoorSpace, RoomFact } from "./types";
 
 const buildings = [kendeda, culc] as IndoorBuilding[];
 
@@ -15,11 +15,21 @@ export function hasIndoor(id: string): boolean {
   return indoorFor(id) !== undefined;
 }
 
-/** Lists routable spaces with their building, level and globally unique selection id. */
-export function indoorRooms() {
-  return buildings.flatMap((building) => building.levels.flatMap((level) => level.available
-    ? level.spaces.filter((space) => space.type !== "void" && space.door && building.graph?.nodes.some((node) => node.id === space.door))
-      .map((space) => ({ id: `${building.building_id}:${space.id}`, building, level, space })) : []));
+/** A searchable indoor entry explicitly distinguishes drawn routes from published facts. */
+export type IndoorRoom = { id: string; building: IndoorBuilding; level: IndoorLevel | undefined } & (
+  | { routable: true; space: IndoorSpace }
+  | { routable: false; space: RoomFact }
+);
+
+/** Lists routable schematic spaces and rooms without geometry for search and selection. */
+export function indoorRooms(): IndoorRoom[] {
+  return buildings.flatMap((building): IndoorRoom[] => [
+    ...building.levels.flatMap((level) => level.available
+      ? level.spaces.filter((space) => space.type !== "void" && space.door && building.graph?.nodes.some((node) => node.id === space.door))
+        .map((space) => ({ id: `${building.building_id}:${space.id}`, building, level, space, routable: true as const })) : []),
+    ...(building.rooms ?? []).map((space) => ({ id: `${building.building_id}:${space.id}`, building,
+      level: building.levels.find((level) => level.id === space.level), space, routable: false as const })),
+  ]);
 }
 
 /** Resolves a room selection id without guessing a building or room. */

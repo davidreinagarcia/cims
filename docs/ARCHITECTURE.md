@@ -30,13 +30,13 @@ src/
     search/            SearchPanel: lazy building lookup and grouped Buildings, Rooms, Places results
     layers/            LayersPanel: category toggles, sub-type tree, legend; chips on phones
     building-card/     PlaceCard: hours/access/provenance, inside places, directions and corrections; lib/hours.ts computes campus-local status
-  indoor/              BuildingView overlay + FloorPlan SVG, typed registry, pure Dijkstra wayfinding and accessible directions for Kendeda; CULC placeholder
+  indoor/              BuildingView overlay + FloorPlan SVG, typed registry, pure Dijkstra wayfinding and accessible directions for Kendeda; CULC published room finder
   data/indoor/         curated indoor JSON: source credit, levels, vector spaces with door node ids, graph edges, connectors and approximate entrances
   data/places.json     GeoJSON of points of interest  <- edit this to add places
   data/pois/events.json  fictional weekly demo events at seed locations, explicitly labeled demo
   lib/events.ts        pure next/current event windows and English labels in America/New_York
   lib/places.ts        typed access to the data; hides drafts by default and expired one-off events
-  lib/search.ts        ranked campus search for places, footprints and routable rooms with building aliases and highlight ranges
+  lib/search.ts        ranked campus search for places, footprints and rooms with building aliases and highlight ranges
   lib/layerCatalog.ts  the toggleable layers (id, label, color token, sub-types): add a layer or sub-type here
   state/layerFilters.tsx  which layers/sub-types are on, saved in localStorage
   components/Glyph.tsx    line glyph per category (shape differs, works without color)
@@ -58,7 +58,7 @@ src/
   with `map.setFilter(id, buildMapFilter(filters))`. Features carry `category` and optional `subtype`
   properties; a category listed in `lib/layerCatalog.ts` becomes a toggle, any other stays always visible.
 - **Indoor** opens for registered building and `buildingId:spaceId` room selections inside `.stage`, above the continuously mounted map. Back or Escape clears selection and returns focus to the map; places inside reuse the shared selection. `BuildingDetails` is shared with the sidebar card.
-- **Indoor routing** uses `indoor/route.ts`: Euclidean plan units for same level edges, elevator cost 40 and stairs cost 25 per level hop. Step-free routes exclude inaccessible connectors. `BuildingView` routes immediately from its entrance or chosen start when a room or step-free preference changes; `RoomSearch` browses every level in one keyboard accessible combobox; `FloorPlan` draws decorative route legs and fits its camera to the stage or current leg. Add buildings as JSON using the same typed schema and register them in `indoor/registry.ts`; buildings without a graph hide directions.
+- **Indoor routing** uses `indoor/route.ts`: Euclidean plan units for same level edges, elevator cost 40 and stairs cost 25 per level hop. Step-free routes exclude inaccessible connectors. `BuildingView` routes immediately from its entrance or chosen start when a room or step-free preference changes; `RoomSearch` browses every level in one keyboard accessible combobox; `FloorPlan` draws decorative route legs and fits its camera to the stage or current leg. Add buildings as JSON using the same typed schema and register them in `indoor/registry.ts`; buildings without a graph hide directions. CULC uses `rooms-only` facts with no geometry or routing: 104 sourced entries, five unavailable plan levels, a level browser and room cards. `indoorRooms()` marks these entries `routable: false`; exact room numbers lead global search and resolve through the existing room selection. Unknown levels remain null. Explicit textual floor names in the inventory are normalized to 1, 4 and 5.
 - **Panels** are components in `src/panels/<name>/`, mounted in `components/Sidebar.tsx`.
 
 ## Where things go

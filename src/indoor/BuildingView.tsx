@@ -8,7 +8,7 @@ import FloorPlan from "./FloorPlan";
 import RoomSearch from "./RoomSearch";
 import { findRoute } from "./route";
 import { indoorFor, resolveRoom } from "./registry";
-import type { IndoorBuilding, IndoorSpace, IndoorSpaceType } from "./types";
+import type { IndoorBuilding, IndoorSpace, IndoorSpaceType, RoomFact } from "./types";
 import "./BuildingView.css";
 
 const typeLabels: Record<IndoorSpaceType, string> = {
@@ -20,10 +20,10 @@ export default function BuildingView() {
   const { selection } = useSelection();
   const room = selection?.kind === "room" ? resolveRoom(selection.id) : undefined;
   const building = selection?.kind === "building" ? indoorFor(selection.id) : room?.building;
-  return building ? <BuildingScreen key={building.building_id} building={building} initialRoom={room?.space} /> : null;
+  return building ? <BuildingScreen key={building.building_id} building={building} initialRoom={room?.routable ? room.space : undefined} initialFact={room && !room.routable ? room.space : undefined} /> : null;
 }
 
-function BuildingScreen({ building, initialRoom }: { building: IndoorBuilding; initialRoom?: IndoorSpace }) {
+function BuildingScreen({ building, initialRoom, initialFact }: { building: IndoorBuilding; initialRoom?: IndoorSpace; initialFact?: RoomFact }) {
   const { select } = useSelection();
   const { dialogOpen } = useAuth();
   const graph = building.graph;
@@ -103,10 +103,10 @@ function BuildingScreen({ building, initialRoom }: { building: IndoorBuilding; i
       <button ref={back} className="cims-btn" type="button" onClick={() => select(null)}>Back to map</button>
       <h2 id="indoor-title" className="cims-card__name">{facts?.name ?? building.title}</h2>
       {!!facts?.aliases.length && <span className="cims-card__alias">{facts.aliases.join(", ")}</span>}
-      <span className="cims-tag">{building.status === "schematic" ? "Schematic plan" : "No floor plan yet"}</span>
+      <span className="cims-tag">{building.status === "schematic" ? "Schematic plan" : building.status === "rooms-only" ? "Room finder" : "No floor plan yet"}</span>
     </header>
     <div className="building-view__body">
-      {graph ? <>
+      {building.status === "rooms-only" ? <RoomDirectory building={building} selected={initialFact} /> : graph ? <>
         <div className="building-view__finder">
           <RoomSearch building={building} onChoose={chooseDestination} />
           <div className="building-view__origin">
@@ -170,4 +170,40 @@ function BuildingScreen({ building, initialRoom }: { building: IndoorBuilding; i
       </aside>
     </div>
   </section>;
+}
+
+function RoomDirectory({ building, selected }: { building: IndoorBuilding; selected?: RoomFact }) {
+  const { select } = useSelection();
+  const choose = (room: RoomFact) => select({ kind: "room", id: `${building.building_id}:${room.id}` });
+  const groups = [...building.levels.map((level) => ({ id: level.id, name: level.name })), { id: null, name: "Level not listed" }];
+  return <div className="building-view__room-finder">
+    <RoomSearch building={building} onChooseRoom={choose} />
+    {selected && <section className="building-view__room-card" aria-labelledby="room-title" aria-live="polite">
+      <span className="cims-caps">Room card</span>
+      <h3 id="room-title">Room {selected.room}</h3>
+      <p>{selected.name}</p>
+      <dl>
+        <div><dt>Level</dt><dd>{selected.level ? `Level ${selected.level}` : "Level not listed"}</dd></div>
+        <div><dt>Type</dt><dd>{selected.type}</dd></div>
+        <div><dt>Capacity</dt><dd>{selected.capacity != null ? `${selected.capacity} seats` : "Not published"}</dd></div>
+      </dl>
+      <a className="building-view__room-source" href={selected.source_url} target="_blank" rel="noopener noreferrer">Source</a>
+      <p>No floor plan for Clough yet, so no directions inside the building. Walk in through the main entrance and look for the room number.</p>
+    </section>}
+    <section className="building-view__browse" aria-labelledby="browse-title">
+      <h3 id="browse-title" className="cims-caps">Browse by level</h3>
+      {groups.map((level) => {
+        const rooms = (building.rooms ?? []).filter((room) => room.level === level.id);
+        return <details key={level.id ?? "unknown"}>
+          <summary>{level.name}<span className="cims-muted">{rooms.length} rooms</span></summary>
+          {rooms.map((room) => <button className="building-view__room-result" type="button" key={room.id}
+            aria-pressed={selected?.id === room.id} onClick={() => choose(room)}>
+            <span>Room {room.room}<small className="cims-muted">{room.name}</small></span>
+            {room.capacity != null && <span>{room.capacity} seats</span>}
+          </button>)}
+        </details>;
+      })}
+    </section>
+    <p className="building-view__credit">{building.credit}</p>
+  </div>;
 }
