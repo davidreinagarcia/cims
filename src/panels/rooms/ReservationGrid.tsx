@@ -233,7 +233,7 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
     setBooking(true);
     setError(null);
     void reservationsService.create(input, session.accountId)
-      .then(() => { setSelection(null); setNotice(`Reserved. Check in within ${CHECKIN_WINDOW_MINUTES} minutes of the start time from "My bookings" above, or it releases automatically.`); setRefreshKey((k) => k + 1); })
+      .then(() => { setSelection(null); setNotice(`Reserved. Check in within ${CHECKIN_WINDOW_MINUTES} minutes of the start time from "My bookings", or it releases automatically.`); setRefreshKey((k) => k + 1); })
       .catch((err: unknown) => setError(err instanceof Error ? err.message : "Something went wrong saving on this device. Please try again."))
       .finally(() => setBooking(false));
   }, [pending, session]);
@@ -370,7 +370,12 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
       )}
 
       {error && <p className="reserve-grid__error" role="alert"><strong>Error:</strong> {error}</p>}
-      {notice && <p className="cims-muted" role="status">{notice}</p>}
+      {notice && (
+        <div className="cims-actions">
+          <p className="cims-muted" role="status">{notice}</p>
+          <button type="button" className="cims-btn" onClick={requestBookingsView}>My bookings</button>
+        </div>
+      )}
 
       {selectedRoom && selectionWindow && (
         <section className="reserve-confirm" aria-live="polite" aria-label="Confirm reservation">
@@ -384,11 +389,10 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
               {booking ? "Reserving…" : "Reserve"}
             </button>
             <button type="button" className="cims-btn" onClick={() => setSelection(null)}>Clear</button>
-            <button type="button" className="cims-btn" onClick={requestBookingsView}>My bookings</button>
           </div>
           <p className="cims-muted">
             After reserving, check in within {CHECKIN_WINDOW_MINUTES} minutes of the start time using this device's location
-            (see "My bookings" above) or the room releases automatically for someone else.
+            from "My bookings", or the room releases automatically for someone else.
           </p>
           {!session && <p className="cims-muted">Sign-in required to reserve &mdash; you'll be asked when you tap Reserve.</p>}
         </section>

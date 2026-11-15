@@ -193,7 +193,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `FreeRoom` [src/indoor/availability.ts:90](../src/indoor/availability.ts#L90): A matching room together with its demo amenities, ready for the results list and selection.
 - `AmenitiesById` [src/indoor/availability.ts:93](../src/indoor/availability.ts#L93): Demo amenities keyed by room selection id, e.g. `roomFinderDemo.ts#roomAmenitiesById`.
 - `DemoSlotPattern` [src/indoor/availability.ts:96](../src/indoor/availability.ts#L96): A fictional weekly booking recurring at campus-local HH:MM times.
-- `BookingRequest` [src/indoor/handoff.ts:5](../src/indoor/handoff.ts#L5): A request to open the reservations panel on one building, coming from an indoor room card.
+- `BookingRequest` [src/indoor/handoff.ts:5](../src/indoor/handoff.ts#L5): A request to open the reservations panel: on one building/room ("Book this room"), or straight on "My booking…
 - `IndoorRoom` [src/indoor/registry.ts:24](../src/indoor/registry.ts#L24): A searchable indoor entry explicitly distinguishes drawn routes from published facts.
 - `Step` [src/indoor/route.ts:5](../src/indoor/route.ts#L5): One accessible instruction and the level on which it happens.
 - `Transition` [src/indoor/route.ts:11](../src/indoor/route.ts#L11): Where the route changes floor: shown on the plan as a badge.
@@ -288,7 +288,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `DuplicateListProps` [src/panels/report/DuplicateList.tsx:6](../src/panels/report/DuplicateList.tsx#L6): Props for the "Already reported?" step.
 - `ReportFlowProps` [src/panels/report/ReportFlow.tsx:11](../src/panels/report/ReportFlow.tsx#L11): Props for the report flow.
 - `ReportFormProps` [src/panels/report/ReportForm.tsx:12](../src/panels/report/ReportForm.tsx#L12): Props for the details step.
-- `ReportStatusViewProps` [src/panels/report/ReportStatusView.tsx:7](../src/panels/report/ReportStatusView.tsx#L7): Props for the status page.
+- `ReportStatusViewProps` [src/panels/report/ReportStatusView.tsx:8](../src/panels/report/ReportStatusView.tsx#L8): Props for the status page.
 - `Navigate` [src/panels/report/index.tsx:13](../src/panels/report/index.tsx#L13): Changes the query string without reloading, so a filed report's status link and the staff team filter stay sh…
 - `BuildingOption` [src/panels/rooms/buildingOptions.ts:4](../src/panels/rooms/buildingOptions.ts#L4): One quick-pick building: `enabled` buildings have a working reservation flow; the rest are real GT buildings…
 - `PortfolioPhoto` [src/portfolio/types.ts:5](../src/portfolio/types.ts#L5): One photo attached to a portfolio entry, kept as a data URL so it survives a page reload without a backend.
@@ -334,13 +334,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `StackView(…)` [src/indoor/StackView.tsx:25](../src/indoor/StackView.tsx#L25): Exploded solid floor slabs; select levels or rooms and open the active level's detailed plan.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:8](../src/panels/account/AccountChip.tsx#L8): Shows sign-in or the selected demo persona with a small sign-out disclosure.
 - `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
-- `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:16](../src/panels/building-card/BuildingCard.tsx#L16): Shows the selected building (kind "building"), or nothing when something else is selected.
-- `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:23](../src/panels/building-card/BuildingCard.tsx#L23): Shared building facts and actions for the sidebar and expanded indoor screen.
+- `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:17](../src/panels/building-card/BuildingCard.tsx#L17): Shows the selected building (kind "building"), or nothing when something else is selected.
+- `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:24](../src/panels/building-card/BuildingCard.tsx#L24): Shared building facts and actions for the sidebar and expanded indoor screen.
 - `BuildingLink({ coordinates, buildingId, attached, floorOrRoom })` [src/panels/building-card/BuildingLink.tsx:7](../src/panels/building-card/BuildingLink.tsx#L7): Renders nothing when the place is not inside a known footprint (or the footprints are not loaded).
 - `BuildingPhotoFigure({ buildingId })` [src/panels/building-card/BuildingPhoto.tsx:5](../src/panels/building-card/BuildingPhoto.tsx#L5): Renders the sourced photo for a building, or nothing when there is none.
-- `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:13](../src/panels/building-card/BuildingPreview.tsx#L13): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
+- `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:14](../src/panels/building-card/BuildingPreview.tsx#L14): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
 - `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:12](../src/panels/building-card/InsidePlaces.tsx#L12): Show selectable places grouped by category for a footprint or a legacy seed building.
-- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
+- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:19](../src/panels/building-card/PlaceCard.tsx#L19): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:86](../src/panels/bulletin/BulletinBoard.tsx#L86): Modal cork board with shared interests; the shell owns its URL, type and return focus.
 - `PostComposer(…)` [src/panels/bulletin/PostComposer.tsx:27](../src/panels/bulletin/PostComposer.tsx#L27): Modal form that creates a post for the signed-in account; reports the saved post, or closes without one.
 - `BusList({ here }, number] | null })` [src/panels/buses/BusList.tsx:47](../src/panels/buses/BusList.tsx#L47): Lists every route for the "which buses are around" view; `here` is where you are (resolved by the panel), or…
@@ -359,15 +359,15 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PoliceReportFlow({ tipId, navigate })` [src/panels/report/PoliceReportFlow.tsx:42](../src/panels/report/PoliceReportFlow.tsx#L42): The 1-step form plus its status page (?kind=police&tip=<id>).
 - `ReportFlow({ location, reportId, navigate })` [src/panels/report/ReportFlow.tsx:23](../src/panels/report/ReportFlow.tsx#L23): Report-an-issue flow (PRD US-10.1 to US-10.3). Filing and "+1" need a signed-in demo account (F-21).
 - `ReportForm({ location, draft, busy, onContinue })` [src/panels/report/ReportForm.tsx:22](../src/panels/report/ReportForm.tsx#L22): The details form (PRD US-10.1). Safety hazard shows the emergency banner before everything else.
-- `ReportStatusView({ reportId, justFiled, onAnother })` [src/panels/report/ReportStatusView.tsx:15](../src/panels/report/ReportStatusView.tsx#L15): Status page of one report (PRD US-10.3), always carrying the "Prototype: not sent" label.
+- `ReportStatusView({ reportId, justFiled, onAnother })` [src/panels/report/ReportStatusView.tsx:16](../src/panels/report/ReportStatusView.tsx#L16): Status page of one report (PRD US-10.3), always carrying the "Prototype: not sent" label.
 - `ReportSummary({ report, showLocation = true })` [src/panels/report/ReportSummary.tsx:12](../src/panels/report/ReportSummary.tsx#L12): Category, place, description and tags of a report; used by the duplicates list, status page and staff queue.
 - `StaffQueue({ role })` [src/panels/report/StaffQueue.tsx:26](../src/panels/report/StaffQueue.tsx#L26): Staff view of the report queue. Unlisted in the MVP: reached with ?panel=staff (optionally &team=IT).
 - `UnclaimedReports({ reports, team, className = "" })` [src/panels/report/UnclaimedReports.tsx:8](../src/panels/report/UnclaimedReports.tsx#L8): Lists unclaimed reports for a team's dashboard; `onError` shows a rule rejection (e.g. someone claimed it fir…
 - `ReportPanel({ onClose })` [src/panels/report/index.tsx:19](../src/panels/report/index.tsx#L19): Mounts the 3-step report flow, or (unlisted, ?staff=1) the staff queue; the floating card / bottom
 - `BuildingGlyph({ buildingId })` [src/panels/rooms/BuildingGlyph.tsx:10](../src/panels/rooms/BuildingGlyph.tsx#L10): Renders a flat, ink-outlined elevation sketch with a gold hatch fill and a row of square windows per level ba…
 - `MyBookingsSection({ onCountChange })` [src/panels/rooms/MyBookingsSection.tsx:117](../src/panels/rooms/MyBookingsSection.tsx#L117): Top-level "My bookings": every non-cancelled reservation the signed-in account holds, across Kendeda and CULC.
-- `ReservationGrid({ rooms, onlyAvailable = false })` [src/panels/rooms/ReservationGrid.tsx:54](../src/panels/rooms/ReservationGrid.tsx#L54): Day/time grid, booking flow and favorites for any list of bookable rooms -- one building's rooms
-- `RoomsBoard({ onClose })` [src/panels/rooms/RoomsBoard.tsx:41](../src/panels/rooms/RoomsBoard.tsx#L41): Full-screen "Rooms" takeover, replacing the small floating-card/bottom-sheet `RoomFinderPanel`
+- `ReservationGrid({ rooms, onlyAvailable = false })` [src/panels/rooms/ReservationGrid.tsx:55](../src/panels/rooms/ReservationGrid.tsx#L55): Day/time grid, booking flow and favorites for any list of bookable rooms -- one building's rooms
+- `RoomsBoard({ onClose })` [src/panels/rooms/RoomsBoard.tsx:43](../src/panels/rooms/RoomsBoard.tsx#L43): Full-screen "Rooms" takeover, replacing the small floating-card/bottom-sheet `RoomFinderPanel`
 - `RoomsNearMe({ onBack, onlyAvailable })` [src/panels/rooms/RoomsNearMe.tsx:25](../src/panels/rooms/RoomsNearMe.tsx#L25): Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and
 - `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
 - `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
@@ -454,10 +454,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `nowWindow(now, minutes = 30)` [src/indoor/availability.ts:160](../src/indoor/availability.ts#L160): Creates an elapsed-time availability window without changing the supplied instant.
 - `campusTimeToday(now, time)` [src/indoor/availability.ts:195](../src/indoor/availability.ts#L195): Converts a campus-local "HH:MM" time on the same campus day as `now` to an instant, or null if invalid.
 - `expandDemoSlots(pattern, day)` [src/indoor/availability.ts:201](../src/indoor/availability.ts#L201): Expands weekly patterns for one campus-local day, skipping invalid or nonexistent DST times.
-- `requestBooking(buildingId, roomId)` [src/indoor/handoff.ts:12](../src/indoor/handoff.ts#L12): Asks the shell to open the reservations panel on this building (room id is "buildingId:spaceId").
-- `peekBookingRequest()` [src/indoor/handoff.ts:18](../src/indoor/handoff.ts#L18): The latest booking request, if one has not been handled yet.
-- `clearBookingRequest()` [src/indoor/handoff.ts:21](../src/indoor/handoff.ts#L21): Marks the booking request as handled, so opening the panel later starts at its building picker again.
-- `useBookingRequestSeq()` [src/indoor/handoff.ts:24](../src/indoor/handoff.ts#L24): Re-renders when a new booking request arrives; returns its sequence number (0 when none).
+- `requestBooking(buildingId, roomId)` [src/indoor/handoff.ts:19](../src/indoor/handoff.ts#L19): Asks the shell to open the reservations panel on this building (room id is "buildingId:spaceId").
+- `requestBookingsView()` [src/indoor/handoff.ts:24](../src/indoor/handoff.ts#L24): Asks the shell to open the reservations panel straight on "My bookings" -- the quick way back from a room car…
+- `peekBookingRequest()` [src/indoor/handoff.ts:29](../src/indoor/handoff.ts#L29): The latest booking request, if one has not been handled yet.
+- `clearBookingRequest()` [src/indoor/handoff.ts:32](../src/indoor/handoff.ts#L32): Marks the booking request as handled, so opening the panel later starts at its building picker again.
+- `useBookingRequestSeq()` [src/indoor/handoff.ts:35](../src/indoor/handoff.ts#L35): Re-renders when a new booking request arrives; returns its sequence number (0 when none).
 - `openIndoor(buildingId)` [src/indoor/open.ts:9](../src/indoor/open.ts#L9): Opens the full indoor screen of a building.
 - `closeIndoor()` [src/indoor/open.ts:11](../src/indoor/open.ts#L11): Back to the preview card (or the map) without clearing the selection.
 - `useOpenIndoor()` [src/indoor/open.ts:13](../src/indoor/open.ts#L13): The building whose full indoor screen is open, if any.
