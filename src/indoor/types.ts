@@ -32,6 +32,8 @@ export type IndoorLevel = { id: string; label: string; name: string; note?: stri
 export interface IndoorBuilding {
   description: string;
   building_id: string;
+  /** Short name used in door sticker links, e.g. ?in=culc&door=e1-s. */
+  slug?: string;
   title: string;
   status: "schematic" | "no-plan" | "rooms-only";
   credit: string;

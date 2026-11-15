@@ -12,6 +12,7 @@ All project documentation: product (charter → PRD), engineering (architecture,
 - [`demo/`](demo/INDEX.md): Demo runbook: script readiness, pre-flight checklist and plan B.
 - [`design/`](design/INDEX.md): Visual direction and UI references: the chosen "survey map" style, tokens and how to build it.
 - [`research/`](research/INDEX.md): Fuentes y dudas pendientes de las investigaciones de datos del campus.
+- [`stickers/`](stickers/INDEX.md): QR codes and the link list for the door stickers that open a building with the entrance preselected.
 - [`testing/`](testing/INDEX.md): Test plans with people (hallway tests).
 
 **Files**
@@ -28,6 +29,7 @@ All project documentation: product (charter → PRD), engineering (architecture,
 - [`ARCHITECTURE.md`](ARCHITECTURE.md): Code layout: where each kind of code and data goes in src/.
 - [`MAINTENANCE.md`](MAINTENANCE.md): How indexes, the function registry and docs stay current automatically, and what agents do.
 - [`MERGING-TO-MAIN.md`](MERGING-TO-MAIN.md): Rules for getting code into main (= production, auto-deploys). Read before every merge.
+- [`SUPABASE.md`](SUPABASE.md): Status and setup of the optional Supabase bulletin backend.
 - [`WORKPLAN.md`](WORKPLAN.md): Lanes, file ownership, anti-conflict rules, agent workflow and the prioritized task checklist (T-xx).
 
 <!-- AUTO:END -->

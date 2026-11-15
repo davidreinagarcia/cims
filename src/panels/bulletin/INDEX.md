@@ -6,7 +6,9 @@ Full-screen cork board with campus-time posts, URL filters, device-local interes
 
 **Files**
 
+- [`AddPostForm.tsx`](AddPostForm.tsx): Small signed-in bulletin composer that keeps its draft when the backend is unavailable. · exports `AddPostForm`
 - [`BulletinBoard.tsx`](BulletinBoard.tsx): Full-screen Campus Bulletin: cork board with masonry note cards, type filters with counts, search and deep li… · exports `BulletinBoard`
 - [`board.css`](board.css): * @file Full-screen cork texture, responsive masonry and pinned paper notes for the Campus Bulletin.
+- [`useBulletinInterest.ts`](useBulletinInterest.ts): Instant local interests with optional account sync, offline retries and public counts. · exports `useBulletinInterest`
 
 <!-- AUTO:END -->

@@ -34,7 +34,41 @@
         "source_url": "https://crc.gatech.edu/locations/",
         "building_id": "crc",
         "floor_or_suite": "1st floor",
-        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "17:00",
+              "21:00"
+            ]
+          ],
+          "tue": [
+            [
+              "17:00",
+              "21:00"
+            ]
+          ],
+          "wed": [
+            [
+              "17:00",
+              "21:00"
+            ]
+          ],
+          "thu": [
+            [
+              "17:00",
+              "21:00"
+            ]
+          ],
+          "fri": [
+            [
+              "14:00",
+              "16:45"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",
@@ -54,7 +88,49 @@
         "description": "The CRC competition pool hosts recreational swimming as well as varsity teams.",
         "source_url": "https://crc.gatech.edu/locations/",
         "building_id": "crc",
-        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "09:00",
+              "14:00"
+            ]
+          ],
+          "tue": [
+            [
+              "06:00",
+              "09:00"
+            ],
+            [
+              "12:00",
+              "15:00"
+            ]
+          ],
+          "wed": [
+            [
+              "09:00",
+              "14:00"
+            ]
+          ],
+          "thu": [
+            [
+              "06:00",
+              "09:00"
+            ],
+            [
+              "12:00",
+              "15:00"
+            ]
+          ],
+          "fri": [
+            [
+              "09:00",
+              "14:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",
@@ -74,7 +150,51 @@
         "description": "A CRC leisure pool with six lap lanes and a current channel.",
         "source_url": "https://crc.gatech.edu/locations/",
         "building_id": "crc",
-        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 179224195 (Campus Recreation Center), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "16:00",
+              "20:00"
+            ]
+          ],
+          "tue": [
+            [
+              "16:00",
+              "20:00"
+            ]
+          ],
+          "wed": [
+            [
+              "16:00",
+              "20:00"
+            ]
+          ],
+          "thu": [
+            [
+              "16:00",
+              "20:00"
+            ]
+          ],
+          "fri": [
+            [
+              "16:00",
+              "20:00"
+            ]
+          ],
+          "sat": [
+            [
+              "10:00",
+              "18:00"
+            ]
+          ],
+          "sun": [
+            [
+              "12:00",
+              "18:00"
+            ]
+          ]
+        }
       },
       "geometry": {
         "type": "Point",

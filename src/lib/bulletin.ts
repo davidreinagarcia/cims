@@ -28,6 +28,18 @@ export interface BulletinPost {
   sourceUrl?: string;
 }
 
+/** A persisted bulletin row returned by the optional PostgREST backend. */
+export interface BulletinRow {
+  id: string;
+  type: PostType;
+  title: string;
+  org: string | null;
+  body: string;
+  place_id: string | null;
+  starts_at: string | null;
+  ends_at: string | null;
+}
+
 const orgTypes = LAYER_CATALOG.find((layer) => layer.id === "orgs")!.subtypes;
 
 /** Bulletin filters in display order, sharing organization labels with the layer catalog. */
@@ -63,6 +75,22 @@ function whenLabel(window: { start: Date; end: Date }, now: Date): string {
 
 function postType(value: string | null | undefined): PostType | "all" {
   return POST_TYPES.find((item) => item.id === value)?.id ?? "all";
+}
+
+/** Convert unexpired database posts to cards, using the same campus-time labels as demo posts. */
+export function databaseBulletinPosts(rows: readonly BulletinRow[], now: Date): BulletinPost[] {
+  return rows.flatMap((row): BulletinPost[] => {
+    if (postType(row.type) === "all") return [];
+    const window = nextWindow({ starts_at: row.starts_at ?? undefined, ends_at: row.ends_at ?? undefined }, now);
+    if ((row.starts_at || row.ends_at) && !window) return [];
+    const place = places.features.find((feature) => feature.properties.id === row.place_id);
+    return [{
+      id: row.id, type: row.type, title: row.title, org: row.org ?? undefined, description: row.body,
+      start: window?.start, end: window?.end, when: window ? whenLabel(window, now) : "No time specified",
+      soon: Boolean(window && window.start.getTime() <= now.getTime() + 86_400_000),
+      placeId: place?.properties.id, placeName: place?.properties.name, isDemo: false,
+    }];
+  });
 }
 
 /** Return ongoing and upcoming dated events or org posts, with ongoing entries first. */

@@ -20,12 +20,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 - `loadedBuildings()` [src/lib/buildings.ts:76](../src/lib/buildings.ts#L76): The index if it is already loaded, so callers can answer synchronously.
 - `loadBuildings()` [src/lib/buildings.ts:81](../src/lib/buildings.ts#L81): Loads the footprints once; a failed load is forgotten so the next call retries.
-- `POST_TYPES` [src/lib/bulletin.ts:34](../src/lib/bulletin.ts#L34): Bulletin filters in display order, sharing organization labels with the layer catalog.
-- `bulletinPosts(now)` [src/lib/bulletin.ts:69](../src/lib/bulletin.ts#L69): Return ongoing and upcoming dated events or org posts, with ongoing entries first.
-- `filterPosts(posts, type, query?)` [src/lib/bulletin.ts:108](../src/lib/bulletin.ts#L108): Filter posts by type and the shared case/accent-insensitive search, retaining post order.
-- `countByType(posts)` [src/lib/bulletin.ts:133](../src/lib/bulletin.ts#L133): Count every post type and the unfiltered total, including categories with no posts.
-- `bulletinUrl(type)` [src/lib/bulletin.ts:140](../src/lib/bulletin.ts#L140): Build a bulletin deep link, omitting the type parameter for the all filter.
-- `readBulletinParams(search)` [src/lib/bulletin.ts:147](../src/lib/bulletin.ts#L147): Read bulletin visibility and a validated type filter from a query string.
+- `POST_TYPES` [src/lib/bulletin.ts:46](../src/lib/bulletin.ts#L46): Bulletin filters in display order, sharing organization labels with the layer catalog.
+- `databaseBulletinPosts(rows, now)` [src/lib/bulletin.ts:81](../src/lib/bulletin.ts#L81): Convert unexpired database posts to cards, using the same campus-time labels as demo posts.
+- `bulletinPosts(now)` [src/lib/bulletin.ts:97](../src/lib/bulletin.ts#L97): Return ongoing and upcoming dated events or org posts, with ongoing entries first.
+- `filterPosts(posts, type, query?)` [src/lib/bulletin.ts:136](../src/lib/bulletin.ts#L136): Filter posts by type and the shared case/accent-insensitive search, retaining post order.
+- `countByType(posts)` [src/lib/bulletin.ts:161](../src/lib/bulletin.ts#L161): Count every post type and the unfiltered total, including categories with no posts.
+- `bulletinUrl(type)` [src/lib/bulletin.ts:168](../src/lib/bulletin.ts#L168): Build a bulletin deep link, omitting the type parameter for the all filter.
+- `readBulletinParams(search)` [src/lib/bulletin.ts:175](../src/lib/bulletin.ts#L175): Read bulletin visibility and a validated type filter from a query string.
 - `nextWindow(event, now)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Return the current or next weekly campus occurrence, or an unexpired one-off window.
 - `formatWindow(window)` [src/lib/events.ts:58](../src/lib/events.ts#L58): Format an event window as short English text in campus time.
 - `campusDay(now)` [src/lib/hours.ts:11](../src/lib/hours.ts#L11): Returns the hours-contract weekday for an instant in America/New_York.
@@ -36,6 +37,14 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `places` [src/lib/places.ts:19](../src/lib/places.ts#L19): The places the app shows: seed, demo and verified records, plus drafts only with ?drafts=1.
 - `searchPlaces(query, items)` [src/lib/search.ts:113](../src/lib/search.ts#L113): Searches name, aliases and category; queries under two characters preserve the full input order.
 - `searchCampus(query, items, buildings)` [src/lib/search.ts:148](../src/lib/search.ts#L148): Searches footprints and published rooms alongside places, including building aliases in room queries.
+- `suggest(query, buildings, limit = 6)` [src/lib/suggest.ts:7](../src/lib/suggest.ts#L7): Few, ranked suggestions like a map app: nothing for an empty or one letter query, never the whole campus.
+- `locate(result, "kind" | "id">, buildings)` [src/lib/suggest.ts:13](../src/lib/suggest.ts#L13): The [lng, lat] of a building, room (its building) or place result.
+- `recents()` [src/lib/suggest.ts:21](../src/lib/suggest.ts#L21): Last picked results, newest first, kept only in this browser.
+- `remember(result)` [src/lib/suggest.ts:25](../src/lib/suggest.ts#L25): Remembers a picked result (five at most).
+- `supabaseEnabled()` [src/lib/supabase.ts:8](../src/lib/supabase.ts#L8): Enable the remote bulletin only when both public deployment settings are present.
+- `supabaseSelect(table, params, string> = {})` [src/lib/supabase.ts:36](../src/lib/supabase.ts#L36): Select rows with PostgREST query parameters, returning null on an unavailable backend.
+- `supabaseInsert(table, row)` [src/lib/supabase.ts:41](../src/lib/supabase.ts#L41): Insert rows idempotently and return their representation, or null on failure.
+- `supabaseDelete(postId, accountId)` [src/lib/supabase.ts:46](../src/lib/supabase.ts#L46): Delete an interest using explicit post and account filters, returning null on failure.
 - `useAuth()` [src/state/auth.tsx:63](../src/state/auth.tsx#L63): Reads the demo session and sign-in controls inside AuthProvider.
 - `useLayerFilters()` [src/state/layerFilters.tsx:72](../src/state/layerFilters.tsx#L72): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
@@ -49,23 +58,25 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
 - `IndoorRoom` [src/indoor/registry.ts:19](../src/indoor/registry.ts#L19): A searchable indoor entry explicitly distinguishes drawn routes from published facts.
 - `Step` [src/indoor/route.ts:5](../src/indoor/route.ts#L5): One accessible instruction and the level on which it happens.
-- `RouteLeg` [src/indoor/route.ts:7](../src/indoor/route.ts#L7): A continuous portion of the route on one floor.
-- `IndoorRoute` [src/indoor/route.ts:9](../src/indoor/route.ts#L9): A shortest path with drawing geometry and human readable instructions.
-- `RouteOptions` [src/indoor/route.ts:11](../src/indoor/route.ts#L11): Routing preferences and optional endpoint names supplied by the directory.
+- `Transition` [src/indoor/route.ts:7](../src/indoor/route.ts#L7): Where the route changes floor: shown on the plan as a badge.
+- `RouteLeg` [src/indoor/route.ts:9](../src/indoor/route.ts#L9): A continuous portion of the route on one floor.
+- `IndoorRoute` [src/indoor/route.ts:11](../src/indoor/route.ts#L11): A shortest path with drawing geometry and human readable instructions.
+- `RouteOptions` [src/indoor/route.ts:13](../src/indoor/route.ts#L13): Routing preferences and optional endpoint names supplied by the directory.
 - `IndoorShape` [src/indoor/types.ts:3](../src/indoor/types.ts#L3): A space shape in the schematic coordinate system.
 - `IndoorSpaceType` [src/indoor/types.ts:9](../src/indoor/types.ts#L9): The supported schematic space categories.
 - `IndoorSpace` [src/indoor/types.ts:12](../src/indoor/types.ts#L12): One named space with its source and optional contextual note.
 - `IndoorLevel` [src/indoor/types.ts:26](../src/indoor/types.ts#L26): A level either has vector geometry or an explicit unavailable note.
 - `IndoorBuilding` [src/indoor/types.ts:32](../src/indoor/types.ts#L32): Building indoor data, including provenance and an honest no-plan status.
-- `IndoorNode` [src/indoor/types.ts:45](../src/indoor/types.ts#L45): A walkable point in plan units on one level.
-- `IndoorConnector` [src/indoor/types.ts:48](../src/indoor/types.ts#L48): A named vertical connection with explicit accessibility.
-- `IndoorEntrance` [src/indoor/types.ts:57](../src/indoor/types.ts#L57): An approximate building entrance connected to the walking graph.
-- `IndoorGraph` [src/indoor/types.ts:60](../src/indoor/types.ts#L60): Undirected walking edges and vertical connections for one building.
-- `RoomFact` [src/indoor/types.ts:68](../src/indoor/types.ts#L68): Published room facts without geometry, inferred levels or routing nodes.
+- `IndoorNode` [src/indoor/types.ts:47](../src/indoor/types.ts#L47): A walkable point in plan units on one level.
+- `IndoorConnector` [src/indoor/types.ts:50](../src/indoor/types.ts#L50): A named vertical connection with explicit accessibility.
+- `IndoorEntrance` [src/indoor/types.ts:59](../src/indoor/types.ts#L59): An approximate building entrance connected to the walking graph.
+- `IndoorGraph` [src/indoor/types.ts:62](../src/indoor/types.ts#L62): Undirected walking edges and vertical connections for one building.
+- `RoomFact` [src/indoor/types.ts:70](../src/indoor/types.ts#L70): Published room facts without geometry, inferred levels or routing nodes.
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
 - `PostType` [src/lib/bulletin.ts:11](../src/lib/bulletin.ts#L11): The five supported bulletin filters; unknown source subtypes become community posts.
 - `BulletinPost` [src/lib/bulletin.ts:14](../src/lib/bulletin.ts#L14): A dated bulletin entry with known source facts and a selectable map location.
+- `BulletinRow` [src/lib/bulletin.ts:32](../src/lib/bulletin.ts#L32): A persisted bulletin row returned by the optional PostgREST backend.
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
 - `LayerCategory` [src/lib/layerCatalog.ts:11](../src/lib/layerCatalog.ts#L11): One entry of the layer panel.
 - `PlaceFeature` [src/lib/places.ts:7](../src/lib/places.ts#L7): One place as a GeoJSON point feature.
@@ -98,7 +109,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:15](../src/components/MapView.tsx#L15): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
-- `BuildingView()` [src/indoor/BuildingView.tsx:19](../src/indoor/BuildingView.tsx#L19): Opens registered buildings and resolves room selections straight into a routed building screen.
+- `BuildingView()` [src/indoor/BuildingView.tsx:20](../src/indoor/BuildingView.tsx#L20): Opens registered buildings and resolves room selections straight into a routed building screen.
 - `FloorPlan({ level, selected, focus, route, legs, onSelect })` [src/indoor/FloorPlan.tsx:38](../src/indoor/FloorPlan.tsx#L38): Renders one available level with controls and brings the selected space into view.
 - `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:7](../src/panels/account/AccountChip.tsx#L7): Shows sign-in or the selected demo persona with a small sign-out disclosure.
@@ -106,9 +117,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:13](../src/panels/building-card/BuildingCard.tsx#L13): Shows the selected building (kind "building"), or nothing when something else is selected.
 - `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:20](../src/panels/building-card/BuildingCard.tsx#L20): Shared building facts and actions for the sidebar and expanded indoor screen.
 - `BuildingLink({ coordinates })` [src/panels/building-card/BuildingLink.tsx:7](../src/panels/building-card/BuildingLink.tsx#L7): Renders nothing when the place is not inside a known footprint (or the footprints are not loaded).
+- `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:10](../src/panels/building-card/BuildingPreview.tsx#L10): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:16](../src/panels/building-card/PlaceCard.tsx#L16): Shows the selected place's known details and correction link, or nothing without a place selection.
-- `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:84](../src/panels/bulletin/BulletinBoard.tsx#L84): Modal cork board with local interests; the shell owns its URL, type and return focus.
+- `AddPostForm(…)` [src/panels/bulletin/AddPostForm.tsx:8](../src/panels/bulletin/AddPostForm.tsx#L8): Compose a post for the current demo session and return the inserted row to the board.
+- `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:81](../src/panels/bulletin/BulletinBoard.tsx#L81): Modal cork board with local fallback and optional Supabase posts and interest counts.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
+- `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
+- `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
 - `SearchPanel(…)` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
 - `BottomSheet(…)` [src/shell/BottomSheet.tsx:21](../src/shell/BottomSheet.tsx#L21): Drag or tap the handle (or press Enter/Space on it) to move between snaps; arrow keys step up and down. Opens…
 - `ChipsBar()` [src/shell/ChipsBar.tsx:14](../src/shell/ChipsBar.tsx#L14): One pill per layer category; pressed = layer on. Categories without data stay visible but inert (aria-disable…
@@ -116,8 +131,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayersPopover()` [src/shell/LayersPopover.tsx:7](../src/shell/LayersPopover.tsx#L7): Tile that opens the legend popover. Esc or a click outside closes it and returns focus to the tile.
 - `MobileTabBar({ panel, onPanel })` [src/shell/MobileTabBar.tsx:5](../src/shell/MobileTabBar.tsx#L5): Fixed bottom bar above the safe-area inset. Left/right arrows move between tabs.
 - `Rail({ panel, onPanel })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
+- `RoutePanel({ initialSelection, onClose })` [src/shell/RoutePanel.tsx:10](../src/shell/RoutePanel.tsx#L10): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:69](../src/shell/Shell.tsx#L69): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
+- `Shell()` [src/shell/Shell.tsx:71](../src/shell/Shell.tsx#L71): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
 - `Icon({ name, size = 24 })` [src/shell/icons.tsx:22](../src/shell/icons.tsx#L22): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = mockAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
@@ -133,11 +149,17 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BASEMAP_TILEJSON` [src/config.ts:21](../src/config.ts#L21): Vector basemap (ADR-0006 step 2): OpenFreeMap, free and keyless, OpenMapTiles schema.
 - `TILE_ATTRIBUTION` [src/config.ts:23](../src/config.ts#L23): Attribution OpenFreeMap and OpenStreetMap require next to the map.
 - `CORRECTION_URL` [src/config.ts:26](../src/config.ts#L26): Base URL for prefilled place correction issues.
+- `openIndoor(buildingId)` [src/indoor/open.ts:9](../src/indoor/open.ts#L9): Opens the full indoor screen of a building.
+- `closeIndoor()` [src/indoor/open.ts:11](../src/indoor/open.ts#L11): Back to the preview card (or the map) without clearing the selection.
+- `useOpenIndoor()` [src/indoor/open.ts:13](../src/indoor/open.ts#L13): The building whose full indoor screen is open, if any.
 - `indoorFor(buildingId)` [src/indoor/registry.ts:9](../src/indoor/registry.ts#L9): Returns the curated indoor model for this footprint id, if supported.
 - `hasIndoor(id)` [src/indoor/registry.ts:14](../src/indoor/registry.ts#L14): Whether a building opens the indoor screen instead of the sidebar card.
 - `indoorRooms()` [src/indoor/registry.ts:25](../src/indoor/registry.ts#L25): Lists routable schematic spaces and rooms without geometry for search and selection.
 - `resolveRoom(id)` [src/indoor/registry.ts:36](../src/indoor/registry.ts#L36): Resolves a room selection id without guessing a building or room.
-- `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:22](../src/indoor/route.ts#L22): Finds the least cost walk, filtering inaccessible connectors before searching.
+- `indoorBySlug(slug)` [src/indoor/registry.ts:41](../src/indoor/registry.ts#L41): Finds an indoor building by its sticker slug (or full footprint id).
+- `doorLink()` [src/indoor/registry.ts:46](../src/indoor/registry.ts#L46): A door sticker link: ?in=<building slug>&door=<entrance id>, read once when the app opens.
+- `doorUrl(origin, building, entranceId)` [src/indoor/registry.ts:56](../src/indoor/registry.ts#L56): The sticker link for one entrance, for printing QR codes and programming NFC tags.
+- `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:24](../src/indoor/route.ts#L24): Finds the least cost walk, filtering inaccessible connectors before searching.
 - `baseStyle` [src/map/baseStyle.ts:69](../src/map/baseStyle.ts#L69): Base style every layer is added on top of.
 - `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.
 - `ScaleBox` [src/map/furniture/ScaleBox.ts:22](../src/map/furniture/ScaleBox.ts#L22): MapLibre control: a four-segment scale bar in feet and the map center's latitude/longitude, updated as the ma…
@@ -168,6 +190,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `addHatchPatterns(map)` [src/map/patterns/index.ts:38](../src/map/patterns/index.ts#L38): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
 - `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
+- `useBulletinInterest(accountId?)` [src/panels/bulletin/useBulletinInterest.ts:18](../src/panels/bulletin/useBulletinInterest.ts#L18): Keep interests usable locally and sync only when an optional demo account is present.
 - `NAV_ITEMS` [src/shell/icons.tsx:35](../src/shell/icons.tsx#L35): The four destinations of the rail (desktop) and the tab bar (phones), in order.
 - `moveFocus(event, vertical)` [src/shell/icons.tsx:43](../src/shell/icons.tsx#L43): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 

@@ -38,7 +38,41 @@
         "url": "https://studentengagement.gatech.edu/about/contact-us",
         "address": "John Lewis Student Center, Suite 3110",
         "building_id": "student-center",
-        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim search"
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim search",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",
@@ -159,7 +193,41 @@
         "aliases": [
           "OIE"
         ],
-        "coord_source": "OSM way 42830543 (Savant Building), building representative point returned by Nominatim search"
+        "coord_source": "OSM way 42830543 (Savant Building), building representative point returned by Nominatim search",
+        "hours": {
+          "mon": [
+            [
+              "08:30",
+              "16:30"
+            ]
+          ],
+          "tue": [
+            [
+              "08:30",
+              "16:30"
+            ]
+          ],
+          "wed": [
+            [
+              "08:30",
+              "16:30"
+            ]
+          ],
+          "thu": [
+            [
+              "08:30",
+              "16:30"
+            ]
+          ],
+          "fri": [
+            [
+              "08:30",
+              "16:30"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",
@@ -183,7 +251,41 @@
         "url": "https://registrar.gatech.edu/about",
         "address": "Tech Tower, 1st floor, 225 North Avenue, Atlanta, GA 30332",
         "building_id": "tech-tower",
-        "coord_source": "OSM way 42706709 (Lettie Pate Whithead Evans Administration Building), building representative point returned by Nominatim search"
+        "coord_source": "OSM way 42706709 (Lettie Pate Whithead Evans Administration Building), building representative point returned by Nominatim search",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",
@@ -230,7 +332,41 @@
         "source_url": "https://finaid.gatech.edu/contacting-our-office",
         "url": "https://finaid.gatech.edu/contacting-our-office",
         "address": "Bill Moore Student Success Center, 3rd floor",
-        "coord_source": "OSM way 42706711 (Bill Moore Student Success Center), building representative point returned by Nominatim search"
+        "coord_source": "OSM way 42706711 (Bill Moore Student Success Center), building representative point returned by Nominatim search",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",

@@ -144,6 +144,20 @@ out which system or team handles it.
 - **Given** I submit, **then** I see a confirmation with a shareable status link, in ≤ 3 taps total
   for a prefilled location.
 
+**US-10.5 (planned)** As **maintenance staff**, I want a page that lists every door sticker to install so
+that I can print or program each one and mark it done.
+- **Given** I'm signed in as staff in the maintenance/staff area (the T-23 staff queue), **then** I see a
+  **Door stickers** list: one row per building entrance with its name, level, link, a QR code to
+  print or download, and an **Installed / Verified** state with who and when.
+- **Given** a row, **then** the link is the one produced by `doorUrl()` in `src/indoor/registry.ts`
+  (`/?in=<building>&door=<entrance id>`); the QR images already exist in `docs/stickers/` and the full
+  table with how the links work is in [docs/stickers/README.md](stickers/README.md). Build the page from
+  the indoor data (`src/data/indoor/*.json` entrances), not from copies, so new entrances appear by themselves.
+- **Given** I scan a sticker I just installed, **then** the building opens at that door; I can flag the
+  entrance as **wrong door** so the team corrects its name or position.
+- Whoever builds the maintenance page (T-23 branch or later) owns this story; nothing about it blocks
+  the report flow.
+
 **US-10.2** As a **student**, I want to see whether someone already reported the same problem so that I
 add my voice instead of filing a duplicate.
 - **Given** open reports exist for the **same room** (or within 25 m outdoors) and the **same

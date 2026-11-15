@@ -158,8 +158,8 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 - [ ] **T-13 POI layers** (F-05) · needs T-12 and data from T-30 *Survey pins, clusters for stacked places and the filters are done; draft data for food, printing, health, makerspace and exercise is merged (T-30) and waits for human verification.*
 - [ ] **T-14 Search** (F-04) · needs T-03; rooms join when T-20 lands *Places done (ranked, accent and typo tolerant, keyboard). Still to add to the index: buildings (the 3D layer has 291 footprints with aliases) and rooms (T-20/T-21).*
   Buildings + aliases + places + rooms; "Kendeda <room>" opens indoor view on the right floor.
-- [x] **T-15 Orgs & events layer + bulletin tab** (F-07) · needs T-12, data T-32 *Read-only done (Bulletin tab, event and org cards, weekly demo events, 13 draft real orgs). Officer posting (US-07.2, Should) not started; the sign-in gate (T-25) exists.*
-  Read-only bulletin and fictional weekly demo events implemented in Lane A. Posting waits for the sign-in gate T-25.
+- [x] **T-15 Orgs & events layer + bulletin tab** (F-07) · needs T-12, data T-32 *Bulletin, event/org cards and weekly demo events done. Optional Supabase posting for signed-in demo sessions is implemented; project/keys pending. Real authorization remains future work.*
+  Without backend settings the board stays local and Add post keeps its coming-soon sign-in gate. See [Supabase status](SUPABASE.md).
 
 **Lane B: Inside + Actions (Tato)**
 
@@ -174,6 +174,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Wayfinding v1 on Kendeda: multilevel schematic routes, stairs or step-free elevator, accessible directions, route leg navigation and responsive plan fitting; CULC has no plan or graph.
 - [ ] **T-22 Backend** per T-05 decision · needs T-05
   Tables: `accounts` (opaque id, role, provider, status), `issue_reports`, `issue_plus_ones`, each write with `account_id`; rate limiting per account; env vars documented in `.env.example`.
+  Bulletin subset ready: posts, interests, aggregate counts and demo RLS in `supabase/migrations/0001_bulletin.sql`; project creation/keys and real authentication are still pending. Reports and rate limits remain outside this subset.
 - [ ] **T-23 Report an issue** (F-10) · UI can start on mocks after T-02; real data needs T-22
   Prefilled location, category → team ("routes to IT"), duplicates + "Me too", status page,
   staff view, "Prototype: not sent to Facilities/IT" label (Risk R-14). Every write (report, +1) goes through the T-25 sign-in gate; the staff view needs the staff role (no unlisted URL).

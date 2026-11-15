@@ -15,7 +15,41 @@
         "aliases": [
           "CMHCR"
         ],
-        "coord_source": "OSM way 42831367 (Flag Building (Charles A. Smithgall Jr. Building)), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 42831367 (Flag Building (Charles A. Smithgall Jr. Building)), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",
@@ -36,7 +70,41 @@
         "source_url": "https://students.gatech.edu/vp-letter/vpsewb-newsletter-what-role-should-ai-play-georgia-tech",
         "address": "740 Ferst Drive NW, Atlanta, GA 30332",
         "url": "https://health.gatech.edu/",
-        "coord_source": "OSM way 42872499 (Joseph B. Whitehead Student Health Center), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 42872499 (Joseph B. Whitehead Student Health Center), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "thu": [
+            [
+              "09:00",
+              "16:30"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "16:30"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",
@@ -77,7 +145,41 @@
         "floor_or_suite": "Suite 204",
         "address": "740 Ferst Drive NW, Atlanta, GA 30332",
         "url": "https://wellnesscenter.gatech.edu/about/contact-us",
-        "coord_source": "OSM way 42872499 (Joseph B. Whitehead Student Health Center), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 42872499 (Joseph B. Whitehead Student Health Center), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",

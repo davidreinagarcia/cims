@@ -1,26 +1,21 @@
 /** @file Full-screen Campus Bulletin: cork board with masonry note cards, type filters with counts, search and deep link. */
 import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
-import { POST_TYPES, bulletinPosts, countByType, filterPosts, type BulletinPost, type PostType } from "../../lib/bulletin";
+import { POST_TYPES, bulletinPosts, databaseBulletinPosts, countByType, filterPosts, type BulletinPost, type BulletinRow, type PostType } from "../../lib/bulletin";
+import { supabaseEnabled, supabaseSelect } from "../../lib/supabase";
 import { Icon } from "../../shell/icons";
 import { useAuth } from "../../state/auth";
 import { useSelection } from "../../state/selection";
+import AddPostForm from "./AddPostForm";
+import { useBulletinInterest } from "./useBulletinInterest";
 import "./board.css";
 
 // Look is decided by position in the list (index % length), never by what the post says.
 const FILLS = ["var(--white)", "var(--room-classroom)", "var(--room-study)", "var(--room-lab)", "var(--paper)", "var(--room-restroom)"];
 const TILTS = [-1.2, 0.9, -0.4, 1.5, -1.5, 0.5, 1.1];
 const PINS = ["var(--navy)", "var(--cat-issues)", "var(--gold-ink)", "var(--cat-orgs)"];
-const FOCUSABLE = "button:not([disabled]), input, a[href], [tabindex]:not([tabindex='-1'])";
-const INTERESTS_KEY = "cims.bulletin.interests.v1";
+const FOCUSABLE = "button:not([disabled]), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), a[href], [tabindex]:not([tabindex='-1'])";
 const today = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", month: "short", day: "numeric", year: "numeric" });
 const typeLabel = (type: PostType) => POST_TYPES.find((item) => item.id === type)!.label;
-
-function readInterests(): Set<string> {
-  try {
-    const saved: unknown = JSON.parse(localStorage.getItem(INTERESTS_KEY) ?? "[]");
-    return new Set(Array.isArray(saved) ? saved.filter((id): id is string => typeof id === "string") : []);
-  } catch { return new Set(); }
-}
 
 function CorkTexture() {
   return (
@@ -47,8 +42,9 @@ function Pin({ color }: { color: string }) {
   );
 }
 
-function NoteCard({ post, index, interested, onInterest, onShow }: {
+function NoteCard({ post, index, interested, interestCount, onInterest, onShow }: {
   post: BulletinPost; index: number; interested: boolean; onInterest: () => void; onShow: (placeId: string) => void;
+  interestCount?: number | null;
 }) {
   const style = { "--fill": FILLS[index % FILLS.length], "--tilt": `${TILTS[index % TILTS.length]}deg` } as CSSProperties;
   return (
@@ -75,22 +71,26 @@ function NoteCard({ post, index, interested, onInterest, onShow }: {
           <button type="button" className="board-card__interest" aria-pressed={interested}
             aria-label={`Interested in ${post.title}`} onClick={onInterest}>Interested</button>
         </div>
+        {interestCount !== undefined && <p className="board-card__count">{interestCount === null ? "Interest count unavailable" : `${interestCount} interested`}</p>}
       </article>
     </li>
   );
 }
 
-/** Modal cork board with local interests; the shell owns its URL, type and return focus. */
+/** Modal cork board with local fallback and optional Supabase posts and interest counts. */
 export default function BulletinBoard({ type, onType, onClose }: {
   type: PostType | "all"; onType: (type: PostType | "all") => void; onClose: () => void;
 }) {
   const { select } = useSelection();
-  const { requireAuth, dialogOpen } = useAuth();
+  const { session, requireAuth, dialogOpen } = useAuth();
+  const enabled = supabaseEnabled();
   const root = useRef<HTMLDialogElement>(null);
   const [query, setQuery] = useState("");
   const [notice, setNotice] = useState("");
   const [now, setNow] = useState(() => new Date());
-  const [interests, setInterests] = useState(readInterests);
+  const { interests, toggle: toggleInterest, counts: interestCounts, notice: interestNotice } = useBulletinInterest(session?.accountId);
+  const [remotePosts, setRemotePosts] = useState<BulletinRow[]>([]);
+  const [adding, setAdding] = useState(false);
   const [onlyInterests, setOnlyInterests] = useState(false);
 
   useEffect(() => {
@@ -104,21 +104,34 @@ export default function BulletinBoard({ type, onType, onClose }: {
     return () => { element?.close(); };
   }, []);
 
-  const posts = useMemo(() => bulletinPosts(now), [now]);
+  useEffect(() => {
+    if (!enabled) return;
+    let active = true;
+    const refresh = async () => {
+      const rows = await supabaseSelect<BulletinRow>("bulletin_posts", {
+        select: "id,type,title,org,body,place_id,starts_at,ends_at", hidden: "eq.false", order: "starts_at.asc.nullslast,created_at.desc",
+      });
+      if (active && rows) setRemotePosts(rows);
+    };
+    void refresh();
+    window.addEventListener("online", refresh);
+    return () => { active = false; window.removeEventListener("online", refresh); };
+  }, [enabled, now]);
+
+  const posts = useMemo(() => {
+    const local = bulletinPosts(now);
+    if (!enabled) return local;
+    return [...local, ...databaseBulletinPosts(remotePosts, now)].sort((a, b) => {
+      const ongoingA = Boolean(a.start && a.end && a.start <= now && a.end > now);
+      const ongoingB = Boolean(b.start && b.end && b.start <= now && b.end > now);
+      return Number(ongoingB) - Number(ongoingA) || (a.start?.getTime() ?? Infinity) - (b.start?.getTime() ?? Infinity);
+    });
+  }, [now, enabled, remotePosts]);
   const matching = useMemo(() => filterPosts(posts, "all", query), [posts, query]);
   const saved = matching.filter((post) => interests.has(post.id));
   const counts = countByType(onlyInterests ? saved : matching);
   const shown = filterPosts(onlyInterests ? saved : matching, type);
   const chips: { id: PostType | "all"; label: string }[] = [{ id: "all", label: "All" }, ...POST_TYPES];
-
-  const toggleInterest = (id: string) => {
-    const next = new Set(interests);
-    if (next.has(id)) next.delete(id); else next.add(id);
-    setInterests(next);
-    // TODO T-22: add shared interest counts only when a backend provides them.
-    try { localStorage.setItem(INTERESTS_KEY, JSON.stringify([...next])); }
-    catch { setNotice("Interests are available for this visit. This browser could not save them on this device."); }
-  };
 
   const onKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {
     if (dialogOpen) return;
@@ -152,16 +165,23 @@ export default function BulletinBoard({ type, onType, onClose }: {
           <Icon name="left" size={18} /> Back to map
         </button>
         <button type="button" className="board__btn board__btn--gold board__add"
-          onClick={() => requireAuth(() => setNotice("Posting is coming soon. The board is read-only for now."))}>
-          <span>Add post</span><small>Coming soon</small>
+          onClick={() => requireAuth(() => enabled ? setAdding(true) : setNotice("Posting is coming soon. The board is read-only for now."))}>
+          <span>Add post</span>{!enabled && <small>Coming soon</small>}
         </button>
       </header>
       <div className="board__sub">
         <p role="status">Showing {shown.length} {shown.length === 1 ? "post" : "posts"} · {today.format(now)} · Campus time (ET)</p>
-        {notice && <p className="board__notice" role="status">{notice}</p>}
+        {(notice || interestNotice) && <p className="board__notice" role="status">{notice || interestNotice}</p>}
       </div>
       <div className="board__surface">
         <CorkTexture />
+        {enabled && adding && session && <AddPostForm accountId={session.accountId}
+          onCancel={() => { setAdding(false); root.current?.querySelector<HTMLElement>(".board__add")?.focus(); }}
+          onAdded={(row) => {
+            setRemotePosts((posts) => [row, ...posts.filter((post) => post.id !== row.id)]);
+            setAdding(false); setNotice("Post added."); setOnlyInterests(false); setQuery(""); onType("all");
+            root.current?.querySelector<HTMLElement>(".board__add")?.focus();
+          }} />}
         <div className="board__chips" role="group" aria-label="Filter posts by type">
           {chips.map((chip) => (
             <button key={chip.id} type="button" className="board__chip" aria-pressed={type === chip.id} onClick={() => onType(chip.id)}>
@@ -177,6 +197,7 @@ export default function BulletinBoard({ type, onType, onClose }: {
             <ul className="board__grid" aria-label="Posts">
               {shown.map((post, index) => (
                 <NoteCard key={post.id} post={post} index={index} interested={interests.has(post.id)}
+                  interestCount={enabled ? interestCounts ? interestCounts[post.id] ?? 0 : null : undefined}
                   onInterest={() => toggleInterest(post.id)}
                   onShow={(placeId) => { select({ kind: "place", id: placeId }); onClose(); }} />
               ))}

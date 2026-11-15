@@ -76,6 +76,20 @@
 .board-card__interest { border: var(--hairline); margin-left: auto; }
 .board-card__interest[aria-pressed="true"] { color: var(--white); background: var(--navy); }
 .board-card__map:hover, .board-card__interest:hover { border-color: var(--ink); }
+.board-card__count { margin: var(--s2) 0 0; font: var(--fs-xs)/1.4 var(--font-mono); }
+.board-form { max-width: 640px; margin: 0 auto var(--s5); padding: var(--s4); border: var(--hairline); background: var(--paper); }
+.board-form h3 { margin-top: 0; }
+.board-form fieldset { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); min-width: 0; padding: 0; margin: 0; border: 0; }
+.board-form label { display: flex; flex-direction: column; gap: var(--s1); min-width: 0; }
+.board-form input, .board-form select, .board-form textarea {
+  width: 100%; min-width: 0; max-width: 100%; min-height: var(--tap); padding: var(--s2); border: var(--hairline);
+  background: var(--white); color: var(--ink); font: inherit;
+}
+.board-form label:last-child, .board-form__zone { grid-column: 1 / -1; }
+.board-form textarea { resize: vertical; }
+.board-form__zone { margin: 0; font-size: var(--fs-sm); }
+.board-form__actions { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s3); }
+@media (max-width: 599.98px) { .board-form fieldset { grid-template-columns: minmax(0, 1fr); } }
 .board__empty { position: relative; max-width: 560px; margin: var(--s6) auto; padding: var(--s6); border: var(--hairline); background: var(--paper); text-align: center; }
 @media (hover: hover) { .board-card:hover { transform: translateY(-2px) rotate(var(--tilt)); } }
 @media (min-width: 600px) { .board__grid { columns: 2; } }

@@ -5,9 +5,9 @@ import { Icon } from "./icons";
 
 /** The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropdown row. */
 export default function SearchPill({ showResults, onQuery, onRoute, trailing }: {
-  /** Show the results dropdown (there is a query and nothing is selected). */
+  /** Show suggestions or recent picks while search is active and nothing is selected. */
   showResults: boolean;
-  /** Reports whether the field has text. Text means a new search: the shell clears the selection so the dropdown shows. */
+  /** Requests search results on focus or input; the shell clears the selection so the dropdown shows. */
   onQuery: (hasQuery: boolean) => void;
   /** Desktop: the Route button. Phones use the Route FAB instead. */
   onRoute?: () => void;
@@ -16,6 +16,7 @@ export default function SearchPill({ showResults, onQuery, onRoute, trailing }: 
 }) {
   return (
     <div className="shell-search" data-results={showResults}
+      onFocusCapture={(event) => { if (event.target instanceof HTMLInputElement) onQuery(true); }}
       onInput={(event) => { if (event.target instanceof HTMLInputElement) onQuery(event.target.value.trim() !== ""); }}
       onKeyDownCapture={(event) => {
         // List hidden behind a selection: arrows reopen it before moving in it; Enter never picks a result nobody can see.

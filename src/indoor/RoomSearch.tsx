@@ -12,7 +12,7 @@ export default function RoomSearch({ building, onChoose, onChooseRoom }: { build
   const id = useId();
   const tokens = query.toLowerCase().trim().split(/\s+/);
   const roomsOnly = building.status === "rooms-only";
-  const rooms = roomsOnly ? [...building.levels.map((level) => ({ id: level.id, name: level.name, label: level.label })),
+  const allRooms = roomsOnly ? [...building.levels.map((level) => ({ id: level.id, name: level.name, label: level.label })),
     { id: null, name: "Level not listed", label: "?" }].flatMap((level) => (building.rooms ?? [])
       .filter((room) => room.level === level.id && tokens.every((token) => `${room.room} ${room.name} ${room.type} ${level.name} ${building.title} CULC Clough`.toLowerCase().includes(token)))
       .sort((a, b) => Number(b.room.toLowerCase() === query.trim().toLowerCase()) - Number(a.room.toLowerCase() === query.trim().toLowerCase()))
@@ -21,6 +21,8 @@ export default function RoomSearch({ building, onChoose, onChooseRoom }: { build
     : building.levels.flatMap((level) => level.available ? level.spaces
       .filter((space) => space.door && space.type !== "void" && tokens.every((token) => `${space.name} ${space.type} ${level.name}`.toLowerCase().includes(token)))
       .map((space) => ({ id: space.id, name: space.name, meta: space.type, level, pick: () => onChoose?.(space) })) : []);
+  // Like a map app: nothing listed until you type, then a handful of matches (the directory beside the plan lists everything).
+  const rooms = query.trim() ? allRooms.slice(0, 8) : [];
   const choose = (pick: () => void) => { pick(); setQuery(""); setOpen(false); input.current?.focus(); };
 
   useEffect(() => {
