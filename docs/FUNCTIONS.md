@@ -289,7 +289,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:11](../src/panels/building-card/InsidePlaces.tsx#L11): Show selectable places grouped by category for a footprint or a legacy seed building.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:85](../src/panels/bulletin/BulletinBoard.tsx#L85): Modal cork board with shared interests; the shell owns its URL, type and return focus.
-- `PostComposer(…)` [src/panels/bulletin/PostComposer.tsx:17](../src/panels/bulletin/PostComposer.tsx#L17): Modal form that creates a post for the signed-in account; reports the saved post, or closes without one.
+- `PostComposer(…)` [src/panels/bulletin/PostComposer.tsx:27](../src/panels/bulletin/PostComposer.tsx#L27): Modal form that creates a post for the signed-in account; reports the saved post, or closes without one.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:68](../src/panels/layers/LayersPanel.tsx#L68): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `DoorStickers()` [src/panels/maintenance/DoorStickers.tsx:33](../src/panels/maintenance/DoorStickers.tsx#L33): Link and QR generator for the entrance stickers, one list per building.
 - `MaintenanceView({ onClose })` [src/panels/maintenance/MaintenanceView.tsx:66](../src/panels/maintenance/MaintenanceView.tsx#L66): Full-screen maintenance dashboard, opened from the menu (and by ?view=maintenance).

@@ -5,11 +5,21 @@ import { audienceFor, createUserPost, type UserPost } from "../../lib/bulletinPo
 import { loadBuildings, loadedBuildings, type BuildingIndex } from "../../lib/buildings";
 import { campusDateTime } from "../../lib/events";
 import { photoToDataUrl } from "../../lib/photo";
-import { resolveRoom } from "../../indoor/registry";
+import { indoorRooms, resolveRoom } from "../../indoor/registry";
 import type { CampusSearchResult } from "../../lib/search";
 import PlaceField from "../search/PlaceField";
 import "../search/search.css";
 import "./composer.css";
+
+/** Menu title of a pick: identical rooms on one level are numbered "1 of 2" (the model has no real room numbers there). */
+function describePlace(result: CampusSearchResult): string {
+  if (result.kind !== "room") return result.name;
+  const room = resolveRoom(result.id);
+  const twins = room ? indoorRooms().filter((item) => item.building.building_id === room.building.building_id
+    && item.level?.id === room.level?.id && item.space.name === room.space.name) : [];
+  const ordinal = twins.length > 1 ? ` (${twins.findIndex((item) => item.id === result.id) + 1} of ${twins.length})` : "";
+  return `${result.name}${ordinal}`;
+}
 
 const onlyRegistered = (result: CampusSearchResult) => result.kind === "building" || result.kind === "room";
 
@@ -56,7 +66,7 @@ export default function PostComposer({ session, onDone, onClose }: {
     try {
       const post = await createUserPost(session, {
         title: title.trim(), description: description.trim() || undefined, startsAt, endsAt, poster: poster ?? undefined,
-        location: { kind: place.kind === "room" ? "room" : "building", id: place.id, name: place.kind === "room" && place.meta ? `${place.name}, ${place.meta}` : place.name, buildingId },
+        location: { kind: place.kind === "room" ? "room" : "building", id: place.id, name: place.name, buildingId },
       });
       onDone(post);
     } catch (e) {
@@ -86,7 +96,8 @@ export default function PostComposer({ session, onDone, onClose }: {
             <span className="cims-field"><input type="time" value={to} onChange={(e) => setTo(e.target.value)} /></span></label>
         </div>
         <PlaceField label="Where (required)" placeholder="Search a building or room…" buildings={buildings}
-          filter={onlyRegistered} picked={place} onPick={setPlace} />
+          filter={onlyRegistered} describe={describePlace} picked={place}
+          onPick={(r) => setPlace(r && r.kind === "room" ? { ...r, name: `${describePlace(r)}, ${r.meta}` } : r)} />
         <div className="composer__field">
           <span className="cims-caps">Poster (optional)</span>
           {poster && <img className="composer__poster" src={poster} alt="Poster preview" />}
