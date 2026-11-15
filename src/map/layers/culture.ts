@@ -6,7 +6,7 @@ import { CULTURE_AREAS, CULTURE_NOTES, doodleFor, type CultureNote } from "../..
 import { loadMapLibre } from "../maplibre";
 import "../culture.css";
 
-const CAMPUS_CENTER: [number, number] = [-84.3975, 33.7766];
+const CAMPUS_CENTER: [number, number] = [-84.3975, 33.7761];
 
 /** A tilted post-it with tape, the note's doodle and its title in handwriting. */
 function stampEl(n: CultureNote): HTMLElement {
@@ -52,11 +52,16 @@ const culture: MapLayer = {
     let frame = 0;
     let lastNote: string | null = null;
 
-    /** Greedy declutter in screen space: the open note first, then tour order; a stamp that would overlap one already shown hides. */
+    /** Greedy declutter in screen space: West / East labels always show, then the open note, then tour order; a stamp that would overlap one already shown hides. */
     const declutter = () => {
       frame = 0;
       const open = getCulture().note;
       const placed: DOMRect[] = [];
+      for (const marker of areas) {
+        const el = marker.getElement();
+        el.dataset.hidden = "false"; // labels never disappear: notes give way to them
+        placed.push(el.getBoundingClientRect());
+      }
       const order = [...stamps].sort((a, b) => Number(b.note.id === open) - Number(a.note.id === open));
       for (const { note, marker } of order) {
         const el = marker.getElement();
@@ -66,14 +71,6 @@ const culture: MapLayer = {
         el.dataset.hidden = String(hit);
         el.dataset.active = String(note.id === open);
         if (!hit) placed.push(box);
-      }
-      // The West / East labels give way to notes (they are approximate areas, the notes are exact spots).
-      for (const marker of areas) {
-        const el = marker.getElement();
-        const r = el.getBoundingClientRect();
-        const hit = placed.some((p) => r.x < p.right && r.right > p.x && r.y < p.bottom && r.bottom > p.y);
-        el.dataset.hidden = String(hit);
-        if (!hit) placed.push(r);
       }
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(declutter); };
