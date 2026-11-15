@@ -1,14 +1,16 @@
-/** @file Short card for a building with an indoor map: name, thumbnail of the entrance floor, key facts and the button that opens the full indoor screen. */
+/** @file Short card for a building with an indoor map: name, thumbnail of the entrance floor, key facts, report-an-issue and the button that opens the full indoor screen. */
 import { useEffect, useState } from "react";
 import { loadBuildings, loadedBuildings } from "../../lib/buildings";
 import { openIndoor, useOpenIndoor } from "../../indoor/open";
 import { indoorFor } from "../../indoor/registry";
+import { useAuth } from "../../state/auth";
 import { useSelection } from "../../state/selection";
 import "./building-card.css";
 
 /** Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is open. */
 export default function BuildingPreview() {
   const { selection, select } = useSelection();
+  const { session, requireAuth } = useAuth();
   const open = useOpenIndoor();
   const building = selection?.kind === "building" ? indoorFor(selection.id) : undefined;
   const [facts, setFacts] = useState(() => building && loadedBuildings()?.byId.get(building.building_id));
@@ -27,6 +29,8 @@ export default function BuildingPreview() {
   const [lng, lat] = facts?.center ?? [];
   const directions = facts ? `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}` : undefined;
   const aliases = facts?.aliases ?? [];
+  // T-23: opens the report flow (Shell's "report" panel) prefilled with this building; floor/room are picked in the form.
+  const handleReportIssue = () => requireAuth(() => select({ kind: "report", id: building.building_id }));
   return (
     <section className="detail preview" aria-label="Building preview">
       <h2 className="cims-card__name">{facts?.name ?? building.title}</h2>
@@ -44,6 +48,10 @@ export default function BuildingPreview() {
         {rooms > 0 && <span className="cims-tag">{rooms} rooms</span>}
         <span className="cims-tag">Schematic plan</span>
       </p>
+      <div className="detail__report">
+        <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
+        {!session && <small className="cims-muted">Requires sign-in</small>}
+      </div>
       <div className="cims-actions">
         <button type="button" className="cims-btn cims-btn--primary" onClick={() => openIndoor(building.building_id)}>Open building map</button>
         {directions ? <a className="cims-btn" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>

@@ -9,6 +9,7 @@ import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinPanel from "../panels/bulletin/BulletinPanel";
+import ReportPanel from "../panels/report";
 import { useAuth } from "../state/auth";
 import { useSelection, type SelectionKind } from "../state/selection";
 import BottomSheet, { type SheetSnap } from "./BottomSheet";
@@ -64,8 +65,9 @@ export default function Shell() {
     if (KINDS.includes(kind as SelectionKind) && rest.length) select({ kind: kind as SelectionKind, id: rest.join(":") });
   }, []); // once, on load
 
-  // Picking something on the map (or from the bulletin) always shows it.
-  useEffect(() => { if (selection) setPanel("explore"); }, [selection]);
+  // Picking something on the map (or from the bulletin) always shows it; a "report" selection
+  // (a place/building card's "Report an issue") opens the report panel prefilled with it instead.
+  useEffect(() => { if (selection) setPanel(selection.kind === "report" ? "report" : "explore"); }, [selection]);
 
   const choosePanel = (next: ShellPanel) => {
     if (next !== "explore" && next === panel) setPanel("explore"); // pressing the open item again closes it
@@ -86,9 +88,13 @@ export default function Shell() {
   let content: { title: string; key: string; body: ReactNode } | null = null;
   if (panel === "bulletin") content = { title: "Bulletin", key: "bulletin", body: <BulletinPanel onShowMap={() => setPanel("explore")} /> };
   else if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <ComingSoon what="Room finder" hint="You can already search a room number in the search bar." /> };
-  else if (panel === "report") content = { title: "Report", key: "report", body: <ComingSoon what="Report an issue" /> };
+  else if (panel === "report") {
+    // Keyed by the selected place/building (when there is one) so the flow resets for a new "Report an issue".
+    const reportKey = selection?.kind === "report" ? `report:${selection.id}` : "report";
+    content = { title: "Report", key: reportKey, body: <ReportPanel key={reportKey} onClose={() => setPanel("explore")} /> };
+  }
   else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel onClose={() => setPanel("explore")} /> };
-  else if (selection) content = {
+  else if (selection && selection.kind !== "report") content = {
     title: selection.kind === "building" ? "Building" : "Place",
     key: `${selection.kind}:${selection.id}`,
     body: <><PlaceCard /><BuildingPreview /><BuildingCard /></>,

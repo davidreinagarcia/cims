@@ -9,8 +9,11 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`buildings.ts`](buildings.ts): Building footprints (OSM, src/data/buildings.geojson): loaded once on demand, with a point-in-footprint looku… · exports `loadedBuildings`, `loadBuildings`
 - [`events.ts`](events.ts): Pure event windows and short labels in the America/New_York campus timezone. · exports `nextWindow`, `formatWindow`
 - [`hours.ts`](hours.ts): Pure opening status and weekday lookup in the campus timezone. · exports `campusDay`, `openStatus`
+- [`issue-routing.ts`](issue-routing.ts): Issue categories and their routing (category → team + official contact), from src/data/issue-routing.json whe… · exports `TEAMS`, `SAFETY_CATEGORY`, `hasVerifiedRouting`, `issueRoutes`, `routeFor`
 - [`layerCatalog.ts`](layerCatalog.ts): The toggleable map layers (PRD F-02): id, label, color token and sub-types. Add a layer or sub-type here. · exports `LAYER_CATALOG`, `categoryColor`
 - [`places.ts`](places.ts): Typed access to every curated place: seed file plus src/data/pois/*.json, drafts hidden unless ?drafts=1. · exports `showDrafts`, `places`
+- [`reports.mock.ts`](reports.mock.ts): Mock ReportsService backed by localStorage, with labeled sample reports. Prototype only: nothing leaves the b… · exports `createLocalReportsService`
+- [`reports.ts`](reports.ts): Report-an-issue contracts (types + ReportsService) and the one place that picks the backend adapter. · exports `STATUS_FLOW`, `STATUS_LABEL`, `isActive`, `reportsService`
 - [`search.ts`](search.ts): Ranked building, room and place search with accent folding and original-text match ranges. · exports `searchPlaces`, `searchCampus`
 - [`suggest.ts`](suggest.ts): Search-as-you-type suggestions (short ranked list, nothing until typed) and where a result sits on the map. · exports `suggest`, `locate`, `recents`, `remember`
 

@@ -174,9 +174,10 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Wayfinding v1 on Kendeda: multilevel schematic routes, stairs or step-free elevator, accessible directions, route leg navigation and responsive plan fitting; CULC has no plan or graph.
 - [ ] **T-22 Backend** per T-05 decision · needs T-05
   Tables: `accounts` (opaque id, role, provider, status), `issue_reports`, `issue_plus_ones`, each write with `account_id`; rate limiting per account; env vars documented in `.env.example`.
-- [ ] **T-23 Report an issue** (F-10) · UI can start on mocks after T-02; real data needs T-22
+- [x] **T-23 Report an issue** (F-10) · UI can start on mocks after T-02; real data needs T-22
   Prefilled location, category → team ("routes to IT"), duplicates + "Me too", status page,
   staff view, "Prototype: not sent to Facilities/IT" label (Risk R-14). Every write (report, +1) goes through the T-25 sign-in gate; the staff view needs the staff role (no unlisted URL).
+  *Mounted in the map-first shell's "Report" slot (`src/panels/report/`, `src/shell/Shell.tsx`), prefilled from the place card, the building card and the building preview's "Report an issue" buttons (`select({ kind: "report", id })`), built against a `localStorage` mock. Branch `feat/T23-shell-integration`, not yet merged. Deferred: room-level entry from the indoor floor plan, the open-reports map-pin layer (US-10.3), the door-stickers page (US-10.5) and real data (needs T-22).*
 - [ ] **T-24 Room finder** (F-11, Must since Q6) · needs T-20, T-21
   Availability seed for Kendeda rooms, filters (capacity, features), map + floor highlight, Book deep link.
 - [x] **T-25 Sign-in mock + posting gate** (F-21, [ADR-0007](adr/0007-gt-sign-in-simulated.md)) · A · *hotspot PR (`App.tsx`, `src/state/`)* · needs T-01; land it before T-23 and the T-15 posting UI
