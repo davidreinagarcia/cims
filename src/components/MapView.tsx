@@ -33,8 +33,21 @@ export default function MapView() {
         bearing: CAMPUS.bearing,
         maxBounds: CAMPUS.bounds,
         style: baseStyle,
+        attributionControl: false,
       });
       const m = map;
+      // Attribution (legal, always reachable): expanded on desktop; on phones (< 768px) the compact ⓘ button,
+      // collapsed once the map has loaded (MapLibre opens it by default), tap ⓘ to read it.
+      const phone = window.matchMedia("(max-width: 767px)").matches;
+      m.addControl(new maplibregl.AttributionControl({
+        compact: phone,
+        customAttribution: '<a href="https://maplibre.org/" target="_blank" rel="noopener">MapLibre</a>', // same credit as the default control
+      }), "bottom-right");
+      if (phone) m.once("load", () => {
+        const attrib = m.getContainer().querySelector(".maplibregl-ctrl-attrib");
+        attrib?.classList.remove("maplibregl-compact-show");
+        attrib?.removeAttribute("open");
+      });
       // Bottom corners stack upward (each new control goes on top), so add bottom-right controls from the bottom up:
       // scale box, compass, 2D/3D, zoom (APP-SHELL.md §7). The top of the map stays free for the floating search UI.
       m.addControl(new ScaleBox(), "bottom-right");
