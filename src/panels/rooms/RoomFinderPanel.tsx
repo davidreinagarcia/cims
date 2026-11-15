@@ -1,6 +1,7 @@
 /** @file Reserve-a-room entry point (F-11/F-20, T-60): pick a building, or jump to favorited rooms, then book a real (prototype) slot via ReservationGrid. */
 import { useEffect, useState } from "react";
 import { bookableRoomsFor, favoriteRoomsFrom } from "../../indoor/availability";
+import { clearBookingRequest, peekBookingRequest } from "../../indoor/handoff";
 import { indoorFor, indoorRooms } from "../../indoor/registry";
 import { roomAmenitiesById } from "../../indoor/roomFinderDemo";
 import { preferredRoomsService, type PreferredRoom } from "../../lib/preferredRooms";
@@ -12,7 +13,7 @@ import RoomsNearMe from "./RoomsNearMe";
 import "./rooms.css";
 
 /** Which first step the user is on: pick a building, browse favorited rooms, browse by distance (T-61), or a chosen building's grid. */
-type Screen = { kind: "picker" } | { kind: "favorites" } | { kind: "nearby" } | { kind: "building"; buildingId: string };
+type Screen = { kind: "picker" } | { kind: "favorites" } | { kind: "nearby" } | { kind: "building"; buildingId: string; roomId?: string };
 
 /**
  * Sidebar tab: "Reserve a room" entry point, replacing the read-only room finder (T-24) with a
@@ -26,7 +27,12 @@ type Screen = { kind: "picker" } | { kind: "favorites" } | { kind: "nearby" } | 
  */
 export default function RoomFinderPanel() {
   const { session } = useAuth();
-  const [screen, setScreen] = useState<Screen>({ kind: "picker" });
+  // "Book this room" on the indoor room card opens straight on that room's row.
+  const [screen, setScreen] = useState<Screen>(() => {
+    const request = peekBookingRequest();
+    return request ? { kind: "building", buildingId: request.buildingId, roomId: request.roomId } : { kind: "picker" };
+  });
+  useEffect(() => clearBookingRequest(), []);
   const [favorites, setFavorites] = useState<PreferredRoom[]>([]);
 
   useEffect(() => {
@@ -39,7 +45,7 @@ export default function RoomFinderPanel() {
 
   const building = screen.kind === "building" ? indoorFor(screen.buildingId) : undefined;
   const rooms = screen.kind === "building" && building
-    ? bookableRoomsFor(indoorRooms(), roomAmenitiesById, building.building_id)
+    ? bookableRoomsFor(indoorRooms(), roomAmenitiesById, building.building_id).filter((room) => !screen.roomId || room.id === screen.roomId)
     : screen.kind === "favorites"
       ? favoriteRoomsFrom(indoorRooms(), roomAmenitiesById, new Set(favorites.map((f) => f.room)))
       : null;
@@ -90,9 +96,11 @@ export default function RoomFinderPanel() {
             <div className="reserve-building__info">
               <h3 className="reserve-building__title">{building.title}</h3>
               <button type="button" className="cims-btn cims-btn--small" onClick={() => setScreen({ kind: "picker" })}>Change building</button>
+              {screen.kind === "building" && screen.roomId && <button type="button" className="cims-btn cims-btn--small"
+                onClick={() => setScreen({ kind: "building", buildingId: building.building_id })}>All rooms here</button>}
             </div>
           </div>
-          <ReservationGrid key={building.building_id} rooms={rooms ?? []} />
+          <ReservationGrid key={`${building.building_id}:${screen.kind === "building" ? screen.roomId ?? "" : ""}`} rooms={rooms ?? []} />
         </>
       ) : (
         <BuildingPicker onPick={(buildingId) => setScreen({ kind: "building", buildingId })} />
