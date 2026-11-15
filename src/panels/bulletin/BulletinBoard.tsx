@@ -1,7 +1,7 @@
 /** @file Full-screen Campus Bulletin: cork board with masonry note cards, type filters with counts, search and deep link. */
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type CSSProperties, type KeyboardEvent } from "react";
 import { loadInterests, setInterest } from "../../lib/bulletinInterests";
-import { getUserPosts, refreshUserPosts, subscribeUserPosts, audienceFor, type UserPost } from "../../lib/bulletinPosts";
+import { canDeletePost, deleteUserPost, getUserPosts, refreshUserPosts, subscribeUserPosts, audienceFor, type UserPost } from "../../lib/bulletinPosts";
 import { POST_TYPES, bulletinPosts, countByType, filterPosts, postsFor, type BulletinPost, type PostType } from "../../lib/bulletin";
 import { recordPortfolioEntry } from "../../portfolio/store";
 import { Icon } from "../../shell/icons";
@@ -43,8 +43,8 @@ function Pin({ color }: { color: string }) {
   );
 }
 
-function NoteCard({ post, index, interested, count, onInterest, onShow }: {
-  post: BulletinPost; index: number; interested: boolean; count: number; onInterest: () => void; onShow: (post: BulletinPost) => void;
+function NoteCard({ post, index, interested, count, onInterest, onShow, onDelete }: {
+  post: BulletinPost; index: number; interested: boolean; count: number; onInterest: () => void; onShow: (post: BulletinPost) => void; onDelete?: () => void;
 }) {
   const style = { "--fill": FILLS[index % FILLS.length], "--tilt": `${TILTS[index % TILTS.length]}deg` } as CSSProperties;
   return (
@@ -73,6 +73,7 @@ function NoteCard({ post, index, interested, count, onInterest, onShow }: {
               <Icon name="explore" size={18} /> {post.placeKind === "room" ? "Guide me to the room" : "Show on map"}
             </button>
           )}
+          {onDelete && <button type="button" className="board-card__delete" aria-label={`Delete ${post.title}`} onClick={onDelete}>Delete</button>}
           <button type="button" className="board-card__interest" aria-pressed={interested}
             aria-label={`Interested in ${post.title}`} onClick={onInterest}>Interested{count > 0 ? ` · ${count}` : ""}</button>
         </div>
@@ -119,6 +120,11 @@ export default function BulletinBoard({ type, onType, onClose }: {
   const counts = countByType(onlyInterests ? saved : matching);
   const shown = filterPosts(onlyInterests ? saved : matching, type);
   const chips: { id: PostType | "all"; label: string }[] = [{ id: "all", label: "All" }, ...POST_TYPES];
+
+  const removePost = (post: BulletinPost) => {
+    if (!window.confirm(`Delete "${post.title}"? This cannot be undone.`)) return;
+    deleteUserPost(post.id).then(() => setNotice("Post deleted."), (e) => setNotice(e instanceof Error ? e.message : "Could not delete that post."));
+  };
 
   const toggleInterest = (id: string) => {
     const on = !interests.has(id);
@@ -206,6 +212,7 @@ export default function BulletinBoard({ type, onType, onClose }: {
               {shown.map((post, index) => (
                 <NoteCard key={post.id} post={post} index={index} interested={interests.has(post.id)} count={interestCounts[post.id] ?? 0}
                   onInterest={() => toggleInterest(post.id)}
+                  onDelete={post.ownerId !== undefined && canDeletePost(session, { accountId: post.ownerId }) ? () => removePost(post) : undefined}
                   onShow={(post) => { select({ kind: post.placeKind ?? "place", id: post.placeId! }); onClose(); }} />
               ))}
             </ul>

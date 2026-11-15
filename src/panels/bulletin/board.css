@@ -98,3 +98,5 @@
 .board__tab { font-weight: 600; }
 .board-card__poster { display: block; margin: 0 0 var(--s3); border: var(--hairline); background: var(--white); }
 .board-card__poster img { display: block; width: 100%; max-height: 360px; object-fit: contain; }
+.board-card__delete { min-height: var(--tap); padding: var(--s2); border: 1px solid transparent; background: transparent; color: var(--cat-issues); font: 500 var(--fs-sm)/1.2 var(--font-body); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.board-card__delete:hover { border-color: var(--cat-issues); }

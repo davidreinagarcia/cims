@@ -37,13 +37,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `placeBuilding(place, index, all)` [src/lib/buildingPlaces.ts:11](../src/lib/buildingPlaces.ts#L11): Resolve explicit footprint ids, legacy seed building ids, then exact-point containment.
 - `loadedBuildings()` [src/lib/buildings.ts:84](../src/lib/buildings.ts#L84): The index if it is already loaded, so callers can answer synchronously.
 - `loadBuildings()` [src/lib/buildings.ts:89](../src/lib/buildings.ts#L89): Loads the footprints once; a failed load is forgotten so the next call retries.
-- `POST_TYPES` [src/lib/bulletin.ts:41](../src/lib/bulletin.ts#L41): Bulletin filters in display order, sharing organization labels with the layer catalog.
-- `bulletinPosts(now, written)` [src/lib/bulletin.ts:76](../src/lib/bulletin.ts#L76): Return ongoing and upcoming dated events or org posts (curated plus user-written), with ongoing entries first.
-- `postsFor(posts, audience)` [src/lib/bulletin.ts:126](../src/lib/bulletin.ts#L126): Keep only the posts of one tab (Orgs or People).
-- `filterPosts(posts, type, query?)` [src/lib/bulletin.ts:131](../src/lib/bulletin.ts#L131): Filter posts by type and the shared case/accent-insensitive search, retaining post order.
-- `countByType(posts)` [src/lib/bulletin.ts:156](../src/lib/bulletin.ts#L156): Count every post type and the unfiltered total, including categories with no posts.
-- `bulletinUrl(type)` [src/lib/bulletin.ts:163](../src/lib/bulletin.ts#L163): Build a bulletin deep link, omitting the type parameter for the all filter.
-- `readBulletinParams(search)` [src/lib/bulletin.ts:170](../src/lib/bulletin.ts#L170): Read bulletin visibility and a validated type filter from a query string.
+- `POST_TYPES` [src/lib/bulletin.ts:43](../src/lib/bulletin.ts#L43): Bulletin filters in display order, sharing organization labels with the layer catalog.
+- `bulletinPosts(now, written)` [src/lib/bulletin.ts:78](../src/lib/bulletin.ts#L78): Return ongoing and upcoming dated events or org posts (curated plus user-written), with ongoing entries first.
+- `postsFor(posts, audience)` [src/lib/bulletin.ts:128](../src/lib/bulletin.ts#L128): Keep only the posts of one tab (Orgs or People).
+- `filterPosts(posts, type, query?)` [src/lib/bulletin.ts:133](../src/lib/bulletin.ts#L133): Filter posts by type and the shared case/accent-insensitive search, retaining post order.
+- `countByType(posts)` [src/lib/bulletin.ts:158](../src/lib/bulletin.ts#L158): Count every post type and the unfiltered total, including categories with no posts.
+- `bulletinUrl(type)` [src/lib/bulletin.ts:165](../src/lib/bulletin.ts#L165): Build a bulletin deep link, omitting the type parameter for the all filter.
+- `readBulletinParams(search)` [src/lib/bulletin.ts:172](../src/lib/bulletin.ts#L172): Read bulletin visibility and a validated type filter from a query string.
 - `loadInterests()` [src/lib/bulletinInterests.ts:13](../src/lib/bulletinInterests.ts#L13): Loads every mark (public counts) and this account's own.
 - `setInterest(postId, on)` [src/lib/bulletinInterests.ts:24](../src/lib/bulletinInterests.ts#L24): Marks or unmarks one post as interesting for this account.
 - `audienceFor(role)` [src/lib/bulletinPosts.ts:38](../src/lib/bulletinPosts.ts#L38): Audience an account role posts under, or null when that role may not post (staff, moderators).
@@ -51,7 +51,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `getUserPosts()` [src/lib/bulletinPosts.ts:53](../src/lib/bulletinPosts.ts#L53): Current snapshot of the loaded posts (stable between changes).
 - `refreshUserPosts()` [src/lib/bulletinPosts.ts:56](../src/lib/bulletinPosts.ts#L56): Loads posts that have not ended yet and publishes them; failures keep what is already loaded.
 - `createUserPost(session, input)` [src/lib/bulletinPosts.ts:68](../src/lib/bulletinPosts.ts#L68): Saves a post for the signed-in account and adds it to the live store. Rule rejections (wrong role, too fast)…
-- `userPostFeatures()` [src/lib/bulletinPosts.ts:91](../src/lib/bulletinPosts.ts#L91): Map anchors for the loaded posts: one orgs-layer point per post at its building's centre (none until footprin…
+- `canDeletePost(session, post, "accountId">)` [src/lib/bulletinPosts.ts:91](../src/lib/bulletinPosts.ts#L91): Whether this account may delete a post: its author, or a moderator (the server enforces the same rule).
+- `deleteUserPost(id)` [src/lib/bulletinPosts.ts:96](../src/lib/bulletinPosts.ts#L96): Deletes a post and drops it from the live store. Rule rejections reach the caller.
+- `userPostFeatures()` [src/lib/bulletinPosts.ts:105](../src/lib/bulletinPosts.ts#L105): Map anchors for the loaded posts: one orgs-layer point per post at its building's centre (none until footprin…
 - `campusDateTime(day, clock)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Instant for a campus-time date (YYYY-MM-DD) and clock (HH:MM); null when the input is malformed or the time d…
 - `nextWindow(event, now)` [src/lib/events.ts:43](../src/lib/events.ts#L43): Return the current or next weekly campus occurrence, or an unexpired one-off window.
 - `formatWindow(window)` [src/lib/events.ts:65](../src/lib/events.ts#L65): Format an event window as short English text in campus time.
@@ -288,7 +290,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:12](../src/panels/building-card/BuildingPreview.tsx#L12): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
 - `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:11](../src/panels/building-card/InsidePlaces.tsx#L11): Show selectable places grouped by category for a footprint or a legacy seed building.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
-- `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:85](../src/panels/bulletin/BulletinBoard.tsx#L85): Modal cork board with shared interests; the shell owns its URL, type and return focus.
+- `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:86](../src/panels/bulletin/BulletinBoard.tsx#L86): Modal cork board with shared interests; the shell owns its URL, type and return focus.
 - `PostComposer(…)` [src/panels/bulletin/PostComposer.tsx:27](../src/panels/bulletin/PostComposer.tsx#L27): Modal form that creates a post for the signed-in account; reports the saved post, or closes without one.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:68](../src/panels/layers/LayersPanel.tsx#L68): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `DoorStickers()` [src/panels/maintenance/DoorStickers.tsx:33](../src/panels/maintenance/DoorStickers.tsx#L33): Link and QR generator for the entrance stickers, one list per building.

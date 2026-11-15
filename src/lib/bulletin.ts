@@ -28,6 +28,8 @@ export interface BulletinPost {
   placeName?: string;
   /** Orgs tab (curated orgs and org accounts) or People tab (student accounts). */
   audience: "org" | "person";
+  /** Account that wrote a user post (curated posts have none); drives who may delete it. */
+  ownerId?: string;
   /** Poster image (data URL) attached by the author, shown on the board and in BuzzPrint. */
   poster?: string;
   isDemo: boolean;
@@ -113,7 +115,7 @@ export function bulletinPosts(now: Date, written: readonly UserPost[] = []): Bul
     when: whenLabel({ start: post.startsAt, end: post.endsAt }, now),
     soon: post.startsAt.getTime() <= now.getTime() + 86_400_000,
     placeId: post.location.id, placeKind: post.location.kind, placeName: post.location.name,
-    isDemo: false, poster: post.poster,
+    isDemo: false, poster: post.poster, ownerId: post.accountId,
   }] : []);
   return [...curated, ...mine].sort((a, b) => {
     const ongoingA = a.start! <= now && a.end! > now;
