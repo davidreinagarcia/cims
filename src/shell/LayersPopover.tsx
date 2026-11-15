@@ -29,7 +29,7 @@ export default function LayersPopover() {
             <span className="cims-caps">Legend</span>
             <button type="button" className="shell-iconbtn" aria-label="Close layers" onClick={close}><Icon name="close" size={20} /></button>
           </header>
-          <LayersPanel />
+          <LayersPanel startOpen />
         </div>
       )}
       <button ref={tile} type="button" className="shell-layers__tile" aria-expanded={open} aria-controls="shell-layers-popover"

@@ -218,6 +218,7 @@
 
 /* Layers: a round button under the chips (top-right), popover opens downward. */
 .app[data-layout="mobile"] .shell-layers { left: auto; bottom: auto; right: var(--s2); top: calc(var(--top) + 48px + 56px); z-index: 3; }
+.app[data-layout="mobile"] .shell-layers:has(.shell-popover) { z-index: 5; } /* open legend sits above the FABs */
 .app[data-layout="mobile"] .shell-layers__tile { width: var(--tap); height: var(--tap); border-radius: 50%; }
 .app[data-layout="mobile"] .shell-layers__label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 .app[data-layout="mobile"] .shell-popover { left: auto; right: 0; bottom: auto; top: 52px; width: min(340px, calc(100vw - 16px)); max-height: calc(100dvh - var(--top) - var(--bottom) - 180px); }
