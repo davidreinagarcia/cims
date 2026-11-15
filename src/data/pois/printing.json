@@ -50,7 +50,51 @@
         "status": "draft",
         "description": "Student printing locations inside Crosland Tower.",
         "source_url": "https://news.gatech.edu/features/2024/08/first-year-survival-tips",
-        "coord_source": "OSM relation 3178620 (Dorothy Murray Crosland Tower), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM relation 3178620 (Dorothy Murray Crosland Tower), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "23:59"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "23:59"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "23:59"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "23:59"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "23:59"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "23:59"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "23:59"
+            ]
+          ]
+        }
       },
       "geometry": {
         "type": "Point",
@@ -71,7 +115,51 @@
         "source_url": "https://library.gatech.edu/print-studio",
         "building_id": "library",
         "floor_or_suite": "3rd floor",
-        "coord_source": "OSM relation 3178630 (Price Gilbert Memorial Library), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM relation 3178630 (Price Gilbert Memorial Library), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "10:00",
+              "22:00"
+            ]
+          ],
+          "tue": [
+            [
+              "10:00",
+              "22:00"
+            ]
+          ],
+          "wed": [
+            [
+              "10:00",
+              "22:00"
+            ]
+          ],
+          "thu": [
+            [
+              "10:00",
+              "22:00"
+            ]
+          ],
+          "fri": [
+            [
+              "10:00",
+              "22:00"
+            ]
+          ],
+          "sat": [
+            [
+              "12:00",
+              "18:00"
+            ]
+          ],
+          "sun": [
+            [
+              "10:00",
+              "22:00"
+            ]
+          ]
+        }
       },
       "geometry": {
         "type": "Point",
@@ -91,7 +179,41 @@
         "description": "Campus print service offering binding and a choice of paper.",
         "source_url": "https://arch.gatech.edu/student-resource-guide",
         "address": "811 Marietta St NW, Atlanta, GA 30318",
-        "coord_source": "OSM way 43335058 (Printing and Copying Services), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 43335058 (Printing and Copying Services), building representative point returned by Nominatim lookup",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        }
       },
       "geometry": {
         "type": "Point",

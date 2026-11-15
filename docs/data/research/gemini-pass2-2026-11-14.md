@@ -1,7 +1,7 @@
 <!-- summary: Audit report of the Gemini deep research pass on campus POIs (2026-11-14): what is solid, what is missing, what to verify. -->
 # Gemini POI research, second pass (2026-11-14)
 
-Deep research run by David with Gemini to collect locations and opening hours for every map layer. This is the **audit report only**. The raw GeoJSON files it produced are **not imported yet** and **nothing here is verified**: per project rules, anything imported goes in as `draft` and a person seals it with `npm run data:verify`.
+Deep research run by David with Gemini to collect locations and opening hours for every map layer. **Nothing here is verified.** Hours were applied to existing `draft` records only (see "Applied"); a person seals each one with `npm run data:verify`. New venues are listed under "Pending" because they have no coordinates yet.
 
 ## Status
 
@@ -107,13 +107,63 @@ All have `hours: null`. IDs are Gemini's, and may change on import.
 - `student-center-welcome-desk`: no location or hours.
 - `barnes-and-noble-tech-square`: address and phone verified via buzzcard.gatech.edu, standard Fall hours not found.
 
+## Applied in this PR (22 existing records got `hours`)
+
+Coordinates, ids and `source_url` were not touched. All stay `draft`. Gemini's source for each is in its original answer; check hours against the venue's own page before verifying.
+
+| Layer | Record id | Note |
+| --- | --- | --- |
+| food | `panda-express-student-center`, `twisted-taco-student-center` | Gemini confirms both exist. |
+| food | `brittain-dining-hall` | Mon to Fri 11:00 to 23:00. Meal periods and the "reopened after renovation" claim are unconfirmed. |
+| food | `north-avenue-dining-hall`, `west-village-dining-hall` | From dining.gatech.edu. |
+| food | `jimmy-johns-pavilions` | Pavilions only, no Student Center location. |
+| orgs | `office-registrar`, `office-international-education`, `scholarships-financial-aid`, `center-student-engagement` | Weekday office hours. |
+| health | `stamps-health-services` | Thursday opens 09:00. |
+| health | `mental-health-care-resources`, `wellness-empowerment-center` | Mon to Fri 08:00 to 17:00. |
+| makerspace | `flowers-invention-studio` | After-hours slot (17:00 to 18:00) is training only. |
+| makerspace | `hive-makerspace` | Mon to Fri 10:00 to 18:00. |
+| printing | `print-studio-price-gilbert` | **Check:** Saturday 12:00 to 18:00 but Sunday 10:00 to 22:00 looks odd. |
+| printing | `crosland-printing` | 24/7 for GT affiliates, BuzzCard 18:00 to 07:00. |
+| printing | `printing-copying-services-marietta` | Hours came from the architecture student guide, not an OIT page. |
+| exercise | `crc` (in `places.json`) | **Conflict:** Sunday 09:00 on crc.gatech.edu/hours, 10:00 elsewhere. 09:00 used. |
+| exercise | `crc-climbing-wall` | Staffed hours only. |
+| exercise | `crc-competition-pool`, `crc-crawford-pool` | Recreational swim hours. The Nov 14 swim meet hours were left out. |
+
+Left out on purpose: pharmacy hours (Gemini calculated them, the page does not list them), Clough printing ("typically 24/7"), and every first pass hour not re-confirmed in pass 2.
+
+## Pending: new venues, need coordinates before they can be added
+
+Hours below are as Gemini reported them from the cited official page. All Mon to Fri unless stated. None has coordinates.
+
+| Venue | Where | Hours | Source |
+| --- | --- | --- | --- |
+| Naugle Writing and Communication Center | Clough 447 | 09:00 to 17:00 in person (17:00 to 20:00 online only) | communicationcenter.gatech.edu |
+| BuzzCard Center | The Pavilions (410 4th St NW) | 08:00 to 17:00 | buzzcard.gatech.edu/contact |
+| Bursar's Office | Lyman Hall 111 | 08:30 to 16:00 | bursar.gatech.edu |
+| Office of Disability Services | Smithgall (Flag) Suite 123 | 08:00 to 17:00 | disabilityservices.gatech.edu |
+| Belonging and Student Support | Smithgall Suite 140 | 08:00 to 17:00 | students.gatech.edu/content/hours-operation |
+| PTS Customer Service Center | E81 Tech Square deck, 770 Spring St | 08:00 to 16:00 | pts.gatech.edu/contact |
+| Wreck Techs desk, East Campus | Howell Hall lounge | Sun to Thu 14:00 to 22:00, Fri 14:00 to 18:00 | wrecktechs.gatech.edu |
+| Wreck Techs desk, West Campus | West Village, next to Wreck Stop | same as above | wrecktechs.gatech.edu |
+| Montgomery Machining Mall | MRDC 2nd floor | 06:30 to 16:30 | me.gatech.edu |
+| Ken Byers Tennis Complex | outdoor courts | 17:00 to 22:00, Sat 10:00 to 14:00 | crc.gatech.edu/locations |
+| CRC Bike Shop, ORGT Wilderness Outpost | CRC | Outpost 14:00 to 19:00 (Fri 17:00). Bike shop hours cut off | crc.gatech.edu |
+| Boho Taco | 22 5th St NW (Tech Square) | daily 11:00 to 22:00 | dining.gatech.edu |
+| Conference Dining Room | 800 Spring St NW | daily 07:00 to 23:00. Check it is open to the public | dining.gatech.edu |
+| Visitor parking areas 4, 10, 11, 12 | various | 24/7, $2/h, 4 h max. Sunday row cut off for areas 10, 11, 12 | pts.gatech.edu/parking/visitor-parking |
+| EV charging, Visitor Area 4 | Ferst Dr / State St | 24/7, 6 ChargePoint spaces | pts.gatech.edu |
+| Stinger routes (Gold, Clough, Green, Blue, Red, Northside, Weekend Midtown, Emory) and Stingerette | routes, not points | See Gemini's answer. Needs stop list and trace, a point layer cannot show them | pts.gatech.edu |
+
+Not mappable yet (no building or room published): STAR, Office of Student Integrity, Parent and Family Programs, New Student and Transition Programs, Housing Help Desk, Child Care Services.
+
+Hours conflict to settle for transit: the Aug 2025 PTS notice says Gold, Red and Blue run until 3:15 a.m., but the Fall 2026 update lists earlier ends (Red and Blue 22:00).
+
 ## Next steps
 
-1. Get the 9 JSON files from David and keep the raw copies out of `src/data/`.
-2. Convert to the real schema (`docs/data/README.md`): drop unsupported fields, map `building_name` to `building_id`, remove `null` fields.
-3. Deduplicate against existing `src/data/pois/*.json`, keeping existing OSM coordinates.
-4. Look up real coordinates for everything new. Never reuse one point for two venues.
-5. Import as `draft` with `source_url`, add `support.json` and `transport.json`, run `npm run data:check`, then people verify with `npm run data:verify`.
+1. Look up OSM coordinates for the "Pending" venues. Never reuse one point for two venues. Add them as `draft` with `source_url`.
+2. Check the three flagged hours (Print Studio Saturday, CRC Sunday, transit end time) against the live pages.
+3. Run `npm run data:verify -- <id> --by <name>` per record once hours, address and point are checked.
+4. Decide how to show bus routes (needs LineString geometry plus stops).
 
 ## Sources used by Gemini
 
