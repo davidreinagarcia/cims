@@ -9,6 +9,7 @@ const PATHS = {
   bulletin: "M4 5h16v14H4Z M7 9h10M7 12h10M7 15h6",
   stories: "M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18Z M12 8a4 4 0 1 0 0 8 4 4 0 0 0 0-8Z",
   bus: "M6 3h12a2 2 0 0 1 2 2v12H4V5a2 2 0 0 1 2-2Z M4 11h16 M8 14h.01M16 14h.01 M7 17v3M17 17v3",
+  games: "M3 8h18v8a2 2 0 0 1-2 2h-2.5l-2-3h-5l-2 3H5a2 2 0 0 1-2-2Z M7.5 11v3M6 12.5h3 M16 12h.01M18 13.5h.01",
   buzzprint: "M3 7h6l2 2h10v10H3Z M3 7v-2.5h4.5L10 7",
   route: "M12 2.5 21.5 12 12 21.5 2.5 12Z M8.5 14v-3h6 M12.5 8.5 15 11l-2.5 2.5",
   layers: "M12 4 21 9l-9 5-9-5Z M3 13l9 5 9-5",
@@ -33,7 +34,7 @@ export function Icon({ name, size = 24 }: { name: IconName; size?: number }) {
 }
 
 /** What the floating card / bottom sheet can show besides a map selection. */
-export type ShellPanel = "explore" | "buses" | "rooms" | "report" | "bulletin" | "stories" | "route" | "buzzprint";
+export type ShellPanel = "explore" | "buses" | "rooms" | "report" | "bulletin" | "stories" | "route" | "buzzprint" | "games";
 
 /** The six destinations of the rail (desktop) and the tab bar (phones), in order. */
 export const NAV_ITEMS: { id: Exclude<ShellPanel, "route">; label: string; icon: IconName }[] = [
@@ -43,6 +44,7 @@ export const NAV_ITEMS: { id: Exclude<ShellPanel, "route">; label: string; icon:
   { id: "report", label: "Report", icon: "report" },
   { id: "bulletin", label: "Bulletin", icon: "bulletin" },
   { id: "stories", label: "Stories", icon: "stories" },
+  { id: "games", label: "Games", icon: "games" },
   { id: "buzzprint", label: "BuzzPrint", icon: "buzzprint" },
 ];
 

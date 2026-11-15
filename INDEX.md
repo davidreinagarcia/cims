@@ -50,6 +50,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
     - [`src/data/indoor/`](src/data/indoor/INDEX.md): Indoor models per building: schematic levels, rooms, walking graph and entrances.
     - [`src/data/mocks/`](src/data/mocks/INDEX.md): Fictional fixtures layered on top of real building data, always labeled "Demo data" in the UI.
     - [`src/data/pois/`](src/data/pois/INDEX.md): Curated points of interest, one file per category (drafts by Codex pending verification, plus demo events). H…
+  - [`src/games/`](src/games/INDEX.md): Games tab (mockup): lobby, two game modes on the campus map, simulated bots and click-to-move GPS. All client…
   - [`src/indoor/`](src/indoor/INDEX.md): Building screen, vector schematic renderer and indoor contracts shared by lanes A and B.
   - [`src/lib/`](src/lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
   - [`src/map/`](src/map/INDEX.md): Everything about the map engine: contract for layers, base style, and the layer auto-loader.

@@ -11,6 +11,9 @@ import SignInDialog from "../panels/account/SignInDialog";
 import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
+import GameHud from "../games/GameHud";
+import GamesPanel from "../games/GamesPanel";
+import { leaveGame, useGames } from "../games/store";
 import HousingGuide from "../panels/culture/HousingGuide";
 import CultureReader from "../panels/culture/CultureReader";
 import { useCulture } from "../culture/store";
@@ -39,7 +42,7 @@ import SearchPill from "./SearchPill";
 import "./shell.css";
 
 const MOBILE = "(max-width: 767.98px)";
-const PANELS: ShellPanel[] = ["explore", "buses", "rooms", "report", "bulletin", "stories", "route", "buzzprint"];
+const PANELS: ShellPanel[] = ["explore", "buses", "rooms", "report", "bulletin", "stories", "route", "buzzprint", "games"];
 const KINDS: SelectionKind[] = ["building", "place", "room", "report"];
 
 function useIsMobile(): boolean {
@@ -99,6 +102,7 @@ export default function Shell() {
   const [hasQuery, setHasQuery] = useState(false);
   const [snap, setSnap] = useState<SheetSnap>("half");
   const { banners, dismiss } = useAlertBanners();
+  const { game } = useGames();
   // Staff dashboards are full-screen views, deep-linkable with ?view=police or ?view=maintenance.
   const [staffView, setStaffView] = useState<"police" | "maintenance" | null>(() => {
     const v = new URLSearchParams(window.location.search).get("view");
@@ -160,7 +164,14 @@ export default function Shell() {
 
   // Picking something on the map (or from the bulletin) always shows it; a "report" selection
   // (a place/building card's "Report an issue") opens the report panel prefilled with it instead.
-  useEffect(() => { if (selection) setPanel(selection.kind === "report" ? "report" : "explore"); }, [selection]);
+  // During a match, tapping places on the map must not kick the player out of the Games tab.
+  useEffect(() => {
+    if (!selection) return;
+    if (game && panel === "games") { select(null); return; }
+    setPanel(selection.kind === "report" ? "report" : "explore");
+  }, [selection]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Leaving the Games tab (any other tab, URL change) ends the match and clears its map layers.
+  useEffect(() => { if (panel !== "games" || bulletin.open || buzzprintOpen || staffView) leaveGame(); }, [panel, bulletin.open, buzzprintOpen, staffView]);
   // GT Culture is a mode of its own: turning it on closes every panel and card, and while it is on nothing else opens
   // (the nav, search and route are dimmed and inert; a tap on a building is ignored). The police button stays: safety.
   const culture = useCulture().on;
@@ -220,6 +231,7 @@ export default function Shell() {
     const reportKey = selection?.kind === "report" ? `report:${selection.id}` : "report";
     content = { title: "Report", key: reportKey, body: <ReportPanel key={reportKey} onClose={() => setPanel("explore")} /> };
   }
+  else if (panel === "games" && !game) content = { title: "Games", key: "games", body: <GamesPanel /> };
   // Desktop "stories" is a full-screen takeover beside the rail (below); phones keep the bottom sheet.
   else if (panel === "stories" && mobile) content = { title: "Stories", key: "stories", body: <StoriesPanel onShowMap={() => setPanel("explore")} /> };
   else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel initialSelection={routeTo} onClose={closeContent} /> };
@@ -275,6 +287,7 @@ export default function Shell() {
       <div className="stage">
         <MapView />
         <BuildingView />
+        {panel === "games" && <GameHud />}
         <LayersPopover />
         <CultureReader />
         <HousingGuide />

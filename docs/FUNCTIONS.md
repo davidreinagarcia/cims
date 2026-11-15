@@ -173,6 +173,18 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `AuthAdapter` [src/auth/types.ts:32](../src/auth/types.ts#L32): Adapter boundary keeps sign-in implementation out of screens.
 - `GlyphId` [src/components/Glyph.tsx:31](../src/components/Glyph.tsx#L31): Known glyph ids: the layer categories plus "building".
 - `CultureNote` [src/culture/notes.ts:5](../src/culture/notes.ts#L5): One sticky note: a sourced GT tradition pinned where it happens.
+- `GameIconName` [src/games/GameIcons.tsx:17](../src/games/GameIcons.tsx#L17): Names of the Games icons.
+- `GamesState` [src/games/store.ts:8](../src/games/store.ts#L8): Everything the UI and the map layer read.
+- `TeamId` [src/games/types.ts:4](../src/games/types.ts#L4): The two teams of every match.
+- `GameMode` [src/games/types.ts:6](../src/games/types.ts#L6): Game modes: King of the Hill zones or a race for random drops.
+- `LngLat` [src/games/types.ts:8](../src/games/types.ts#L8): Where a point lives on the map.
+- `Profile` [src/games/types.ts:11](../src/games/types.ts#L11): Guest profile kept in localStorage (there are no accounts yet).
+- `LobbyGame` [src/games/types.ts:14](../src/games/types.ts#L14): A match listed in the lobby.
+- `Zone` [src/games/types.ts:17](../src/games/types.ts#L17): A capture zone (Conquest mode). `owner` is null while neutral.
+- `Drop` [src/games/types.ts:19](../src/games/types.ts#L19): A drop target (Drop Race mode). `claimedBy` is the nickname of whoever got it.
+- `Bot` [src/games/types.ts:21](../src/games/types.ts#L21): A simulated player moving on the map.
+- `FeedItem` [src/games/types.ts:24](../src/games/types.ts#L24): One line of the activity feed.
+- `ActiveGame` [src/games/types.ts:27](../src/games/types.ts#L27): A running (or finished) match. Times are in whole seconds.
 - `PlanRoute` [src/indoor/FloorPlan.tsx:129](../src/indoor/FloorPlan.tsx#L129): Everything the plan needs to draw a route: the route, the legs on this level and which step is highlighted.
 - `RoutableIndoorRoom` [src/indoor/availability.ts:13](../src/indoor/availability.ts#L13): A routable (schematic) entry from `registry.ts#indoorRooms`, narrowed from the `IndoorRoom`
 - `BookableRoom` [src/indoor/availability.ts:21](../src/indoor/availability.ts#L21): A room with bookable demo amenities (T-60 reservations), with a ready-to-render display label.
@@ -285,8 +297,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PortfolioEntrySeed` [src/portfolio/types.ts:47](../src/portfolio/types.ts#L47): What the Bulletin hook hands the adapter to create one entry; the adapter assigns id/accountId/photos.
 - `PortfolioAdapter` [src/portfolio/types.ts:50](../src/portfolio/types.ts#L50): Storage boundary. The local adapter keeps entries in this browser; a Supabase adapter would sit behind the sa…
 - `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
-- `IconName` [src/shell/icons.tsx:23](../src/shell/icons.tsx#L23): Names of the shell icons.
-- `ShellPanel` [src/shell/icons.tsx:36](../src/shell/icons.tsx#L36): What the floating card / bottom sheet can show besides a map selection.
+- `IconName` [src/shell/icons.tsx:24](../src/shell/icons.tsx#L24): Names of the shell icons.
+- `ShellPanel` [src/shell/icons.tsx:37](../src/shell/icons.tsx#L37): What the floating card / bottom sheet can show besides a map selection.
 - `LayerFiltersApi` [src/state/layerFilters.tsx:23](../src/state/layerFilters.tsx#L23): What useLayerFilters() returns.
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): Selectable map and search entities; room ids use "buildingId:spaceId".
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
@@ -313,6 +325,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:39](../src/components/Glyph.tsx#L39): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:16](../src/components/MapView.tsx#L16): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
+- `GameHud()` [src/games/GameHud.tsx:12](../src/games/GameHud.tsx#L12): Compact card over the map while a match runs. Renders nothing outside one.
+- `GIcon({ name, size = 20 })` [src/games/GameIcons.tsx:20](../src/games/GameIcons.tsx#L20): A line icon in currentColor; decorative (aria-hidden).
+- `GamesPanel()` [src/games/GamesPanel.tsx:12](../src/games/GamesPanel.tsx#L12): Lobby: who you are, matches you can join with one click, and a path to create your own.
 - `BuildingView()` [src/indoor/BuildingView.tsx:34](../src/indoor/BuildingView.tsx#L34): Opens registered buildings and resolves room selections straight into a routed building screen.
 - `FloorPlan(…)` [src/indoor/FloorPlan.tsx:132](../src/indoor/FloorPlan.tsx#L132): Renders one available level with controls and brings the route or the selected space into view.
 - `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
@@ -351,8 +366,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `ReportPanel({ onClose })` [src/panels/report/index.tsx:19](../src/panels/report/index.tsx#L19): Mounts the 3-step report flow, or (unlisted, ?staff=1) the staff queue; the floating card / bottom
 - `BuildingGlyph({ buildingId })` [src/panels/rooms/BuildingGlyph.tsx:10](../src/panels/rooms/BuildingGlyph.tsx#L10): Renders a flat, ink-outlined elevation sketch with a gold hatch fill and a row of square windows per level ba…
 - `MyBookingsSection({ onCountChange })` [src/panels/rooms/MyBookingsSection.tsx:117](../src/panels/rooms/MyBookingsSection.tsx#L117): Top-level "My bookings": every non-cancelled reservation the signed-in account holds, across Kendeda and CULC.
-- `ReservationGrid({ rooms, onlyAvailable = false })` [src/panels/rooms/ReservationGrid.tsx:49](../src/panels/rooms/ReservationGrid.tsx#L49): Day/time grid, booking flow and favorites for any list of bookable rooms -- one building's rooms
-- `RoomsBoard({ onClose })` [src/panels/rooms/RoomsBoard.tsx:39](../src/panels/rooms/RoomsBoard.tsx#L39): Full-screen "Rooms" takeover, replacing the small floating-card/bottom-sheet `RoomFinderPanel`
+- `ReservationGrid({ rooms, onlyAvailable = false })` [src/panels/rooms/ReservationGrid.tsx:54](../src/panels/rooms/ReservationGrid.tsx#L54): Day/time grid, booking flow and favorites for any list of bookable rooms -- one building's rooms
+- `RoomsBoard({ onClose })` [src/panels/rooms/RoomsBoard.tsx:41](../src/panels/rooms/RoomsBoard.tsx#L41): Full-screen "Rooms" takeover, replacing the small floating-card/bottom-sheet `RoomFinderPanel`
 - `RoomsNearMe({ onBack, onlyAvailable })` [src/panels/rooms/RoomsNearMe.tsx:25](../src/panels/rooms/RoomsNearMe.tsx#L25): Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and
 - `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
 - `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
@@ -366,8 +381,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Rail({ panel, onPanel, onPolice, onMaintenance })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
 - `RoutePanel({ initialSelection, onClose })` [src/shell/RoutePanel.tsx:10](../src/shell/RoutePanel.tsx#L10): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:86](../src/shell/Shell.tsx#L86): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
-- `Icon({ name, size = 24 })` [src/shell/icons.tsx:26](../src/shell/icons.tsx#L26): A 24px line icon in currentColor; decorative (aria-hidden).
+- `Shell()` [src/shell/Shell.tsx:89](../src/shell/Shell.tsx#L89): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
+- `Icon({ name, size = 24 })` [src/shell/icons.tsx:27](../src/shell/icons.tsx#L27): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = supabaseAuthAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:36](../src/state/layerFilters.tsx#L36): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
@@ -403,6 +418,32 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `setReader(open)` [src/culture/store.ts:36](../src/culture/store.ts#L36): Show or hide the reader card without leaving culture mode.
 - `setGuide(open)` [src/culture/store.ts:41](../src/culture/store.ts#L41): Open or close the West vs East guide.
 - `useCulture()` [src/culture/store.ts:46](../src/culture/store.ts#L46): React hook for the culture state.
+- `RADIUS_M` [src/games/data.ts:6](../src/games/data.ts#L6): Zone and drop capture radius in meters.
+- `ZONE_POINTS_PER_SECOND` [src/games/data.ts:8](../src/games/data.ts#L8): Points per second for every zone a team holds.
+- `DROP_POINTS` [src/games/data.ts:10](../src/games/data.ts#L10): Points for claiming one drop.
+- `DROP_COUNT` [src/games/data.ts:12](../src/games/data.ts#L12): Drops placed per match.
+- `TEAMS` [src/games/data.ts:15](../src/games/data.ts#L15): Team names and map colors (red matches --route family, blue matches --navy family).
+- `NEUTRAL` [src/games/data.ts:20](../src/games/data.ts#L20): Fill color of an unclaimed zone.
+- `PLAY_AREA` [src/games/data.ts:23](../src/games/data.ts#L23): Where drops may spawn: the central part of campus ([west, south, east, north]), clear of the basemap edges.
+- `START` [src/games/data.ts:25](../src/games/data.ts#L25): Where the guest player starts (Tech Green).
+- `zoneTemplates()` [src/games/data.ts:31](../src/games/data.ts#L31): Capture zones at real campus places; ids missing from the data are skipped.
+- `SEED_LOBBY` [src/games/data.ts:42](../src/games/data.ts#L42): Pre-loaded matches shown in the lobby.
+- `MODE_LABEL` [src/games/data.ts:49](../src/games/data.ts#L49): Display name of a game mode.
+- `BOT_NAMES` [src/games/data.ts:52](../src/games/data.ts#L52): Names for simulated players.
+- `MODE_BLURB` [src/games/data.ts:55](../src/games/data.ts#L55): One-line pitch of each mode, shown on the create screen.
+- `subscribeGames(listener)` [src/games/store.ts:51](../src/games/store.ts#L51): Subscribe to any change (for the map layer). Returns the unsubscribe function.
+- `getGamesState()` [src/games/store.ts:56](../src/games/store.ts#L56): Current snapshot.
+- `useGames()` [src/games/store.ts:60](../src/games/store.ts#L60): React hook over the games store.
+- `setNickname(nickname)` [src/games/store.ts:81](../src/games/store.ts#L81): Changes the guest nickname (trimmed, 2 to 20 characters; ignored otherwise).
+- `setTeam(team)` [src/games/store.ts:89](../src/games/store.ts#L89): Picks the team used for the next match.
+- `joinGame(id)` [src/games/store.ts:134](../src/games/store.ts#L134): Joins a lobby match (a clean simulated session with 2 to 4 bots). Returns false when it is full.
+- `createGame(opts)` [src/games/store.ts:145](../src/games/store.ts#L145): Creates a match, lists it in the lobby and jumps straight into it.
+- `rematch()` [src/games/store.ts:155](../src/games/store.ts#L155): Starts the same match again from zero (new bots, new drops).
+- `leaveGame()` [src/games/store.ts:160](../src/games/store.ts#L160): Leaves the running match and removes every game layer from the map. Safe to call when nothing runs.
+- `setSimulate(on)` [src/games/store.ts:178](../src/games/store.ts#L178): Turns click-to-move on or off; off asks the browser for the real GPS (falls back to click-to-move if refused).
+- `teleport(point)` [src/games/store.ts:198](../src/games/store.ts#L198): Click-to-move: puts the player at a point (only in simulated mode).
+- `capturableZone(s)` [src/games/store.ts:205](../src/games/store.ts#L205): The zone the player stands in that their team does not hold yet (the "Capturar Zona" target), or null.
+- `captureZone()` [src/games/store.ts:212](../src/games/store.ts#L212): Captures the zone under the player for their team.
 - `STACK_VIEW_ENABLED` [src/indoor/StackView.tsx:22](../src/indoor/StackView.tsx#L22): Shows the Plan | Stack toggle in the building header. Set to false to hide the stack view for a demo.
 - `bookableRoomsFor(rooms, amenitiesById, buildingId)` [src/indoor/availability.ts:30](../src/indoor/availability.ts#L30): Every bookable room in one building, sorted alphabetically. The label prefers the published
 - `favoriteRoomsFrom(rooms, amenitiesById, roomIds)` [src/indoor/availability.ts:56](../src/indoor/availability.ts#L56): Bookable rooms in `roomIds` across every building, labeled "Building · Room N" using each
@@ -481,8 +522,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `recordPortfolioEntry(session, post)` [src/portfolio/store.ts:56](../src/portfolio/store.ts#L56): Records a BuzzPrint entry from a Bulletin post, snapshotting the fields BulletinPost already has
 - `addPortfolioPhoto(accountId, entryId, photo)` [src/portfolio/store.ts:77](../src/portfolio/store.ts#L77): Attaches a photo to one of this account's entries and shows it immediately.
 - `setAdapter(next)` [src/portfolio/store.ts:84](../src/portfolio/store.ts#L84): Backend hook: replace the storage adapter before the first load.
-- `NAV_ITEMS` [src/shell/icons.tsx:39](../src/shell/icons.tsx#L39): The six destinations of the rail (desktop) and the tab bar (phones), in order.
-- `moveFocus(event, vertical)` [src/shell/icons.tsx:50](../src/shell/icons.tsx#L50): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
+- `NAV_ITEMS` [src/shell/icons.tsx:40](../src/shell/icons.tsx#L40): The six destinations of the rail (desktop) and the tab bar (phones), in order.
+- `moveFocus(event, vertical)` [src/shell/icons.tsx:52](../src/shell/icons.tsx#L52): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 - `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:16](../src/stories/CameraCapture.tsx#L16): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
 - `useLocationPermission()` [src/stories/LocationGate.tsx:10](../src/stories/LocationGate.tsx#L10): Live location permission. Updates by itself when the person flips the switch in the browser settings and come…
 - `ago(ms, now = Date.now()` [src/stories/StoriesPanel.tsx:13](../src/stories/StoriesPanel.tsx#L13): "now", "12m", "3h": how long ago, short like Instagram.
@@ -504,6 +545,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Possible duplicates
 
+- ⚠️ TEAMS (src/games/data.ts:15) ↔ TEAMS (src/lib/issue-routing.ts:33)
 - ⚠️ localAdapter (src/portfolio/localAdapter.ts:36) ↔ localAdapter (src/stories/localAdapter.ts:30)
 - ⚠️ subscribe (src/portfolio/store.ts:22) ↔ subscribe (src/stories/store.ts:32)
 - ⚠️ getState (src/portfolio/store.ts:28) ↔ getState (src/stories/store.ts:38)

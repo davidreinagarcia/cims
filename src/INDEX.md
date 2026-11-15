@@ -11,6 +11,7 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 - [`components/`](components/INDEX.md): React components shared by the shell: map view, glyphs, offline notice. The layout itself lives in src/shell/.
 - [`culture/`](culture/INDEX.md): Culture mode state (layer on/off, West vs East guide open): never saved, so the layer always starts off.
 - [`data/`](data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
+- [`games/`](games/INDEX.md): Games tab (mockup): lobby, two game modes on the campus map, simulated bots and click-to-move GPS. All client…
 - [`indoor/`](indoor/INDEX.md): Building screen, vector schematic renderer and indoor contracts shared by lanes A and B.
 - [`lib/`](lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
 - [`map/`](map/INDEX.md): Everything about the map engine: contract for layers, base style, and the layer auto-loader.
