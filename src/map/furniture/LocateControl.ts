@@ -6,6 +6,11 @@ import { loadMapLibre } from "../maplibre";
 import "./furniture.css";
 
 const ASKED = "cims.location.asked";
+const IOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+/** Where to flip location back on once a browser has blocked it; no web page may do that itself. */
+const FIX_STEPS = IOS
+  ? ["Tap aA in the address bar, then Website Settings, and set Location to Allow.", "If it stays blocked: Settings > Privacy & Security > Location Services must be on, with Safari Websites on While Using."]
+  : ["Tap the lock (or tune) icon next to the address bar, then Permissions, and set Location to Allow.", "If it stays blocked: Android Settings > Location must be on, and Chrome allowed under App permissions."];
 let askedThisSession = false;
 
 /** Map control that watches location only while visible and never follows the camera after the first fix. */
@@ -22,9 +27,42 @@ export class LocateControl implements IControl {
   private firstFix = true;
   private pending = false;
   private manual = false;
+  private permission?: PermissionStatus;
 
   private message = (message: string) => {
     if (this.status) this.status.textContent = message;
+  };
+
+  /** Blocked: say exactly how to unblock it and offer a re-check. Tracking also resumes by itself once the permission flips to granted. */
+  private help = () => {
+    if (!this.status) return;
+    const title = document.createElement("strong");
+    title.textContent = "Location is blocked for this site";
+    const steps = document.createElement("ol");
+    for (const text of FIX_STEPS) { const li = document.createElement("li"); li.textContent = text; steps.append(li); }
+    const again = document.createElement("button");
+    again.type = "button";
+    again.className = "cims-btn cims-btn--small";
+    again.textContent = "I allowed it, check again";
+    again.addEventListener("click", () => { this.message("Finding your location…"); void this.request(false); });
+    this.status.replaceChildren(title, steps, again);
+  };
+
+  /** Starts tracking as soon as the person allows location in the browser settings, with no extra tap. */
+  private watchPermission = async () => {
+    try {
+      const status = await navigator.permissions.query({ name: "geolocation" });
+      if (!this.map) return;
+      this.permission = status;
+      status.onchange = () => {
+        if (status.state !== "granted" || this.enabled || !this.map) return;
+        this.manual = true;
+        this.enabled = true;
+        this.refresh();
+        this.message("Finding your location…");
+        this.start();
+      };
+    } catch { /* Permissions API unavailable: the button still works. */ }
   };
 
   private clear = () => {
@@ -43,7 +81,10 @@ export class LocateControl implements IControl {
     this.clear();
     this.enabled = false;
     this.refresh();
-    if (this.manual) this.message(new GeolocationError(error.code === 1 ? "denied" : error.code === 3 ? "timeout" : "unavailable").message);
+    if (!this.manual) return;
+    if (error.code === 1) this.help();
+    else if (error.code === 2) this.message("Your phone can't find you. Switch Location (GPS) on in its quick settings, then tap again.");
+    else this.message(new GeolocationError(error.code === 3 ? "timeout" : "unavailable").message);
   };
 
   private position = ({ coords }: GeolocationPosition) => {
@@ -87,7 +128,7 @@ export class LocateControl implements IControl {
       try { permission = (await navigator.permissions.query({ name: "geolocation" })).state; } catch { /* Manual location still works without Permissions API. */ }
       if (!this.map) return;
       if (permission === "denied") {
-        if (!automatic) this.message(new GeolocationError("denied").message);
+        if (!automatic) this.help();
         return;
       }
       if (automatic && permission !== "granted") {
@@ -170,6 +211,7 @@ export class LocateControl implements IControl {
     map.on("zoom", this.resize);
     this.ready = true;
     if (this.button) this.button.disabled = false;
+    void this.watchPermission();
     void this.request(true);
   };
 
@@ -198,6 +240,7 @@ export class LocateControl implements IControl {
   onRemove(): void {
     this.enabled = false;
     this.clear();
+    if (this.permission) this.permission.onchange = null;
     document.removeEventListener("visibilitychange", this.visibility);
     this.map?.off("load", this.loaded);
     this.map?.off("zoom", this.resize);

@@ -416,7 +416,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `flyToAlert(map, alert)` [src/map/alertsOverlay.ts:22](../src/map/alertsOverlay.ts#L22): Fits the camera to an alarm circle with room around it.
 - `addAlertsOverlay(map, options)` [src/map/alertsOverlay.ts:35](../src/map/alertsOverlay.ts#L35): Adds the alarm layers to a map whose style is ready and keeps them in sync with the live store.
 - `baseStyle` [src/map/baseStyle.ts:69](../src/map/baseStyle.ts#L69): Base style every layer is added on top of.
-- `LocateControl` [src/map/furniture/LocateControl.ts:12](../src/map/furniture/LocateControl.ts#L12): Map control that watches location only while visible and never follows the camera after the first fix.
+- `LocateControl` [src/map/furniture/LocateControl.ts:17](../src/map/furniture/LocateControl.ts#L17): Map control that watches location only while visible and never follows the camera after the first fix.
 - `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.
 - `ScaleBox` [src/map/furniture/ScaleBox.ts:22](../src/map/furniture/ScaleBox.ts#L22): MapLibre control: a four-segment scale bar in feet and the map center's latitude/longitude, updated as the ma…
 - `ViewToggle` [src/map/furniture/ViewToggle.ts:9](../src/map/furniture/ViewToggle.ts#L9): MapLibre control: "2D" / "3D" button. The label is the view you get by pressing it.
