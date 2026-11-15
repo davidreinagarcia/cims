@@ -1,6 +1,6 @@
-/** @file Exploded "stack" view (concept B): every drawn level as a plate in one CSS 3D scene, with the route and its vertical links. */
-import { useLayoutEffect, useRef, useState } from "react";
-import { drawnBounds, levelRank, planWalls, roomCategory } from "../lib/indoorPlan";
+/** @file Frontal exploded floor slabs with measured level labels, room selection and vertical route links. */
+import { useLayoutEffect, useRef, useState, type CSSProperties, type MouseEvent } from "react";
+import { drawnBounds, levelRank, planWalls, roomCategory, spaceDisplayName } from "../lib/indoorPlan";
 import type { IndoorRoute } from "./route";
 import type { IndoorBuilding, IndoorLevel, IndoorSpace } from "./types";
 import "./StackView.css";
@@ -18,43 +18,53 @@ function outlineVertices(d: string): Point[] {
   return out;
 }
 
-
 /** Shows the Plan | Stack toggle in the building header. Set to false to hide the stack view for a demo. */
 export const STACK_VIEW_ENABLED = true;
 
-/** Every available level as a plate in one CSS 3D scene; click a plate to make it the active level. */
-export default function StackView({ building, levels, activeId, selected, route, onLevel, roomCount }: {
+/** Exploded solid floor slabs; select levels or rooms and open the active level's detailed plan. */
+export default function StackView({ building, levels, activeId, selected, route, onLevel, onOpenPlan, onSelect, roomCount }: {
   building: IndoorBuilding; levels: DrawnLevel[]; activeId?: string; selected?: IndoorSpace; route?: IndoorRoute;
-  activeStep: number | null; onLevel: (id: string) => void; roomCount: (level: IndoorLevel) => number;
+  activeStep: number | null; onLevel: (id: string) => void; onOpenPlan: () => void;
+  onSelect: (space: IndoorSpace) => void; roomCount: (level: IndoorLevel) => number;
 }) {
   const stage = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 0, h: 0 });
   const [anchors, setAnchors] = useState<Record<string, Point>>({});
-  const ordered = [...levels].sort((a, b) => levelRank(a.id) - levelRank(b.id)); // bottom plate first
+  const ordered = [...levels].sort((a, b) => levelRank(a.id) - levelRank(b.id));
   const frame = drawnBounds(levels) ?? { x: 0, y: 0, w: 100, h: 100 };
   const pad = Math.max(frame.w, frame.h) * 0.04;
   const box = { x: frame.x - pad, y: frame.y - pad, w: frame.w + pad * 2, h: frame.h + pad * 2 };
-  // Plate size and spacing from the stage: wide buildings get wide plates, tall ones narrower.
+  // Turn portrait schematics within Stack only: long edges face the viewer, with no diagonal scene rotation.
+  const turned = box.h > box.w;
+  const drawingW = turned ? box.h : box.w;
+  const drawingH = turned ? box.w : box.h;
+  const orient = (p: Point): Point => turned ? { x: box.h - (p.y - box.y), y: p.x - box.x } : { x: p.x - box.x, y: p.y - box.y };
+  const drawingTransform = `${turned ? `translate(${box.h} 0) rotate(90) ` : ""}translate(${-box.x} ${-box.y})`;
+  const narrow = size.w < 500;
+  const labelW = narrow ? 94 : 122;
+  const margin = narrow ? 12 : 28;
   const n = ordered.length;
-  const plateW = Math.max(120, Math.min(size.w * 0.52, size.w - 170, (size.h * 0.95) * box.w / box.h / Math.max(1, 0.35 * n), 620));
-  const plateH = plateW * box.h / box.w;
-  const gap = Math.min(150, Math.max(50, (size.h * 0.62) / Math.max(1, n - 1)), plateH * 0.9);
+  // Reserve the aligned label column and fit the entire projected stack, including perspective and slab depth.
+  const maxGap = narrow ? 100 : n <= 3 ? 210 : 145;
+  const shelfHeight = Math.min((size.h * 0.8 - 14) / Math.max(1, n), maxGap * 0.8);
+  const plateW = Math.max(1, Math.min(760, shelfHeight / 0.53 * drawingW / drawingH, (size.w - labelW - margin * 3) * 0.92));
+  const plateH = plateW * drawingH / drawingW;
+  const gap = Math.max(1, Math.min(maxGap, (size.h * 0.88 - plateH * 0.53 - 14) / (Math.max(1, n - 1) * 0.85)));
   const z = (index: number) => (index - (n - 1) / 2) * gap;
+  const centerX = margin + (size.w - labelW - margin * 3) / 2;
+  const labelX = Math.min(size.w - labelW - margin, centerX + plateW * 0.58 + margin);
+  const thickness = narrow ? 5 : 10;
 
-  // Dashed guides only where an outline corner on one plate sits over a corner on the plate below.
-  const tolerance = Math.max(frame.w, frame.h) * 0.03;
+  // Guides connect only coincident outline corners, never an inferred building bounding box.
   const guides: { key: string; from: string; to: string }[] = [];
   ordered.slice(1).forEach((upper, k) => {
     const lower = ordered[k];
     const below = outlineVertices(lower.outline);
-    const used = new Set<number>();
     outlineVertices(upper.outline).forEach((v, i) => {
-      let best = -1, bestD = tolerance;
-      below.forEach((w, j) => { const d = Math.hypot(v.x - w.x, v.y - w.y); if (!used.has(j) && d <= bestD) { best = j; bestD = d; } });
-      if (best >= 0) { used.add(best); guides.push({ key: `${upper.id}-${i}`, from: `v:${lower.id}:${best}`, to: `v:${upper.id}:${i}` }); }
+      const match = below.findIndex((w) => Math.hypot(v.x - w.x, v.y - w.y) < 0.01);
+      if (match >= 0) guides.push({ key: `${upper.id}-${i}`, from: `v:${lower.id}:${match}`, to: `v:${upper.id}:${i}` });
     });
   });
-  // Where the route changes level: the node it leaves and the node it reaches, from the graph.
   const links: { from: string; to: string }[] = [];
   route?.nodes.forEach((node, i) => {
     const before = route.nodes[i - 1];
@@ -68,8 +78,8 @@ export default function StackView({ building, levels, activeId, selected, route,
     observer.observe(element);
     return () => observer.disconnect();
   }, []);
-  // Labels and vertical links are flat: read where the 3D anchors land on screen after layout.
-  const routeKey = route?.nodes.map((node) => node.id).join("|") ?? "";
+  // Anchors live on stationary final-position wrappers; only the slab inside animates, so links never measure a mid-animation position.
+  const routeKey = route?.nodes.map((node) => `${node.level}:${node.id}`).join("|") ?? "";
   useLayoutEffect(() => {
     const element = stage.current;
     if (!element) return;
@@ -82,54 +92,71 @@ export default function StackView({ building, levels, activeId, selected, route,
     setAnchors(next);
   }, [size.w, size.h, routeKey, levels]);
 
-  // Labels sit in one column just right of the whole stack, each at its plate's height.
-  const cornerXs = Object.entries(anchors).filter(([key]) => key.startsWith("corner:")).map(([, p]) => p.x);
-  const labelX = Math.min(Math.max(0, size.w - 130), (cornerXs.length ? Math.max(...cornerXs) : size.w / 2) + 20);
-  const pct = (p: Point) => ({ left: `${((p.x - box.x) / box.w) * 100}%`, top: `${((p.y - box.y) / box.h) * 100}%` });
+  const pct = (p: Point) => { const q = orient(p); return { left: `${q.x / drawingW * 100}%`, top: `${q.y / drawingH * 100}%` }; };
 
-  return <div ref={stage} className="stack" role="group" aria-label={`${building.title}, all levels stacked`}>
-    <div className="stack__scene" style={{ width: plateW, height: plateH }}>
+  return <div ref={stage} className="stack" data-compact={size.h < 260 || undefined} role="group" aria-label={`${building.title}, all levels stacked`}>
+    {size.w > 0 && <div className="stack__scene" style={{ width: plateW, height: plateH, left: centerX }}>
       {ordered.map((level, index) => {
         const active = level.id === activeId;
         const legs = route?.legs.filter((leg) => leg.level === level.id) ?? [];
         const routeNodes = route?.nodes.filter((node) => node.level === level.id) ?? [];
-        return <div key={level.id} className="stack__plate" data-active={active || undefined} style={{ transform: `translateZ(${z(index)}px)` }}
+        return <div key={level.id} className="stack__plate" data-active={active || undefined}
+          style={{ transform: `translateZ(${z(index)}px)`, "--plate-z": `${z(index)}px`, "--slab-depth": `${thickness}px`, "--explode-delay": `${index * 40}ms` } as CSSProperties}
           role="button" tabIndex={0} aria-pressed={active} aria-label={`${level.name}, ${roomCount(level)} spaces${legs.length ? ", route on this level" : ""}`}
-          onClick={() => onLevel(level.id)} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); onLevel(level.id); } }}>
-          <svg viewBox={`${box.x} ${box.y} ${box.w} ${box.h}`} preserveAspectRatio="none" aria-hidden="true">
-            <path d={level.outline} className="stack__floor" />
-            {level.spaces.map((space) => {
-              const shape = space.shape;
-              const cls = `cims-room cims-room--${roomCategory(space.type)}${selected?.id === space.id ? " cims-room--selected" : ""}`;
-              return shape.kind === "rect" ? <rect key={space.id} className={cls} x={shape.x} y={shape.y} width={shape.w} height={shape.h} />
-                : shape.kind === "circle" ? <circle key={space.id} className={cls} cx={shape.cx} cy={shape.cy} r={shape.r} />
-                : <polygon key={space.id} className={cls} points={shape.points} />;
+          onClick={() => onLevel(level.id)} onKeyDown={(event) => { if (event.target === event.currentTarget && (event.key === "Enter" || event.key === " ")) { event.preventDefault(); onLevel(level.id); } }}>
+          <div className="stack__slab">
+            <svg className="stack__underside" viewBox={`0 0 ${drawingW} ${drawingH}`} preserveAspectRatio="none" aria-hidden="true">
+              <g transform={drawingTransform}><path d={level.outline} /></g>
+            </svg>
+            {(level.outline.match(/M[^Z]+Z/gi) ?? []).flatMap((ring, ringIndex) => {
+              const vertices = outlineVertices(ring).map(orient);
+              return vertices.map((v, i) => {
+                const next = vertices[(i + 1) % vertices.length];
+                const dx = (next.x - v.x) / drawingW * plateW;
+                const dy = (next.y - v.y) / drawingH * plateH;
+                return <span key={`${ringIndex}-${i}`} className="stack__edge" aria-hidden="true" style={{ left: `${v.x / drawingW * 100}%`, top: `${v.y / drawingH * 100}%`, width: Math.hypot(dx, dy), transform: `rotateZ(${Math.atan2(dy, dx)}rad) rotateX(-90deg)` }} />;
+              });
             })}
-            <path d={planWalls(level)} className="stack__outline" />
-            {legs.map((leg, i) => <polyline key={i} className="stack__route" points={leg.points.map((p) => p.join(",")).join(" ")} />)}
-          </svg>
-          {/* anchors: right edge for the level label, and every route node for the vertical links */}
+            <svg className="stack__top" viewBox={`0 0 ${drawingW} ${drawingH}`} preserveAspectRatio="none" aria-hidden="true">
+              <g transform={drawingTransform}>
+                <path d={level.outline} className="stack__floor" />
+                {level.spaces.map((space) => {
+                  const shape = space.shape;
+                  const cls = `cims-room cims-room--${roomCategory(space.type)}${selected?.id === space.id ? " cims-room--selected" : ""}`;
+                  const props = { className: cls, onClick: (event: MouseEvent) => { event.stopPropagation(); if (active) onSelect(space); else onLevel(level.id); } };
+                  return shape.kind === "rect" ? <rect key={space.id} {...props} x={shape.x} y={shape.y} width={shape.w} height={shape.h}><title>{spaceDisplayName(space)}</title></rect>
+                    : shape.kind === "circle" ? <circle key={space.id} {...props} cx={shape.cx} cy={shape.cy} r={shape.r}><title>{spaceDisplayName(space)}</title></circle>
+                    : <polygon key={space.id} {...props} points={shape.points}><title>{spaceDisplayName(space)}</title></polygon>;
+                })}
+                <path d={planWalls(level)} className="stack__outline" />
+                {legs.map((leg, i) => <polyline key={i} className="stack__route" points={leg.points.map((p) => p.join(",")).join(" ")} />)}
+              </g>
+            </svg>
+          </div>
           <span className="stack__anchor" data-anchor={`label:${level.id}`} style={{ left: "50%", top: "50%" }} />
-          {[[0, 0], [100, 0], [100, 100], [0, 100]].map(([left, top]) => <span key={`${left}-${top}`} className="stack__anchor" data-anchor={`corner:${level.id}:${left}-${top}`} style={{ left: `${left}%`, top: `${top}%` }} />)}
-          {/* outline corners, for the dashed guides between plates */}
           {outlineVertices(level.outline).map((v, i) => <span key={`v-${i}`} className="stack__anchor" data-anchor={`v:${level.id}:${i}`} style={pct(v)} />)}
           {routeNodes.map((node) => <span key={node.id} className="stack__anchor" data-anchor={`${level.id}:${node.id}`} style={pct(node)} />)}
         </div>;
       })}
-    </div>
-    <svg className="stack__overlay" width={size.w} height={size.h} aria-hidden="true">
-      {guides.map(({ key, from, to }) => anchors[from] && anchors[to]
-        ? <line key={key} x1={anchors[from].x} y1={anchors[from].y} x2={anchors[to].x} y2={anchors[to].y} className="stack__guide" /> : null)}
-      {links.map(({ from, to }) => anchors[from] && anchors[to] && <g key={`${from}-${to}`}>
-        <line x1={anchors[from].x} y1={anchors[from].y} x2={anchors[to].x} y2={anchors[to].y} className="stack__link" />
-        <circle cx={anchors[from].x} cy={anchors[from].y} r="4" className="stack__link-end" />
-        <circle cx={anchors[to].x} cy={anchors[to].y} r="4" className="stack__link-end" />
-      </g>)}
-    </svg>
-    {ordered.map((level) => anchors[`label:${level.id}`] && <button key={level.id} type="button" tabIndex={-1} className="stack__label"
-      data-active={level.id === activeId || undefined} style={{ left: labelX, top: anchors[`label:${level.id}`].y }}
-      onClick={() => onLevel(level.id)}>
-      <span className="cims-caps">{level.name}</span><small className="cims-mono">{roomCount(level)} spaces</small>
-    </button>)}
+    </div>}
+    {Object.keys(anchors).length > 0 && <>
+      <svg className="stack__overlay stack__annotations" width={size.w} height={size.h} aria-hidden="true">
+        {guides.map(({ key, from, to }) => anchors[from] && anchors[to]
+          ? <line key={key} x1={anchors[from].x} y1={anchors[from].y} x2={anchors[to].x} y2={anchors[to].y} className="stack__guide" /> : null)}
+        {links.map(({ from, to }) => anchors[from] && anchors[to] && <g key={`${from}-${to}`}>
+          <line x1={anchors[from].x} y1={anchors[from].y} x2={anchors[to].x} y2={anchors[to].y} className="stack__link" />
+          <circle cx={anchors[from].x} cy={anchors[from].y} r="4" className="stack__link-end" />
+          <circle cx={anchors[to].x} cy={anchors[to].y} r="4" className="stack__link-end" />
+        </g>)}
+      </svg>
+      {ordered.map((level) => anchors[`label:${level.id}`] && <div key={level.id} className="stack__label stack__annotations"
+        data-active={level.id === activeId || undefined} style={{ left: labelX, top: anchors[`label:${level.id}`].y, width: labelW }}>
+        <button type="button" className="stack__level" aria-pressed={level.id === activeId} aria-label={`${level.name}, ${roomCount(level)} spaces${level.id === activeId ? ", Open plan" : ""}`}
+          onClick={() => level.id === activeId ? onOpenPlan() : onLevel(level.id)}>
+          <span className="stack__label-heading"><span className="cims-caps">{level.name}</span>{level.id === activeId && <small className="cims-mono" aria-hidden="true">{roomCount(level)}</small>}</span>
+          {level.id === activeId ? <span className="stack__open-plan">Open plan <span aria-hidden="true">↗</span></span> : <small className="cims-mono">{roomCount(level)} spaces</small>}
+        </button>
+      </div>)}
+    </>}
   </div>;
 }

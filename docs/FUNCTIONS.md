@@ -258,7 +258,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingView()` [src/indoor/BuildingView.tsx:34](../src/indoor/BuildingView.tsx#L34): Opens registered buildings and resolves room selections straight into a routed building screen.
 - `FloorPlan(…)` [src/indoor/FloorPlan.tsx:132](../src/indoor/FloorPlan.tsx#L132): Renders one available level with controls and brings the route or the selected space into view.
 - `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
-- `StackView(…)` [src/indoor/StackView.tsx:26](../src/indoor/StackView.tsx#L26): Every available level as a plate in one CSS 3D scene; click a plate to make it the active level.
+- `StackView(…)` [src/indoor/StackView.tsx:25](../src/indoor/StackView.tsx#L25): Exploded solid floor slabs; select levels or rooms and open the active level's detailed plan.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:8](../src/panels/account/AccountChip.tsx#L8): Shows sign-in or the selected demo persona with a small sign-out disclosure.
 - `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
 - `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:14](../src/panels/building-card/BuildingCard.tsx#L14): Shows the selected building (kind "building"), or nothing when something else is selected.
@@ -321,7 +321,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BASEMAP_TILEJSON` [src/config.ts:21](../src/config.ts#L21): Vector basemap (ADR-0006 step 2): OpenFreeMap, free and keyless, OpenMapTiles schema.
 - `TILE_ATTRIBUTION` [src/config.ts:23](../src/config.ts#L23): Attribution OpenFreeMap and OpenStreetMap require next to the map.
 - `CORRECTION_URL` [src/config.ts:26](../src/config.ts#L26): Base URL for prefilled place correction issues.
-- `STACK_VIEW_ENABLED` [src/indoor/StackView.tsx:23](../src/indoor/StackView.tsx#L23): Shows the Plan | Stack toggle in the building header. Set to false to hide the stack view for a demo.
+- `STACK_VIEW_ENABLED` [src/indoor/StackView.tsx:22](../src/indoor/StackView.tsx#L22): Shows the Plan | Stack toggle in the building header. Set to false to hide the stack view for a demo.
 - `bookableRoomsFor(rooms, amenitiesById, buildingId)` [src/indoor/availability.ts:24](../src/indoor/availability.ts#L24): Every bookable room in one building (its plain space/room name as the label), sorted alphabetically.
 - `favoriteRoomsFrom(rooms, amenitiesById, roomIds)` [src/indoor/availability.ts:47](../src/indoor/availability.ts#L47): Bookable rooms in `roomIds` across every building, labeled "Building · Room N" using each
 - `crossBuildingBookableRooms(rooms, amenitiesById)` [src/indoor/availability.ts:65](../src/indoor/availability.ts#L65): Every bookable room across every building, labeled "Building · Room" exactly like
