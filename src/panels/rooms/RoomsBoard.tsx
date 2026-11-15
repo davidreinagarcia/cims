@@ -115,27 +115,6 @@ export default function RoomsBoard({ onClose }: { onClose: () => void }) {
         </p>
       </div>
       <div className="rooms-board__surface">
-        <div className="rooms-board__search">
-          <div className="cims-field">
-            <input type="text" value={buildingQuery} placeholder={currentBuildingLabel ?? "Search a building..."}
-              aria-label="Search a building" role="combobox" aria-expanded={buildingMatches.length > 0}
-              onChange={(event) => setBuildingQuery(event.target.value)} />
-          </div>
-          {buildingMatches.length > 0 && (
-            <ul className="rooms-board__search-results" role="listbox">
-              {buildingMatches.map((option) => (
-                <li key={option.id}>
-                  <button type="button" className="rooms-board__search-result" role="option" onClick={() => pickBuilding(option)}>
-                    {option.label}
-                    {option.enabled
-                      ? <span className="rooms-board__count">{bookableRoomsFor(indoorRooms(), roomAmenitiesById, option.id).length}</span>
-                      : <span className="cims-tag cims-tag--alert">Coming soon</span>}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
         <div className="rooms-board__chips" role="group" aria-label="Filter rooms">
           <button type="button" className="rooms-board__chip" aria-pressed={section.kind === "favorites"} onClick={() => setSection({ kind: "favorites" })}>
             Favorites <span className="rooms-board__count">{favorites.length}</span>
@@ -150,6 +129,27 @@ export default function RoomsBoard({ onClose }: { onClose: () => void }) {
             onClick={() => setOnlyAvailable(!onlyAvailable)}>
             Only available rooms
           </button>
+          <div className="rooms-board__search">
+            <div className="cims-field">
+              <input type="text" value={buildingQuery} placeholder={currentBuildingLabel ?? "Search a building..."}
+                aria-label="Search a building" role="combobox" aria-expanded={buildingMatches.length > 0}
+                onChange={(event) => setBuildingQuery(event.target.value)} />
+            </div>
+            {buildingMatches.length > 0 && (
+              <ul className="rooms-board__search-results" role="listbox">
+                {buildingMatches.map((option) => (
+                  <li key={option.id}>
+                    <button type="button" className="rooms-board__search-result" role="option" onClick={() => pickBuilding(option)}>
+                      {option.label}
+                      {option.enabled
+                        ? <span className="rooms-board__count">{bookableRoomsFor(indoorRooms(), roomAmenitiesById, option.id).length}</span>
+                        : <span className="cims-tag cims-tag--alert">Coming soon</span>}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
 
         {comingSoon && (
