@@ -1,5 +1,6 @@
 /** @file BuzzPrint: full-screen personal portfolio of Bulletin posts marked "Interested", landing on a folder you open. */
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { SITE_URL } from "../config";
 import { POST_TYPES } from "../lib/bulletin";
 import { useAuth } from "../state/auth";
 import { useSelection } from "../state/selection";
@@ -16,6 +17,28 @@ const typeLabel = (type: PortfolioEntry["postType"]) => POST_TYPES.find((item) =
 
 function prefersReducedMotion(): boolean {
   try { return window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch { return false; }
+}
+
+/** Plain-text summary of one activity (title, when, where) -- the body every share channel below sends. */
+function shareText(entry: PortfolioEntry): string {
+  return [entry.postTitle, timeFor(entry), entry.placeName].filter(Boolean).join(" · ");
+}
+
+/**
+ * Share links for three specific channels (direct ask, not the generic OS share sheet): WhatsApp
+ * and email take the activity's own text; LinkedIn's share intent only ever accepts a URL (it
+ * fetches that page's own title/description, no raw-text param), and BuzzPrint entries have no
+ * public link of their own -- private, account-scoped data stored only on this device -- so it
+ * points at the app's own live site instead, and the person adds their own line in LinkedIn's
+ * compose box.
+ */
+function shareLinks(entry: PortfolioEntry): { whatsapp: string; email: string; linkedin: string } {
+  const text = shareText(entry);
+  return {
+    whatsapp: `https://wa.me/?text=${encodeURIComponent(text)}`,
+    email: `mailto:?subject=${encodeURIComponent(`My BuzzPrint: ${entry.postTitle}`)}&body=${encodeURIComponent(text)}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SITE_URL)}`,
+  };
 }
 
 function readFileAsDataUrl(file: File): Promise<string> {
@@ -49,10 +72,14 @@ function timeFor(entry: PortfolioEntry): string {
   return entry.endAt === undefined ? start : `${start}–${timeLabel.format(new Date(entry.endAt))}`;
 }
 
-function EntryCard({ entry, accountId, onGuide }: { entry: PortfolioEntry; accountId: string; onGuide: (entry: PortfolioEntry) => void }) {
+function EntryCard({ entry, accountId, index, onGuide, onOpenPhoto }: {
+  entry: PortfolioEntry; accountId: string; index: number; onGuide: (entry: PortfolioEntry) => void; onOpenPhoto: (entry: PortfolioEntry, photoUrl: string) => void;
+}) {
   const input = useRef<HTMLInputElement>(null);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState("");
+  const [shareOpen, setShareOpen] = useState(false);
+  const links = shareLinks(entry);
 
   const onFile = async (file: File) => {
     setBusy(true);
@@ -72,20 +99,39 @@ function EntryCard({ entry, accountId, onGuide }: { entry: PortfolioEntry; accou
   };
 
   return (
-    <li className="buzzprint-card">
+    <li className="buzzprint-card" style={{ "--i": index } as CSSProperties}>
       {entry.posterUrl && <img className="buzzprint-card__poster" src={entry.posterUrl} alt={`Poster for ${entry.postTitle}`} loading="lazy" />}
       <p className="buzzprint-card__what cims-caps">{typeLabel(entry.postType)}{entry.org && <> · {entry.org}</>}</p>
       <h4 className="buzzprint-card__title">{entry.postTitle}</h4>
       <p className="buzzprint-card__when">{timeFor(entry)}</p>
       {entry.placeName && <p className="buzzprint-card__where">{entry.placeName}</p>}
-      {entry.placeId && (
-        <button type="button" className="cims-btn cims-btn--small" onClick={() => onGuide(entry)}>
-          {entry.placeKind === "room" ? "Guide me to the room" : "Show on map"}
+      <div className="buzzprint-card__actions">
+        {entry.placeId && (
+          <button type="button" className="cims-btn cims-btn--small" onClick={() => onGuide(entry)}>
+            {entry.placeKind === "room" ? "Guide me to the room" : "Show on map"}
+          </button>
+        )}
+        <button type="button" className="cims-btn cims-btn--small" aria-expanded={shareOpen} onClick={() => setShareOpen((open) => !open)}>
+          Share
         </button>
+      </div>
+      {shareOpen && (
+        <div className="buzzprint-card__share" role="group" aria-label={`Share ${entry.postTitle}`}>
+          <a className="cims-btn cims-btn--small" href={links.whatsapp} target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          <a className="cims-btn cims-btn--small" href={links.email}>Email</a>
+          <a className="cims-btn cims-btn--small" href={links.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
       )}
       {entry.photos.length > 0 && (
         <ul className="buzzprint-card__photos" aria-label="Your photos">
-          {entry.photos.map((photo) => <li key={photo.id}><img src={photo.dataUrl} alt="" /></li>)}
+          {entry.photos.map((photo) => (
+            <li key={photo.id}>
+              <button type="button" className="buzzprint-card__photo-btn" onClick={() => onOpenPhoto(entry, photo.dataUrl)}
+                aria-label={`View this photo from ${entry.postTitle} larger`}>
+                <img src={photo.dataUrl} alt="" />
+              </button>
+            </li>
+          ))}
         </ul>
       )}
       {notice && <p className="buzzprint-card__notice" role="status">{notice}</p>}
@@ -105,6 +151,7 @@ export default function PortfolioPage({ onClose }: { onClose: () => void }) {
   const { entries, loaded } = usePortfolio();
   const [opened, setOpened] = useState(false);
   const [shrinking, setShrinking] = useState(false);
+  const [lightbox, setLightbox] = useState<{ entry: PortfolioEntry; photoUrl: string } | null>(null);
   const root = useRef<HTMLDialogElement>(null);
 
   useEffect(() => { void ensureLoaded(session?.accountId ?? null); }, [session?.accountId]);
@@ -133,7 +180,7 @@ export default function PortfolioPage({ onClose }: { onClose: () => void }) {
 
   const onKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {
     if (dialogOpen) return;
-    if (event.key === "Escape") { event.preventDefault(); onClose(); return; }
+    if (event.key === "Escape") { event.preventDefault(); if (lightbox) setLightbox(null); else onClose(); return; }
     if (event.key !== "Tab") return;
     const items = Array.from(root.current!.querySelectorAll<HTMLElement>(FOCUSABLE)).filter((el) => el.offsetParent !== null);
     if (!items.length) return;
@@ -169,18 +216,35 @@ export default function PortfolioPage({ onClose }: { onClose: () => void }) {
           </p>
         ) : (
           <div className="buzzprint-list">
-            {groups.map(({ label, items }) => (
-              <section key={label} className="buzzprint-day">
-                <h3 className="buzzprint-day__title cims-caps">{label}</h3>
-                <ul className="buzzprint-day__cards">
-                  {items.map((entry) => <EntryCard key={entry.id} entry={entry} accountId={entry.accountId}
-                    onGuide={(item) => { select({ kind: item.placeKind ?? "place", id: item.placeId! }); onClose(); }} />)}
-                </ul>
-              </section>
-            ))}
+            {(() => {
+              let i = 0; // flat index across every card, for the paper-spill stagger -- not reset per day group
+              return groups.map(({ label, items }) => (
+                <section key={label} className="buzzprint-day">
+                  <h3 className="buzzprint-day__title cims-caps">{label}</h3>
+                  <ul className="buzzprint-day__cards">
+                    {items.map((entry) => <EntryCard key={entry.id} entry={entry} accountId={entry.accountId} index={i++}
+                      onGuide={(item) => { select({ kind: item.placeKind ?? "place", id: item.placeId! }); onClose(); }}
+                      onOpenPhoto={(item, photoUrl) => setLightbox({ entry: item, photoUrl })} />)}
+                  </ul>
+                </section>
+              ));
+            })()}
           </div>
         )}
       </div>
+      {lightbox && (
+        <div className="buzzprint-lightbox" role="dialog" aria-modal="true" aria-label={`${lightbox.entry.postTitle} photo`}
+          onClick={(event) => { if (event.target === event.currentTarget) setLightbox(null); }}>
+          <button type="button" className="buzzprint-lightbox__close" aria-label="Close photo" onClick={() => setLightbox(null)}>×</button>
+          <img className="buzzprint-lightbox__photo" src={lightbox.photoUrl} alt="" />
+          <div className="buzzprint-lightbox__caption">
+            <p className="buzzprint-lightbox__what cims-caps">{typeLabel(lightbox.entry.postType)}{lightbox.entry.org && <> · {lightbox.entry.org}</>}</p>
+            <h4 className="buzzprint-lightbox__title">{lightbox.entry.postTitle}</h4>
+            <p className="buzzprint-lightbox__when">{timeFor(lightbox.entry)}</p>
+            {lightbox.entry.placeName && <p className="buzzprint-lightbox__where">{lightbox.entry.placeName}</p>}
+          </div>
+        </div>
+      )}
     </dialog>
   );
 }
