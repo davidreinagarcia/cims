@@ -156,6 +156,11 @@ export default function FloorPlan({ level, selected, focus, route, legs, onSelec
               <circle r="12" className={`floor-plan__marker floor-plan__marker--${letter}`} />
               <text textAnchor="middle" dominantBaseline="central">{letter}</text>
             </g>)}
+          {route.transitions.filter((t) => t.level === level.id).map((t, i) => <g key={`t${i}`} transform={`translate(${t.x},${t.y})`} className={`floor-plan__transition floor-plan__transition--${t.kind}`}>
+            <rect x="-14" y="-14" width="28" height="28" rx="3" />
+            <path d={t.kind === "stairs" ? "M-8 7 H-3 V2 H2 V-3 H7 V-8" : t.direction === "up" ? "M0 -8 L6 0 H-6 Z" : "M0 8 L6 0 H-6 Z"} />
+            <text x="0" y="28" textAnchor="middle">{t.kind === "stairs" ? "STAIRS" : "LIFT"} {t.direction === "up" ? "↑" : "↓"} {t.to === "B" ? "Basement" : `Level ${t.to}`}</text>
+          </g>)}
         </g>}
       </svg>
       <span className="floor-plan__annotation cims-mono">SCHEMATIC, NOT TO SCALE</span>

@@ -7,8 +7,8 @@ import { useAuth } from "../state/auth";
 import FloorPlan from "./FloorPlan";
 import RoomSearch from "./RoomSearch";
 import { findRoute } from "./route";
-import { closeIndoor, useOpenIndoor } from "./open";
-import { indoorFor, resolveRoom } from "./registry";
+import { closeIndoor, openIndoor, useOpenIndoor } from "./open";
+import { doorLink, indoorFor, resolveRoom } from "./registry";
 import type { IndoorBuilding, IndoorSpace, IndoorSpaceType, RoomFact } from "./types";
 import "./BuildingView.css";
 
@@ -18,12 +18,20 @@ const typeLabels: Record<IndoorSpaceType, string> = {
 
 /** Opens registered buildings and resolves room selections straight into a routed building screen. */
 export default function BuildingView() {
-  const { selection } = useSelection();
+  const { selection, select } = useSelection();
   const open = useOpenIndoor();
+  // A door sticker (QR or NFC) opens the page on this building with the entrance you are standing at.
+  useEffect(() => { const link = doorLink(); if (link) { select({ kind: "building", id: link.building.building_id }); openIndoor(link.building.building_id); } }, []); // eslint-disable-line react-hooks/exhaustive-deps
   const room = selection?.kind === "room" ? resolveRoom(selection.id) : undefined;
   // Picking a building shows its preview card; the full screen opens from the card (or straight from a room or a door sticker).
   const building = selection?.kind === "building" ? (open === selection.id ? indoorFor(selection.id) : undefined) : room?.building;
-  useEffect(() => { if (open && selection?.kind !== "building") closeIndoor(); }, [open, selection]);
+  // Moving the selection away from a building ends its open screen, so picking it again shows the preview first.
+  const previous = useRef(selection);
+  useEffect(() => {
+    const before = previous.current;
+    previous.current = selection;
+    if (before?.kind === "building" && (selection?.kind !== "building" || selection.id !== before.id)) closeIndoor();
+  }, [selection]);
   return building ? <BuildingScreen key={building.building_id} building={building} initialRoom={room?.routable ? room.space : undefined} initialFact={room && !room.routable ? room.space : undefined} /> : null;
 }
 
@@ -35,9 +43,11 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
   const graph = building.graph;
   const destinations = useMemo(() => building.levels.flatMap((level) => level.available
     ? level.spaces.filter((space) => space.type !== "void").map((space) => ({ ...space, level: level.id })) : []), [building]);
-  const [levelId, setLevelId] = useState(graph?.entrances[0]?.level ?? building.levels.find((level) => level.available)?.id);
+  const sticker = useMemo(() => { const link = doorLink(); return link?.building.building_id === building.building_id ? link.entranceId : undefined; }, [building]);
+  const doorEntrance = graph?.entrances.find((entrance) => entrance.id === sticker) ?? graph?.entrances[0];
+  const [levelId, setLevelId] = useState(doorEntrance?.level ?? building.levels.find((level) => level.available)?.id);
   const [selected, setSelected] = useState<IndoorSpace | undefined>(initialRoom);
-  const [from, setFrom] = useState(graph?.entrances[0] ? `entrance:${graph.entrances[0].id}` : "");
+  const [from, setFrom] = useState(doorEntrance ? `entrance:${doorEntrance.id}` : "");
   const [to, setTo] = useState(initialRoom?.id ?? "");
   const [stepFree, setStepFree] = useState(false);
   const [routeVersion, setRouteVersion] = useState(0);
@@ -85,8 +95,13 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
   useEffect(() => {
     const map = screen.current?.parentElement?.querySelector<HTMLElement>(".map");
     if (map) { map.inert = true; map.setAttribute("aria-hidden", "true"); }
-    back.current?.focus();
+    // From a door sticker the next thing you do is say where you are going.
+    if (sticker) screen.current?.querySelector<HTMLInputElement>(".building-view__search input")?.focus();
+    else back.current?.focus();
     return () => {
+      // Leaving the building ends the sticker session: a later visit starts from the default entrance.
+      const url = new URL(location.href);
+      if (url.searchParams.has("in") || url.searchParams.has("door")) { url.searchParams.delete("in"); url.searchParams.delete("door"); history.replaceState(null, "", url); }
       if (map) {
         map.inert = false; map.removeAttribute("aria-hidden"); map.tabIndex = -1;
         map.setAttribute("aria-label", "Campus map"); map.focus({ preventScroll: true });
@@ -137,6 +152,9 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
           <div className="building-view__route-options">
             {route && <div className="building-view__route-levels" role="group" aria-label="Route levels">{[...new Set(route.legs.map((leg) => leg.level))].map((id) =>
               <button className="cims-btn" type="button" key={id} aria-pressed={id === levelId} onClick={() => setLevelId(id)}>{building.levels.find((item) => item.id === id)?.name}</button>)}</div>}
+            {route && !stepFree && route.transitions.some((t) => t.kind === "stairs") && <p className="building-view__stairs-note" role="status">
+              <strong>Includes stairs</strong> ({(n => `${n} ${n === 1 ? "flight" : "flights"}`)(new Set(route.transitions.filter((t) => t.kind === "stairs").map((t) => t.level + t.to)).size)}).
+              <button type="button" className="cims-btn" onClick={() => setStepFree(true)}>Avoid stairs</button></p>}
             <label className="building-view__step-free"><input type="checkbox" role="switch" checked={stepFree} onChange={(event) => setStepFree(event.target.checked)} />Step-free route</label>
           </div>
         </section>}
@@ -154,7 +172,8 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
         {route ? <section className="building-view__steps-section" aria-labelledby="steps-title">
           <h3 id="steps-title" className="cims-caps">Directions to {destination?.name}</h3>
           <ol className="building-view__steps">{route.steps.map((step, index) => <li key={index}>
-            <button type="button" onClick={() => setLevelId(step.level)}>{step.text}</button>
+            <button type="button" className={step.vertical ? `building-view__step-vertical building-view__step-vertical--${step.vertical.kind}` : undefined} onClick={() => setLevelId(step.level)}>
+              {step.vertical && <span className="building-view__step-badge">{step.vertical.kind === "stairs" ? "Stairs" : "Elevator"} {step.vertical.direction === "up" ? "↑" : "↓"}</span>}{step.text}</button>
           </li>)}</ol>
           {start?.note && <p className="cims-muted">{start.note}</p>}
           <p className="cims-muted">Schematic route, positions approximate, not for emergency use.</p>

@@ -30,6 +30,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `places` [src/lib/places.ts:19](../src/lib/places.ts#L19): The places the app shows: seed, demo and verified records, plus drafts only with ?drafts=1.
 - `searchPlaces(query, items)` [src/lib/search.ts:113](../src/lib/search.ts#L113): Searches name, aliases and category; queries under two characters preserve the full input order.
 - `searchCampus(query, items, buildings)` [src/lib/search.ts:148](../src/lib/search.ts#L148): Searches footprints and published rooms alongside places, including building aliases in room queries.
+- `suggest(query, buildings, limit = 6)` [src/lib/suggest.ts:7](../src/lib/suggest.ts#L7): Few, ranked suggestions like a map app: nothing for an empty or one letter query, never the whole campus.
+- `locate(result, "kind" | "id">, buildings)` [src/lib/suggest.ts:13](../src/lib/suggest.ts#L13): The [lng, lat] of a building, room (its building) or place result.
+- `recents()` [src/lib/suggest.ts:21](../src/lib/suggest.ts#L21): Last picked results, newest first, kept only in this browser.
+- `remember(result)` [src/lib/suggest.ts:25](../src/lib/suggest.ts#L25): Remembers a picked result (five at most).
 - `useAuth()` [src/state/auth.tsx:63](../src/state/auth.tsx#L63): Reads the demo session and sign-in controls inside AuthProvider.
 - `useLayerFilters()` [src/state/layerFilters.tsx:72](../src/state/layerFilters.tsx#L72): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
@@ -43,19 +47,20 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
 - `IndoorRoom` [src/indoor/registry.ts:19](../src/indoor/registry.ts#L19): A searchable indoor entry explicitly distinguishes drawn routes from published facts.
 - `Step` [src/indoor/route.ts:5](../src/indoor/route.ts#L5): One accessible instruction and the level on which it happens.
-- `RouteLeg` [src/indoor/route.ts:7](../src/indoor/route.ts#L7): A continuous portion of the route on one floor.
-- `IndoorRoute` [src/indoor/route.ts:9](../src/indoor/route.ts#L9): A shortest path with drawing geometry and human readable instructions.
-- `RouteOptions` [src/indoor/route.ts:11](../src/indoor/route.ts#L11): Routing preferences and optional endpoint names supplied by the directory.
+- `Transition` [src/indoor/route.ts:7](../src/indoor/route.ts#L7): Where the route changes floor: shown on the plan as a badge.
+- `RouteLeg` [src/indoor/route.ts:9](../src/indoor/route.ts#L9): A continuous portion of the route on one floor.
+- `IndoorRoute` [src/indoor/route.ts:11](../src/indoor/route.ts#L11): A shortest path with drawing geometry and human readable instructions.
+- `RouteOptions` [src/indoor/route.ts:13](../src/indoor/route.ts#L13): Routing preferences and optional endpoint names supplied by the directory.
 - `IndoorShape` [src/indoor/types.ts:3](../src/indoor/types.ts#L3): A space shape in the schematic coordinate system.
 - `IndoorSpaceType` [src/indoor/types.ts:9](../src/indoor/types.ts#L9): The supported schematic space categories.
 - `IndoorSpace` [src/indoor/types.ts:12](../src/indoor/types.ts#L12): One named space with its source and optional contextual note.
 - `IndoorLevel` [src/indoor/types.ts:26](../src/indoor/types.ts#L26): A level either has vector geometry or an explicit unavailable note.
 - `IndoorBuilding` [src/indoor/types.ts:32](../src/indoor/types.ts#L32): Building indoor data, including provenance and an honest no-plan status.
-- `IndoorNode` [src/indoor/types.ts:45](../src/indoor/types.ts#L45): A walkable point in plan units on one level.
-- `IndoorConnector` [src/indoor/types.ts:48](../src/indoor/types.ts#L48): A named vertical connection with explicit accessibility.
-- `IndoorEntrance` [src/indoor/types.ts:57](../src/indoor/types.ts#L57): An approximate building entrance connected to the walking graph.
-- `IndoorGraph` [src/indoor/types.ts:60](../src/indoor/types.ts#L60): Undirected walking edges and vertical connections for one building.
-- `RoomFact` [src/indoor/types.ts:68](../src/indoor/types.ts#L68): Published room facts without geometry, inferred levels or routing nodes.
+- `IndoorNode` [src/indoor/types.ts:47](../src/indoor/types.ts#L47): A walkable point in plan units on one level.
+- `IndoorConnector` [src/indoor/types.ts:50](../src/indoor/types.ts#L50): A named vertical connection with explicit accessibility.
+- `IndoorEntrance` [src/indoor/types.ts:59](../src/indoor/types.ts#L59): An approximate building entrance connected to the walking graph.
+- `IndoorGraph` [src/indoor/types.ts:62](../src/indoor/types.ts#L62): Undirected walking edges and vertical connections for one building.
+- `RoomFact` [src/indoor/types.ts:70](../src/indoor/types.ts#L70): Published room facts without geometry, inferred levels or routing nodes.
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
 - `SubType` [src/lib/layerCatalog.ts:5](../src/lib/layerCatalog.ts#L5): A filterable sub-type inside a layer.
@@ -102,6 +107,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:16](../src/panels/building-card/PlaceCard.tsx#L16): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinPanel({ onShowMap })` [src/panels/bulletin/BulletinPanel.tsx:9](../src/panels/bulletin/BulletinPanel.tsx#L9): Show upcoming events independently of layer filters and return to Explore on selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
+- `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
+- `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
 - `SearchPanel()` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
 - `BottomSheet(…)` [src/shell/BottomSheet.tsx:19](../src/shell/BottomSheet.tsx#L19): Drag or tap the handle to move between snaps; arrow keys on the handle do the same. Opens at half.
 - `ChipsBar()` [src/shell/ChipsBar.tsx:14](../src/shell/ChipsBar.tsx#L14): One pill per layer category; pressed = layer on. Categories without data stay visible but inert (aria-disable…
@@ -109,8 +116,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayersPopover()` [src/shell/LayersPopover.tsx:7](../src/shell/LayersPopover.tsx#L7): Tile that opens the legend popover. Esc or a click outside closes it and returns focus to the tile.
 - `MobileTabBar({ panel, onPanel })` [src/shell/MobileTabBar.tsx:5](../src/shell/MobileTabBar.tsx#L5): Fixed bottom bar above the safe-area inset. Left/right arrows move between tabs.
 - `Rail({ panel, onPanel })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
+- `RoutePanel({ onClose })` [src/shell/RoutePanel.tsx:7](../src/shell/RoutePanel.tsx#L7): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:52](../src/shell/Shell.tsx#L52): Lays out the map and every floating surface; panels are mounted unchanged inside the card (desktop) or sheet…
+- `Shell()` [src/shell/Shell.tsx:53](../src/shell/Shell.tsx#L53): Lays out the map and every floating surface; panels are mounted unchanged inside the card (desktop) or sheet…
 - `Icon({ name, size = 24 })` [src/shell/icons.tsx:22](../src/shell/icons.tsx#L22): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = mockAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
@@ -133,7 +141,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `hasIndoor(id)` [src/indoor/registry.ts:14](../src/indoor/registry.ts#L14): Whether a building opens the indoor screen instead of the sidebar card.
 - `indoorRooms()` [src/indoor/registry.ts:25](../src/indoor/registry.ts#L25): Lists routable schematic spaces and rooms without geometry for search and selection.
 - `resolveRoom(id)` [src/indoor/registry.ts:36](../src/indoor/registry.ts#L36): Resolves a room selection id without guessing a building or room.
-- `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:22](../src/indoor/route.ts#L22): Finds the least cost walk, filtering inaccessible connectors before searching.
+- `indoorBySlug(slug)` [src/indoor/registry.ts:41](../src/indoor/registry.ts#L41): Finds an indoor building by its sticker slug (or full footprint id).
+- `doorLink()` [src/indoor/registry.ts:46](../src/indoor/registry.ts#L46): A door sticker link: ?in=<building slug>&door=<entrance id>, read once when the app opens.
+- `doorUrl(origin, building, entranceId)` [src/indoor/registry.ts:56](../src/indoor/registry.ts#L56): The sticker link for one entrance, for printing QR codes and programming NFC tags.
+- `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:24](../src/indoor/route.ts#L24): Finds the least cost walk, filtering inaccessible connectors before searching.
 - `baseStyle` [src/map/baseStyle.ts:69](../src/map/baseStyle.ts#L69): Base style every layer is added on top of.
 - `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.
 - `ScaleBox` [src/map/furniture/ScaleBox.ts:22](../src/map/furniture/ScaleBox.ts#L22): MapLibre control: a four-segment scale bar in feet and the map center's latitude/longitude, updated as the ma…

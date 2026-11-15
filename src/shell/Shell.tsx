@@ -18,6 +18,7 @@ import { Icon, type ShellPanel } from "./icons";
 import LayersPopover from "./LayersPopover";
 import MobileTabBar from "./MobileTabBar";
 import Rail from "./Rail";
+import RoutePanel from "./RoutePanel";
 import SearchPill from "./SearchPill";
 import "./shell.css";
 
@@ -86,7 +87,7 @@ export default function Shell() {
   if (panel === "bulletin") content = { title: "Bulletin", key: "bulletin", body: <BulletinPanel onShowMap={() => setPanel("explore")} /> };
   else if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <ComingSoon what="Room finder" hint="You can already search a room number in the search bar." /> };
   else if (panel === "report") content = { title: "Report", key: "report", body: <ComingSoon what="Report an issue" /> };
-  else if (panel === "route") content = { title: "Route", key: "route", body: <ComingSoon what="Directions between two places" /> };
+  else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel onClose={() => setPanel("explore")} /> };
   else if (selection) content = {
     title: selection.kind === "building" ? "Building" : "Place",
     key: `${selection.kind}:${selection.id}`,

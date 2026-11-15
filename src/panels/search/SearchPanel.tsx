@@ -1,9 +1,9 @@
 /** @file Grouped campus search with ranked highlights and keyboard selection. */
 import { Fragment, useEffect, useId, useMemo, useRef, useState, type KeyboardEvent } from "react";
 import Glyph from "../../components/Glyph";
-import { places } from "../../lib/places";
 import { loadBuildings, loadedBuildings, type BuildingIndex } from "../../lib/buildings";
-import { searchCampus, type MatchRange } from "../../lib/search";
+import type { MatchRange } from "../../lib/search";
+import { recents, remember, suggest } from "../../lib/suggest";
 import { useSelection } from "../../state/selection";
 import "./search.css";
 
@@ -37,7 +37,9 @@ export default function SearchPanel() {
       .catch(() => { if (mounted.current) setFailed(true); })
       .finally(() => { if (mounted.current) setLoading(false); });
   };
-  const results = useMemo(() => searchCampus(query, places.features, buildings?.list ?? []), [query, buildings]);
+  const typed = query.trim().length >= 2;
+  // Like a map app: nothing until you type, then a handful of ranked suggestions; recent picks show on an empty focus.
+  const results = useMemo(() => typed ? suggest(query, buildings, 8) : focused ? recents() : [], [query, buildings, typed, focused]);
   const groups = useMemo(() => {
     const grouped = new Map<string, typeof results>();
     for (const result of results) {
@@ -73,13 +75,14 @@ export default function SearchPanel() {
         : (current + step + ordered.length) % ordered.length);
     } else if (event.key === "Enter" && activeResult) {
       event.preventDefault();
-      select({ kind: activeResult.kind, id: activeResult.id });
+      remember(activeResult); select({ kind: activeResult.kind, id: activeResult.id });
     }
   }
 
   return (
     <>
-      <div className="search cims-field">
+      <div className="search search--row">
+      <div className="cims-field search__field">
         <input
           role="combobox"
           aria-label="Search buildings, rooms and places"
@@ -100,6 +103,7 @@ export default function SearchPanel() {
             <path d="M15 15l5 5" />
           </svg>
         </span>
+      </div>
       </div>
       {(loading || failed) && <p className="search-status cims-muted" role="status">{loading ? "Loading buildings..." : "Buildings could not be loaded. Focus search to retry."}</p>}
       <div className="list cims-results" id={listId} role="listbox" aria-label="Search results" ref={listRef}>
@@ -125,7 +129,7 @@ export default function SearchPanel() {
                   onMouseDown={(event) => event.preventDefault()}
                   onClick={() => {
                     setActive(ordered.findIndex((result) => result.id === id && result.kind === kind));
-                    select({ kind, id });
+                    remember({ kind, id, group: items[0].group, name, meta, matches: [] } as typeof results[number]); select({ kind, id });
                   }}
                 >
                   <span className="cims-glyph" aria-hidden="true"><Glyph id="building" /></span>
@@ -143,7 +147,7 @@ export default function SearchPanel() {
           </div>
         ))}
       </div>
-      {results.length === 0 && (
+      {typed && results.length === 0 && (
         <div className="search-empty cims-empty" role="status">
           <strong>No results</strong>
           <span>Check the spelling or browse the layers</span>
