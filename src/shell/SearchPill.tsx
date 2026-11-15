@@ -7,7 +7,7 @@ import { Icon } from "./icons";
 export default function SearchPill({ showResults, onQuery, onRoute, trailing }: {
   /** Show the results dropdown (there is a query and nothing is selected). */
   showResults: boolean;
-  /** Reports whether the field has text, so the shell knows when the dropdown is open. */
+  /** Reports whether the field has text. Text means a new search: the shell clears the selection so the dropdown shows. */
   onQuery: (hasQuery: boolean) => void;
   /** Desktop: the Route button. Phones use the Route FAB instead. */
   onRoute?: () => void;
@@ -17,9 +17,16 @@ export default function SearchPill({ showResults, onQuery, onRoute, trailing }: 
   return (
     <div className="shell-search" data-results={showResults}
       onInput={(event) => { if (event.target instanceof HTMLInputElement) onQuery(event.target.value.trim() !== ""); }}
+      onKeyDownCapture={(event) => {
+        // List hidden behind a selection: arrows reopen it before moving in it; Enter never picks a result nobody can see.
+        const input = event.target;
+        if (showResults || !(input instanceof HTMLInputElement) || input.value.trim() === "") return;
+        if (event.key === "ArrowDown" || event.key === "ArrowUp") onQuery(true);
+        else if (event.key === "Enter") event.stopPropagation();
+      }}
       onKeyDown={(event) => { if (event.key === "Escape" && event.target instanceof HTMLInputElement) onQuery(false); }}>
       <h1 className="shell-search__wordmark">CIMS</h1>
-      <SearchPanel />
+      <SearchPanel expanded={showResults} />
       {onRoute && (
         <button type="button" className="shell-search__route" onClick={onRoute} aria-label="Route: directions between two places">
           <Icon name="route" />

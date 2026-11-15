@@ -95,7 +95,13 @@ export default function Shell() {
 
   const pill = (
     <SearchPill showResults={showResults}
-      onQuery={(q) => { setHasQuery(q); if (q && panel !== "explore") setPanel("explore"); }}
+      onQuery={(q) => {
+        setHasQuery(q);
+        if (!q) return;
+        // A new query replaces whatever was showing, so its suggestions are visible (and Enter acts on what is seen).
+        if (panel !== "explore") setPanel("explore");
+        if (selection) select(null);
+      }}
       onRoute={mobile ? undefined : () => choosePanel("route")}
       trailing={mobile ? <AccountChip /> : undefined} />
   );
