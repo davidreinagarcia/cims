@@ -7,6 +7,7 @@ Before/after screenshots of the real app, taken for PRs (production build, headl
 **Folders**
 
 - [`app-shell/`](app-shell/INDEX.md): Map-first shell (APP-SHELL.md), production build in headless Chromium at 1440, 1280, 390 and 360 px: empty ma…
+- [`bulletin/`](bulletin/INDEX.md): Production screenshots at 1440, 1280, 390 and 360 px: map, full-screen cork board and the empty Lost & Found…
 - [`data-attach/`](data-attach/INDEX.md): Production screenshots with drafts visible at 1440, 1280, 390 and 360 pixels.
 
 **Files**
