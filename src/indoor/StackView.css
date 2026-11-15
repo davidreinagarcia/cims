@@ -41,3 +41,6 @@
 .stack__label[data-active] { border-left-color: var(--navy); }
 .stack__label[data-active] .cims-caps { color: var(--navy); }
 /* No animated transitions here at all, so prefers-reduced-motion needs nothing extra; keep it that way. */
+
+/* Dashed guides that tie each stair and elevator to the same core on the next plate. */
+.stack__guide { stroke: var(--ink); stroke-width: 1.25; stroke-dasharray: 4 5; opacity: 0.7; }

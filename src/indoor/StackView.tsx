@@ -8,6 +8,7 @@ import "./StackView.css";
 type DrawnLevel = Extract<IndoorLevel, { available: true }>;
 type Point = { x: number; y: number };
 
+
 /** Shows the Plan | Stack toggle in the building header. Set to false to hide the stack view for a demo. */
 export const STACK_VIEW_ENABLED = true;
 
@@ -30,6 +31,9 @@ export default function StackView({ building, levels, activeId, selected, route,
   const gap = Math.min(150, Math.max(50, (size.h * 0.62) / Math.max(1, n - 1)), plateH * 0.9);
   const z = (index: number) => (index - (n - 1) / 2) * gap;
 
+  // Stairs and elevators: dashed guides tie them across consecutive plates, like an axonometric drawing.
+  const cores = building.graph?.connectors ?? [];
+  const nodeById = new Map((building.graph?.nodes ?? []).map((node) => [node.id, node]));
   // Where the route changes level: the node it leaves and the node it reaches, from the graph.
   const links: { from: string; to: string }[] = [];
   route?.nodes.forEach((node, i) => {
@@ -87,11 +91,20 @@ export default function StackView({ building, levels, activeId, selected, route,
           {/* anchors: right edge for the level label, and every route node for the vertical links */}
           <span className="stack__anchor" data-anchor={`label:${level.id}`} style={{ left: "50%", top: "50%" }} />
           {[[0, 0], [100, 0], [100, 100], [0, 100]].map(([left, top]) => <span key={`${left}-${top}`} className="stack__anchor" data-anchor={`corner:${level.id}:${left}-${top}`} style={{ left: `${left}%`, top: `${top}%` }} />)}
+          {/* stairs and elevators on this level, joined plate to plate by dashed guides */}
+          {cores.map((core) => {
+            const node = nodeById.get(core.nodes[level.id]);
+            return node ? <span key={`core-${core.id}`} className="stack__anchor" data-anchor={`core:${level.id}:${core.id}`} style={pct(node)} /> : null;
+          })}
           {routeNodes.map((node) => <span key={node.id} className="stack__anchor" data-anchor={`${level.id}:${node.id}`} style={pct(node)} />)}
         </div>;
       })}
     </div>
     <svg className="stack__overlay" width={size.w} height={size.h} aria-hidden="true">
+      {ordered.slice(1).flatMap((level, k) => cores.map((core) => {
+        const a = anchors[`core:${ordered[k].id}:${core.id}`], b = anchors[`core:${level.id}:${core.id}`];
+        return a && b ? <line key={`guide-${level.id}-${core.id}`} x1={a.x} y1={a.y} x2={b.x} y2={b.y} className="stack__guide" /> : null;
+      }))}
       {links.map(({ from, to }) => anchors[from] && anchors[to] && <g key={`${from}-${to}`}>
         <line x1={anchors[from].x} y1={anchors[from].y} x2={anchors[to].x} y2={anchors[to].y} className="stack__link" />
         <circle cx={anchors[from].x} cy={anchors[from].y} r="4" className="stack__link-end" />
