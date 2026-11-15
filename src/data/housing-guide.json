@@ -1,18 +1,129 @@
 {
-  "_note": "West vs East guide. Only add a row with a real source or a named student author; leave the rest out. The UI shows a 'still gathering' banner while rows are few.",
-  "intro": "Deciding where to live? Here's the honest student take on East vs West. We're still filling this in.",
+  "intro": "Deciding where to live? Here's the East vs West rundown, the way a Tech student would put it. Opinions are labeled with who said them; the official stuff is tagged too.",
+  "verdict": {
+    "label": "Our read of the sources below",
+    "east": "You want to be in the middle of everything: Freshman Hill, the stadium, lots of freshmen, and short walks to engineering and computing classes. You don't mind older, smaller rooms.",
+    "west": "You want it quieter and more relaxed, with bigger, more recently renovated rooms and the gym (CRC) close by. You don't mind a longer walk or a bus to some classes."
+  },
   "rows": [
     {
-      "topic": "Suite-style rooms",
-      "east": "Harris is the one suite-style freshman hall on the East side (older student ranking, double-check current room types).",
-      "west": null,
-      "source_url": "https://nique.net/?p=46828",
+      "topic": "The vibe",
+      "west": "Slightly more chill, quieter and more relaxed.",
+      "east": "The heart of the action: most freshman dorms, Bobby Dodd and Freshman Hill.",
+      "kind": "student",
+      "by": "Prked student guide, 2025",
+      "source_url": "https://prked.com/post/a-students-guide-to-the-best-dorms-at-georgia-tech",
       "verified_at": "2026-11-15",
       "verified_by": "claude-research (pending human check)"
+    },
+    {
+      "topic": "Room size",
+      "west": "About 15' x 11' for traditional rooms. Students say rooms are on average a bit larger.",
+      "east": "About 12' x 10' up to 15' x 11'. Students call the dorms older and smaller.",
+      "kind": "official",
+      "by": "GT Housing FAQ (sizes); Prked and Transfer Hub (opinions)",
+      "source_url": "https://housing.gatech.edu/?p=2178",
+      "verified_at": "2026-11-15",
+      "verified_by": "claude-research (pending human check)"
+    },
+    {
+      "topic": "Suite-style",
+      "west": "Woodruff has suites, about 15' x 12' (renovated, per students).",
+      "east": "Harris has suites, about 12' x 10'.",
+      "kind": "official",
+      "by": "GT Housing FAQ and room page; hall locations from student sources",
+      "source_url": "https://housing.gatech.edu/?p=2178",
+      "verified_at": "2026-11-15",
+      "verified_by": "claude-research (pending human check)"
+    },
+    {
+      "topic": "Walking to class",
+      "west": "A bit of a longer walk to some classes. Farther from CULC, say students. The bus is described as pretty solid.",
+      "east": "Many classes are close, especially engineering and computing.",
+      "kind": "student",
+      "by": "Prked student guide, 2025; GT Transfer Hub",
+      "source_url": "https://prked.com/post/a-students-guide-to-the-best-dorms-at-georgia-tech",
+      "verified_at": "2026-11-15",
+      "verified_by": "claude-research (pending human check)"
+    },
+    {
+      "topic": "Food",
+      "west": "West Village Dining Commons, described as the newest hall.",
+      "east": "Brittain, praised for its omelet station. Tech Square restaurants are closer.",
+      "kind": "student",
+      "by": "Prked student guide, 2025; GT Transfer Hub",
+      "source_url": "https://prked.com/post/a-students-guide-to-the-best-dorms-at-georgia-tech",
+      "verified_at": "2026-11-15",
+      "verified_by": "claude-research (pending human check)"
+    },
+    {
+      "topic": "Working out",
+      "west": "Campus Recreation Center (CRC) is on the West side.",
+      "east": "Glenn and Towers share a connector with a fitness center, and Perry has a workout room.",
+      "kind": "student",
+      "by": "Prked student guide, 2025; GT Transfer Hub",
+      "source_url": "https://prked.com/post/a-students-guide-to-the-best-dorms-at-georgia-tech",
+      "verified_at": "2026-11-15",
+      "verified_by": "claude-research (pending human check)"
+    },
+    {
+      "topic": "Getting around",
+      "west": null,
+      "east": null,
+      "kind": "official",
+      "by": "GT Housing, campus transit page",
+      "source_url": "https://housing.gatech.edu/resources/campus-transit",
+      "verified_at": "2026-11-15",
+      "verified_by": "claude-research (pending human check)",
+      "both": "Both sides get the free campus buses (track them at bus.gatech.edu or the Transloc app), the Midnight Rambler late at night, and the Stingerette ride service from 8:00 p.m. to 3:15 a.m. (not on Institute holidays or home football games)."
+    },
+    {
+      "topic": "Good to know",
+      "west": null,
+      "east": null,
+      "kind": "official",
+      "by": "GT Housing First-Time Resident FAQ",
+      "source_url": "https://housing.gatech.edu/?p=2178",
+      "verified_at": "2026-11-15",
+      "verified_by": "claude-research (pending human check)",
+      "both": "Laundry in the halls is free. You are not required to live on campus as a first-year. There are no hall tours, but 360 virtual tours are on the housing site."
     }
   ],
+  "halls": {
+    "west": [
+      "Fitten",
+      "Montag",
+      "Freeman",
+      "Woodruff"
+    ],
+    "east": [
+      "Glenn",
+      "Towers",
+      "Hopkins",
+      "Field",
+      "Matheson",
+      "Perry",
+      "Brown",
+      "Harris"
+    ],
+    "by": "Prked student guide, 2025 (Harris placement: Technique ranking). Double-check on the housing map.",
+    "source_url": "https://prked.com/post/a-students-guide-to-the-best-dorms-at-georgia-tech",
+    "verified_at": "2026-11-15",
+    "verified_by": "claude-research (pending human check)"
+  },
+  "caveat": "Prked is a parking company's blog, so treat it as one student-style opinion, not gospel. Talk to a current student too.",
   "official_links": [
-    { "label": "Georgia Tech Housing", "url": "https://housing.gatech.edu/" },
-    { "label": "Campus transit for residents", "url": "https://housing.gatech.edu/resources/campus-transit" }
+    {
+      "label": "Georgia Tech Housing",
+      "url": "https://housing.gatech.edu/"
+    },
+    {
+      "label": "Campus transit for residents",
+      "url": "https://housing.gatech.edu/resources/campus-transit"
+    },
+    {
+      "label": "Room and furniture info",
+      "url": "https://housing.gatech.edu/room-and-furniture"
+    }
   ]
 }

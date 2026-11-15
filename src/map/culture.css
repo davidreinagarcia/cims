@@ -47,3 +47,4 @@
   font: 700 17px/1.2 "Bradley Hand", "Segoe Print", "Marker Felt", "Comic Sans MS", cursive; transform: rotate(-2deg);
 }
 @media (prefers-reduced-motion: no-preference) { .culture-note { transition: transform 0.15s ease, width 0.15s ease; } }
+.culture-area small { display: block; font: 600 11px/1.2 "Bradley Hand", "Segoe Print", cursive; opacity: 0.75; }

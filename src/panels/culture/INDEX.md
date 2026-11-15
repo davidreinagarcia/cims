@@ -6,7 +6,7 @@ West vs East guide dialog for people deciding where to live (opens from the Cult
 
 **Files**
 
-- [`HousingGuide.tsx`](HousingGuide.tsx): West vs East guide: a friendly, student-voice dialog for people deciding where to live. Only shows rows that… · exports `HousingGuide`
-- [`housing-guide.css`](housing-guide.css): * @file Sticky-note-paper look for the West vs East dialog.
+- [`HousingGuide.tsx`](HousingGuide.tsx): West vs East guide: a friendly, student-voice dialog for people deciding where to live. Every row says who sa… · exports `HousingGuide`
+- [`housing-guide.css`](housing-guide.css): * @file Sticky-note-paper look for the West vs East dialog: yellow paper, taped title, side-by-side columns t…
 
 <!-- AUTO:END -->

@@ -64,11 +64,12 @@ function wrap(inner: HTMLElement): HTMLElement {
 }
 
 /** Hand-drawn "WEST / EAST" label; opens the guide. */
-function areaEl(label: string): HTMLElement {
+function areaEl(label: string, blurb = ""): HTMLElement {
   const el = document.createElement("button");
   el.type = "button";
   el.className = "culture-area";
-  el.textContent = `${label} campus?`;
+  el.append(`${label} campus?`);
+  if (blurb) el.append(Object.assign(document.createElement("small"), { textContent: blurb }));
   el.addEventListener("click", () => setGuide(true));
   return el;
 }
@@ -87,7 +88,7 @@ const culture: MapLayer = {
       void loadMapLibre().then((ml) => {
         if (mine !== token || !getCulture().on) return;
         for (const n of data.notes as Note[]) markers.push(new ml.Marker({ element: wrap(noteEl(n)), anchor: "bottom" }).setLngLat([n.lng, n.lat]).addTo(map));
-        for (const a of data.areas) markers.push(new ml.Marker({ element: wrap(areaEl(a.label)), anchor: "center" }).setLngLat([a.lng, a.lat]).addTo(map));
+        for (const a of data.areas) markers.push(new ml.Marker({ element: wrap(areaEl(a.label, a.blurb)), anchor: "center" }).setLngLat([a.lng, a.lat]).addTo(map));
         // Frame the whole campus top-down so every note is on screen (fitBounds proved unreliable here).
         map.easeTo({ center: [-84.3975, 33.7766], zoom: window.innerWidth < 600 ? 14.1 : 14.8, pitch: 0, bearing: 0, duration: 1200 });
       });
