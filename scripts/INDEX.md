@@ -10,5 +10,6 @@ Dev tooling run with Node (no deps): index generator, Claude hooks, data fetcher
 - [`data.mjs`](data.mjs): Validate curated GeoJSON, record verification and generate the verification checklist.
 - [`fetch-buildings.mjs`](fetch-buildings.mjs): Fetches Georgia Tech building footprints from OpenStreetMap (Overpass) into src/data/buildings.geojson (T-03).
 - [`gen-index.mjs`](gen-index.mjs): Generates folder INDEX.md files, the global INDEX.md and docs/FUNCTIONS.md from the repo. Zero deps.
+- [`import-research.mjs`](import-research.mjs): Merge Tato's Gemini research into curated draft POIs without replacing curated facts.
 
 <!-- AUTO:END -->

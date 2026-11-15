@@ -68,7 +68,13 @@
           ],
           "sat": [],
           "sun": []
-        }
+        },
+        "hours_note": "Staffed hours shown. Unstaffed bouldering (<13.5 ft) and Kilter Board slots available during CRC hours with online reservation; closed to groups Thu 12:00-14:00 & 21:30-23:30 and Fri 12:00-14:00.",
+        "buzzcard": {
+          "required": true,
+          "note": "CRC BuzzCard plus free online Climbing Wall Membership waiver required; check in at 1st floor Main Issue desk during unstaffed hours."
+        },
+        "url": "https://crc.gatech.edu/locations/"
       },
       "geometry": {
         "type": "Point",
@@ -130,7 +136,13 @@
           ],
           "sat": [],
           "sun": []
-        }
+        },
+        "hours_note": "Short Course Mon, Long Course Wed/Fri; closed for special swim meets (e.g. Nov 14-15, 2026) and CRC holiday closures.",
+        "buzzcard": {
+          "required": true,
+          "note": "Valid CRC membership and BuzzCard required for entry."
+        },
+        "url": "https://crc.gatech.edu/locations/"
       },
       "geometry": {
         "type": "Point",
@@ -194,7 +206,13 @@
               "18:00"
             ]
           ]
-        }
+        },
+        "hours_note": "Lap-lane schedule shown (Sat Nov 14, 2026 LP lanes open 13:00-18:00 due to Swim Atlanta meet). Crawford Rec Area & Water Slide operates Mon-Fri 16:00-20:00, Sat 10:00-18:00, Sun 12:00-18:00; closes at least 1 hr before CRC.",
+        "buzzcard": {
+          "required": true,
+          "note": "Valid CRC membership and BuzzCard required for entry."
+        },
+        "url": "https://crc.gatech.edu/locations/"
       },
       "geometry": {
         "type": "Point",
@@ -303,6 +321,77 @@
           -84.4036909,
           33.7768174
         ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.39433,
+          33.780644
+        ]
+      },
+      "properties": {
+        "id": "ken-byers-tennis-complex",
+        "name": "Ken Byers Tennis Complex",
+        "category": "exercise",
+        "status": "draft",
+        "aliases": [
+          "Byers Tennis Complex"
+        ],
+        "description": "Georgia Tech Athletics tennis courts open to students during designated Fall 2026 recreational hours.",
+        "building": "Ken Byers Tennis Complex",
+        "hours": {
+          "mon": [
+            [
+              "17:00",
+              "22:00"
+            ]
+          ],
+          "tue": [
+            [
+              "17:00",
+              "22:00"
+            ]
+          ],
+          "wed": [
+            [
+              "17:00",
+              "22:00"
+            ]
+          ],
+          "thu": [
+            [
+              "17:00",
+              "22:00"
+            ]
+          ],
+          "fri": [
+            [
+              "17:00",
+              "22:00"
+            ]
+          ],
+          "sat": [
+            [
+              "10:00",
+              "14:00"
+            ]
+          ],
+          "sun": []
+        },
+        "hours_note": "Explicit Fall 2026 student recreational hours; closes during inclement weather.",
+        "buzzcard": {
+          "required": true,
+          "note": "Active student BuzzCard required; first-come, first-served with no reservations."
+        },
+        "url": "https://crc.gatech.edu/locations/",
+        "source_url": "https://crc.gatech.edu/locations/",
+        "confidence": "high",
+        "building_id": "ken-byers-tennis-complex",
+        "coord_source": "OSM way 42789686 (David research)",
+        "coord_precision": "exact"
       }
     }
   ]
