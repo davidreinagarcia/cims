@@ -3,7 +3,6 @@ import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { formatMinutes, routeStatuses, type RouteStatus } from "../../lib/busPlanner";
 import { highlightRoutes } from "../../lib/transitHighlight";
 import { stoppedText } from "../../lib/busMotion";
-import { useGpsFix } from "../../lib/useGpsFix";
 import { useLiveBuses, useTransitNetwork } from "../../lib/useTransit";
 import { TRACKER_URL } from "../../map/transitLive";
 import stingerette from "../../data/stingerette.json";
@@ -44,13 +43,12 @@ function RouteRow({ status, pressed, onPress }: { status: RouteStatus; pressed: 
   </li>;
 }
 
-/** Lists every route for the "which buses are around" view; `here` is the From place, else the GPS fix if allowed. */
+/** Lists every route for the "which buses are around" view; `here` is where you are (resolved by the panel), or null while unknown. */
 export default function BusList({ here }: { here: [number, number] | null }) {
   const { network, failed } = useTransitNetwork();
   const live = useLiveBuses(network);
-  const gps = useGpsFix(!here);
   const [selected, setSelected] = useState<number | null>(null);
-  const at: [number, number] | null = here ?? (gps.fix ? [gps.fix.lng, gps.fix.lat] : null);
+  const at = here;
   const statuses = useMemo(() => (network ? routeStatuses(network, live.buses, at) : []),
     // Coordinates, not the array: a fresh [lng, lat] each render must not re-sort.
     [network, live.buses, at?.[0], at?.[1]]);
@@ -67,10 +65,6 @@ export default function BusList({ here }: { here: [number, number] | null }) {
 
   return <div className="bus-options">
     <p className="bus-options__walk">Pick where you're going above to see only the buses that take you there.</p>
-    {!at && gps.status !== "locating" && <p className="cims-muted bus-options__source">
-      Allow your location to see the next bus at your nearest stop.{" "}
-      {gps.status !== "ok" && <button type="button" className="cims-btn cims-btn--small" onClick={gps.request}>Use my location</button>}
-    </p>}
     <h3 className="bus-list__head cims-caps">Running now</h3>
     {running.length ? <ul className="bus-options__list" aria-label="Running routes">{running.map(row)}</ul>
       : <p className="cims-muted">{live.failed ? "Live buses are unavailable right now." : live.updatedAt ? "No Stinger buses are running right now." : "Checking live buses..."}</p>}

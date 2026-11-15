@@ -30,3 +30,8 @@
 .bus-ondemand__status { color: var(--navy); }
 .bus-ondemand--closed .bus-ondemand__status { color: var(--ink-muted); }
 .bus-option__alert { font-size: var(--fs-sm); font-weight: 600; color: var(--route); }
+.buses__from { display: grid; gap: var(--s2); }
+.buses__origin { margin: 0; display: flex; align-items: baseline; gap: var(--s2); flex-wrap: wrap; font-size: var(--fs-sm); }
+.buses__hint { margin: 0; font-size: var(--fs-sm); color: var(--ink-muted); }
+.buses__link { padding: 0; border: 0; background: none; color: var(--navy); font: inherit; text-decoration: underline; cursor: pointer; min-height: var(--tap); }
+.buses__origin .buses__link { margin-left: auto; }
