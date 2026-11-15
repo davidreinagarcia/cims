@@ -5,6 +5,7 @@ import { locationDetails } from "../../lib/buildingPlaces";
 import type { MapLayer } from "../types";
 import { isVisible } from "../layerFilters";
 import { addPins, pinImageId } from "../pins";
+import { SUBTYPE_GLYPHS } from "../../components/Glyph";
 import { LAYER_CATALOG } from "../../lib/layerCatalog";
 import { places, type PlaceCollection } from "../../lib/places";
 import "./pois.css";
@@ -22,14 +23,18 @@ const COUNT = "places-cluster-count";
 const CLUSTER_MAX_ZOOM = 22;
 const UNCLUSTERED: ExpressionSpecification = ["!", ["has", "point_count"]];
 
-/** icon-image expression: the category's pin image, or the navy base pin for categories nobody toggles. */
+/** icon-image expression: the sub-type's pin (coffee, dining hall) or the category's pin image, or the navy base pin for categories nobody toggles. */
 function iconFor(selected: boolean): ExpressionSpecification {
+  const own = LAYER_CATALOG.flatMap((c) => c.subtypes.filter((sub) => SUBTYPE_GLYPHS[sub.id]).map((sub) => [c.id, sub.id]));
+  const bySubtype = own.flatMap(([category, sub]) => [
+    ["all", ["==", ["get", "category"], category], ["==", ["get", "subtype"], sub]], pinImageId(`${category}-${sub}`, selected)]);
   return [
+    "case", ...bySubtype, [
     "match",
     ["get", "category"],
     ...LAYER_CATALOG.flatMap((c) => [c.id, pinImageId(c.id, selected)]),
     pinImageId("base", selected),
-  ] as unknown as ExpressionSpecification;
+  ]] as unknown as ExpressionSpecification;
 }
 
 const labelLayout: SymbolLayerSpecification["layout"] = {

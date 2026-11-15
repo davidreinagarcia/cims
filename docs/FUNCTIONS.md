@@ -158,7 +158,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Session` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional account selected on this device, with no authentication.
 - `Persona` [src/auth/types.ts:23](../src/auth/types.ts#L23): Fictional identity offered by the demo account picker.
 - `AuthAdapter` [src/auth/types.ts:32](../src/auth/types.ts#L32): Adapter boundary keeps sign-in implementation out of screens.
-- `GlyphId` [src/components/Glyph.tsx:19](../src/components/Glyph.tsx#L19): Known glyph ids: the layer categories plus "building".
+- `GlyphId` [src/components/Glyph.tsx:30](../src/components/Glyph.tsx#L30): Known glyph ids: the layer categories plus "building".
 - `PlanRoute` [src/indoor/FloorPlan.tsx:129](../src/indoor/FloorPlan.tsx#L129): Everything the plan needs to draw a route: the route, the legs on this level and which step is highlighted.
 - `RoutableIndoorRoom` [src/indoor/availability.ts:13](../src/indoor/availability.ts#L13): A routable (schematic) entry from `registry.ts#indoorRooms`, narrowed from the `IndoorRoom`
 - `BookableRoom` [src/indoor/availability.ts:21](../src/indoor/availability.ts#L21): A room with bookable demo amenities (T-60 reservations), with a ready-to-render display label.
@@ -291,7 +291,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component.
 - `AlertBanner({ banners, onDismiss })` [src/alerts/AlertBanner.tsx:14](../src/alerts/AlertBanner.tsx#L14): Stack of banners pinned to the top of the app; publishes its height as `--alert-h` so the shell makes room.
 - `TipNotifier({ onOpen })` [src/alerts/TipNotifier.tsx:21](../src/alerts/TipNotifier.tsx#L21): Props: `onOpen` is called with the tip when the toast is pressed (open the console / select the tip).
-- `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:27](../src/components/Glyph.tsx#L27): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
+- `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:38](../src/components/Glyph.tsx#L38): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:16](../src/components/MapView.tsx#L16): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
 - `BuildingView()` [src/indoor/BuildingView.tsx:34](../src/indoor/BuildingView.tsx#L34): Opens registered buildings and resolves room selections straight into a routed building screen.
@@ -304,7 +304,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:21](../src/panels/building-card/BuildingCard.tsx#L21): Shared building facts and actions for the sidebar and expanded indoor screen.
 - `BuildingLink({ coordinates, buildingId, attached, floorOrRoom })` [src/panels/building-card/BuildingLink.tsx:7](../src/panels/building-card/BuildingLink.tsx#L7): Renders nothing when the place is not inside a known footprint (or the footprints are not loaded).
 - `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:12](../src/panels/building-card/BuildingPreview.tsx#L12): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
-- `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:11](../src/panels/building-card/InsidePlaces.tsx#L11): Show selectable places grouped by category for a footprint or a legacy seed building.
+- `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:12](../src/panels/building-card/InsidePlaces.tsx#L12): Show selectable places grouped by category for a footprint or a legacy seed building.
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:78](../src/panels/bulletin/BulletinBoard.tsx#L78): Modal cork board with shared interests; the shell owns its URL, type and return focus.
 - `BusList({ here }, number] | null })` [src/panels/buses/BusList.tsx:48](../src/panels/buses/BusList.tsx#L48): Lists every route for the "which buses are around" view; `here` is the From place, else the GPS fix if allowe…
@@ -362,7 +362,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `supabaseAuthAdapter` [src/auth/supabaseAdapter.ts:8](../src/auth/supabaseAdapter.ts#L8): Real Supabase sessions for the demo accounts, so every row a person writes belongs to a real account with a s…
 - `STAFF_ROLES` [src/auth/types.ts:7](../src/auth/types.ts#L7): Roles that work the report queue.
 - `staffTeam(role)` [src/auth/types.ts:10](../src/auth/types.ts#L10): The report team a staff role works for; moderators see every team (null).
-- `glyphPath(id)` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
+- `SUBTYPE_GLYPHS` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): Sub-types that get their own pictogram instead of their category's.
+- `placeGlyph(category, subtype?)` [src/components/Glyph.tsx:25](../src/components/Glyph.tsx#L25): Glyph id for a place: its sub-type's pictogram when it has one, else its category's.
+- `glyphPath(id)` [src/components/Glyph.tsx:33](../src/components/Glyph.tsx#L33): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
 - `CAMPUS` [src/config.ts:3](../src/config.ts#L3): Central place for map settings. Change here, not inside components.
 - `MAP_LIGHT` [src/config.ts:18](../src/config.ts#L18): Fixed light for the extruded buildings: anchored to the map so wall shading doesn't change as you rotate.
 - `BASEMAP_TILEJSON` [src/config.ts:21](../src/config.ts#L21): Vector basemap (ADR-0006 step 2): OpenFreeMap, free and keyless, OpenMapTiles schema.
@@ -429,7 +431,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `HATCH_GOLD` [src/map/patterns/index.ts:7](../src/map/patterns/index.ts#L7): Image id of the gold hatch (selected building walls).
 - `addHatchPatterns(map)` [src/map/patterns/index.ts:38](../src/map/patterns/index.ts#L38): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
-- `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
+- `addPins(map)` [src/map/pins.ts:53](../src/map/pins.ts#L53): Registers one normal and one selected (gold) pin per layer category and per sub-type with its own pictogram (…
 - `TRACKER_URL` [src/map/transitLive.ts:5](../src/map/transitLive.ts#L5): The official tracker page: where "live tracking" links point.
 - `fetchBuses(routeNames, string>, signal?)` [src/map/transitLive.ts:25](../src/map/transitLive.ts#L25): Fetches fresh buses on known routes; throws on a failed tracker or invalid vehicle list.
 - `formatWhen(iso)` [src/panels/report/ReportSummary.tsx:7](../src/panels/report/ReportSummary.tsx#L7): Formats an ISO timestamp for display in the viewer's locale.
