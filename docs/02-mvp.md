@@ -54,7 +54,7 @@ Feature IDs (`F-xx`) are used across the PRD, roadmap and risk register. Origins
 | ID | Feature | Origin |
 |----|---------|--------|
 | F-19 | Locker reservation | Also system to reserve a locker |
-| F-20 | Unified booking (book inside CIMS across systems) and real ticket integration with Facilities/IT | P2 + P3 prompts |
+| F-20 | ~~Unified booking (book inside CIMS across systems)~~ and real ticket integration with Facilities/IT | P2 + P3 prompts |
 | F-12 | Stories / feed, each story tappable to its map location | Stories/feed; Video stories |
 | F-13 | Live activity heat map (Waze-style) + study-space density prediction model | Heat map of campus activity; "after data collection complete with a model" |
 | F-14 | Indoor path to the selected room | Selected classroom shows a path |
@@ -62,9 +62,16 @@ Feature IDs (`F-xx`) are used across the PRD, roadmap and risk register. Origins
 | F-16 | Street view / VR tour; East vs. West campus guide for prospective & international students | Street view/possible VR |
 | F-17 | Dining hall capacity & daily food reviews | capacity / daily food review |
 
+> **Team, 2026-11-14:** F-20 "Unified booking" promoted from Could to an in-scope **prototype**, Kendeda and
+> CULC only (T-60) — see the "Won't have" bullet below, now struck through for the same reason.
+
 ### Won't have (this hackathon)
 
-- Real bookings or real ticket submission into Facilities/IT systems (we deep-link / simulate routing)
+- ~~Real bookings~~ or real ticket submission into Facilities/IT systems (we deep-link / simulate routing).
+  **Team, 2026-11-14:** real bookings *inside* CIMS were promoted to an in-scope prototype for Kendeda and
+  CULC only (F-20, T-60) — booking still doesn't sync across devices (no real backend, T-22 undecided) and
+  the weekly schedule stays seeded "Demo data", but the reserve/renew/cancel flow itself is real and goes
+  through the T-25 sign-in gate. Ticket submission to Facilities/IT is still out of scope (T-23 stays simulated).
 - Payments or **real** GT SSO integration (a simulated sign-in is in scope: F-21)
 - Native iOS/Android apps
 - Full campus indoor coverage

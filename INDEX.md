@@ -36,6 +36,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`src/components/`](src/components/INDEX.md): React components shared by the shell: map view, glyphs, offline notice. The layout itself lives in src/shell/.
   - [`src/data/`](src/data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
     - [`src/data/indoor/`](src/data/indoor/INDEX.md): Indoor models per building: schematic levels, rooms, walking graph and entrances.
+    - [`src/data/mocks/`](src/data/mocks/INDEX.md): Fictional fixtures layered on top of real building data, always labeled "Demo data" in the UI.
     - [`src/data/pois/`](src/data/pois/INDEX.md): Curated points of interest, one file per category (drafts by Codex pending verification, plus demo events). H…
   - [`src/indoor/`](src/indoor/INDEX.md): Building screen, vector schematic renderer and indoor contracts shared by lanes A and B.
   - [`src/lib/`](src/lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
@@ -48,6 +49,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
     - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
     - [`src/panels/layers/`](src/panels/layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
+    - [`src/panels/rooms/`](src/panels/rooms/INDEX.md): Reserve a room (F-11/F-20): pick a Kendeda or CULC building (or jump to favorited rooms), book/renew/cancel a…
     - [`src/panels/search/`](src/panels/search/INDEX.md): Search box and list of places (rooms and buildings join in T-14).
   - [`src/pwa/`](src/pwa/INDEX.md): Offline support: the service worker template. vite.config.ts fills in the precache list and emits it as /sw.j…
   - [`src/shell/`](src/shell/INDEX.md): Map-first app shell (docs/design/APP-SHELL.md): rail / tab bar, search pill, chips, floating card / bottom sh…

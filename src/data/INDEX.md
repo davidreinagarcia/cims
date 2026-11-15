@@ -7,6 +7,7 @@ Curated campus data (GeoJSON/JSON). Every record needs `source_url` + `verified_
 **Folders**
 
 - [`indoor/`](indoor/INDEX.md): Indoor models per building: schematic levels, rooms, walking graph and entrances.
+- [`mocks/`](mocks/INDEX.md): Fictional fixtures layered on top of real building data, always labeled "Demo data" in the UI.
 - [`pois/`](pois/INDEX.md): Curated points of interest, one file per category (drafts by Codex pending verification, plus demo events). H…
 
 **Files**

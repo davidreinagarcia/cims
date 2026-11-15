@@ -1,0 +1,78 @@
+{
+  "_note": "Demo data for the CULC room finder/reservation flow (F-11/F-20, T-60). `capacity` on every room below is copied as-is from the real, sourced schematic in src/data/indoor/culc.json (ultimately from docs/research/culc-room-inventory.json) -- never invented. `features`, `bookable`, `owner_system`, `policy` and the weekly busy `slots` ARE fictional, same convention as kendeda-room-finder-demo.json: there is no real GT availability feed yet (PRD Q7). Room ids match registry.ts#indoorRooms() ('buildingId:spaceId').",
+  "demo": true,
+  "amenities": [
+    {
+      "room": "g-wayne-clough-undergraduate-learning-commons:culc-242",
+      "capacity": 6,
+      "features": ["whiteboard", "outlets"],
+      "bookable": true,
+      "owner_system": "Library Group Study (demo)",
+      "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead.",
+      "book_url": "https://example.org/cims-room-finder-demo/culc/242"
+    },
+    {
+      "room": "g-wayne-clough-undergraduate-learning-commons:culc-244",
+      "capacity": 6,
+      "features": ["whiteboard", "outlets", "quiet"],
+      "bookable": true,
+      "owner_system": "Library Group Study (demo)",
+      "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead.",
+      "book_url": "https://example.org/cims-room-finder-demo/culc/244"
+    },
+    {
+      "room": "g-wayne-clough-undergraduate-learning-commons:culc-315",
+      "capacity": 6,
+      "features": ["whiteboard", "display", "outlets"],
+      "bookable": true,
+      "owner_system": "Library Group Study (demo)",
+      "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead.",
+      "book_url": "https://example.org/cims-room-finder-demo/culc/315"
+    },
+    {
+      "room": "g-wayne-clough-undergraduate-learning-commons:culc-441",
+      "capacity": 8,
+      "features": ["whiteboard", "display", "outlets", "accessible"],
+      "bookable": true,
+      "owner_system": "Library Group Study (demo)",
+      "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead.",
+      "book_url": "https://example.org/cims-room-finder-demo/culc/441"
+    },
+    {
+      "room": "g-wayne-clough-undergraduate-learning-commons:culc-450",
+      "capacity": 6,
+      "features": ["display", "outlets"],
+      "bookable": true,
+      "owner_system": "Library Group Study (demo)",
+      "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead.",
+      "book_url": "https://example.org/cims-room-finder-demo/culc/450"
+    },
+    {
+      "room": "g-wayne-clough-undergraduate-learning-commons:culc-455",
+      "capacity": 9,
+      "features": ["whiteboard", "display", "outlets", "accessible"],
+      "bookable": true,
+      "owner_system": "Library Group Study (demo)",
+      "policy": "Demo policy: any GT student, up to 2 hours, book up to 7 days ahead.",
+      "book_url": "https://example.org/cims-room-finder-demo/culc/455"
+    },
+    {
+      "room": "g-wayne-clough-undergraduate-learning-commons:culc-469",
+      "capacity": 20,
+      "features": ["whiteboard", "display", "outlets", "accessible"],
+      "bookable": true,
+      "owner_system": "GT Scheduling (demo)",
+      "policy": "Demo policy: registered student orgs and staff only, up to 2 hours, book up to 14 days ahead.",
+      "book_url": "https://example.org/cims-room-finder-demo/culc/469"
+    }
+  ],
+  "slots": [
+    { "room": "g-wayne-clough-undergraduate-learning-commons:culc-242", "weekday": "mon", "start": "13:00", "end": "14:00" },
+    { "room": "g-wayne-clough-undergraduate-learning-commons:culc-242", "weekday": "wed", "start": "13:00", "end": "14:00" },
+    { "room": "g-wayne-clough-undergraduate-learning-commons:culc-244", "weekday": "tue", "start": "15:30", "end": "16:30" },
+    { "room": "g-wayne-clough-undergraduate-learning-commons:culc-244", "weekday": "thu", "start": "15:30", "end": "16:30" },
+    { "room": "g-wayne-clough-undergraduate-learning-commons:culc-315", "weekday": "mon", "start": "10:00", "end": "11:00" },
+    { "room": "g-wayne-clough-undergraduate-learning-commons:culc-441", "weekday": "fri", "start": "09:00", "end": "10:30" },
+    { "room": "g-wayne-clough-undergraduate-learning-commons:culc-469", "weekday": "wed", "start": "17:00", "end": "19:00" }
+  ]
+}
