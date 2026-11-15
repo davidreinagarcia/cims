@@ -25,8 +25,9 @@ function zoomAt(camera: Camera, factor: number, point: { x: number; y: number } 
 function SpaceLabel({ space }: { space: IndoorSpace }) {
   const b = bounds(space.shape);
   // Conservatively fit the whole label; tiny spaces remain available in the directory.
-  const words = (space.type === "void" ? "open to below" : space.name).toUpperCase().split(" ");
-  const size = Math.min(13, (b.w - 14) / (Math.max(...words.map((word) => word.length)) * 0.65), (b.h - 12) / (words.length * 1.25));
+  // Numbered rooms show just the number on the plan; the full name lives in the directory and card.
+  const words = (space.type === "void" ? "open to below" : space.room ?? space.name).toUpperCase().split(" ");
+  const size = Math.min(space.room ? 26 : 13, (b.w - 14) / (Math.max(...words.map((word) => word.length)) * 0.65), (b.h - 12) / (words.length * 1.25));
   if (size < 8 || space.shape.kind === "circle") return null;
   return <text className="floor-plan__label" x={b.x + b.w / 2} y={b.y + b.h / 2 - (words.length - 1) * size * 0.625} fontSize={size} textAnchor="middle" dominantBaseline="central" aria-hidden="true">
     {words.map((word, i) => <tspan key={i} x={b.x + b.w / 2} dy={i ? size * 1.25 : 0}>{word}</tspan>)}

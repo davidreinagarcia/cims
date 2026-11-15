@@ -17,6 +17,9 @@ export interface IndoorSpace {
   source: string;
   note?: string;
   door?: string;
+  /** Published room number, when this space is a numbered room. */
+  room?: string;
+  capacity?: number | null;
 }
 
 /** A level either has vector geometry or an explicit unavailable note. */

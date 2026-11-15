@@ -1,1087 +1,4163 @@
 {
-  "description": "Clough Undergraduate Learning Commons room finder from published facts, without floor plan geometry.",
-  "building_id": "g-wayne-clough-undergraduate-learning-commons",
-  "title": "G. Wayne Clough Undergraduate Learning Commons",
-  "status": "rooms-only",
-  "credit": "Room numbers, levels and capacities as published by Georgia Tech (Registrar Spring 27 centrally scheduled room list, A/V Services, Library reservation pages). No floor plan is shown: no drawing with a licence we can use was found.",
-  "source_url": "",
-  "levels": [
+ "description": "Clough Undergraduate Learning Commons schematic floor plans, levels 1 to 5, redrawn from the Georgia Tech Library floor maps.",
+ "building_id": "g-wayne-clough-undergraduate-learning-commons",
+ "title": "G. Wayne Clough Undergraduate Learning Commons",
+ "status": "schematic",
+ "credit": "Layout redrawn by hand from the Georgia Tech Library \"Clough Floor Maps\" (2019); room numbers, levels and capacities from the Registrar Spring 27 room list. Schematic and approximate, not to scale.",
+ "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+ "levels": [
+  {
+   "id": "1",
+   "label": "1",
+   "name": "Level 1",
+   "available": true,
+   "viewBox": [
+    10,
+    150,
+    890,
+    1450
+   ],
+   "outline": "M136 268 L268 268 L268 1032 L382 1032 L670 1032 L670 1480 L136 1480 L136 944 L20 944 L20 340 L136 340 Z",
+   "spaces": [
     {
-      "id": "1",
-      "label": "1",
-      "name": "Level 1",
-      "available": false,
-      "note": "No plan drawn yet"
+     "id": "culc-152",
+     "name": "152 Distance Learning Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "polygon",
+      "points": "276,188 660,188 660,530 362,530 362,454 276,454"
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d1-152",
+     "room": "152",
+     "capacity": 305
     },
     {
-      "id": "2",
-      "label": "2",
-      "name": "Level 2",
-      "available": false,
-      "note": "No plan drawn yet"
+     "id": "culc-150",
+     "name": "150 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 276,
+      "y": 454,
+      "w": 86,
+      "h": 76
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d1-150",
+     "room": "150",
+     "capacity": 12
     },
     {
-      "id": "3",
-      "label": "3",
-      "name": "Level 3",
-      "available": false,
-      "note": "No plan drawn yet"
+     "id": "culc-146",
+     "name": "146 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 276,
+      "y": 552,
+      "w": 86,
+      "h": 74
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d1-146",
+     "room": "146",
+     "capacity": 12
     },
     {
-      "id": "4",
-      "label": "4",
-      "name": "Level 4",
-      "available": false,
-      "note": "No plan drawn yet"
+     "id": "culc-144",
+     "name": "144 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "polygon",
+      "points": "362,550 660,550 660,892 276,892 276,626 362,626"
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d1-144",
+     "room": "144",
+     "capacity": 305
     },
     {
-      "id": "5",
-      "label": "5",
-      "name": "Level 5",
-      "available": false,
-      "note": "No plan drawn yet"
+     "id": "culc-131",
+     "name": "131 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 20,
+      "y": 1058,
+      "w": 104,
+      "h": 144
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d1-131",
+     "room": "131",
+     "capacity": 30
+    },
+    {
+     "id": "culc-129",
+     "name": "129 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 20,
+      "y": 1206,
+      "w": 104,
+      "h": 198
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d1-129",
+     "room": "129",
+     "capacity": 36
+    },
+    {
+     "id": "culc-127",
+     "name": "127 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 20,
+      "y": 1418,
+      "w": 102,
+      "h": 176
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d1-127",
+     "room": "127",
+     "capacity": 32
+    },
+    {
+     "id": "culc-125",
+     "name": "125 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 142,
+      "y": 1486,
+      "w": 234,
+      "h": 108
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d1-125",
+     "room": "125",
+     "capacity": 30
+    },
+    {
+     "id": "culc-123",
+     "name": "123 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 378,
+      "y": 1486,
+      "w": 234,
+      "h": 108
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d1-123",
+     "room": "123",
+     "capacity": 30
+    },
+    {
+     "id": "culc-102",
+     "name": "102 Distance Learning Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 288,
+      "y": 1192,
+      "w": 234,
+      "h": 148
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d1-102",
+     "room": "102",
+     "capacity": 70
+    },
+    {
+     "id": "culc-main-atrium",
+     "name": "Main Atrium",
+     "type": "circulation",
+     "shape": {
+      "kind": "polygon",
+      "points": "136,268 268,268 268,944 20,944 20,340 136,340"
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library)",
+     "door": "d1-main-atrium"
+    },
+    {
+     "id": "culc-elevator-1",
+     "name": "Elevator",
+     "type": "core",
+     "shape": {
+      "kind": "rect",
+      "x": 396,
+      "y": 946,
+      "w": 82,
+      "h": 78
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library)"
     }
+   ]
+  },
+  {
+   "id": "2",
+   "label": "2",
+   "name": "Level 2",
+   "available": true,
+   "viewBox": [
+    10,
+    150,
+    890,
+    1450
+   ],
+   "outline": "M164 180 L322 180 L322 260 L524 260 L524 180 L854 180 L854 1592 L35 1592 L35 892 L164 892 Z",
+   "spaces": [
+    {
+     "id": "culc-273",
+     "name": "273 Academic Services",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 686,
+      "y": 228,
+      "w": 108,
+      "h": 266
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-273",
+     "room": "273"
+    },
+    {
+     "id": "culc-277",
+     "name": "277 Academic Services",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 686,
+      "y": 500,
+      "w": 108,
+      "h": 102
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-277",
+     "room": "277"
+    },
+    {
+     "id": "culc-283",
+     "name": "283 Academic Services",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 686,
+      "y": 608,
+      "w": 108,
+      "h": 238
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-283",
+     "room": "283"
+    },
+    {
+     "id": "culc-285",
+     "name": "Room 285",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 688,
+      "y": 858,
+      "w": 106,
+      "h": 46
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-285",
+     "room": "285"
+    },
+    {
+     "id": "culc-205",
+     "name": "205 Academic Services",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 688,
+      "y": 912,
+      "w": 106,
+      "h": 310
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-205",
+     "room": "205"
+    },
+    {
+     "id": "culc-215",
+     "name": "215 Technology Support",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 688,
+      "y": 1230,
+      "w": 106,
+      "h": 270
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-215",
+     "room": "215"
+    },
+    {
+     "id": "culc-262",
+     "name": "262 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 328,
+      "y": 270,
+      "w": 88,
+      "h": 107
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-262",
+     "room": "262",
+     "capacity": 36
+    },
+    {
+     "id": "culc-272",
+     "name": "272 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 421,
+      "y": 270,
+      "w": 96,
+      "h": 109
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-272",
+     "room": "272",
+     "capacity": 32
+    },
+    {
+     "id": "culc-274",
+     "name": "Room 274",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 421,
+      "y": 384,
+      "w": 96,
+      "h": 110
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-274",
+     "room": "274"
+    },
+    {
+     "id": "culc-278",
+     "name": "278 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 421,
+      "y": 538,
+      "w": 96,
+      "h": 108
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-278",
+     "room": "278",
+     "capacity": 30
+    },
+    {
+     "id": "culc-280",
+     "name": "280 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 421,
+      "y": 652,
+      "w": 96,
+      "h": 110
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-280",
+     "room": "280",
+     "capacity": 27
+    },
+    {
+     "id": "culc-242",
+     "name": "242 Study Room",
+     "type": "study",
+     "shape": {
+      "kind": "rect",
+      "x": 328,
+      "y": 556,
+      "w": 88,
+      "h": 27
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-242",
+     "room": "242",
+     "capacity": 6
+    },
+    {
+     "id": "culc-244",
+     "name": "244 Study Room",
+     "type": "study",
+     "shape": {
+      "kind": "rect",
+      "x": 328,
+      "y": 583,
+      "w": 88,
+      "h": 31
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-244",
+     "room": "244",
+     "capacity": 6
+    },
+    {
+     "id": "culc-246",
+     "name": "246 Study Room",
+     "type": "study",
+     "shape": {
+      "kind": "rect",
+      "x": 328,
+      "y": 614,
+      "w": 88,
+      "h": 30
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-246",
+     "room": "246",
+     "capacity": 6
+    },
+    {
+     "id": "culc-248",
+     "name": "248 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 328,
+      "y": 644,
+      "w": 88,
+      "h": 30
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-248",
+     "room": "248",
+     "capacity": 8
+    },
+    {
+     "id": "culc-250",
+     "name": "250 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 328,
+      "y": 674,
+      "w": 88,
+      "h": 32
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-250",
+     "room": "250",
+     "capacity": 8
+    },
+    {
+     "id": "culc-252",
+     "name": "252 Study Room",
+     "type": "study",
+     "shape": {
+      "kind": "rect",
+      "x": 328,
+      "y": 706,
+      "w": 88,
+      "h": 32
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d2-252",
+     "room": "252",
+     "capacity": 6
+    },
+    {
+     "id": "culc-elevator-2",
+     "name": "Elevator",
+     "type": "core",
+     "shape": {
+      "kind": "rect",
+      "x": 400,
+      "y": 1004,
+      "w": 82,
+      "h": 80
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library)"
+    },
+    {
+     "id": "culc-stairs-2",
+     "name": "Stairs",
+     "type": "core",
+     "shape": {
+      "kind": "rect",
+      "x": 274,
+      "y": 1130,
+      "w": 258,
+      "h": 184
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library)"
+    }
+   ]
+  },
+  {
+   "id": "3",
+   "label": "3",
+   "name": "Level 3",
+   "available": true,
+   "viewBox": [
+    10,
+    150,
+    890,
+    1450
+   ],
+   "outline": "M178 257 L318 257 L318 400 L496 400 L496 324 L636 324 L636 1480 L284 1480 L284 1584 L88 1584 L88 1080 L178 1080 Z",
+   "spaces": [
+    {
+     "id": "culc-373",
+     "name": "373 Class Laboratory - Dry",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 642,
+      "y": 353,
+      "w": 86,
+      "h": 117
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-373",
+     "room": "373",
+     "capacity": 30
+    },
+    {
+     "id": "culc-375",
+     "name": "375 Class Laboratory - Dry",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 642,
+      "y": 484,
+      "w": 86,
+      "h": 114
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-375",
+     "room": "375",
+     "capacity": 30
+    },
+    {
+     "id": "culc-381",
+     "name": "Room 381",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 642,
+      "y": 646,
+      "w": 86,
+      "h": 82
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-381",
+     "room": "381"
+    },
+    {
+     "id": "culc-383",
+     "name": "383 Class Laboratory - Dry",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 642,
+      "y": 738,
+      "w": 86,
+      "h": 110
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-383",
+     "room": "383",
+     "capacity": 30
+    },
+    {
+     "id": "culc-385",
+     "name": "Room 385",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 638,
+      "y": 912,
+      "w": 96,
+      "h": 34
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-385",
+     "room": "385"
+    },
+    {
+     "id": "culc-387",
+     "name": "387 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 642,
+      "y": 952,
+      "w": 86,
+      "h": 118
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-387",
+     "room": "387",
+     "capacity": 30
+    },
+    {
+     "id": "culc-305",
+     "name": "Room 305",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 642,
+      "y": 1148,
+      "w": 44,
+      "h": 28
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-305",
+     "room": "305"
+    },
+    {
+     "id": "culc-307",
+     "name": "Room 307",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 690,
+      "y": 1148,
+      "w": 44,
+      "h": 28
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-307",
+     "room": "307"
+    },
+    {
+     "id": "culc-367",
+     "name": "367 Meeting Space",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 84,
+      "y": 257,
+      "w": 90,
+      "h": 57
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-367",
+     "room": "367"
+    },
+    {
+     "id": "culc-365",
+     "name": "Room 365",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 84,
+      "y": 320,
+      "w": 90,
+      "h": 98
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-365",
+     "room": "365"
+    },
+    {
+     "id": "culc-363",
+     "name": "363 Lab Space",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 86,
+      "y": 424,
+      "w": 86,
+      "h": 56
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-363",
+     "room": "363"
+    },
+    {
+     "id": "culc-357",
+     "name": "357 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 86,
+      "y": 488,
+      "w": 86,
+      "h": 126
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-357",
+     "room": "357",
+     "capacity": 24
+    },
+    {
+     "id": "culc-341",
+     "name": "341 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 86,
+      "y": 740,
+      "w": 86,
+      "h": 126
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-341",
+     "room": "341",
+     "capacity": 24
+    },
+    {
+     "id": "culc-335",
+     "name": "335 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 86,
+      "y": 922,
+      "w": 86,
+      "h": 120
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-335",
+     "room": "335",
+     "capacity": 24
+    },
+    {
+     "id": "culc-331",
+     "name": "Room 331",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 84,
+      "y": 1050,
+      "w": 44,
+      "h": 30
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-331",
+     "room": "331"
+    },
+    {
+     "id": "culc-333",
+     "name": "Room 333",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 132,
+      "y": 1050,
+      "w": 44,
+      "h": 30
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-333",
+     "room": "333"
+    },
+    {
+     "id": "culc-362",
+     "name": "362 Class Laboratory - Dry",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 325,
+      "y": 408,
+      "w": 79,
+      "h": 90
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-362",
+     "room": "362",
+     "capacity": 30
+    },
+    {
+     "id": "culc-372",
+     "name": "372 Class Laboratory - Dry",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 410,
+      "y": 406,
+      "w": 78,
+      "h": 92
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-372",
+     "room": "372",
+     "capacity": 30
+    },
+    {
+     "id": "culc-346",
+     "name": "346 Class Laboratory - Dry",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 325,
+      "y": 658,
+      "w": 79,
+      "h": 112
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-346",
+     "room": "346",
+     "capacity": 30
+    },
+    {
+     "id": "culc-382",
+     "name": "382 Class Laboratory - Dry",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 408,
+      "y": 658,
+      "w": 82,
+      "h": 156
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-382",
+     "room": "382",
+     "capacity": 30
+    },
+    {
+     "id": "culc-344",
+     "name": "344 Study Room",
+     "type": "study",
+     "shape": {
+      "kind": "rect",
+      "x": 325,
+      "y": 780,
+      "w": 39,
+      "h": 34
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-344",
+     "room": "344",
+     "capacity": 6
+    },
+    {
+     "id": "culc-342",
+     "name": "342 Podcast Room",
+     "type": "study",
+     "shape": {
+      "kind": "rect",
+      "x": 366,
+      "y": 780,
+      "w": 36,
+      "h": 34
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-342",
+     "room": "342",
+     "capacity": 6
+    },
+    {
+     "id": "culc-315",
+     "name": "315 Study Room",
+     "type": "study",
+     "shape": {
+      "kind": "rect",
+      "x": 634,
+      "y": 1348,
+      "w": 52,
+      "h": 62
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-315",
+     "room": "315",
+     "capacity": 6
+    },
+    {
+     "id": "culc-317",
+     "name": "317 Study Room",
+     "type": "study",
+     "shape": {
+      "kind": "rect",
+      "x": 634,
+      "y": 1412,
+      "w": 52,
+      "h": 60
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-317",
+     "room": "317",
+     "capacity": 6
+    },
+    {
+     "id": "culc-325",
+     "name": "325 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 303,
+      "y": 1442,
+      "w": 139,
+      "h": 100
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-325",
+     "room": "325",
+     "capacity": 30
+    },
+    {
+     "id": "culc-323",
+     "name": "323 General Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 446,
+      "y": 1466,
+      "w": 138,
+      "h": 82
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d3-323",
+     "room": "323",
+     "capacity": 24
+    },
+    {
+     "id": "culc-winsett-gallery",
+     "name": "Winsett Gallery",
+     "type": "circulation",
+     "shape": {
+      "kind": "rect",
+      "x": 636,
+      "y": 1166,
+      "w": 236,
+      "h": 342
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library)",
+     "door": "d3-winsett-gallery"
+    },
+    {
+     "id": "culc-elevator-3",
+     "name": "Elevator",
+     "type": "core",
+     "shape": {
+      "kind": "rect",
+      "x": 424,
+      "y": 1056,
+      "w": 82,
+      "h": 80
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library)"
+    },
+    {
+     "id": "culc-stairs-3",
+     "name": "Stairs",
+     "type": "core",
+     "shape": {
+      "kind": "rect",
+      "x": 286,
+      "y": 1160,
+      "w": 246,
+      "h": 184
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library)"
+    }
+   ]
+  },
+  {
+   "id": "4",
+   "label": "4",
+   "name": "Level 4",
+   "available": true,
+   "viewBox": [
+    10,
+    150,
+    890,
+    1450
+   ],
+   "outline": "M192 300 L334 300 L334 444 L508 444 L508 350 L736 350 L736 1132 L872 1132 L872 1552 L100 1552 L100 1050 L192 1050 Z",
+   "spaces": [
+    {
+     "id": "culc-457",
+     "name": "457 Office Space",
+     "type": "office",
+     "shape": {
+      "kind": "rect",
+      "x": 99,
+      "y": 362,
+      "w": 91,
+      "h": 286
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-457",
+     "room": "457"
+    },
+    {
+     "id": "culc-469",
+     "name": "469 Conference Room",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 99,
+      "y": 300,
+      "w": 89,
+      "h": 58
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-469",
+     "room": "469",
+     "capacity": 20
+    },
+    {
+     "id": "culc-455",
+     "name": "455 Study Room",
+     "type": "study",
+     "shape": {
+      "kind": "polygon",
+      "points": "76,652 122,652 122,716 66,716"
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-455",
+     "room": "455",
+     "capacity": 9
+    },
+    {
+     "id": "culc-447",
+     "name": "447 Naugle Writing and Communication Center",
+     "type": "office",
+     "shape": {
+      "kind": "rect",
+      "x": 98,
+      "y": 720,
+      "w": 92,
+      "h": 172
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-447",
+     "room": "447"
+    },
+    {
+     "id": "culc-445",
+     "name": "445 Study Room",
+     "type": "study",
+     "shape": {
+      "kind": "polygon",
+      "points": "76,896 122,896 122,960 66,960"
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-445",
+     "room": "445",
+     "capacity": 9
+    },
+    {
+     "id": "culc-441",
+     "name": "441 IBM Room",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 100,
+      "y": 964,
+      "w": 40,
+      "h": 86
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-441",
+     "room": "441",
+     "capacity": 8
+    },
+    {
+     "id": "culc-443",
+     "name": "443 McKinsey Room",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 142,
+      "y": 964,
+      "w": 48,
+      "h": 86
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-443",
+     "room": "443",
+     "capacity": 8
+    },
+    {
+     "id": "culc-466",
+     "name": "Room 466",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 338,
+      "y": 442,
+      "w": 52,
+      "h": 75
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-466",
+     "room": "466"
+    },
+    {
+     "id": "culc-474",
+     "name": "Room 474",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 390,
+      "y": 448,
+      "w": 107,
+      "h": 38
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-474",
+     "room": "474"
+    },
+    {
+     "id": "culc-462",
+     "name": "Room 462",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 339,
+      "y": 524,
+      "w": 51,
+      "h": 36
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-462",
+     "room": "462"
+    },
+    {
+     "id": "culc-464",
+     "name": "Room 464",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 339,
+      "y": 566,
+      "w": 51,
+      "h": 36
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-464",
+     "room": "464"
+    },
+    {
+     "id": "culc-478",
+     "name": "478 Lab Space",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 414,
+      "y": 692,
+      "w": 92,
+      "h": 162
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-478",
+     "room": "478"
+    },
+    {
+     "id": "culc-450",
+     "name": "450 Google Room",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 338,
+      "y": 784,
+      "w": 36,
+      "h": 66
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-450",
+     "room": "450",
+     "capacity": 6
+    },
+    {
+     "id": "culc-448",
+     "name": "448 Ben & Jerry’s/Greenscreen Room",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 376,
+      "y": 784,
+      "w": 38,
+      "h": 66
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-448",
+     "room": "448",
+     "capacity": 6
+    },
+    {
+     "id": "culc-473",
+     "name": "473 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 646,
+      "y": 402,
+      "w": 92,
+      "h": 115
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-473",
+     "room": "473",
+     "capacity": 24
+    },
+    {
+     "id": "culc-475",
+     "name": "475 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 646,
+      "y": 524,
+      "w": 92,
+      "h": 124
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-475",
+     "room": "475",
+     "capacity": 24
+    },
+    {
+     "id": "culc-479",
+     "name": "Room 479",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 708,
+      "y": 654,
+      "w": 44,
+      "h": 60
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-479",
+     "room": "479"
+    },
+    {
+     "id": "culc-481",
+     "name": "481 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 646,
+      "y": 722,
+      "w": 92,
+      "h": 108
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-481",
+     "room": "481",
+     "capacity": 24
+    },
+    {
+     "id": "culc-483",
+     "name": "483 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 646,
+      "y": 837,
+      "w": 92,
+      "h": 111
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-483",
+     "room": "483",
+     "capacity": 24
+    },
+    {
+     "id": "culc-487",
+     "name": "487 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 646,
+      "y": 956,
+      "w": 92,
+      "h": 108
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-487",
+     "room": "487",
+     "capacity": 24
+    },
+    {
+     "id": "culc-489",
+     "name": "489 Office Space",
+     "type": "office",
+     "shape": {
+      "kind": "rect",
+      "x": 670,
+      "y": 1070,
+      "w": 67,
+      "h": 60
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-489",
+     "room": "489"
+    },
+    {
+     "id": "culc-423",
+     "name": "423 Distance Learning Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 293,
+      "y": 1454,
+      "w": 132,
+      "h": 130
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-423",
+     "room": "423",
+     "capacity": 44
+    },
+    {
+     "id": "culc-421",
+     "name": "421 Study Room",
+     "type": "study",
+     "shape": {
+      "kind": "rect",
+      "x": 437,
+      "y": 1459,
+      "w": 53,
+      "h": 97
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d4-421",
+     "room": "421",
+     "capacity": 6
+    },
+    {
+     "id": "culc-elevator-4",
+     "name": "Elevator",
+     "type": "core",
+     "shape": {
+      "kind": "rect",
+      "x": 486,
+      "y": 1070,
+      "w": 83,
+      "h": 80
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library)"
+    },
+    {
+     "id": "culc-stairs-4",
+     "name": "Stairs",
+     "type": "core",
+     "shape": {
+      "kind": "rect",
+      "x": 323,
+      "y": 1170,
+      "w": 255,
+      "h": 188
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library)"
+    }
+   ]
+  },
+  {
+   "id": "5",
+   "label": "5",
+   "name": "Level 5",
+   "available": true,
+   "viewBox": [
+    10,
+    150,
+    890,
+    1450
+   ],
+   "outline": "M496 284 L652 284 L652 1492 L496 1492 L496 1436 L294 1436 L294 608 L496 608 Z M25 218 L293 218 L293 1436 L540 1436 L540 1570 L25 1570 Z",
+   "spaces": [
+    {
+     "id": "culc-571",
+     "name": "571 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 654,
+      "y": 317,
+      "w": 92,
+      "h": 129
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d5-571",
+     "room": "571",
+     "capacity": 24
+    },
+    {
+     "id": "culc-573",
+     "name": "573 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 654,
+      "y": 454,
+      "w": 92,
+      "h": 128
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d5-573",
+     "room": "573",
+     "capacity": 24
+    },
+    {
+     "id": "culc-575",
+     "name": "575 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 654,
+      "y": 590,
+      "w": 92,
+      "h": 128
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d5-575",
+     "room": "575",
+     "capacity": 24
+    },
+    {
+     "id": "culc-581",
+     "name": "581 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 654,
+      "y": 734,
+      "w": 92,
+      "h": 130
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d5-581",
+     "room": "581",
+     "capacity": 24
+    },
+    {
+     "id": "culc-584",
+     "name": "584 Lab Space",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 656,
+      "y": 970,
+      "w": 78,
+      "h": 150
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d5-584",
+     "room": "584"
+    },
+    {
+     "id": "culc-587",
+     "name": "587 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 652,
+      "y": 1124,
+      "w": 92,
+      "h": 154
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d5-587",
+     "room": "587",
+     "capacity": 24
+    },
+    {
+     "id": "culc-589",
+     "name": "589 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 654,
+      "y": 1282,
+      "w": 90,
+      "h": 162
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d5-589",
+     "room": "589",
+     "capacity": 24
+    },
+    {
+     "id": "culc-572",
+     "name": "572 Class Laboratory - Wet",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 300,
+      "y": 394,
+      "w": 142,
+      "h": 214
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d5-572",
+     "room": "572",
+     "capacity": 28
+    },
+    {
+     "id": "culc-578",
+     "name": "578 Lab Space",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 303,
+      "y": 678,
+      "w": 187,
+      "h": 190
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library); level, number and capacity from the Registrar list",
+     "door": "d5-578",
+     "room": "578"
+    },
+    {
+     "id": "culc-roof-garden",
+     "name": "Roof garden",
+     "type": "outdoor",
+     "shape": {
+      "kind": "polygon",
+      "points": "20,218 293,218 293,1436 540,1436 540,1570 20,1570"
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library)",
+     "door": "d5-roof-garden"
+    },
+    {
+     "id": "culc-elevator-5",
+     "name": "Elevator",
+     "type": "core",
+     "shape": {
+      "kind": "rect",
+      "x": 470,
+      "y": 1094,
+      "w": 80,
+      "h": 80
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library)"
+    },
+    {
+     "id": "culc-stairs-5",
+     "name": "Stairs",
+     "type": "core",
+     "shape": {
+      "kind": "rect",
+      "x": 294,
+      "y": 1228,
+      "w": 255,
+      "h": 190
+     },
+     "source": "Clough Floor Maps (Georgia Tech Library)"
+    }
+   ]
+  }
+ ],
+ "rooms": [
+  {
+   "id": "culc-106",
+   "room": "106",
+   "level": null,
+   "name": "Classroom Service",
+   "type": "service",
+   "capacity": null,
+   "source_url": "https://avservices.gatech.edu/building/166/",
+   "source_note": "Rooms in this Building > Classroom Service > 106; Seating: None. La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-142",
+   "room": "142",
+   "level": null,
+   "name": "Classroom Service",
+   "type": "service",
+   "capacity": null,
+   "source_url": "https://avservices.gatech.edu/building/166/",
+   "source_note": "Rooms in this Building > Classroom Service > 142; Seating: None. La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-144a",
+   "room": "144A",
+   "level": null,
+   "name": "Classroom Service",
+   "type": "service",
+   "capacity": null,
+   "source_url": "https://avservices.gatech.edu/building/166/",
+   "source_note": "Rooms in this Building > Classroom Service > 144A; Seating: None. La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-144b",
+   "room": "144B",
+   "level": null,
+   "name": "Classroom Service",
+   "type": "service",
+   "capacity": null,
+   "source_url": "https://avservices.gatech.edu/building/166/",
+   "source_note": "Rooms in this Building > Classroom Service > 144B; Seating: None. La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-148",
+   "room": "148",
+   "level": null,
+   "name": "Classroom Service",
+   "type": "service",
+   "capacity": null,
+   "source_url": "https://avservices.gatech.edu/building/166/",
+   "source_note": "Rooms in this Building > Classroom Service > 148; Seating: None. La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-152a",
+   "room": "152A",
+   "level": null,
+   "name": "Classroom Service",
+   "type": "service",
+   "capacity": null,
+   "source_url": "https://avservices.gatech.edu/building/166/",
+   "source_note": "Rooms in this Building > Classroom Service > 152A; Seating: None. La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-152b",
+   "room": "152B",
+   "level": null,
+   "name": "Classroom Service",
+   "type": "service",
+   "capacity": null,
+   "source_url": "https://avservices.gatech.edu/building/166/",
+   "source_note": "Rooms in this Building > Classroom Service > 152B; Seating: None. La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-154",
+   "room": "154",
+   "level": null,
+   "name": "Classroom Service",
+   "type": "service",
+   "capacity": null,
+   "source_url": "https://avservices.gatech.edu/building/166/",
+   "source_note": "Rooms in this Building > Classroom Service > 154; Seating: None. La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-423a",
+   "room": "423A",
+   "level": null,
+   "name": "Classroom Service",
+   "type": "service",
+   "capacity": null,
+   "source_url": "https://avservices.gatech.edu/building/166/",
+   "source_note": "Rooms in this Building > Classroom Service > 423A; Seating: None. La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-572a",
+   "room": "572A",
+   "level": null,
+   "name": "Study Room",
+   "type": "study",
+   "capacity": 4,
+   "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+   "source_note": "Recurso de la cuadrícula de reservas: Clough 572A (Capacity 4). La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-572b",
+   "room": "572B",
+   "level": null,
+   "name": "Study Room",
+   "type": "study",
+   "capacity": 4,
+   "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+   "source_note": "Recurso de la cuadrícula de reservas: Clough 572B (Capacity 4). La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-572c",
+   "room": "572C",
+   "level": null,
+   "name": "Study Room",
+   "type": "study",
+   "capacity": 4,
+   "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+   "source_note": "Recurso de la cuadrícula de reservas: Clough 572C (Capacity 4). La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-572d",
+   "room": "572D",
+   "level": null,
+   "name": "Study Room",
+   "type": "study",
+   "capacity": 4,
+   "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+   "source_note": "Recurso de la cuadrícula de reservas: Clough 572D (Capacity 4). La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-585",
+   "room": "585",
+   "level": null,
+   "name": "Study Room",
+   "type": "study",
+   "capacity": 4,
+   "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
+   "source_note": "Recurso de la cuadrícula de reservas: Clough 585 (Capacity 4). La fuente no declara la planta; no se deduce del número."
+  },
+  {
+   "id": "culc-kaldi-s-coffee",
+   "room": "Kaldi's Coffee",
+   "level": "1",
+   "name": "Kaldi's Coffee",
+   "type": "service",
+   "capacity": null,
+   "source_url": "https://library.gatech.edu/clough",
+   "source_note": "Services & Resources > Kaldi’s Coffee: explicitly located on the first floor. Conflicto con el Starbucks de segunda planta del PDF antiguo."
+  },
+  {
+   "id": "culc-shipping-receiving",
+   "room": "Shipping & Receiving",
+   "level": "1",
+   "name": "Shipping & Receiving",
+   "type": "service",
+   "capacity": null,
+   "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
+   "source_note": "Página 1: etiqueta Shipping & Receiving."
+  }
+ ],
+ "graph": {
+  "nodes": [
+   {
+    "id": "n1-0",
+    "level": "1",
+    "x": 232,
+    "y": 272
+   },
+   {
+    "id": "n1-1",
+    "level": "1",
+    "x": 232,
+    "y": 359
+   },
+   {
+    "id": "n1-2",
+    "level": "1",
+    "x": 232,
+    "y": 492
+   },
+   {
+    "id": "n1-3",
+    "level": "1",
+    "x": 232,
+    "y": 589
+   },
+   {
+    "id": "n1-4",
+    "level": "1",
+    "x": 232,
+    "y": 721
+   },
+   {
+    "id": "n1-5",
+    "level": "1",
+    "x": 232,
+    "y": 952
+   },
+   {
+    "id": "n1-6",
+    "level": "1",
+    "x": 200,
+    "y": 1072
+   },
+   {
+    "id": "n1-7",
+    "level": "1",
+    "x": 436,
+    "y": 1072
+   },
+   {
+    "id": "n1-8",
+    "level": "1",
+    "x": 576,
+    "y": 1072
+   },
+   {
+    "id": "n1-9",
+    "level": "1",
+    "x": 624,
+    "y": 1072
+   },
+   {
+    "id": "n1-10",
+    "level": "1",
+    "x": 160,
+    "y": 1120
+   },
+   {
+    "id": "n1-11",
+    "level": "1",
+    "x": 160,
+    "y": 1305
+   },
+   {
+    "id": "n1-12",
+    "level": "1",
+    "x": 160,
+    "y": 1440
+   },
+   {
+    "id": "n1-13",
+    "level": "1",
+    "x": 495,
+    "y": 1440
+   },
+   {
+    "id": "n1-14",
+    "level": "1",
+    "x": 576,
+    "y": 1440
+   },
+   {
+    "id": "n1-15",
+    "level": "1",
+    "x": 640,
+    "y": 1440
+   },
+   {
+    "id": "n1-16",
+    "level": "1",
+    "x": 576,
+    "y": 1266
+   },
+   {
+    "id": "n1-17",
+    "level": "1",
+    "x": 200,
+    "y": 272
+   },
+   {
+    "id": "n1-18",
+    "level": "1",
+    "x": 206,
+    "y": 272
+   },
+   {
+    "id": "d1-152",
+    "level": "1",
+    "x": 276,
+    "y": 359
+   },
+   {
+    "id": "d1-150",
+    "level": "1",
+    "x": 276,
+    "y": 492
+   },
+   {
+    "id": "d1-146",
+    "level": "1",
+    "x": 276,
+    "y": 589
+   },
+   {
+    "id": "d1-144",
+    "level": "1",
+    "x": 276,
+    "y": 721
+   },
+   {
+    "id": "d1-131",
+    "level": "1",
+    "x": 124,
+    "y": 1120
+   },
+   {
+    "id": "d1-129",
+    "level": "1",
+    "x": 124,
+    "y": 1305
+   },
+   {
+    "id": "d1-127",
+    "level": "1",
+    "x": 122,
+    "y": 1440
+   },
+   {
+    "id": "d1-125",
+    "level": "1",
+    "x": 160,
+    "y": 1486
+   },
+   {
+    "id": "d1-123",
+    "level": "1",
+    "x": 495,
+    "y": 1486
+   },
+   {
+    "id": "d1-102",
+    "level": "1",
+    "x": 522,
+    "y": 1266
+   },
+   {
+    "id": "d1-main-atrium",
+    "level": "1",
+    "x": 232,
+    "y": 944
+   },
+   {
+    "id": "el1",
+    "level": "1",
+    "x": 436,
+    "y": 1072,
+    "label": "Elevator"
+   },
+   {
+    "id": "e1-n",
+    "level": "1",
+    "x": 206,
+    "y": 264,
+    "label": "Upper exit"
+   },
+   {
+    "id": "e1-s",
+    "level": "1",
+    "x": 673,
+    "y": 1488,
+    "label": "Lower exit"
+   },
+   {
+    "id": "n2-0",
+    "level": "2",
+    "x": 560,
+    "y": 264
+   },
+   {
+    "id": "n2-1",
+    "level": "2",
+    "x": 560,
+    "y": 361
+   },
+   {
+    "id": "n2-2",
+    "level": "2",
+    "x": 560,
+    "y": 439
+   },
+   {
+    "id": "n2-3",
+    "level": "2",
+    "x": 560,
+    "y": 551
+   },
+   {
+    "id": "n2-4",
+    "level": "2",
+    "x": 560,
+    "y": 570
+   },
+   {
+    "id": "n2-5",
+    "level": "2",
+    "x": 560,
+    "y": 592
+   },
+   {
+    "id": "n2-6",
+    "level": "2",
+    "x": 560,
+    "y": 598
+   },
+   {
+    "id": "n2-7",
+    "level": "2",
+    "x": 560,
+    "y": 629
+   },
+   {
+    "id": "n2-8",
+    "level": "2",
+    "x": 560,
+    "y": 659
+   },
+   {
+    "id": "n2-9",
+    "level": "2",
+    "x": 560,
+    "y": 690
+   },
+   {
+    "id": "n2-10",
+    "level": "2",
+    "x": 560,
+    "y": 707
+   },
+   {
+    "id": "n2-11",
+    "level": "2",
+    "x": 560,
+    "y": 722
+   },
+   {
+    "id": "n2-12",
+    "level": "2",
+    "x": 560,
+    "y": 727
+   },
+   {
+    "id": "n2-13",
+    "level": "2",
+    "x": 560,
+    "y": 881
+   },
+   {
+    "id": "n2-14",
+    "level": "2",
+    "x": 560,
+    "y": 1067
+   },
+   {
+    "id": "n2-15",
+    "level": "2",
+    "x": 560,
+    "y": 1096
+   },
+   {
+    "id": "n2-16",
+    "level": "2",
+    "x": 560,
+    "y": 1222
+   },
+   {
+    "id": "n2-17",
+    "level": "2",
+    "x": 560,
+    "y": 1480
+   },
+   {
+    "id": "n2-18",
+    "level": "2",
+    "x": 454,
+    "y": 264
+   },
+   {
+    "id": "n2-19",
+    "level": "2",
+    "x": 469,
+    "y": 264
+   },
+   {
+    "id": "n2-20",
+    "level": "2",
+    "x": 626,
+    "y": 1480
+   },
+   {
+    "id": "n2-21",
+    "level": "2",
+    "x": 440,
+    "y": 1096
+   },
+   {
+    "id": "n2-22",
+    "level": "2",
+    "x": 512,
+    "y": 1222
+   },
+   {
+    "id": "d2-273",
+    "level": "2",
+    "x": 686,
+    "y": 361
+   },
+   {
+    "id": "d2-277",
+    "level": "2",
+    "x": 686,
+    "y": 551
+   },
+   {
+    "id": "d2-283",
+    "level": "2",
+    "x": 686,
+    "y": 727
+   },
+   {
+    "id": "d2-285",
+    "level": "2",
+    "x": 688,
+    "y": 881
+   },
+   {
+    "id": "d2-205",
+    "level": "2",
+    "x": 688,
+    "y": 1067
+   },
+   {
+    "id": "d2-215",
+    "level": "2",
+    "x": 688,
+    "y": 1480
+   },
+   {
+    "id": "d2-262",
+    "level": "2",
+    "x": 416,
+    "y": 270
+   },
+   {
+    "id": "d2-272",
+    "level": "2",
+    "x": 469,
+    "y": 270
+   },
+   {
+    "id": "d2-274",
+    "level": "2",
+    "x": 517,
+    "y": 439
+   },
+   {
+    "id": "d2-278",
+    "level": "2",
+    "x": 517,
+    "y": 592
+   },
+   {
+    "id": "d2-280",
+    "level": "2",
+    "x": 517,
+    "y": 707
+   },
+   {
+    "id": "d2-242",
+    "level": "2",
+    "x": 416,
+    "y": 570
+   },
+   {
+    "id": "d2-244",
+    "level": "2",
+    "x": 416,
+    "y": 598
+   },
+   {
+    "id": "d2-246",
+    "level": "2",
+    "x": 416,
+    "y": 629
+   },
+   {
+    "id": "d2-248",
+    "level": "2",
+    "x": 416,
+    "y": 659
+   },
+   {
+    "id": "d2-250",
+    "level": "2",
+    "x": 416,
+    "y": 690
+   },
+   {
+    "id": "d2-252",
+    "level": "2",
+    "x": 416,
+    "y": 722
+   },
+   {
+    "id": "el2",
+    "level": "2",
+    "x": 440,
+    "y": 1096,
+    "label": "Elevator"
+   },
+   {
+    "id": "st2",
+    "level": "2",
+    "x": 512,
+    "y": 1222,
+    "label": "Stairs"
+   },
+   {
+    "id": "e2-n",
+    "level": "2",
+    "x": 454,
+    "y": 248,
+    "label": "Upper exit"
+   },
+   {
+    "id": "e2-s",
+    "level": "2",
+    "x": 626,
+    "y": 1530,
+    "label": "Lower exit"
+   },
+   {
+    "id": "n3-0",
+    "level": "3",
+    "x": 560,
+    "y": 336
+   },
+   {
+    "id": "n3-1",
+    "level": "3",
+    "x": 560,
+    "y": 396
+   },
+   {
+    "id": "n3-2",
+    "level": "3",
+    "x": 560,
+    "y": 412
+   },
+   {
+    "id": "n3-3",
+    "level": "3",
+    "x": 560,
+    "y": 541
+   },
+   {
+    "id": "n3-4",
+    "level": "3",
+    "x": 560,
+    "y": 687
+   },
+   {
+    "id": "n3-5",
+    "level": "3",
+    "x": 560,
+    "y": 793
+   },
+   {
+    "id": "n3-6",
+    "level": "3",
+    "x": 560,
+    "y": 880
+   },
+   {
+    "id": "n3-7",
+    "level": "3",
+    "x": 560,
+    "y": 929
+   },
+   {
+    "id": "n3-8",
+    "level": "3",
+    "x": 560,
+    "y": 1011
+   },
+   {
+    "id": "n3-9",
+    "level": "3",
+    "x": 560,
+    "y": 1146
+   },
+   {
+    "id": "n3-10",
+    "level": "3",
+    "x": 560,
+    "y": 1162
+   },
+   {
+    "id": "n3-11",
+    "level": "3",
+    "x": 560,
+    "y": 1252
+   },
+   {
+    "id": "n3-12",
+    "level": "3",
+    "x": 560,
+    "y": 1337
+   },
+   {
+    "id": "n3-13",
+    "level": "3",
+    "x": 560,
+    "y": 1376
+   },
+   {
+    "id": "n3-14",
+    "level": "3",
+    "x": 560,
+    "y": 1432
+   },
+   {
+    "id": "n3-15",
+    "level": "3",
+    "x": 248,
+    "y": 416
+   },
+   {
+    "id": "n3-16",
+    "level": "3",
+    "x": 248,
+    "y": 452
+   },
+   {
+    "id": "n3-17",
+    "level": "3",
+    "x": 248,
+    "y": 551
+   },
+   {
+    "id": "n3-18",
+    "level": "3",
+    "x": 248,
+    "y": 714
+   },
+   {
+    "id": "n3-19",
+    "level": "3",
+    "x": 248,
+    "y": 803
+   },
+   {
+    "id": "n3-20",
+    "level": "3",
+    "x": 248,
+    "y": 880
+   },
+   {
+    "id": "n3-21",
+    "level": "3",
+    "x": 248,
+    "y": 982
+   },
+   {
+    "id": "n3-22",
+    "level": "3",
+    "x": 248,
+    "y": 1065
+   },
+   {
+    "id": "n3-23",
+    "level": "3",
+    "x": 248,
+    "y": 1376
+   },
+   {
+    "id": "n3-24",
+    "level": "3",
+    "x": 344,
+    "y": 880
+   },
+   {
+    "id": "n3-25",
+    "level": "3",
+    "x": 384,
+    "y": 880
+   },
+   {
+    "id": "n3-26",
+    "level": "3",
+    "x": 449,
+    "y": 880
+   },
+   {
+    "id": "n3-27",
+    "level": "3",
+    "x": 373,
+    "y": 1376
+   },
+   {
+    "id": "n3-28",
+    "level": "3",
+    "x": 425,
+    "y": 396
+   },
+   {
+    "id": "n3-29",
+    "level": "3",
+    "x": 449,
+    "y": 396
+   },
+   {
+    "id": "n3-30",
+    "level": "3",
+    "x": 465,
+    "y": 1146
+   },
+   {
+    "id": "n3-31",
+    "level": "3",
+    "x": 532,
+    "y": 1252
+   },
+   {
+    "id": "n3-32",
+    "level": "3",
+    "x": 571,
+    "y": 1436
+   },
+   {
+    "id": "n3-33",
+    "level": "3",
+    "x": 617,
+    "y": 1453
+   },
+   {
+    "id": "n3-34",
+    "level": "3",
+    "x": 688,
+    "y": 1480
+   },
+   {
+    "id": "d3-373",
+    "level": "3",
+    "x": 642,
+    "y": 412
+   },
+   {
+    "id": "d3-375",
+    "level": "3",
+    "x": 642,
+    "y": 541
+   },
+   {
+    "id": "d3-381",
+    "level": "3",
+    "x": 642,
+    "y": 687
+   },
+   {
+    "id": "d3-383",
+    "level": "3",
+    "x": 642,
+    "y": 793
+   },
+   {
+    "id": "d3-385",
+    "level": "3",
+    "x": 638,
+    "y": 929
+   },
+   {
+    "id": "d3-387",
+    "level": "3",
+    "x": 642,
+    "y": 1011
+   },
+   {
+    "id": "d3-305",
+    "level": "3",
+    "x": 642,
+    "y": 1162
+   },
+   {
+    "id": "d3-307",
+    "level": "3",
+    "x": 690,
+    "y": 1162
+   },
+   {
+    "id": "d3-367",
+    "level": "3",
+    "x": 174,
+    "y": 314
+   },
+   {
+    "id": "d3-365",
+    "level": "3",
+    "x": 174,
+    "y": 416
+   },
+   {
+    "id": "d3-363",
+    "level": "3",
+    "x": 172,
+    "y": 452
+   },
+   {
+    "id": "d3-357",
+    "level": "3",
+    "x": 172,
+    "y": 551
+   },
+   {
+    "id": "d3-341",
+    "level": "3",
+    "x": 172,
+    "y": 803
+   },
+   {
+    "id": "d3-335",
+    "level": "3",
+    "x": 172,
+    "y": 982
+   },
+   {
+    "id": "d3-331",
+    "level": "3",
+    "x": 128,
+    "y": 1065
+   },
+   {
+    "id": "d3-333",
+    "level": "3",
+    "x": 176,
+    "y": 1065
+   },
+   {
+    "id": "d3-362",
+    "level": "3",
+    "x": 404,
+    "y": 408
+   },
+   {
+    "id": "d3-372",
+    "level": "3",
+    "x": 449,
+    "y": 406
+   },
+   {
+    "id": "d3-346",
+    "level": "3",
+    "x": 325,
+    "y": 714
+   },
+   {
+    "id": "d3-382",
+    "level": "3",
+    "x": 449,
+    "y": 814
+   },
+   {
+    "id": "d3-344",
+    "level": "3",
+    "x": 344,
+    "y": 814
+   },
+   {
+    "id": "d3-342",
+    "level": "3",
+    "x": 384,
+    "y": 814
+   },
+   {
+    "id": "d3-315",
+    "level": "3",
+    "x": 634,
+    "y": 1410
+   },
+   {
+    "id": "d3-317",
+    "level": "3",
+    "x": 634,
+    "y": 1432
+   },
+   {
+    "id": "d3-325",
+    "level": "3",
+    "x": 373,
+    "y": 1442
+   },
+   {
+    "id": "d3-323",
+    "level": "3",
+    "x": 560,
+    "y": 1466
+   },
+   {
+    "id": "d3-winsett-gallery",
+    "level": "3",
+    "x": 636,
+    "y": 1337
+   },
+   {
+    "id": "el3",
+    "level": "3",
+    "x": 465,
+    "y": 1146,
+    "label": "Elevator"
+   },
+   {
+    "id": "st3",
+    "level": "3",
+    "x": 532,
+    "y": 1252,
+    "label": "Stairs"
+   },
+   {
+    "id": "e3-n",
+    "level": "3",
+    "x": 425,
+    "y": 376,
+    "label": "Upper exit"
+   },
+   {
+    "id": "e3-s",
+    "level": "3",
+    "x": 686,
+    "y": 1536,
+    "label": "Lower exit"
+   },
+   {
+    "id": "n4-0",
+    "level": "4",
+    "x": 576,
+    "y": 384
+   },
+   {
+    "id": "n4-1",
+    "level": "4",
+    "x": 576,
+    "y": 432
+   },
+   {
+    "id": "n4-2",
+    "level": "4",
+    "x": 576,
+    "y": 460
+   },
+   {
+    "id": "n4-3",
+    "level": "4",
+    "x": 576,
+    "y": 586
+   },
+   {
+    "id": "n4-4",
+    "level": "4",
+    "x": 576,
+    "y": 684
+   },
+   {
+    "id": "n4-5",
+    "level": "4",
+    "x": 576,
+    "y": 773
+   },
+   {
+    "id": "n4-6",
+    "level": "4",
+    "x": 576,
+    "y": 776
+   },
+   {
+    "id": "n4-7",
+    "level": "4",
+    "x": 576,
+    "y": 892
+   },
+   {
+    "id": "n4-8",
+    "level": "4",
+    "x": 576,
+    "y": 1010
+   },
+   {
+    "id": "n4-9",
+    "level": "4",
+    "x": 576,
+    "y": 1100
+   },
+   {
+    "id": "n4-10",
+    "level": "4",
+    "x": 576,
+    "y": 1156
+   },
+   {
+    "id": "n4-11",
+    "level": "4",
+    "x": 576,
+    "y": 1264
+   },
+   {
+    "id": "n4-12",
+    "level": "4",
+    "x": 576,
+    "y": 1408
+   },
+   {
+    "id": "n4-13",
+    "level": "4",
+    "x": 576,
+    "y": 1440
+   },
+   {
+    "id": "n4-14",
+    "level": "4",
+    "x": 264,
+    "y": 360
+   },
+   {
+    "id": "n4-15",
+    "level": "4",
+    "x": 264,
+    "y": 479
+   },
+   {
+    "id": "n4-16",
+    "level": "4",
+    "x": 264,
+    "y": 505
+   },
+   {
+    "id": "n4-17",
+    "level": "4",
+    "x": 264,
+    "y": 542
+   },
+   {
+    "id": "n4-18",
+    "level": "4",
+    "x": 264,
+    "y": 584
+   },
+   {
+    "id": "n4-19",
+    "level": "4",
+    "x": 264,
+    "y": 684
+   },
+   {
+    "id": "n4-20",
+    "level": "4",
+    "x": 264,
+    "y": 806
+   },
+   {
+    "id": "n4-21",
+    "level": "4",
+    "x": 264,
+    "y": 817
+   },
+   {
+    "id": "n4-22",
+    "level": "4",
+    "x": 264,
+    "y": 928
+   },
+   {
+    "id": "n4-23",
+    "level": "4",
+    "x": 264,
+    "y": 1007
+   },
+   {
+    "id": "n4-24",
+    "level": "4",
+    "x": 264,
+    "y": 1408
+   },
+   {
+    "id": "n4-25",
+    "level": "4",
+    "x": 359,
+    "y": 1408
+   },
+   {
+    "id": "n4-26",
+    "level": "4",
+    "x": 464,
+    "y": 1408
+   },
+   {
+    "id": "n4-27",
+    "level": "4",
+    "x": 480,
+    "y": 432
+   },
+   {
+    "id": "n4-28",
+    "level": "4",
+    "x": 527,
+    "y": 1156
+   },
+   {
+    "id": "n4-29",
+    "level": "4",
+    "x": 578,
+    "y": 1264
+   },
+   {
+    "id": "n4-30",
+    "level": "4",
+    "x": 739,
+    "y": 1504
+   },
+   {
+    "id": "d4-457",
+    "level": "4",
+    "x": 190,
+    "y": 505
+   },
+   {
+    "id": "d4-469",
+    "level": "4",
+    "x": 188,
+    "y": 358
+   },
+   {
+    "id": "d4-455",
+    "level": "4",
+    "x": 122,
+    "y": 684
+   },
+   {
+    "id": "d4-447",
+    "level": "4",
+    "x": 190,
+    "y": 806
+   },
+   {
+    "id": "d4-445",
+    "level": "4",
+    "x": 122,
+    "y": 928
+   },
+   {
+    "id": "d4-441",
+    "level": "4",
+    "x": 140,
+    "y": 1007
+   },
+   {
+    "id": "d4-443",
+    "level": "4",
+    "x": 190,
+    "y": 1007
+   },
+   {
+    "id": "d4-466",
+    "level": "4",
+    "x": 338,
+    "y": 479
+   },
+   {
+    "id": "d4-474",
+    "level": "4",
+    "x": 480,
+    "y": 448
+   },
+   {
+    "id": "d4-462",
+    "level": "4",
+    "x": 339,
+    "y": 542
+   },
+   {
+    "id": "d4-464",
+    "level": "4",
+    "x": 339,
+    "y": 584
+   },
+   {
+    "id": "d4-478",
+    "level": "4",
+    "x": 506,
+    "y": 773
+   },
+   {
+    "id": "d4-450",
+    "level": "4",
+    "x": 338,
+    "y": 817
+   },
+   {
+    "id": "d4-448",
+    "level": "4",
+    "x": 376,
+    "y": 817
+   },
+   {
+    "id": "d4-473",
+    "level": "4",
+    "x": 646,
+    "y": 460
+   },
+   {
+    "id": "d4-475",
+    "level": "4",
+    "x": 646,
+    "y": 586
+   },
+   {
+    "id": "d4-479",
+    "level": "4",
+    "x": 708,
+    "y": 684
+   },
+   {
+    "id": "d4-481",
+    "level": "4",
+    "x": 646,
+    "y": 776
+   },
+   {
+    "id": "d4-483",
+    "level": "4",
+    "x": 646,
+    "y": 892
+   },
+   {
+    "id": "d4-487",
+    "level": "4",
+    "x": 646,
+    "y": 1010
+   },
+   {
+    "id": "d4-489",
+    "level": "4",
+    "x": 670,
+    "y": 1100
+   },
+   {
+    "id": "d4-423",
+    "level": "4",
+    "x": 359,
+    "y": 1454
+   },
+   {
+    "id": "d4-421",
+    "level": "4",
+    "x": 464,
+    "y": 1459
+   },
+   {
+    "id": "el4",
+    "level": "4",
+    "x": 527,
+    "y": 1156,
+    "label": "Elevator"
+   },
+   {
+    "id": "st4",
+    "level": "4",
+    "x": 578,
+    "y": 1264,
+    "label": "Stairs"
+   },
+   {
+    "id": "e4-n",
+    "level": "4",
+    "x": 425,
+    "y": 416,
+    "label": "Upper exit"
+   },
+   {
+    "id": "e4-s",
+    "level": "4",
+    "x": 739,
+    "y": 1542,
+    "label": "Lower exit"
+   },
+   {
+    "id": "n5-0",
+    "level": "5",
+    "x": 576,
+    "y": 320
+   },
+   {
+    "id": "n5-1",
+    "level": "5",
+    "x": 576,
+    "y": 336
+   },
+   {
+    "id": "n5-2",
+    "level": "5",
+    "x": 576,
+    "y": 382
+   },
+   {
+    "id": "n5-3",
+    "level": "5",
+    "x": 576,
+    "y": 518
+   },
+   {
+    "id": "n5-4",
+    "level": "5",
+    "x": 576,
+    "y": 644
+   },
+   {
+    "id": "n5-5",
+    "level": "5",
+    "x": 576,
+    "y": 654
+   },
+   {
+    "id": "n5-6",
+    "level": "5",
+    "x": 576,
+    "y": 799
+   },
+   {
+    "id": "n5-7",
+    "level": "5",
+    "x": 576,
+    "y": 1045
+   },
+   {
+    "id": "n5-8",
+    "level": "5",
+    "x": 576,
+    "y": 1184
+   },
+   {
+    "id": "n5-9",
+    "level": "5",
+    "x": 576,
+    "y": 1201
+   },
+   {
+    "id": "n5-10",
+    "level": "5",
+    "x": 576,
+    "y": 1324
+   },
+   {
+    "id": "n5-11",
+    "level": "5",
+    "x": 576,
+    "y": 1472
+   },
+   {
+    "id": "n5-12",
+    "level": "5",
+    "x": 400,
+    "y": 644
+   },
+   {
+    "id": "n5-13",
+    "level": "5",
+    "x": 448,
+    "y": 336
+   },
+   {
+    "id": "n5-14",
+    "level": "5",
+    "x": 510,
+    "y": 1184
+   },
+   {
+    "id": "n5-15",
+    "level": "5",
+    "x": 549,
+    "y": 1324
+   },
+   {
+    "id": "n5-16",
+    "level": "5",
+    "x": 675,
+    "y": 1486
+   },
+   {
+    "id": "n5-17",
+    "level": "5",
+    "x": 688,
+    "y": 1488
+   },
+   {
+    "id": "d5-571",
+    "level": "5",
+    "x": 654,
+    "y": 382
+   },
+   {
+    "id": "d5-573",
+    "level": "5",
+    "x": 654,
+    "y": 518
+   },
+   {
+    "id": "d5-575",
+    "level": "5",
+    "x": 654,
+    "y": 654
+   },
+   {
+    "id": "d5-581",
+    "level": "5",
+    "x": 654,
+    "y": 799
+   },
+   {
+    "id": "d5-584",
+    "level": "5",
+    "x": 656,
+    "y": 1045
+   },
+   {
+    "id": "d5-587",
+    "level": "5",
+    "x": 652,
+    "y": 1201
+   },
+   {
+    "id": "d5-589",
+    "level": "5",
+    "x": 681,
+    "y": 1444
+   },
+   {
+    "id": "d5-572",
+    "level": "5",
+    "x": 400,
+    "y": 608
+   },
+   {
+    "id": "d5-578",
+    "level": "5",
+    "x": 400,
+    "y": 678
+   },
+   {
+    "id": "d5-roof-garden",
+    "level": "5",
+    "x": 540,
+    "y": 1324
+   },
+   {
+    "id": "el5",
+    "level": "5",
+    "x": 510,
+    "y": 1184,
+    "label": "Elevator"
+   },
+   {
+    "id": "st5",
+    "level": "5",
+    "x": 549,
+    "y": 1324,
+    "label": "Stairs"
+   },
+   {
+    "id": "e5-n",
+    "level": "5",
+    "x": 390,
+    "y": 308,
+    "label": "Upper exit"
+   },
+   {
+    "id": "e5-s",
+    "level": "5",
+    "x": 726,
+    "y": 1532,
+    "label": "Lower exit"
+   }
   ],
-  "rooms": [
-    {
-      "id": "culc-102",
-      "room": "102",
-      "level": "1",
-      "name": "Distance Learning Classroom",
-      "type": "classroom",
-      "capacity": 70,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 102; CAPACITY 70; DLPE - Integrated Active & Distance Learning. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-106",
-      "room": "106",
-      "level": null,
-      "name": "Classroom Service",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Classroom Service > 106; Seating: None. La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-123",
-      "room": "123",
-      "level": "1",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 30,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 123; CAPACITY 30; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-125",
-      "room": "125",
-      "level": "1",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 30,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 125; CAPACITY 30; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-127",
-      "room": "127",
-      "level": "1",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 32,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 127; CAPACITY 32; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-129",
-      "room": "129",
-      "level": "1",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 36,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 129; CAPACITY 36; Integrated     Active Learning. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-131",
-      "room": "131",
-      "level": "1",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 30,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 131; CAPACITY 30; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-142",
-      "room": "142",
-      "level": null,
-      "name": "Classroom Service",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Classroom Service > 142; Seating: None. La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-144",
-      "room": "144",
-      "level": "1",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 305,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 144; CAPACITY 305; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-144a",
-      "room": "144A",
-      "level": null,
-      "name": "Classroom Service",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Classroom Service > 144A; Seating: None. La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-144b",
-      "room": "144B",
-      "level": null,
-      "name": "Classroom Service",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Classroom Service > 144B; Seating: None. La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-146",
-      "room": "146",
-      "level": "1",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 12,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 146; CAPACITY 12; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-148",
-      "room": "148",
-      "level": null,
-      "name": "Classroom Service",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Classroom Service > 148; Seating: None. La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-150",
-      "room": "150",
-      "level": "1",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 12,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 150; CAPACITY 12; Integrated. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-152",
-      "room": "152",
-      "level": "1",
-      "name": "Distance Learning Classroom",
-      "type": "classroom",
-      "capacity": 305,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 152; CAPACITY 305; DLPE - Integrated Distance Learning. Planta 1: página 1 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-152a",
-      "room": "152A",
-      "level": null,
-      "name": "Classroom Service",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Classroom Service > 152A; Seating: None. La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-152b",
-      "room": "152B",
-      "level": null,
-      "name": "Classroom Service",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Classroom Service > 152B; Seating: None. La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-154",
-      "room": "154",
-      "level": null,
-      "name": "Classroom Service",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Classroom Service > 154; Seating: None. La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-205",
-      "room": "205",
-      "level": "2",
-      "name": "Academic Services",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 2, número 205. Leyenda y pictograma de Academic Services."
-    },
-    {
-      "id": "culc-215",
-      "room": "215",
-      "level": "2",
-      "name": "Technology Support",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://w1.calendar.oit.gatech.edu/event/2024/11/26/drop-support-duo-phone-call-2fa-phase-out-0",
-      "source_note": "Evento del 26 de noviembre de 2024: Location Clough 215 y párrafo de atención técnica presencial. Referencia histórica, no horario actual. Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-242",
-      "room": "242",
-      "level": "2",
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 6,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 242 (Capacity 6). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Rango literal 242–252, sin crear las salas intermedias ausentes de otras fuentes."
-    },
-    {
-      "id": "culc-244",
-      "room": "244",
-      "level": "2",
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 6,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 244 (Capacity 6). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Rango literal 242–252, sin crear las salas intermedias ausentes de otras fuentes."
-    },
-    {
-      "id": "culc-246",
-      "room": "246",
-      "level": "2",
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 6,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 246 (Capacity 6). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Rango literal 242–252, sin crear las salas intermedias ausentes de otras fuentes."
-    },
-    {
-      "id": "culc-248",
-      "room": "248",
-      "level": "2",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 8,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 248; CAPACITY 8; Limited      Offline Until Further Notice. Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Rango literal 242–252, sin crear las salas intermedias ausentes de otras fuentes. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-250",
-      "room": "250",
-      "level": "2",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 8,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 250; CAPACITY 8; Limited. Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Rango literal 242–252, sin crear las salas intermedias ausentes de otras fuentes. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-252",
-      "room": "252",
-      "level": "2",
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 6,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 252 (Capacity 6). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Rango literal 242–252, sin crear las salas intermedias ausentes de otras fuentes."
-    },
-    {
-      "id": "culc-262",
-      "room": "262",
-      "level": "2",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 36,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 262; CAPACITY 36; Integrated     Active Learning. Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-272",
-      "room": "272",
-      "level": "2",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 32,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 272; CAPACITY 32; Integrated     Restricted Use (after 1:30 PM). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-273",
-      "room": "273",
-      "level": "2",
-      "name": "Academic Services",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 2, número 273. Leyenda y pictograma de Academic Services."
-    },
-    {
-      "id": "culc-274",
-      "room": "274",
-      "level": "2",
-      "name": "Room 274",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 2, número 274. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
-    },
-    {
-      "id": "culc-277",
-      "room": "277",
-      "level": "2",
-      "name": "Academic Services",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 2, número 277. Leyenda y pictograma de Academic Services."
-    },
-    {
-      "id": "culc-278",
-      "room": "278",
-      "level": "2",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 30,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 278; CAPACITY 30; Integrated     Restricted Use (after 12:30 PM). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-280",
-      "room": "280",
-      "level": "2",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 27,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 280; CAPACITY 27; Integrated     Restricted Use (after 12:30 PM). Planta 2: página 2 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-283",
-      "room": "283",
-      "level": "2",
-      "name": "Academic Services",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 2, número 283. Leyenda y pictograma de Academic Services."
-    },
-    {
-      "id": "culc-285",
-      "room": "285",
-      "level": "2",
-      "name": "Room 285",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 2, número 285. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
-    },
-    {
-      "id": "culc-305",
-      "room": "305",
-      "level": "3",
-      "name": "Room 305",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 3, número 305. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
-    },
-    {
-      "id": "culc-307",
-      "room": "307",
-      "level": "3",
-      "name": "Room 307",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 3, número 307. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
-    },
-    {
-      "id": "culc-315",
-      "room": "315",
-      "level": "3",
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 6,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 315 (Capacity 6). Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-317",
-      "room": "317",
-      "level": "3",
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 6,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 317 (Capacity 6). Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-323",
-      "room": "323",
-      "level": "3",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 24,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 323; CAPACITY 24; Integrated. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-325",
-      "room": "325",
-      "level": "3",
-      "name": "General Classroom",
-      "type": "classroom",
-      "capacity": 30,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 325; CAPACITY 30; Integrated. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-331",
-      "room": "331",
-      "level": "3",
-      "name": "Room 331",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 3, número 331. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
-    },
-    {
-      "id": "culc-333",
-      "room": "333",
-      "level": "3",
-      "name": "Room 333",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 3, número 333. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
-    },
-    {
-      "id": "culc-335",
-      "room": "335",
-      "level": "3",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 335; Seating: 24. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-341",
-      "room": "341",
-      "level": "3",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 341; Seating: 24. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-342",
-      "room": "342",
-      "level": "3",
-      "name": "Podcast Room",
-      "type": "study",
-      "capacity": 6,
-      "source_url": "https://libcal.library.gatech.edu/reserve/podcast",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 342 (Capacity 6). Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-344",
-      "room": "344",
-      "level": "3",
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 6,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 344 (Capacity 6). Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-346",
-      "room": "346",
-      "level": "3",
-      "name": "Class Laboratory - Dry",
-      "type": "lab",
-      "capacity": 30,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Dry > 346; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-357",
-      "room": "357",
-      "level": "3",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 357; Seating: 24. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-362",
-      "room": "362",
-      "level": "3",
-      "name": "Class Laboratory - Dry",
-      "type": "lab",
-      "capacity": 30,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Dry > 362; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-363",
-      "room": "363",
-      "level": "3",
-      "name": "Lab Space",
-      "type": "lab",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 3, número 363. Leyenda y pictograma de Lab Space."
-    },
-    {
-      "id": "culc-365",
-      "room": "365",
-      "level": "3",
-      "name": "Room 365",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 3, número 365. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
-    },
-    {
-      "id": "culc-367",
-      "room": "367",
-      "level": "3",
-      "name": "Meeting Space",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 3, número 367. Leyenda y pictograma de Meeting Space."
-    },
-    {
-      "id": "culc-372",
-      "room": "372",
-      "level": "3",
-      "name": "Class Laboratory - Dry",
-      "type": "lab",
-      "capacity": 30,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Dry > 372; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-373",
-      "room": "373",
-      "level": "3",
-      "name": "Class Laboratory - Dry",
-      "type": "lab",
-      "capacity": 30,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Dry > 373; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-375",
-      "room": "375",
-      "level": "3",
-      "name": "Class Laboratory - Dry",
-      "type": "lab",
-      "capacity": 30,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Dry > 375; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-381",
-      "room": "381",
-      "level": "3",
-      "name": "Room 381",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 3, número 381. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
-    },
-    {
-      "id": "culc-382",
-      "room": "382",
-      "level": "3",
-      "name": "Class Laboratory - Dry",
-      "type": "lab",
-      "capacity": 30,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Dry > 382; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-383",
-      "room": "383",
-      "level": "3",
-      "name": "Class Laboratory - Dry",
-      "type": "lab",
-      "capacity": 30,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Dry > 383; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-385",
-      "room": "385",
-      "level": "3",
-      "name": "Room 385",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 3, número 385. Número visible; no se asigna un uso específico sin etiqueta explícita. No equivale a disponibilidad actual."
-    },
-    {
-      "id": "culc-387",
-      "room": "387",
-      "level": "3",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 30,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 387; Seating: 30. Planta 3: página 3 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-421",
-      "room": "421",
-      "level": "4",
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 6,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 421 (Capacity 6). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-423",
-      "room": "423",
-      "level": "4",
-      "name": "Distance Learning Classroom",
-      "type": "classroom",
-      "capacity": 44,
-      "source_url": "https://registrar.gatech.edu/public/files/Spring%2027%20Centrally%20Scheduled%20Room%20List.pdf",
-      "source_note": "Página 1, bloque CLOUGH UNDERGRADUATE LEARNING COMMONS, BLDG CODE 166, fila 423; CAPACITY 44; DLPE - Integrated Active & Distance Learning. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta. Categoría de aula corroborada por Rooms in this Building en https://avservices.gatech.edu/building/166/."
-    },
-    {
-      "id": "culc-423a",
-      "room": "423A",
-      "level": null,
-      "name": "Classroom Service",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Classroom Service > 423A; Seating: None. La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-441",
-      "room": "441",
-      "level": "4",
-      "name": "IBM Room",
-      "type": "other",
-      "capacity": 8,
-      "source_url": "https://libcal.library.gatech.edu/reserve/clough_rehearsal_rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 441 (IBM Room) (Capacity 8). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-443",
-      "room": "443",
-      "level": "4",
-      "name": "McKinsey Room",
-      "type": "other",
-      "capacity": 8,
-      "source_url": "https://libcal.library.gatech.edu/reserve/clough_rehearsal_rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 443 (McKinsey Room) (Capacity 8). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-445",
-      "room": "445",
-      "level": "4",
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 9,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 445 (Capacity 9). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-447",
-      "room": "447",
-      "level": "4",
-      "name": "Naugle Writing and Communication Center",
-      "type": "office",
-      "capacity": null,
-      "source_url": "https://www.communicationcenter.gatech.edu/",
-      "source_note": "Location and Hours: located in 447 Clough; indicaciones al salir de los ascensores on the 4th floor. Fall 2026 hours. No aforo publicado."
-    },
-    {
-      "id": "culc-448",
-      "room": "448",
-      "level": "4",
-      "name": "Ben & Jerry’s/Greenscreen Room",
-      "type": "other",
-      "capacity": 6,
-      "source_url": "https://libcal.library.gatech.edu/reserve/clough_rehearsal_rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 448 (Ben & Jerry’s/Greenscreen Room) (Capacity 6). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-450",
-      "room": "450",
-      "level": "4",
-      "name": "Google Room",
-      "type": "other",
-      "capacity": 6,
-      "source_url": "https://libcal.library.gatech.edu/reserve/clough_rehearsal_rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 450 (Google Room) (Capacity 6). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-455",
-      "room": "455",
-      "level": "4",
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 9,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 455 (Capacity 9). Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-457",
-      "room": "457",
-      "level": "4",
-      "name": "Office Space",
-      "type": "office",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 4, número 457. Leyenda y pictograma de Office Space."
-    },
-    {
-      "id": "culc-462",
-      "room": "462",
-      "level": "4",
-      "name": "Room 462",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 4, número 462. Número visible sin pictograma de uso propio inequívoco; no se infiere función por color o proximidad."
-    },
-    {
-      "id": "culc-464",
-      "room": "464",
-      "level": "4",
-      "name": "Room 464",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 4, número 464. Número visible sin pictograma de uso propio inequívoco; no se infiere función por color o proximidad."
-    },
-    {
-      "id": "culc-466",
-      "room": "466",
-      "level": "4",
-      "name": "Room 466",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 4, número 466. Número visible sin pictograma de uso propio inequívoco; no se infiere función por color o proximidad."
-    },
-    {
-      "id": "culc-469",
-      "room": "469",
-      "level": "4",
-      "name": "Conference Room",
-      "type": "other",
-      "capacity": 20,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Conference Room > 469; Seating: 20. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-473",
-      "room": "473",
-      "level": "4",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 473; Seating: 24. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-474",
-      "room": "474",
-      "level": "4",
-      "name": "Room 474",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 4, número 474. Número visible sin pictograma de uso propio inequívoco; no se infiere función por color o proximidad."
-    },
-    {
-      "id": "culc-475",
-      "room": "475",
-      "level": "4",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 475; Seating: 24. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-478",
-      "room": "478",
-      "level": "4",
-      "name": "Lab Space",
-      "type": "lab",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 4, número 478. Leyenda y pictograma de Lab Space."
-    },
-    {
-      "id": "culc-479",
-      "room": "479",
-      "level": "4",
-      "name": "Room 479",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 4, número 479. Número visible sin pictograma de uso propio inequívoco; no se infiere función por color o proximidad."
-    },
-    {
-      "id": "culc-481",
-      "room": "481",
-      "level": "4",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 481; Seating: 24. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-483",
-      "room": "483",
-      "level": "4",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 483; Seating: 24. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-487",
-      "room": "487",
-      "level": "4",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 487; Seating: 24. Planta 4: página 4 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-489",
-      "room": "489",
-      "level": "4",
-      "name": "Office Space",
-      "type": "office",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 4, número 489. Leyenda y pictograma de Office Space."
-    },
-    {
-      "id": "culc-571",
-      "room": "571",
-      "level": "5",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 571; Seating: 24. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-572",
-      "room": "572",
-      "level": "5",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 28,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 572; Seating: 28. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-572a",
-      "room": "572A",
-      "level": null,
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 4,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 572A (Capacity 4). La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-572b",
-      "room": "572B",
-      "level": null,
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 4,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 572B (Capacity 4). La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-572c",
-      "room": "572C",
-      "level": null,
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 4,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 572C (Capacity 4). La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-572d",
-      "room": "572D",
-      "level": null,
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 4,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 572D (Capacity 4). La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-573",
-      "room": "573",
-      "level": "5",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 573; Seating: 24. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-575",
-      "room": "575",
-      "level": "5",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 575; Seating: 24. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-578",
-      "room": "578",
-      "level": "5",
-      "name": "Lab Space",
-      "type": "lab",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 5, número 578. Leyenda y pictograma de Lab Space."
-    },
-    {
-      "id": "culc-581",
-      "room": "581",
-      "level": "5",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 581; Seating: 24. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-584",
-      "room": "584",
-      "level": "5",
-      "name": "Lab Space",
-      "type": "lab",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 5, número 584. Leyenda y pictograma de Lab Space."
-    },
-    {
-      "id": "culc-585",
-      "room": "585",
-      "level": null,
-      "name": "Study Room",
-      "type": "study",
-      "capacity": 4,
-      "source_url": "https://libcal.library.gatech.edu/reserve/study-rooms",
-      "source_note": "Recurso de la cuadrícula de reservas: Clough 585 (Capacity 4). La fuente no declara la planta; no se deduce del número."
-    },
-    {
-      "id": "culc-587",
-      "room": "587",
-      "level": "5",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 587; Seating: 24. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-589",
-      "room": "589",
-      "level": "5",
-      "name": "Class Laboratory - Wet",
-      "type": "lab",
-      "capacity": 24,
-      "source_url": "https://avservices.gatech.edu/building/166/",
-      "source_note": "Rooms in this Building > Class Laboratory - Wet > 589; Seating: 24. Planta 5: página 5 de https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf, número impreso en el directorio de planta."
-    },
-    {
-      "id": "culc-kaldi-s-coffee",
-      "room": "Kaldi's Coffee",
-      "level": "1",
-      "name": "Kaldi's Coffee",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://library.gatech.edu/clough",
-      "source_note": "Services & Resources > Kaldi’s Coffee: explicitly located on the first floor. Conflicto con el Starbucks de segunda planta del PDF antiguo."
-    },
-    {
-      "id": "culc-main-atrium",
-      "room": "Main Atrium",
-      "level": "1",
-      "name": "Main Atrium",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 1: etiqueta Main Atrium."
-    },
-    {
-      "id": "culc-roof-garden",
-      "room": "Roof garden",
-      "level": "5",
-      "name": "Roof garden",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://repository.gatech.edu/server/api/core/bitstreams/1d05bf36-84d2-4d12-9b6d-be36dff0457e/content",
-      "source_note": "Apéndice, página impresa 18: Fifth Floor > Access to roof garden. Descripción de 2014, sin aforo actual."
-    },
-    {
-      "id": "culc-shipping-receiving",
-      "room": "Shipping & Receiving",
-      "level": "1",
-      "name": "Shipping & Receiving",
-      "type": "service",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 1: etiqueta Shipping & Receiving."
-    },
-    {
-      "id": "culc-winsett-gallery",
-      "room": "Winsett Gallery",
-      "level": "3",
-      "name": "Winsett Gallery",
-      "type": "other",
-      "capacity": null,
-      "source_url": "https://www.library.gatech.edu/sites/default/files/2019-08/Clough%20Floor%20Maps.pdf",
-      "source_note": "Página 3: etiqueta Winsett Gallery."
+  "edges": [
+   [
+    "n1-0",
+    "n1-1"
+   ],
+   [
+    "n1-1",
+    "n1-2"
+   ],
+   [
+    "n1-2",
+    "n1-3"
+   ],
+   [
+    "n1-3",
+    "n1-4"
+   ],
+   [
+    "n1-4",
+    "n1-5"
+   ],
+   [
+    "n1-5",
+    "n1-6"
+   ],
+   [
+    "n1-6",
+    "n1-7"
+   ],
+   [
+    "n1-7",
+    "n1-8"
+   ],
+   [
+    "n1-8",
+    "n1-9"
+   ],
+   [
+    "n1-6",
+    "n1-10"
+   ],
+   [
+    "n1-10",
+    "n1-11"
+   ],
+   [
+    "n1-11",
+    "n1-12"
+   ],
+   [
+    "n1-12",
+    "n1-13"
+   ],
+   [
+    "n1-13",
+    "n1-14"
+   ],
+   [
+    "n1-14",
+    "n1-15"
+   ],
+   [
+    "n1-8",
+    "n1-16"
+   ],
+   [
+    "n1-16",
+    "n1-14"
+   ],
+   [
+    "n1-17",
+    "n1-18"
+   ],
+   [
+    "n1-18",
+    "n1-0"
+   ],
+   [
+    "d1-152",
+    "n1-1"
+   ],
+   [
+    "d1-150",
+    "n1-2"
+   ],
+   [
+    "d1-146",
+    "n1-3"
+   ],
+   [
+    "d1-144",
+    "n1-4"
+   ],
+   [
+    "d1-131",
+    "n1-10"
+   ],
+   [
+    "d1-129",
+    "n1-11"
+   ],
+   [
+    "d1-127",
+    "n1-12"
+   ],
+   [
+    "d1-125",
+    "n1-12"
+   ],
+   [
+    "d1-123",
+    "n1-13"
+   ],
+   [
+    "d1-102",
+    "n1-16"
+   ],
+   [
+    "d1-main-atrium",
+    "n1-5"
+   ],
+   [
+    "el1",
+    "n1-7"
+   ],
+   [
+    "e1-n",
+    "n1-18"
+   ],
+   [
+    "e1-s",
+    "n1-15"
+   ],
+   [
+    "n2-0",
+    "n2-1"
+   ],
+   [
+    "n2-1",
+    "n2-2"
+   ],
+   [
+    "n2-2",
+    "n2-3"
+   ],
+   [
+    "n2-3",
+    "n2-4"
+   ],
+   [
+    "n2-4",
+    "n2-5"
+   ],
+   [
+    "n2-5",
+    "n2-6"
+   ],
+   [
+    "n2-6",
+    "n2-7"
+   ],
+   [
+    "n2-7",
+    "n2-8"
+   ],
+   [
+    "n2-8",
+    "n2-9"
+   ],
+   [
+    "n2-9",
+    "n2-10"
+   ],
+   [
+    "n2-10",
+    "n2-11"
+   ],
+   [
+    "n2-11",
+    "n2-12"
+   ],
+   [
+    "n2-12",
+    "n2-13"
+   ],
+   [
+    "n2-13",
+    "n2-14"
+   ],
+   [
+    "n2-14",
+    "n2-15"
+   ],
+   [
+    "n2-15",
+    "n2-16"
+   ],
+   [
+    "n2-16",
+    "n2-17"
+   ],
+   [
+    "n2-18",
+    "n2-19"
+   ],
+   [
+    "n2-19",
+    "n2-0"
+   ],
+   [
+    "n2-17",
+    "n2-20"
+   ],
+   [
+    "n2-21",
+    "n2-15"
+   ],
+   [
+    "n2-22",
+    "n2-16"
+   ],
+   [
+    "d2-273",
+    "n2-1"
+   ],
+   [
+    "d2-277",
+    "n2-3"
+   ],
+   [
+    "d2-283",
+    "n2-12"
+   ],
+   [
+    "d2-285",
+    "n2-13"
+   ],
+   [
+    "d2-205",
+    "n2-14"
+   ],
+   [
+    "d2-215",
+    "n2-20"
+   ],
+   [
+    "d2-262",
+    "n2-18"
+   ],
+   [
+    "d2-272",
+    "n2-19"
+   ],
+   [
+    "d2-274",
+    "n2-2"
+   ],
+   [
+    "d2-278",
+    "n2-5"
+   ],
+   [
+    "d2-280",
+    "n2-10"
+   ],
+   [
+    "d2-242",
+    "n2-4"
+   ],
+   [
+    "d2-244",
+    "n2-6"
+   ],
+   [
+    "d2-246",
+    "n2-7"
+   ],
+   [
+    "d2-248",
+    "n2-8"
+   ],
+   [
+    "d2-250",
+    "n2-9"
+   ],
+   [
+    "d2-252",
+    "n2-11"
+   ],
+   [
+    "el2",
+    "n2-21"
+   ],
+   [
+    "st2",
+    "n2-22"
+   ],
+   [
+    "e2-n",
+    "n2-18"
+   ],
+   [
+    "e2-s",
+    "n2-20"
+   ],
+   [
+    "n3-0",
+    "n3-1"
+   ],
+   [
+    "n3-1",
+    "n3-2"
+   ],
+   [
+    "n3-2",
+    "n3-3"
+   ],
+   [
+    "n3-3",
+    "n3-4"
+   ],
+   [
+    "n3-4",
+    "n3-5"
+   ],
+   [
+    "n3-5",
+    "n3-6"
+   ],
+   [
+    "n3-6",
+    "n3-7"
+   ],
+   [
+    "n3-7",
+    "n3-8"
+   ],
+   [
+    "n3-8",
+    "n3-9"
+   ],
+   [
+    "n3-9",
+    "n3-10"
+   ],
+   [
+    "n3-10",
+    "n3-11"
+   ],
+   [
+    "n3-11",
+    "n3-12"
+   ],
+   [
+    "n3-12",
+    "n3-13"
+   ],
+   [
+    "n3-13",
+    "n3-14"
+   ],
+   [
+    "n3-15",
+    "n3-16"
+   ],
+   [
+    "n3-16",
+    "n3-17"
+   ],
+   [
+    "n3-17",
+    "n3-18"
+   ],
+   [
+    "n3-18",
+    "n3-19"
+   ],
+   [
+    "n3-19",
+    "n3-20"
+   ],
+   [
+    "n3-20",
+    "n3-21"
+   ],
+   [
+    "n3-21",
+    "n3-22"
+   ],
+   [
+    "n3-22",
+    "n3-23"
+   ],
+   [
+    "n3-20",
+    "n3-24"
+   ],
+   [
+    "n3-24",
+    "n3-25"
+   ],
+   [
+    "n3-25",
+    "n3-26"
+   ],
+   [
+    "n3-26",
+    "n3-6"
+   ],
+   [
+    "n3-23",
+    "n3-27"
+   ],
+   [
+    "n3-27",
+    "n3-13"
+   ],
+   [
+    "n3-28",
+    "n3-29"
+   ],
+   [
+    "n3-29",
+    "n3-1"
+   ],
+   [
+    "n3-30",
+    "n3-9"
+   ],
+   [
+    "n3-31",
+    "n3-11"
+   ],
+   [
+    "n3-14",
+    "n3-32"
+   ],
+   [
+    "n3-32",
+    "n3-33"
+   ],
+   [
+    "n3-33",
+    "n3-34"
+   ],
+   [
+    "d3-373",
+    "n3-2"
+   ],
+   [
+    "d3-375",
+    "n3-3"
+   ],
+   [
+    "d3-381",
+    "n3-4"
+   ],
+   [
+    "d3-383",
+    "n3-5"
+   ],
+   [
+    "d3-385",
+    "n3-7"
+   ],
+   [
+    "d3-387",
+    "n3-8"
+   ],
+   [
+    "d3-305",
+    "n3-10"
+   ],
+   [
+    "d3-307",
+    "n3-10"
+   ],
+   [
+    "d3-367",
+    "n3-15"
+   ],
+   [
+    "d3-365",
+    "n3-15"
+   ],
+   [
+    "d3-363",
+    "n3-16"
+   ],
+   [
+    "d3-357",
+    "n3-17"
+   ],
+   [
+    "d3-341",
+    "n3-19"
+   ],
+   [
+    "d3-335",
+    "n3-21"
+   ],
+   [
+    "d3-331",
+    "n3-22"
+   ],
+   [
+    "d3-333",
+    "n3-22"
+   ],
+   [
+    "d3-362",
+    "n3-28"
+   ],
+   [
+    "d3-372",
+    "n3-29"
+   ],
+   [
+    "d3-346",
+    "n3-18"
+   ],
+   [
+    "d3-382",
+    "n3-26"
+   ],
+   [
+    "d3-344",
+    "n3-24"
+   ],
+   [
+    "d3-342",
+    "n3-25"
+   ],
+   [
+    "d3-315",
+    "n3-33"
+   ],
+   [
+    "d3-317",
+    "n3-14"
+   ],
+   [
+    "d3-325",
+    "n3-27"
+   ],
+   [
+    "d3-323",
+    "n3-32"
+   ],
+   [
+    "d3-winsett-gallery",
+    "n3-12"
+   ],
+   [
+    "el3",
+    "n3-30"
+   ],
+   [
+    "st3",
+    "n3-31"
+   ],
+   [
+    "e3-n",
+    "n3-28"
+   ],
+   [
+    "e3-s",
+    "n3-34"
+   ],
+   [
+    "n4-0",
+    "n4-1"
+   ],
+   [
+    "n4-1",
+    "n4-2"
+   ],
+   [
+    "n4-2",
+    "n4-3"
+   ],
+   [
+    "n4-3",
+    "n4-4"
+   ],
+   [
+    "n4-4",
+    "n4-5"
+   ],
+   [
+    "n4-5",
+    "n4-6"
+   ],
+   [
+    "n4-6",
+    "n4-7"
+   ],
+   [
+    "n4-7",
+    "n4-8"
+   ],
+   [
+    "n4-8",
+    "n4-9"
+   ],
+   [
+    "n4-9",
+    "n4-10"
+   ],
+   [
+    "n4-10",
+    "n4-11"
+   ],
+   [
+    "n4-11",
+    "n4-12"
+   ],
+   [
+    "n4-12",
+    "n4-13"
+   ],
+   [
+    "n4-14",
+    "n4-15"
+   ],
+   [
+    "n4-15",
+    "n4-16"
+   ],
+   [
+    "n4-16",
+    "n4-17"
+   ],
+   [
+    "n4-17",
+    "n4-18"
+   ],
+   [
+    "n4-18",
+    "n4-19"
+   ],
+   [
+    "n4-19",
+    "n4-20"
+   ],
+   [
+    "n4-20",
+    "n4-21"
+   ],
+   [
+    "n4-21",
+    "n4-22"
+   ],
+   [
+    "n4-22",
+    "n4-23"
+   ],
+   [
+    "n4-23",
+    "n4-24"
+   ],
+   [
+    "n4-24",
+    "n4-25"
+   ],
+   [
+    "n4-25",
+    "n4-26"
+   ],
+   [
+    "n4-26",
+    "n4-12"
+   ],
+   [
+    "n4-27",
+    "n4-1"
+   ],
+   [
+    "n4-28",
+    "n4-10"
+   ],
+   [
+    "n4-29",
+    "n4-11"
+   ],
+   [
+    "n4-13",
+    "n4-30"
+   ],
+   [
+    "d4-457",
+    "n4-16"
+   ],
+   [
+    "d4-469",
+    "n4-14"
+   ],
+   [
+    "d4-455",
+    "n4-19"
+   ],
+   [
+    "d4-447",
+    "n4-20"
+   ],
+   [
+    "d4-445",
+    "n4-22"
+   ],
+   [
+    "d4-441",
+    "n4-23"
+   ],
+   [
+    "d4-443",
+    "n4-23"
+   ],
+   [
+    "d4-466",
+    "n4-15"
+   ],
+   [
+    "d4-474",
+    "n4-27"
+   ],
+   [
+    "d4-462",
+    "n4-17"
+   ],
+   [
+    "d4-464",
+    "n4-18"
+   ],
+   [
+    "d4-478",
+    "n4-5"
+   ],
+   [
+    "d4-450",
+    "n4-21"
+   ],
+   [
+    "d4-448",
+    "n4-21"
+   ],
+   [
+    "d4-473",
+    "n4-2"
+   ],
+   [
+    "d4-475",
+    "n4-3"
+   ],
+   [
+    "d4-479",
+    "n4-4"
+   ],
+   [
+    "d4-481",
+    "n4-6"
+   ],
+   [
+    "d4-483",
+    "n4-7"
+   ],
+   [
+    "d4-487",
+    "n4-8"
+   ],
+   [
+    "d4-489",
+    "n4-9"
+   ],
+   [
+    "d4-423",
+    "n4-25"
+   ],
+   [
+    "d4-421",
+    "n4-26"
+   ],
+   [
+    "el4",
+    "n4-28"
+   ],
+   [
+    "st4",
+    "n4-29"
+   ],
+   [
+    "e4-n",
+    "n4-27"
+   ],
+   [
+    "e4-s",
+    "n4-30"
+   ],
+   [
+    "n5-0",
+    "n5-1"
+   ],
+   [
+    "n5-1",
+    "n5-2"
+   ],
+   [
+    "n5-2",
+    "n5-3"
+   ],
+   [
+    "n5-3",
+    "n5-4"
+   ],
+   [
+    "n5-4",
+    "n5-5"
+   ],
+   [
+    "n5-5",
+    "n5-6"
+   ],
+   [
+    "n5-6",
+    "n5-7"
+   ],
+   [
+    "n5-7",
+    "n5-8"
+   ],
+   [
+    "n5-8",
+    "n5-9"
+   ],
+   [
+    "n5-9",
+    "n5-10"
+   ],
+   [
+    "n5-10",
+    "n5-11"
+   ],
+   [
+    "n5-12",
+    "n5-4"
+   ],
+   [
+    "n5-13",
+    "n5-1"
+   ],
+   [
+    "n5-14",
+    "n5-8"
+   ],
+   [
+    "n5-15",
+    "n5-10"
+   ],
+   [
+    "n5-11",
+    "n5-16"
+   ],
+   [
+    "n5-16",
+    "n5-17"
+   ],
+   [
+    "d5-571",
+    "n5-2"
+   ],
+   [
+    "d5-573",
+    "n5-3"
+   ],
+   [
+    "d5-575",
+    "n5-5"
+   ],
+   [
+    "d5-581",
+    "n5-6"
+   ],
+   [
+    "d5-584",
+    "n5-7"
+   ],
+   [
+    "d5-587",
+    "n5-9"
+   ],
+   [
+    "d5-589",
+    "n5-16"
+   ],
+   [
+    "d5-572",
+    "n5-12"
+   ],
+   [
+    "d5-578",
+    "n5-12"
+   ],
+   [
+    "d5-roof-garden",
+    "n5-15"
+   ],
+   [
+    "el5",
+    "n5-14"
+   ],
+   [
+    "st5",
+    "n5-15"
+   ],
+   [
+    "e5-n",
+    "n5-13"
+   ],
+   [
+    "e5-s",
+    "n5-17"
+   ]
+  ],
+  "connectors": [
+   {
+    "id": "elevator",
+    "name": "Elevator",
+    "kind": "elevator",
+    "stepFree": true,
+    "nodes": {
+     "1": "el1",
+     "2": "el2",
+     "3": "el3",
+     "4": "el4",
+     "5": "el5"
     }
+   },
+   {
+    "id": "stairs",
+    "name": "Stairs",
+    "kind": "stairs",
+    "stepFree": false,
+    "nodes": {
+     "2": "st2",
+     "3": "st3",
+     "4": "st4",
+     "5": "st5"
+    }
+   }
+  ],
+  "entrances": [
+   {
+    "id": "e1-n",
+    "name": "Level 1 upper exit",
+    "level": "1",
+    "node": "e1-n",
+    "note": "Approximate position from the library floor map, to be confirmed on site."
+   },
+   {
+    "id": "e1-s",
+    "name": "Level 1 lower exit",
+    "level": "1",
+    "node": "e1-s",
+    "note": "Approximate position from the library floor map, to be confirmed on site."
+   },
+   {
+    "id": "e2-n",
+    "name": "Level 2 upper exit",
+    "level": "2",
+    "node": "e2-n",
+    "note": "Approximate position from the library floor map, to be confirmed on site."
+   },
+   {
+    "id": "e2-s",
+    "name": "Level 2 lower exit",
+    "level": "2",
+    "node": "e2-s",
+    "note": "Approximate position from the library floor map, to be confirmed on site."
+   },
+   {
+    "id": "e3-n",
+    "name": "Level 3 upper exit",
+    "level": "3",
+    "node": "e3-n",
+    "note": "Approximate position from the library floor map, to be confirmed on site."
+   },
+   {
+    "id": "e3-s",
+    "name": "Level 3 lower exit",
+    "level": "3",
+    "node": "e3-s",
+    "note": "Approximate position from the library floor map, to be confirmed on site."
+   },
+   {
+    "id": "e4-n",
+    "name": "Level 4 upper exit",
+    "level": "4",
+    "node": "e4-n",
+    "note": "Approximate position from the library floor map, to be confirmed on site."
+   },
+   {
+    "id": "e4-s",
+    "name": "Level 4 lower exit",
+    "level": "4",
+    "node": "e4-s",
+    "note": "Approximate position from the library floor map, to be confirmed on site."
+   },
+   {
+    "id": "e5-n",
+    "name": "Level 5 upper exit",
+    "level": "5",
+    "node": "e5-n",
+    "note": "Approximate position from the library floor map, to be confirmed on site."
+   },
+   {
+    "id": "e5-s",
+    "name": "Level 5 lower exit",
+    "level": "5",
+    "node": "e5-s",
+    "note": "Approximate position from the library floor map, to be confirmed on site."
+   }
   ]
+ }
 }

@@ -3,7 +3,7 @@ import kendeda from "../data/indoor/kendeda.json";
 import culc from "../data/indoor/culc.json";
 import type { IndoorBuilding, IndoorLevel, IndoorSpace, RoomFact } from "./types";
 
-const buildings = [kendeda, culc] as IndoorBuilding[];
+const buildings = [kendeda, culc] as unknown as IndoorBuilding[];
 
 /** Returns the curated indoor model for this footprint id, if supported. */
 export function indoorFor(buildingId: string): IndoorBuilding | undefined {
