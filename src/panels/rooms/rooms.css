@@ -1,15 +1,4 @@
-/** @file Reserve-a-room panel layout (T-60): building picker, schematic glyph, day/slot grid and "my reservations". Look comes from .cims-field / .cims-chip / .cims-btn (styles/cims-ui.css) plus tokens.css. */
-.room-finder { padding: var(--s4); display: flex; flex-direction: column; gap: var(--s3); min-width: 0; overflow-wrap: anywhere; }
-.room-finder h2 { margin: 0; display: flex; align-items: center; gap: var(--s2); font-size: var(--fs-md); }
-.room-finder__intro { margin: 0; font-size: var(--fs-sm); }
-
-/* ---------- favorites shortcut (shown above the picker) ---------- */
-.reserve-favorites-entry { margin: 0; }
-
-/* ---------- building picker (step 1) ---------- */
-.reserve-picker { display: flex; flex-direction: column; gap: var(--s2); }
-.reserve-picker__chip[aria-disabled="true"] { opacity: 0.6; }
-.reserve-picker__chip .cims-tag { margin-left: var(--s1); }
+/** @file Reservation flow layout (T-60/T-62): schematic building header, day/slot grid, confirm panel and "My bookings" cards. Look comes from .cims-field / .cims-chip / .cims-btn (styles/cims-ui.css) plus tokens.css; the board chrome itself lives in rooms-board.css. */
 
 /* ---------- building header + schematic glyph ---------- */
 .reserve-building { display: flex; align-items: center; gap: var(--s3); padding-bottom: var(--s2); border-bottom: var(--hairline); }
@@ -17,7 +6,7 @@
 .reserve-building__info { display: flex; flex-direction: column; gap: var(--s2); align-items: flex-start; min-width: 0; }
 .reserve-building__title { margin: 0; font-size: var(--fs-lg); overflow-wrap: anywhere; }
 
-/* ---------- day/time grid (step 2) ---------- */
+/* ---------- day/time grid ---------- */
 .reserve-grid-screen { display: flex; flex-direction: column; gap: var(--s3); min-width: 0; }
 .reserve-grid__days { display: flex; gap: var(--s2); overflow-x: auto; }
 .reserve-grid { border: var(--hairline); background: var(--white); overflow-x: auto; }
@@ -33,18 +22,29 @@
 /* scroll-margin keeps the sticky room-name column (168px) from fighting the browser's focus-follows-click
    auto-scroll: without it, focusing a slot near the left edge jumps the grid further right than needed. */
 .reserve-slot { flex: none; width: 22px; height: 28px; border: 0; background: none; padding: 0; cursor: pointer; display: grid; place-items: center; scroll-margin-inline-start: 176px; }
-.reserve-slot::before { content: ""; width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--ink); background: var(--white); }
+/* Solid rectangular cells, edge to edge (no gap, no radius) -- a continuous booking-grid row, closer
+   to a real room-scheduling system than the old free-floating dot. Busy cells get an ink diagonal
+   hatch over --paper-2 instead of a flat fill, reusing this app's own "survey map" hatching motif
+   (docs/design/DESIGN-DIRECTION.md's "ink hatching" treatment) instead of a plain gray block. */
+.reserve-slot::before { content: ""; width: 100%; height: 100%; box-sizing: border-box; border: 1px solid var(--ink); }
 .reserve-slot--free::before { background: var(--cat-free); border-color: var(--cat-free); }
-.reserve-slot--busy::before { background: var(--paper-2); border-color: var(--hairline-muted); opacity: 0.8; }
+.reserve-slot--busy::before {
+  background-color: var(--paper-2);
+  background-image: repeating-linear-gradient(45deg, var(--ink) 0 1px, transparent 1px 6px);
+  border-color: var(--hairline-muted);
+}
 .reserve-slot--selected::before { background: var(--gold); border-color: var(--ink); }
 .reserve-slot--capped { cursor: not-allowed; }
-.reserve-slot--capped::before { background: var(--paper-2); border: 1px dashed var(--ink-muted); opacity: 0.6; }
+.reserve-slot--capped::before {
+  background-color: var(--paper-2);
+  background-image: repeating-linear-gradient(45deg, var(--ink-muted) 0 1px, transparent 1px 6px);
+  border: 1px dashed var(--ink-muted); opacity: 0.7;
+}
 .reserve-slot:disabled { cursor: not-allowed; }
 .reserve-slot:focus-visible::before { outline: 2px solid var(--ink); outline-offset: 2px; }
 .reserve-grid__legend { display: flex; gap: var(--s4); list-style: none; margin: 0; padding: var(--s2) var(--s3); font-size: var(--fs-sm); border-top: var(--hairline); }
 .reserve-grid__legend li { display: flex; align-items: center; gap: var(--s1); }
 .reserve-grid__legend .reserve-slot { width: 14px; height: 14px; }
-.reserve-grid__legend .reserve-slot::before { width: 12px; height: 12px; }
 
 .reserve-grid__error { color: var(--cat-issues); margin: 0; }
 
@@ -53,15 +53,17 @@
 .reserve-confirm p { margin: 0; }
 .reserve-confirm__actions { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
 
-/* ---------- my reservations ---------- */
-.reserve-mine { border-top: var(--hairline); padding-top: var(--s3); display: flex; flex-direction: column; gap: var(--s2); }
-.reserve-mine h3 { margin: 0; }
-.reserve-mine__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s2); }
-.reserve-mine__item { border: var(--hairline); padding: var(--s2) var(--s3); display: flex; justify-content: space-between; align-items: center; gap: var(--s2); flex-wrap: wrap; }
-.reserve-mine__info { display: flex; flex-direction: column; gap: 2px; font-size: var(--fs-sm); }
-.reserve-mine__reminder { font-size: var(--fs-sm); color: var(--cat-issues); font-weight: 600; }
-.reserve-mine__actions { display: flex; gap: var(--s2); }
-.reserve-mine__prototype { display: flex; align-items: baseline; gap: var(--s2); }
-
 /* ---------- rooms near me (T-61) ---------- */
 .reserve-nearby__error { display: flex; flex-direction: column; gap: var(--s2); }
+
+/* ---------- my bookings (T-62, panels/rooms/MyBookingsSection.tsx) ---------- */
+.booking-list { display: flex; flex-direction: column; gap: var(--s3); }
+.booking-list__items { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s3); }
+.booking-card { display: flex; gap: var(--s3); border: var(--hairline); background: var(--white); padding: var(--s3) var(--s4); }
+.booking-card .reserve-glyph { width: 64px; height: 48px; }
+.booking-card__body { display: flex; flex-direction: column; gap: 2px; min-width: 0; font-size: var(--fs-sm); }
+.booking-card__title { font-size: var(--fs-md); overflow-wrap: anywhere; }
+.reserve-mine__reminder { font-size: var(--fs-sm); color: var(--cat-issues); font-weight: 600; }
+.booking-card__actions { display: flex; flex-wrap: wrap; gap: var(--s2); margin-top: var(--s2); }
+/* Plain inline flow (not flex): the tag sits inline with the running text, which includes an <em> partway through. */
+.booking-list__prototype .cims-tag { margin-right: var(--s2); }

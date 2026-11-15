@@ -14,7 +14,7 @@ import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinBoard from "../panels/bulletin/BulletinBoard";
 import PoliceView from "../panels/police/PoliceView";
 import ReportPanel from "../panels/report";
-import RoomFinderPanel from "../panels/rooms/RoomFinderPanel";
+import RoomsBoard from "../panels/rooms/RoomsBoard";
 import StoriesPanel from "../stories/StoriesPanel";
 import { useStories } from "../stories/store";
 import { bulletinUrl, readBulletinParams, type PostType } from "../lib/bulletin";
@@ -159,7 +159,8 @@ export default function Shell() {
 
   useEffect(() => {
     const onKey = (event: KeyboardEvent) => {
-      if (event.key !== "Escape" || event.defaultPrevented || dialogOpen || bulletin.open) return;
+      // Rooms is a modal dialog (RoomsBoard, like BulletinBoard) that handles its own Escape via onCancel.
+      if (event.key !== "Escape" || event.defaultPrevented || dialogOpen || bulletin.open || panel === "rooms") return;
       if (document.querySelector(".building-view")) return; // the indoor screen handles its own Esc
       if (panel !== "explore" || selection) { event.preventDefault(); closeContent(); }
     };
@@ -168,8 +169,8 @@ export default function Shell() {
   });
 
   let content: { title: string; key: string; body: ReactNode } | null = null;
-  if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <RoomFinderPanel /> };
-  else if (panel === "report") {
+  // "rooms" is a full-screen takeover like the bulletin board (RoomsBoard, below), not a floating-card panel.
+  if (panel === "report") {
     // Keyed by the selected place/building (when there is one) so the flow resets for a new "Report an issue".
     const reportKey = selection?.kind === "report" ? `report:${selection.id}` : "report";
     content = { title: "Report", key: reportKey, body: <ReportPanel key={reportKey} onClose={() => setPanel("explore")} /> };
@@ -256,6 +257,7 @@ export default function Shell() {
       {mobile && <MobileTabBar panel={bulletin.open ? "bulletin" : panel} onPanel={choosePanel} />}
       <OfflineBanner />
       {policeOpen && <PoliceView onClose={() => setPolice(false)} />}
+      {panel === "rooms" && <RoomsBoard onClose={closeContent} />}
       {bulletin.open && <BulletinBoard type={bulletin.type} onClose={closeBulletin}
         onType={(type) => { writeBulletinUrl(type); setBulletin({ open: true, type }); }} />}
     </div>

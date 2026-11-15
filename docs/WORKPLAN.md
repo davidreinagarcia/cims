@@ -222,6 +222,35 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   Ported onto `main` after the app-shell restructure (`feat/T61-shell-integration`, 2026-11-14): the old
   `Sidebar` tab this was built against is gone, so `RoomFinderPanel` now mounts unchanged inside the
   shell's "Rooms" floating card (desktop) / bottom sheet (mobile), same as `BulletinPanel`.
+  *Superseded by T-62: `RoomFinderPanel` is gone, replaced by the full-page `RoomsBoard`.*
+- [x] **T-62 Rooms full-page board** (F-11/F-20, "session, 2026-11-15") · B · needs T-24/T-60/T-61
+  Gives Rooms the same full-screen treatment Bulletin already has, instead of a small floating-card/bottom-sheet
+  panel: `src/shell/Shell.tsx` mounts the new `RoomsBoard` whenever `panel === "rooms"`, outside the
+  `FloatingCard`/`BottomSheet` system — the same pattern `BulletinBoard` uses, just keyed off the existing
+  `panel` state (Rooms needed no second "open" flag the way Bulletin's type filter did) — so `?panel=rooms`,
+  the rail/tab-bar item and `useBookingRequestSeq()`'s "Book this room" handoff all keep working unchanged.
+  `RoomsBoard.tsx` adds a Bulletin-style top chip bar: one chip per entry in `buildingOptions.ts` (the single
+  list of bookable/"Coming soon" buildings, lifted out of the old `BuildingPicker.tsx` so both the chip bar and
+  `RoomsNearMe.tsx` share it), Favorites, Rooms near me and My bookings as mutually-exclusive sections, plus an
+  independent **Only available rooms** toggle — narrows whichever section is showing to rooms free *right now*
+  (the current 30-minute slot on today's grid, not "for the rest of today": simpler and matches what someone
+  walking up right now actually wants), reusing `ReservationGrid`'s own `isRoomFree`/`expandDemoSlots` calls
+  rather than a second availability engine. **My bookings** is promoted to that top-level section
+  (`MyBookingsSection.tsx`, replacing `ReservationGrid`'s old inline "My reservations here" list) with a richer
+  card per booking: room/building/floor pulled from `indoor/registry.ts` (never invented), the existing
+  `BuildingGlyph` schematic icon, capacity and the reserved window, and five actions — Show on map
+  (`select({ kind: "building", id })`, the same selection mechanism `BulletinBoard`/`PlaceCard` use), Check in
+  (`lib/reservations.ts#checkInNearby`, the exact 15-minute/150 m logic factored out of `ReservationGrid` so
+  both call sites stay identical), external Directions (Google Maps link to the building, `PlaceCard`'s exact
+  pattern), Guide inside building (`select({ kind: "room", id })`, opening the existing routed indoor screen —
+  kept as a separate label from Directions so the external-vs-in-app distinction is clear), and Report
+  (`select({ kind: "report", id: buildingId })`, prefilled via `report/location.ts#locationForId` and handled by
+  the shell's normal Report panel). Cancel stayed on the card too (existing capability, not one of the
+  five above, but dropping it would have been a regression). The day/slot grid's cells (`rooms.css`) changed
+  from a small circle to solid rectangular cells flush edge-to-edge, with a diagonal ink hatch
+  (`repeating-linear-gradient` on `--ink`/`--paper-2`) on busy cells instead of a flat gray fill — closer to a
+  real room-booking calendar grid and reusing this app's own hatching motif instead of a new color or asset.
+  Still Kendeda + CULC only, still mock/localStorage persistence, no backend work.
 - [x] **T-25 Sign-in mock + posting gate** (F-21, [ADR-0007](adr/0007-gt-sign-in-simulated.md)) · A · *hotspot PR (`App.tsx`, `src/state/`)* · needs T-01; land it before T-23 and the T-15 posting UI
   **Deliberately theater: looks real, enforces nothing; roles only change labels.** `src/auth/`: `AuthAdapter` interface (`signIn(persona)`, `signOut()`, `session`) with a **mock** adapter (localStorage; demo personas Student / Club officer / Facilities staff / Moderator). `AuthProvider` + `useAuth()` in `src/state/`, `SignInDialog` ("Sign in with Georgia Tech (demo)": never asks for credentials, community-rules checkbox, DEMO badge), a `requireAuth(action)` gate that opens the dialog and resumes the action, an account chip in the header. Types `Session { accountId, role, provider }` in `src/types/`. **Done when:** a signed-out write opens the dialog and continues after sign-in; a reload keeps the session; sign-out clears it; every screen says "Demo sign-in".
 

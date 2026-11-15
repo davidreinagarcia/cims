@@ -89,18 +89,19 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `reportsService` [src/lib/reports.ts:89](../src/lib/reports.ts#L89): The reports backend used by the app: Supabase, with the local mock as offline fallback (ADR-0005).
 - `createLocalReservationsService()` [src/lib/reservations.mock.ts:16](../src/lib/reservations.mock.ts#L16): Creates the localStorage-backed mock. Falls back to memory when storage is unavailable.
 - `createSupabaseReservationsService(fallback)` [src/lib/reservations.supabase.ts:17](../src/lib/reservations.supabase.ts#L17): Shared reservations; the caller's `accountId` argument is ignored because ownership is the Supabase user (aut…
-- `SLOT_MINUTES` [src/lib/reservations.ts:7](../src/lib/reservations.ts#L7): 30 minutes: both the grid's cell size and the minimum booking length.
-- `MIN_DURATION_MINUTES` [src/lib/reservations.ts:9](../src/lib/reservations.ts#L9): Shortest a reservation may be.
-- `MAX_DURATION_MINUTES` [src/lib/reservations.ts:11](../src/lib/reservations.ts#L11): Longest a reservation may be; the grid must not let a selection grow past this.
-- `CHECKIN_WINDOW_MINUTES` [src/lib/reservations.ts:19](../src/lib/reservations.ts#L19): Every reservation (T-61, replacing T-60's manually-tapped "Renew" button) has this many minutes
-- `CHECKIN_RADIUS_METERS` [src/lib/reservations.ts:28](../src/lib/reservations.ts#L28): How close (in meters) a check-in's GPS fix must be to the room's *building* centroid
-- `END_REMINDER_MINUTES` [src/lib/reservations.ts:30](../src/lib/reservations.ts#L30): How many minutes before a checked-in reservation's end the UI shows an in-app "ending soon" reminder (honest…
-- `REBOOK_COOLDOWN_MINUTES` [src/lib/reservations.ts:41](../src/lib/reservations.ts#L41): Anti-camping cooldown (T-61, explicitly requested): once an account's reservation on a room ends
-- `checkinDeadline(reservation)` [src/lib/reservations.ts:88](../src/lib/reservations.ts#L88): The instant a reservation's check-in window closes; past this with no check-in, the room is a no-show and fre…
-- `reservationBusyWindow(reservation)` [src/lib/reservations.ts:97](../src/lib/reservations.ts#L97): The interval a reservation blocks on its room: its whole booked range, or null once cancelled.
-- `isReservationActive(reservation, now)` [src/lib/reservations.ts:103](../src/lib/reservations.ts#L103): Whether a reservation is still occupying its room at `now`: not cancelled, not past its end, and either check…
-- `reservationStatus(reservation, now)` [src/lib/reservations.ts:113](../src/lib/reservations.ts#L113): Classifies a reservation's current status for display; see {@link ReservationStatus}.
-- `reservationsService` [src/lib/reservations.ts:125](../src/lib/reservations.ts#L125): The reservations backend used by the app. Supabase, with the local mock as offline fallback.
+- `SLOT_MINUTES` [src/lib/reservations.ts:9](../src/lib/reservations.ts#L9): 30 minutes: both the grid's cell size and the minimum booking length.
+- `MIN_DURATION_MINUTES` [src/lib/reservations.ts:11](../src/lib/reservations.ts#L11): Shortest a reservation may be.
+- `MAX_DURATION_MINUTES` [src/lib/reservations.ts:13](../src/lib/reservations.ts#L13): Longest a reservation may be; the grid must not let a selection grow past this.
+- `CHECKIN_WINDOW_MINUTES` [src/lib/reservations.ts:21](../src/lib/reservations.ts#L21): Every reservation (T-61, replacing T-60's manually-tapped "Renew" button) has this many minutes
+- `CHECKIN_RADIUS_METERS` [src/lib/reservations.ts:30](../src/lib/reservations.ts#L30): How close (in meters) a check-in's GPS fix must be to the room's *building* centroid
+- `END_REMINDER_MINUTES` [src/lib/reservations.ts:32](../src/lib/reservations.ts#L32): How many minutes before a checked-in reservation's end the UI shows an in-app "ending soon" reminder (honest…
+- `REBOOK_COOLDOWN_MINUTES` [src/lib/reservations.ts:43](../src/lib/reservations.ts#L43): Anti-camping cooldown (T-61, explicitly requested): once an account's reservation on a room ends
+- `checkinDeadline(reservation)` [src/lib/reservations.ts:90](../src/lib/reservations.ts#L90): The instant a reservation's check-in window closes; past this with no check-in, the room is a no-show and fre…
+- `reservationBusyWindow(reservation)` [src/lib/reservations.ts:99](../src/lib/reservations.ts#L99): The interval a reservation blocks on its room: its whole booked range, or null once cancelled.
+- `isReservationActive(reservation, now)` [src/lib/reservations.ts:105](../src/lib/reservations.ts#L105): Whether a reservation is still occupying its room at `now`: not cancelled, not past its end, and either check…
+- `reservationStatus(reservation, now)` [src/lib/reservations.ts:115](../src/lib/reservations.ts#L115): Classifies a reservation's current status for display; see {@link ReservationStatus}.
+- `reservationsService` [src/lib/reservations.ts:127](../src/lib/reservations.ts#L127): The reservations backend used by the app. Supabase, with the local mock as offline fallback.
+- `checkInNearby(reservation, accountId)` [src/lib/reservations.ts:138](../src/lib/reservations.ts#L138): Location check-in (T-61/T-62): re-reads the browser's position and confirms it's within
 - `searchPlaces(query, items)` [src/lib/search.ts:113](../src/lib/search.ts#L113): Searches name, aliases and category; queries under two characters preserve the full input order.
 - `searchCampus(query, items, buildings)` [src/lib/search.ts:148](../src/lib/search.ts#L148): Searches footprints and published rooms alongside places, including building aliases in room queries.
 - `suggest(query, buildings, limit = 6)` [src/lib/suggest.ts:7](../src/lib/suggest.ts#L7): Few, ranked suggestions like a map app: nothing for an empty or one letter query, never the whole campus.
@@ -194,10 +195,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `IssueReport` [src/lib/reports.ts:28](../src/lib/reports.ts#L28): A reported issue as the UI sees it.
 - `NewIssueReport` [src/lib/reports.ts:47](../src/lib/reports.ts#L47): What the form submits; the service assigns id, team, status and timestamps.
 - `ReportsService` [src/lib/reports.ts:56](../src/lib/reports.ts#L56): Backend contract for reports. Implemented by the localStorage mock today (ADR-0005 still open).
-- `Reservation` [src/lib/reservations.ts:44](../src/lib/reservations.ts#L44): A booked room as the UI sees it. Always a fixed start/end; "open-ended + Renew" (T-60) is gone, replaced by t…
-- `NewReservation` [src/lib/reservations.ts:64](../src/lib/reservations.ts#L64): What the booking flow submits; the service assigns id, timestamps and ownership.
-- `ReservationsService` [src/lib/reservations.ts:74](../src/lib/reservations.ts#L74): Backend contract for reservations. Implemented by the localStorage mock today (ADR-0005 still open).
-- `ReservationStatus` [src/lib/reservations.ts:110](../src/lib/reservations.ts#L110): Where one reservation stands right now, for the "My reservations here" UI -- derived purely from timestamps,…
+- `Reservation` [src/lib/reservations.ts:46](../src/lib/reservations.ts#L46): A booked room as the UI sees it. Always a fixed start/end; "open-ended + Renew" (T-60) is gone, replaced by t…
+- `NewReservation` [src/lib/reservations.ts:66](../src/lib/reservations.ts#L66): What the booking flow submits; the service assigns id, timestamps and ownership.
+- `ReservationsService` [src/lib/reservations.ts:76](../src/lib/reservations.ts#L76): Backend contract for reservations. Implemented by the localStorage mock today (ADR-0005 still open).
+- `ReservationStatus` [src/lib/reservations.ts:112](../src/lib/reservations.ts#L112): Where one reservation stands right now, for the "My reservations here" UI -- derived purely from timestamps,…
 - `MatchRange` [src/lib/search.ts:7](../src/lib/search.ts#L7): A half-open character range in the original field, suitable for String.slice.
 - `SearchMatch` [src/lib/search.ts:10](../src/lib/search.ts#L10): A matching name, alias or category and its highlight ranges.
 - `SearchResult` [src/lib/search.ts:17](../src/lib/search.ts#L17): A ranked place with an extensible group label and matches in displayable fields.
@@ -219,6 +220,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `ReportFormProps` [src/panels/report/ReportForm.tsx:12](../src/panels/report/ReportForm.tsx#L12): Props for the details step.
 - `ReportStatusViewProps` [src/panels/report/ReportStatusView.tsx:7](../src/panels/report/ReportStatusView.tsx#L7): Props for the status page.
 - `Navigate` [src/panels/report/index.tsx:13](../src/panels/report/index.tsx#L13): Changes the query string without reloading, so a filed report's status link and the staff team filter stay sh…
+- `BuildingOption` [src/panels/rooms/buildingOptions.ts:4](../src/panels/rooms/buildingOptions.ts#L4): One quick-pick building: `enabled` buildings have a working reservation flow; the rest are real GT buildings…
 - `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
 - `IconName` [src/shell/icons.tsx:21](../src/shell/icons.tsx#L21): Names of the shell icons.
 - `ShellPanel` [src/shell/icons.tsx:34](../src/shell/icons.tsx#L34): What the floating card / bottom sheet can show besides a map selection.
@@ -272,10 +274,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `StaffQueue({ role })` [src/panels/report/StaffQueue.tsx:24](../src/panels/report/StaffQueue.tsx#L24): Staff view of the report queue. Unlisted in the MVP: reached with ?panel=staff (optionally &team=IT).
 - `ReportPanel({ onClose })` [src/panels/report/index.tsx:19](../src/panels/report/index.tsx#L19): Mounts the 3-step report flow, or (unlisted, ?staff=1) the staff queue; the floating card / bottom
 - `BuildingGlyph({ buildingId })` [src/panels/rooms/BuildingGlyph.tsx:10](../src/panels/rooms/BuildingGlyph.tsx#L10): Renders a flat, ink-outlined elevation sketch with a gold hatch fill and a row of square windows per level ba…
-- `BuildingPicker({ onPick })` [src/panels/rooms/BuildingPicker.tsx:30](../src/panels/rooms/BuildingPicker.tsx#L30): Search bar + quick-pick chips for the two buildings with real indoor data; other GT buildings show as "Coming…
-- `ReservationGrid({ rooms })` [src/panels/rooms/ReservationGrid.tsx:50](../src/panels/rooms/ReservationGrid.tsx#L50): Day/time grid, booking flow, favorites, location check-in and "My reservations" for any list of
-- `RoomFinderPanel()` [src/panels/rooms/RoomFinderPanel.tsx:28](../src/panels/rooms/RoomFinderPanel.tsx#L28): Sidebar tab: "Reserve a room" entry point, replacing the read-only room finder (T-24) with a
-- `RoomsNearMe({ onBack })` [src/panels/rooms/RoomsNearMe.tsx:19](../src/panels/rooms/RoomsNearMe.tsx#L19): Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and hands the…
+- `MyBookingsSection({ onCountChange })` [src/panels/rooms/MyBookingsSection.tsx:117](../src/panels/rooms/MyBookingsSection.tsx#L117): Top-level "My bookings": every non-cancelled reservation the signed-in account holds, across Kendeda and CULC.
+- `ReservationGrid({ rooms, onlyAvailable = false })` [src/panels/rooms/ReservationGrid.tsx:49](../src/panels/rooms/ReservationGrid.tsx#L49): Day/time grid, booking flow and favorites for any list of bookable rooms -- one building's rooms
+- `RoomsBoard({ onClose })` [src/panels/rooms/RoomsBoard.tsx:39](../src/panels/rooms/RoomsBoard.tsx#L39): Full-screen "Rooms" takeover, replacing the small floating-card/bottom-sheet `RoomFinderPanel`
+- `RoomsNearMe({ onBack, onlyAvailable })` [src/panels/rooms/RoomsNearMe.tsx:25](../src/panels/rooms/RoomsNearMe.tsx#L25): Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and
 - `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
 - `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
 - `SearchPanel(…)` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
@@ -378,6 +380,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `locationParts(location)` [src/panels/report/location.ts:7](../src/panels/report/location.ts#L7): Breadcrumb parts for a location: building › floor › room, or the outdoor pin coordinates.
 - `locationForId(id, floor, room)` [src/panels/report/location.ts:22](../src/panels/report/location.ts#L22): Builds a prefilled location for a place or building id (checks curated places first, then the OSM
 - `locationFromParams(params)` [src/panels/report/location.ts:31](../src/panels/report/location.ts#L31): Builds the prefilled location from ?building=&floor=&room= (or ?lng=&lat=); null when the URL has none.
+- `BUILDING_OPTIONS` [src/panels/rooms/buildingOptions.ts:15](../src/panels/rooms/buildingOptions.ts#L15): Real Georgia Tech building ids/names verified in `src/data/buildings.geojson` -- see that file's
 - `NAV_ITEMS` [src/shell/icons.tsx:37](../src/shell/icons.tsx#L37): The five destinations of the rail (desktop) and the tab bar (phones), in order.
 - `moveFocus(event, vertical)` [src/shell/icons.tsx:46](../src/shell/icons.tsx#L46): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 - `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:13](../src/stories/CameraCapture.tsx#L13): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
