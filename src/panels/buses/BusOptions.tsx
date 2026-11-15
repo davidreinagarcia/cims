@@ -3,7 +3,6 @@ import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import { formatMinutes, planBusTrips, type BusOption } from "../../lib/busPlanner";
 import { highlightRoutes } from "../../lib/transitHighlight";
 import { stoppedText } from "../../lib/busMotion";
-import { useGpsFix } from "../../lib/useGpsFix";
 import { useLiveBuses, useTransitNetwork } from "../../lib/useTransit";
 import { TRACKER_URL } from "../../map/transitLive";
 import { useLayerFilters } from "../../state/layerFilters";
@@ -16,18 +15,16 @@ function leaveText(option: BusOption): string {
   return option.leaveIn < 60 ? "Leave now" : `Leave in ${formatMinutes(option.leaveIn)}`;
 }
 
-/** Lists bus options from `origin` (or the user's GPS position when null) to `destination`. */
-export default function BusOptions({ origin, destination }: { origin: [number, number] | null; destination: [number, number] }) {
+/** Lists bus options from `origin` (your location or a picked place; the panel resolves it) to `destination`. */
+export default function BusOptions({ origin, destination }: { origin: [number, number]; destination: [number, number] }) {
   const { network, failed: loadError } = useTransitNetwork();
   const [selected, setSelected] = useState<number | null>(null);
-  const gps = useGpsFix(!origin);
   const live = useLiveBuses(network);
   const { isOn, toggleCategory } = useLayerFilters();
 
-  const start: [number, number] | null = origin ?? (gps.fix ? [gps.fix.lng, gps.fix.lat] : null);
-  const plan = useMemo(() => (network && start ? planBusTrips(network, start, destination, live.buses) : null),
+  const plan = useMemo(() => (network ? planBusTrips(network, origin, destination, live.buses) : null),
     // Coordinates, not the array: a fresh [lng, lat] each render must not replan.
-    [network, start?.[0], start?.[1], destination[0], destination[1], live.buses]);
+    [network, origin[0], origin[1], destination[0], destination[1], live.buses]);
 
   const routeIds = plan?.options.map((o) => o.route.id).join(",") ?? "";
   useEffect(() => {
@@ -37,14 +34,6 @@ export default function BusOptions({ origin, destination }: { origin: [number, n
   useEffect(() => () => highlightRoutes(null), []);
 
   if (loadError) return <p className="cims-muted" role="status">Bus routes couldn't load. Check your connection and try again.</p>;
-  if (!origin && gps.status !== "ok") {
-    return <div className="bus-options__notice" role="status">
-      {gps.status === "error" ? <>
-        <p>{gps.message}</p>
-        <button type="button" className="cims-btn cims-btn--small" onClick={gps.request}>Use my location</button>
-      </> : <p className="cims-muted">Finding your location...</p>}
-    </div>;
-  }
   if (!plan) return <p className="cims-muted" role="status">Loading bus routes...</p>;
 
   const best = plan.options[0];
