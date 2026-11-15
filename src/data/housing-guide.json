@@ -2,10 +2,20 @@
   "intro": "Deciding where to live? Here's the East vs West rundown, the way a Tech student would put it. Opinions are labeled with who said them; the official stuff is tagged too.",
   "verdict": {
     "label": "Our read of the sources below",
-    "east": "You want to be in the middle of everything: Freshman Hill, the stadium, lots of freshmen, and short walks to engineering and computing classes. You don't mind older, smaller rooms.",
-    "west": "You want it quieter and more relaxed, with bigger, more recently renovated rooms and the gym (CRC) close by. You don't mind a longer walk or a bus to some classes."
+    "east": "You want to be in the middle of everything: classes close by, Freshman Hill, the stadium, the fraternities, lots of food options (Tech Square is right across the Connector). You don't mind older, smaller rooms.",
+    "west": "You want tranquility, bigger rooms, a big dining hall (West Village) and the CRC close by. You don't mind a longer walk or a bus to some classes."
   },
   "rows": [
+    {
+      "topic": "Straight from a GT student",
+      "west": "Tranquility, one big dining hall, and the CRC.",
+      "east": "Classes close by, fraternities, and lots of different zones to eat.",
+      "kind": "student",
+      "by": "A GT student on the CIMS team",
+      "source_url": "https://housing.gatech.edu/",
+      "verified_at": "2026-11-15",
+      "verified_by": "CIMS team student (first-hand)"
+    },
     {
       "topic": "The vibe",
       "west": "Slightly more chill, quieter and more relaxed.",
@@ -13,6 +23,16 @@
       "kind": "student",
       "by": "Prked student guide, 2025",
       "source_url": "https://prked.com/post/a-students-guide-to-the-best-dorms-at-georgia-tech",
+      "verified_at": "2026-11-15",
+      "verified_by": "claude-research (pending human check)"
+    },
+    {
+      "topic": "Fraternities",
+      "west": "Not where the Greek houses are.",
+      "east": "The Greek houses are concentrated on East, mostly around Fifth Street, Ferst, Fowler and Techwood.",
+      "kind": "student",
+      "by": "GT news feature on Greek life and student guides",
+      "source_url": "https://www.news.gatech.edu/archive/features/125-years-greek-life.shtml",
       "verified_at": "2026-11-15",
       "verified_by": "claude-research (pending human check)"
     },
@@ -48,11 +68,11 @@
     },
     {
       "topic": "Food",
-      "west": "West Village Dining Commons, described as the newest hall.",
-      "east": "Brittain, praised for its omelet station. Tech Square restaurants are closer.",
+      "west": "West Village Dining Commons: the big one. About 50,000 sq ft and seats 600+ inside, plus outdoor terraces.",
+      "east": "Brittain (praised for its omelet station), plus Tech Square just across the Connector with lots of different places to eat. Check what's open now.",
       "kind": "student",
-      "by": "Prked student guide, 2025; GT Transfer Hub",
-      "source_url": "https://prked.com/post/a-students-guide-to-the-best-dorms-at-georgia-tech",
+      "by": "AIA Georgia design listing (size and seating); Prked; Tech Square community page",
+      "source_url": "https://aiaga.org/?p=8358",
       "verified_at": "2026-11-15",
       "verified_by": "claude-research (pending human check)"
     },
