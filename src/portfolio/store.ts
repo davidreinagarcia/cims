@@ -2,12 +2,12 @@
 import { useSyncExternalStore } from "react";
 import type { BulletinPost } from "../lib/bulletin";
 import type { Session } from "../auth/types";
-import { localAdapter } from "./localAdapter";
+import { supabasePortfolioAdapter } from "./supabaseAdapter";
 import type { PortfolioAdapter, PortfolioEntry, PortfolioPhotoSeed } from "./types";
 
 interface State { entries: PortfolioEntry[]; loaded: boolean; accountId: string | null }
 
-let adapter: PortfolioAdapter = localAdapter;
+let adapter: PortfolioAdapter = supabasePortfolioAdapter;
 let state: State = { entries: [], loaded: false, accountId: null };
 let starting: Promise<void> | null = null;
 let startedFor: string | null = null;

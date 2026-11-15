@@ -1,5 +1,5 @@
 /** @file Map-first app shell (docs/design/APP-SHELL.md): full-bleed map with rail or tab bar, search pill, chips, a card or sheet for panels, and full-screen Bulletin/BuzzPrint views. */
-import { useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
+import { Suspense, lazy, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
 import MapView from "../components/MapView";
 import OfflineBanner from "../components/OfflineBanner";
 import AlertBanner from "../alerts/AlertBanner";
@@ -12,20 +12,12 @@ import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import GameHud from "../games/GameHud";
-import GamesPanel from "../games/GamesPanel";
 import { leaveGame, useGames } from "../games/store";
 import HousingGuide from "../panels/culture/HousingGuide";
 import CultureReader from "../panels/culture/CultureReader";
 import { useCulture } from "../culture/store";
-import BulletinBoard from "../panels/bulletin/BulletinBoard";
 import BusesPanel from "../panels/buses/BusesPanel";
 import TipNotifier from "../alerts/TipNotifier";
-import PoliceView from "../panels/police/PoliceView";
-import MaintenanceView from "../panels/maintenance/MaintenanceView";
-import ReportPanel from "../panels/report";
-import RoomsBoard from "../panels/rooms/RoomsBoard";
-import PortfolioPage from "../portfolio/PortfolioPage";
-import StoriesPanel from "../stories/StoriesPanel";
 import { useStories } from "../stories/store";
 import { bulletinUrl, readBulletinParams, type PostType } from "../lib/bulletin";
 import { useAuth } from "../state/auth";
@@ -40,6 +32,16 @@ import Rail from "./Rail";
 import RoutePanel from "./RoutePanel";
 import SearchPill from "./SearchPill";
 import "./shell.css";
+
+// Panels nobody sees on first paint load on demand, keeping the first download small.
+const BulletinBoard = lazy(() => import("../panels/bulletin/BulletinBoard"));
+const PoliceView = lazy(() => import("../panels/police/PoliceView"));
+const MaintenanceView = lazy(() => import("../panels/maintenance/MaintenanceView"));
+const RoomsBoard = lazy(() => import("../panels/rooms/RoomsBoard"));
+const PortfolioPage = lazy(() => import("../portfolio/PortfolioPage"));
+const StoriesPanel = lazy(() => import("../stories/StoriesPanel"));
+const GamesPanel = lazy(() => import("../games/GamesPanel"));
+const ReportPanel = lazy(() => import("../panels/report"));
 
 const MOBILE = "(max-width: 767.98px)";
 const PANELS: ShellPanel[] = ["explore", "buses", "rooms", "report", "bulletin", "stories", "route", "buzzprint", "games"];
@@ -239,11 +241,11 @@ export default function Shell() {
   else if (panel === "report") {
     // Keyed by the selected place/building (when there is one) so the flow resets for a new "Report an issue".
     const reportKey = selection?.kind === "report" ? `report:${selection.id}` : "report";
-    content = { title: "Report", key: reportKey, body: <ReportPanel key={reportKey} onClose={() => setPanel("explore")} /> };
+    content = { title: "Report", key: reportKey, body: <Suspense fallback={<p className="cims-empty" role="status">Loading…</p>}><ReportPanel key={reportKey} onClose={() => setPanel("explore")} /></Suspense> };
   }
-  else if (panel === "games" && !game) content = { title: "Games", key: "games", body: <GamesPanel /> };
+  else if (panel === "games" && !game) content = { title: "Games", key: "games", body: <Suspense fallback={<p className="cims-empty" role="status">Loading…</p>}><GamesPanel /></Suspense> };
   // Desktop "stories" is a full-screen takeover beside the rail (below); phones keep the bottom sheet.
-  else if (panel === "stories" && mobile) content = { title: "Stories", key: "stories", body: <StoriesPanel onShowMap={() => setPanel("explore")} /> };
+  else if (panel === "stories" && mobile) content = { title: "Stories", key: "stories", body: <Suspense fallback={<p className="cims-empty" role="status">Loading…</p>}><StoriesPanel onShowMap={() => setPanel("explore")} /></Suspense> };
   else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel initialSelection={routeTo} onClose={closeContent} /> };
   else if (selection && selection.kind !== "report") content = {
     title: selection.kind === "building" ? "Building" : "Place",
@@ -328,21 +330,21 @@ export default function Shell() {
       {mobile && <MobileTabBar panel={bulletin.open ? "bulletin" : buzzprintOpen ? "buzzprint" : panel} onPanel={choosePanel} />}
       <OfflineBanner />
       {staffView !== "police" && <TipNotifier onOpen={() => openStaff("police")} />}
-      {staffView === "police" && <PoliceView onClose={() => openStaff(null)} />}
-      {staffView === "maintenance" && <MaintenanceView onClose={() => openStaff(null)} />}
+      {staffView === "police" && <Suspense fallback={null}><PoliceView onClose={() => openStaff(null)} /></Suspense>}
+      {staffView === "maintenance" && <Suspense fallback={null}><MaintenanceView onClose={() => openStaff(null)} /></Suspense>}
       {panel === "stories" && !mobile && (
         <section className="stories-full" aria-label="Stories">
           <header className="stories-full__head">
             <h2>Stories</h2>
             <button type="button" className="cims-btn" onClick={closeContent}>Back to map</button>
           </header>
-          <StoriesPanel onShowMap={() => setPanel("explore")} />
+          <Suspense fallback={null}><StoriesPanel onShowMap={() => setPanel("explore")} /></Suspense>
         </section>
       )}
-      {panel === "rooms" && <RoomsBoard onClose={closeContent} />}
-      {bulletin.open && <BulletinBoard type={bulletin.type} onClose={closeBulletin}
-        onType={(type) => { writeBulletinUrl(type); setBulletin({ open: true, type }); }} />}
-      {buzzprintOpen && <PortfolioPage onClose={closeBuzzprint} />}
+      {panel === "rooms" && <Suspense fallback={null}><RoomsBoard onClose={closeContent} /></Suspense>}
+      {bulletin.open && <Suspense fallback={null}><BulletinBoard type={bulletin.type} onClose={closeBulletin}
+        onType={(type) => { writeBulletinUrl(type); setBulletin({ open: true, type }); }} /></Suspense>}
+      {buzzprintOpen && <Suspense fallback={null}><PortfolioPage onClose={closeBuzzprint} /></Suspense>}
     </div>
   );
 }

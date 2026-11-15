@@ -22,6 +22,9 @@ export async function withFallback<T>(run: () => Promise<T>, local: () => Promis
   }
 }
 
+/** Storage buckets the app uses. */
+export type Bucket = "stories" | "reports" | "portfolio";
+
 const AUTH_KEY = "cims.supabase.auth.v1";
 interface Auth { access_token: string; refresh_token: string; expires_at: number; user: { id: string; is_anonymous?: boolean; email?: string; app_metadata?: { role?: string } }; password?: string }
 
@@ -97,7 +100,8 @@ export async function rest<T>(path: string, init: { method?: string; body?: unkn
   }).catch((e) => { throw new BackendDown(String(e)); });
   if (!res.ok) {
     const text = await res.text();
-    if (res.status >= 500 || res.status === 401) throw new BackendDown(`${res.status} ${text.slice(0, 120)}`);
+    // 404 = table/function not migrated yet (a preview ahead of `db:apply`): serve the local fallback like an outage.
+    if (res.status >= 500 || res.status === 401 || res.status === 404) throw new BackendDown(`${res.status} ${text.slice(0, 120)}`);
     let message = text.slice(0, 200);
     try { message = JSON.parse(text).message ?? message; } catch { /* plain text */ }
     throw new Error(message); // a rule the server enforces (rate limit, double booking...): show it, do not fall back
@@ -107,7 +111,7 @@ export async function rest<T>(path: string, init: { method?: string; body?: unkn
 }
 
 /** Uploads a blob under `<uid>/<uuid>.<ext>` in a public bucket and returns the object path. */
-export async function upload(bucket: "stories" | "reports", blob: Blob, ext: string): Promise<string> {
+export async function upload(bucket: Bucket, blob: Blob, ext: string): Promise<string> {
   const s = await session();
   const path = `${s.user.id}/${crypto.randomUUID()}.${ext}`;
   const res = await fetch(`${URL_}/storage/v1/object/${bucket}/${path}`, {
@@ -120,6 +124,6 @@ export async function upload(bucket: "stories" | "reports", blob: Blob, ext: str
 }
 
 /** Public URL of an uploaded object. */
-export function publicUrl(bucket: "stories" | "reports", path: string): string {
+export function publicUrl(bucket: Bucket, path: string): string {
   return `${URL_}/storage/v1/object/public/${bucket}/${path}`;
 }
