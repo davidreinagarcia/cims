@@ -99,7 +99,7 @@ function validHours(hours) {
   return hours && !Array.isArray(hours) && typeof hours === 'object'
     && Object.entries(hours).every(([day, intervals]) => DAYS.includes(day) && Array.isArray(intervals)
       && intervals.every(pair => Array.isArray(pair) && pair.length === 2
-        && pair.every(t => typeof t === 'string' && TIME.test(t)) && pair[0] < pair[1]));
+        && pair.every((t, index) => typeof t === 'string' && (TIME.test(t) || (index === 1 && t === '24:00'))) && pair[0] < pair[1]));
 }
 
 /** Compare JSON facts independently of object property order. */
@@ -178,6 +178,27 @@ async function main() {
   let previous = { added: [], matched: [] };
   try { previous = await readJson(auditPath); } catch (error) { if (error.code !== 'ENOENT') throw error; }
   const added = [], matched = [], skipped = [], issues = [];
+  const decisions = previous.decisions ?? { hours_moved: 0, dumps_dropped: 0, records_attached: 0 };
+  for (const feature of existing) {
+    const q = feature.properties;
+    const marker = 'Research hours (not imported';
+    if (q.hours_note?.includes(marker)) {
+      const dump = q.hours_note.slice(q.hours_note.indexOf(marker));
+      const hours = JSON.parse(dump.slice(dump.indexOf('{')));
+      if (empty(q.hours) && validHours(hours)) { q.hours = hours; decisions.hours_moved++; }
+      decisions.dumps_dropped++;
+      const human = q.hours_note.slice(0, q.hours_note.indexOf(marker)).trim();
+      if (human) q.hours_note = human; else delete q.hours_note;
+    }
+    if (q.coord_precision === 'building') {
+      const b = footprint(q.building_id, buildings) ?? footprint(q.building, buildings);
+      if (!b) throw new Error(`${q.id}: unresolved building`);
+      q.building_id = b.properties.id;
+      feature.geometry.coordinates = centroid(b.geometry);
+    }
+  }
+  decisions.records_attached = existing.filter(f => f.properties.coord_precision === 'building').length;
+
   const amenities = research.features.filter(f => f.properties.category === 'extra');
   // The parent collection metadata is retained; the candidate features themselves are untouched.
   await writeChanged(`${RESEARCH}amenities-candidates.json`, `${JSON.stringify({ ...research, features: amenities }, null, 2)}\n`);
@@ -200,7 +221,7 @@ async function main() {
     const oldAddition = previouslyAdded.get(p.id);
     if (oldAddition && existing.some(f => f.properties.id === oldAddition.id)) {
       added.push(oldAddition);
-      if (oldAddition.hours_issue) issues.push(oldAddition.hours_issue);
+      delete oldAddition.hours_issue;
       continue;
     }
     const building = footprint(p.building, buildings);
@@ -221,11 +242,10 @@ async function main() {
     if (compatible.length > 1) { skip('Coincidencia ambigua entre POI existentes'); continue; }
     const target = compatible[0];
     const hoursIssue = !empty(p.hours) && !validHours(p.hours)
-      ? { id: p.id, reason: 'Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59', research_hours: p.hours } : undefined;
+      ? { id: p.id, reason: 'Horario no representable por el contrato; conservar en auditoría sin inventar intervalos', research_hours: p.hours } : undefined;
     const values = { ...p };
     if (hoursIssue) {
       delete values.hours;
-      values.hours_note = [p.hours_note, `Research hours (not imported into hours; contract rejects these intervals): ${JSON.stringify(p.hours)}`].filter(Boolean).join(' ');
       issues.push(hoursIssue);
     }
     if (target) {
@@ -278,7 +298,7 @@ async function main() {
     added.push(entry);
   }
   for (const [file, doc] of documents) await writeChanged(file, `${JSON.stringify(doc, null, 2)}\n`);
-  await writeChanged(auditPath, `${JSON.stringify({ added, matched }, null, 2)}\n`);
+  await writeChanged(auditPath, `${JSON.stringify({ added, matched, decisions }, null, 2)}\n`);
   const categories = ['food', 'support', 'printing', 'makerspace', 'exercise', 'health', 'transport'];
   const counts = Object.fromEntries(categories.map(c => [c, added.filter(a => a.category === c).length]));
   const amenitiesCounts = {};
@@ -292,7 +312,9 @@ async function main() {
     `Añadidos: ${added.length}. Omitidos: ${skipped.length}. Amenities separados sin modificar: ${amenities.length}.`, '',
     'Los POI curados conservan ids, coordenadas, estado, source_url y todos sus valores existentes. Las coincidencias exigen nombre/alias y edificio compatible (metadatos o contención en su huella); un id idéntico establece identidad explícita. No se fusionan impresoras de pisos distintos con un registro genérico del edificio.', '',
     'Transport está en LAYER_CATALOG y el validador admite sus POI. Solo se consideran instalaciones fijas; las paradas Stinger/bus se omiten.', '',
-    'Los horarios con 24:00 se conservan literalmente en hours_note, sin redondear a 23:59 ni crear intervalos inventados. Los conflictos conservan el horario curado. Los subtipos solo se escriben si el catálogo los enumera.', '',
+    '## Decisions 2026-11-14', '',
+    'David’s hours win: los conflictos conservan sus horarios curados. 24:00 accepted: únicamente como cierre al final del día. Building-attached POIs: se adjuntan al edificio y se verifica edificio + piso, sin exigir un punto exacto.', '',
+    `Horarios movidos a hours: ${decisions.hours_moved}; dumps retirados: ${decisions.dumps_dropped}; registros adjuntos a huellas reales: ${decisions.records_attached}.`, '',
     'El archivo import-audit-2026-11-14.json conserva las altas y campos completados originales para que una segunda ejecución mantenga este reporte sin duplicar registros. No eliminarlo si se desea conservar esa auditoría.', '',
     '## Altas por categoría', '', '| Categoría | Añadidos |', '| --- | ---: |',
     ...categories.map(c => `| ${c} | ${counts[c]} |`), '',
@@ -304,14 +326,14 @@ async function main() {
     '## Omisiones por motivo', '', ...Object.entries(skippedCounts).map(([reason, count]) => `- ${count}: ${reason}.`), '',
     '## Revisión humana: omitidos', '', ...skipped.map(s => `- ${s.id}: ${s.reason}.`), '',
     '## Revisión humana: precisión de edificio', '',
-    ...added.filter(a => a.coord_precision === 'building').map(a => `- ${a.id}: ${a.coord_source}; ubicar el local/sala/entrada antes de verificar.`), '',
+    ...added.filter(a => a.coord_precision === 'building').map(a => `- ${a.id}: ${a.coord_source}; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.`), '',
     '## Revisión humana: conflictos de horarios', '',
     ...matched.filter(m => m.conflict).map(m => `- ${m.id}: se conserva ${JSON.stringify(m.conflict.existing_hours)}; investigación ${JSON.stringify(m.conflict.research_hours)}.`), '',
     '## Revisión humana: horarios incompatibles con el contrato', '',
     ...issues.map(i => `- ${i.id}: ${i.reason}. Original: ${JSON.stringify(i.research_hours)}.`), ''];
   await writeChanged(`${RESEARCH}import-report-2026-11-14.md`, `${lines.join('\n')}`);
   console.log(JSON.stringify({ matched: matched.length, filled_records: matched.filter(m => m.fields.length).length,
-    filled_fields: filled, added: counts, skipped: skipped.length, amenities: amenities.length, hours_issues: issues.length }, null, 2));
+    filled_fields: filled, added: counts, skipped: skipped.length, amenities: amenities.length, hours_issues: issues.length, decisions }, null, 2));
 }
 
 main().catch(error => { console.error(error); process.exitCode = 1; });

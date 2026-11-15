@@ -268,7 +268,7 @@
         "description": "Self-service black-and-white printer and color printer with scanner/copier on Crosland Grove level.",
         "address": "260 4th Street NW, Atlanta, GA 30332",
         "building": "Dorothy Crosland Tower",
-        "hours_note": "Open 24/7 when school is in session; reduced or closed during semester breaks and holidays. Research hours (not imported into hours; contract rejects these intervals): {\"mon\":[[\"00:00\",\"24:00\"]],\"tue\":[[\"00:00\",\"24:00\"]],\"wed\":[[\"00:00\",\"24:00\"]],\"thu\":[[\"00:00\",\"24:00\"]],\"fri\":[[\"00:00\",\"24:00\"]],\"sat\":[[\"00:00\",\"24:00\"]],\"sun\":[[\"00:00\",\"24:00\"]]}",
+        "hours_note": "Open 24/7 when school is in session; reduced or closed during semester breaks and holidays.",
         "buzzcard": {
           "required": true,
           "note": "BuzzCard required to release print jobs and pay for copies ($0.04/copy B&W, $0.19/copy color)."
@@ -279,7 +279,51 @@
         "confidence": "medium",
         "building_id": "dorothy-murray-crosland-tower",
         "coord_source": "building centroid: dorothy-murray-crosland-tower",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
       }
     },
     {
@@ -299,7 +343,7 @@
         "description": "Black-and-white Pharos printer located near the yellow staircase on Crosland 2nd floor.",
         "address": "260 4th Street NW, Atlanta, GA 30332",
         "building": "Dorothy Crosland Tower",
-        "hours_note": "Open 24/7 when school is in session; break exceptions apply. Research hours (not imported into hours; contract rejects these intervals): {\"mon\":[[\"00:00\",\"24:00\"]],\"tue\":[[\"00:00\",\"24:00\"]],\"wed\":[[\"00:00\",\"24:00\"]],\"thu\":[[\"00:00\",\"24:00\"]],\"fri\":[[\"00:00\",\"24:00\"]],\"sat\":[[\"00:00\",\"24:00\"]],\"sun\":[[\"00:00\",\"24:00\"]]}",
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
         "buzzcard": {
           "required": true,
           "note": "BuzzCard required to release print jobs."
@@ -310,7 +354,51 @@
         "confidence": "medium",
         "building_id": "dorothy-murray-crosland-tower",
         "coord_source": "building centroid: dorothy-murray-crosland-tower",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
       }
     },
     {
@@ -333,7 +421,7 @@
         "description": "Color printer located inside the graduate-student-only study community on Crosland 6th floor.",
         "address": "260 4th Street NW, Atlanta, GA 30332",
         "building": "Dorothy Crosland Tower",
-        "hours_note": "Open 24/7 when Library is open; break exceptions apply. Research hours (not imported into hours; contract rejects these intervals): {\"mon\":[[\"00:00\",\"24:00\"]],\"tue\":[[\"00:00\",\"24:00\"]],\"wed\":[[\"00:00\",\"24:00\"]],\"thu\":[[\"00:00\",\"24:00\"]],\"fri\":[[\"00:00\",\"24:00\"]],\"sat\":[[\"00:00\",\"24:00\"]],\"sun\":[[\"00:00\",\"24:00\"]]}",
+        "hours_note": "Open 24/7 when Library is open; break exceptions apply.",
         "buzzcard": {
           "required": true,
           "note": "Graduate student BuzzCard required to enter the Graduate Student Community and release prints."
@@ -344,7 +432,51 @@
         "confidence": "medium",
         "building_id": "dorothy-murray-crosland-tower",
         "coord_source": "building centroid: dorothy-murray-crosland-tower",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
       }
     },
     {
@@ -364,7 +496,7 @@
         "description": "Self-service color printer in the Price Gilbert 3rd floor Purple Computing Zone.",
         "address": "260 4th Street NW, Atlanta, GA 30332",
         "building": "Price Gilbert Memorial Library",
-        "hours_note": "Open 24/7 when school is in session; break exceptions apply. Research hours (not imported into hours; contract rejects these intervals): {\"mon\":[[\"00:00\",\"24:00\"]],\"tue\":[[\"00:00\",\"24:00\"]],\"wed\":[[\"00:00\",\"24:00\"]],\"thu\":[[\"00:00\",\"24:00\"]],\"fri\":[[\"00:00\",\"24:00\"]],\"sat\":[[\"00:00\",\"24:00\"]],\"sun\":[[\"00:00\",\"24:00\"]]}",
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
         "buzzcard": {
           "required": true,
           "note": "BuzzCard required to release print jobs."
@@ -375,7 +507,51 @@
         "confidence": "medium",
         "building_id": "price-gilbert-memorial-library",
         "coord_source": "building centroid: price-gilbert-memorial-library",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
       }
     },
     {
@@ -398,7 +574,7 @@
         "description": "Self-service color printer near Clough Room 215.",
         "address": "266 4th Street NW, Atlanta, GA 30332",
         "building": "Clough Undergraduate Learning Commons",
-        "hours_note": "Open 24/7 when school is in session; break exceptions apply. Research hours (not imported into hours; contract rejects these intervals): {\"mon\":[[\"00:00\",\"24:00\"]],\"tue\":[[\"00:00\",\"24:00\"]],\"wed\":[[\"00:00\",\"24:00\"]],\"thu\":[[\"00:00\",\"24:00\"]],\"fri\":[[\"00:00\",\"24:00\"]],\"sat\":[[\"00:00\",\"24:00\"]],\"sun\":[[\"00:00\",\"24:00\"]]}",
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
         "buzzcard": {
           "required": true,
           "note": "BuzzCard required to release print jobs and for after-hours/modified building access."
@@ -409,7 +585,51 @@
         "confidence": "medium",
         "building_id": "g-wayne-clough-undergraduate-learning-commons",
         "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
       }
     },
     {
@@ -432,7 +652,7 @@
         "description": "Self-service black-and-white printer near Clough Room 385 in the Pink Computing Zone.",
         "address": "266 4th Street NW, Atlanta, GA 30332",
         "building": "Clough Undergraduate Learning Commons",
-        "hours_note": "Open 24/7 when school is in session; break exceptions apply. Research hours (not imported into hours; contract rejects these intervals): {\"mon\":[[\"00:00\",\"24:00\"]],\"tue\":[[\"00:00\",\"24:00\"]],\"wed\":[[\"00:00\",\"24:00\"]],\"thu\":[[\"00:00\",\"24:00\"]],\"fri\":[[\"00:00\",\"24:00\"]],\"sat\":[[\"00:00\",\"24:00\"]],\"sun\":[[\"00:00\",\"24:00\"]]}",
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
         "buzzcard": {
           "required": true,
           "note": "BuzzCard required to release print jobs."
@@ -443,7 +663,51 @@
         "confidence": "medium",
         "building_id": "g-wayne-clough-undergraduate-learning-commons",
         "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
       }
     },
     {
@@ -466,7 +730,7 @@
         "description": "Self-service black-and-white printer near the stairs on Clough 4th floor.",
         "address": "266 4th Street NW, Atlanta, GA 30332",
         "building": "Clough Undergraduate Learning Commons",
-        "hours_note": "Open 24/7 when school is in session; break exceptions apply. Research hours (not imported into hours; contract rejects these intervals): {\"mon\":[[\"00:00\",\"24:00\"]],\"tue\":[[\"00:00\",\"24:00\"]],\"wed\":[[\"00:00\",\"24:00\"]],\"thu\":[[\"00:00\",\"24:00\"]],\"fri\":[[\"00:00\",\"24:00\"]],\"sat\":[[\"00:00\",\"24:00\"]],\"sun\":[[\"00:00\",\"24:00\"]]}",
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
         "buzzcard": {
           "required": true,
           "note": "BuzzCard required to release print jobs."
@@ -477,7 +741,51 @@
         "confidence": "medium",
         "building_id": "g-wayne-clough-undergraduate-learning-commons",
         "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
       }
     },
     {
@@ -568,7 +876,7 @@
         "description": "24-hour ECE public computing labs with ECE Pharos black-and-white and color print queues (ECE_Black, ECE_Color_Xerox, ECE_Color_Dell).",
         "address": "266 Ferst Dr",
         "building": "Christopher W. Klaus Advanced Computing Building",
-        "hours_note": "Labs open 24 hours via BuzzCard; User Assistants staffed 10:00-22:00 normally and 09:00-17:00 during finals week (unstaffed between semesters/holidays). Research hours (not imported into hours; contract rejects these intervals): {\"mon\":[[\"00:00\",\"24:00\"]],\"tue\":[[\"00:00\",\"24:00\"]],\"wed\":[[\"00:00\",\"24:00\"]],\"thu\":[[\"00:00\",\"24:00\"]],\"fri\":[[\"00:00\",\"24:00\"]],\"sat\":[[\"00:00\",\"24:00\"]],\"sun\":[[\"00:00\",\"24:00\"]]}",
+        "hours_note": "Labs open 24 hours via BuzzCard; User Assistants staffed 10:00-22:00 normally and 09:00-17:00 during finals week (unstaffed between semesters/holidays).",
         "buzzcard": {
           "required": true,
           "note": "BuzzCard required for 24h lab entry and Pharos release; OIT print quota does not transfer to ECE queues."
@@ -579,7 +887,51 @@
         "confidence": "medium",
         "building_id": "christopher-w-klaus-advanced-computing-building",
         "coord_source": "building centroid: christopher-w-klaus-advanced-computing-building",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
       }
     },
     {
@@ -598,7 +950,7 @@
         "status": "draft",
         "description": "24-hour ECE public thin-client lab connected to ECE Pharos black-and-white and color print queues.",
         "building": "Van Leer Building",
-        "hours_note": "Open 24 hours via BuzzCard; User Assistants staffed 10:00-22:00 normally and 09:00-17:00 during finals week. Research hours (not imported into hours; contract rejects these intervals): {\"mon\":[[\"00:00\",\"24:00\"]],\"tue\":[[\"00:00\",\"24:00\"]],\"wed\":[[\"00:00\",\"24:00\"]],\"thu\":[[\"00:00\",\"24:00\"]],\"fri\":[[\"00:00\",\"24:00\"]],\"sat\":[[\"00:00\",\"24:00\"]],\"sun\":[[\"00:00\",\"24:00\"]]}",
+        "hours_note": "Open 24 hours via BuzzCard; User Assistants staffed 10:00-22:00 normally and 09:00-17:00 during finals week.",
         "buzzcard": {
           "required": true,
           "note": "BuzzCard required for 24h lab entry and Pharos release; OIT print quota does not transfer to ECE queues."
@@ -609,7 +961,51 @@
         "confidence": "medium",
         "building_id": "van-leer-building",
         "coord_source": "building centroid: van-leer-building",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
       }
     },
     {

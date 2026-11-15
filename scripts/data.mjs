@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const DAYS = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const buildingIds = new Set(JSON.parse(await readFile(resolve(ROOT, 'src/data/buildings.geojson'), 'utf8')).features.map(f => f.properties.id));
 const STATUSES = ['seed', 'draft', 'verified', 'demo'];
 
 /** Return whether a value is a non-array object. */
@@ -157,14 +158,15 @@ function validate(documents, catalog) {
       if (p.aliases !== undefined && (!Array.isArray(p.aliases) || !p.aliases.every(isText))) fail('aliases must be an array of nonempty strings');
       if (p.buzzcard !== undefined && (!isObject(p.buzzcard) || typeof p.buzzcard.required !== 'boolean'
         || (p.buzzcard.note !== undefined && !isText(p.buzzcard.note)))) fail('buzzcard must contain required (boolean) and optional note (string)');
+      if (p.coord_precision === 'building' && !buildingIds.has(p.building_id)) fail('building precision requires a real footprint building_id');
       if (p.hours !== undefined) {
         if (!isObject(p.hours)) fail('hours must be an object');
         else for (const [day, intervals] of Object.entries(p.hours)) {
           if (!DAYS.includes(day)) fail(`hours.${day}: unknown weekday (use mon..sun)`);
           if (!Array.isArray(intervals)) fail(`hours.${day} must be an array of time pairs`);
           else for (const pair of intervals) {
-            if (!Array.isArray(pair) || pair.length !== 2 || !pair.every(time => typeof time === 'string' && /^(?:[01]\d|2[0-3]):[0-5]\d$/.test(time))) {
-              fail(`hours.${day}: each interval must be a pair of valid HH:MM times`);
+            if (!Array.isArray(pair) || pair.length !== 2 || !pair.every((time, index) => typeof time === 'string' && (/^(?:[01]\d|2[0-3]):[0-5]\d$/.test(time) || (index === 1 && time === '24:00')))) {
+              fail(`hours.${day}: each interval must be a pair of HH:MM times (24:00 only for closing)`);
             } else if (pair[0] >= pair[1]) fail(`hours.${day}: open must be before close`);
           }
         }
@@ -240,7 +242,7 @@ async function list(documents) {
     '# Data still to verify', '',
     '1. Run `npm run data:list` to regenerate this checklist.',
     '2. Open the source for each entry, or find an authoritative source when it says NO SOURCE.',
-    '3. Check the address, hours, BuzzCard requirements and coordinates; update the JSON from evidence.',
+    '3. Check the address, hours, BuzzCard requirements and location (building + floor for building precision); update the JSON from evidence.',
     '4. Run the listed verification command (add `--source https://…` if needed), then `npm run data:check` and regenerate the list.', ''];
   let count = 0;
   for (const category of [...groups.keys()].sort()) {
@@ -248,7 +250,7 @@ async function list(documents) {
     const features = groups.get(category).sort((a, b) => a.properties.id < b.properties.id ? -1 : a.properties.id > b.properties.id ? 1 : 0);
     for (const { properties: p, geometry: { coordinates: [lng, lat] } } of features) {
       const source = isHttps(p.source_url) ? `[source](<${new URL(p.source_url).href.replace(/[<>]/g, encodeURIComponent)}>)` : 'NO SOURCE';
-      lines.push(`- [ ] **${markdown(p.name)}** (\`${p.id}\`, ${markdown(category)}${p.subtype ? `/${markdown(p.subtype)}` : ''}) · ${source} · check address, hours, buzzcard, [coordinates](https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=19/${lat}/${lng}) · \`npm run data:verify -- ${p.id} --by david\``);
+      lines.push(`- [ ] **${markdown(p.name)}** (\`${p.id}\`, ${markdown(category)}${p.subtype ? `/${markdown(p.subtype)}` : ''}) · ${source} · check address, hours, buzzcard; ${p.coord_precision === 'building' ? `check building + floor (${markdown(p.building_id)}${p.floor_or_room ? ` · ${markdown(p.floor_or_room)}` : '; floor/room unknown'})` : `check point coordinates [location](https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=19/${lat}/${lng})`} · \`npm run data:verify -- ${p.id} --by david\``);
       count++;
     }
     lines.push('');

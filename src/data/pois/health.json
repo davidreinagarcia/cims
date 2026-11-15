@@ -281,7 +281,7 @@
         "description": "Automated kiosk dispensing over-the-counter medications and personal care items (relocated to Clough 3rd floor).",
         "address": "266 4th Street NW, Atlanta, GA 30332",
         "building": "Clough Undergraduate Learning Commons",
-        "hours_note": "Accessible 24/7 while Clough Commons is open during academic terms; break exceptions apply. Research hours (not imported into hours; contract rejects these intervals): {\"mon\":[[\"00:00\",\"24:00\"]],\"tue\":[[\"00:00\",\"24:00\"]],\"wed\":[[\"00:00\",\"24:00\"]],\"thu\":[[\"00:00\",\"24:00\"]],\"fri\":[[\"00:00\",\"24:00\"]],\"sat\":[[\"00:00\",\"24:00\"]],\"sun\":[[\"00:00\",\"24:00\"]]}",
+        "hours_note": "Accessible 24/7 while Clough Commons is open during academic terms; break exceptions apply.",
         "buzzcard": {
           "required": false,
           "note": "Inside Clough Commons (BuzzCard required for after-hours/modified building access)."
@@ -292,7 +292,51 @@
         "confidence": "medium",
         "building_id": "g-wayne-clough-undergraduate-learning-commons",
         "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
       }
     },
     {

@@ -6,6 +6,7 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 
 **Files**
 
+- [`buildingPlaces.ts`](buildingPlaces.ts): Building association and location metadata shared by POI pins and detail cards. · exports `locationDetails`, `placeBuilding`
 - [`buildings.ts`](buildings.ts): Building footprints (OSM, src/data/buildings.geojson): loaded once on demand, with a point-in-footprint looku… · exports `loadedBuildings`, `loadBuildings`
 - [`events.ts`](events.ts): Pure event windows and short labels in the America/New_York campus timezone. · exports `nextWindow`, `formatWindow`
 - [`hours.ts`](hours.ts): Pure opening status and weekday lookup in the campus timezone. · exports `campusDay`, `openStatus`

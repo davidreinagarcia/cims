@@ -9,7 +9,11 @@ Los POI curados conservan ids, coordenadas, estado, source_url y todos sus valor
 
 Transport está en LAYER_CATALOG y el validador admite sus POI. Solo se consideran instalaciones fijas; las paradas Stinger/bus se omiten.
 
-Los horarios con 24:00 se conservan literalmente en hours_note, sin redondear a 23:59 ni crear intervalos inventados. Los conflictos conservan el horario curado. Los subtipos solo se escriben si el catálogo los enumera.
+## Decisions 2026-11-14
+
+David’s hours win: los conflictos conservan sus horarios curados. 24:00 accepted: únicamente como cierre al final del día. Building-attached POIs: se adjuntan al edificio y se verifica edificio + piso, sin exigir un punto exacto.
+
+Horarios movidos a hours: 10; dumps retirados: 11; registros adjuntos a huellas reales: 31.
 
 El archivo import-audit-2026-11-14.json conserva las altas y campos completados originales para que una segunda ejecución mantenga este reporte sin duplicar registros. No eliminarlo si se desea conservar esa auditoría.
 
@@ -130,37 +134,37 @@ El archivo import-audit-2026-11-14.json conserva las altas y campos completados 
 
 ## Revisión humana: precisión de edificio
 
-- tech-square-tavern: building centroid: georgia-tech-hotel-and-conference-center; ubicar el local/sala/entrada antes de verificar.
-- collective-food-hall-coda: building centroid: coda; ubicar el local/sala/entrada antes de verificar.
-- coc-tso-help-desk: building centroid: college-of-computing-building; ubicar el local/sala/entrada antes de verificar.
-- oit-asc-walk-up-support: building centroid: g-wayne-clough-undergraduate-learning-commons; ubicar el local/sala/entrada antes de verificar.
-- jlsc-information-desk: building centroid: john-lewis-student-center; ubicar el local/sala/entrada antes de verificar.
-- georgia-tech-post-office: building centroid: john-lewis-student-center; ubicar el local/sala/entrada antes de verificar.
-- scec-event-services-office: building centroid: john-lewis-student-center; ubicar el local/sala/entrada antes de verificar.
-- buzzcard-center: building centroid: john-lewis-student-center; ubicar el local/sala/entrada antes de verificar.
-- bursars-office: building centroid: lyman-hall-building; ubicar el local/sala/entrada antes de verificar.
-- office-of-disability-services: building centroid: flag-building-charles-a-smithgall-jr-building; ubicar el local/sala/entrada antes de verificar.
-- pts-customer-service-center: building centroid: technology-square-parking-deck; ubicar el local/sala/entrada antes de verificar.
-- crosland-grove-printers: building centroid: dorothy-murray-crosland-tower; ubicar el local/sala/entrada antes de verificar.
-- crosland-2f-bw-printer: building centroid: dorothy-murray-crosland-tower; ubicar el local/sala/entrada antes de verificar.
-- crosland-6f-gsc-color-printer: building centroid: dorothy-murray-crosland-tower; ubicar el local/sala/entrada antes de verificar.
-- price-gilbert-3f-purple-zone-printer: building centroid: price-gilbert-memorial-library; ubicar el local/sala/entrada antes de verificar.
-- clough-2f-color-printer: building centroid: g-wayne-clough-undergraduate-learning-commons; ubicar el local/sala/entrada antes de verificar.
-- clough-3f-pink-zone-printer: building centroid: g-wayne-clough-undergraduate-learning-commons; ubicar el local/sala/entrada antes de verificar.
-- clough-4f-bw-printer: building centroid: g-wayne-clough-undergraduate-learning-commons; ubicar el local/sala/entrada antes de verificar.
-- ccb-1f-pharos-printer: building centroid: college-of-computing-building; ubicar el local/sala/entrada antes de verificar.
-- ccb-ground-pharos-printer: building centroid: college-of-computing-building; ubicar el local/sala/entrada antes de verificar.
-- klaus-ece-public-lab-printers: building centroid: christopher-w-klaus-advanced-computing-building; ubicar el local/sala/entrada antes de verificar.
-- van-leer-c257-ece-lab-printer: building centroid: van-leer-building; ubicar el local/sala/entrada antes de verificar.
-- architecture-west-359a-plotters: building centroid: architecture-west; ubicar el local/sala/entrada antes de verificar.
-- pharmabox-clough: building centroid: g-wayne-clough-undergraduate-learning-commons; ubicar el local/sala/entrada antes de verificar.
-- cmhcr-cos-mose-1120b: building centroid: glen-p-robinson-jr-building; ubicar el local/sala/entrada antes de verificar.
-- w02-student-center-parking-deck: building centroid: student-center-parking-deck; ubicar el local/sala/entrada antes de verificar.
-- w22-dalney-parking-deck: building centroid: dalney-street-parking-deck; ubicar el local/sala/entrada antes de verificar.
-- e81-tech-square-parking-deck: building centroid: technology-square-parking-deck; ubicar el local/sala/entrada antes de verificar.
-- coda-parking-garage: building centroid: coda; ubicar el local/sala/entrada antes de verificar.
-- w02-bike-room-fix-it: building centroid: student-center-parking-deck; ubicar el local/sala/entrada antes de verificar.
-- w22-bike-room-fix-it: building centroid: dalney-street-parking-deck; ubicar el local/sala/entrada antes de verificar.
+- tech-square-tavern: building centroid: georgia-tech-hotel-and-conference-center; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- collective-food-hall-coda: building centroid: coda; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- coc-tso-help-desk: building centroid: college-of-computing-building; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- oit-asc-walk-up-support: building centroid: g-wayne-clough-undergraduate-learning-commons; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- jlsc-information-desk: building centroid: john-lewis-student-center; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- georgia-tech-post-office: building centroid: john-lewis-student-center; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- scec-event-services-office: building centroid: john-lewis-student-center; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- buzzcard-center: building centroid: john-lewis-student-center; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- bursars-office: building centroid: lyman-hall-building; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- office-of-disability-services: building centroid: flag-building-charles-a-smithgall-jr-building; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- pts-customer-service-center: building centroid: technology-square-parking-deck; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- crosland-grove-printers: building centroid: dorothy-murray-crosland-tower; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- crosland-2f-bw-printer: building centroid: dorothy-murray-crosland-tower; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- crosland-6f-gsc-color-printer: building centroid: dorothy-murray-crosland-tower; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- price-gilbert-3f-purple-zone-printer: building centroid: price-gilbert-memorial-library; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- clough-2f-color-printer: building centroid: g-wayne-clough-undergraduate-learning-commons; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- clough-3f-pink-zone-printer: building centroid: g-wayne-clough-undergraduate-learning-commons; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- clough-4f-bw-printer: building centroid: g-wayne-clough-undergraduate-learning-commons; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- ccb-1f-pharos-printer: building centroid: college-of-computing-building; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- ccb-ground-pharos-printer: building centroid: college-of-computing-building; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- klaus-ece-public-lab-printers: building centroid: christopher-w-klaus-advanced-computing-building; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- van-leer-c257-ece-lab-printer: building centroid: van-leer-building; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- architecture-west-359a-plotters: building centroid: architecture-west; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- pharmabox-clough: building centroid: g-wayne-clough-undergraduate-learning-commons; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- cmhcr-cos-mose-1120b: building centroid: glen-p-robinson-jr-building; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- w02-student-center-parking-deck: building centroid: student-center-parking-deck; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- w22-dalney-parking-deck: building centroid: dalney-street-parking-deck; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- e81-tech-square-parking-deck: building centroid: technology-square-parking-deck; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- coda-parking-garage: building centroid: coda; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- w02-bike-room-fix-it: building centroid: student-center-parking-deck; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
+- w22-bike-room-fix-it: building centroid: dalney-street-parking-deck; comprobar edificio y piso/sala contra la fuente antes de verificar; no se exige ubicación puntual.
 
 ## Revisión humana: conflictos de horarios
 
@@ -172,14 +176,3 @@ El archivo import-audit-2026-11-14.json conserva las altas y campos completados 
 
 ## Revisión humana: horarios incompatibles con el contrato
 
-- crosland-grove-printers: Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59. Original: {"mon":[["00:00","24:00"]],"tue":[["00:00","24:00"]],"wed":[["00:00","24:00"]],"thu":[["00:00","24:00"]],"fri":[["00:00","24:00"]],"sat":[["00:00","24:00"]],"sun":[["00:00","24:00"]]}.
-- crosland-2f-bw-printer: Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59. Original: {"mon":[["00:00","24:00"]],"tue":[["00:00","24:00"]],"wed":[["00:00","24:00"]],"thu":[["00:00","24:00"]],"fri":[["00:00","24:00"]],"sat":[["00:00","24:00"]],"sun":[["00:00","24:00"]]}.
-- crosland-6f-gsc-color-printer: Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59. Original: {"mon":[["00:00","24:00"]],"tue":[["00:00","24:00"]],"wed":[["00:00","24:00"]],"thu":[["00:00","24:00"]],"fri":[["00:00","24:00"]],"sat":[["00:00","24:00"]],"sun":[["00:00","24:00"]]}.
-- price-gilbert-3f-purple-zone-printer: Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59. Original: {"mon":[["00:00","24:00"]],"tue":[["00:00","24:00"]],"wed":[["00:00","24:00"]],"thu":[["00:00","24:00"]],"fri":[["00:00","24:00"]],"sat":[["00:00","24:00"]],"sun":[["00:00","24:00"]]}.
-- clough-2f-color-printer: Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59. Original: {"mon":[["00:00","24:00"]],"tue":[["00:00","24:00"]],"wed":[["00:00","24:00"]],"thu":[["00:00","24:00"]],"fri":[["00:00","24:00"]],"sat":[["00:00","24:00"]],"sun":[["00:00","24:00"]]}.
-- clough-3f-pink-zone-printer: Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59. Original: {"mon":[["00:00","24:00"]],"tue":[["00:00","24:00"]],"wed":[["00:00","24:00"]],"thu":[["00:00","24:00"]],"fri":[["00:00","24:00"]],"sat":[["00:00","24:00"]],"sun":[["00:00","24:00"]]}.
-- clough-4f-bw-printer: Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59. Original: {"mon":[["00:00","24:00"]],"tue":[["00:00","24:00"]],"wed":[["00:00","24:00"]],"thu":[["00:00","24:00"]],"fri":[["00:00","24:00"]],"sat":[["00:00","24:00"]],"sun":[["00:00","24:00"]]}.
-- klaus-ece-public-lab-printers: Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59. Original: {"mon":[["00:00","24:00"]],"tue":[["00:00","24:00"]],"wed":[["00:00","24:00"]],"thu":[["00:00","24:00"]],"fri":[["00:00","24:00"]],"sat":[["00:00","24:00"]],"sun":[["00:00","24:00"]]}.
-- van-leer-c257-ece-lab-printer: Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59. Original: {"mon":[["00:00","24:00"]],"tue":[["00:00","24:00"]],"wed":[["00:00","24:00"]],"thu":[["00:00","24:00"]],"fri":[["00:00","24:00"]],"sat":[["00:00","24:00"]],"sun":[["00:00","24:00"]]}.
-- campus-recreation-center: Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59. Original: {"mon":[["05:30","24:00"]],"tue":[["05:30","24:00"]],"wed":[["05:30","24:00"]],"thu":[["05:30","24:00"]],"fri":[["05:30","21:00"]],"sat":[["09:00","19:00"]],"sun":[["09:00","22:00"]]}.
-- pharmabox-clough: Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59. Original: {"mon":[["00:00","24:00"]],"tue":[["00:00","24:00"]],"wed":[["00:00","24:00"]],"thu":[["00:00","24:00"]],"fri":[["00:00","24:00"]],"sat":[["00:00","24:00"]],"sun":[["00:00","24:00"]]}.

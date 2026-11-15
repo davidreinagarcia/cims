@@ -18,6 +18,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 
 ### Shared helpers (`src/lib`, `src/state`, `src/hooks`): reuse these first
 
+- `locationDetails(place)` [src/lib/buildingPlaces.ts:6](../src/lib/buildingPlaces.ts#L6): Read sourced location metadata without assuming an exact point or inventing a room.
+- `placeBuilding(place, index, all)` [src/lib/buildingPlaces.ts:11](../src/lib/buildingPlaces.ts#L11): Resolve explicit footprint ids, legacy seed building ids, then exact-point containment.
 - `loadedBuildings()` [src/lib/buildings.ts:76](../src/lib/buildings.ts#L76): The index if it is already loaded, so callers can answer synchronously.
 - `loadBuildings()` [src/lib/buildings.ts:81](../src/lib/buildings.ts#L81): Loads the footprints once; a failed load is forgotten so the next call retries.
 - `nextWindow(event, now)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Return the current or next weekly campus occurrence, or an unexpired one-off window.
@@ -102,9 +104,10 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
 - `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:13](../src/panels/building-card/BuildingCard.tsx#L13): Shows the selected building (kind "building"), or nothing when something else is selected.
 - `BuildingDetails({ buildingId, embedded = false })` [src/panels/building-card/BuildingCard.tsx:20](../src/panels/building-card/BuildingCard.tsx#L20): Shared building facts and actions for the sidebar and expanded indoor screen.
-- `BuildingLink({ coordinates })` [src/panels/building-card/BuildingLink.tsx:7](../src/panels/building-card/BuildingLink.tsx#L7): Renders nothing when the place is not inside a known footprint (or the footprints are not loaded).
-- `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:10](../src/panels/building-card/BuildingPreview.tsx#L10): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
-- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:16](../src/panels/building-card/PlaceCard.tsx#L16): Shows the selected place's known details and correction link, or nothing without a place selection.
+- `BuildingLink({ coordinates, buildingId, attached, floorOrRoom })` [src/panels/building-card/BuildingLink.tsx:7](../src/panels/building-card/BuildingLink.tsx#L7): Renders nothing when the place is not inside a known footprint (or the footprints are not loaded).
+- `BuildingPreview()` [src/panels/building-card/BuildingPreview.tsx:11](../src/panels/building-card/BuildingPreview.tsx#L11): Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is op…
+- `InsidePlaces({ buildingId, excludeId })` [src/panels/building-card/InsidePlaces.tsx:11](../src/panels/building-card/InsidePlaces.tsx#L11): Show selectable places grouped by category for a footprint or a legacy seed building.
+- `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinPanel({ onShowMap })` [src/panels/bulletin/BulletinPanel.tsx:9](../src/panels/bulletin/BulletinPanel.tsx#L9): Show upcoming events independently of layer filters and return to Explore on selection.
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:31](../src/panels/layers/LayersPanel.tsx#L31): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.

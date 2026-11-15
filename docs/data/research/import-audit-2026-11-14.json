@@ -110,55 +110,7 @@
       "name": "Crosland Tower Grove Level Printers and Copier/Scanner",
       "category": "printing",
       "coord_source": "building centroid: dorothy-murray-crosland-tower",
-      "coord_precision": "building",
-      "hours_issue": {
-        "id": "crosland-grove-printers",
-        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
-        "research_hours": {
-          "mon": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "tue": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "wed": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "thu": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "fri": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sat": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sun": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ]
-        }
-      }
+      "coord_precision": "building"
     },
     {
       "research_id": "crosland-2f-bw-printer",
@@ -166,55 +118,7 @@
       "name": "Crosland Tower 2nd Floor B&W Printer",
       "category": "printing",
       "coord_source": "building centroid: dorothy-murray-crosland-tower",
-      "coord_precision": "building",
-      "hours_issue": {
-        "id": "crosland-2f-bw-printer",
-        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
-        "research_hours": {
-          "mon": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "tue": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "wed": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "thu": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "fri": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sat": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sun": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ]
-        }
-      }
+      "coord_precision": "building"
     },
     {
       "research_id": "crosland-6f-gsc-color-printer",
@@ -222,55 +126,7 @@
       "name": "Crosland Tower 6th Floor Color Printer (Graduate Student Community)",
       "category": "printing",
       "coord_source": "building centroid: dorothy-murray-crosland-tower",
-      "coord_precision": "building",
-      "hours_issue": {
-        "id": "crosland-6f-gsc-color-printer",
-        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
-        "research_hours": {
-          "mon": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "tue": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "wed": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "thu": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "fri": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sat": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sun": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ]
-        }
-      }
+      "coord_precision": "building"
     },
     {
       "research_id": "price-gilbert-3f-purple-zone-printer",
@@ -278,55 +134,7 @@
       "name": "Price Gilbert 3rd Floor Purple Zone Color Printer",
       "category": "printing",
       "coord_source": "building centroid: price-gilbert-memorial-library",
-      "coord_precision": "building",
-      "hours_issue": {
-        "id": "price-gilbert-3f-purple-zone-printer",
-        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
-        "research_hours": {
-          "mon": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "tue": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "wed": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "thu": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "fri": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sat": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sun": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ]
-        }
-      }
+      "coord_precision": "building"
     },
     {
       "research_id": "clough-2f-color-printer",
@@ -334,55 +142,7 @@
       "name": "Clough Commons 2nd Floor Color Printer",
       "category": "printing",
       "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
-      "coord_precision": "building",
-      "hours_issue": {
-        "id": "clough-2f-color-printer",
-        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
-        "research_hours": {
-          "mon": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "tue": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "wed": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "thu": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "fri": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sat": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sun": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ]
-        }
-      }
+      "coord_precision": "building"
     },
     {
       "research_id": "clough-3f-pink-zone-printer",
@@ -390,55 +150,7 @@
       "name": "Clough Commons 3rd Floor B&W Printer (Pink Computing Zone)",
       "category": "printing",
       "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
-      "coord_precision": "building",
-      "hours_issue": {
-        "id": "clough-3f-pink-zone-printer",
-        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
-        "research_hours": {
-          "mon": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "tue": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "wed": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "thu": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "fri": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sat": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sun": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ]
-        }
-      }
+      "coord_precision": "building"
     },
     {
       "research_id": "clough-4f-bw-printer",
@@ -446,55 +158,7 @@
       "name": "Clough Commons 4th Floor B&W Printer",
       "category": "printing",
       "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
-      "coord_precision": "building",
-      "hours_issue": {
-        "id": "clough-4f-bw-printer",
-        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
-        "research_hours": {
-          "mon": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "tue": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "wed": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "thu": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "fri": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sat": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sun": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ]
-        }
-      }
+      "coord_precision": "building"
     },
     {
       "research_id": "ccb-1f-pharos-printer",
@@ -518,55 +182,7 @@
       "name": "Klaus ECE Public Lab Pharos Printers",
       "category": "printing",
       "coord_source": "building centroid: christopher-w-klaus-advanced-computing-building",
-      "coord_precision": "building",
-      "hours_issue": {
-        "id": "klaus-ece-public-lab-printers",
-        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
-        "research_hours": {
-          "mon": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "tue": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "wed": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "thu": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "fri": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sat": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sun": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ]
-        }
-      }
+      "coord_precision": "building"
     },
     {
       "research_id": "van-leer-c257-ece-lab-printer",
@@ -574,55 +190,7 @@
       "name": "Van Leer C257 ECE Public Lab Pharos Printer",
       "category": "printing",
       "coord_source": "building centroid: van-leer-building",
-      "coord_precision": "building",
-      "hours_issue": {
-        "id": "van-leer-c257-ece-lab-printer",
-        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
-        "research_hours": {
-          "mon": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "tue": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "wed": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "thu": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "fri": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sat": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sun": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ]
-        }
-      }
+      "coord_precision": "building"
     },
     {
       "research_id": "architecture-west-359a-plotters",
@@ -646,55 +214,7 @@
       "name": "Pharmabox (Clough Commons)",
       "category": "health",
       "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
-      "coord_precision": "building",
-      "hours_issue": {
-        "id": "pharmabox-clough",
-        "reason": "Horario no representable por el contrato (p. ej. 24:00); no se inventa 23:59",
-        "research_hours": {
-          "mon": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "tue": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "wed": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "thu": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "fri": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sat": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ],
-          "sun": [
-            [
-              "00:00",
-              "24:00"
-            ]
-          ]
-        }
-      }
+      "coord_precision": "building"
     },
     {
       "research_id": "cmhcr-cos-mose-1120b",
@@ -1434,5 +954,10 @@
         "floor_or_room"
       ]
     }
-  ]
+  ],
+  "decisions": {
+    "hours_moved": 10,
+    "dumps_dropped": 11,
+    "records_attached": 31
+  }
 }

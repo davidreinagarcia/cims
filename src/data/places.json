@@ -115,7 +115,7 @@
             ]
           ]
         },
-        "hours_note": "Fall 2026 hours (CRC homepage lists Sun 10:00-22:00). Thanksgiving 2026: Wed 11/25 05:30-14:00, Thu 11/26-Sat 11/28 closed, Sun 11/29 09:00-17:00; Winter Break Dec 18-Jan 9 adjusted/closed Dec 25-Jan 3. Research hours (not imported into hours; contract rejects these intervals): {\"mon\":[[\"05:30\",\"24:00\"]],\"tue\":[[\"05:30\",\"24:00\"]],\"wed\":[[\"05:30\",\"24:00\"]],\"thu\":[[\"05:30\",\"24:00\"]],\"fri\":[[\"05:30\",\"21:00\"]],\"sat\":[[\"09:00\",\"19:00\"]],\"sun\":[[\"09:00\",\"22:00\"]]}",
+        "hours_note": "Fall 2026 hours (CRC homepage lists Sun 10:00-22:00). Thanksgiving 2026: Wed 11/25 05:30-14:00, Thu 11/26-Sat 11/28 closed, Sun 11/29 09:00-17:00; Winter Break Dec 18-Jan 9 adjusted/closed Dec 25-Jan 3.",
         "buzzcard": {
           "required": true,
           "note": "Valid CRC membership and active BuzzCard required (up to 2 forgotten-ID lookups/semester before fee; non-member guests require member sponsor + $10 pass)."
