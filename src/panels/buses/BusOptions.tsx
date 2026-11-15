@@ -70,12 +70,12 @@ export default function BusOptions({ origin, destination }: { origin: [number, n
                   : <span className="bus-option__total">{formatMinutes(o.tripTime)}<small>trip once a bus comes</small></span>}
               </span>
               <span className="bus-option__leave">{leaveText(o)}</span>
-              <ol className="bus-option__steps">
-                <li><span aria-hidden="true">🚶</span> Walk {formatMinutes(o.walkToStop)} to <strong>{o.board.name}</strong></li>
-                <li><span aria-hidden="true">🚌</span> {o.wait != null ? <>Bus in ≈{formatMinutes(o.wait)} · </> : null}ride {formatMinutes(o.rideTime)}</li>
-                <li><span aria-hidden="true">🚶</span> Get off at <strong>{o.alight.name}</strong>, walk {formatMinutes(o.walkFromStop)}</li>
-              </ol>
-              {o.busStillSince != null && stoppedText(o.busStillSince) && <span className="bus-option__alert">That bus has been {stoppedText(o.busStillSince)!.toLowerCase()}: it may be late.</span>}
+              <span className="bus-option__steps">
+                <span><span aria-hidden="true">🚶</span> Walk {formatMinutes(o.walkToStop)} to <strong>{o.board.name}</strong></span>
+                <span><span aria-hidden="true">🚌</span> {o.wait != null ? <>Bus in ≈{formatMinutes(o.wait)} · </> : null}ride {formatMinutes(o.rideTime)}</span>
+                <span><span aria-hidden="true">🚶</span> Get off at <strong>{o.alight.name}</strong>, walk {formatMinutes(o.walkFromStop)}</span>
+              </span>
+              {o.busStillFor != null && stoppedText(o.busStillFor) && <span className="bus-option__alert">That bus has been {stoppedText(o.busStillFor)!.toLowerCase()}: it may be late.</span>}
               {!o.live && o.route.hours && <span className="bus-option__hours">Service: {o.route.hours}</span>}
             </button>
           </li>

@@ -19,7 +19,7 @@
 .bus-option__total small { font: var(--fs-xs) var(--font-body); color: var(--ink-muted); }
 .bus-option__leave { font-weight: 600; color: var(--navy); }
 .bus-option--idle .bus-option__leave { color: var(--ink-muted); }
-.bus-option__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; font-size: var(--fs-sm); }
+.bus-option__steps { display: grid; gap: 2px; font-size: var(--fs-sm); }
 .bus-option__hours { font-size: var(--fs-xs); }
 .bus-options__source { margin: 0; font-size: var(--fs-xs); }
 .bus-list__head { margin: var(--s2) 0 0; font-size: var(--fs-sm); color: var(--ink-muted); }

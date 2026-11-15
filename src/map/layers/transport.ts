@@ -275,7 +275,7 @@ const transport: MapLayer = {
       const f = e.features?.[0];
       if (!f || f.geometry.type !== "Point") return;
       const at = f.geometry.coordinates as [number, number];
-      const p = f.properties as { route: string; route_id: number; heading?: number | null; still_since?: number };
+      const p = f.properties as { route: string; route_id: number; heading?: number | null; still_for_ms?: number };
       const title = document.createElement("strong");
       title.textContent = `${p.route} bus`;
       // MapLibre may hand properties back as strings; a missing heading becomes NaN here.
@@ -285,7 +285,7 @@ const transport: MapLayer = {
       const nextName = route && next != null ? network!.stops.get(route.stops[next].stop)?.name : undefined;
       const toward = nextName ? `Next stop: ${nextName}` : "Next stop unknown";
       const direction = Number.isFinite(heading) ? `Heading ${compassWord(heading)}` : "Direction not known yet";
-      const stopped = p.still_since ? stoppedText(Number(p.still_since)) : null;
+      const stopped = p.still_for_ms ? stoppedText(Number(p.still_for_ms)) : null;
       show(at, title, line(toward), line(direction), line(stopped ?? "Moving", stopped ? "cims-stop-popup__alert" : undefined), trackerLink("Official tracker"));
     };
     const onEnter = () => (map.getCanvas().style.cursor = "pointer");

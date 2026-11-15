@@ -13,9 +13,8 @@ const AT_STOP_M = 60;
 /** A bus waits at a stop a little: arriving up to this late still catches it. */
 const CATCH_GRACE_S = 30;
 
-/** A live bus as the planner needs it. */
-/** A live bus as the planner needs it; `stillSince` is when it last stopped moving (ms), if known. */
-export interface LiveBus { id: string; routeId: number; at: [number, number]; stillSince?: number; heading?: number | null }
+/** A live bus as the planner needs it; `stillFor` is how long (ms) it has stood in the same spot, if known. */
+export interface LiveBus { id: string; routeId: number; at: [number, number]; stillFor?: number; heading?: number | null }
 
 /** One way to get there by bus. Times are seconds. `live` is false when no bus is running on the route right now. */
 export interface BusOption {
@@ -34,8 +33,8 @@ export interface BusOption {
   total: number | null;
   /** Door-to-door seconds without waiting: what the trip takes once a bus is there. */
   tripTime: number;
-  /** When the bus you'd catch last stopped moving (ms), or null. */
-  busStillSince: number | null;
+  /** How long (ms) the bus you'd catch has stood still, or null. */
+  busStillFor: number | null;
 }
 
 /** The planner's answer: bus options (best first) and the plain walking time to compare against. */
@@ -143,7 +142,7 @@ export function planBusTrips(network: TransitNetwork, origin: LngLat, destinatio
     const near = (point: LngLat) => located.flatMap((stop, i) => (stop && meters(point, stop.at) <= MAX_WALK_TO_STOP_M ? [{ i, stop, walk: walkSeconds(point, stop.at) }] : []));
     const boards = near(origin);
     const alights = near(destination);
-    let best: Omit<BusOption, "live" | "wait" | "leaveIn" | "total" | "busStillSince"> & { boardIndex: number } | null = null;
+    let best: Omit<BusOption, "live" | "wait" | "leaveIn" | "total" | "busStillFor"> & { boardIndex: number } | null = null;
     for (const b of boards) for (const a of alights) {
       if (a.i === b.i || a.stop.id === b.stop.id) continue;
       const ride = rideSeconds(route, b.i, a.i);
@@ -159,7 +158,7 @@ export function planBusTrips(network: TransitNetwork, origin: LngLat, destinatio
       .filter((t): t is { bus: LiveBus; eta: number } => t.eta != null);
     const etas = timed.map((t) => t.eta);
     if (!etas.length) {
-      options.push({ ...option, live: false, wait: null, leaveIn: null, total: null, busStillSince: null });
+      options.push({ ...option, live: false, wait: null, leaveIn: null, total: null, busStillFor: null });
       continue;
     }
     const catchable = etas.filter((eta) => eta + CATCH_GRACE_S >= option.walkToStop);
@@ -167,13 +166,13 @@ export function planBusTrips(network: TransitNetwork, origin: LngLat, destinatio
     // Every bus passes before you get there: the soonest one comes back after a full lap.
     const wait = catchable.length ? Math.min(...catchable) : lap != null ? Math.min(...etas) + lap : null;
     if (wait == null) {
-      options.push({ ...option, live: false, wait: null, leaveIn: null, total: null, busStillSince: null });
+      options.push({ ...option, live: false, wait: null, leaveIn: null, total: null, busStillFor: null });
       continue;
     }
     const caught = timed.reduce<{ bus: LiveBus; eta: number } | null>((best, t) =>
       (t.eta + CATCH_GRACE_S >= option.walkToStop || !catchable.length) && (!best || t.eta < best.eta) ? t : best, null);
     options.push({ ...option, live: true, wait, leaveIn: Math.max(0, wait - option.walkToStop),
-      total: Math.max(option.walkToStop, wait) + option.rideTime + option.walkFromStop, busStillSince: caught?.bus.stillSince ?? null });
+      total: Math.max(option.walkToStop, wait) + option.rideTime + option.walkFromStop, busStillFor: caught?.bus.stillFor ?? null });
   }
   options.sort((a, b) => (a.live === b.live ? (a.total ?? a.tripTime) - (b.total ?? b.tripTime) : a.live ? -1 : 1));
   return { options, walkTime };
@@ -195,8 +194,8 @@ export interface RouteStatus {
   walkToStop: number | null;
   /** Seconds until the next live bus reaches `nearStop`, or null. */
   nextBus: number | null;
-  /** When that next bus last stopped moving (ms), or null. */
-  nextBusStillSince: number | null;
+  /** How long (ms) that next bus has stood still, or null. */
+  nextBusStillFor: number | null;
 }
 
 /** Every route with a stop sequence, for the "buses near you" list: running routes first, soonest bus at your nearest stop first, then the rest by name. */
@@ -223,7 +222,7 @@ export function routeStatuses(network: TransitNetwork, buses: LiveBus[], here: L
       }
     }
     return { route, running: mine.length, nearStop: pick?.stop ?? null, walkToStop: pick?.walk ?? null,
-      nextBus: pick?.eta ?? null, nextBusStillSince: pick?.bus?.stillSince ?? null };
+      nextBus: pick?.eta ?? null, nextBusStillFor: pick?.bus?.stillFor ?? null };
   });
   const rank = (s: RouteStatus) => (s.running ? (s.nextBus != null ? 0 : 1) : 2);
   return list.sort((a, b) => rank(a) - rank(b) || (a.nextBus ?? 0) - (b.nextBus ?? 0) || a.route.name.localeCompare(b.route.name));

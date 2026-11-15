@@ -30,7 +30,7 @@ export function useLiveBuses(network: TransitNetwork | null): { buses: LiveBus[]
       const request = (inFlight = new AbortController());
       const deadline = window.setTimeout(() => request.abort(), 15_000);
       try {
-        const buses = (await fetchBuses(names, request.signal)).map((b) => ({ id: b.properties.id, routeId: b.properties.route_id, at: b.geometry.coordinates as [number, number], stillSince: b.properties.still_since, heading: b.properties.heading }));
+        const buses = (await fetchBuses(names, request.signal)).map((b) => ({ id: b.properties.id, routeId: b.properties.route_id, at: b.geometry.coordinates as [number, number], stillFor: b.properties.still_for_ms, heading: b.properties.heading }));
         if (alive) setState({ buses, updatedAt: Date.now(), failed: false });
       } catch {
         if (alive) setState({ buses: [], updatedAt: null, failed: true });

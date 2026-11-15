@@ -25,8 +25,8 @@ function stingeretteStatus(): { open: boolean; text: string } {
 
 /** One route row: name, whether it's running, and the next bus at your nearest stop. */
 function RouteRow({ status, pressed, onPress }: { status: RouteStatus; pressed: boolean; onPress: () => void }) {
-  const { route, running, nearStop, walkToStop, nextBus, nextBusStillSince } = status;
-  const stopped = nextBusStillSince != null ? stoppedText(nextBusStillSince) : null;
+  const { route, running, nearStop, walkToStop, nextBus, nextBusStillFor } = status;
+  const stopped = nextBusStillFor != null ? stoppedText(nextBusStillFor) : null;
   return <li>
     <button type="button" className={`bus-option bus-row${running ? "" : " bus-option--idle"}`} aria-pressed={pressed} onClick={onPress}
       style={{ "--route-color": route.color ?? "var(--cat-transport)" } as CSSProperties}>
