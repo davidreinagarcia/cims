@@ -85,6 +85,8 @@ export default function Shell() {
   if (panel === "bulletin") content = { title: "Bulletin", key: "bulletin", body: <BulletinPanel onShowMap={() => setPanel("explore")} /> };
   else if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <ComingSoon what="Room finder" hint="You can already search a room number in the search bar." /> };
   else if (panel === "report") content = { title: "Report", key: "report", body: <ComingSoon what="Report an issue" /> };
+  // TODO(route): mount David's From/To directions box here once feat/search-gmaps merges. Until then the desktop
+  // Route button (SearchPill) and the phone FAB both go through choosePanel("route") and land on this one placeholder.
   else if (panel === "route") content = { title: "Route", key: "route", body: <ComingSoon what="Directions between two places" /> };
   else if (selection) content = {
     title: selection.kind === "building" ? "Building" : "Place",
