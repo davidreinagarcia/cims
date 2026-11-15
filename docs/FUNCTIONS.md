@@ -24,15 +24,15 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `circleRing(center, number], radiusM, steps = 96)` [src/lib/alerts.ts:106](../src/lib/alerts.ts#L106): Points of a circle on the ground as a closed GeoJSON ring ([lng, lat]), accurate at campus scale.
 - `insideAlert(alert, point, number])` [src/lib/alerts.ts:119](../src/lib/alerts.ts#L119): Whether a [lng, lat] point lies inside an alarm circle.
 - `alertKindLabel(kind)` [src/lib/alerts.ts:126](../src/lib/alerts.ts#L126): Label for an alarm kind.
-- `refreshAlerts()` [src/lib/alerts.ts:176](../src/lib/alerts.ts#L176): Re-reads everything now; call after signing in or out so the police view picks up the new role.
-- `useAlerts()` [src/lib/alerts.ts:225](../src/lib/alerts.ts#L225): Live alarms, tips and connection state; re-renders on every change.
-- `subscribeAlerts(listener)` [src/lib/alerts.ts:230](../src/lib/alerts.ts#L230): Subscribes plain (non-React) code, such as a map layer, to alert changes; returns the unsubscribe.
-- `launchAlert(input)` [src/lib/alerts.ts:242](../src/lib/alerts.ts#L242): Police: launches an alarm that every open page shows at once.
-- `endAlert(id)` [src/lib/alerts.ts:258](../src/lib/alerts.ts#L258): Police: ends an alarm (everyone sees an all-clear).
-- `submitTip(input)` [src/lib/alerts.ts:267](../src/lib/alerts.ts#L267): Citizen: sends a police tip; returns its id for status tracking.
-- `tipStatus(id)` [src/lib/alerts.ts:284](../src/lib/alerts.ts#L284): Citizen: current status of a tip they sent.
-- `setTipStatus(id, status)` [src/lib/alerts.ts:296](../src/lib/alerts.ts#L296): Police: moves a tip along the queue.
-- `focusAlert(alert)` [src/lib/alerts.ts:305](../src/lib/alerts.ts#L305): Asks the map to fly to an alarm (the banner's "Show on map").
+- `refreshAlerts()` [src/lib/alerts.ts:179](../src/lib/alerts.ts#L179): Re-reads everything now; call after signing in or out so the police view picks up the new role.
+- `useAlerts()` [src/lib/alerts.ts:228](../src/lib/alerts.ts#L228): Live alarms, tips and connection state; re-renders on every change.
+- `subscribeAlerts(listener)` [src/lib/alerts.ts:233](../src/lib/alerts.ts#L233): Subscribes plain (non-React) code, such as a map layer, to alert changes; returns the unsubscribe.
+- `launchAlert(input)` [src/lib/alerts.ts:245](../src/lib/alerts.ts#L245): Police: launches an alarm that every open page shows at once.
+- `endAlert(id)` [src/lib/alerts.ts:261](../src/lib/alerts.ts#L261): Police: ends an alarm (everyone sees an all-clear).
+- `submitTip(input)` [src/lib/alerts.ts:270](../src/lib/alerts.ts#L270): Citizen: sends a police tip; returns its id for status tracking.
+- `tipStatus(id)` [src/lib/alerts.ts:287](../src/lib/alerts.ts#L287): Citizen: current status of a tip they sent.
+- `setTipStatus(id, status)` [src/lib/alerts.ts:299](../src/lib/alerts.ts#L299): Police: moves a tip along the queue.
+- `focusAlert(alert)` [src/lib/alerts.ts:308](../src/lib/alerts.ts#L308): Asks the map to fly to an alarm (the banner's "Show on map").
 - `locationDetails(place)` [src/lib/buildingPlaces.ts:6](../src/lib/buildingPlaces.ts#L6): Read sourced location metadata without assuming an exact point or inventing a room.
 - `placeBuilding(place, index, all)` [src/lib/buildingPlaces.ts:11](../src/lib/buildingPlaces.ts#L11): Resolve explicit footprint ids, legacy seed building ids, then exact-point containment.
 - `loadedBuildings()` [src/lib/buildings.ts:84](../src/lib/buildings.ts#L84): The index if it is already loaded, so callers can answer synchronously.
