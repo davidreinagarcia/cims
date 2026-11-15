@@ -1,21 +1,23 @@
 /** @file Phone bottom sheet above the tab bar: hosts the same panels as the desktop card, with peek / half / full snaps. */
-import { useEffect, useRef, useState, type PointerEvent, type ReactNode } from "react";
+import { useEffect, useRef, useState, type MouseEvent, type PointerEvent, type ReactNode } from "react";
 import { Icon } from "./icons";
 
 /** Sheet heights, smallest first. */
 export type SheetSnap = "peek" | "half" | "full";
 const ORDER: SheetSnap[] = ["peek", "half", "full"];
 const PEEK_PX = 88;
+/** Strip kept free above a full sheet for the Route FAB and the attribution (shell.css --sheet-full). */
+const FAB_ROW_PX = 56 + 2 * 12;
 
-/** Pixel height of each snap right now (full stops under the search pill). */
+/** Pixel height of each snap right now (full stops a FAB row under the search pill). */
 function snapHeights(sheet: HTMLElement): Record<SheetSnap, number> {
   const bottom = sheet.getBoundingClientRect().bottom;
   const pill = document.querySelector(".shell-search")?.getBoundingClientRect().bottom ?? 64;
-  const full = Math.max(PEEK_PX, bottom - pill - 8);
+  const full = Math.max(PEEK_PX, bottom - pill - 8 - FAB_ROW_PX);
   return { peek: PEEK_PX, half: Math.min(full, Math.round(window.innerHeight * 0.5)), full };
 }
 
-/** Drag or tap the handle to move between snaps; arrow keys on the handle do the same. Opens at half. */
+/** Drag or tap the handle (or press Enter/Space on it) to move between snaps; arrow keys step up and down. Opens at half. */
 export default function BottomSheet({ title, contentKey, snap, onSnap, onClose, children }: {
   title: string;
   /** Changes when the content changes, so the sheet reopens at half. */
@@ -31,7 +33,16 @@ export default function BottomSheet({ title, contentKey, snap, onSnap, onClose, 
   useEffect(() => onSnap("half"), [contentKey]);
 
   const step = (direction: 1 | -1) => onSnap(ORDER[Math.min(2, Math.max(0, ORDER.indexOf(snap) + direction))]);
+  // Tap, Enter, Space and screen-reader activation all arrive as a click; a click that ends a drag is swallowed.
+  const dragged = useRef(false);
+  const click = (event: MouseEvent<HTMLButtonElement>) => {
+    const afterDrag = dragged.current;
+    dragged.current = false;
+    if (afterDrag && event.detail !== 0) return; // detail 0 = keyboard / assistive tech, never part of a drag
+    onSnap(snap === "full" ? "peek" : ORDER[ORDER.indexOf(snap) + 1]);
+  };
   const down = (event: PointerEvent<HTMLButtonElement>) => {
+    dragged.current = false;
     drag.current = { y: event.clientY, h: sheet.current!.getBoundingClientRect().height, moved: false };
     event.currentTarget.setPointerCapture(event.pointerId);
   };
@@ -42,11 +53,11 @@ export default function BottomSheet({ title, contentKey, snap, onSnap, onClose, 
     if (Math.abs(dy) > 6) d.moved = true;
     if (d.moved) setDragHeight(Math.max(PEEK_PX, Math.min(snapHeights(sheet.current!).full, d.h + dy)));
   };
-  const up = () => {
+  const up = (event: PointerEvent<HTMLButtonElement>) => {
     const d = drag.current;
     drag.current = null;
-    if (!d) return;
-    if (!d.moved) { onSnap(snap === "full" ? "peek" : ORDER[ORDER.indexOf(snap) + 1]); return; }
+    if (!d || !d.moved) return; // a plain tap: the click handler does it
+    dragged.current = event.type === "pointerup"; // a cancelled drag gets no click to swallow
     const heights = snapHeights(sheet.current!);
     const current = dragHeight ?? d.h;
     setDragHeight(null);
@@ -54,11 +65,11 @@ export default function BottomSheet({ title, contentKey, snap, onSnap, onClose, 
   };
 
   return (
-    <section ref={sheet} className="shell-sheet" data-snap={snap} aria-label={title}
+    <section ref={sheet} className="shell-sheet" data-snap={snap} aria-label={title} tabIndex={-1}
       style={dragHeight == null ? undefined : { height: dragHeight, transition: "none" }}>
       <header className="shell-sheet__head">
         <button type="button" className="shell-sheet__handle" aria-label={`${title}: ${snap === "full" ? "collapse" : "expand"} sheet`}
-          onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up}
+          onClick={click} onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerCancel={up}
           onKeyDown={(event) => {
             if (event.key === "ArrowUp") { event.preventDefault(); step(1); }
             else if (event.key === "ArrowDown") { event.preventDefault(); step(-1); }

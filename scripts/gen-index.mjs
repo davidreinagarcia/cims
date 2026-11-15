@@ -104,7 +104,7 @@ function summarize(f) {
   if (basename(f) === ".gitignore") return "Files and folders git ignores";
   if (ext === ".md") return mdSummary(text);
   if (CODE.has(ext)) return codeSummary(text);
-  if (ext === ".sh" || ext === ".yml" || ext === ".yaml" || basename(f).startsWith(".")) return shSummary(text);
+  if (ext === ".sh" || ext === ".conf" || ext === ".yml" || ext === ".yaml" || basename(f).startsWith(".")) return shSummary(text);
   if (ext === ".json" || ext === ".geojson") return jsonSummary(f, text);
   if (ext === ".css") { const m = text.match(/\/\*\s*([\s\S]*?)\*\//); return m ? clip(m[1]) : ""; }
   if (ext === ".html") { const m = text.match(/<title>(.*?)<\/title>/i); return m ? `HTML entry · ${m[1]}` : "HTML entry"; }

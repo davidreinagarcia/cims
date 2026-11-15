@@ -4,24 +4,24 @@ import { loadBuildings, loadedBuildings, type Building } from "../../lib/buildin
 import { useSelection } from "../../state/selection";
 
 /** Renders nothing when the place is not inside a known footprint (or the footprints are not loaded). */
-export default function BuildingLink({ coordinates }: { coordinates: number[] }) {
+export default function BuildingLink({ coordinates, buildingId, attached, floorOrRoom }: { coordinates: number[]; buildingId?: string; attached?: boolean; floorOrRoom?: string }) {
   const { select } = useSelection();
   const [lng, lat] = coordinates;
-  const [building, setBuilding] = useState<Building | undefined>(() => loadedBuildings()?.at(lng, lat));
+  const [building, setBuilding] = useState<Building | undefined>(() => (buildingId && loadedBuildings()?.byId.get(buildingId)) || loadedBuildings()?.at(lng, lat));
   useEffect(() => {
     let alive = true;
     const index = loadedBuildings();
-    if (index) setBuilding(index.at(lng, lat));
-    else loadBuildings().then((loaded) => alive && setBuilding(loaded.at(lng, lat))).catch(() => {});
+    if (index) setBuilding((buildingId && index.byId.get(buildingId)) || index.at(lng, lat));
+    else loadBuildings().then((loaded) => alive && setBuilding((buildingId && loaded.byId.get(buildingId)) || loaded.at(lng, lat))).catch(() => {});
     return () => {
       alive = false;
     };
-  }, [lng, lat]);
+  }, [lng, lat, buildingId]);
   if (!building) return null;
   return (
     <tr>
       <th scope="row">Building</th>
-      <td><button type="button" className="detail__link" onClick={() => select({ kind: "building", id: building.id })}>{building.name ?? "Unnamed building"}</button></td>
+      <td>{attached && "Inside "}<button type="button" className="detail__link" onClick={() => select({ kind: "building", id: building.id })}>{building.name ?? "Unnamed building"}</button>{floorOrRoom && <> · {floorOrRoom}</>}</td>
     </tr>
   );
 }

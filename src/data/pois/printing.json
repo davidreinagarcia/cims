@@ -159,7 +159,14 @@
               "22:00"
             ]
           ]
-        }
+        },
+        "hours_note": "Fall and Spring staffed hours (Summer Sat-Sun 14:00-18:00). Posters must be submitted 30 minutes before close; closed on holidays/library closures. Industrial Design also notes 24/7 gloss-paper plotters on the Library 3rd floor.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard (with funds loaded) or submitted departmental funding ticket required for poster payment."
+        },
+        "url": "https://library.gatech.edu/print-studio",
+        "floor_or_room": "3rd Floor"
       },
       "geometry": {
         "type": "Point",
@@ -242,6 +249,825 @@
           -84.3988236,
           33.7741957
         ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3951642,
+          33.7741966
+        ]
+      },
+      "properties": {
+        "id": "crosland-grove-printers",
+        "name": "Crosland Tower Grove Level Printers and Copier/Scanner",
+        "category": "printing",
+        "status": "draft",
+        "description": "Self-service black-and-white printer and color printer with scanner/copier on Crosland Grove level.",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "building": "Dorothy Crosland Tower",
+        "hours_note": "Open 24/7 when school is in session; reduced or closed during semester breaks and holidays.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required to release print jobs and pay for copies ($0.04/copy B&W, $0.19/copy color)."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "floor_or_room": "Grove Level (near exterior doors)",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "confidence": "medium",
+        "building_id": "dorothy-murray-crosland-tower",
+        "coord_source": "building centroid: dorothy-murray-crosland-tower",
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3951642,
+          33.7741966
+        ]
+      },
+      "properties": {
+        "id": "crosland-2f-bw-printer",
+        "name": "Crosland Tower 2nd Floor B&W Printer",
+        "category": "printing",
+        "status": "draft",
+        "description": "Black-and-white Pharos printer located near the yellow staircase on Crosland 2nd floor.",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "building": "Dorothy Crosland Tower",
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required to release print jobs."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "floor_or_room": "2nd Floor (near yellow staircase)",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "confidence": "medium",
+        "building_id": "dorothy-murray-crosland-tower",
+        "coord_source": "building centroid: dorothy-murray-crosland-tower",
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3951642,
+          33.7741966
+        ]
+      },
+      "properties": {
+        "id": "crosland-6f-gsc-color-printer",
+        "name": "Crosland Tower 6th Floor Color Printer (Graduate Student Community)",
+        "category": "printing",
+        "status": "draft",
+        "aliases": [
+          "GSC Printer"
+        ],
+        "description": "Color printer located inside the graduate-student-only study community on Crosland 6th floor.",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "building": "Dorothy Crosland Tower",
+        "hours_note": "Open 24/7 when Library is open; break exceptions apply.",
+        "buzzcard": {
+          "required": true,
+          "note": "Graduate student BuzzCard required to enter the Graduate Student Community and release prints."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "floor_or_room": "6th Floor (Graduate Student Community)",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "confidence": "medium",
+        "building_id": "dorothy-murray-crosland-tower",
+        "coord_source": "building centroid: dorothy-murray-crosland-tower",
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3957559,
+          33.7743563
+        ]
+      },
+      "properties": {
+        "id": "price-gilbert-3f-purple-zone-printer",
+        "name": "Price Gilbert 3rd Floor Purple Zone Color Printer",
+        "category": "printing",
+        "status": "draft",
+        "description": "Self-service color printer in the Price Gilbert 3rd floor Purple Computing Zone.",
+        "address": "260 4th Street NW, Atlanta, GA 30332",
+        "building": "Price Gilbert Memorial Library",
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required to release print jobs."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "floor_or_room": "3rd Floor (Purple Zone)",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "confidence": "medium",
+        "building_id": "price-gilbert-memorial-library",
+        "coord_source": "building centroid: price-gilbert-memorial-library",
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3963859,
+          33.7746478
+        ]
+      },
+      "properties": {
+        "id": "clough-2f-color-printer",
+        "name": "Clough Commons 2nd Floor Color Printer",
+        "category": "printing",
+        "status": "draft",
+        "aliases": [
+          "CULC 2nd Floor Printer"
+        ],
+        "description": "Self-service color printer near Clough Room 215.",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "building": "Clough Undergraduate Learning Commons",
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required to release print jobs and for after-hours/modified building access."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "floor_or_room": "2nd Floor (near Room 215)",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "confidence": "medium",
+        "building_id": "g-wayne-clough-undergraduate-learning-commons",
+        "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3963859,
+          33.7746478
+        ]
+      },
+      "properties": {
+        "id": "clough-3f-pink-zone-printer",
+        "name": "Clough Commons 3rd Floor B&W Printer (Pink Computing Zone)",
+        "category": "printing",
+        "status": "draft",
+        "aliases": [
+          "CULC 3rd Floor Printer"
+        ],
+        "description": "Self-service black-and-white printer near Clough Room 385 in the Pink Computing Zone.",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "building": "Clough Undergraduate Learning Commons",
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required to release print jobs."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "floor_or_room": "3rd Floor (near Room 385, Pink Computing Zone)",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "confidence": "medium",
+        "building_id": "g-wayne-clough-undergraduate-learning-commons",
+        "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3963859,
+          33.7746478
+        ]
+      },
+      "properties": {
+        "id": "clough-4f-bw-printer",
+        "name": "Clough Commons 4th Floor B&W Printer",
+        "category": "printing",
+        "status": "draft",
+        "aliases": [
+          "CULC 4th Floor Printer"
+        ],
+        "description": "Self-service black-and-white printer near the stairs on Clough 4th floor.",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "building": "Clough Undergraduate Learning Commons",
+        "hours_note": "Open 24/7 when school is in session; break exceptions apply.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required to release print jobs."
+        },
+        "url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "floor_or_room": "4th Floor (near stairs)",
+        "source_url": "https://libanswers.library.gatech.edu/tech_computers_print/faq/389103",
+        "confidence": "medium",
+        "building_id": "g-wayne-clough-undergraduate-learning-commons",
+        "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3973086,
+          33.7774355
+        ]
+      },
+      "properties": {
+        "id": "ccb-1f-pharos-printer",
+        "name": "College of Computing Building 1st Floor Pharos Station",
+        "category": "printing",
+        "status": "draft",
+        "aliases": [
+          "CCB 148 Printer"
+        ],
+        "description": "CoC instructional Pharos pay-for-print station ($0.04/page, jobs held 60 minutes).",
+        "address": "801 Atlantic Dr NW, Atlanta, GA 30332",
+        "building": "College of Computing Building",
+        "hours_note": "Building/lab hours not stated on CoC Pharos FAQ.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard funds required ($0.04/page); Library weekly free print allocation does not apply."
+        },
+        "url": "https://support.cc.gatech.edu/faq/pharos-faq",
+        "floor_or_room": "1st Floor (outside CCB 148)",
+        "source_url": "https://support.cc.gatech.edu/faq/pharos-faq",
+        "confidence": "medium",
+        "building_id": "college-of-computing-building",
+        "coord_source": "building centroid: college-of-computing-building",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3973086,
+          33.7774355
+        ]
+      },
+      "properties": {
+        "id": "ccb-ground-pharos-printer",
+        "name": "College of Computing Building Ground Floor Pharos Station",
+        "category": "printing",
+        "status": "draft",
+        "aliases": [
+          "CCB 16 Printer"
+        ],
+        "description": "CoC instructional Pharos pay-for-print station ($0.04/page, jobs held 60 minutes).",
+        "address": "801 Atlantic Dr NW, Atlanta, GA 30332",
+        "building": "College of Computing Building",
+        "hours_note": "Building/lab hours not stated on CoC Pharos FAQ.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard funds required ($0.04/page); Library weekly free print allocation does not apply."
+        },
+        "url": "https://support.cc.gatech.edu/faq/pharos-faq",
+        "floor_or_room": "Ground Floor (near CCB 16)",
+        "source_url": "https://support.cc.gatech.edu/faq/pharos-faq",
+        "confidence": "medium",
+        "building_id": "college-of-computing-building",
+        "coord_source": "building centroid: college-of-computing-building",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3961457,
+          33.7771508
+        ]
+      },
+      "properties": {
+        "id": "klaus-ece-public-lab-printers",
+        "name": "Klaus ECE Public Lab Pharos Printers",
+        "category": "printing",
+        "status": "draft",
+        "aliases": [
+          "Klaus 1446/1448/2440 Printers"
+        ],
+        "description": "24-hour ECE public computing labs with ECE Pharos black-and-white and color print queues (ECE_Black, ECE_Color_Xerox, ECE_Color_Dell).",
+        "address": "266 Ferst Dr",
+        "building": "Christopher W. Klaus Advanced Computing Building",
+        "hours_note": "Labs open 24 hours via BuzzCard; User Assistants staffed 10:00-22:00 normally and 09:00-17:00 during finals week (unstaffed between semesters/holidays).",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required for 24h lab entry and Pharos release; OIT print quota does not transfer to ECE queues."
+        },
+        "url": "https://help.ece.gatech.edu/labs",
+        "floor_or_room": "Rooms 1446, 1448, and 2440",
+        "source_url": "https://help.ece.gatech.edu/labs",
+        "confidence": "medium",
+        "building_id": "christopher-w-klaus-advanced-computing-building",
+        "coord_source": "building centroid: christopher-w-klaus-advanced-computing-building",
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3971816,
+          33.7759121
+        ]
+      },
+      "properties": {
+        "id": "van-leer-c257-ece-lab-printer",
+        "name": "Van Leer C257 ECE Public Lab Pharos Printer",
+        "category": "printing",
+        "status": "draft",
+        "description": "24-hour ECE public thin-client lab connected to ECE Pharos black-and-white and color print queues.",
+        "building": "Van Leer Building",
+        "hours_note": "Open 24 hours via BuzzCard; User Assistants staffed 10:00-22:00 normally and 09:00-17:00 during finals week.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required for 24h lab entry and Pharos release; OIT print quota does not transfer to ECE queues."
+        },
+        "url": "https://help.ece.gatech.edu/labs",
+        "floor_or_room": "Room C257",
+        "source_url": "https://help.ece.gatech.edu/labs",
+        "confidence": "medium",
+        "building_id": "van-leer-building",
+        "coord_source": "building centroid: van-leer-building",
+        "coord_precision": "building",
+        "hours": {
+          "mon": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "tue": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "wed": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "thu": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "fri": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sat": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ],
+          "sun": [
+            [
+              "00:00",
+              "24:00"
+            ]
+          ]
+        }
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3960717,
+          33.7761018
+        ]
+      },
+      "properties": {
+        "id": "architecture-west-359a-plotters",
+        "name": "Architecture West Plotter Printers",
+        "category": "printing",
+        "status": "draft",
+        "aliases": [
+          "ID Plotters"
+        ],
+        "description": "School of Industrial Design large-format plotter printers.",
+        "building": "Architecture West",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "18:00"
+            ]
+          ],
+          "tue": [],
+          "wed": [
+            [
+              "08:00",
+              "18:00"
+            ]
+          ],
+          "thu": [],
+          "fri": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "sat": [],
+          "sun": [
+            [
+              "13:00",
+              "18:00"
+            ]
+          ]
+        },
+        "hours_note": "Undated School of Industrial Design plotter schedule lists Mon, Wed, Fri, and Sun only; Tue/Thu/Sat unlisted.",
+        "buzzcard": {
+          "required": false,
+          "note": "Access rules beyond posted plotter hours not specified in source."
+        },
+        "url": "https://id.gatech.edu/printing-resources",
+        "floor_or_room": "3rd Floor, Room 359A",
+        "source_url": "https://id.gatech.edu/printing-resources",
+        "confidence": "medium",
+        "building_id": "architecture-west",
+        "coord_source": "building centroid: architecture-west",
+        "coord_precision": "building"
       }
     }
   ]

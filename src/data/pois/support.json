@@ -1,0 +1,636 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3973086,
+          33.7774355
+        ]
+      },
+      "properties": {
+        "id": "coc-tso-help-desk",
+        "name": "College of Computing TSO Help Desk",
+        "category": "support",
+        "status": "draft",
+        "aliases": [
+          "TSO",
+          "TSO Help Desk",
+          "CoC IT Support"
+        ],
+        "description": "Walk-up IT help desk for the College of Computing community.",
+        "address": "801 Atlantic Dr NW, Atlanta, GA 30332",
+        "building": "College of Computing Building",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "16:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Fall 2026 site activity confirmed via Sept 3, 2026 remote-support notice and Nov 10, 2026 news; after-hours emergency support is limited to CoC faculty and staff critical services.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open walk-in desk during business hours; contact 404-894-7065 or helpdesk@cc.gatech.edu."
+        },
+        "url": "https://support.cc.gatech.edu/services/helpdesk",
+        "floor_or_room": "Room 225D",
+        "source_url": "https://support.cc.gatech.edu/",
+        "confidence": "high",
+        "building_id": "college-of-computing-building",
+        "coord_source": "building centroid: college-of-computing-building",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3963859,
+          33.7746478
+        ]
+      },
+      "properties": {
+        "id": "oit-asc-walk-up-support",
+        "name": "OIT Administrative Services Center (ASC) Walk-Up Support",
+        "category": "support",
+        "status": "draft",
+        "aliases": [
+          "ASC",
+          "OIT Technology Support Center",
+          "Administrative Services Center"
+        ],
+        "description": "Central OIT walk-up technology, account, OS, Wi-Fi, software, and administrative services support desk.",
+        "address": "266 4th Street NW, Atlanta, GA 30332",
+        "building": "Clough Undergraduate Learning Commons",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "24/7 phone/ticket support via 404-385-1111 or support@oit.gatech.edu; walk-up desk in Clough 215 operates Mon-Fri 08:00-17:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "Walk-up support during business hours; GT login required for online ticket/chat portal."
+        },
+        "url": "https://techsupport.gatech.edu/contact-us",
+        "floor_or_room": "Room 215",
+        "source_url": "https://support.cc.gatech.edu/services/helpdesk",
+        "confidence": "medium",
+        "building_id": "g-wayne-clough-undergraduate-learning-commons",
+        "coord_source": "building centroid: g-wayne-clough-undergraduate-learning-commons",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3986635,
+          33.7740046
+        ]
+      },
+      "properties": {
+        "id": "jlsc-information-desk",
+        "name": "John Lewis Student Center Information Desk",
+        "category": "support",
+        "status": "draft",
+        "aliases": [
+          "Student Center Info Desk"
+        ],
+        "description": "Central visitor and student information desk inside the John Lewis Student Center.",
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "building": "John Lewis Student Center",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "19:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "19:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "19:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "19:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "sat": [
+            [
+              "09:00",
+              "15:00"
+            ]
+          ],
+          "sun": [
+            [
+              "09:00",
+              "15:00"
+            ]
+          ]
+        },
+        "hours_note": "Fall Break schedule adjusts Mon-Tue hours to 08:00-17:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "Publicly accessible during Student Center building hours (07:00-23:00)."
+        },
+        "url": "https://studentcenter.gatech.edu/hours",
+        "source_url": "https://www.studentcenter.gatech.edu/",
+        "confidence": "high",
+        "building_id": "john-lewis-student-center",
+        "coord_source": "building centroid: john-lewis-student-center",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3986635,
+          33.7740046
+        ]
+      },
+      "properties": {
+        "id": "georgia-tech-post-office",
+        "name": "Georgia Tech Post Office",
+        "category": "support",
+        "status": "draft",
+        "aliases": [
+          "GT Post Office",
+          "Student Center Post Office",
+          "Campus Mail Center"
+        ],
+        "description": "Campus student and department mail center providing package pickup and outgoing USPS shipping.",
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "building": "John Lewis Student Center",
+        "hours": {
+          "mon": [
+            [
+              "08:30",
+              "17:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:30",
+              "18:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:30",
+              "17:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:30",
+              "18:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:30",
+              "17:00"
+            ]
+          ],
+          "sat": [
+            [
+              "09:00",
+              "12:00"
+            ]
+          ],
+          "sun": []
+        },
+        "hours_note": "Outgoing shipping is via USPS only; break schedules vary.",
+        "buzzcard": {
+          "required": true,
+          "note": "BuzzCard required for campus mail/package retrieval."
+        },
+        "url": "https://studentcenter.gatech.edu/georgia-tech-post-office",
+        "source_url": "https://studentcenter.gatech.edu/hours",
+        "confidence": "high",
+        "building_id": "john-lewis-student-center",
+        "coord_source": "building centroid: john-lewis-student-center",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3986635,
+          33.7740046
+        ]
+      },
+      "properties": {
+        "id": "scec-event-services-office",
+        "name": "Student and Campus Event Centers Administration and Event Services",
+        "category": "support",
+        "status": "draft",
+        "aliases": [
+          "Student Center Event Services Suite"
+        ],
+        "description": "Administration and Event Services front desk handling Student Center, Exhibition Hall, classroom, and outdoor reservations.",
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "building": "John Lewis Student Center",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Undated official office hours.",
+        "buzzcard": {
+          "required": false,
+          "note": "Open weekday office hours; call 404-894-2828 for event reservations."
+        },
+        "url": "https://studentcenter.gatech.edu/our-professional-team",
+        "floor_or_room": "3rd Floor",
+        "source_url": "https://studentcenter.gatech.edu/our-professional-team",
+        "confidence": "medium",
+        "building_id": "john-lewis-student-center",
+        "coord_source": "building centroid: john-lewis-student-center",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3986635,
+          33.7740046
+        ]
+      },
+      "properties": {
+        "id": "buzzcard-center",
+        "name": "BuzzCard Center",
+        "category": "support",
+        "status": "draft",
+        "aliases": [
+          "BuzzCard Office"
+        ],
+        "description": "Campus ID card issuance, replacement, and BuzzCard Funds support office.",
+        "address": "351 Ferst Drive NW, Atlanta, GA 30332",
+        "building": "John Lewis Student Center",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "BuzzCard contact page lists Mon-Fri 08:00-17:00; Student Center overview lists weekday walk-up window as 09:00-13:00 and 14:00-17:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "Walk-in ID card center; phone 404-894-2470."
+        },
+        "url": "https://www.buzzcard.gatech.edu/contact/",
+        "floor_or_room": "2nd Floor (next to Information Desk)",
+        "source_url": "https://www.buzzcard.gatech.edu/contact/",
+        "confidence": "medium",
+        "building_id": "john-lewis-student-center",
+        "coord_source": "building centroid: john-lewis-student-center",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3941406,
+          33.7729692
+        ]
+      },
+      "properties": {
+        "id": "bursars-office",
+        "name": "Office of the Bursar",
+        "category": "support",
+        "status": "draft",
+        "aliases": [
+          "Bursar's Office"
+        ],
+        "description": "Student tuition and fee billing, cashier windows, and 24-hour check/money-order drop box.",
+        "address": "225 North Avenue, Atlanta, GA 30332-0255",
+        "building": "Lyman Hall",
+        "hours": {
+          "mon": [
+            [
+              "08:30",
+              "16:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:30",
+              "16:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:30",
+              "16:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:30",
+              "16:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:30",
+              "16:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "Flagged older-term hours: cashier hours from Fall 2019 FASET orientation packet; entry vestibule drop box (no cash) is accessible 24/7.",
+        "buzzcard": {
+          "required": false,
+          "note": "Public administrative office; credit cards not accepted at cashier windows."
+        },
+        "url": "https://bursar.gatech.edu/payment-options",
+        "floor_or_room": "Suite 111",
+        "source_url": "https://bursar.gatech.edu/PDF/Fall_2019_OSFA_and_Bursar_FASET.pdf",
+        "confidence": "medium",
+        "building_id": "lyman-hall-building",
+        "coord_source": "building centroid: lyman-hall-building",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.3995702,
+          33.77434
+        ]
+      },
+      "properties": {
+        "id": "office-of-disability-services",
+        "name": "Office of Disability Services (ODS)",
+        "category": "support",
+        "status": "draft",
+        "aliases": [
+          "ODS",
+          "Disability Services",
+          "ODS Testing Center"
+        ],
+        "description": "Academic accommodations and proctored exam Testing Center (a division of the Dean of Students).",
+        "address": "353 Ferst Drive",
+        "building": "Charles A. Smithgall, Jr. Student Services Building",
+        "hours": {
+          "mon": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "tue": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "wed": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "thu": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "fri": [
+            [
+              "08:00",
+              "17:00"
+            ]
+          ],
+          "sat": [],
+          "sun": []
+        },
+        "hours_note": "ODS Testing Center exam hours run 08:30-16:45 Fall/Spring (08:00-20:45 during finals); closed institutional holidays and reading days.",
+        "buzzcard": {
+          "required": false,
+          "note": "Virtual appointments available; phone 404-894-2563 or 404-894-1664 TTY."
+        },
+        "url": "https://disabilityservices.gatech.edu/about/contact-us",
+        "floor_or_room": "Suite 123",
+        "source_url": "https://disabilityservices.gatech.edu/about/contact-us",
+        "confidence": "medium",
+        "building_id": "flag-building-charles-a-smithgall-jr-building",
+        "coord_source": "building centroid: flag-building-charles-a-smithgall-jr-building",
+        "coord_precision": "building"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.403324,
+          33.781217
+        ]
+      },
+      "properties": {
+        "id": "gtpd-headquarters",
+        "name": "Georgia Tech Police Department (GTPD)",
+        "category": "support",
+        "status": "draft",
+        "aliases": [
+          "GTPD",
+          "Campus Police"
+        ],
+        "description": "Campus police headquarters, 24/7 emergency dispatch, lost-and-found high-value storage, and safety services.",
+        "address": "879 Hemphill Ave NW, Atlanta, GA 30318",
+        "hours_note": "24/7 emergency dispatch and VOICE/counselor transfer via 404-894-2500; walk-in administrative lobby hours not stated in source.",
+        "buzzcard": {
+          "required": false,
+          "note": "Emergency campus police dispatch available 24/7 at 404-894-2500."
+        },
+        "source_url": "https://president.gatech.edu/sites/default/files/documents/gt-student-mental-health-appendix-a.pdf",
+        "confidence": "medium",
+        "coord_source": "OSM way 751387123 (David research)",
+        "coord_precision": "exact"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -84.389548,
+          33.7755971
+        ]
+      },
+      "properties": {
+        "id": "pts-customer-service-center",
+        "name": "Parking and Transportation Services (PTS) Customer Service Center",
+        "category": "support",
+        "status": "draft",
+        "aliases": [
+          "PTS",
+          "PTS Customer Service Center"
+        ],
+        "description": "Customer service center for campus parking permits, shuttle inquiries, and $12 bike helmets.",
+        "address": "770 Spring Street, Atlanta, GA 30332",
+        "building": "E81: Tech Square Parking Deck",
+        "hours_note": "Walk-in counter hours not published on retrieved pages; 24/7 Operations Dispatch Center operates at 404-385-7275.",
+        "buzzcard": {
+          "required": false,
+          "note": "Walk-in transit and parking customer center; email support@pts.gatech.edu."
+        },
+        "url": "https://www.pts.gatech.edu/parking/parking-zones/",
+        "floor_or_room": "Ground Level",
+        "source_url": "https://www.pts.gatech.edu/author/bhoang34/page/3/",
+        "confidence": "medium",
+        "building_id": "technology-square-parking-deck",
+        "coord_source": "building centroid: technology-square-parking-deck",
+        "coord_precision": "building"
+      }
+    }
+  ]
+}

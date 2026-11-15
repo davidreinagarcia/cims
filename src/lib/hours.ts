@@ -30,7 +30,7 @@ export function openStatus(hours: Hours | undefined, now: Date): { state: "open"
     + Number(parts.find((part) => part.type === "minute")!.value);
   const sorted = [...ranges].sort((a, b) => minutes(a[0]) - minutes(b[0]));
   const active = sorted.find(([start, end]) => minutes(start) <= current && current < endMinutes(end));
-  if (active) return { state: "open", label: `OPEN NOW, closes ${active[1]}` };
+  if (active) return { state: "open", label: `OPEN NOW, closes ${endMinutes(active[1]) === 1440 ? "at midnight" : active[1]}` };
   const next = sorted.find(([start]) => minutes(start) > current);
   if (next) return { state: "closed", label: `CLOSED, opens at ${next[0]}` };
   const index = days.indexOf(day);

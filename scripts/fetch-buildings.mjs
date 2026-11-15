@@ -162,6 +162,22 @@ for (const el of data.elements ?? []) {
     Object.assign(props, { verified_at: o.verified_at ?? null, verified_by: o.verified_by ?? null });
   }
   features.push({ type: "Feature", id, properties: props, geometry });
+
+  // Stacked volumes (towers on a podium): each part is its own extrusion from min_levels to levels, drawn on
+  // top of the footprint and selected as the parent (part_of). Parts carry no name, so they get no label.
+  for (const part of o?.parts ?? []) {
+    features.push({
+      type: "Feature",
+      id: `${id}--${part.key}`,
+      properties: {
+        id: `${id}--${part.key}`, part_of: id, part_name: part.name ?? null,
+        height: +(part.levels * METERS_PER_LEVEL).toFixed(1), height_source: "override", levels: part.levels,
+        min_height: +((part.min_levels ?? 0) * METERS_PER_LEVEL).toFixed(1),
+        osm_id: osm, source_url: props.source_url, verified_at: o.verified_at ?? null, verified_by: o.verified_by ?? null,
+      },
+      geometry: { type: "Polygon", coordinates: [part.polygon] },
+    });
+  }
 }
 
 features.sort((a, b) => a.properties.id.localeCompare(b.properties.id));

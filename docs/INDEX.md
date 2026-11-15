@@ -29,6 +29,7 @@ All project documentation: product (charter → PRD), engineering (architecture,
 - [`ARCHITECTURE.md`](ARCHITECTURE.md): Code layout: where each kind of code and data goes in src/.
 - [`MAINTENANCE.md`](MAINTENANCE.md): How indexes, the function registry and docs stay current automatically, and what agents do.
 - [`MERGING-TO-MAIN.md`](MERGING-TO-MAIN.md): Rules for getting code into main (= production, auto-deploys). Read before every merge.
+- [`SUPABASE.md`](SUPABASE.md): What we need Supabase for (stories, reports, fullness, events, reservations, auth), proposed schema, RLS, sto…
 - [`WORKPLAN.md`](WORKPLAN.md): Lanes, file ownership, anti-conflict rules, agent workflow and the prioritized task checklist (T-xx).
 
 <!-- AUTO:END -->

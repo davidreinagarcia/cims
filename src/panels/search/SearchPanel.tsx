@@ -18,7 +18,10 @@ function highlight(text: string, ranges: MatchRange[] = []) {
 }
 
 /** Renders search and grouped results as siblings so sidebar CSS order can place panels between them. */
-export default function SearchPanel() {
+export default function SearchPanel({ expanded = true }: {
+  /** Whether the host is showing the results list; drives the combobox's aria-expanded and active option. */
+  expanded?: boolean;
+} = {}) {
   const { selection, select } = useSelection();
   const [query, setQuery] = useState("");
   const [active, setActive] = useState(-1);
@@ -87,9 +90,9 @@ export default function SearchPanel() {
           role="combobox"
           aria-label="Search buildings, rooms and places"
           aria-autocomplete="list"
-          aria-expanded={true}
+          aria-expanded={expanded}
           aria-controls={listId}
-          aria-activedescendant={focused && activeResult ? optionId(`${activeResult.kind}:${activeResult.id}`) : undefined}
+          aria-activedescendant={expanded && focused && activeResult ? optionId(`${activeResult.kind}:${activeResult.id}`) : undefined}
           placeholder="Search buildings, rooms and places..."
           value={query}
           onChange={(event) => { ensureBuildings(); setQuery(event.target.value); setActive(0); }}

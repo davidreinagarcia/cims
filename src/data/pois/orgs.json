@@ -14,7 +14,12 @@
         "source_url": "https://career.gatech.edu/contact-us/",
         "url": "https://career.gatech.edu/",
         "address": "219 Uncle Heinie Way, Atlanta, GA 30332",
-        "coord_source": "OSM way 42706711 (Bill Moore Student Success Center), building representative point returned by Nominatim search"
+        "coord_source": "OSM way 42706711 (Bill Moore Student Success Center), building representative point returned by Nominatim search",
+        "hours_note": "Main Career Center walk-in hours not published in retrieved sources; Campus Closet operates Mon 09:00-15:30 and Tue 09:00-12:00 (other days truncated); interview building opens 08:00.",
+        "buzzcard": {
+          "required": false,
+          "note": "Serves Georgia Tech students and alumni; phone 404-894-3320."
+        }
       },
       "geometry": {
         "type": "Point",
@@ -227,7 +232,13 @@
           ],
           "sat": [],
           "sun": []
-        }
+        },
+        "hours_note": "OIE Front Desk operates 08:30-16:30 Mon-Fri; general office hours are 08:00-17:00 Mon-Fri.",
+        "buzzcard": {
+          "required": false,
+          "note": "Front desk walk-in/phone support at 404-894-7475."
+        },
+        "floor_or_room": "Suite 211"
       },
       "geometry": {
         "type": "Point",
@@ -366,7 +377,13 @@
           ],
           "sat": [],
           "sun": []
-        }
+        },
+        "hours_note": "Flagged older-term hours: advising hours (09:30-15:30) taken from Fall 2019 FASET orientation packet; 3rd floor location verified on current OSFA contact page.",
+        "buzzcard": {
+          "required": false,
+          "note": "Advisors assigned by student last name; phone 404-894-4160."
+        },
+        "floor_or_room": "3rd Floor"
       },
       "geometry": {
         "type": "Point",
