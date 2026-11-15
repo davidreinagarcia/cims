@@ -79,8 +79,8 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
   const [pickStart, setPickStart] = useState(false);
   const [changeStart, setChangeStart] = useState(false);
   const [activeStep, setActiveStep] = useState<number | null>(null);
-  // ?indoor=stack opens straight in the stack view (demo links and screenshots).
-  const [view, setView] = useState<"plan" | "stack">(() => STACK_VIEW_ENABLED && new URLSearchParams(location.search).get("indoor") === "stack" ? "stack" : "plan");
+  // Stack opens first on every screen; an explicit ?indoor=plan still opens the detailed plan.
+  const [view, setView] = useState<"plan" | "stack">(() => STACK_VIEW_ENABLED && building.levels.some((item) => item.available) && new URLSearchParams(location.search).get("indoor") !== "plan" ? "stack" : "plan");
   const [sheet, setSheet] = useState<"peek" | "open">(initialRoom || initialFact ? "open" : "peek");
   const [walking, setWalking] = useState(false); // phone: step-by-step route mode
   const [facts, setFacts] = useState(() => loadedBuildings()?.byId.get(building.building_id));
@@ -236,9 +236,9 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
     aria-pressed={item.id === levelId} disabled={!item.available} title={item.note ?? item.name}
     onClick={() => { setLevelId(item.id); setActiveStep(null); }}>{item.label}</button>);
 
-  const plan = view === "stack" && STACK_VIEW_ENABLED
+  const plan = view === "stack" && STACK_VIEW_ENABLED && drawnLevels.length > 0
     ? <StackView building={building} levels={drawnLevels} activeId={levelId} selected={selected} route={route} activeStep={activeStep}
-      onLevel={(id) => setLevelId(id)} roomCount={roomCount} />
+      onLevel={(id) => setLevelId(id)} onOpenPlan={() => setView("plan")} onSelect={chooseSpace} roomCount={roomCount} />
     : level?.available ? <FloorPlan key={level.id} level={level} graph={graph} frame={frame} selected={selected} planRoute={planRoute(level.id)} onSelect={chooseSpace} />
       : <div className="building-view__no-plan cims-empty"><p>{level?.note ?? "No floor plan for this level yet."}</p></div>;
 
