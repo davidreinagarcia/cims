@@ -6,7 +6,7 @@ Maintenance dashboard: live Facilities report queue split by crew, with status c
 
 **Files**
 
-- [`MaintenanceView.tsx`](MaintenanceView.tsx): Maintenance dashboard (full screen): live Facilities reports split by crew (electrical, plumbing, HVAC...), c… · exports `MaintenanceView`
-- [`maintenance.css`](maintenance.css): * @file Maintenance dashboard layout: crew rail with live counts + card list.
+- [`MaintenanceView.tsx`](MaintenanceView.tsx): Maintenance dashboard (full screen): live Facilities board in three colored columns (To do, In progress, Done… · exports `MaintenanceView`
+- [`maintenance.css`](maintenance.css): * @file Maintenance dashboard: crew rail with live counts + a three-column board whose colors follow the site…
 
 <!-- AUTO:END -->

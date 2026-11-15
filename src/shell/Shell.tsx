@@ -12,6 +12,7 @@ import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinBoard from "../panels/bulletin/BulletinBoard";
+import TipNotifier from "../alerts/TipNotifier";
 import PoliceView from "../panels/police/PoliceView";
 import MaintenanceView from "../panels/maintenance/MaintenanceView";
 import ReportPanel from "../panels/report";
@@ -284,6 +285,7 @@ export default function Shell() {
       )}
       {mobile && <MobileTabBar panel={bulletin.open ? "bulletin" : buzzprintOpen ? "buzzprint" : panel} onPanel={choosePanel} />}
       <OfflineBanner />
+      {staffView !== "police" && <TipNotifier onOpen={() => openStaff("police")} />}
       {staffView === "police" && <PoliceView onClose={() => openStaff(null)} />}
       {staffView === "maintenance" && <MaintenanceView onClose={() => openStaff(null)} />}
       {panel === "rooms" && <RoomsBoard onClose={closeContent} />}

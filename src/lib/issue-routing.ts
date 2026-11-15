@@ -25,6 +25,8 @@ export interface IssueRoute {
   team: Team;
   reportingUrl: string | null;
   phone: string | null;
+  /** True when the team is unknown: the report goes to every team and the first one to claim it keeps it. */
+  broadcast?: boolean;
 }
 
 /** All teams, in the order the staff view lists them. */
@@ -48,7 +50,7 @@ const FIXTURE: IssueRoute[] = [
   { category: "accessibility", label: "Accessibility", hint: "Elevator, door, ramp", team: "Facilities", reportingUrl: null, phone: null },
   { category: "cleanliness", label: "Cleanliness", team: "Facilities", reportingUrl: null, phone: null },
   { category: "safety-hazard", label: "Safety hazard", team: "Emergency", reportingUrl: null, phone: null },
-  { category: "other", label: "Other", team: "Facilities", reportingUrl: null, phone: null },
+  { category: "other", label: "Other", hint: "Not sure who handles it? Every team sees it until one claims it", team: "Facilities", reportingUrl: null, phone: null, broadcast: true },
 ];
 
 /** Shape of one entry in src/data/issue-routing.json (T-31). */

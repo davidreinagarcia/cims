@@ -12,5 +12,6 @@
 - [`20261115000300_booking_fixes.sql`](20261115000300_booking_fixes.sql): _no summary_
 - [`20261115000400_roles.sql`](20261115000400_roles.sql): _no summary_
 - [`20261115000500_police_alerts_and_realtime.sql`](20261115000500_police_alerts_and_realtime.sql): _no summary_
+- [`20261115000600_report_claim.sql`](20261115000600_report_claim.sql): _no summary_
 
 <!-- AUTO:END -->

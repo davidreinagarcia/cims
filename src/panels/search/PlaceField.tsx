@@ -5,7 +5,8 @@ import type { CampusSearchResult } from "../../lib/search";
 import { suggest } from "../../lib/suggest";
 
 /** A labelled combobox that reports the chosen result, or null once the text is edited again. */
-export default function PlaceField({ label, placeholder, buildings, picked, onPick }: {
+export default function PlaceField({ label, placeholder, buildings, picked, onPick, filter, autoFocus }: {
+  filter?: (result: CampusSearchResult) => boolean; autoFocus?: boolean;
   label: string; placeholder: string; buildings: BuildingIndex | null; picked: CampusSearchResult | null; onPick: (result: CampusSearchResult | null) => void;
 }) {
   const [text, setText] = useState("");
@@ -13,7 +14,7 @@ export default function PlaceField({ label, placeholder, buildings, picked, onPi
   const [active, setActive] = useState(0);
   const id = useId();
   const shown = picked ? picked.name : text;
-  const options = open && !picked ? suggest(text, buildings, 5) : [];
+  const options = open && !picked ? (filter ? suggest(text, buildings, 30).filter(filter) : suggest(text, buildings, 5)).slice(0, 6) : [];
   const choose = (result: CampusSearchResult) => { onPick(result); setOpen(false); };
   const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.nativeEvent.isComposing) return;
@@ -27,7 +28,7 @@ export default function PlaceField({ label, placeholder, buildings, picked, onPi
     <label className="cims-caps" htmlFor={id}>{label}</label>
     <div className="cims-field">
       <input id={id} role="combobox" autoComplete="off" aria-expanded={options.length > 0} aria-controls={`${id}-list`} aria-autocomplete="list"
-        aria-activedescendant={options[active] ? `${id}-${active}` : undefined} placeholder={placeholder} value={shown}
+        aria-activedescendant={options[active] ? `${id}-${active}` : undefined} placeholder={placeholder} value={shown} autoFocus={autoFocus}
         onChange={(event) => { if (picked) onPick(null); setText(event.target.value); setActive(0); setOpen(true); }}
         onFocus={(event) => { setOpen(true); if (picked) event.target.select(); }} onBlur={() => setOpen(false)} onKeyDown={onKeyDown} />
     </div>

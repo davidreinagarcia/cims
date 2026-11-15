@@ -75,6 +75,7 @@ function sampleReports(): StoredReport[] {
       status: statuses[statuses.length - 1],
       history: statuses.map((status, i) => ({ status, at: i === 0 ? createdAt : hoursAgo(30 - n * 4 - i * 2) })),
       plusOnes,
+      openToAll: false,
       createdAt,
       sample: true,
     };
@@ -133,6 +134,7 @@ export function createLocalReportsService(): ReportsService {
         status: "open",
         history: [{ status: "open", at: now }],
         plusOnes: 0,
+        openToAll: input.category === "other",
         createdAt: now,
         sample: false,
       };
@@ -164,7 +166,10 @@ export function createLocalReportsService(): ReportsService {
       );
     },
     async listByTeam(team: Team) {
-      return load().filter((r) => r.team === team).map(view);
+      return load().filter((r) => r.team === team || r.openToAll).map(view);
+    },
+    async claim(id: string, team: Team) {
+      return update(id, (r) => (r.openToAll ? { ...r, team, openToAll: false, status: r.status === "open" ? "routed" : r.status, history: [...r.history, { status: "routed", at: new Date().toISOString() }] } : r));
     },
   };
 }
