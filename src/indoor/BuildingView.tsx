@@ -188,7 +188,6 @@ function RoomDirectory({ building, selected }: { building: IndoorBuilding; selec
         <div><dt>Capacity</dt><dd>{selected.capacity != null ? `${selected.capacity} seats` : "Not published"}</dd></div>
       </dl>
       <a className="building-view__room-source" href={selected.source_url} target="_blank" rel="noopener noreferrer">Source</a>
-      <p className="building-view__source-note cims-muted">{selected.source_note}</p>
       <p>No floor plan for Clough yet, so no directions inside the building. Walk in through the main entrance and look for the room number.</p>
     </section>}
     <section className="building-view__browse" aria-labelledby="browse-title">
