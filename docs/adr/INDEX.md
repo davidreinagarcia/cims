@@ -12,7 +12,7 @@ Architecture Decision Records: one decision per file, immutable once Accepted.
 - [`0003-maplibre-2d-with-3d-extrusion.md`](0003-maplibre-2d-with-3d-extrusion.md): Accepted: MapLibre with 3D extrusion of our own OSM-derived building footprints.
 - [`0004-curated-data-as-versioned-geojson.md`](0004-curated-data-as-versioned-geojson.md): Proposed: curated data as GeoJSON in src/data/ with provenance fields.
 - [`0005-backend-supabase.md`](0005-backend-supabase.md): Proposed/open: Supabase vs server/ on Alexandria for reports, density, availability.
-- [`0006-vector-basemap-survey-style.md`](0006-vector-basemap-survey-style.md): Proposed: replace the OSM raster basemap with free vector tiles styled to the survey-map direction.
+- [`0006-vector-basemap-survey-style.md`](0006-vector-basemap-survey-style.md): Accepted: OpenFreeMap vector tiles styled to the survey-map direction (per-ground palette).
 - [`0007-gt-sign-in-simulated.md`](0007-gt-sign-in-simulated.md): Accepted: reading is open, every post needs a signed-in account; the MVP simulates the Georgia Tech sign-in b…
 - [`README.md`](README.md): ADR rules and the index of all decisions with status.
 

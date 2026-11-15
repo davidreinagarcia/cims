@@ -1,4 +1,4 @@
-<!-- summary: Proposed: replace the OSM raster basemap with free vector tiles styled to the survey-map direction. -->
+<!-- summary: Accepted: OpenFreeMap vector tiles styled to the survey-map direction (per-ground palette). -->
 # ADR-0006: Vector basemap styled to the "survey map" direction
 
 - **Status:** Accepted (2026-11-14): step 1 shipped with T-10, step 2 (OpenFreeMap vector tiles + our palette) in `feat/basemap-palette`
