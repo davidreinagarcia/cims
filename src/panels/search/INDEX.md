@@ -6,7 +6,7 @@ Search box and list of places (rooms and buildings join in T-14).
 
 **Files**
 
-- [`SearchPanel.tsx`](SearchPanel.tsx): Grouped place search with ranked highlights and keyboard selection. · exports `SearchPanel`
+- [`SearchPanel.tsx`](SearchPanel.tsx): Grouped campus search with ranked highlights and keyboard selection. · exports `SearchPanel`
 - [`search.css`](search.css): * @file Search panel layout. Look comes from .cims-field / .cims-results (styles/cims-ui.css); `order` keeps…
 
 <!-- AUTO:END -->

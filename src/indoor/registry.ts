@@ -14,3 +14,15 @@ export function indoorFor(buildingId: string): IndoorBuilding | undefined {
 export function hasIndoor(id: string): boolean {
   return indoorFor(id) !== undefined;
 }
+
+/** Lists routable spaces with their building, level and globally unique selection id. */
+export function indoorRooms() {
+  return buildings.flatMap((building) => building.levels.flatMap((level) => level.available
+    ? level.spaces.filter((space) => space.type !== "void" && space.door && building.graph?.nodes.some((node) => node.id === space.door))
+      .map((space) => ({ id: `${building.building_id}:${space.id}`, building, level, space })) : []));
+}
+
+/** Resolves a room selection id without guessing a building or room. */
+export function resolveRoom(id: string) {
+  return indoorRooms().find((room) => room.id === id);
+}

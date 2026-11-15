@@ -8,3 +8,6 @@
 .cims-result .cims-glyph { color: var(--ink); }
 .search-empty { order: 4; }
 .list:empty { flex: 0; padding: 0; }
+
+.search-status { order: 4; margin: 0 var(--s4) var(--s3); font-size: var(--fs-sm); }
+.list .cims-result > span { min-width: 0; overflow-wrap: anywhere; }

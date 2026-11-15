@@ -1,7 +1,7 @@
 /** @file Shared selection state: what the user picked on the map or in a panel (building, place, room, report). */
 import { createContext, useContext, useMemo, useReducer, type ReactNode } from "react";
 
-/** The kinds of thing that can be selected. Only "place" is used so far. */
+/** Selectable map and search entities; room ids use "buildingId:spaceId". */
 export type SelectionKind = "building" | "place" | "room" | "report";
 
 /** One selected thing: what kind it is and its id inside that kind's data. */

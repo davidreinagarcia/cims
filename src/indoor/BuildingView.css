@@ -1,69 +1,80 @@
-/** @file Expanded building layout, with a survey drawing and scrollable directory and facts. */
+/** @file Aligned room finder, generous survey canvas and quiet directory on a sixteen pixel grid. */
 .building-view { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; background: var(--paper); min-width: 0; overflow: hidden; }
-.building-view__header { display: flex; align-items: flex-start; gap: var(--s4); padding: var(--s4); border-bottom: var(--hairline); }
+.building-view__header { display: flex; align-items: center; gap: 16px; padding: 16px; border-bottom: var(--hairline); flex-wrap: wrap; }
 .building-view__header > .cims-btn { flex: none; }
-.building-view__heading { min-width: 0; overflow-wrap: anywhere; }
-.building-view__heading h2 { margin: 0; font-size: var(--fs-xl); }
-.building-view__heading p { margin: var(--s1) 0 var(--s2); }
-.building-view__tags { display: flex; flex-wrap: wrap; gap: var(--s2); }
-.building-view__body { display: grid; grid-template-columns: minmax(0, 1fr) 340px; min-height: 0; flex: 1; }
-.building-view__plan { min-width: 0; overflow-y: auto; padding: var(--s4); }
-.building-view__plan .cims-breadcrumb { margin-bottom: var(--s3); }
-.building-view__drawing { border: var(--hairline); background: var(--white); }
-.building-view__credit { font-size: var(--fs-sm); color: var(--ink-muted); overflow-wrap: anywhere; margin: var(--s3) 0 0; }
+.building-view__header h2 { flex: 1 1 240px; min-width: 0; margin: 0; font-size: var(--fs-lg); overflow-wrap: anywhere; }
+.building-view__header .cims-card__alias { margin: 0; font-size: var(--fs-sm); }
+.building-view__body { display: grid; grid-template-columns: minmax(0, 1fr) 340px; grid-template-rows: auto auto minmax(0, 1fr); gap: 16px; padding: 16px; min-height: 0; flex: 1; overflow-y: auto; align-content: start; }
+.building-view__finder { grid-column: 1; grid-row: 1; min-width: 0; }
+.building-view__search { position: relative; }
+.building-view__search > label { display: block; margin-bottom: 8px; }
+.building-view__search .cims-field { height: 48px; }
+.building-view__magnifier { display: grid; place-items: center; flex: none; width: 44px; color: var(--gold-ink); }
+.building-view__search .cims-field input { padding-left: 0; font-size: var(--fs-md); }
+.building-view__matches { position: absolute; top: 100%; left: 0; right: 0; z-index: 4; background: var(--white); border: var(--hairline); max-height: min(360px, 48vh); overflow-y: auto; }
+.building-view__room-result { display: flex; width: 100%; gap: 16px; justify-content: space-between; align-items: center; min-height: 44px; border: 0; border-top: var(--hairline-muted); padding: 8px 16px; text-align: left; font: inherit; color: var(--ink); background: var(--white); cursor: pointer; }
+.building-view__room-result > span:first-child { min-width: 0; overflow-wrap: anywhere; }
+.building-view__room-result small { display: block; font-size: var(--fs-sm); text-transform: capitalize; }
+.building-view__room-result:hover, .building-view__room-result[aria-selected="true"] { background: var(--paper-2); outline: 1px solid var(--ink); outline-offset: -1px; }
+.building-view__origin { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 8px; font-size: var(--fs-sm); }
+.building-view__origin > span { padding: 8px; border: var(--hairline-muted); }
+.building-view__origin .cims-btn { font-size: var(--fs-sm); padding: 0 12px; }
+.building-view__start-options { display: grid; gap: 8px; margin-top: 8px; padding: 16px; border: var(--hairline); }
+.building-view__start-options select { width: 100%; min-width: 0; min-height: 44px; border: var(--hairline); border-radius: 0; padding: 8px; font: inherit; color: var(--ink); background: var(--white); }
+.building-view__summary { grid-column: 1; grid-row: 2; padding: 16px; border: var(--hairline); min-width: 0; }
+.building-view__route-heading { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 16px; }
+.building-view__route-heading strong { overflow-wrap: anywhere; }
+.building-view__route-heading > span { font-size: var(--fs-sm); }
+.building-view__route-heading > button { margin-left: auto; }
+.building-view__route-options, .building-view__route-levels { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.building-view__route-options { margin-top: 8px; justify-content: space-between; }
+.building-view__route-levels .cims-btn { font-size: var(--fs-sm); padding: 0 12px; }
+.building-view__route-levels [aria-pressed="true"] { background: var(--navy); color: var(--white); }
+.building-view__step-free { display: flex; align-items: center; gap: 8px; min-height: 44px; font-size: var(--fs-sm); cursor: pointer; }
+.building-view__step-free input { width: 20px; height: 20px; accent-color: var(--navy); }
+.building-view__plan { grid-column: 1; grid-row: 3; min-width: 0; }
+.building-view__body:not(:has(.building-view__summary)) .building-view__plan { grid-row: 2 / 4; }
+.building-view__drawing { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 16px; align-items: start; }
+.building-view__drawing > .floor-plan { min-width: 0; border: var(--hairline); background: var(--white); }
+.building-view__levels { position: static; margin-top: 68px; }
+.building-view__credit { font-size: var(--fs-sm); color: var(--ink-muted); overflow-wrap: anywhere; margin: 16px 0 0; }
 .building-view a { color: var(--navy); }
-.building-view__details { min-width: 0; overflow-y: auto; border-left: var(--hairline); }
-.building-view__directory-section { padding: var(--s4); border-bottom: var(--hairline); }
-.building-view h3 { margin: 0 0 var(--s3); font-size: var(--fs-lg); }
-.building-view__search-label { display: block; font-size: var(--fs-sm); margin-bottom: var(--s1); }
-.building-view__directory { position: relative; max-height: 280px; overflow-y: auto; margin-top: var(--s3); border: var(--hairline); }
-.building-view__directory button { display: block; min-height: var(--tap); width: 100%; border: 0; border-top: var(--hairline-muted); padding: var(--s2) var(--s4); text-align: left; font: inherit; font-size: var(--fs-sm); background: var(--white); color: var(--ink); cursor: pointer; overflow-wrap: anywhere; }
-.building-view__directory button:hover { background: var(--paper-2); }
+.building-view__details { grid-column: 2; grid-row: 1 / 4; min-width: 0; border-left: var(--hairline); padding-left: 16px; overflow-y: auto; }
+.building-view h3 { margin: 0 0 16px; font-size: var(--fs-lg); }
+.building-view__directory h4 { margin: 16px 0 0; }
+.building-view__directory h5 { margin: 0; padding: 8px 16px; font-size: var(--fs-sm); color: var(--ink-muted); border-bottom: var(--hairline-muted); }
+.building-view__directory button { display: block; min-height: 44px; width: 100%; border: 0; border-bottom: var(--hairline-muted); padding: 8px 16px; text-align: left; font: inherit; font-size: var(--fs-sm); background: var(--white); color: var(--ink); cursor: pointer; overflow-wrap: anywhere; }
+.building-view__directory button:hover, .building-view__steps button:hover { background: var(--paper-2); }
 .building-view__directory button[aria-pressed="true"] { background: var(--gold); }
-.building-view__directory > p { padding: var(--s3); }
-.building-view__space { border: var(--hairline); padding: var(--s3); margin-top: var(--s3); background: var(--white); overflow-wrap: anywhere; }
-.building-view__space h4 { margin: 0 0 var(--s2); }
-.building-view__space p { font-size: var(--fs-sm); }
-.building-view__space .cims-btn { width: 100%; }
-.building-view__facts-title { padding: var(--s4) var(--s4) 0; }
-.building-view__details .detail { margin: 0; border: 0; background: transparent; }
-.building-view__empty { min-height: 260px; align-content: center; }
-.building-view button:disabled { opacity: 0.55; cursor: not-allowed; }
+.building-view__steps { padding-left: 28px; margin: 0; font-size: var(--fs-sm); }
+.building-view__steps li { border-bottom: var(--hairline-muted); }
+.building-view__steps li::marker { font-family: var(--font-mono); }
+.building-view__steps button { display: block; border: 0; color: var(--navy); background: transparent; font: inherit; text-align: left; min-height: 44px; padding: 8px; cursor: pointer; width: 100%; overflow-wrap: anywhere; }
+.building-view__steps-section > p { font-size: var(--fs-sm); }
+.building-view__facts { border-top: var(--hairline); margin-top: 16px; }
+.building-view__facts summary { display: list-item; min-height: 44px; padding: 12px 0; cursor: pointer; }
+.building-view__facts .detail { margin: 0; padding: 0; border: 0; background: transparent; overflow-wrap: anywhere; }
+.building-view__facts .detail__inside button, .building-view__facts .detail > p > a { display: inline-flex; align-items: center; min-height: 44px; }
+.building-view__no-plan { grid-column: 1; grid-row: 1 / 4; align-content: start; border: var(--hairline); }
+.building-view__no-plan p { max-width: 50ch; margin: 0; }
+.building-view button:disabled { opacity: .55; cursor: not-allowed; }
 .building-view button:active:not(:disabled) { background: var(--paper-2); color: var(--ink); }
 @media (max-width: 1050px) and (min-width: 701px) {
-  .building-view__body { grid-template-columns: minmax(0, 1fr) minmax(220px, 40%); }
-  .building-view__header { flex-direction: column; gap: var(--s2); }
+  .building-view__body { grid-template-columns: minmax(0, 1fr) 280px; }
+  .building-view__drawing { gap: 8px; }
 }
 @media (max-width: 700px) {
-  /* On phones the building takes the whole screen (the map pane is only 58% of it and the sidebar sheet sits below). */
   .building-view { position: fixed; inset: 0; z-index: 20; overflow-y: auto; display: block; }
-  .building-view__header { flex-direction: column; gap: var(--s3); padding: var(--s3); }
-  .building-view__body { display: block; }
-  .building-view__plan { overflow: visible; padding: var(--s3); }
-  .building-view__details { overflow: visible; border-left: 0; border-top: var(--hairline); }
-  .building-view__directory-section { padding: var(--s3); }
-}
-.building-view__drawing { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: start; }
-.building-view__drawing > .floor-plan { grid-column: 2; grid-row: 1; }
-.building-view__levels { position: static; grid-column: 1; grid-row: 1; margin: var(--s3); }
-.building-view__empty { grid-column: 1 / -1; }
-.building-view__directions { padding: var(--s4); border-bottom: var(--hairline); }
-.building-view__directions form { display: grid; gap: var(--s2); }
-.building-view__directions select { width: 100%; min-width: 0; min-height: var(--tap); padding: var(--s2); font: inherit; font-size: var(--fs-sm); border: var(--hairline); background: var(--white); color: var(--ink); }
-.building-view__directions p { font-size: var(--fs-sm); overflow-wrap: anywhere; }
-.building-view__route-actions, .building-view__route-legs { display: flex; flex-wrap: wrap; gap: var(--s2); }
-.building-view__route-actions .cims-btn { flex: 1 1 auto; white-space: normal; }
-.building-view__step-free { display: flex; align-items: center; gap: var(--s2); min-height: var(--tap); font-size: var(--fs-sm); }
-.building-view__step-free input { flex: none; width: 18px; height: 18px; accent-color: var(--navy); }
-.building-view__show-route { width: 100%; background: var(--navy); color: var(--white); }
-.building-view__directions [aria-pressed="true"] { background: var(--gold); color: var(--navy); }
-.building-view__steps { padding-left: var(--s5); font-size: var(--fs-sm); }
-.building-view__steps button { border: 0; color: var(--navy); background: transparent; font: inherit; text-align: left; min-height: var(--tap); padding: var(--s2); cursor: pointer; width: 100%; overflow-wrap: anywhere; }
-.building-view__steps button:hover { background: var(--paper-2); }
-.building-view__directions button:active { filter: brightness(.9); }
-@media (max-width: 700px) {
-  .building-view__drawing { display: flex; flex-direction: column; }
-  .building-view__levels { order: -1; display: flex; margin: 0; width: 100%; border-bottom: var(--hairline); box-shadow: none; }
-  .building-view__drawing > .floor-plan { width: 100%; }
-  .building-view__directions { padding: var(--s3); }
+  .building-view__header h2 { flex-basis: 100%; }
+  .building-view__body { display: flex; flex-direction: column; overflow: visible; }
+  .building-view__finder { order: 0; position: sticky; top: 0; z-index: 3; background: var(--paper); padding: 8px 0; }
+  .building-view__plan { order: 1; width: 100%; }
+  .building-view__summary { order: 2; }
+  .building-view__details { order: 3; overflow: visible; border-left: 0; border-top: var(--hairline); padding: 16px 0 0; }
+  .building-view__drawing { display: flex; flex-direction: column; gap: 8px; }
+  .building-view__drawing > .floor-plan { width: 100%; box-sizing: border-box; }
+  .building-view__levels { display: flex; gap: 8px; width: auto; margin: 0; }
+  .building-view__levels button { width: 44px; }
+  .building-view__no-plan { order: 0; }
+  .building-view__route-heading > button { margin-left: 0; }
 }
