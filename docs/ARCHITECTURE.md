@@ -30,6 +30,8 @@ src/
     search/            SearchPanel: search box + list
     layers/            LayersPanel: category toggles, sub-type tree, legend; chips on phones
     building-card/     PlaceCard: hours/access/provenance, inside places, directions and corrections; lib/hours.ts computes campus-local status
+  indoor/              BuildingView overlay + FloorPlan SVG, typed registry for Kendeda schematic and CULC placeholder
+  data/indoor/         curated indoor JSON: source credit, levels and schematic vector spaces
   data/places.json     GeoJSON of points of interest  <- edit this to add places
   data/pois/events.json  fictional weekly demo events at seed locations, explicitly labeled demo
   lib/events.ts        pure next/current event windows and English labels in America/New_York
@@ -55,6 +57,7 @@ src/
   passes them to every layer through `setFilters(filters)`; a layer hides what is switched off, usually
   with `map.setFilter(id, buildMapFilter(filters))`. Features carry `category` and optional `subtype`
   properties; a category listed in `lib/layerCatalog.ts` becomes a toggle, any other stays always visible.
+- **Indoor** opens for registered building selections inside `.stage`, above the continuously mounted map. Back or Escape clears selection and returns focus to the map; places inside reuse the shared selection. `BuildingDetails` is shared with the sidebar card.
 - **Panels** are components in `src/panels/<name>/`, mounted in `components/Sidebar.tsx`.
 
 ## Where things go

@@ -9,6 +9,7 @@ The web app (Vite + React + TypeScript + MapLibre). Entry: `main.tsx` → `App.t
 - [`auth/`](auth/INDEX.md): Replaceable demo sign-in contract, fictional personas and local session persistence.
 - [`components/`](components/INDEX.md): React components for the current UI (map view, sidebar). T-01 moves these into src/map/ and src/panels/.
 - [`data/`](data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
+- [`indoor/`](indoor/INDEX.md): Building screen, vector schematic renderer and indoor contracts shared by lanes A and B.
 - [`lib/`](lib/INDEX.md): Shared, reusable helpers and typed data access. Check docs/FUNCTIONS.md before adding one.
 - [`map/`](map/INDEX.md): Everything about the map engine: contract for layers, base style, and the layer auto-loader.
 - [`panels/`](panels/INDEX.md): Sidebar panels, one folder per panel. Mount new ones in components/Sidebar.tsx.

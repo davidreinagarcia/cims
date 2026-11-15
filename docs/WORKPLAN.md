@@ -169,6 +169,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
   features for F-11.
 - [ ] **T-21 Indoor viewer** (F-06) · needs T-01, T-02 (mock rooms until T-20)
   Level selector, rooms layer filtered by level, directory by room type, highlight selected room.
+  First indoor building view: Kendeda Level 1 vector schematic and CULC no-plan placeholder, shared Lane A/B. Includes directory, space selection and pan/zoom; 3D and wayfinding remain future work.
 - [ ] **T-22 Backend** per T-05 decision · needs T-05
   Tables: `accounts` (opaque id, role, provider, status), `issue_reports`, `issue_plus_ones`, each write with `account_id`; rate limiting per account; env vars documented in `.env.example`.
 - [ ] **T-23 Report an issue** (F-10) · UI can start on mocks after T-02; real data needs T-22

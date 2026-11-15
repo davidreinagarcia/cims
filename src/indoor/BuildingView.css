@@ -1,0 +1,45 @@
+/** @file Expanded building layout, with a survey drawing and scrollable directory and facts. */
+.building-view { position: absolute; inset: 0; z-index: 2; display: flex; flex-direction: column; background: var(--paper); min-width: 0; overflow: hidden; }
+.building-view__header { display: flex; align-items: flex-start; gap: var(--s4); padding: var(--s4); border-bottom: var(--hairline); }
+.building-view__header > .cims-btn { flex: none; }
+.building-view__heading { min-width: 0; overflow-wrap: anywhere; }
+.building-view__heading h2 { margin: 0; font-size: var(--fs-xl); }
+.building-view__heading p { margin: var(--s1) 0 var(--s2); }
+.building-view__tags { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.building-view__body { display: grid; grid-template-columns: minmax(0, 1fr) 340px; min-height: 0; flex: 1; }
+.building-view__plan { min-width: 0; overflow-y: auto; padding: var(--s4); }
+.building-view__plan .cims-breadcrumb { margin-bottom: var(--s3); }
+.building-view__drawing { position: relative; border: var(--hairline); background: var(--white); }
+.building-view__levels { position: absolute; left: var(--s2); top: 116px; }
+.building-view__credit { font-size: var(--fs-sm); color: var(--ink-muted); overflow-wrap: anywhere; margin: var(--s3) 0 0; }
+.building-view a { color: var(--navy); }
+.building-view__details { min-width: 0; overflow-y: auto; border-left: var(--hairline); }
+.building-view__directory-section { padding: var(--s4); border-bottom: var(--hairline); }
+.building-view h3 { margin: 0 0 var(--s3); font-size: var(--fs-lg); }
+.building-view__search-label { display: block; font-size: var(--fs-sm); margin-bottom: var(--s1); }
+.building-view__directory { position: relative; max-height: 280px; overflow-y: auto; margin-top: var(--s3); border: var(--hairline); }
+.building-view__directory button { display: block; min-height: var(--tap); width: 100%; border: 0; border-top: var(--hairline-muted); padding: var(--s2) var(--s4); text-align: left; font: inherit; font-size: var(--fs-sm); background: var(--white); color: var(--ink); cursor: pointer; overflow-wrap: anywhere; }
+.building-view__directory button:hover { background: var(--paper-2); }
+.building-view__directory button[aria-pressed="true"] { background: var(--gold); }
+.building-view__directory > p { padding: var(--s3); }
+.building-view__space { border: var(--hairline); padding: var(--s3); margin-top: var(--s3); background: var(--white); overflow-wrap: anywhere; }
+.building-view__space h4 { margin: 0 0 var(--s2); }
+.building-view__space p { font-size: var(--fs-sm); }
+.building-view__space .cims-btn { width: 100%; }
+.building-view__facts-title { padding: var(--s4) var(--s4) 0; }
+.building-view__details .detail { margin: 0; border: 0; background: transparent; }
+.building-view__empty { min-height: 260px; align-content: center; }
+.building-view button:disabled { opacity: 0.55; cursor: not-allowed; }
+.building-view button:active:not(:disabled) { background: var(--paper-2); color: var(--ink); }
+@media (max-width: 1050px) and (min-width: 701px) {
+  .building-view__body { grid-template-columns: minmax(0, 1fr) minmax(220px, 40%); }
+  .building-view__header { flex-direction: column; gap: var(--s2); }
+}
+@media (max-width: 700px) {
+  .building-view { overflow-y: auto; display: block; }
+  .building-view__header { flex-direction: column; gap: var(--s3); padding: var(--s3); }
+  .building-view__body { display: block; }
+  .building-view__plan { overflow: visible; padding: var(--s3); }
+  .building-view__details { overflow: visible; border-left: 0; border-top: var(--hairline); }
+  .building-view__directory-section { padding: var(--s3); }
+}
