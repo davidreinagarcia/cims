@@ -1,5 +1,6 @@
 /** @file Location step of the story camera: asks for GPS from a real tap (so the browser shows its permission prompt), and when it is blocked explains the exact fix for this phone. */
 import { useEffect, useState } from "react";
+import { IN_APP_BROWSER as IN_APP, IOS } from "../lib/inAppBrowser";
 import type { GpsState } from "../lib/useGpsFix";
 
 /** What the browser says about location permission; "unknown" where the Permissions API can't tell (older Safari). */
@@ -18,10 +19,6 @@ export function useLocationPermission(): LocationPermission {
   return state;
 }
 
-const UA = typeof navigator === "undefined" ? "" : navigator.userAgent;
-const IOS = /iPhone|iPad|iPod/.test(UA);
-/** In-app browsers (Telegram, Instagram, ...) often have no location at all; the page must be opened in Safari/Chrome. */
-const IN_APP = /FBAN|FBAV|Instagram|Snapchat|TikTok|MicroMessenger|Line\/|Twitter|; wv\)/.test(UA) || (IOS && !/Safari/.test(UA));
 
 function BlockedSteps() {
   return IOS ? (

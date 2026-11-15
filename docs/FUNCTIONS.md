@@ -77,6 +77,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `formatDistance(meters)` [src/lib/geolocation.ts:64](../src/lib/geolocation.ts#L64): "~180 m away" / "~1.2 km away": rounds to a sensible precision for an approximate, building-level distance --…
 - `campusDay(now)` [src/lib/hours.ts:11](../src/lib/hours.ts#L11): Returns the hours-contract weekday for an instant in America/New_York.
 - `openStatus(hours, now)` [src/lib/hours.ts:24](../src/lib/hours.ts#L24): Computes campus-local opening status without guessing when today's hours are missing.
+- `IOS` [src/lib/inAppBrowser.ts:6](../src/lib/inAppBrowser.ts#L6): True on iPhone, iPad and iPod.
+- `IN_APP_BROWSER` [src/lib/inAppBrowser.ts:9](../src/lib/inAppBrowser.ts#L9): True inside another app's built-in browser, where location is usually unavailable.
 - `planLabelBounds(shape)` [src/lib/indoorPlan.ts:13](../src/lib/indoorPlan.ts#L13): Largest axis-aligned rectangle wholly inside a room, including concave rooms with notches.
 - `planWalls(level, { available)` [src/lib/indoorPlan.ts:50](../src/lib/indoorPlan.ts#L50): One wall path for a level: collinear touching edges from rooms and outline are painted only once.
 - `planShapeBounds(shape)` [src/lib/indoorPlan.ts:83](../src/lib/indoorPlan.ts#L83): Axis-aligned bounding box of a schematic shape, in plan units.
@@ -288,7 +290,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): Selectable map and search entities; room ids use "buildingId:spaceId".
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
 - `SelectionApi` [src/state/selection.tsx:20](../src/state/selection.tsx#L20): What useSelection() returns.
-- `LocationPermission` [src/stories/LocationGate.tsx:6](../src/stories/LocationGate.tsx#L6): What the browser says about location permission; "unknown" where the Permissions API can't tell (older Safari…
+- `LocationPermission` [src/stories/LocationGate.tsx:7](../src/stories/LocationGate.tsx#L7): What the browser says about location permission; "unknown" where the Permissions API can't tell (older Safari…
 - `MapFocus` [src/stories/store.ts:9](../src/stories/store.ts#L9): A request to look at one place on the map; `nonce` makes repeats of the same spot count as new requests.
 - `ViewerRequest` [src/stories/store.ts:11](../src/stories/store.ts#L11): A subset of stories to show in the viewer (set when the user clicks the heat map).
 - `StoryKind` [src/stories/types.ts:5](../src/stories/types.ts#L5): A story is either a photo or a short clip, always captured live in the app.
@@ -367,7 +369,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
 - `CameraCapture({ onCapture, onCancel })` [src/stories/CameraCapture.tsx:39](../src/stories/CameraCapture.tsx#L39): Full-screen camera view, like the phone's own app. Calls `onCapture` with the media plus where it was taken;…
-- `LocationGate({ gps, permission })` [src/stories/LocationGate.tsx:41](../src/stories/LocationGate.tsx#L41): Card over the camera until a GPS fix exists. Renders nothing once the fix is in.
+- `LocationGate({ gps, permission })` [src/stories/LocationGate.tsx:38](../src/stories/LocationGate.tsx#L38): Card over the camera until a GPS fix exists. Renders nothing once the fix is in.
 - `StoriesPanel({ onShowMap })` [src/stories/StoriesPanel.tsx:115](../src/stories/StoriesPanel.tsx#L115): The Stories tab. `onShowMap` switches the shell back to the map (after "View on map").
 
 ### Other exported functions & constants
@@ -419,7 +421,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `flyToAlert(map, alert)` [src/map/alertsOverlay.ts:22](../src/map/alertsOverlay.ts#L22): Fits the camera to an alarm circle with room around it.
 - `addAlertsOverlay(map, options)` [src/map/alertsOverlay.ts:35](../src/map/alertsOverlay.ts#L35): Adds the alarm layers to a map whose style is ready and keeps them in sync with the live store.
 - `baseStyle` [src/map/baseStyle.ts:69](../src/map/baseStyle.ts#L69): Base style every layer is added on top of.
-- `LocateControl` [src/map/furniture/LocateControl.ts:12](../src/map/furniture/LocateControl.ts#L12): Map control that watches location only while visible and never follows the camera after the first fix.
+- `LocateControl` [src/map/furniture/LocateControl.ts:17](../src/map/furniture/LocateControl.ts#L17): Map control that watches location only while visible and never follows the camera after the first fix.
 - `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.
 - `ScaleBox` [src/map/furniture/ScaleBox.ts:22](../src/map/furniture/ScaleBox.ts#L22): MapLibre control: a four-segment scale bar in feet and the map center's latitude/longitude, updated as the ma…
 - `ViewToggle` [src/map/furniture/ViewToggle.ts:9](../src/map/furniture/ViewToggle.ts#L9): MapLibre control: "2D" / "3D" button. The label is the view you get by pressing it.
@@ -469,7 +471,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `NAV_ITEMS` [src/shell/icons.tsx:39](../src/shell/icons.tsx#L39): The six destinations of the rail (desktop) and the tab bar (phones), in order.
 - `moveFocus(event, vertical)` [src/shell/icons.tsx:50](../src/shell/icons.tsx#L50): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
 - `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:16](../src/stories/CameraCapture.tsx#L16): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
-- `useLocationPermission()` [src/stories/LocationGate.tsx:9](../src/stories/LocationGate.tsx#L9): Live location permission. Updates by itself when the person flips the switch in the browser settings and come…
+- `useLocationPermission()` [src/stories/LocationGate.tsx:10](../src/stories/LocationGate.tsx#L10): Live location permission. Updates by itself when the person flips the switch in the browser settings and come…
 - `ago(ms, now = Date.now()` [src/stories/StoriesPanel.tsx:13](../src/stories/StoriesPanel.tsx#L13): "now", "12m", "3h": how long ago, short like Instagram.
 - `demoStories(now = Date.now()` [src/stories/demoStories.ts:43](../src/stories/demoStories.ts#L43): Builds the fictional stories (created within the last ~20 h, so they never expire mid-session). Resolves empt…
 - `STORY_TTL_MS` [src/stories/localAdapter.ts:8](../src/stories/localAdapter.ts#L8): Stories live 24 hours, like Instagram.

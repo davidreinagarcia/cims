@@ -24,3 +24,7 @@
   0%, 100% { transform: scale(.96); opacity: .65; }
   65% { transform: scale(1); opacity: 1; }
 }
+.cims-locate__status ol { margin: var(--s1) 0; padding-left: var(--s4); }
+.cims-locate__status li { margin: var(--s1) 0; }
+.cims-locate__status button { display: inline-block; width: auto; height: auto; min-height: 44px; margin-top: var(--s1); padding: var(--s2) var(--s3); }
+.cims-locate__status:has(ol) { width: min(300px, calc(100vw - 96px)); }
