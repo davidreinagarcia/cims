@@ -17,11 +17,10 @@ export const CAMPUS = {
 /** Fixed light for the extruded buildings: anchored to the map so wall shading doesn't change as you rotate. */
 export const MAP_LIGHT = { anchor: "map" as const, position: [1.5, 210, 30] as [number, number, number], intensity: 0.3 };
 
-// Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon;
-// swap for MapTiler/Mapbox/self-hosted vector tiles if traffic grows.
-export const TILE_URL = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-/** Attribution text OSM requires next to the tiles. */
-export const TILE_ATTRIBUTION = "© OpenStreetMap contributors";
+/** Vector basemap (ADR-0006 step 2): OpenFreeMap, free and keyless, OpenMapTiles schema. */
+export const BASEMAP_TILEJSON = "https://tiles.openfreemap.org/planet";
+/** Attribution OpenFreeMap and OpenStreetMap require next to the map. */
+export const TILE_ATTRIBUTION = "© <a href=\"https://openfreemap.org\" target=\"_blank\">OpenFreeMap</a> © <a href=\"https://www.openmaptiles.org/\" target=\"_blank\">OpenMapTiles</a> © <a href=\"https://www.openstreetmap.org/copyright\" target=\"_blank\">OpenStreetMap</a>";
 
 /** Base URL for prefilled place correction issues. */
 export const CORRECTION_URL = "https://github.com/davidreinagarcia/cims/issues/new";

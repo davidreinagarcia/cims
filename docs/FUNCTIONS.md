@@ -111,15 +111,15 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `glyphPath(id)` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
 - `CAMPUS` [src/config.ts:3](../src/config.ts#L3): Central place for map settings. Change here, not inside components.
 - `MAP_LIGHT` [src/config.ts:18](../src/config.ts#L18): Fixed light for the extruded buildings: anchored to the map so wall shading doesn't change as you rotate.
-- `TILE_URL` [src/config.ts:22](../src/config.ts#L22): Free OpenStreetMap raster tiles: no API key needed. Fine for a hackathon; swap for MapTiler/Mapbox/self-hoste…
-- `TILE_ATTRIBUTION` [src/config.ts:24](../src/config.ts#L24): Attribution text OSM requires next to the tiles.
-- `CORRECTION_URL` [src/config.ts:27](../src/config.ts#L27): Base URL for prefilled place correction issues.
+- `BASEMAP_TILEJSON` [src/config.ts:21](../src/config.ts#L21): Vector basemap (ADR-0006 step 2): OpenFreeMap, free and keyless, OpenMapTiles schema.
+- `TILE_ATTRIBUTION` [src/config.ts:23](../src/config.ts#L23): Attribution OpenFreeMap and OpenStreetMap require next to the map.
+- `CORRECTION_URL` [src/config.ts:26](../src/config.ts#L26): Base URL for prefilled place correction issues.
 - `indoorFor(buildingId)` [src/indoor/registry.ts:9](../src/indoor/registry.ts#L9): Returns the curated indoor model for this footprint id, if supported.
 - `hasIndoor(id)` [src/indoor/registry.ts:14](../src/indoor/registry.ts#L14): Whether a building opens the indoor screen instead of the sidebar card.
 - `indoorRooms()` [src/indoor/registry.ts:25](../src/indoor/registry.ts#L25): Lists routable schematic spaces and rooms without geometry for search and selection.
 - `resolveRoom(id)` [src/indoor/registry.ts:36](../src/indoor/registry.ts#L36): Resolves a room selection id without guessing a building or room.
 - `findRoute(graph, fromNodeId, toNodeId, options)` [src/indoor/route.ts:22](../src/indoor/route.ts#L22): Finds the least cost walk, filtering inaccessible connectors before searching.
-- `baseStyle` [src/map/baseStyle.ts:7](../src/map/baseStyle.ts#L7): Base style every layer is added on top of.
+- `baseStyle` [src/map/baseStyle.ts:69](../src/map/baseStyle.ts#L69): Base style every layer is added on top of.
 - `NorthArrow` [src/map/furniture/NorthArrow.ts:7](../src/map/furniture/NorthArrow.ts#L7): MapLibre control: outlined arrow with an "N" that always points to true north.
 - `ScaleBox` [src/map/furniture/ScaleBox.ts:22](../src/map/furniture/ScaleBox.ts#L22): MapLibre control: a four-segment scale bar in feet and the map center's latitude/longitude, updated as the ma…
 - `ViewToggle` [src/map/furniture/ViewToggle.ts:9](../src/map/furniture/ViewToggle.ts#L9): MapLibre control: "2D" / "3D" button. The label is the view you get by pressing it.
@@ -134,6 +134,17 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `WHITE` [src/map/palette.ts:10](../src/map/palette.ts#L10): --white: building roofs.
 - `GOLD` [src/map/palette.ts:12](../src/map/palette.ts#L12): --gold: selected roof, selected hatch ground.
 - `GOLD_INK` [src/map/palette.ts:14](../src/map/palette.ts#L14): --gold-ink: gold linework on paper (selected hatch lines).
+- `MAP_CAMPUS` [src/map/palette.ts:18](../src/map/palette.ts#L18): --map-campus: university/college land, a sage tint so campus reads as one place.
+- `MAP_GRASS` [src/map/palette.ts:20](../src/map/palette.ts#L20): --map-grass: lawns, parks, pitches.
+- `MAP_WOOD` [src/map/palette.ts:22](../src/map/palette.ts#L22): --map-wood: trees and wooded areas, a step darker than grass.
+- `MAP_WATER` [src/map/palette.ts:24](../src/map/palette.ts#L24): --map-water: ponds, fountains, streams.
+- `MAP_ROAD_MAJOR` [src/map/palette.ts:26](../src/map/palette.ts#L26): --map-road-major: motorways and arterials (old-gold family, lighter than --gold).
+- `MAP_ROAD_MAJOR_CASE` [src/map/palette.ts:28](../src/map/palette.ts#L28): Casing for major roads.
+- `MAP_ROAD_MINOR` [src/map/palette.ts:30](../src/map/palette.ts#L30): --map-road-minor: streets and service roads (white with a hairline casing, like a drafted plan).
+- `MAP_ROAD_MINOR_CASE` [src/map/palette.ts:32](../src/map/palette.ts#L32): Casing for minor roads.
+- `MAP_WALKWAY` [src/map/palette.ts:34](../src/map/palette.ts#L34): --map-walkway: footways, pedestrian paths and steps (terracotta, lighter than the brick --route so routes sta…
+- `MAP_RAIL` [src/map/palette.ts:36](../src/map/palette.ts#L36): --map-rail: rail and tram lines.
+- `MAP_BUILDING_CONTEXT` [src/map/palette.ts:38](../src/map/palette.ts#L38): --map-building-context: off-campus buildings, flat (ours are the extruded, hatched ones).
 - `HATCH_GOLD` [src/map/patterns/index.ts:7](../src/map/patterns/index.ts#L7): Image id of the gold hatch (selected building walls).
 - `addHatchPatterns(map)` [src/map/patterns/index.ts:38](../src/map/patterns/index.ts#L38): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
