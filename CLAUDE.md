@@ -11,8 +11,13 @@ CIMS: Georgia Tech campus map (Vite + React 18 + TS + MapLibre). Two humans (Dav
 
 ## Hard rules
 
-- **Never push to `main`, never merge.** `main` auto-deploys to production. Branch `feat/Txx-name`,
-  push, open a **draft** PR. Rules: [docs/MERGING-TO-MAIN.md](docs/MERGING-TO-MAIN.md).
+- **Never `git push` to `main`.** `main` auto-deploys to production. Work on a branch `feat/Txx-name`,
+  push it, open a PR. **Merging:** only when your human explicitly asks you to ("review and merge",
+  "mergea el PR"). Then review the diff, merge `main` into the branch and resolve conflicts keeping
+  newer `main` code, run `npm run build`, require green CI, squash merge through the PR
+  (`gh pr merge --squash --delete-branch`) and check the live site. Without that request, stop at a PR.
+  If `main` already contains the PR's work, close the PR instead of resolving conflicts.
+  Rules: [docs/MERGING-TO-MAIN.md](docs/MERGING-TO-MAIN.md).
 - **Stay in your task's lane and files** ([WORKPLAN §2–3](docs/WORKPLAN.md)). Need another file? Stop and ask.
 - **Hotspots** (`src/App.tsx`, `src/components/MapView.tsx`, `src/types/*`, `src/state/*`,
   `src/styles.css`, `src/config.ts`, `src/lib/supabase.ts`, `src/auth/`, `supabase/migrations/` (new files only), `package.json`, lockfile, `.github/`, `.claude/`, `deploy/`): only if the task says so.
