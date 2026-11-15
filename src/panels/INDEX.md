@@ -9,6 +9,7 @@ Panels, one folder per panel, shown in the floating card / bottom sheet. Mount n
 - [`account/`](account/INDEX.md): Account chip and accessible DEMO sign-in theater using the existing survey map design.
 - [`building-card/`](building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
 - [`bulletin/`](bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
+- [`culture/`](culture/INDEX.md): West vs East guide dialog for people deciding where to live (opens from the Culture layer and the layers pane…
 - [`layers/`](layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
 - [`police/`](police/INDEX.md): GTPD console: draw the danger circle, launch and end alarms, work citizen police tips.
 - [`report/`](report/INDEX.md): Report-an-issue flow (F-10) and staff queue; mounted in Shell's "report" slot (src/shell/Shell.tsx). Owner: T…

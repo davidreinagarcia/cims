@@ -4,6 +4,7 @@ import Glyph from "../../components/Glyph";
 import { LAYER_CATALOG, OVERLAY_CATALOG, type LayerCategory, type OverlayLayer } from "../../lib/layerCatalog";
 import { places } from "../../lib/places";
 import { OTHER_SUBTYPE } from "../../map/layerFilters";
+import { setGuide } from "../../culture/store";
 import { setHeat, useStories } from "../../stories/store";
 import { useLayerFilters } from "../../state/layerFilters";
 import "./layers.css";
@@ -31,7 +32,9 @@ const overlayStyle = (o: OverlayLayer) => ({ "--cat": `var(${o.cssVar})` }) as C
 function OverlayGlyph({ id }: { id: OverlayLayer["id"] }) {
   return (
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      {id === "alerts"
+      {id === "culture"
+        ? <><path d="M5 4h14v11l-5 5H5Z" /><path d="M14 20v-5h5M8 9h8M8 12.5h5" /></>
+        : id === "alerts"
         ? <><circle cx="12" cy="12" r="9" strokeDasharray="3 2" /><path d="M12 7.5v5M12 15.5v.5" /></>
         : <><circle cx="12" cy="12" r="3" /><circle cx="12" cy="12" r="6.5" opacity="0.65" /><circle cx="12" cy="12" r="9.5" opacity="0.35" /></>}
     </svg>
@@ -57,6 +60,9 @@ function Overlays() {
           </div>
         </li>
       ))}
+      <li>
+        <button type="button" className="cims-btn layers__guide" onClick={() => setGuide(true)}>West vs East: where to live?</button>
+      </li>
     </ul>
   );
 }

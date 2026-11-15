@@ -42,6 +42,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`src/alerts/`](src/alerts/INDEX.md): Top-of-page banner for live GTPD alarms and the all-clear.
   - [`src/auth/`](src/auth/INDEX.md): Replaceable demo sign-in contract, fictional personas and local session persistence.
   - [`src/components/`](src/components/INDEX.md): React components shared by the shell: map view, glyphs, offline notice. The layout itself lives in src/shell/.
+  - [`src/culture/`](src/culture/INDEX.md): Culture mode state (layer on/off, West vs East guide open): never saved, so the layer always starts off.
   - [`src/data/`](src/data/INDEX.md): Curated campus data (GeoJSON/JSON). Every record needs sourceurl + verifiedat (ADR-0004).
     - [`src/data/indoor/`](src/data/indoor/INDEX.md): Indoor models per building: schematic levels, rooms, walking graph and entrances.
     - [`src/data/mocks/`](src/data/mocks/INDEX.md): Fictional fixtures layered on top of real building data, always labeled "Demo data" in the UI.
@@ -56,6 +57,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
     - [`src/panels/account/`](src/panels/account/INDEX.md): Account chip and accessible DEMO sign-in theater using the existing survey map design.
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
     - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
+    - [`src/panels/culture/`](src/panels/culture/INDEX.md): West vs East guide dialog for people deciding where to live (opens from the Culture layer and the layers pane…
     - [`src/panels/layers/`](src/panels/layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
     - [`src/panels/police/`](src/panels/police/INDEX.md): GTPD console: draw the danger circle, launch and end alarms, work citizen police tips.
     - [`src/panels/report/`](src/panels/report/INDEX.md): Report-an-issue flow (F-10) and staff queue; mounted in Shell's "report" slot (src/shell/Shell.tsx). Owner: T…

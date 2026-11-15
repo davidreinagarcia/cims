@@ -1,0 +1,51 @@
+{
+  "_note": "Sticky notes for the Culture layer. Text is paraphrased from the source page; no invented facts. approx=true means the pin position is an estimate that a human must check.",
+  "notes": [
+    {
+      "id": "cake-race",
+      "title": "Freshman Cake Race",
+      "color": "yellow",
+      "rotate": -3,
+      "lng": -84.3916,
+      "lat": 33.7733,
+      "approx": true,
+      "text": "Homecoming morning, before sunrise, freshmen run half a mile and finish on top of Freshman Hill by Bobby Dodd. Everybody gets cupcakes, the winners get actual cakes. Not required anymore, but they really want you there.",
+      "tip": "Ramblin' Reck Club bakes the cupcakes the night before.",
+      "source_url": "https://traditions.gatech.edu/cakerace.html",
+      "verified_at": "2026-11-15",
+      "verified_by": "claude-research (pending human check)"
+    },
+    {
+      "id": "mini-500",
+      "title": "Mini 500",
+      "color": "pink",
+      "rotate": 2.5,
+      "lng": -84.393448,
+      "lat": 33.775817,
+      "approx": false,
+      "text": "Tricycle race around Peters Parking Deck, Friday afternoon before the Homecoming game. Teams of seven: four drivers, three pit crew. Running since 1969, run by Ramblin' Reck Club.",
+      "tip": "Go watch at least once. It's chaotic in the best way.",
+      "source_url": "https://traditions.gatech.edu/mini500.html",
+      "verified_at": "2026-11-15",
+      "verified_by": "claude-research (pending human check)"
+    },
+    {
+      "id": "reck",
+      "title": "The Ramblin' Reck",
+      "color": "blue",
+      "rotate": -2,
+      "lng": -84.3928,
+      "lat": 33.7724,
+      "approx": false,
+      "text": "A 1930 Ford Model A that leads the football team onto the field at every home game, since Sept. 30, 1961. Cared for by Ramblin' Reck Club and an elected Reck Driver.",
+      "tip": "Home game days: look for it at Bobby Dodd.",
+      "source_url": "https://traditions.gatech.edu/ramblinreck.html",
+      "verified_at": "2026-11-15",
+      "verified_by": "claude-research (pending human check)"
+    }
+  ],
+  "areas": [
+    { "id": "west", "label": "West", "lng": -84.4019, "lat": 33.7785, "approx": true },
+    { "id": "east", "label": "East", "lng": -84.3912, "lat": 33.7733, "approx": true }
+  ]
+}

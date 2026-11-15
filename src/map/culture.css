@@ -1,0 +1,27 @@
+/** @file Sticky-note look for the Culture layer: paper squares, tape, marker handwriting, tilted. Survey ink for text. */
+.culture-note {
+  --note: #F6E58D; position: relative; width: 150px; padding: 14px 12px 10px; border: 0; border-radius: 1px;
+  background: var(--note); color: #1C2733; text-align: left; cursor: pointer; transform: rotate(var(--tilt, 0deg));
+  box-shadow: 1px 3px 0 rgba(28, 39, 51, 0.25); font: 600 14px/1.25 "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive;
+  display: block;
+}
+.culture-note--pink { --note: #F4B9C5; }
+.culture-note--blue { --note: #B9D8F0; }
+.culture-note::before { /* tape */
+  content: ""; position: absolute; top: -8px; left: 50%; width: 46px; height: 14px; transform: translateX(-50%) rotate(-2deg);
+  background: rgba(255, 255, 255, 0.55); border: 1px solid rgba(28, 39, 51, 0.15);
+}
+.culture-note__title { display: block; font-size: 15px; }
+.culture-note__body, .culture-note__tip, .culture-note__src { display: none; margin-top: 6px; font-size: 13px; font-weight: 500; }
+.culture-note__tip { font-style: normal; color: #4a2f2f; }
+.culture-note__src { font-size: 11px; color: #1C2733; text-decoration: underline; }
+.culture-note[aria-expanded="true"] { width: 230px; z-index: 5; }
+.culture-note[aria-expanded="true"] .culture-note__body,
+.culture-note[aria-expanded="true"] .culture-note__tip,
+.culture-note[aria-expanded="true"] .culture-note__src { display: block; }
+.culture-note:focus-visible, .culture-area:focus-visible { outline: 2px solid #1C2733; outline-offset: 2px; }
+.culture-area {
+  padding: 4px 10px; border: 2px dashed #1C2733; border-radius: 3px; background: rgba(243, 238, 226, 0.85); color: #1C2733;
+  font: 700 16px/1.2 "Bradley Hand", "Segoe Print", "Comic Sans MS", cursive; cursor: pointer; transform: rotate(-2deg);
+}
+@media (prefers-reduced-motion: no-preference) { .culture-note { transition: width 0.15s ease; } }

@@ -1,6 +1,7 @@
 /** @file Story heat map (Snapchat style): more stories in one spot paint the zone redder; clicking it opens those stories. Also flies to a story's location on "View on map". */
 import type { GeoJSONSource, Map as MapLibreMap } from "maplibre-gl";
 import type { MapLayer } from "../types";
+import { getCulture, subscribeCulture } from "../../culture/store";
 import { ensureLoaded, getState, liveStories, openViewer, subscribe } from "../../stories/store";
 
 const SOURCE = "stories";
@@ -51,7 +52,8 @@ const stories: MapLayer = {
     const src = () => map.getSource(SOURCE) as GeoJSONSource | undefined;
 
     const sync = () => {
-      const { stories: all, focus, heat } = getState();
+      const { stories: all, focus } = getState();
+      const heat = getState().heat && !getCulture().on; // culture mode hides the heat map too
       src()?.setData({
         type: "FeatureCollection",
         features: liveStories(all).map((s) => ({ type: "Feature" as const, properties: { id: s.id }, geometry: { type: "Point" as const, coordinates: [s.lng, s.lat] } })),
@@ -66,6 +68,7 @@ const stories: MapLayer = {
       }
     };
     const unsubscribe = subscribe(sync);
+    const unsubscribeCulture = subscribeCulture(sync);
     void ensureLoaded().then(sync);
 
     /** Stories whose blob covers the point (screen-space, same radius as the paint). */
@@ -99,6 +102,7 @@ const stories: MapLayer = {
     return {
       remove() {
         unsubscribe();
+        unsubscribeCulture();
         window.clearTimeout(focusTimer);
         map.off("click", onClick);
         map.off("mousemove", onMove);

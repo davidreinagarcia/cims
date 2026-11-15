@@ -1,0 +1,18 @@
+{
+  "_note": "West vs East guide. Only add a row with a real source or a named student author; leave the rest out. The UI shows a 'still gathering' banner while rows are few.",
+  "intro": "Deciding where to live? Here's the honest student take on East vs West. We're still filling this in.",
+  "rows": [
+    {
+      "topic": "Suite-style rooms",
+      "east": "Harris is the one suite-style freshman hall on the East side (older student ranking, double-check current room types).",
+      "west": null,
+      "source_url": "https://nique.net/?p=46828",
+      "verified_at": "2026-11-15",
+      "verified_by": "claude-research (pending human check)"
+    }
+  ],
+  "official_links": [
+    { "label": "Georgia Tech Housing", "url": "https://housing.gatech.edu/" },
+    { "label": "Campus transit for residents", "url": "https://housing.gatech.edu/resources/campus-transit" }
+  ]
+}
