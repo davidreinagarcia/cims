@@ -96,7 +96,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `routeFor(category)` [src/lib/issue-routing.ts:82](../src/lib/issue-routing.ts#L82): Routing for one category.
 - `LAYER_CATALOG` [src/lib/layerCatalog.ts:22](../src/lib/layerCatalog.ts#L22): The PRD layers plus Printing and Health (added 2026-11-14), in panel order.
 - `OVERLAY_CATALOG` [src/lib/layerCatalog.ts:59](../src/lib/layerCatalog.ts#L59): Live overlays shown under the place layers in the layer panel.
-- `categoryColor(layer, fallback = "#1C2733")` [src/lib/layerCatalog.ts:65](../src/lib/layerCatalog.ts#L65): Resolved color of a layer (reads the design token, so the tokens stay the single source of truth).
+- `categoryColor(layer, fallback = "#1C2733")` [src/lib/layerCatalog.ts:66](../src/lib/layerCatalog.ts#L66): Resolved color of a layer (reads the design token, so the tokens stay the single source of truth).
 - `CREWS` [src/lib/liveReports.ts:8](../src/lib/liveReports.ts#L8): Maintenance crews (sub-teams of Facilities) and the report categories each one handles.
 - `crewOf(category)` [src/lib/liveReports.ts:17](../src/lib/liveReports.ts#L17): The crew a category belongs to (falls back to the general crew).
 - `useLiveReports(team)` [src/lib/liveReports.ts:22](../src/lib/liveReports.ts#L22): Live list of a team's reports; `fresh` holds ids that arrived after the first load (for highlighting).
@@ -160,7 +160,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `useTransitNetwork()` [src/lib/useTransit.ts:10](../src/lib/useTransit.ts#L10): The network once loaded; `failed` when the download failed.
 - `useLiveBuses(network)` [src/lib/useTransit.ts:21](../src/lib/useTransit.ts#L21): Live buses every 10 s while mounted and the tab is visible. `updatedAt` is null until the first good answer;…
 - `useAuth()` [src/state/auth.tsx:63](../src/state/auth.tsx#L63): Reads the demo session and sign-in controls inside AuthProvider.
-- `useLayerFilters()` [src/state/layerFilters.tsx:72](../src/state/layerFilters.tsx#L72): Read and change the layer panel state from any component.
+- `useLayerFilters()` [src/state/layerFilters.tsx:92](../src/state/layerFilters.tsx#L92): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
 
 ### Types & contracts
@@ -171,7 +171,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Session` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional account selected on this device, with no authentication.
 - `Persona` [src/auth/types.ts:23](../src/auth/types.ts#L23): Fictional identity offered by the demo account picker.
 - `AuthAdapter` [src/auth/types.ts:32](../src/auth/types.ts#L32): Adapter boundary keeps sign-in implementation out of screens.
-- `GlyphId` [src/components/Glyph.tsx:30](../src/components/Glyph.tsx#L30): Known glyph ids: the layer categories plus "building".
+- `GlyphId` [src/components/Glyph.tsx:31](../src/components/Glyph.tsx#L31): Known glyph ids: the layer categories plus "building".
+- `CultureNote` [src/culture/notes.ts:5](../src/culture/notes.ts#L5): One sticky note: a sourced GT tradition pinned where it happens.
 - `GameIconName` [src/games/GameIcons.tsx:17](../src/games/GameIcons.tsx#L17): Names of the Games icons.
 - `GamesState` [src/games/store.ts:8](../src/games/store.ts#L8): Everything the UI and the map layer read.
 - `TeamId` [src/games/types.ts:4](../src/games/types.ts#L4): The two teams of every match.
@@ -298,7 +299,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
 - `IconName` [src/shell/icons.tsx:24](../src/shell/icons.tsx#L24): Names of the shell icons.
 - `ShellPanel` [src/shell/icons.tsx:37](../src/shell/icons.tsx#L37): What the floating card / bottom sheet can show besides a map selection.
-- `LayerFiltersApi` [src/state/layerFilters.tsx:20](../src/state/layerFilters.tsx#L20): What useLayerFilters() returns.
+- `LayerFiltersApi` [src/state/layerFilters.tsx:23](../src/state/layerFilters.tsx#L23): What useLayerFilters() returns.
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): Selectable map and search entities; room ids use "buildingId:spaceId".
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
 - `SelectionApi` [src/state/selection.tsx:20](../src/state/selection.tsx#L20): What useSelection() returns.
@@ -321,7 +322,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component.
 - `AlertBanner({ banners, onDismiss })` [src/alerts/AlertBanner.tsx:14](../src/alerts/AlertBanner.tsx#L14): Stack of banners pinned to the top of the app; publishes its height as `--alert-h` so the shell makes room.
 - `TipNotifier({ onOpen })` [src/alerts/TipNotifier.tsx:21](../src/alerts/TipNotifier.tsx#L21): Props: `onOpen` is called with the tip when the toast is pressed (open the console / select the tip).
-- `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:38](../src/components/Glyph.tsx#L38): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
+- `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:39](../src/components/Glyph.tsx#L39): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:16](../src/components/MapView.tsx#L16): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
 - `GameHud()` [src/games/GameHud.tsx:12](../src/games/GameHud.tsx#L12): Compact card over the map while a match runs. Renders nothing outside one.
@@ -345,7 +346,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BusList({ here }, number] | null })` [src/panels/buses/BusList.tsx:47](../src/panels/buses/BusList.tsx#L47): Lists every route for the "which buses are around" view; `here` is where you are (resolved by the panel), or…
 - `BusOptions({ origin, destination }, number]; destination, number] })` [src/panels/buses/BusOptions.tsx:19](../src/panels/buses/BusOptions.tsx#L19): Lists bus options from `origin` (your location or a picked place; the panel resolves it) to `destination`.
 - `BusesPanel()` [src/panels/buses/BusesPanel.tsx:39](../src/panels/buses/BusesPanel.tsx#L39): The panel body shown in the floating card (desktop) or bottom sheet (phone).
-- `LayersPanel()` [src/panels/layers/LayersPanel.tsx:68](../src/panels/layers/LayersPanel.tsx#L68): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
+- `CultureReader()` [src/panels/culture/CultureReader.tsx:8](../src/panels/culture/CultureReader.tsx#L8): Shown while the culture layer is on; mount once in the shell.
+- `HousingGuide()` [src/panels/culture/HousingGuide.tsx:8](../src/panels/culture/HousingGuide.tsx#L8): The West vs East dialog. Mount once in the shell; opens from the layers panel or the map's "West campus?" not…
+- `LayersPanel()` [src/panels/layers/LayersPanel.tsx:74](../src/panels/layers/LayersPanel.tsx#L74): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `DoorStickers()` [src/panels/maintenance/DoorStickers.tsx:33](../src/panels/maintenance/DoorStickers.tsx#L33): Link and QR generator for the entrance stickers, one list per building.
 - `MaintenanceView({ onClose })` [src/panels/maintenance/MaintenanceView.tsx:66](../src/panels/maintenance/MaintenanceView.tsx#L66): Full-screen maintenance dashboard, opened from the menu (and by ?view=maintenance).
 - `PoliceMap(props)` [src/panels/police/PoliceMap.tsx:32](../src/panels/police/PoliceMap.tsx#L32): Police map: pointer events draw the circle (mouse and touch alike) while `drawing` is on.
@@ -363,25 +366,25 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `ReportPanel({ onClose })` [src/panels/report/index.tsx:19](../src/panels/report/index.tsx#L19): Mounts the 3-step report flow, or (unlisted, ?staff=1) the staff queue; the floating card / bottom
 - `BuildingGlyph({ buildingId })` [src/panels/rooms/BuildingGlyph.tsx:10](../src/panels/rooms/BuildingGlyph.tsx#L10): Renders a flat, ink-outlined elevation sketch with a gold hatch fill and a row of square windows per level ba…
 - `MyBookingsSection({ onCountChange })` [src/panels/rooms/MyBookingsSection.tsx:117](../src/panels/rooms/MyBookingsSection.tsx#L117): Top-level "My bookings": every non-cancelled reservation the signed-in account holds, across Kendeda and CULC.
-- `ReservationGrid({ rooms, onlyAvailable = false })` [src/panels/rooms/ReservationGrid.tsx:49](../src/panels/rooms/ReservationGrid.tsx#L49): Day/time grid, booking flow and favorites for any list of bookable rooms -- one building's rooms
-- `RoomsBoard({ onClose })` [src/panels/rooms/RoomsBoard.tsx:39](../src/panels/rooms/RoomsBoard.tsx#L39): Full-screen "Rooms" takeover, replacing the small floating-card/bottom-sheet `RoomFinderPanel`
+- `ReservationGrid({ rooms, onlyAvailable = false })` [src/panels/rooms/ReservationGrid.tsx:54](../src/panels/rooms/ReservationGrid.tsx#L54): Day/time grid, booking flow and favorites for any list of bookable rooms -- one building's rooms
+- `RoomsBoard({ onClose })` [src/panels/rooms/RoomsBoard.tsx:41](../src/panels/rooms/RoomsBoard.tsx#L41): Full-screen "Rooms" takeover, replacing the small floating-card/bottom-sheet `RoomFinderPanel`
 - `RoomsNearMe({ onBack, onlyAvailable })` [src/panels/rooms/RoomsNearMe.tsx:25](../src/panels/rooms/RoomsNearMe.tsx#L25): Requests the browser's location once, sorts both bookable buildings' rooms by distance from it, and
 - `DirectionsBox({ buildings, initialTo, onClose })` [src/panels/search/DirectionsBox.tsx:9](../src/panels/search/DirectionsBox.tsx#L9): Replaces the search field while the user plans a trip from one place to another.
 - `PlaceField(…)` [src/panels/search/PlaceField.tsx:8](../src/panels/search/PlaceField.tsx#L8): A labelled combobox that reports the chosen result, or null once the text is edited again.
 - `SearchPanel(…)` [src/panels/search/SearchPanel.tsx:21](../src/panels/search/SearchPanel.tsx#L21): Renders search and grouped results as siblings so sidebar CSS order can place panels between them.
 - `PortfolioPage({ onClose })` [src/portfolio/PortfolioPage.tsx:102](../src/portfolio/PortfolioPage.tsx#L102): Full-page BuzzPrint view, opened the same way the Bulletin is: its own open flag outside the shell's panel sw…
 - `BottomSheet(…)` [src/shell/BottomSheet.tsx:21](../src/shell/BottomSheet.tsx#L21): Drag or tap the handle (or press Enter/Space on it) to move between snaps; arrow keys step up and down. Opens…
-- `ChipsBar()` [src/shell/ChipsBar.tsx:14](../src/shell/ChipsBar.tsx#L14): One pill per layer category; pressed = layer on. Categories without data stay visible but inert (aria-disable…
+- `ChipsBar()` [src/shell/ChipsBar.tsx:15](../src/shell/ChipsBar.tsx#L15): One pill per layer category; pressed = layer on. Categories without data stay visible but inert (aria-disable…
 - `FloatingCard(…)` [src/shell/FloatingCard.tsx:6](../src/shell/FloatingCard.tsx#L6): Card with a close button and a ‹ collapse tab on its right edge. Renders nothing visible when its panel rende…
-- `LayersPopover()` [src/shell/LayersPopover.tsx:7](../src/shell/LayersPopover.tsx#L7): Tile that opens the legend popover. Esc or a click outside closes it and returns focus to the tile.
+- `LayersPopover()` [src/shell/LayersPopover.tsx:8](../src/shell/LayersPopover.tsx#L8): Tile that opens the legend popover. Esc or a click outside closes it and returns focus to the tile.
 - `MobileTabBar({ panel, onPanel })` [src/shell/MobileTabBar.tsx:5](../src/shell/MobileTabBar.tsx#L5): Fixed bottom bar above the safe-area inset. Left/right arrows move between tabs.
 - `Rail({ panel, onPanel, onPolice, onMaintenance })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
 - `RoutePanel({ initialSelection, onClose })` [src/shell/RoutePanel.tsx:10](../src/shell/RoutePanel.tsx#L10): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:86](../src/shell/Shell.tsx#L86): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
+- `Shell()` [src/shell/Shell.tsx:89](../src/shell/Shell.tsx#L89): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
 - `Icon({ name, size = 24 })` [src/shell/icons.tsx:27](../src/shell/icons.tsx#L27): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = supabaseAuthAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
-- `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
+- `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:36](../src/state/layerFilters.tsx#L36): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
 - `CameraCapture({ onCapture, onCancel })` [src/stories/CameraCapture.tsx:39](../src/stories/CameraCapture.tsx#L39): Full-screen camera view, like the phone's own app. Calls `onCapture` with the media plus where it was taken;…
 - `LocationGate({ gps, permission })` [src/stories/LocationGate.tsx:38](../src/stories/LocationGate.tsx#L38): Card over the camera until a GPS fix exists. Renders nothing once the fix is in.
@@ -397,14 +400,24 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `supabaseAuthAdapter` [src/auth/supabaseAdapter.ts:8](../src/auth/supabaseAdapter.ts#L8): Real Supabase sessions for the demo accounts, so every row a person writes belongs to a real account with a s…
 - `STAFF_ROLES` [src/auth/types.ts:7](../src/auth/types.ts#L7): Roles that work the report queue.
 - `staffTeam(role)` [src/auth/types.ts:10](../src/auth/types.ts#L10): The report team a staff role works for; moderators see every team (null).
-- `SUBTYPE_GLYPHS` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): Sub-types that get their own pictogram instead of their category's.
-- `placeGlyph(category, subtype?)` [src/components/Glyph.tsx:25](../src/components/Glyph.tsx#L25): Glyph id for a place: its sub-type's pictogram when it has one, else its category's.
-- `glyphPath(id)` [src/components/Glyph.tsx:33](../src/components/Glyph.tsx#L33): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
+- `SUBTYPE_GLYPHS` [src/components/Glyph.tsx:23](../src/components/Glyph.tsx#L23): Sub-types that get their own pictogram instead of their category's.
+- `placeGlyph(category, subtype?)` [src/components/Glyph.tsx:26](../src/components/Glyph.tsx#L26): Glyph id for a place: its sub-type's pictogram when it has one, else its category's.
+- `glyphPath(id)` [src/components/Glyph.tsx:34](../src/components/Glyph.tsx#L34): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
 - `CAMPUS` [src/config.ts:3](../src/config.ts#L3): Central place for map settings. Change here, not inside components.
 - `MAP_LIGHT` [src/config.ts:18](../src/config.ts#L18): Fixed light for the extruded buildings: anchored to the map so wall shading doesn't change as you rotate.
 - `BASEMAP_TILEJSON` [src/config.ts:21](../src/config.ts#L21): Vector basemap (ADR-0006 step 2): OpenFreeMap, free and keyless, OpenMapTiles schema.
 - `TILE_ATTRIBUTION` [src/config.ts:23](../src/config.ts#L23): Attribution OpenFreeMap and OpenStreetMap require next to the map.
 - `CORRECTION_URL` [src/config.ts:26](../src/config.ts#L26): Base URL for prefilled place correction issues.
+- `CULTURE_NOTES` [src/culture/notes.ts:11](../src/culture/notes.ts#L11): Notes in tour order.
+- `CULTURE_AREAS` [src/culture/notes.ts:14](../src/culture/notes.ts#L14): The West / East labels that open the housing guide.
+- `doodleFor(id)` [src/culture/notes.ts:17](../src/culture/notes.ts#L17): Hand-drawn doodle for a note (generated illustrations in public/culture/).
+- `getCulture()` [src/culture/store.ts:15](../src/culture/store.ts#L15): Current culture state (for non-React code such as map layers).
+- `subscribeCulture(l)` [src/culture/store.ts:20](../src/culture/store.ts#L20): Listen for culture state changes; returns the unsubscribe function.
+- `setCulture(on)` [src/culture/store.ts:26](../src/culture/store.ts#L26): Turn the culture layer on or off. On means every other layer hides and the welcome letter opens; off closes e…
+- `setNote(id)` [src/culture/store.ts:31](../src/culture/store.ts#L31): Open a note in the reader (null shows the welcome letter).
+- `setReader(open)` [src/culture/store.ts:36](../src/culture/store.ts#L36): Show or hide the reader card without leaving culture mode.
+- `setGuide(open)` [src/culture/store.ts:41](../src/culture/store.ts#L41): Open or close the West vs East guide.
+- `useCulture()` [src/culture/store.ts:46](../src/culture/store.ts#L46): React hook for the culture state.
 - `RADIUS_M` [src/games/data.ts:6](../src/games/data.ts#L6): Zone and drop capture radius in meters.
 - `ZONE_POINTS_PER_SECOND` [src/games/data.ts:8](../src/games/data.ts#L8): Points per second for every zone a team holds.
 - `DROP_POINTS` [src/games/data.ts:10](../src/games/data.ts#L10): Points for claiming one drop.

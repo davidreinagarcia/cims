@@ -8,7 +8,10 @@
 
 /* ---------- day/time grid ---------- */
 .reserve-grid-screen { display: flex; flex-direction: column; gap: var(--s3); min-width: 0; }
-.reserve-grid__days { display: flex; gap: var(--s2); overflow-x: auto; }
+.reserve-grid__days { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2); }
+.reserve-grid__month { display: contents; }
+.reserve-grid__month-toggle { background: var(--paper-2); font-family: var(--font-mono); }
+.reserve-grid__month-toggle[aria-expanded="true"] { background: var(--navy); color: var(--white); }
 .reserve-grid { border: var(--hairline); background: var(--white); overflow-x: auto; }
 .reserve-grid__row { display: flex; border-top: var(--hairline-muted); min-width: max-content; }
 .reserve-grid__row:first-child { border-top: 0; }

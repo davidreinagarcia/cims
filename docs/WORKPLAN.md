@@ -292,6 +292,7 @@ Legend: **Owner** A = David · B = Tato · D = Data (either) · Both.
 - [x] **T-41 Offline fallback / PWA** · A · service worker caching the shell + data (Risk R-06)
 - [ ] **T-42 Transport layer** (F-09) · A
 - [ ] **T-43 Study-space fullness** (F-08) · B · reuses T-22 backend
+- [ ] **T-80 GT Culture layer + West vs East guide** · A · sticky-note layer (always off, hides other layers) with verified traditions; guide still needs real student content
 
 ### P3: Demo & pitch (start T-50 early; the rest at M3)
 

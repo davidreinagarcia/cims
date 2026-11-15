@@ -1,0 +1,90 @@
+/** @file Culture layer look: small taped post-its with a pen doodle and handwritten title, the hand-lettered West / East labels, and the reader card (welcome letter + one note at a time). Flat paper colors, 1px ink lines, hard offset shadows only. */
+:root {
+  --note-yellow: #F8E58C; --note-pink: #F6C6CF; --note-blue: #C9E1F2;
+  --hand: "Caveat", "Segoe Print", "Bradley Hand", cursive;
+}
+
+/* ---- map stamps ---- */
+
+.culture-stamp-wrap[data-hidden="true"], .culture-area[data-hidden="true"] { visibility: hidden; pointer-events: none; } /* MapLibre owns the marker's inline opacity */
+.culture-stamp-wrap[data-active="true"] { z-index: 3; }
+.culture-stamp {
+  --note: var(--note-yellow);
+  position: relative; display: flex; flex-direction: column; align-items: center; width: 84px; padding: 6px 6px 5px; margin-bottom: 9px;
+  border: 1px solid rgba(28, 39, 51, .45); background: var(--note); color: var(--ink, #1C2733); cursor: pointer;
+  transform: rotate(var(--tilt, 0deg)); box-shadow: 2px 3px 0 rgba(28, 39, 51, .18);
+}
+.culture-stamp--pink { --note: var(--note-pink); }
+.culture-stamp--blue { --note: var(--note-blue); }
+.culture-stamp::before { /* tape */
+  content: ""; position: absolute; top: -7px; left: 50%; width: 34px; height: 12px; transform: translateX(-50%) rotate(-4deg);
+  background: rgba(243, 238, 226, .75); border: 1px solid rgba(28, 39, 51, .15);
+}
+.culture-stamp::after { /* the pin that marks the exact spot */
+  content: ""; position: absolute; bottom: -10px; left: 50%; width: 7px; height: 7px; margin-left: -4px; border-radius: 50%;
+  background: var(--ink, #1C2733); box-shadow: 0 0 0 2px var(--paper, #F3EEE2);
+}
+.culture-stamp img { width: 56px; height: 56px; mix-blend-mode: multiply; pointer-events: none; }
+.culture-stamp__title {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+  font: 700 15px/1 var(--hand); text-align: center;
+}
+.culture-stamp:hover, .culture-stamp-wrap[data-active="true"] .culture-stamp { transform: rotate(0deg) scale(1.12); }
+.culture-stamp-wrap[data-active="true"] .culture-stamp { outline: 2px solid var(--ink, #1C2733); outline-offset: 2px; }
+.culture-stamp:focus-visible, .culture-area:focus-visible { outline: 2px solid var(--navy, #003057); outline-offset: 3px; }
+@media (prefers-reduced-motion: no-preference) { .culture-stamp { transition: transform .15s ease; } }
+@media (max-width: 600px) {
+  .culture-stamp { width: 68px; padding: 5px 4px 4px; }
+  .culture-stamp img { width: 44px; height: 44px; }
+  .culture-stamp__title { font-size: 13px; }
+}
+
+.culture-area {
+  padding: 2px 12px 4px; border: 1.5px dashed var(--ink, #1C2733); background: rgba(243, 238, 226, .92); color: var(--ink, #1C2733); cursor: pointer;
+  font: 700 22px/1 var(--hand); transform: rotate(-3deg);
+}
+.culture-area small { display: block; font: 600 15px/1.1 var(--hand); opacity: .8; }
+
+/* ---- reader card ---- */
+.culture-reader {
+  position: absolute; z-index: 20; top: 76px; right: 64px; width: 360px; max-height: calc(100% - 190px); overflow-y: auto;
+  padding: 22px 22px 16px; border: 1px solid var(--ink, #1C2733); color: var(--ink, #1C2733);
+  /* ruled notebook paper, flat lines only */
+  background: var(--paper, #F3EEE2) repeating-linear-gradient(transparent 0 27px, rgba(0, 48, 87, .13) 27px 28px);
+  background-attachment: local; box-shadow: 4px 4px 0 rgba(28, 39, 51, .2);
+}
+.culture-reader::before { /* red margin line */
+  content: ""; position: absolute; top: 0; bottom: 0; left: 14px; border-left: 1px solid rgba(165, 52, 44, .35);
+}
+.culture-reader__close { position: absolute; top: 6px; right: 6px; width: 36px; height: 36px; border: 0; background: none; font-size: 24px; line-height: 1; color: inherit; cursor: pointer; }
+.culture-reader__count { margin: 0 0 4px; font: 500 12px/1 var(--font-mono, "IBM Plex Mono", monospace); text-transform: uppercase; letter-spacing: .08em; opacity: .7; }
+.culture-reader__head { display: flex; align-items: center; gap: 12px; }
+.culture-reader__head img { flex: none; width: 88px; height: 88px; mix-blend-mode: multiply; }
+.culture-reader h2 { margin: 0; font: 700 34px/.95 var(--hand); }
+.culture-reader__tag { display: inline-block; margin-top: 6px; padding: 1px 8px; border: 1px solid currentColor; font: 500 11px/1.5 var(--font-mono, "IBM Plex Mono", monospace); text-transform: uppercase; letter-spacing: .06em; }
+.culture-reader__hand { margin: 12px 0; font: 500 21px/1.3 var(--hand); }
+.culture-reader__row { margin: 6px 0; font-size: 14px; }
+.culture-reader__row b { font: 700 18px/1 var(--hand); margin-right: 4px; }
+.culture-reader__text { margin: 10px 0; font-size: 14.5px; line-height: 1.5; }
+.culture-reader__facts { margin: 8px 0; padding-left: 20px; font-size: 14px; line-height: 1.45; }
+.culture-reader__tip { margin: 12px 0; padding: 6px 10px; background: var(--note-yellow); border: 1px solid rgba(28, 39, 51, .3); font: 600 20px/1.2 var(--hand); transform: rotate(-1deg); }
+.culture-reader__src { font-size: 12px; }
+.culture-reader__src a, .culture-reader a { color: var(--navy, #003057); }
+.culture-reader__sign { margin: 12px 0 0; font: 700 22px/1 var(--hand); text-align: right; }
+.culture-reader__nav { position: sticky; bottom: -16px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px -22px -16px; padding: 10px 22px 16px; background: var(--paper, #F3EEE2); border-top: 1px solid rgba(28, 39, 51, .25); }
+.culture-reader__nav .cims-btn--primary { color: var(--gold, #B3A369); }
+.culture-reader__nav .culture-reader__wide { grid-column: 1 / -1; }
+.culture-reader__reopen {
+  position: absolute; z-index: 20; top: 76px; right: 64px; display: flex; align-items: center; gap: 6px; padding: 6px 14px 6px 10px;
+  border: 1px solid var(--ink, #1C2733); background: var(--note-yellow); font: 700 20px/1 var(--hand); color: var(--ink, #1C2733); cursor: pointer;
+  transform: rotate(-2deg); box-shadow: 2px 3px 0 rgba(28, 39, 51, .18);
+}
+@media (max-width: 600px) {
+  .culture-reader { top: auto; right: 6px; left: 6px; bottom: 6px; width: auto; max-height: 46vh; /* the map area already ends at the tab bar; covers the round buttons on purpose */ padding: 16px 16px 12px; }
+  .culture-reader__head img { width: 64px; height: 64px; }
+  .culture-reader h2 { font-size: 28px; }
+  .culture-reader__hand { font-size: 18px; margin: 8px 0; }
+  .culture-reader__nav { bottom: -12px; margin: 10px -16px -12px; padding: 8px 16px 12px; }
+  .culture-reader__nav .cims-btn { min-height: 40px; }
+  .culture-reader__reopen { top: auto; right: auto; left: 12px; bottom: 96px; } /* left side, above the north arrow, clear of the map controls */
+}

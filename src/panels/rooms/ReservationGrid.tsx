@@ -13,7 +13,11 @@ import { useAuth } from "../../state/auth";
 /** An in-progress tap-to-extend selection: slots `startIndex` (inclusive) to `endIndex` (exclusive) on one room/day. */
 interface GridSelection { room: string; dayIndex: number; startIndex: number; endIndex: number }
 
-const DAY_COUNT = 4; // today + 3 more, enough to show the pattern without an endless list
+// Fall 2026 end of term (final instructional/exam days run through Dec 17), per Georgia Tech's
+// published academic calendar -- the day range below never goes past the semester, not an
+// arbitrary cutoff. Days aren't filtered for Thanksgiving recess/holiday (Nov 25-27): whether the
+// library stays open over a break is its own published-hours fact this prototype doesn't have yet.
+const SEMESTER_END = new Date("2026-12-17T23:59:59-05:00");
 const DISPLAY_TIMES = (() => {
   const times: string[] = [];
   for (let hour = 7; hour < 22; hour++) times.push(`${String(hour).padStart(2, "0")}:00`, `${String(hour).padStart(2, "0")}:30`);
@@ -24,6 +28,7 @@ const MAX_SLOTS = MAX_DURATION_MINUTES / SLOT_MINUTES;
 const timeFmt = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", hour: "numeric", minute: "2-digit", hour12: true });
 const hourFmt = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", hour: "numeric", hour12: true });
 const dayFmt = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", weekday: "short", month: "short", day: "numeric" });
+const monthFmt = new Intl.DateTimeFormat("en-US", { timeZone: "America/New_York", month: "long" });
 
 /** A small outline/filled heart used for the "Preferred rooms" toggle; purely decorative, the button carries the label. */
 function HeartIcon({ filled }: { filled: boolean }) {
@@ -55,7 +60,17 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
   }, []);
 
   const bookableRooms = rooms;
-  const days = useMemo(() => Array.from({ length: DAY_COUNT }, (_, i) => new Date(now.getTime() + i * 86_400_000)), [now]);
+  // Today through the end of term (SEMESTER_END) -- every day of the semester is selectable, grouped
+  // by month in the day picker below rather than listed flat.
+  const days = useMemo(() => {
+    const list: Date[] = [];
+    for (let i = 0; ; i++) {
+      const day = new Date(now.getTime() + i * 86_400_000);
+      if (i > 0 && day.getTime() > SEMESTER_END.getTime()) break;
+      list.push(day);
+    }
+    return list;
+  }, [now]);
   // boundaries[dayIndex][slotIndex] = the half-open instant window that slot covers, in campus-local time.
   const boundaries = useMemo(() => days.map((day) => {
     const starts = DISPLAY_TIMES.map((time) => campusTimeToday(day, time) ?? day);
@@ -64,6 +79,19 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
   }), [days]);
 
   const [selectedDayIndex, setSelectedDayIndex] = useState(0);
+  // The day picker groups everything after "Today" by month (expanded lazily, collapsed by default)
+  // instead of listing all ~32 remaining days of the semester flat.
+  const [expandedMonths, setExpandedMonths] = useState<Set<string>>(new Set());
+  const monthGroups = useMemo(() => {
+    const groups: { month: string; days: { day: Date; index: number }[] }[] = [];
+    days.forEach((day, index) => {
+      if (index === 0) return; // "Today" renders on its own, outside any month group
+      const month = monthFmt.format(day);
+      const group = groups[groups.length - 1]?.month === month ? groups[groups.length - 1] : (groups.push({ month, days: [] }), groups[groups.length - 1]);
+      group.days.push({ day, index });
+    });
+    return groups;
+  }, [days]);
   const [selection, setSelection] = useState<GridSelection | null>(null);
   const [booking, setBooking] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -107,9 +135,14 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
     const tomorrow = new Date(today.getTime() + 86_400_000);
     return [...expandDemoSlots(demoSlotPatterns, today), ...expandDemoSlots(demoSlotPatterns, tomorrow), ...busyFromReservations];
   }, [days, busyFromReservations]);
-  const nowSlotIndex = useMemo(() => boundaries[0].findIndex(
-    (slot) => slot.start.getTime() <= now.getTime() && now.getTime() < slot.end.getTime(),
-  ), [boundaries, now]);
+  // Before today's displayed hours open (e.g. testing at 3 AM), there is no "current" slot to anchor
+  // to -- fall back to the opening slot instead of showing nothing all night. After closing there is
+  // no more "today" left to show, so that stays unresolved (-1, handled in the empty state below).
+  const beforeOpen = now.getTime() < boundaries[0][0].start.getTime();
+  const nowSlotIndex = useMemo(() => {
+    const idx = boundaries[0].findIndex((slot) => slot.start.getTime() <= now.getTime() && now.getTime() < slot.end.getTime());
+    return idx >= 0 ? idx : beforeOpen ? 0 : -1;
+  }, [boundaries, now, beforeOpen]);
   const visibleRooms = useMemo(() => {
     if (!onlyAvailable) return bookableRooms;
     if (nowSlotIndex < 0) return [];
@@ -232,11 +265,27 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
   return (
     <div className="reserve-grid-screen">
       <div className="reserve-grid__days" role="group" aria-label="Day">
-        {days.map((day, index) => (
-          <button key={index} type="button" className="cims-chip" aria-pressed={index === selectedDayIndex} onClick={() => pickDay(index)}>
-            {index === 0 ? "Today" : dayFmt.format(day)}
-          </button>
-        ))}
+        <button type="button" className="cims-chip" aria-pressed={selectedDayIndex === 0} onClick={() => pickDay(0)}>Today</button>
+        {monthGroups.map((group) => {
+          const open = expandedMonths.has(group.month);
+          return (
+            <span key={group.month} className="reserve-grid__month">
+              <button type="button" className="cims-chip reserve-grid__month-toggle" aria-expanded={open}
+                onClick={() => setExpandedMonths((current) => {
+                  const next = new Set(current);
+                  if (next.has(group.month)) next.delete(group.month); else next.add(group.month);
+                  return next;
+                })}>
+                {group.month} {open ? "−" : "+"}
+              </button>
+              {open && group.days.map(({ day, index }) => (
+                <button key={index} type="button" className="cims-chip" aria-pressed={index === selectedDayIndex} onClick={() => pickDay(index)}>
+                  {dayFmt.format(day)}
+                </button>
+              ))}
+            </span>
+          );
+        })}
       </div>
 
       {bookableRooms.length === 0 ? (
@@ -249,6 +298,9 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
         </p>
       ) : (
         <div className="reserve-grid" role="group" aria-label={`Availability for ${dayFmt.format(days[selectedDayIndex])}`}>
+          {onlyAvailable && beforeOpen && (
+            <p className="cims-muted" role="status">Before today's hours start -- showing what's free at opening ({hourFmt.format(boundaries[0][0].start)}).</p>
+          )}
           {visibleRooms.map((room) => {
             const favorited = favoriteIds.has(room.id);
             return (
@@ -304,12 +356,16 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
               </div>
             );
           })}
-          <ul className="reserve-grid__legend">
-            <li><span className="reserve-slot reserve-slot--free" aria-hidden="true" /> Free</li>
-            <li><span className="reserve-slot reserve-slot--busy" aria-hidden="true" /> Busy</li>
-            <li><span className="reserve-slot reserve-slot--selected" aria-hidden="true" /> Selected</li>
-          </ul>
         </div>
+      )}
+      {/* Outside the grid's own horizontally-scrolling container (above) so it stays put -- Free/Busy/
+          Selected shouldn't scroll off to the side when the hour row is slid to see later times. */}
+      {bookableRooms.length > 0 && visibleRooms.length > 0 && (
+        <ul className="reserve-grid__legend">
+          <li><span className="reserve-slot reserve-slot--free" aria-hidden="true" /> Free</li>
+          <li><span className="reserve-slot reserve-slot--busy" aria-hidden="true" /> Busy</li>
+          <li><span className="reserve-slot reserve-slot--selected" aria-hidden="true" /> Selected</li>
+        </ul>
       )}
 
       {error && <p className="reserve-grid__error" role="alert"><strong>Error:</strong> {error}</p>}

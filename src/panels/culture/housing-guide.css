@@ -1,0 +1,31 @@
+/** @file Sticky-note-paper look for the West vs East dialog: yellow paper, taped title, side-by-side columns that stack on phones. */
+.housing-guide__scrim { position: fixed; inset: 0; z-index: 60; display: grid; place-items: center; padding: 16px; background: rgba(28, 39, 51, 0.5); }
+.housing-guide {
+  position: relative; width: min(680px, 100%); max-height: 90vh; overflow-y: auto; padding: 26px 22px 18px; background: linear-gradient(165deg, #FBE98A, #F4D866);
+  color: #1C2733; box-shadow: 3px 7px 0 rgba(28, 39, 51, 0.35); font-family: "Bradley Hand", "Segoe Print", "Marker Felt", "Comic Sans MS", cursive; transform: rotate(-0.4deg);
+}
+.housing-guide::before { content: ""; position: absolute; top: -10px; left: 50%; width: 80px; height: 20px; transform: translateX(-50%) rotate(-2deg); background: rgba(255, 255, 255, 0.6); border-left: 1px dashed rgba(28, 39, 51, 0.2); border-right: 1px dashed rgba(28, 39, 51, 0.2); }
+.housing-guide__close { position: absolute; top: 6px; right: 12px; border: 0; background: none; font-size: 30px; line-height: 1; cursor: pointer; color: inherit; }
+.housing-guide__title { margin: 0 0 6px; font-size: 30px; }
+.housing-guide__intro, .housing-guide__draft { margin: 0 0 12px; font-size: 16px; line-height: 1.3; }
+.housing-guide__verdict { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 0 0 16px; padding: 10px 12px; background: rgba(255, 255, 255, 0.45); border: 2px dashed #1C2733; font-size: 14px; }
+.housing-guide__verdict b { font-size: 16px; }
+.housing-guide__verdict p { margin: 4px 0 0; line-height: 1.3; }
+.housing-guide__verdict small { grid-column: 1 / -1; opacity: 0.7; }
+.housing-guide__cols, .housing-guide__cells { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.housing-guide__cols span { font-weight: 800; font-size: 20px; border-bottom: 2px solid #1C2733; }
+.housing-guide__row { margin: 14px 0; padding-bottom: 8px; border-bottom: 1px dashed rgba(28, 39, 51, 0.4); }
+.housing-guide__row h3 { margin: 0 0 4px; font-size: 17px; }
+.housing-guide__cells p, .housing-guide__both { margin: 0; font-size: 15px; line-height: 1.3; }
+.housing-guide__both { padding: 6px 10px; background: rgba(255, 255, 255, 0.4); }
+.housing-guide__badge { margin-left: 6px; padding: 1px 7px; border: 1.5px solid #1C2733; border-radius: 99px; font: 700 10px/1.4 "IBM Plex Mono", ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.05em; vertical-align: middle; }
+.housing-guide__badge--official { background: #1C2733; color: #FBE98A; }
+.housing-guide__by { margin: 4px 0 0; font-size: 12px; opacity: 0.8; }
+.housing-guide__by a, .housing-guide__links a { color: #1C2733; margin-right: 12px; }
+.housing-guide__links { font-size: 13px; }
+@media (max-width: 560px) {
+  .housing-guide__cols { display: none; }
+  .housing-guide__cells, .housing-guide__verdict { grid-template-columns: 1fr; }
+  .housing-guide__cells p:first-child::before { content: "West: "; font-weight: 800; }
+  .housing-guide__cells p:last-child::before { content: "East: "; font-weight: 800; }
+}

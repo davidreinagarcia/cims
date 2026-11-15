@@ -14,6 +14,9 @@ import PlaceCard from "../panels/building-card/PlaceCard";
 import GameHud from "../games/GameHud";
 import GamesPanel from "../games/GamesPanel";
 import { leaveGame, useGames } from "../games/store";
+import HousingGuide from "../panels/culture/HousingGuide";
+import CultureReader from "../panels/culture/CultureReader";
+import { useCulture } from "../culture/store";
 import BulletinBoard from "../panels/bulletin/BulletinBoard";
 import BusesPanel from "../panels/buses/BusesPanel";
 import TipNotifier from "../alerts/TipNotifier";
@@ -169,11 +172,22 @@ export default function Shell() {
   }, [selection]); // eslint-disable-line react-hooks/exhaustive-deps
   // Leaving the Games tab (any other tab, URL change) ends the match and clears its map layers.
   useEffect(() => { if (panel !== "games" || bulletin.open || buzzprintOpen || staffView) leaveGame(); }, [panel, bulletin.open, buzzprintOpen, staffView]);
+  // GT Culture is a mode of its own: turning it on closes every panel and card, and while it is on nothing else opens
+  // (the nav, search and route are dimmed and inert; a tap on a building is ignored). The police button stays: safety.
+  const culture = useCulture().on;
+  useEffect(() => {
+    if (!culture) return;
+    setPanel("explore");
+    setBulletin((current) => ({ ...current, open: false }));
+    setBuzzprintOpen(false);
+    if (selection) select(null);
+  }, [culture, selection]); // eslint-disable-line react-hooks/exhaustive-deps
   // "Book this room" on the indoor room card: leave the building and open the reservations panel on it.
   const booking = useBookingRequestSeq();
   useEffect(() => { if (booking) { select(null); setPanel("rooms"); } }, [booking]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const choosePanel = (next: ShellPanel) => {
+    if (culture) return; // blocked while GT Culture is on
     if (next === "bulletin") {
       bulletinOpener.current = document.querySelector<HTMLElement>('[data-nav="bulletin"]');
       writeBulletinUrl("all", true);
@@ -266,7 +280,7 @@ export default function Shell() {
   );
 
   return (
-    <div className="app cims" data-layout={mobile ? "mobile" : "desktop"} data-alert={banners.length > 0 ? "true" : undefined}>
+    <div className="app cims" data-layout={mobile ? "mobile" : "desktop"} data-culture={culture || undefined} data-alert={banners.length > 0 ? "true" : undefined}>
       <AlertBanner banners={banners} onDismiss={dismiss} />
       <SignInDialog />
       {!mobile && <Rail panel={bulletin.open ? "bulletin" : buzzprintOpen ? "buzzprint" : panel} onPanel={choosePanel} onPolice={() => setPolice(true)} onMaintenance={() => openStaff("maintenance")} />}
@@ -275,6 +289,8 @@ export default function Shell() {
         <BuildingView />
         {panel === "games" && <GameHud />}
         <LayersPopover />
+        <CultureReader />
+        <HousingGuide />
         {mobile && (
           <>
             <button type="button" className="shell-fab shell-fab--police" aria-label="GTPD alert console" onClick={() => setPolice(true)}>
