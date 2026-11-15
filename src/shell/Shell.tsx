@@ -12,6 +12,7 @@ import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinBoard from "../panels/bulletin/BulletinBoard";
+import BusesPanel from "../panels/buses/BusesPanel";
 import TipNotifier from "../alerts/TipNotifier";
 import PoliceView from "../panels/police/PoliceView";
 import MaintenanceView from "../panels/maintenance/MaintenanceView";
@@ -35,7 +36,7 @@ import SearchPill from "./SearchPill";
 import "./shell.css";
 
 const MOBILE = "(max-width: 767.98px)";
-const PANELS: ShellPanel[] = ["explore", "rooms", "report", "bulletin", "stories", "route", "buzzprint"];
+const PANELS: ShellPanel[] = ["explore", "buses", "rooms", "report", "bulletin", "stories", "route", "buzzprint"];
 const KINDS: SelectionKind[] = ["building", "place", "room", "report"];
 
 function useIsMobile(): boolean {
@@ -199,7 +200,8 @@ export default function Shell() {
 
   let content: { title: string; key: string; body: ReactNode } | null = null;
   // "rooms" is a full-screen takeover like the bulletin board (RoomsBoard, below), not a floating-card panel.
-  if (panel === "report") {
+  if (panel === "buses") content = { title: "Buses", key: "buses", body: <BusesPanel /> };
+  else if (panel === "report") {
     // Keyed by the selected place/building (when there is one) so the flow resets for a new "Report an issue".
     const reportKey = selection?.kind === "report" ? `report:${selection.id}` : "report";
     content = { title: "Report", key: reportKey, body: <ReportPanel key={reportKey} onClose={() => setPanel("explore")} /> };
