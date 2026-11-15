@@ -13,6 +13,7 @@ import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinBoard from "../panels/bulletin/BulletinBoard";
 import PoliceView from "../panels/police/PoliceView";
+import MaintenanceView from "../panels/maintenance/MaintenanceView";
 import ReportPanel from "../panels/report";
 import RoomsBoard from "../panels/rooms/RoomsBoard";
 import PortfolioPage from "../portfolio/PortfolioPage";
@@ -93,15 +94,19 @@ export default function Shell() {
   const [hasQuery, setHasQuery] = useState(false);
   const [snap, setSnap] = useState<SheetSnap>("half");
   const { banners, dismiss } = useAlertBanners();
-  // The GTPD console is a full-screen view, deep-linkable with ?view=police.
-  const [policeOpen, setPoliceOpen] = useState(() => new URLSearchParams(window.location.search).get("view") === "police");
-  const setPolice = (open: boolean) => {
+  // Staff dashboards are full-screen views, deep-linkable with ?view=police or ?view=maintenance.
+  const [staffView, setStaffView] = useState<"police" | "maintenance" | null>(() => {
+    const v = new URLSearchParams(window.location.search).get("view");
+    return v === "police" || v === "maintenance" ? v : null;
+  });
+  const openStaff = (view: "police" | "maintenance" | null) => {
     const params = new URLSearchParams(window.location.search);
-    if (open) params.set("view", "police"); else params.delete("view");
+    if (view) params.set("view", view); else params.delete("view");
     const query = params.toString();
     window.history.replaceState(window.history.state, "", `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`);
-    setPoliceOpen(open);
+    setStaffView(view);
   };
+  const setPolice = (open: boolean) => openStaff(open ? "police" : null);
 
   useEffect(() => {
     // Canonicalize the old panel link once; history navigation never writes over the destination.
@@ -248,7 +253,7 @@ export default function Shell() {
     <div className="app cims" data-layout={mobile ? "mobile" : "desktop"} data-alert={banners.length > 0 ? "true" : undefined}>
       <AlertBanner banners={banners} onDismiss={dismiss} />
       <SignInDialog />
-      {!mobile && <Rail panel={bulletin.open ? "bulletin" : buzzprintOpen ? "buzzprint" : panel} onPanel={choosePanel} onPolice={() => setPolice(true)} />}
+      {!mobile && <Rail panel={bulletin.open ? "bulletin" : buzzprintOpen ? "buzzprint" : panel} onPanel={choosePanel} onPolice={() => setPolice(true)} onMaintenance={() => openStaff("maintenance")} />}
       <div className="stage">
         <MapView />
         <BuildingView />
@@ -279,7 +284,8 @@ export default function Shell() {
       )}
       {mobile && <MobileTabBar panel={bulletin.open ? "bulletin" : buzzprintOpen ? "buzzprint" : panel} onPanel={choosePanel} />}
       <OfflineBanner />
-      {policeOpen && <PoliceView onClose={() => setPolice(false)} />}
+      {staffView === "police" && <PoliceView onClose={() => openStaff(null)} />}
+      {staffView === "maintenance" && <MaintenanceView onClose={() => openStaff(null)} />}
       {panel === "rooms" && <RoomsBoard onClose={closeContent} />}
       {bulletin.open && <BulletinBoard type={bulletin.type} onClose={closeBulletin}
         onType={(type) => { writeBulletinUrl(type); setBulletin({ open: true, type }); }} />}

@@ -1,8 +1,12 @@
 /** @file GTPD console (full screen): draw the danger circle on a 2D map, launch and end alarms, and work the queue of citizen police tips, all live. */
 import { useEffect, useRef, useState } from "react";
 import {
-  ALERT_KINDS, AlertsError, endAlert, launchAlert, setPoliceKey, useAlerts, type AlertKind, type CampusAlert, type PoliceTip,
+  ALERT_KINDS, AlertsError, endAlert, launchAlert, refreshAlerts, useAlerts, type AlertKind, type CampusAlert, type PoliceTip,
 } from "../../lib/alerts";
+import { useAuth } from "../../state/auth";
+import { useLiveReports } from "../../lib/liveReports";
+import { STATUS_LABEL, reportsService, type ReportStatus } from "../../lib/reports";
+import ReportSummary from "../report/ReportSummary";
 import PoliceMap, { type Draft } from "./PoliceMap";
 import TipsQueue from "./TipsQueue";
 import "./police.css";
@@ -10,20 +14,46 @@ import "./police.css";
 /** Props for the console. */
 export interface PoliceViewProps { onClose: () => void }
 
-/** Asks for the GTPD access code (remote mode only) and explains local demo mode. */
-function AccessGate({ rejected }: { rejected: boolean }) {
-  const [code, setCode] = useState("");
+/** Shown to anyone who is not signed in as a GTPD (police) or moderator account. */
+function AccessGate() {
+  const { openDialog } = useAuth();
   return (
-    <form className="police__gate" onSubmit={(e) => { e.preventDefault(); setPoliceKey(code); }}>
+    <div className="police__gate">
       <h2 className="cims-caps">GTPD access</h2>
-      <p>Enter the access code to launch alarms and read citizen reports.</p>
-      <label className="police__label">
-        <span>Access code</span>
-        <input className="police__control" type="password" autoComplete="off" value={code} onChange={(e) => setCode(e.target.value)} autoFocus />
-      </label>
-      {rejected && <p className="police__error" role="alert">That code was not accepted.</p>}
-      <button type="submit" className="cims-btn cims-btn--primary" disabled={!code.trim()}>Open console</button>
-    </form>
+      <p>This console is for GTPD accounts. Sign in with the police demo account to launch alarms and read citizen reports.</p>
+      <button type="button" className="cims-btn cims-btn--primary" onClick={openDialog}>Sign in</button>
+    </div>
+  );
+}
+
+/** Safety-hazard reports filed through the report form (team Emergency), live, with the status dropdown. */
+function EmergencyReports() {
+  const { reports, fresh, error } = useLiveReports("Emergency");
+  const [problem, setProblem] = useState<string | null>(null);
+  const change = async (id: string, status: ReportStatus) => {
+    setProblem(null);
+    try { await reportsService.setStatus(id, status); } catch (e) { setProblem(e instanceof Error ? e.message : "Could not update."); }
+  };
+  const open = (reports ?? []).filter((r) => r.status !== "resolved" && r.status !== "duplicate");
+  return (
+    <section className="police__section" aria-labelledby="police-hazards">
+      <h2 id="police-hazards" className="cims-section__title cims-caps">Safety hazard reports ({open.length})</h2>
+      {(error || problem) && <p className="police__error" role="alert">{error ?? problem}</p>}
+      {!reports && !error && <p className="cims-empty" role="status">Loading…</p>}
+      {reports && open.length === 0 && <p className="cims-muted">Nothing open. New reports appear here the moment they are filed.</p>}
+      <ul className="police__tips">
+        {open.map((r) => (
+          <li key={r.id} className={`police-tip${fresh.has(r.id) ? " is-selected" : ""}`}>
+            <ReportSummary report={r} />
+            <label className="police__label"><span>Status</span>
+              <select className="police__control" value={r.status} onChange={(e) => change(r.id, e.target.value as ReportStatus)}>
+                {(Object.keys(STATUS_LABEL) as ReportStatus[]).map((st) => <option key={st} value={st}>{STATUS_LABEL[st]}</option>)}
+              </select>
+            </label>
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 
@@ -145,6 +175,8 @@ export default function PoliceView({ onClose }: PoliceViewProps) {
     return () => window.removeEventListener("keydown", onKey);
   }, [drawing, onClose]);
 
+  const { session } = useAuth();
+  useEffect(() => { refreshAlerts(); }, [session]);
   const authorized = state.mode === "local" || state.police;
   const active = state.alerts.filter((a) => a.status === "active");
   const tips: PoliceTip[] = authorized ? state.tips : [];
@@ -162,7 +194,7 @@ export default function PoliceView({ onClose }: PoliceViewProps) {
       <div className="police__body">
         <aside className="police__side">
           {!authorized ? (
-            state.status === "connecting" ? <p className="cims-empty" role="status">Connecting…</p> : <AccessGate rejected={state.keyRejected} />
+            state.status === "connecting" ? <p className="cims-empty" role="status">Connecting…</p> : <AccessGate />
           ) : (
             <>
               <LaunchForm
@@ -173,6 +205,7 @@ export default function PoliceView({ onClose }: PoliceViewProps) {
                 onLaunched={() => { setDraft(null); setDrawing(false); }}
               />
               <ActiveAlarms alerts={active} onShow={(a) => setFocus({ ...a })} />
+              <EmergencyReports />
               <section className="police__section" aria-labelledby="police-tips">
                 <h2 id="police-tips" className="cims-section__title cims-caps">Citizen reports {newCount > 0 && <span className="cims-tag cims-tag--alert">{newCount} new</span>}</h2>
                 <TipsQueue

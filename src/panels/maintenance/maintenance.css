@@ -1,0 +1,26 @@
+/** @file Maintenance dashboard layout: crew rail with live counts + card list. */
+.maint { position: absolute; inset: 0; z-index: 60; display: flex; flex-direction: column; background: var(--paper); outline: none; }
+.maint__bar { display: flex; align-items: center; gap: var(--s3); padding: var(--s2) var(--s4); background: var(--navy); color: var(--white); border-bottom: 3px solid var(--gold); }
+.maint__title { flex: 1; margin: 0; font: 700 var(--fs-xl)/1.1 var(--font-display); text-transform: uppercase; letter-spacing: var(--caps-tracking); }
+.maint__bar .cims-btn { background: transparent; color: var(--white); border-color: var(--white); }
+.maint__live { padding: 2px var(--s3); border: 1px solid var(--white); border-radius: var(--radius-pill); font: 500 var(--fs-xs) var(--font-mono); text-transform: uppercase; }
+.maint__gate { display: grid; gap: var(--s3); padding: var(--s5) var(--s4); max-width: 480px; }
+.maint__body { flex: 1; min-height: 0; display: grid; grid-template-columns: 240px minmax(0, 1fr); }
+.maint__crews { display: grid; align-content: start; gap: var(--s2); padding: var(--s3); border-right: var(--hairline); overflow-y: auto; }
+.maint__crew { display: grid; grid-template-columns: 1fr auto; padding: var(--s2) var(--s3); border: var(--hairline); background: var(--white); color: var(--ink); text-align: left; cursor: pointer; font: inherit; }
+.maint__crew[aria-pressed="true"] { background: var(--navy); color: var(--white); border-color: var(--navy); }
+.maint__crew-name { font-weight: 600; }
+.maint__crew-count { font: 700 var(--fs-xl) var(--font-mono); grid-row: span 2; align-self: center; }
+.maint__crew-sub { font-size: var(--fs-xs); opacity: 0.75; }
+.maint__list { overflow-y: auto; padding: var(--s3) var(--s4); }
+.maint__check { display: flex; gap: var(--s2); margin-bottom: var(--s3); font-size: var(--fs-sm); }
+.maint__cards { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); }
+.maint__card { display: grid; gap: var(--s2); padding: var(--s3); border: var(--hairline-muted); background: #fff; align-content: start; }
+.maint__card.is-new { border-color: var(--gold); outline: 2px solid var(--gold); }
+.maint__meta { display: flex; gap: var(--s2); align-items: center; margin: 0; }
+.maint__status { display: grid; gap: var(--s1); font-size: var(--fs-sm); }
+.maint__status select { min-height: var(--tap); padding: var(--s2) var(--s3); border: var(--hairline); background: var(--white); font: inherit; }
+@media (max-width: 720px) {
+  .maint__body { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+  .maint__crews { grid-auto-flow: column; grid-auto-columns: 140px; overflow-x: auto; border-right: 0; border-bottom: var(--hairline); }
+}
