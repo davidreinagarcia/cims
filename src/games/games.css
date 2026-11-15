@@ -1,0 +1,44 @@
+/* @file Look of the Games tab (lobby, create form) and the in-match HUD, built from the shell tokens. */
+.games { display: flex; flex-direction: column; gap: var(--s3); padding: var(--s4); }
+.games__profile { display: flex; flex-direction: column; gap: var(--s2); }
+.games__label { font-size: var(--fs-sm); color: var(--ink-muted); }
+.games__input { min-height: var(--tap); padding: 0 var(--s3); border: var(--hairline); background: var(--white); font: inherit; color: var(--ink); }
+.games__head { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); }
+.games__title { margin: 0; font-family: var(--font-display); font-size: var(--fs-lg); color: var(--navy); text-transform: uppercase; letter-spacing: var(--caps-tracking); }
+.games__list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
+.games__item { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); padding: var(--s3) 0; border-top: var(--hairline-muted); }
+.games__itemtext { display: flex; flex-direction: column; min-width: 0; font-size: var(--fs-sm); }
+.games__itemtext strong { font-size: var(--fs-md); }
+.games__itemtext span { color: var(--ink-muted); }
+.games__note { margin: 0; font-size: var(--fs-sm); color: var(--ink-muted); }
+.games__form { display: flex; flex-direction: column; gap: var(--s2); padding: var(--s3); background: var(--paper-2); border: var(--hairline-muted); }
+.games__teams, .games__segment { display: flex; gap: var(--s2); }
+.games__team, .games__seg {
+  flex: 1; min-height: var(--tap); border: var(--hairline); background: var(--white); color: var(--ink); font: 500 var(--fs-sm)/1 var(--font-body); cursor: pointer;
+}
+.games__team { border-color: var(--team); }
+.games__team[aria-checked="true"] { background: var(--team); color: var(--white); }
+.games__seg[aria-checked="true"] { background: var(--navy); color: var(--white); }
+.games button:disabled { opacity: 0.55; cursor: not-allowed; }
+
+/* HUD: floating over the map, clear of the rail and the bottom controls */
+.game-hud {
+  position: absolute; z-index: 7; top: 72px; right: var(--s3); width: min(340px, calc(100% - 2 * var(--s3)));
+  display: flex; flex-direction: column; gap: var(--s2); padding: var(--s3);
+  background: var(--paper); border: var(--hairline-muted); border-radius: var(--radius-card); box-shadow: var(--elev);
+}
+.app[data-layout="mobile"] .game-hud { left: var(--s2); right: var(--s2); top: auto; bottom: var(--s2); width: auto; max-height: 55%; overflow-y: auto; }
+.game-hud__top { display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s3); }
+.game-hud__name { display: block; color: var(--navy); }
+.game-hud__mode { font-size: var(--fs-sm); color: var(--ink-muted); }
+.game-hud__clock { font: 600 var(--fs-xl)/1 var(--font-mono, monospace); color: var(--navy); }
+.game-hud__scores { display: flex; gap: var(--s2); }
+.game-hud__score { flex: 1; display: flex; flex-direction: column; padding: var(--s2) var(--s3); background: var(--white); border-left: 6px solid var(--team); font-size: var(--fs-sm); }
+.game-hud__score strong { font-size: var(--fs-xl); line-height: 1.1; }
+.game-hud__score[data-lead="true"] { outline: 2px solid var(--team); }
+.game-hud__hint, .game-hud__result { margin: 0; font-size: var(--fs-sm); color: var(--ink-muted); }
+.game-hud__result { color: var(--ink); font-weight: 600; }
+.game-hud__feed { list-style: none; margin: 0; padding: 0; font-size: var(--fs-xs); color: var(--ink-muted); }
+.game-hud__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s2); padding-top: var(--s2); border-top: var(--hairline-muted); }
+.game-hud__toggle { display: flex; align-items: center; gap: var(--s2); font-size: var(--fs-xs); color: var(--ink-muted); cursor: pointer; }
+.game-hud__warn { flex-basis: 100%; font-size: var(--fs-xs); color: var(--cat-issues); }
