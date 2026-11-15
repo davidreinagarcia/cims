@@ -12,7 +12,9 @@ Building screen, vector schematic renderer and indoor contracts shared by lanes 
 - [`FloorPlan.css`](FloorPlan.css): * @file Vector plan canvas, survey controls and room interaction states.
 - [`FloorPlan.tsx`](FloorPlan.tsx): Crisp SVG schematic with keyboard space selection, pointer pan and bounded pointer-centered zoom. · exports `FloorPlan`
 - [`RoomSearch.tsx`](RoomSearch.tsx): One keyboard accessible room picker across every available building level. · exports `RoomSearch`
+- [`availability.ts`](availability.ts): Pure room-finder queries (F-11) and campus-local expansion of fictional weekly demo slots. · exports `isRoomFree`, `findFreeRooms`, `freeUntil`, `nowWindow`, `campusTimeToday`, `expandDemoSlots`
 - [`registry.ts`](registry.ts): Registry of buildings with an indoor screen, including explicit no-plan placeholders. · exports `indoorFor`, `hasIndoor`, `indoorRooms`, `resolveRoom`
+- [`roomFinderDemo.ts`](roomFinderDemo.ts): Loads the Kendeda room finder demo seed (F-11/T-24) and indexes it by selection id. · exports `roomAmenitiesById`, `demoSlotPatterns`
 - [`route.ts`](route.ts): Dependency free shortest indoor paths and plan relative walking instructions. · exports `findRoute`
 - [`types.ts`](types.ts): Indoor schematic contracts matching the curated JSON, without inferred room facts.
 

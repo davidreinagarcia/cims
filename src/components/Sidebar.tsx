@@ -5,8 +5,11 @@ import BulletinPanel from "../panels/bulletin/BulletinPanel";
 import BuildingCard from "../panels/building-card/BuildingCard";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import LayersPanel from "../panels/layers/LayersPanel";
+import RoomFinderPanel from "../panels/rooms/RoomFinderPanel";
 import SearchPanel from "../panels/search/SearchPanel";
 import "./Sidebar.css";
+
+const TABS = ["Explore", "Bulletin", "Rooms"];
 
 /** Left column (bottom sheet on phones) that hosts the panels. */
 export default function Sidebar() {
@@ -25,14 +28,16 @@ export default function Sidebar() {
         <nav className="cims-header__nav" aria-label="Account"><AccountChip /></nav>
       </header>
       <div className="sidebar__tabs" role="tablist" aria-label="Campus panels">
-        {["Explore", "Bulletin"].map((label, index) => (
+        {TABS.map((label, index) => (
           <button key={label} type="button" role="tab" id={`${id}-tab-${index}`}
             aria-selected={tab === index} aria-controls={`${id}-panel-${index}`}
             tabIndex={tab === index ? 0 : -1} ref={(element) => { tabs.current[index] = element; }}
             onClick={() => setTab(index)} onKeyDown={(event) => {
               if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
               event.preventDefault();
-              const next = event.key === "Home" ? 0 : event.key === "End" ? 1 : 1 - index;
+              const last = TABS.length - 1;
+              const next = event.key === "Home" ? 0 : event.key === "End" ? last
+                : (index + (event.key === "ArrowRight" ? 1 : -1) + TABS.length) % TABS.length;
               setTab(next);
               tabs.current[next]?.focus();
             }}>{label}</button>
@@ -49,6 +54,9 @@ export default function Sidebar() {
           setTab(0);
           tabs.current[0]?.focus();
         }} />}
+      </div>
+      <div className="sidebar__panel" role="tabpanel" id={`${id}-panel-2`} aria-labelledby={`${id}-tab-2`} hidden={tab !== 2}>
+        {tab === 2 && <RoomFinderPanel />}
       </div>
     </aside>
   );

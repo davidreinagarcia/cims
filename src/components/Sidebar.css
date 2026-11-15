@@ -9,7 +9,7 @@
   .sidebar .cims-header { min-height: 52px; }
 }
 
-.sidebar__tabs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); flex: none; border-bottom: var(--hairline); }
+.sidebar__tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); flex: none; border-bottom: var(--hairline); }
 .sidebar__tabs button { min-height: var(--tap); border: 0; background: var(--paper); color: var(--navy); font: inherit; cursor: pointer; }
 .sidebar__tabs button[aria-selected="true"] { background: var(--navy); color: var(--white); }
 .sidebar__tabs button:hover { box-shadow: inset 0 -3px var(--gold); }

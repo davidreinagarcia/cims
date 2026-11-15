@@ -1,0 +1,20 @@
+/** @file Room finder panel layout. Look comes from .cims-field / .cims-chip / .cims-results (styles/cims-ui.css). */
+.room-finder { padding: var(--s4); display: flex; flex-direction: column; gap: var(--s3); min-width: 0; overflow-wrap: anywhere; }
+.room-finder h2 { margin: 0; display: flex; align-items: center; gap: var(--s2); font-size: var(--fs-md); }
+.room-finder__intro { margin: 0; font-size: var(--fs-sm); }
+
+.room-finder__when, .room-finder__filters { border: 0; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s2); }
+.room-finder__when legend, .room-finder__filters legend { padding: 0; margin-bottom: var(--s1); }
+.room-finder__time input { width: 100%; }
+.room-finder__duration { display: flex; align-items: center; gap: var(--s2); font-size: var(--fs-sm); }
+.room-finder__duration select { min-height: var(--tap); }
+.room-finder__capacity { padding: 0 var(--s2); gap: var(--s2); align-items: center; }
+.room-finder__capacity input { width: 4em; text-align: right; }
+
+.room-finder__results { display: flex; flex-direction: column; gap: var(--s2); }
+.room-finder__results li { border: var(--hairline); background: var(--white); }
+.room-finder__result { display: flex; flex-direction: column; gap: var(--s1); width: 100%; border: 0; background: none; font: inherit; text-align: left; padding: var(--s2) var(--s3); cursor: pointer; }
+.room-finder__result:hover { background: var(--paper-2); }
+.room-finder__result-head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s2); flex-wrap: wrap; }
+.room-finder__result-meta, .room-finder__result-policy { font-size: var(--fs-sm); }
+.room-finder__book { display: flex; justify-content: center; align-items: center; gap: var(--s2); margin: 0 var(--s3) var(--s3); border-top: 0; }
