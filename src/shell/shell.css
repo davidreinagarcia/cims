@@ -144,14 +144,17 @@
 .shell-chip__glyph { display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: var(--paper); color: var(--cat, var(--ink)); }
 .shell-chip[aria-pressed="true"] { background: var(--navy); border-color: var(--navy); color: var(--white); }
 .shell-chip[aria-pressed="true"]:hover { background: #0B3D68; }
-.shell-chip:disabled { background: var(--paper-2); color: var(--ink-muted); box-shadow: none; opacity: 0.6; cursor: not-allowed; }
-.shell-chip:disabled .shell-chip__glyph { color: var(--ink-muted); }
+/* No data yet: same opaque surface, quiet state = muted ink + dashed border; never translucent, never toggles. */
+.shell-chip[aria-disabled="true"] { background: var(--paper); border: 1px dashed var(--ink-muted); color: var(--ink-muted); box-shadow: none; cursor: not-allowed; }
+.shell-chip[aria-disabled="true"]:hover { background: var(--paper); }
+.shell-chip[aria-disabled="true"] .shell-chip__glyph { background: var(--paper-2); color: var(--ink-muted); }
+/* Arrows sit inside the row's bounds (the row already ends before the account control). */
 .shell-chips__arrow {
   position: absolute; top: 3px; display: grid; place-items: center; width: 36px; height: 36px; padding: 0; pointer-events: auto;
   border: var(--hairline-muted); border-radius: 50%; background: var(--white); color: var(--ink); box-shadow: var(--elev); cursor: pointer;
 }
-.shell-chips__arrow--start { left: -4px; }
-.shell-chips__arrow--end { right: -4px; }
+.shell-chips__arrow--start { left: 0; }
+.shell-chips__arrow--end { right: 0; }
 
 /* ---------- account (desktop: 40px circle top-right) ---------- */
 .shell-account { position: relative; z-index: 7; flex: none; pointer-events: auto; }

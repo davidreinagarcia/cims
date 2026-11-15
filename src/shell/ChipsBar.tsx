@@ -7,8 +7,10 @@ import { useLayerFilters } from "../state/layerFilters";
 import { Icon } from "./icons";
 
 const withData = new Set(places.features.map((feature) => feature.properties.category));
+// Chips with data first, then the "no data yet" ones; catalog order kept within each group.
+const ordered = [...LAYER_CATALOG].sort((a, b) => Number(!withData.has(a.id)) - Number(!withData.has(b.id)));
 
-/** One pill per layer category; pressed = layer on. Categories without data are disabled, like in the Layers panel. */
+/** One pill per layer category; pressed = layer on. Categories without data stay visible but inert (aria-disabled, dashed). */
 export default function ChipsBar() {
   const { isOn, toggleCategory } = useLayerFilters();
   const row = useRef<HTMLDivElement>(null);
@@ -27,14 +29,17 @@ export default function ChipsBar() {
   return (
     <div className="shell-chips" data-start={edges.start} data-end={edges.end}>
       <div ref={row} className="shell-chips__row" role="group" aria-label="Quick layer toggles">
-        {LAYER_CATALOG.map((layer) => (
-          <button key={layer.id} type="button" className="shell-chip" aria-pressed={isOn(layer.id) && withData.has(layer.id)}
-            disabled={!withData.has(layer.id)} title={withData.has(layer.id) ? undefined : "No data yet"}
-            style={{ "--cat": `var(${layer.cssVar})` } as CSSProperties} onClick={() => toggleCategory(layer.id)}>
-            <span className="shell-chip__glyph"><Glyph id={layer.id} size={16} /></span>
-            {layer.label}
-          </button>
-        ))}
+        {ordered.map((layer) => {
+          const ready = withData.has(layer.id);
+          return (
+            <button key={layer.id} type="button" className="shell-chip" aria-pressed={ready ? isOn(layer.id) : undefined}
+              aria-disabled={ready ? undefined : true} title={ready ? undefined : "No data yet"}
+              style={{ "--cat": `var(${layer.cssVar})` } as CSSProperties} onClick={() => { if (ready) toggleCategory(layer.id); }}>
+              <span className="shell-chip__glyph"><Glyph id={layer.id} size={16} /></span>
+              {layer.label}
+            </button>
+          );
+        })}
       </div>
       {edges.start && <button type="button" tabIndex={-1} aria-hidden="true" className="shell-chips__arrow shell-chips__arrow--start" onClick={() => scroll(-1)}><Icon name="left" size={18} /></button>}
       {edges.end && <button type="button" tabIndex={-1} aria-hidden="true" className="shell-chips__arrow shell-chips__arrow--end" onClick={() => scroll(1)}><Icon name="right" size={18} /></button>}
