@@ -6,6 +6,8 @@ Fuentes y dudas pendientes de las investigaciones de datos del campus.
 
 **Files**
 
+- [`culc-floor-plans.md`](culc-floor-plans.md): Fuentes verificadas de planos y salas de CULC, límites de reutilización y propuesta de esquema propio sin cop…
+- [`culc-room-inventory.json`](culc-room-inventory.json): JSON array, 104 items
 - [`org-research-notes.md`](org-research-notes.md): Fuentes oficiales, coordenadas OSM, descartes y dudas de los 13 borradores de organizaciones y oficinas T-32.
 - [`poi-research-notes.md`](poi-research-notes.md): Fuentes, coordenadas OSM, descartes y dudas para los borradores T-30 de comida, impresión, salud, fabricación…
 
