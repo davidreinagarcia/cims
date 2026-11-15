@@ -1,0 +1,6 @@
+/** @file Toast for new citizen police reports. */
+.tip-toast { position: fixed; z-index: 90; top: var(--s3); left: 50%; transform: translateX(-50%); display: flex; max-width: min(92vw, 460px); background: #B42318; color: #fff; border: 2px solid #fff; box-shadow: 0 8px 24px rgba(0,0,0,.35); animation: tip-pop .25s ease-out; }
+.tip-toast__main { flex: 1; display: grid; gap: 2px; padding: var(--s3) var(--s4); background: none; border: 0; color: inherit; text-align: left; font: inherit; cursor: pointer; }
+.tip-toast__x { padding: 0 var(--s3); background: none; border: 0; color: inherit; font-size: 24px; cursor: pointer; }
+@keyframes tip-pop { from { opacity: 0; transform: translate(-50%, -12px); } }
+@media (prefers-reduced-motion: reduce) { .tip-toast { animation: none; } }

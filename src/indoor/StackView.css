@@ -1,46 +1,64 @@
-/** @file Stack view: CSS 3D plates (perspective, tilt, translateZ per level), flat labels and dashed vertical route links. */
-.stack { position: absolute; inset: 0; overflow: hidden; perspective: 1800px; perspective-origin: 50% 40%; }
+/** @file Frontal paper floor slabs, responsive spacing and a single staggered opening animation with reduced-motion support. */
+.stack { position: absolute; inset: 0; overflow: hidden; perspective: 2400px; perspective-origin: 50% 50%; }
 .stack__scene {
-  position: absolute; left: 50%; top: 50%; transform-style: preserve-3d;
-  transform: translate(-50%, -50%) rotateX(55deg) rotateZ(-35deg);
+  position: absolute; top: 50%; transform-style: preserve-3d;
+  transform: translate(-50%, -50%) rotateX(58deg) rotateZ(0deg);
 }
-/* Only a plate's drawn floor takes clicks, so a plate above never steals the click meant for one below. */
 .stack__plate { position: absolute; inset: 0; transform-style: preserve-3d; cursor: pointer; outline: none; pointer-events: none; }
-.stack__floor { pointer-events: auto; }
-.stack__plate svg { display: block; width: 100%; height: 100%; overflow: visible; }
-.stack__floor { fill: var(--paper); stroke: none; }
-.stack__outline { fill: none; stroke: var(--ink); stroke-width: 1.5; vector-effect: non-scaling-stroke; }
-.stack__plate .cims-room { stroke-width: 0.75; vector-effect: non-scaling-stroke; animation: none; }
-/* other levels: thin ink outlines over light paper */
-/* see-through so the active plate and the route below stay visible */
-.stack__plate:not([data-active]) .stack__floor { fill: var(--paper); fill-opacity: 0.55; }
-.stack__plate:not([data-active]) .cims-room { fill: none; stroke: var(--ink-muted); }
-.stack__plate:not([data-active]) .cims-room--void { fill: none; }
-.stack__plate:not([data-active]) .cims-room--selected { fill: var(--room-selected); stroke: var(--ink); }
-.stack__plate[data-active] .floor-plan__floor, .stack__plate[data-active] .stack__floor { fill: var(--white); }
+.stack__slab { position: absolute; inset: 0; transform-style: preserve-3d; animation: stack-explode 560ms cubic-bezier(.16, 1, .3, 1) var(--explode-delay) backwards; }
+.stack__plate svg { position: absolute; inset: 0; display: block; width: 100%; height: 100%; overflow: visible; }
+.stack__underside { transform: translateZ(calc(-1 * var(--slab-depth))); }
+.stack__underside path { fill: var(--paper-2); stroke: var(--ink-muted); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.stack__edge { position: absolute; display: block; height: var(--slab-depth); transform-origin: 0 0; background: var(--paper-2); border: 1px solid var(--ink-muted); box-sizing: border-box; }
+.stack__plate[data-active] .stack__edge { background: #c2bba6; border-color: var(--navy); }
+.stack__plate[data-active] .stack__underside path { fill: #c2bba6; stroke: var(--navy); }
+.stack__floor { pointer-events: auto; fill: var(--paper); stroke: var(--ink-muted); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.stack__outline { fill: none; stroke: var(--ink-muted); stroke-width: 1; vector-effect: non-scaling-stroke; pointer-events: none; }
+.stack__plate .cims-room { stroke: none; animation: none; pointer-events: all; }
+.stack__plate .cims-room--void { pointer-events: none; }
+.stack__plate:not([data-active]) .cims-room { fill: none; }
+.stack__plate:not([data-active]) .cims-room--selected { fill: var(--room-selected); }
+.stack__plate[data-active] .stack__floor { fill: var(--white); stroke: var(--navy); }
+.stack__plate[data-active] .stack__outline { stroke: var(--navy); }
 .stack__plate[data-active] .cims-room--service { fill: var(--paper-2); }
-.stack__plate[data-active] .cims-room--utility { fill: var(--paper); stroke-dasharray: 4 3; }
+.stack__plate[data-active] .cims-room--utility { fill: var(--paper); }
 .stack__plate[data-active] .cims-room--outdoor { fill: var(--map-campus); }
-.stack__plate[data-active] .cims-room--void { fill: none; stroke-dasharray: 4 3; }
-.stack__plate[data-active] .stack__outline { stroke-width: 2.5; }
-.stack__plate .cims-room--selected { stroke: var(--ink); stroke-width: 2; stroke-dasharray: 6 3; }
-.stack__plate:hover .stack__outline, .stack__plate:focus-visible .stack__outline { stroke: var(--navy); stroke-width: 3; }
-.stack__route { fill: none; stroke: var(--route); stroke-width: 3; stroke-dasharray: 8 5; vector-effect: non-scaling-stroke; }
+.stack__plate[data-active] .cims-room--void { fill: none; }
+.stack__plate .cims-room--selected { fill: var(--room-selected); }
+.stack__plate:focus-visible .stack__floor { stroke: var(--navy); stroke-width: 2; }
+.stack__route { fill: none; stroke: var(--route); stroke-width: 2.5; stroke-dasharray: 8 5; stroke-linecap: round; stroke-linejoin: round; vector-effect: non-scaling-stroke; pointer-events: none; }
 .stack__anchor { position: absolute; width: 0; height: 0; pointer-events: none; }
-
 .stack__overlay { position: absolute; inset: 0; pointer-events: none; overflow: visible; }
 .stack__link { stroke: var(--route); stroke-width: 2.5; stroke-dasharray: 6 5; }
-.stack__link-end { fill: var(--route); stroke: var(--white); stroke-width: 1.5; }
-
-.stack__label {
-  position: absolute; z-index: 1; transform: translateY(-50%); display: grid; justify-items: start; gap: 0;
-  padding: var(--s1) var(--s2); border: 0; border-left: 2px solid var(--ink); background: none; color: var(--ink); cursor: pointer; text-align: left;
-}
+.stack__link-end { fill: var(--route); stroke: var(--white); stroke-width: 1; }
+.stack__guide { stroke: var(--ink-muted); stroke-width: 1; stroke-dasharray: 3 5; opacity: 0.45; }
+.stack__annotations { animation: stack-annotate 160ms ease-out 740ms both; }
+.stack__label { position: absolute; z-index: 1; transform: translateY(-50%); padding-left: 8px; border-left: 1px solid var(--ink-muted); color: var(--ink); }
+.stack__level { display: grid; gap: 2px; justify-items: start; width: 100%; min-height: 44px; align-content: center; padding: 2px 0; border: 0; background: none; color: inherit; cursor: pointer; text-align: left; }
 .stack__label .cims-caps { font-size: var(--fs-md); line-height: 1.1; }
+.stack__label-heading { display: flex; align-items: baseline; gap: 6px; }
 .stack__label small { font-size: var(--fs-xs); color: var(--ink-muted); }
-.stack__label[data-active] { border-left-color: var(--navy); }
-.stack__label[data-active] .cims-caps { color: var(--navy); }
-/* No animated transitions here at all, so prefers-reduced-motion needs nothing extra; keep it that way. */
-
-/* Dashed guides between outline corners that line up on consecutive plates. */
-.stack__guide { stroke: var(--ink); stroke-width: 1.25; stroke-dasharray: 4 5; opacity: 0.7; }
+.stack__label[data-active] { border-left: 2px solid var(--navy); color: var(--navy); }
+.stack__open-plan { display: inline-block; padding: 2px 5px; background: var(--navy); color: var(--white); font: 600 11px/1.2 var(--font-display); text-transform: uppercase; letter-spacing: .04em; white-space: nowrap; }
+.stack__level:focus-visible, .stack__open-plan:focus-visible { outline: 2px solid var(--navy); outline-offset: 3px; }
+@keyframes stack-explode {
+  from { transform: translateZ(calc(-1 * var(--plate-z))); opacity: .6; }
+  to { transform: translateZ(0); opacity: 1; }
+}
+@keyframes stack-annotate { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 767px) {
+  .stack__label { padding-left: 6px; }
+  .stack__label .cims-caps { font-size: 13px; }
+  .stack__label-heading { display: flex; align-items: baseline; gap: 6px; }
+.stack__label small { font-size: 10px; }
+  .stack__level { min-height: 36px; }
+  .stack__open-plan { padding: 2px 4px; font-size: 10px; }
+}
+/* A routed room's phone sheet leaves a short canvas; the level pills above remain the full-size level controls. */
+.stack[data-compact] .stack__level { min-height: 24px; padding: 0; gap: 0; }
+.stack[data-compact] .stack__label .cims-caps { font-size: 12px; line-height: 1.1; }
+.stack[data-compact] .stack__label small { font-size: 9px; line-height: 1; }
+.stack[data-compact] .stack__open-plan { padding: 1px 3px; font-size: 9px; line-height: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .stack__slab, .stack__annotations { animation: none; }
+}

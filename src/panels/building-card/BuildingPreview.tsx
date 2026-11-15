@@ -1,4 +1,4 @@
-/** @file Short card for a building with an indoor map: name, thumbnail of the entrance floor, key facts, report-an-issue and the button that opens the full indoor screen. */
+/** @file Short card for a building with an indoor map: name, thumbnail of the entrance floor, Open building map, Directions and Report an issue first, then the places inside as pictograms and the plan thumbnail. */
 import { useEffect, useState } from "react";
 import { loadBuildings, loadedBuildings } from "../../lib/buildings";
 import { openIndoor, useOpenIndoor } from "../../indoor/open";
@@ -6,6 +6,7 @@ import { indoorFor } from "../../indoor/registry";
 import { useAuth } from "../../state/auth";
 import { useSelection } from "../../state/selection";
 import InsidePlaces from "./InsidePlaces";
+import BuildingPhotoFigure from "./BuildingPhoto";
 import "./building-card.css";
 
 /** Preview for the selected building when it has an indoor map; nothing otherwise or while the full screen is open. */
@@ -34,31 +35,32 @@ export default function BuildingPreview() {
   const handleReportIssue = () => requireAuth(() => select({ kind: "report", id: building.building_id }));
   return (
     <section className="detail preview" aria-label="Building preview">
+      <BuildingPhotoFigure buildingId={building.building_id} />
       <h2 className="cims-card__name">{facts?.name ?? building.title}</h2>
       {!!aliases.length && <p className="cims-card__alias">{aliases.join(", ")}</p>}
-      {first?.available && (
-        <svg className="preview__plan" viewBox={first.viewBox.join(" ")} role="img" aria-label={`Thumbnail of ${first.name}`} preserveAspectRatio="xMidYMid meet">
-          <path d={first.outline} className="preview__outline" />
-          {first.spaces.filter((space) => space.type !== "void").map((space) => space.shape.kind === "rect"
-            ? <rect key={space.id} x={space.shape.x} y={space.shape.y} width={space.shape.w} height={space.shape.h} className="preview__space" />
-            : space.shape.kind === "polygon" ? <polygon key={space.id} points={space.shape.points} className="preview__space" /> : null)}
-        </svg>
-      )}
       <p className="detail__tags">
         <span className="cims-tag">{drawn.length} {drawn.length === 1 ? "level" : "levels"}</span>
         {rooms > 0 && <span className="cims-tag">{rooms} rooms</span>}
         <span className="cims-tag">Schematic plan</span>
       </p>
-      <div className="detail__report">
-        <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
-        {!session && <small className="cims-muted">Requires sign-in</small>}
-      </div>
-      <InsidePlaces buildingId={building.building_id} />
-      <div className="cims-actions">
-        <button type="button" className="cims-btn cims-btn--primary" onClick={() => openIndoor(building.building_id)}>Open building map</button>
+      <div className="cims-actions preview__actions">
+        <button type="button" className="cims-btn cims-btn--primary detail__wide" onClick={() => openIndoor(building.building_id)}>Open building map</button>
         {directions ? <a className="cims-btn" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
           : <button type="button" className="cims-btn" onClick={() => select(null)}>Close</button>}
+        <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
       </div>
+      {!session && <p className="cims-muted"><small>Reporting requires sign-in</small></p>}
+      <InsidePlaces buildingId={building.building_id} />
+      {first?.available && (
+        <button type="button" className="preview__thumb" onClick={() => openIndoor(building.building_id)} aria-label={`Open the ${first.name} plan`}>
+        <svg className="preview__plan" viewBox={first.viewBox.join(" ")} aria-hidden="true" preserveAspectRatio="xMidYMid meet">
+          <path d={first.outline} className="preview__outline" />
+          {first.spaces.filter((space) => space.type !== "void").map((space) => space.shape.kind === "rect"
+            ? <rect key={space.id} x={space.shape.x} y={space.shape.y} width={space.shape.w} height={space.shape.h} className="preview__space" />
+            : space.shape.kind === "polygon" ? <polygon key={space.id} points={space.shape.points} className="preview__space" /> : null)}
+        </svg>
+        </button>
+      )}
     </section>
   );
 }

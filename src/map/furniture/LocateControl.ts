@@ -2,10 +2,15 @@
 import type { IControl, Map as MapLibreMap, Marker } from "maplibre-gl";
 import { CAMPUS } from "../../config";
 import { GeolocationError } from "../../lib/geolocation";
+import { IN_APP_BROWSER, IOS } from "../../lib/inAppBrowser";
 import { loadMapLibre } from "../maplibre";
 import "./furniture.css";
 
 const ASKED = "cims.location.asked";
+/** Where to flip location back on once a browser has blocked it; no web page may do that itself. */
+const FIX_STEPS = IOS
+  ? ["Tap aA in the address bar, then Website Settings, and set Location to Allow.", "If it stays blocked: Settings > Privacy & Security > Location Services must be on, with Safari Websites on While Using."]
+  : ["Tap the lock (or tune) icon next to the address bar, then Permissions, and set Location to Allow.", "If it stays blocked: Android Settings > Location must be on, and Chrome allowed under App permissions."];
 let askedThisSession = false;
 
 /** Map control that watches location only while visible and never follows the camera after the first fix. */
@@ -16,21 +21,56 @@ export class LocateControl implements IControl {
   private status?: HTMLElement;
   private watch?: number;
   private marker?: Marker;
+  private pin?: Marker;
   private fix?: GeolocationCoordinates;
   private enabled = false;
   private ready = false;
   private firstFix = true;
   private pending = false;
   private manual = false;
+  private permission?: PermissionStatus;
 
   private message = (message: string) => {
     if (this.status) this.status.textContent = message;
+  };
+
+  /** Blocked: say exactly how to unblock it and offer a re-check. Tracking also resumes by itself once the permission flips to granted. */
+  private help = () => {
+    if (!this.status) return;
+    const title = document.createElement("strong");
+    title.textContent = "Location is blocked for this site";
+    const steps = document.createElement("ol");
+    for (const text of FIX_STEPS) { const li = document.createElement("li"); li.textContent = text; steps.append(li); }
+    const again = document.createElement("button");
+    again.type = "button";
+    again.className = "cims-btn cims-btn--small";
+    again.textContent = "I allowed it, check again";
+    again.addEventListener("click", () => { this.message("Finding your location…"); this.ask(); });
+    this.status.replaceChildren(title, steps, again);
+  };
+
+  /** Starts tracking as soon as the person allows location in the browser settings, with no extra tap. */
+  private watchPermission = async () => {
+    try {
+      const status = await navigator.permissions.query({ name: "geolocation" });
+      if (!this.map) return;
+      this.permission = status;
+      status.onchange = () => {
+        if (status.state !== "granted" || this.enabled || !this.map) return;
+        this.manual = true;
+        this.enabled = true;
+        this.refresh();
+        this.message("Finding your location…");
+        this.start();
+      };
+    } catch { /* Permissions API unavailable: the button still works. */ }
   };
 
   private clear = () => {
     if (this.watch !== undefined) navigator.geolocation.clearWatch(this.watch);
     this.watch = undefined;
     this.marker?.remove();
+    this.pin?.remove();
     this.fix = undefined;
   };
 
@@ -43,7 +83,10 @@ export class LocateControl implements IControl {
     this.clear();
     this.enabled = false;
     this.refresh();
-    if (this.manual) this.message(new GeolocationError(error.code === 1 ? "denied" : error.code === 3 ? "timeout" : "unavailable").message);
+    if (!this.manual) return;
+    if (error.code === 1) this.help();
+    else if (error.code === 2) this.message("Your phone can't find you. Switch Location (GPS) on in its quick settings, then tap again.");
+    else this.message(new GeolocationError(error.code === 3 ? "timeout" : "unavailable").message);
   };
 
   private position = ({ coords }: GeolocationPosition) => {
@@ -54,6 +97,8 @@ export class LocateControl implements IControl {
     this.fix = coords;
     this.resize();
     this.marker?.setLngLat([lng, lat]).addTo(map);
+    this.pin?.setLngLat([lng, lat]).addTo(map);
+    this.tilt();
     if (this.firstFix) {
       this.firstFix = false;
       const [[west, south], [east, north]] = CAMPUS.bounds;
@@ -75,30 +120,36 @@ export class LocateControl implements IControl {
     }
   };
 
-  private request = async (automatic: boolean) => {
+  /**
+   * Manual ask, called straight from a tap. It must reach the browser synchronously: Safari on iPhone only shows
+   * the permission prompt when the request comes from the tap itself, so no await may come before it.
+   */
+  private ask = () => {
+    if (!this.map || !this.ready) return;
+    if (!("geolocation" in navigator) || !window.isSecureContext) { this.message(new GeolocationError("unsupported").message); return; }
+    if (IN_APP_BROWSER) this.message(`This looks like an in-app browser, which often can't share location. If nothing happens, open this page in ${IOS ? "Safari" : "Chrome"}.`);
+    this.manual = true;
+    this.enabled = true;
+    this.refresh();
+    this.start();
+  };
+
+  /** Quiet ask when the map opens: only if the browser would show its prompt, and only once per device. */
+  private autoRequest = async () => {
     if (this.pending || !this.map) return;
     this.pending = true;
     try {
-      if (!("geolocation" in navigator) || !window.isSecureContext) {
-        if (!automatic) this.message(new GeolocationError("unsupported").message);
-        return;
-      }
+      if (!("geolocation" in navigator) || !window.isSecureContext) return;
       let permission: PermissionState | undefined;
       try { permission = (await navigator.permissions.query({ name: "geolocation" })).state; } catch { /* Manual location still works without Permissions API. */ }
-      if (!this.map) return;
-      if (permission === "denied") {
-        if (!automatic) this.message(new GeolocationError("denied").message);
-        return;
-      }
-      if (automatic && permission !== "granted") {
+      if (!this.map || permission === "denied") return;
+      if (permission !== "granted") {
         if (permission !== "prompt" || askedThisSession) return;
         try { if (localStorage.getItem(ASKED)) return; } catch { /* Fall back to the session flag. */ }
-      }
-      if (permission !== "granted") {
         askedThisSession = true;
         try { localStorage.setItem(ASKED, "1"); } catch { /* Private mode may block storage. */ }
       }
-      this.manual = !automatic;
+      this.manual = false;
       this.enabled = true;
       this.refresh();
       this.start();
@@ -113,7 +164,7 @@ export class LocateControl implements IControl {
       this.message("Location hidden.");
     } else {
       this.message("Finding your location…");
-      void this.request(false);
+      this.ask();
     }
   };
 
@@ -124,19 +175,26 @@ export class LocateControl implements IControl {
 
   private resize = () => {
     if (!this.map || !this.marker || !this.fix) return;
-    // Web Mercator uses 512 CSS pixels per world tile, independent of device pixel ratio.
-    const metersPerPixel = 40_075_016.686 * Math.cos(this.fix.latitude * Math.PI / 180)
-      / (512 * 2 ** this.map.getZoom());
-    const radius = Math.max(34, Math.min(60, this.fix.accuracy / metersPerPixel));
-    const element = this.marker.getElement();
-    element.querySelector("[data-accuracy]")?.setAttribute("r", String(radius));
-    const arrow = element.querySelector<SVGElement>("[data-heading]");
+    // Scales with the map like the buildings (about 10 m wide), but clamped so it is never tiny or huge.
+    const metersPerPixel = 40_075_016.686 * Math.cos(this.fix.latitude * Math.PI / 180) / (512 * 2 ** this.map.getZoom());
+    const scale = Math.max(0.35, Math.min(0.8, 10 / metersPerPixel / 34));
+    const ring = this.marker.getElement().querySelector<SVGElement>("svg");
+    if (ring) ring.style.transform = `scale(${scale})`;
+    const pin = this.pin?.getElement().querySelector<SVGElement>("svg");
+    if (pin) { pin.style.transformOrigin = "50% 100%"; pin.style.transform = `scale(${Math.max(0.6, scale * 1.2)})`; }
+    const arrow = this.marker.getElement().querySelector<SVGElement>("[data-heading]");
     if (arrow) {
       const heading = this.fix.heading;
       const hasHeading = heading !== null && Number.isFinite(heading);
       arrow.style.display = hasHeading ? "" : "none";
-      arrow.setAttribute("transform", `rotate(${hasHeading ? heading : 0}) translate(0 ${-radius})`);
+      arrow.setAttribute("transform", `rotate(${hasHeading ? heading : 0}) translate(0 -34)`);
     }
+  };
+
+  /** Shows the upright pin only while the map is tilted (3D view). */
+  private tilt = () => {
+    const pin = this.pin?.getElement();
+    if (pin) pin.style.opacity = (this.map?.getPitch() ?? 0) > 8 ? "1" : "0";
   };
 
   private loaded = async () => {
@@ -167,10 +225,21 @@ export class LocateControl implements IControl {
         font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="7">CIMS</text>
     </svg>`;
     this.marker = new Marker({ element, anchor: "center", pitchAlignment: "map", rotationAlignment: "map" });
+    const pin = document.createElement("div");
+    pin.className = "cims-location-pin";
+    pin.setAttribute("aria-hidden", "true");
+    pin.innerHTML = `<svg width="30" height="44" viewBox="0 0 30 44">
+      <ellipse cx="15" cy="40" rx="6" ry="2.5" fill="#001E36" opacity=".35"/>
+      <path d="M15 39 3 18a13 13 0 1 1 24 0Z" fill="#003057" stroke="#B3A369" stroke-width="1.5"/>
+      <circle cx="15" cy="14" r="5" fill="#B3A369"/>
+    </svg>`;
+    this.pin = new Marker({ element: pin, anchor: "bottom", pitchAlignment: "viewport", rotationAlignment: "viewport" });
+    map.on("pitch", this.tilt);
     map.on("zoom", this.resize);
     this.ready = true;
     if (this.button) this.button.disabled = false;
-    void this.request(true);
+    void this.watchPermission();
+    void this.autoRequest();
   };
 
   /** Builds the accessible locate button beside the existing map controls. */
@@ -198,10 +267,13 @@ export class LocateControl implements IControl {
   onRemove(): void {
     this.enabled = false;
     this.clear();
+    if (this.permission) this.permission.onchange = null;
     document.removeEventListener("visibilitychange", this.visibility);
     this.map?.off("load", this.loaded);
+    this.map?.off("pitch", this.tilt);
     this.map?.off("zoom", this.resize);
     this.marker = undefined;
+    this.pin = undefined;
     this.button?.removeEventListener("click", this.click);
     this.el?.remove();
     this.map = undefined;

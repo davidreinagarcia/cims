@@ -9,13 +9,14 @@
         "name": "Tech Tower",
         "category": "landmark",
         "status": "seed",
-        "description": "Georgia Tech's iconic administration building."
+        "description": "Georgia Tech's iconic administration building.",
+        "source_url": "https://www.openstreetmap.org/way/42706709"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -84.3947,
-          33.7727
+          -84.394683,
+          33.772466
         ]
       }
     },
@@ -30,13 +31,14 @@
         ],
         "category": "academic",
         "status": "seed",
-        "description": "Classrooms, study space and collaboration areas."
+        "description": "Classrooms, study space and collaboration areas.",
+        "source_url": "https://www.openstreetmap.org/relation/3178622"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -84.3964,
-          33.775
+          -84.396474,
+          33.774647
         ]
       }
     },
@@ -50,13 +52,14 @@
         ],
         "category": "food",
         "status": "seed",
-        "description": "Food, services and student organizations."
+        "description": "Food, services and student organizations.",
+        "source_url": "https://www.openstreetmap.org/relation/3178621"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -84.399,
-          33.7739
+          -84.398552,
+          33.773965
         ]
       }
     },
@@ -121,13 +124,14 @@
           "note": "Valid CRC membership and active BuzzCard required (up to 2 forgotten-ID lookups/semester before fee; non-member guests require member sponsor + $10 pass)."
         },
         "url": "https://crc.gatech.edu/",
-        "floor_or_room": "Floors 1-5"
+        "floor_or_room": "Floors 1-5",
+        "source_url": "https://www.openstreetmap.org/way/179224195"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -84.404,
-          33.7755
+          -84.404041,
+          33.775662
         ]
       }
     },
@@ -141,13 +145,14 @@
         ],
         "category": "landmark",
         "status": "seed",
-        "description": "Home of Yellow Jackets football."
+        "description": "Home of Yellow Jackets football.",
+        "source_url": "https://www.openstreetmap.org/way/618966004"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -84.3928,
-          33.7724
+          -84.392959,
+          33.772476
         ]
       }
     },
@@ -161,13 +166,14 @@
         ],
         "category": "academic",
         "status": "seed",
-        "description": "Main campus library."
+        "description": "Main campus library.",
+        "source_url": "https://www.openstreetmap.org/relation/3178630"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -84.3955,
-          33.7745
+          -84.39565,
+          33.774276
         ]
       }
     },
@@ -178,13 +184,14 @@
         "name": "Tech Green",
         "category": "landmark",
         "status": "seed",
-        "description": "Central lawn of campus."
+        "description": "Central lawn of campus.",
+        "source_url": "https://www.openstreetmap.org/way/178721865"
       },
       "geometry": {
         "type": "Point",
         "coordinates": [
-          -84.3989,
-          33.7727
+          -84.397329,
+          33.774662
         ]
       }
     }

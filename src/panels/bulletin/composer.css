@@ -1,0 +1,13 @@
+/** @file Styles for the Bulletin "New post" dialog. */
+.composer { width: min(520px, calc(100vw - 2 * var(--s4))); max-height: calc(100dvh - 2 * var(--s4)); overflow: auto; padding: 0; border: 1px solid var(--ink); background: var(--paper); color: var(--ink); }
+.composer::backdrop { background: rgb(0 0 0 / 0.45); }
+.composer__form { display: grid; gap: var(--s3); padding: var(--s5); }
+.composer__title { margin: 0; font: 600 var(--fs-xxl)/1.05 var(--font-display); }
+.composer__who { margin: 0; font-size: var(--fs-sm); color: var(--ink-muted); }
+.composer__field { display: grid; gap: var(--s1); }
+.composer__field textarea { width: 100%; resize: vertical; font: inherit; }
+.composer__row { display: flex; flex-wrap: wrap; gap: var(--s2); }
+.composer__row > .composer__field { flex: 1 1 120px; }
+.composer__poster { max-width: 100%; max-height: 220px; object-fit: contain; border: var(--hairline); background: var(--white); }
+.composer__error { margin: 0; color: var(--cat-issues); font-weight: 500; }
+.composer__actions { display: flex; justify-content: flex-end; gap: var(--s2); }

@@ -1,11 +1,13 @@
-/** @file Card for the selected building footprint: name, nicknames, an honest height note, the places inside it, directions, report-an-issue and a correction link. */
+/** @file Card for the selected building footprint: name, then Directions and Report an issue, the places inside as pictograms, and the facts (honest height, address, source, correction link) last. */
 import { useEffect, useState } from "react";
 import { CORRECTION_URL } from "../../config";
 import { loadBuildings, loadedBuildings, type BuildingIndex } from "../../lib/buildings";
 import { useAuth } from "../../state/auth";
 import InsidePlaces from "./InsidePlaces";
+import BuildingPhotoFigure from "./BuildingPhoto";
 import { useSelection } from "../../state/selection";
 import { hasIndoor } from "../../indoor/registry";
+import { buildingPhoto } from "../../lib/buildingPhotos";
 import "./building-card.css";
 
 const unknown = <span className="cims-muted">Unknown</span>;
@@ -52,7 +54,7 @@ export function BuildingDetails({ buildingId, embedded = false }: { buildingId: 
     b.heightSource === "osm:height" ? `${b.height} m (OpenStreetMap height)`
     : b.heightSource === "osm:levels" ? `About ${b.height} m (from ${b.levels ?? "?"} levels)`
     : null;
-  const missing = [!b.name && "Name", !b.aliases.length && "Nickname", !b.address && "Address", !height && "Height", "Photo", "Hours", "BuzzCard access"].filter(Boolean);
+  const missing = [!b.name && "Name", !b.aliases.length && "Nickname", !b.address && "Address", !height && "Height", !buildingPhoto(b.id) && "Photo", "Hours", "BuzzCard access"].filter(Boolean);
   const correction = new URL(CORRECTION_URL);
   correction.searchParams.set("title", `Correction: ${name} (${b.id})`);
   correction.searchParams.set("body", `Building ID: ${b.id}\n\nFields shown as Unknown:\n${missing.map((field) => `* ${field}`).join("\n")}\n\nSuggested correction:\n\nSource URL:\n`);
@@ -62,6 +64,7 @@ export function BuildingDetails({ buildingId, embedded = false }: { buildingId: 
   return (
     <section className="detail" aria-label="Building details">
       {!embedded && <>
+        <BuildingPhotoFigure buildingId={b.id} />
         <h2 className="cims-card__name">{name}</h2>
         <p className="cims-card__alias">{b.aliases.length ? b.aliases.join(", ") : unknown}</p>
         <p className="detail__tags">
@@ -69,26 +72,26 @@ export function BuildingDetails({ buildingId, embedded = false }: { buildingId: 
           <span className="cims-tag cims-tag--alert" title="Outline from OpenStreetMap, not yet checked by a person">Unverified</span>
         </p>
       </>}
-      <table className="cims-infotable" aria-label="Building information">
-        <tbody>
-          <tr><th scope="row">Address</th><td>{b.address || unknown}</td></tr>
-          <tr><th scope="row">Height</th><td>{height ?? <>{unknown} <span className="cims-muted">(drawn at an estimated {b.height} m)</span></>}</td></tr>
-          <tr><th scope="row">Hours</th><td>{unknown}</td></tr>
-          <tr><th scope="row">BuzzCard</th><td>{unknown}</td></tr>
-          <tr><th scope="row">Source</th><td>
-            {b.osmId ? <a href={`https://www.openstreetmap.org/${b.osmId}`} target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> : unknown}
-          </td></tr>
-        </tbody>
-      </table>
-      <p><a href={correction.toString()} target="_blank" rel="noopener noreferrer">Suggest a correction</a></p>
-      <div className="detail__report">
-        <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
-        {!session && <small className="cims-muted">Requires sign-in</small>}
-      </div>
-      <InsidePlaces buildingId={b.id} />
       <div className="cims-actions">
         <a className="cims-btn cims-btn--primary" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
-        <button type="button" className="cims-btn" onClick={() => select(null)}>Close</button>
+        <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
+      </div>
+      {!session && <p className="cims-muted"><small>Reporting requires sign-in</small></p>}
+      <InsidePlaces buildingId={b.id} />
+      <div className="detail__facts">
+        <h3 className="cims-caps">Building facts</h3>
+        <table className="cims-infotable" aria-label="Building information">
+          <tbody>
+            <tr><th scope="row">Address</th><td>{b.address || unknown}</td></tr>
+            <tr><th scope="row">Height</th><td>{height ?? <>{unknown} <span className="cims-muted">(drawn at an estimated {b.height} m)</span></>}</td></tr>
+            <tr><th scope="row">Hours</th><td>{unknown}</td></tr>
+            <tr><th scope="row">BuzzCard</th><td>{unknown}</td></tr>
+            <tr><th scope="row">Source</th><td>
+              {b.osmId ? <a href={`https://www.openstreetmap.org/${b.osmId}`} target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a> : unknown}
+            </td></tr>
+          </tbody>
+        </table>
+        <p><a href={correction.toString()} target="_blank" rel="noopener noreferrer">Suggest a correction</a></p>
       </div>
     </section>
   );

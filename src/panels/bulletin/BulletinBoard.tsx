@@ -1,8 +1,11 @@
 /** @file Full-screen Campus Bulletin: cork board with masonry note cards, type filters with counts, search and deep link. */
-import { useEffect, useMemo, useRef, useState, type CSSProperties, type KeyboardEvent } from "react";
+import { useEffect, useMemo, useRef, useState, useSyncExternalStore, type CSSProperties, type KeyboardEvent } from "react";
 import { loadInterests, setInterest } from "../../lib/bulletinInterests";
-import { POST_TYPES, bulletinPosts, countByType, filterPosts, type BulletinPost, type PostType } from "../../lib/bulletin";
+import { canDeletePost, deleteUserPost, getUserPosts, refreshUserPosts, subscribeUserPosts, audienceFor, type UserPost } from "../../lib/bulletinPosts";
+import { POST_TYPES, bulletinPosts, countByType, filterPosts, postsFor, type BulletinPost, type PostType } from "../../lib/bulletin";
+import { recordPortfolioEntry } from "../../portfolio/store";
 import { Icon } from "../../shell/icons";
+import PostComposer from "./PostComposer";
 import { useAuth } from "../../state/auth";
 import { useSelection } from "../../state/selection";
 import "./board.css";
@@ -40,31 +43,37 @@ function Pin({ color }: { color: string }) {
   );
 }
 
-function NoteCard({ post, index, interested, count, onInterest, onShow }: {
-  post: BulletinPost; index: number; interested: boolean; count: number; onInterest: () => void; onShow: (placeId: string) => void;
+function NoteCard({ post, index, interested, count, onInterest, onShow, onDelete }: {
+  post: BulletinPost; index: number; interested: boolean; count: number; onInterest: () => void; onShow: (post: BulletinPost) => void; onDelete?: () => void;
 }) {
   const style = { "--fill": FILLS[index % FILLS.length], "--tilt": `${TILTS[index % TILTS.length]}deg` } as CSSProperties;
   return (
     <li className="board-card" style={style}>
       <article aria-labelledby={`post-${post.id}`}>
         <Pin color={PINS[index % PINS.length]} />
+        {post.poster && (
+          <a className="board-card__poster" href={post.poster} target="_blank" rel="noreferrer" aria-label={`Open the poster for ${post.title}`}>
+            <img src={post.poster} alt={`Poster for ${post.title}`} loading="lazy" />
+          </a>
+        )}
         {(post.soon || post.isDemo) && (
           <div className="board-card__tags">
             {post.soon && <span className="board-card__stamp">Soon</span>}
             {post.isDemo && <span className="cims-tag cims-tag--alert" title="Fictional demo data, not a real post">DEMO</span>}
           </div>
         )}
-        <p className="board-card__kicker cims-caps">{typeLabel(post.type)}{post.org && <> · {post.org}</>}</p>
+        <p className="board-card__kicker cims-caps">{post.audience === "person" ? "Person" : typeLabel(post.type)}{post.org && <> · {post.org}</>}</p>
         <h3 id={`post-${post.id}`} className="board-card__title">{post.title}</h3>
         <p className="board-card__when">{post.when}</p>
         {post.placeName && <p className="board-card__place">{post.placeName}</p>}
         {post.description && <p className="board-card__desc">{post.description}</p>}
         <div className="board-card__actions">
           {post.placeId && (
-            <button type="button" className="board-card__map" onClick={() => onShow(post.placeId!)}>
-              <Icon name="explore" size={18} /> Show on map
+            <button type="button" className="board-card__map" onClick={() => onShow(post)}>
+              <Icon name="explore" size={18} /> {post.placeKind === "room" ? "Guide me to the room" : "Show on map"}
             </button>
           )}
+          {onDelete && <button type="button" className="board-card__delete" aria-label={`Delete ${post.title}`} onClick={onDelete}>Delete</button>}
           <button type="button" className="board-card__interest" aria-pressed={interested}
             aria-label={`Interested in ${post.title}`} onClick={onInterest}>Interested{count > 0 ? ` · ${count}` : ""}</button>
         </div>
@@ -78,7 +87,7 @@ export default function BulletinBoard({ type, onType, onClose }: {
   type: PostType | "all"; onType: (type: PostType | "all") => void; onClose: () => void;
 }) {
   const { select } = useSelection();
-  const { requireAuth, dialogOpen } = useAuth();
+  const { requireAuth, dialogOpen, session } = useAuth();
   const root = useRef<HTMLDialogElement>(null);
   const [query, setQuery] = useState("");
   const [notice, setNotice] = useState("");
@@ -87,6 +96,10 @@ export default function BulletinBoard({ type, onType, onClose }: {
   const [interestCounts, setCounts] = useState<Record<string, number>>({});
   useEffect(() => { let alive = true; void loadInterests().then((s) => { if (alive) { setInterests(s.mine); setCounts(s.counts); } }); return () => { alive = false; }; }, []);
   const [onlyInterests, setOnlyInterests] = useState(false);
+  const [audience, setAudience] = useState<"org" | "person">("org");
+  const [composing, setComposing] = useState(false);
+  const written = useSyncExternalStore(subscribeUserPosts, getUserPosts, getUserPosts);
+  useEffect(() => { void refreshUserPosts(); }, []);
 
   useEffect(() => {
     const timer = window.setInterval(() => setNow(new Date()), 30_000);
@@ -99,12 +112,19 @@ export default function BulletinBoard({ type, onType, onClose }: {
     return () => { element?.close(); };
   }, []);
 
-  const posts = useMemo(() => bulletinPosts(now), [now]);
-  const matching = useMemo(() => filterPosts(posts, "all", query), [posts, query]);
+  const posts = useMemo(() => bulletinPosts(now, written), [now, written]);
+  const searched = useMemo(() => filterPosts(posts, "all", query), [posts, query]);
+  const audienceCounts = { org: postsFor(searched, "org").length, person: postsFor(searched, "person").length };
+  const matching = useMemo(() => postsFor(searched, audience), [searched, audience]);
   const saved = matching.filter((post) => interests.has(post.id));
   const counts = countByType(onlyInterests ? saved : matching);
   const shown = filterPosts(onlyInterests ? saved : matching, type);
   const chips: { id: PostType | "all"; label: string }[] = [{ id: "all", label: "All" }, ...POST_TYPES];
+
+  const removePost = (post: BulletinPost) => {
+    if (!window.confirm(`Delete "${post.title}"? This cannot be undone.`)) return;
+    deleteUserPost(post.id).then(() => setNotice("Post deleted."), (e) => setNotice(e instanceof Error ? e.message : "Could not delete that post."));
+  };
 
   const toggleInterest = (id: string) => {
     const on = !interests.has(id);
@@ -113,6 +133,14 @@ export default function BulletinBoard({ type, onType, onClose }: {
     setInterests(next);
     setCounts((c) => ({ ...c, [id]: Math.max(0, (c[id] ?? 0) + (on ? 1 : -1)) }));
     setInterest(id, on).catch(() => setNotice("Could not save that right now. Try again in a moment."));
+    // BuzzPrint (T-71): marking a post Interested records it in the signed-in account's portfolio.
+    // Un-marking it does NOT remove that record — it's a history of what you engaged with, not a
+    // mirror of this list. A signed-out click still toggles the interest above; it just has no
+    // account to save a portfolio entry under, so none is recorded.
+    if (on && session) {
+      const post = posts.find((item) => item.id === id);
+      if (post) void recordPortfolioEntry(session, post);
+    }
   };
 
   const onKeyDown = (event: KeyboardEvent<HTMLDialogElement>) => {
@@ -147,8 +175,11 @@ export default function BulletinBoard({ type, onType, onClose }: {
           <Icon name="left" size={18} /> Back to map
         </button>
         <button type="button" className="board__btn board__btn--gold board__add"
-          onClick={() => requireAuth(() => setNotice("Posting is coming soon. The board is read-only for now."))}>
-          <span>Add post</span><small>Coming soon</small>
+          onClick={() => requireAuth(() => {
+            if (session && !audienceFor(session.role)) setNotice("Only student and organization accounts can post.");
+            else setComposing(true);
+          })}>
+          <span>Add post</span>
         </button>
       </header>
       <div className="board__sub">
@@ -157,8 +188,16 @@ export default function BulletinBoard({ type, onType, onClose }: {
       </div>
       <div className="board__surface">
         <CorkTexture />
+        <div className="board__chips board__tabs" role="group" aria-label="Whose posts">
+          {(["org", "person"] as const).map((id) => (
+            <button key={id} type="button" className="board__chip board__tab" aria-pressed={audience === id}
+              onClick={() => { setAudience(id); onType("all"); }}>
+              {id === "org" ? "Orgs" : "People"} <span className="board__count">{audienceCounts[id]}</span>
+            </button>
+          ))}
+        </div>
         <div className="board__chips" role="group" aria-label="Filter posts by type">
-          {chips.map((chip) => (
+          {(audience === "org" ? chips : []).map((chip) => (
             <button key={chip.id} type="button" className="board__chip" aria-pressed={type === chip.id} onClick={() => onType(chip.id)}>
               {chip.label} <span className="board__count">{counts[chip.id]}</span>
             </button>
@@ -173,11 +212,16 @@ export default function BulletinBoard({ type, onType, onClose }: {
               {shown.map((post, index) => (
                 <NoteCard key={post.id} post={post} index={index} interested={interests.has(post.id)} count={interestCounts[post.id] ?? 0}
                   onInterest={() => toggleInterest(post.id)}
-                  onShow={(placeId) => { select({ kind: "place", id: placeId }); onClose(); }} />
+                  onDelete={post.ownerId !== undefined && canDeletePost(session, { accountId: post.ownerId }) ? () => removePost(post) : undefined}
+                  onShow={(post) => { select({ kind: post.placeKind ?? "place", id: post.placeId! }); onClose(); }} />
               ))}
             </ul>
           )}
       </div>
+      {composing && session && (
+        <PostComposer session={session} onClose={() => setComposing(false)}
+          onDone={(post: UserPost) => { setComposing(false); setAudience(post.audience); onType("all"); setNotice("Posted. It is on the board and pinned to its building on the map."); }} />
+      )}
     </dialog>
   );
 }

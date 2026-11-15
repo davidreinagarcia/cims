@@ -4,6 +4,7 @@ import { LAYER_CATALOG } from "./layerCatalog";
 import { places, showDrafts } from "./places";
 import type { PlaceCollection, PlaceFeature } from "./places";
 import { searchPlaces } from "./search";
+import type { UserPost } from "./bulletinPosts";
 import events from "../data/pois/events.json";
 import orgs from "../data/pois/orgs.json";
 
@@ -22,7 +23,15 @@ export interface BulletinPost {
   when: string;
   soon: boolean;
   placeId?: string;
+  /** What `placeId` selects on the map; curated posts point at place records, user posts at a building or room. */
+  placeKind?: "place" | "building" | "room";
   placeName?: string;
+  /** Orgs tab (curated orgs and org accounts) or People tab (student accounts). */
+  audience: "org" | "person";
+  /** Account that wrote a user post (curated posts have none); drives who may delete it. */
+  ownerId?: string;
+  /** Poster image (data URL) attached by the author, shown on the board and in BuzzPrint. */
+  poster?: string;
   isDemo: boolean;
   url?: string;
   sourceUrl?: string;
@@ -65,8 +74,8 @@ function postType(value: string | null | undefined): PostType | "all" {
   return POST_TYPES.find((item) => item.id === value)?.id ?? "all";
 }
 
-/** Return ongoing and upcoming dated events or org posts, with ongoing entries first. */
-export function bulletinPosts(now: Date): BulletinPost[] {
+/** Return ongoing and upcoming dated events or org posts (curated plus user-written), with ongoing entries first. */
+export function bulletinPosts(now: Date, written: readonly UserPost[] = []): BulletinPost[] {
   if (!Number.isFinite(now.getTime())) return [];
   // places removes expired events at module load; retain original records so now is authoritative.
   const originals = [events, orgs] as unknown as PlaceCollection[];
@@ -74,7 +83,7 @@ export function bulletinPosts(now: Date): BulletinPost[] {
     .map((feature) => [feature.properties.id, feature])).values()]
     .filter((feature) => feature.properties.status !== "draft" || showDrafts);
   const byId = new Map(features.map((feature) => [feature.properties.id, feature.properties]));
-  return features.flatMap(({ properties: p }): BulletinPost[] => {
+  const curated = features.flatMap(({ properties: p }): BulletinPost[] => {
     if (p.kind !== "event" && p.kind !== "org") return [];
     const window = nextWindow(p.event, now);
     if (!window) return [];
@@ -92,16 +101,32 @@ export function bulletinPosts(now: Date): BulletinPost[] {
       when: whenLabel(window, now),
       soon: window.start.getTime() <= now.getTime() + 86_400_000,
       placeId: venue?.id ?? p.id,
+      placeKind: "place",
+      audience: "org",
       placeName: venue?.name,
       isDemo: p.status === "demo",
       url: p.url,
       sourceUrl: p.source_url,
     }];
-  }).sort((a, b) => {
+  });
+  const mine = written.flatMap((post): BulletinPost[] => post.endsAt > now ? [{
+    id: post.id, title: post.title, org: post.authorName, type: "community", audience: post.audience,
+    description: post.description, start: post.startsAt, end: post.endsAt,
+    when: whenLabel({ start: post.startsAt, end: post.endsAt }, now),
+    soon: post.startsAt.getTime() <= now.getTime() + 86_400_000,
+    placeId: post.location.id, placeKind: post.location.kind, placeName: post.location.name,
+    isDemo: false, poster: post.poster, ownerId: post.accountId,
+  }] : []);
+  return [...curated, ...mine].sort((a, b) => {
     const ongoingA = a.start! <= now && a.end! > now;
     const ongoingB = b.start! <= now && b.end! > now;
     return Number(ongoingB) - Number(ongoingA) || a.start!.getTime() - b.start!.getTime();
   });
+}
+
+/** Keep only the posts of one tab (Orgs or People). */
+export function postsFor(posts: readonly BulletinPost[], audience: "org" | "person"): BulletinPost[] {
+  return posts.filter((post) => post.audience === audience);
 }
 
 /** Filter posts by type and the shared case/accent-insensitive search, retaining post order. */

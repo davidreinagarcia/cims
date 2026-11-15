@@ -5,8 +5,11 @@ import { locationDetails } from "../../lib/buildingPlaces";
 import type { MapLayer } from "../types";
 import { isVisible } from "../layerFilters";
 import { addPins, pinImageId } from "../pins";
+import { SUBTYPE_GLYPHS } from "../../components/Glyph";
 import { LAYER_CATALOG } from "../../lib/layerCatalog";
-import { places, type PlaceCollection } from "../../lib/places";
+import { places, type PlaceCollection, type PlaceFeature } from "../../lib/places";
+import { refreshUserPosts, subscribeUserPosts, userPostFeatures } from "../../lib/bulletinPosts";
+import { loadBuildings } from "../../lib/buildings";
 import "./pois.css";
 
 const ATTACHED = "places-attached";
@@ -22,14 +25,18 @@ const COUNT = "places-cluster-count";
 const CLUSTER_MAX_ZOOM = 22;
 const UNCLUSTERED: ExpressionSpecification = ["!", ["has", "point_count"]];
 
-/** icon-image expression: the category's pin image, or the navy base pin for categories nobody toggles. */
+/** icon-image expression: the sub-type's pin (coffee, dining hall) or the category's pin image, or the navy base pin for categories nobody toggles. */
 function iconFor(selected: boolean): ExpressionSpecification {
+  const own = LAYER_CATALOG.flatMap((c) => c.subtypes.filter((sub) => SUBTYPE_GLYPHS[sub.id]).map((sub) => [c.id, sub.id]));
+  const bySubtype = own.flatMap(([category, sub]) => [
+    ["all", ["==", ["get", "category"], category], ["==", ["get", "subtype"], sub]], pinImageId(`${category}-${sub}`, selected)]);
   return [
+    "case", ...bySubtype, [
     "match",
     ["get", "category"],
     ...LAYER_CATALOG.flatMap((c) => [c.id, pinImageId(c.id, selected)]),
     pinImageId("base", selected),
-  ] as unknown as ExpressionSpecification;
+  ]] as unknown as ExpressionSpecification;
 }
 
 const labelLayout: SymbolLayerSpecification["layout"] = {
@@ -79,8 +86,17 @@ const pois: MapLayer = {
         } };
       }) };
     };
-    map.addSource(ATTACHED, { type: "geojson", data: attachedData(places.features) });
+    // Bulletin posts written by accounts sit in their building like any org event (badge on the footprint).
+    let lastFilters: Parameters<typeof isVisible>[0] | undefined;
+    const withPosts = (features: typeof places.features) => [...features, ...userPostFeatures().filter((f) =>
+      !lastFilters || isVisible(lastFilters, f.properties.category, f.properties.subtype)).map((f) =>
+      ({ ...f, properties: { ...f.properties, coord_precision: "building" } }) as unknown as PlaceFeature)];
+    map.addSource(ATTACHED, { type: "geojson", data: attachedData(withPosts(places.features)) });
     const attachedSource = map.getSource(ATTACHED) as GeoJSONSource;
+    let visibleNow = places.features;
+    const refreshPosts = () => { if (!removed) attachedSource.setData(attachedData(withPosts(visibleNow))); };
+    const stopPosts = subscribeUserPosts(refreshPosts);
+    void loadBuildings().then(() => refreshUserPosts()).catch(() => undefined);
     // An association outline remains reliable even when a centroid falls in a courtyard.
     map.addLayer({ id: ATTACHED_HIGHLIGHT, type: "line", source: "buildings",
       filter: ["==", ["get", "id"], ""], paint: { "line-color": "#B3A369", "line-width": 5 } });
@@ -226,8 +242,10 @@ const pois: MapLayer = {
       setFilters(filters) {
         ++request;
         popup?.remove();
+        lastFilters = filters;
         const visible = places.features.filter(f => isVisible(filters, f.properties.category, f.properties.subtype));
-        attachedSource.setData(attachedData(visible));
+        visibleNow = visible;
+        attachedSource.setData(attachedData(withPosts(visible)));
         source.setData({
           type: "FeatureCollection",
           features: visible.filter(f => locationDetails(f).coord_precision !== "building"),
@@ -235,6 +253,7 @@ const pois: MapLayer = {
       },
       remove() {
         removed = true;
+        stopPosts();
         ++request;
         popup?.remove();
         map.off("click", CLUSTER, onClusterClick);

@@ -1,1088 +1,1080 @@
 {
-  "description": "Kendeda Building indoor model: Level 2, Level 1 and the basement as simplified schematics redrawn from public drawings, with a walkable graph for routing.",
-  "building_id": "kendeda-building-for-innovative-sustainable-design",
+ "description": "Kendeda Building indoor model: Level 2, Level 1 and the basement as simplified schematics redrawn from public drawings, with a walkable graph for routing.",
+ "building_id": "kendeda-building-for-innovative-sustainable-design",
  "slug": "kendeda",
-  "title": "The Kendeda Building for Innovative Sustainable Design",
-  "status": "schematic",
-  "credit": "Layouts redrawn and simplified from public schematic design drawings of the Kendeda Building (The Miller Hull Partnership and Lord Aeck Sargent, published by the Kendeda Fund in 2016 and by ArchDaily in 2021). Level 1 follows the labelled Level 1 floor plan; Level 2 and the basement follow the labelled use diagrams. Schematic only: not an official plan, not to scale, room numbers unknown, entrances and walking paths approximate.",
-  "source_url": "https://livingbuilding.kendedafund.org/2016/12/16/georgia-tech-living-building-schematic-design-floor-plan/index.html",
-  "levels": [
+ "title": "The Kendeda Building for Innovative Sustainable Design",
+ "status": "schematic",
+ "credit": "Layouts redrawn and simplified from public schematic design drawings of the Kendeda Building (The Miller Hull Partnership and Lord Aeck Sargent, published by the Kendeda Fund in 2016 and by ArchDaily in 2021). Level 1 follows the labelled Level 1 floor plan; Level 2 and the basement follow the labelled use diagrams. Schematic only: not an official plan, not to scale, room numbers unknown, entrances and walking paths approximate.",
+ "source_url": "https://livingbuilding.kendedafund.org/2016/12/16/georgia-tech-living-building-schematic-design-floor-plan/index.html",
+ "levels": [
+  {
+   "id": "2",
+   "label": "2",
+   "name": "Level 2",
+   "available": true,
+   "viewBox": [
+    140,
+    47,
+    635,
+    347
+   ],
+   "outline": "M241 75 L527 75 L527 169 L747 169 L747 356 L578 356 L578 365 L186 365 L186 246 L241 246 Z",
+   "spaces": [
     {
-      "id": "2",
-      "label": "2",
-      "name": "Level 2",
-      "available": true,
-      "viewBox": [
-        140,
-        47,
-        635,
-        347
-      ],
-      "outline": "M241 75 L527 75 L527 182 L578 182 L578 365 L186 365 L186 246 L241 246 Z",
-      "spaces": [
-        {
-          "id": "classroom-1",
-          "name": "Classroom",
-          "type": "classroom",
-          "shape": {
-            "kind": "rect",
-            "x": 241,
-            "y": 75,
-            "w": 143,
-            "h": 99
-          },
-          "source": "label in the drawing",
-          "door": "n2-cls1"
-        },
-        {
-          "id": "classroom-2",
-          "name": "Classroom",
-          "type": "classroom",
-          "shape": {
-            "kind": "rect",
-            "x": 384,
-            "y": 75,
-            "w": 143,
-            "h": 99
-          },
-          "source": "label in the drawing",
-          "door": "n2-cls2"
-        },
-        {
-          "id": "atrium-void",
-          "name": "Atrium, open to Level 1",
-          "type": "void",
-          "shape": {
-            "kind": "rect",
-            "x": 301,
-            "y": 185,
-            "w": 154,
-            "h": 61
-          },
-          "source": "label in the drawing",
-          "note": "Opening above the lobby; not walkable."
-        },
-        {
-          "id": "teaching-lab-a",
-          "name": "Teaching lab",
-          "type": "lab",
-          "shape": {
-            "kind": "rect",
-            "x": 186,
-            "y": 273,
-            "w": 82,
-            "h": 83
-          },
-          "source": "label in the drawing",
-          "door": "n2-laba"
-        },
-        {
-          "id": "teaching-lab-b",
-          "name": "Teaching lab",
-          "type": "lab",
-          "shape": {
-            "kind": "rect",
-            "x": 268,
-            "y": 273,
-            "w": 82,
-            "h": 83
-          },
-          "source": "label in the drawing",
-          "door": "n2-labb"
-        },
-        {
-          "id": "teaching-lab-c",
-          "name": "Teaching lab",
-          "type": "lab",
-          "shape": {
-            "kind": "rect",
-            "x": 350,
-            "y": 273,
-            "w": 83,
-            "h": 83
-          },
-          "source": "label in the drawing",
-          "door": "n2-labc"
-        },
-        {
-          "id": "building-core-2",
-          "name": "Building core",
-          "type": "core",
-          "shape": {
-            "kind": "rect",
-            "x": 467,
-            "y": 287,
-            "w": 98,
-            "h": 78
-          },
-          "source": "label in the drawing",
-          "door": "core-2"
-        },
-        {
-          "id": "rooftop-lab",
-          "name": "Rooftop lab",
-          "type": "lab",
-          "shape": {
-            "kind": "rect",
-            "x": 521,
-            "y": 190,
-            "w": 55,
-            "h": 44
-          },
-          "source": "label in the drawing",
-          "door": "n2-rooftop"
-        },
-        {
-          "id": "apiaries",
-          "name": "Apiaries",
-          "type": "outdoor",
-          "shape": {
-            "kind": "rect",
-            "x": 598,
-            "y": 169,
-            "w": 149,
-            "h": 99
-          },
-          "source": "label in the drawing",
-          "door": "n2-apiaries"
-        },
-        {
-          "id": "roof-garden",
-          "name": "Roof garden",
-          "type": "outdoor",
-          "shape": {
-            "kind": "rect",
-            "x": 571,
-            "y": 273,
-            "w": 176,
-            "h": 83
-          },
-          "source": "label in the drawing",
-          "door": "n2-garden"
-        }
-      ]
+     "id": "classroom-1",
+     "name": "Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 241,
+      "y": 75,
+      "w": 143,
+      "h": 99
+     },
+     "source": "label in the drawing",
+     "door": "n2-cls1"
     },
     {
-      "id": "1",
-      "label": "1",
-      "name": "Level 1",
-      "available": true,
-      "viewBox": [
-        140,
-        47,
-        635,
-        347
-      ],
-      "outline": "M168 240 L248 240 L248 110 L515 110 L515 182 L560 182 L735 182 L735 290 L685 290 L685 322 L565 322 L565 365 L168 365 Z",
-      "spaces": [
-        {
-          "id": "maker-space",
-          "name": "Maker space",
-          "type": "lab",
-          "shape": {
-            "kind": "rect",
-            "x": 248,
-            "y": 110,
-            "w": 97,
-            "h": 75
-          },
-          "source": "label in the drawing",
-          "door": "n1-maker"
-        },
-        {
-          "id": "student-commons",
-          "name": "Student commons areas",
-          "type": "study",
-          "shape": {
-            "kind": "rect",
-            "x": 345,
-            "y": 110,
-            "w": 170,
-            "h": 75
-          },
-          "source": "label in the drawing",
-          "door": "n1-commons"
-        },
-        {
-          "id": "breakout-study",
-          "name": "Breakout and group study",
-          "type": "study",
-          "shape": {
-            "kind": "rect",
-            "x": 297,
-            "y": 185,
-            "w": 218,
-            "h": 55
-          },
-          "source": "label in the drawing",
-          "door": "n1-breakout"
-        },
-        {
-          "id": "lobby-circulation",
-          "name": "Lobby and circulation",
-          "type": "circulation",
-          "shape": {
-            "kind": "rect",
-            "x": 168,
-            "y": 240,
-            "w": 392,
-            "h": 45
-          },
-          "source": "label in the drawing",
-          "door": "c4"
-        },
-        {
-          "id": "concierge-desk",
-          "name": "Concierge desk",
-          "type": "service",
-          "shape": {
-            "kind": "circle",
-            "cx": 300,
-            "cy": 266,
-            "r": 14
-          },
-          "source": "label in the drawing",
-          "door": "d1-concierge"
-        },
-        {
-          "id": "teaching-lab",
-          "name": "Teaching lab",
-          "type": "lab",
-          "shape": {
-            "kind": "rect",
-            "x": 168,
-            "y": 285,
-            "w": 80,
-            "h": 80
-          },
-          "source": "label in the drawing",
-          "door": "n1-lab"
-        },
-        {
-          "id": "teaching-lab-support",
-          "name": "Teaching lab support",
-          "type": "lab",
-          "shape": {
-            "kind": "rect",
-            "x": 248,
-            "y": 285,
-            "w": 50,
-            "h": 80
-          },
-          "source": "label in the drawing",
-          "door": "n1-lab-support"
-        },
-        {
-          "id": "offices-support",
-          "name": "Offices and support",
-          "type": "office",
-          "shape": {
-            "kind": "rect",
-            "x": 298,
-            "y": 290,
-            "w": 167,
-            "h": 75
-          },
-          "source": "label in the drawing",
-          "door": "n1-offices"
-        },
-        {
-          "id": "building-core",
-          "name": "Building core",
-          "type": "core",
-          "shape": {
-            "kind": "rect",
-            "x": 467,
-            "y": 287,
-            "w": 98,
-            "h": 78
-          },
-          "source": "label in the drawing",
-          "door": "core-1"
-        },
-        {
-          "id": "auditorium",
-          "name": "Auditorium",
-          "type": "auditorium",
-          "shape": {
-            "kind": "polygon",
-            "points": "560,182 735,182 735,290 685,290 685,322 565,322 565,290 560,290"
-          },
-          "source": "label in the drawing",
-          "door": "n1-auditorium"
-        }
-      ]
+     "id": "classroom-2",
+     "name": "Classroom",
+     "type": "classroom",
+     "shape": {
+      "kind": "rect",
+      "x": 384,
+      "y": 75,
+      "w": 143,
+      "h": 99
+     },
+     "source": "label in the drawing",
+     "door": "n2-cls2"
     },
     {
-      "id": "B",
-      "label": "B",
-      "name": "Basement",
-      "available": true,
-      "viewBox": [
-        140,
-        47,
-        635,
-        347
-      ],
-      "outline": "M431 262 L503 262 L503 233 L616 233 L616 366 L431 366 Z",
-      "spaces": [
-        {
-          "id": "cistern",
-          "name": "Cistern",
-          "type": "utility",
-          "shape": {
-            "kind": "rect",
-            "x": 503,
-            "y": 233,
-            "w": 53,
-            "h": 40
-          },
-          "source": "label in the drawing",
-          "door": "nb-cistern"
-        },
-        {
-          "id": "mechanical-room",
-          "name": "Mechanical room",
-          "type": "utility",
-          "shape": {
-            "kind": "rect",
-            "x": 561,
-            "y": 233,
-            "w": 55,
-            "h": 88
-          },
-          "source": "label in the drawing",
-          "door": "nb-mech"
-        },
-        {
-          "id": "battery-storage",
-          "name": "Battery storage",
-          "type": "utility",
-          "shape": {
-            "kind": "rect",
-            "x": 436,
-            "y": 326,
-            "w": 40,
-            "h": 35
-          },
-          "source": "label in the drawing",
-          "door": "nb-battery"
-        },
-        {
-          "id": "composters",
-          "name": "Composters",
-          "type": "service",
-          "shape": {
-            "kind": "rect",
-            "x": 486,
-            "y": 326,
-            "w": 60,
-            "h": 40
-          },
-          "source": "label in the drawing",
-          "door": "nb-compost"
-        },
-        {
-          "id": "bike-storage",
-          "name": "Bike storage",
-          "type": "service",
-          "shape": {
-            "kind": "rect",
-            "x": 571,
-            "y": 326,
-            "w": 40,
-            "h": 25
-          },
-          "source": "label in the drawing",
-          "door": "nb-bike"
-        },
-        {
-          "id": "building-core-b",
-          "name": "Elevator",
-          "type": "core",
-          "shape": {
-            "kind": "rect",
-            "x": 501,
-            "y": 291,
-            "w": 30,
-            "h": 30
-          },
-          "source": "label in the drawing",
-          "door": "core-b"
-        }
-      ]
+     "id": "atrium-void",
+     "name": "Atrium, open to Level 1",
+     "type": "void",
+     "shape": {
+      "kind": "rect",
+      "x": 301,
+      "y": 185,
+      "w": 154,
+      "h": 61
+     },
+     "source": "label in the drawing",
+     "note": "Opening above the lobby; not walkable."
+    },
+    {
+     "id": "teaching-lab-a",
+     "name": "Teaching lab",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 186,
+      "y": 273,
+      "w": 82,
+      "h": 83
+     },
+     "source": "label in the drawing",
+     "door": "n2-laba"
+    },
+    {
+     "id": "teaching-lab-b",
+     "name": "Teaching lab",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 268,
+      "y": 273,
+      "w": 82,
+      "h": 83
+     },
+     "source": "label in the drawing",
+     "door": "n2-labb"
+    },
+    {
+     "id": "teaching-lab-c",
+     "name": "Teaching lab",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 350,
+      "y": 273,
+      "w": 83,
+      "h": 83
+     },
+     "source": "label in the drawing",
+     "door": "n2-labc"
+    },
+    {
+     "id": "building-core-2",
+     "name": "Building core",
+     "type": "core",
+     "shape": {
+      "kind": "rect",
+      "x": 467,
+      "y": 287,
+      "w": 104,
+      "h": 78
+     },
+     "source": "label in the drawing",
+     "door": "core-2"
+    },
+    {
+     "id": "rooftop-lab",
+     "name": "Rooftop lab",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 521,
+      "y": 190,
+      "w": 55,
+      "h": 44
+     },
+     "source": "label in the drawing",
+     "door": "n2-rooftop"
+    },
+    {
+     "id": "apiaries",
+     "name": "Apiaries",
+     "type": "outdoor",
+     "shape": {
+      "kind": "rect",
+      "x": 598,
+      "y": 169,
+      "w": 149,
+      "h": 104
+     },
+     "source": "label in the drawing",
+     "door": "n2-apiaries"
+    },
+    {
+     "id": "roof-garden",
+     "name": "Roof garden",
+     "type": "outdoor",
+     "shape": {
+      "kind": "rect",
+      "x": 571,
+      "y": 273,
+      "w": 176,
+      "h": 83
+     },
+     "source": "label in the drawing",
+     "door": "n2-garden"
     }
-  ],
-  "source_urls": [
-    "https://livingbuilding.kendedafund.org/2016/12/16/georgia-tech-living-building-schematic-design-floor-plan/index.html",
-    "https://www.archdaily.com/966808/the-kendeda-building-for-innovative-sustainable-design-miller-hull-partnership"
-  ],
-  "graph": {
-    "nodes": [
-      {
-        "id": "e-west",
-        "level": "1",
-        "x": 172,
-        "y": 262,
-        "label": "West entrance"
-      },
-      {
-        "id": "ws-1",
-        "level": "1",
-        "x": 192,
-        "y": 262,
-        "label": "West stairs"
-      },
-      {
-        "id": "c1",
-        "level": "1",
-        "x": 215,
-        "y": 262
-      },
-      {
-        "id": "c2",
-        "level": "1",
-        "x": 272,
-        "y": 262
-      },
-      {
-        "id": "d1-concierge",
-        "level": "1",
-        "x": 300,
-        "y": 262,
-        "label": "Concierge desk"
-      },
-      {
-        "id": "c3",
-        "level": "1",
-        "x": 330,
-        "y": 262
-      },
-      {
-        "id": "c4",
-        "level": "1",
-        "x": 390,
-        "y": 262,
-        "label": "Lobby"
-      },
-      {
-        "id": "c5",
-        "level": "1",
-        "x": 430,
-        "y": 262
-      },
-      {
-        "id": "c6",
-        "level": "1",
-        "x": 470,
-        "y": 262
-      },
-      {
-        "id": "c7",
-        "level": "1",
-        "x": 516,
-        "y": 262
-      },
-      {
-        "id": "e-east",
-        "level": "1",
-        "x": 545,
-        "y": 262,
-        "label": "East entrance"
-      },
-      {
-        "id": "n1-lab",
-        "level": "1",
-        "x": 208,
-        "y": 300
-      },
-      {
-        "id": "n1-lab-support",
-        "level": "1",
-        "x": 273,
-        "y": 300
-      },
-      {
-        "id": "n1-offices",
-        "level": "1",
-        "x": 380,
-        "y": 320
-      },
-      {
-        "id": "core-1",
-        "level": "1",
-        "x": 516,
-        "y": 326,
-        "label": "Elevator"
-      },
-      {
-        "id": "as-1",
-        "level": "1",
-        "x": 392,
-        "y": 250,
-        "label": "Atrium stairs"
-      },
-      {
-        "id": "d1-breakout",
-        "level": "1",
-        "x": 430,
-        "y": 240
-      },
-      {
-        "id": "n1-breakout",
-        "level": "1",
-        "x": 430,
-        "y": 212
-      },
-      {
-        "id": "n1-commons",
-        "level": "1",
-        "x": 430,
-        "y": 150
-      },
-      {
-        "id": "v1",
-        "level": "1",
-        "x": 272,
-        "y": 215
-      },
-      {
-        "id": "n1-maker",
-        "level": "1",
-        "x": 296,
-        "y": 150
-      },
-      {
-        "id": "n1-auditorium",
-        "level": "1",
-        "x": 650,
-        "y": 235
-      },
-      {
-        "id": "d1-aud",
-        "level": "1",
-        "x": 560,
-        "y": 255
-      },
-      {
-        "id": "ws-2",
-        "level": "2",
-        "x": 191,
-        "y": 257,
-        "label": "West stairs"
-      },
-      {
-        "id": "l2a",
-        "level": "2",
-        "x": 227,
-        "y": 259
-      },
-      {
-        "id": "l2b",
-        "level": "2",
-        "x": 309,
-        "y": 259
-      },
-      {
-        "id": "l2c",
-        "level": "2",
-        "x": 391,
-        "y": 259
-      },
-      {
-        "id": "l2d",
-        "level": "2",
-        "x": 470,
-        "y": 259
-      },
-      {
-        "id": "core-2",
-        "level": "2",
-        "x": 516,
-        "y": 326,
-        "label": "Elevator"
-      },
-      {
-        "id": "as-2",
-        "level": "2",
-        "x": 392,
-        "y": 252,
-        "label": "Atrium stairs"
-      },
-      {
-        "id": "d2-core",
-        "level": "2",
-        "x": 516,
-        "y": 287
-      },
-      {
-        "id": "n2-laba",
-        "level": "2",
-        "x": 227,
-        "y": 310
-      },
-      {
-        "id": "n2-labb",
-        "level": "2",
-        "x": 309,
-        "y": 310
-      },
-      {
-        "id": "n2-labc",
-        "level": "2",
-        "x": 391,
-        "y": 310
-      },
-      {
-        "id": "s1",
-        "level": "2",
-        "x": 285,
-        "y": 215
-      },
-      {
-        "id": "n1",
-        "level": "2",
-        "x": 300,
-        "y": 180
-      },
-      {
-        "id": "n2",
-        "level": "2",
-        "x": 384,
-        "y": 180
-      },
-      {
-        "id": "n3",
-        "level": "2",
-        "x": 455,
-        "y": 180
-      },
-      {
-        "id": "s2",
-        "level": "2",
-        "x": 470,
-        "y": 215
-      },
-      {
-        "id": "n2-cls1",
-        "level": "2",
-        "x": 312,
-        "y": 130
-      },
-      {
-        "id": "d2-cls1",
-        "level": "2",
-        "x": 312,
-        "y": 174
-      },
-      {
-        "id": "n2-cls2",
-        "level": "2",
-        "x": 455,
-        "y": 130
-      },
-      {
-        "id": "d2-cls2",
-        "level": "2",
-        "x": 455,
-        "y": 174
-      },
-      {
-        "id": "n2-rooftop",
-        "level": "2",
-        "x": 548,
-        "y": 212
-      },
-      {
-        "id": "d2-roof",
-        "level": "2",
-        "x": 521,
-        "y": 225
-      },
-      {
-        "id": "d2-east",
-        "level": "2",
-        "x": 565,
-        "y": 326
-      },
-      {
-        "id": "g1",
-        "level": "2",
-        "x": 585,
-        "y": 322
-      },
-      {
-        "id": "n2-garden",
-        "level": "2",
-        "x": 650,
-        "y": 315
-      },
-      {
-        "id": "g2",
-        "level": "2",
-        "x": 585,
-        "y": 268
-      },
-      {
-        "id": "n2-apiaries",
-        "level": "2",
-        "x": 672,
-        "y": 220
-      },
-      {
-        "id": "core-b",
-        "level": "B",
-        "x": 516,
-        "y": 306,
-        "label": "Elevator"
-      },
-      {
-        "id": "bn1",
-        "level": "B",
-        "x": 516,
-        "y": 323
-      },
-      {
-        "id": "bn2",
-        "level": "B",
-        "x": 496,
-        "y": 323
-      },
-      {
-        "id": "bn3",
-        "level": "B",
-        "x": 456,
-        "y": 323
-      },
-      {
-        "id": "bn6",
-        "level": "B",
-        "x": 591,
-        "y": 323
-      },
-      {
-        "id": "nb-battery",
-        "level": "B",
-        "x": 456,
-        "y": 343
-      },
-      {
-        "id": "nb-compost",
-        "level": "B",
-        "x": 516,
-        "y": 346
-      },
-      {
-        "id": "nb-bike",
-        "level": "B",
-        "x": 591,
-        "y": 338
-      },
-      {
-        "id": "bn5",
-        "level": "B",
-        "x": 530,
-        "y": 290
-      },
-      {
-        "id": "nb-cistern",
-        "level": "B",
-        "x": 530,
-        "y": 253
-      },
-      {
-        "id": "nb-mech",
-        "level": "B",
-        "x": 590,
-        "y": 280
-      }
-    ],
-    "edges": [
-      [
-        "e-west",
-        "ws-1"
-      ],
-      [
-        "ws-1",
-        "c1"
-      ],
-      [
-        "c1",
-        "c2"
-      ],
-      [
-        "c2",
-        "d1-concierge"
-      ],
-      [
-        "d1-concierge",
-        "c3"
-      ],
-      [
-        "c3",
-        "c4"
-      ],
-      [
-        "c4",
-        "c5"
-      ],
-      [
-        "c5",
-        "c6"
-      ],
-      [
-        "c6",
-        "c7"
-      ],
-      [
-        "c7",
-        "e-east"
-      ],
-      [
-        "c1",
-        "n1-lab"
-      ],
-      [
-        "c2",
-        "n1-lab-support"
-      ],
-      [
-        "c4",
-        "n1-offices"
-      ],
-      [
-        "c7",
-        "core-1"
-      ],
-      [
-        "c4",
-        "as-1"
-      ],
-      [
-        "c5",
-        "d1-breakout"
-      ],
-      [
-        "d1-breakout",
-        "n1-breakout"
-      ],
-      [
-        "n1-breakout",
-        "n1-commons"
-      ],
-      [
-        "c2",
-        "v1"
-      ],
-      [
-        "v1",
-        "n1-maker"
-      ],
-      [
-        "c7",
-        "d1-aud"
-      ],
-      [
-        "d1-aud",
-        "n1-auditorium"
-      ],
-      [
-        "ws-2",
-        "l2a"
-      ],
-      [
-        "l2a",
-        "l2b"
-      ],
-      [
-        "l2b",
-        "l2c"
-      ],
-      [
-        "l2c",
-        "l2d"
-      ],
-      [
-        "l2c",
-        "as-2"
-      ],
-      [
-        "l2d",
-        "d2-core"
-      ],
-      [
-        "d2-core",
-        "core-2"
-      ],
-      [
-        "l2a",
-        "n2-laba"
-      ],
-      [
-        "l2b",
-        "n2-labb"
-      ],
-      [
-        "l2c",
-        "n2-labc"
-      ],
-      [
-        "l2b",
-        "s1"
-      ],
-      [
-        "s1",
-        "n1"
-      ],
-      [
-        "n1",
-        "n2"
-      ],
-      [
-        "n2",
-        "n3"
-      ],
-      [
-        "l2d",
-        "s2"
-      ],
-      [
-        "s2",
-        "n3"
-      ],
-      [
-        "n1",
-        "d2-cls1"
-      ],
-      [
-        "d2-cls1",
-        "n2-cls1"
-      ],
-      [
-        "n3",
-        "d2-cls2"
-      ],
-      [
-        "d2-cls2",
-        "n2-cls2"
-      ],
-      [
-        "l2d",
-        "d2-roof"
-      ],
-      [
-        "d2-roof",
-        "n2-rooftop"
-      ],
-      [
-        "core-2",
-        "d2-east"
-      ],
-      [
-        "d2-east",
-        "g1"
-      ],
-      [
-        "g1",
-        "n2-garden"
-      ],
-      [
-        "g1",
-        "g2"
-      ],
-      [
-        "g2",
-        "n2-apiaries"
-      ],
-      [
-        "core-b",
-        "bn1"
-      ],
-      [
-        "bn1",
-        "bn2"
-      ],
-      [
-        "bn2",
-        "bn3"
-      ],
-      [
-        "bn1",
-        "bn6"
-      ],
-      [
-        "bn3",
-        "nb-battery"
-      ],
-      [
-        "bn1",
-        "nb-compost"
-      ],
-      [
-        "bn6",
-        "nb-bike"
-      ],
-      [
-        "core-b",
-        "bn5"
-      ],
-      [
-        "bn5",
-        "nb-cistern"
-      ],
-      [
-        "bn5",
-        "nb-mech"
-      ]
-    ],
-    "connectors": [
-      {
-        "id": "elevator",
-        "name": "Elevator",
-        "kind": "elevator",
-        "stepFree": true,
-        "nodes": {
-          "B": "core-b",
-          "1": "core-1",
-          "2": "core-2"
-        }
-      },
-      {
-        "id": "west-stairs",
-        "name": "West stairs",
-        "kind": "stairs",
-        "stepFree": false,
-        "nodes": {
-          "1": "ws-1",
-          "2": "ws-2"
-        }
-      },
-      {
-        "id": "atrium-stairs",
-        "name": "Atrium stairs",
-        "kind": "stairs",
-        "stepFree": false,
-        "nodes": {
-          "1": "as-1",
-          "2": "as-2"
-        }
-      }
-    ],
-    "entrances": [
-      {
-        "id": "west",
-        "name": "West entrance",
-        "level": "1",
-        "node": "e-west",
-        "note": "Approximate position, to be confirmed on site."
-      },
-      {
-        "id": "east",
-        "name": "East entrance",
-        "level": "1",
-        "node": "e-east",
-        "note": "Approximate position, to be confirmed on site."
-      }
-    ]
+   ]
+  },
+  {
+   "id": "1",
+   "label": "1",
+   "name": "Level 1",
+   "available": true,
+   "viewBox": [
+    140,
+    47,
+    635,
+    347
+   ],
+   "outline": "M168 240 L248 240 L248 110 L515 110 L515 182 L560 182 L735 182 L735 290 L685 290 L685 322 L565 322 L565 365 L168 365 Z",
+   "spaces": [
+    {
+     "id": "maker-space",
+     "name": "Maker space",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 248,
+      "y": 110,
+      "w": 97,
+      "h": 75
+     },
+     "source": "label in the drawing",
+     "door": "n1-maker"
+    },
+    {
+     "id": "student-commons",
+     "name": "Student commons areas",
+     "type": "study",
+     "shape": {
+      "kind": "rect",
+      "x": 345,
+      "y": 110,
+      "w": 170,
+      "h": 75
+     },
+     "source": "label in the drawing",
+     "door": "n1-commons"
+    },
+    {
+     "id": "breakout-study",
+     "name": "Breakout and group study",
+     "type": "study",
+     "shape": {
+      "kind": "rect",
+      "x": 297,
+      "y": 185,
+      "w": 218,
+      "h": 55
+     },
+     "source": "label in the drawing",
+     "door": "n1-breakout"
+    },
+    {
+     "id": "lobby-circulation",
+     "name": "Lobby and circulation",
+     "type": "circulation",
+     "shape": {
+      "kind": "polygon",
+      "points": "168,240 286,240 286,266 286.067414,267.37224 286.269006,268.731265 286.602835,270.063985 287.065687,271.357568 287.653102,272.599554 288.359425,273.777983 289.177854,274.881506 290.100505,275.899495 291.118494,276.822146 292.222017,277.640575 293.400446,278.346898 294.642432,278.934313 295.936015,279.397165 297.268735,279.730994 298.62776,279.932586 300,280 301.37224,279.932586 302.731265,279.730994 304.063985,279.397165 305.357568,278.934313 306.599554,278.346898 307.777983,277.640575 308.881506,276.822146 309.899495,275.899495 310.822146,274.881506 311.640575,273.777983 312.346898,272.599554 312.934313,271.357568 313.397165,270.063985 313.730994,268.731265 313.932586,267.37224 314,266 314,240 560,240 560,285 168,285"
+     },
+     "source": "label in the drawing",
+     "door": "c4"
+    },
+    {
+     "id": "concierge-desk",
+     "name": "Concierge desk",
+     "type": "service",
+     "shape": {
+      "kind": "polygon",
+      "points": "314,266 313.932586,267.37224 313.730994,268.731265 313.397165,270.063985 312.934313,271.357568 312.346898,272.599554 311.640575,273.777983 310.822146,274.881506 309.899495,275.899495 308.881506,276.822146 307.777983,277.640575 306.599554,278.346898 305.357568,278.934313 304.063985,279.397165 302.731265,279.730994 301.37224,279.932586 300,280 298.62776,279.932586 297.268735,279.730994 295.936015,279.397165 294.642432,278.934313 293.400446,278.346898 292.222017,277.640575 291.118494,276.822146 290.100505,275.899495 289.177854,274.881506 288.359425,273.777983 287.653102,272.599554 287.065687,271.357568 286.602835,270.063985 286.269006,268.731265 286.067414,267.37224 286,266 286.067414,264.62776 286.269006,263.268735 286.602835,261.936015 287.065687,260.642432 287.653102,259.400446 288.359425,258.222017 289.177854,257.118494 290.100505,256.100505 291.118494,255.177854 292.222017,254.359425 293.400446,253.653102 294.642432,253.065687 295.936015,252.602835 297.268735,252.269006 298.62776,252.067414 300,252 301.37224,252.067414 302.731265,252.269006 304.063985,252.602835 305.357568,253.065687 306.599554,253.653102 307.777983,254.359425 308.881506,255.177854 309.899495,256.100505 310.822146,257.118494 311.640575,258.222017 312.346898,259.400446 312.934313,260.642432 313.397165,261.936015 313.730994,263.268735 313.932586,264.62776"
+     },
+     "source": "label in the drawing",
+     "door": "d1-concierge"
+    },
+    {
+     "id": "teaching-lab",
+     "name": "Teaching lab",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 168,
+      "y": 285,
+      "w": 80,
+      "h": 80
+     },
+     "source": "label in the drawing",
+     "door": "n1-lab"
+    },
+    {
+     "id": "teaching-lab-support",
+     "name": "Teaching lab support",
+     "type": "lab",
+     "shape": {
+      "kind": "rect",
+      "x": 248,
+      "y": 285,
+      "w": 50,
+      "h": 80
+     },
+     "source": "label in the drawing",
+     "door": "n1-lab-support"
+    },
+    {
+     "id": "offices-support",
+     "name": "Offices and support",
+     "type": "office",
+     "shape": {
+      "kind": "rect",
+      "x": 298,
+      "y": 285,
+      "w": 169,
+      "h": 80
+     },
+     "source": "label in the drawing",
+     "door": "n1-offices"
+    },
+    {
+     "id": "building-core",
+     "name": "Building core",
+     "type": "core",
+     "shape": {
+      "kind": "polygon",
+      "points": "467,285 560,285 560,290 565,290 565,365 467,365"
+     },
+     "source": "label in the drawing",
+     "door": "core-1"
+    },
+    {
+     "id": "auditorium",
+     "name": "Auditorium",
+     "type": "auditorium",
+     "shape": {
+      "kind": "polygon",
+      "points": "560,182 735,182 735,290 685,290 685,322 565,322 565,290 560,290"
+     },
+     "source": "label in the drawing",
+     "door": "n1-auditorium"
+    }
+   ]
+  },
+  {
+   "id": "B",
+   "label": "B",
+   "name": "Basement",
+   "available": true,
+   "viewBox": [
+    140,
+    47,
+    635,
+    347
+   ],
+   "outline": "M431 262 L503 262 L503 233 L616 233 L616 366 L431 366 Z",
+   "spaces": [
+    {
+     "id": "cistern",
+     "name": "Cistern",
+     "type": "utility",
+     "shape": {
+      "kind": "rect",
+      "x": 503,
+      "y": 233,
+      "w": 58,
+      "h": 40
+     },
+     "source": "label in the drawing",
+     "door": "nb-cistern"
+    },
+    {
+     "id": "mechanical-room",
+     "name": "Mechanical room",
+     "type": "utility",
+     "shape": {
+      "kind": "rect",
+      "x": 561,
+      "y": 233,
+      "w": 55,
+      "h": 93
+     },
+     "source": "label in the drawing",
+     "door": "nb-mech"
+    },
+    {
+     "id": "battery-storage",
+     "name": "Battery storage",
+     "type": "utility",
+     "shape": {
+      "kind": "rect",
+      "x": 436,
+      "y": 326,
+      "w": 40,
+      "h": 35
+     },
+     "source": "label in the drawing",
+     "door": "nb-battery"
+    },
+    {
+     "id": "composters",
+     "name": "Composters",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 486,
+      "y": 326,
+      "w": 60,
+      "h": 40
+     },
+     "source": "label in the drawing",
+     "door": "nb-compost"
+    },
+    {
+     "id": "bike-storage",
+     "name": "Bike storage",
+     "type": "service",
+     "shape": {
+      "kind": "rect",
+      "x": 571,
+      "y": 326,
+      "w": 40,
+      "h": 25
+     },
+     "source": "label in the drawing",
+     "door": "nb-bike"
+    },
+    {
+     "id": "building-core-b",
+     "name": "Elevator",
+     "type": "core",
+     "shape": {
+      "kind": "rect",
+      "x": 501,
+      "y": 291,
+      "w": 30,
+      "h": 35
+     },
+     "source": "label in the drawing",
+     "door": "core-b"
+    }
+   ]
   }
+ ],
+ "source_urls": [
+  "https://livingbuilding.kendedafund.org/2016/12/16/georgia-tech-living-building-schematic-design-floor-plan/index.html",
+  "https://www.archdaily.com/966808/the-kendeda-building-for-innovative-sustainable-design-miller-hull-partnership"
+ ],
+ "graph": {
+  "nodes": [
+   {
+    "id": "e-west",
+    "level": "1",
+    "x": 172,
+    "y": 262,
+    "label": "West entrance"
+   },
+   {
+    "id": "ws-1",
+    "level": "1",
+    "x": 192,
+    "y": 262,
+    "label": "West stairs"
+   },
+   {
+    "id": "c1",
+    "level": "1",
+    "x": 215,
+    "y": 262
+   },
+   {
+    "id": "c2",
+    "level": "1",
+    "x": 272,
+    "y": 262
+   },
+   {
+    "id": "d1-concierge",
+    "level": "1",
+    "x": 300,
+    "y": 262,
+    "label": "Concierge desk"
+   },
+   {
+    "id": "c3",
+    "level": "1",
+    "x": 330,
+    "y": 262
+   },
+   {
+    "id": "c4",
+    "level": "1",
+    "x": 390,
+    "y": 262,
+    "label": "Lobby"
+   },
+   {
+    "id": "c5",
+    "level": "1",
+    "x": 430,
+    "y": 262
+   },
+   {
+    "id": "c6",
+    "level": "1",
+    "x": 470,
+    "y": 262
+   },
+   {
+    "id": "c7",
+    "level": "1",
+    "x": 516,
+    "y": 262
+   },
+   {
+    "id": "e-east",
+    "level": "1",
+    "x": 545,
+    "y": 262,
+    "label": "East entrance"
+   },
+   {
+    "id": "n1-lab",
+    "level": "1",
+    "x": 208,
+    "y": 300
+   },
+   {
+    "id": "n1-lab-support",
+    "level": "1",
+    "x": 273,
+    "y": 300
+   },
+   {
+    "id": "n1-offices",
+    "level": "1",
+    "x": 380,
+    "y": 320
+   },
+   {
+    "id": "core-1",
+    "level": "1",
+    "x": 516,
+    "y": 326,
+    "label": "Elevator"
+   },
+   {
+    "id": "as-1",
+    "level": "1",
+    "x": 392,
+    "y": 250,
+    "label": "Atrium stairs"
+   },
+   {
+    "id": "d1-breakout",
+    "level": "1",
+    "x": 430,
+    "y": 240
+   },
+   {
+    "id": "n1-breakout",
+    "level": "1",
+    "x": 430,
+    "y": 212
+   },
+   {
+    "id": "n1-commons",
+    "level": "1",
+    "x": 430,
+    "y": 150
+   },
+   {
+    "id": "v1",
+    "level": "1",
+    "x": 272,
+    "y": 215
+   },
+   {
+    "id": "n1-maker",
+    "level": "1",
+    "x": 296,
+    "y": 150
+   },
+   {
+    "id": "n1-auditorium",
+    "level": "1",
+    "x": 650,
+    "y": 235
+   },
+   {
+    "id": "d1-aud",
+    "level": "1",
+    "x": 560,
+    "y": 255
+   },
+   {
+    "id": "ws-2",
+    "level": "2",
+    "x": 191,
+    "y": 257,
+    "label": "West stairs"
+   },
+   {
+    "id": "l2a",
+    "level": "2",
+    "x": 227,
+    "y": 259
+   },
+   {
+    "id": "l2b",
+    "level": "2",
+    "x": 309,
+    "y": 259
+   },
+   {
+    "id": "l2c",
+    "level": "2",
+    "x": 391,
+    "y": 259
+   },
+   {
+    "id": "l2d",
+    "level": "2",
+    "x": 470,
+    "y": 259
+   },
+   {
+    "id": "core-2",
+    "level": "2",
+    "x": 516,
+    "y": 326,
+    "label": "Elevator"
+   },
+   {
+    "id": "as-2",
+    "level": "2",
+    "x": 392,
+    "y": 252,
+    "label": "Atrium stairs"
+   },
+   {
+    "id": "d2-core",
+    "level": "2",
+    "x": 516,
+    "y": 287
+   },
+   {
+    "id": "n2-laba",
+    "level": "2",
+    "x": 227,
+    "y": 310
+   },
+   {
+    "id": "n2-labb",
+    "level": "2",
+    "x": 309,
+    "y": 310
+   },
+   {
+    "id": "n2-labc",
+    "level": "2",
+    "x": 391,
+    "y": 310
+   },
+   {
+    "id": "s1",
+    "level": "2",
+    "x": 285,
+    "y": 215
+   },
+   {
+    "id": "n1",
+    "level": "2",
+    "x": 300,
+    "y": 180
+   },
+   {
+    "id": "n2",
+    "level": "2",
+    "x": 384,
+    "y": 180
+   },
+   {
+    "id": "n3",
+    "level": "2",
+    "x": 455,
+    "y": 180
+   },
+   {
+    "id": "s2",
+    "level": "2",
+    "x": 470,
+    "y": 215
+   },
+   {
+    "id": "n2-cls1",
+    "level": "2",
+    "x": 312,
+    "y": 130
+   },
+   {
+    "id": "d2-cls1",
+    "level": "2",
+    "x": 312,
+    "y": 174
+   },
+   {
+    "id": "n2-cls2",
+    "level": "2",
+    "x": 455,
+    "y": 130
+   },
+   {
+    "id": "d2-cls2",
+    "level": "2",
+    "x": 455,
+    "y": 174
+   },
+   {
+    "id": "n2-rooftop",
+    "level": "2",
+    "x": 548,
+    "y": 212
+   },
+   {
+    "id": "d2-roof",
+    "level": "2",
+    "x": 521,
+    "y": 225
+   },
+   {
+    "id": "d2-east",
+    "level": "2",
+    "x": 565,
+    "y": 326
+   },
+   {
+    "id": "g1",
+    "level": "2",
+    "x": 585,
+    "y": 322
+   },
+   {
+    "id": "n2-garden",
+    "level": "2",
+    "x": 650,
+    "y": 315
+   },
+   {
+    "id": "g2",
+    "level": "2",
+    "x": 585,
+    "y": 268
+   },
+   {
+    "id": "n2-apiaries",
+    "level": "2",
+    "x": 672,
+    "y": 220
+   },
+   {
+    "id": "core-b",
+    "level": "B",
+    "x": 516,
+    "y": 306,
+    "label": "Elevator"
+   },
+   {
+    "id": "bn1",
+    "level": "B",
+    "x": 516,
+    "y": 323
+   },
+   {
+    "id": "bn2",
+    "level": "B",
+    "x": 496,
+    "y": 323
+   },
+   {
+    "id": "bn3",
+    "level": "B",
+    "x": 456,
+    "y": 323
+   },
+   {
+    "id": "bn6",
+    "level": "B",
+    "x": 591,
+    "y": 323
+   },
+   {
+    "id": "nb-battery",
+    "level": "B",
+    "x": 456,
+    "y": 343
+   },
+   {
+    "id": "nb-compost",
+    "level": "B",
+    "x": 516,
+    "y": 346
+   },
+   {
+    "id": "nb-bike",
+    "level": "B",
+    "x": 591,
+    "y": 338
+   },
+   {
+    "id": "bn5",
+    "level": "B",
+    "x": 530,
+    "y": 290
+   },
+   {
+    "id": "nb-cistern",
+    "level": "B",
+    "x": 530,
+    "y": 253
+   },
+   {
+    "id": "nb-mech",
+    "level": "B",
+    "x": 590,
+    "y": 280
+   }
+  ],
+  "edges": [
+   [
+    "e-west",
+    "ws-1"
+   ],
+   [
+    "ws-1",
+    "c1"
+   ],
+   [
+    "c1",
+    "c2"
+   ],
+   [
+    "c2",
+    "d1-concierge"
+   ],
+   [
+    "d1-concierge",
+    "c3"
+   ],
+   [
+    "c3",
+    "c4"
+   ],
+   [
+    "c4",
+    "c5"
+   ],
+   [
+    "c5",
+    "c6"
+   ],
+   [
+    "c6",
+    "c7"
+   ],
+   [
+    "c7",
+    "e-east"
+   ],
+   [
+    "c1",
+    "n1-lab"
+   ],
+   [
+    "c2",
+    "n1-lab-support"
+   ],
+   [
+    "c4",
+    "n1-offices"
+   ],
+   [
+    "c7",
+    "core-1"
+   ],
+   [
+    "c4",
+    "as-1"
+   ],
+   [
+    "c5",
+    "d1-breakout"
+   ],
+   [
+    "d1-breakout",
+    "n1-breakout"
+   ],
+   [
+    "n1-breakout",
+    "n1-commons"
+   ],
+   [
+    "c2",
+    "v1"
+   ],
+   [
+    "v1",
+    "n1-maker"
+   ],
+   [
+    "c7",
+    "d1-aud"
+   ],
+   [
+    "d1-aud",
+    "n1-auditorium"
+   ],
+   [
+    "ws-2",
+    "l2a"
+   ],
+   [
+    "l2a",
+    "l2b"
+   ],
+   [
+    "l2b",
+    "l2c"
+   ],
+   [
+    "l2c",
+    "l2d"
+   ],
+   [
+    "l2c",
+    "as-2"
+   ],
+   [
+    "l2d",
+    "d2-core"
+   ],
+   [
+    "d2-core",
+    "core-2"
+   ],
+   [
+    "l2a",
+    "n2-laba"
+   ],
+   [
+    "l2b",
+    "n2-labb"
+   ],
+   [
+    "l2c",
+    "n2-labc"
+   ],
+   [
+    "l2b",
+    "s1"
+   ],
+   [
+    "s1",
+    "n1"
+   ],
+   [
+    "n1",
+    "n2"
+   ],
+   [
+    "n2",
+    "n3"
+   ],
+   [
+    "l2d",
+    "s2"
+   ],
+   [
+    "s2",
+    "n3"
+   ],
+   [
+    "n1",
+    "d2-cls1"
+   ],
+   [
+    "d2-cls1",
+    "n2-cls1"
+   ],
+   [
+    "n3",
+    "d2-cls2"
+   ],
+   [
+    "d2-cls2",
+    "n2-cls2"
+   ],
+   [
+    "l2d",
+    "d2-roof"
+   ],
+   [
+    "d2-roof",
+    "n2-rooftop"
+   ],
+   [
+    "core-2",
+    "d2-east"
+   ],
+   [
+    "d2-east",
+    "g1"
+   ],
+   [
+    "g1",
+    "n2-garden"
+   ],
+   [
+    "g1",
+    "g2"
+   ],
+   [
+    "g2",
+    "n2-apiaries"
+   ],
+   [
+    "core-b",
+    "bn1"
+   ],
+   [
+    "bn1",
+    "bn2"
+   ],
+   [
+    "bn2",
+    "bn3"
+   ],
+   [
+    "bn1",
+    "bn6"
+   ],
+   [
+    "bn3",
+    "nb-battery"
+   ],
+   [
+    "bn1",
+    "nb-compost"
+   ],
+   [
+    "bn6",
+    "nb-bike"
+   ],
+   [
+    "core-b",
+    "bn5"
+   ],
+   [
+    "bn5",
+    "nb-cistern"
+   ],
+   [
+    "bn5",
+    "nb-mech"
+   ]
+  ],
+  "connectors": [
+   {
+    "id": "elevator",
+    "name": "Elevator",
+    "kind": "elevator",
+    "stepFree": true,
+    "nodes": {
+     "B": "core-b",
+     "1": "core-1",
+     "2": "core-2"
+    }
+   },
+   {
+    "id": "west-stairs",
+    "name": "West stairs",
+    "kind": "stairs",
+    "stepFree": false,
+    "nodes": {
+     "1": "ws-1",
+     "2": "ws-2"
+    }
+   },
+   {
+    "id": "atrium-stairs",
+    "name": "Atrium stairs",
+    "kind": "stairs",
+    "stepFree": false,
+    "nodes": {
+     "1": "as-1",
+     "2": "as-2"
+    }
+   }
+  ],
+  "entrances": [
+   {
+    "id": "west",
+    "name": "West entrance",
+    "level": "1",
+    "node": "e-west",
+    "note": "Approximate position, to be confirmed on site."
+   },
+   {
+    "id": "east",
+    "name": "East entrance",
+    "level": "1",
+    "node": "e-east",
+    "note": "Approximate position, to be confirmed on site."
+   }
+  ]
+ }
 }

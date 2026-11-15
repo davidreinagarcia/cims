@@ -7,7 +7,7 @@
         "id": "big-chicken-student-center",
         "name": "Big Chicken",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Chicken sandwiches and tenders in the John Lewis Student Center.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
@@ -64,7 +64,9 @@
         },
         "url": "https://dining.gatech.edu/dining-locations",
         "dining_dollars": true,
-        "meal_swipes": false
+        "meal_swipes": false,
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -80,7 +82,7 @@
         "id": "blenz-bowls-student-center",
         "name": "Blenz Bowls",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Smoothie bowls in the John Lewis Student Center.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
@@ -132,7 +134,9 @@
         },
         "url": "https://dining.gatech.edu/dining-locations",
         "dining_dollars": true,
-        "meal_swipes": false
+        "meal_swipes": false,
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -148,7 +152,7 @@
         "id": "brittain-dining-hall",
         "name": "Brittain Dining Hall",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "An East Campus dining hall serving unlimited meals.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "dining-hall",
@@ -195,7 +199,9 @@
         },
         "url": "https://dining.gatech.edu/location/brittain-dining-hall-0",
         "dining_dollars": true,
-        "meal_swipes": true
+        "meal_swipes": true,
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -211,12 +217,14 @@
         "id": "chick-fil-a-student-center",
         "name": "Chick-fil-A",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Chicken sandwiches and nuggets in the John Lewis Student Center.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
         "building_id": "student-center",
-        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM relation 3178621 (John Lewis Student Center), building representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -232,12 +240,14 @@
         "id": "dancing-goats-student-center",
         "name": "Dancing Goats",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Coffee in the John Lewis Student Center.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "coffee",
         "building_id": "student-center",
-        "coord_source": "OSM node 12348556801 (Dancing Goats Coffee), named venue point returned by Nominatim lookup"
+        "coord_source": "OSM node 12348556801 (Dancing Goats Coffee), named venue point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -253,11 +263,13 @@
         "id": "dunkin-pavilions",
         "name": "Dunkin' at the Pavilions",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Coffee and doughnuts at the campus Pavilions.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "coffee",
-        "coord_source": "OSM way 1258405684 (Dunkin'), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM way 1258405684 (Dunkin'), building representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -273,12 +285,14 @@
         "id": "fresh-brothers-student-center",
         "name": "Fresh Brothers Pizza",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Pizza in the John Lewis Student Center.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
         "building_id": "student-center",
-        "coord_source": "OSM node 14224945531 (Fresh Brothers Pizza), named venue point returned by Nominatim lookup"
+        "coord_source": "OSM node 14224945531 (Fresh Brothers Pizza), named venue point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -294,7 +308,7 @@
         "id": "jimmy-johns-pavilions",
         "name": "Jimmy John's at the Pavilions",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Sandwiches at the campus Pavilions.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
@@ -342,7 +356,9 @@
               "16:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -358,13 +374,15 @@
         "id": "kaldis-clough",
         "name": "Kaldi's Coffee at Clough",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Coffee and pastries in Clough Undergraduate Learning Commons.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "coffee",
         "building_id": "clough",
         "address": "266 4th St NW, Atlanta, GA 30313",
-        "coord_source": "OSM node 9848845383 (Kaldi's Coffee), named venue point returned by Nominatim lookup"
+        "coord_source": "OSM node 9848845383 (Kaldi's Coffee), named venue point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -380,11 +398,13 @@
         "id": "kinnamons-student-center",
         "name": "Kinnamōns",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Cinnamon rolls in the John Lewis Student Center.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "building_id": "student-center",
-        "coord_source": "OSM node 14224945534 (Kinnamons), named venue point returned by Nominatim lookup"
+        "coord_source": "OSM node 14224945534 (Kinnamons), named venue point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -400,12 +420,14 @@
         "id": "krafted-wander-dawgs-bennys-student-center",
         "name": "Krafted | Wander Dawgs | Benny's Cheesesteaks",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Burgers, hot dogs and cheesesteaks share a Student Center bay.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
         "building_id": "student-center",
-        "coord_source": "OSM node 14224945532 (Krafted | Wander Dawgs | Benny's Cheesesteaks), named venue point returned by Nominatim lookup"
+        "coord_source": "OSM node 14224945532 (Krafted | Wander Dawgs | Benny's Cheesesteaks), named venue point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -421,12 +443,14 @@
         "id": "marrakech-express-student-center",
         "name": "Marrakech Express",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Moroccan and Mediterranean food in the John Lewis Student Center.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
         "building_id": "student-center",
-        "coord_source": "OSM node 14224945535 (Marrakech Express), named venue point returned by Nominatim lookup"
+        "coord_source": "OSM node 14224945535 (Marrakech Express), named venue point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -442,7 +466,7 @@
         "id": "north-avenue-dining-hall",
         "name": "North Ave Dining Hall",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "An East Campus dining hall with grill and deli stations.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "dining-hall",
@@ -491,7 +515,9 @@
               "21:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -507,7 +533,7 @@
         "id": "panda-express-student-center",
         "name": "Panda Express",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Chinese food on the first floor of the Student Center.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
@@ -557,7 +583,9 @@
               "17:00"
             ]
           ]
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -573,14 +601,16 @@
         "id": "sideways-cafe-library",
         "name": "Sideways Cafe by Blue Donkey",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Coffee at Price Gilbert Memorial Library.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "coffee",
         "building_id": "library",
         "address": "704 Cherry St NW, Atlanta, GA 30313",
         "url": "https://dining.gatech.edu/node/7",
-        "coord_source": "OSM relation 3178630 (Price Gilbert Memorial Library), building representative point returned by Nominatim lookup"
+        "coord_source": "OSM relation 3178630 (Price Gilbert Memorial Library), building representative point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -596,12 +626,14 @@
         "id": "taim-student-center",
         "name": "taïm Mediterranean Kitchen",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Mediterranean food in the John Lewis Student Center.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
         "building_id": "student-center",
-        "coord_source": "OSM node 14224945533 (taïm Mediterranean Kitchen), named venue point returned by Nominatim lookup"
+        "coord_source": "OSM node 14224945533 (taïm Mediterranean Kitchen), named venue point returned by Nominatim lookup",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -617,7 +649,7 @@
         "id": "twisted-taco-student-center",
         "name": "Twisted Taco",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "Mexican food on the second floor of the Student Center.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "restaurant",
@@ -657,7 +689,9 @@
           ],
           "sat": [],
           "sun": []
-        }
+        },
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -673,7 +707,7 @@
         "id": "west-village-dining-hall",
         "name": "West Village Dining Hall",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "description": "A West Campus dining hall serving unlimited meals.",
         "source_url": "https://dining.gatech.edu/dining-locations",
         "subtype": "dining-hall",
@@ -730,7 +764,9 @@
         },
         "url": "https://dining.gatech.edu/location/west-village-dining-hall",
         "dining_dollars": true,
-        "meal_swipes": true
+        "meal_swipes": true,
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       },
       "geometry": {
         "type": "Point",
@@ -753,7 +789,7 @@
         "id": "boho-taco-tech-square",
         "name": "Boho Taco",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "subtype": "restaurant",
         "description": "Georgia Tech Partner fast-casual taco restaurant in Tech Square.",
         "address": "22 5th Street NW, Atlanta, GA 30308",
@@ -812,7 +848,9 @@
         "source_url": "https://dining.gatech.edu/dining-locations",
         "confidence": "medium",
         "coord_source": "OSM node 535031257 (David research)",
-        "coord_precision": "exact"
+        "coord_precision": "exact",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -828,7 +866,7 @@
         "id": "tech-square-tavern",
         "name": "Tech Square Tavern",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "subtype": "restaurant",
         "description": "Evening restaurant inside the Georgia Tech Hotel and Conference Center listed as an active Tech Dining retail location.",
         "address": "800 Spring St NW, Atlanta, GA 30308",
@@ -890,7 +928,9 @@
         "confidence": "medium",
         "building_id": "georgia-tech-hotel-and-conference-center",
         "coord_source": "building centroid: georgia-tech-hotel-and-conference-center",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     },
     {
@@ -906,7 +946,7 @@
         "id": "collective-food-hall-coda",
         "name": "The Collective Food Hall",
         "category": "food",
-        "status": "draft",
+        "status": "verified",
         "subtype": "cafeteria",
         "aliases": [
           "Coda Food Hall"
@@ -968,7 +1008,9 @@
         "confidence": "medium",
         "building_id": "coda",
         "coord_source": "building centroid: coda",
-        "coord_precision": "building"
+        "coord_precision": "building",
+        "verified_at": "2026-11-15",
+        "verified_by": "tato"
       }
     }
   ]

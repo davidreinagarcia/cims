@@ -3,10 +3,10 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { SAFETY_CATEGORY, hasVerifiedRouting, issueRoutes, routeFor, type IssueCategory } from "../../lib/issue-routing";
 import { nearestPlace } from "../../lib/nearestPlace";
 import { photoToDataUrl } from "../../lib/photo";
-import { places } from "../../lib/places";
 import { useGpsFix } from "../../lib/useGpsFix";
 import type { NewIssueReport, ReportLocation } from "../../lib/reports";
 import { locationParts } from "./location";
+import BuildingPicker, { type PickedBuilding } from "./BuildingPicker";
 
 /** Props for the details step. */
 export interface ReportFormProps {
@@ -21,7 +21,7 @@ export interface ReportFormProps {
 /** The details form (PRD US-10.1). Safety hazard shows the emergency banner before everything else. */
 export default function ReportForm({ location, draft, busy, onContinue }: ReportFormProps) {
   const manual = !location;
-  const [buildingId, setBuildingId] = useState(draft?.location.buildingId ?? "");
+  const [building, setBuilding] = useState<PickedBuilding | null>(draft?.location.buildingId ? { id: draft.location.buildingId, name: draft.location.buildingName ?? draft.location.buildingId } : null);
   const [floor, setFloor] = useState(draft?.location.floor ?? "");
   const [room, setRoom] = useState(draft?.location.room ?? "");
   const [category, setCategory] = useState<IssueCategory | null>(draft?.category ?? null);
@@ -43,8 +43,8 @@ export default function ReportForm({ location, draft, busy, onContinue }: Report
     const point: [number, number] = [gps.fix.lng, gps.fix.lat];
     setPin({ point, accuracyM: Math.round(gps.fix.accuracy) });
     const near = nearestPlace(point);
-    if (near) { setBuildingId(near.id); setGpsNote(`Nearest building: ${near.name} (about ${near.distanceM} m).`); }
-    else { setBuildingId(""); setGpsNote("No campus building is close, so this will be reported as an outdoor spot."); }
+    if (near) { setBuilding({ id: near.id, name: near.name }); setGpsNote(`Nearest building: ${near.name} (about ${near.distanceM} m).`); }
+    else { setBuilding(null); setGpsNote("No campus building is close, so this will be reported as an outdoor spot."); }
   }, [gps.fix]);
 
   const route = category ? routeFor(category) : null;
@@ -73,12 +73,12 @@ export default function ReportForm({ location, draft, busy, onContinue }: Report
 
   function onSubmit(event: FormEvent) {
     event.preventDefault();
-    const place = places.features.find((f) => f.properties.id === buildingId);
+    const place = building;
     if (manual && !place && !pin) return fail("Pick the building where the problem is, or use your location.");
     if (!category) return fail("Pick a category.");
     const where: ReportLocation = location ?? {
-      buildingId: place?.properties.id ?? null,
-      buildingName: place?.properties.name ?? null,
+      buildingId: place?.id ?? null,
+      buildingName: place?.name ?? null,
       floor: place ? floor.trim() || null : null,
       room: place ? room.trim() || null : null,
       point: pin?.point ?? null,
@@ -126,15 +126,7 @@ export default function ReportForm({ location, draft, busy, onContinue }: Report
                 {gps.status === "error" ? gps.message : pin ? `GPS fix attached (±${pin.accuracyM} m). ${gpsNote ?? ""}` : "Attaches your GPS position so staff can find the spot."}
               </p>
             </div>
-            <label className="cims-report__label">
-              <span>Building <span className="cims-muted">{pin ? "(optional with GPS)" : "(required)"}</span></span>
-              <select className="cims-report__control" value={buildingId} onChange={(e) => setBuildingId(e.target.value)}>
-                <option value="">Pick a building…</option>
-                {places.features.map((f) => (
-                  <option key={f.properties.id} value={f.properties.id}>{f.properties.name}</option>
-                ))}
-              </select>
-            </label>
+            <BuildingPicker label={pin ? "Building (optional with GPS)" : "Building (required)"} picked={building} onPick={setBuilding} />
             <div className="cims-report__pair">
               <label className="cims-report__label">
                 <span>Floor <span className="cims-muted">(optional)</span></span>
@@ -176,7 +168,7 @@ export default function ReportForm({ location, draft, busy, onContinue }: Report
         <p className="cims-report__route" aria-live="polite">
           {route ? (
             <>
-              <span className="cims-tag">Routes to: {route.team}</span>{" "}
+              <span className="cims-tag">Routes to: {route.broadcast ? "All teams (first to claim)" : route.team}</span>{" "}
               <span className="cims-muted">Simulated in this prototype.</span>
               {route.reportingUrl ? (
                 <>

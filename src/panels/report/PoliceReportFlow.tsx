@@ -3,7 +3,9 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { TIP_CATEGORIES, submitTip, tipStatus, type TipCategory, type TipStatus } from "../../lib/alerts";
 import { nearestPlace } from "../../lib/nearestPlace";
 import { photoToDataUrl } from "../../lib/photo";
-import { places } from "../../lib/places";
+import { loadedBuildings } from "../../lib/buildings";
+import { locate } from "../../lib/suggest";
+import BuildingPicker, { type PickedBuilding } from "./BuildingPicker";
 import { useGpsFix } from "../../lib/useGpsFix";
 import type { Navigate } from "./index";
 
@@ -42,7 +44,7 @@ export default function PoliceReportFlow({ tipId, navigate }: { tipId: string | 
   const [category, setCategory] = useState<TipCategory | null>(null);
   const [description, setDescription] = useState("");
   const [photo, setPhoto] = useState<string | null>(null);
-  const [manualId, setManualId] = useState("");
+  const [manual, setManual] = useState<PickedBuilding | null>(null);
   const [problem, setProblem] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -50,8 +52,8 @@ export default function PoliceReportFlow({ tipId, navigate }: { tipId: string | 
 
   if (tipId) return <TipStatusView id={tipId} onAnother={() => navigate(new URLSearchParams({ panel: "report", kind: "police" }))} />;
 
-  const manualPlace = places.features.find((f) => f.properties.id === manualId);
-  const point: [number, number] | null = gps.fix ? [gps.fix.lng, gps.fix.lat] : manualPlace ? manualPlace.geometry.coordinates as [number, number] : null;
+  const manualPoint = manual ? locate({ kind: "building", id: manual.id }, loadedBuildings()) ?? locate({ kind: "place", id: manual.id }, null) : undefined;
+  const point: [number, number] | null = gps.fix ? [gps.fix.lng, gps.fix.lat] : manualPoint ?? null;
   const near = gps.fix && point ? nearestPlace(point) : null;
   const fail = (m: string) => { setProblem(m); requestAnimationFrame(() => problemRef.current?.focus()); };
 
@@ -70,7 +72,7 @@ export default function PoliceReportFlow({ tipId, navigate }: { tipId: string | 
       const sent = await submitTip({
         category, description: description.trim(), photoDataUrl: photo, point,
         accuracyM: gps.fix ? Math.round(gps.fix.accuracy) : null,
-        buildingName: near?.name ?? manualPlace?.properties.name ?? null,
+        buildingName: near?.name ?? manual?.name ?? null,
       });
       navigate(new URLSearchParams({ panel: "report", kind: "police", tip: sent.id }));
     } catch (e) {
@@ -99,13 +101,7 @@ export default function PoliceReportFlow({ tipId, navigate }: { tipId: string | 
             </p>
           </div>
           {!gps.fix && (
-            <label className="cims-report__label">
-              <span>No GPS? Nearest building</span>
-              <select className="cims-report__control" value={manualId} onChange={(e) => setManualId(e.target.value)}>
-                <option value="">Pick a building…</option>
-                {places.features.filter((f) => f.properties.kind !== "event").map((f) => <option key={f.properties.id} value={f.properties.id}>{f.properties.name}</option>)}
-              </select>
-            </label>
+            <BuildingPicker label="No GPS? Search the nearest building" picked={manual} onPick={setManual} />
           )}
         </div>
       </section>
