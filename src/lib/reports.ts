@@ -1,6 +1,7 @@
 /** @file Report-an-issue contracts (types + ReportsService) and the one place that picks the backend adapter. */
 import type { IssueCategory, Team } from "./issue-routing";
 import { createLocalReportsService } from "./reports.mock";
+import { createSupabaseReportsService } from "./reports.supabase";
 
 export type { IssueCategory, Team } from "./issue-routing";
 
@@ -84,5 +85,5 @@ export function isActive(status: ReportStatus): boolean {
   return status === "open" || status === "routed" || status === "in_progress";
 }
 
-/** The reports backend used by the app. Swap the adapter here (and only here) when ADR-0005 is decided. */
-export const reportsService: ReportsService = createLocalReportsService();
+/** The reports backend used by the app: Supabase, with the local mock as offline fallback (ADR-0005). */
+export const reportsService: ReportsService = createSupabaseReportsService(createLocalReportsService());

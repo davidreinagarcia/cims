@@ -1,7 +1,7 @@
 <!-- summary: What we need Supabase for (stories, reports, fullness, events, reservations, auth), proposed schema, RLS, storage, and the migration plan from today's mock adapters. -->
 # Supabase plan
 
-Status: **not set up yet**. Every feature below runs today on a mock or local adapter, so the demo never depends on it ([ADR-0005](adr/0005-backend-supabase.md), [ADR-0007](adr/0007-gt-sign-in-simulated.md)). This file is the shopping list for when we plug it in.
+Status (2026-11-15): **live for Reports (F-10) and Stories (T-70)**. Project `CISM` (us-east-1), migrations in `supabase/migrations/`, adapters `src/lib/reports.supabase.ts` and `src/stories/supabaseAdapter.ts` (plain `fetch`, no SDK, anonymous Supabase auth per browser). If the backend is unreachable they fall back to the local mocks, so the demo never depends on it. Reservations, fullness, events and accounts below are still mock/local ([ADR-0005](adr/0005-backend-supabase.md), [ADR-0007](adr/0007-gt-sign-in-simulated.md)). This file is the shopping list for when we plug it in.
 
 ## Why Supabase
 Postgres + PostGIS (radius queries), Row Level Security (clients write directly, no custom API), Storage (photos and videos), Realtime (live heat map), free tier. Standard Postgres, so we can leave.

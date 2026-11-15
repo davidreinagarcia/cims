@@ -12,6 +12,7 @@ Stories (T-70): live camera capture with GPS, the Stories tab viewer, the store 
 - [`localAdapter.ts`](localAdapter.ts): Demo storage for stories: metadata and media blobs in this browser's IndexedDB, expired stories purged on rea… · exports `STORY_TTL_MS`, `localAdapter`
 - [`store.ts`](store.ts): Stories state without a provider: a tiny external store (list, viewer subset, map-focus requests) shared by t… · exports `subscribe`, `getState`, `ensureLoaded`, `useStories`, `liveStories`, `postStory`, `openViewer`, `closeViewer`, `focusOnMap`, `setAdapter`, `setHeat`
 - [`stories.css`](stories.css): Stories tab: viewer, camera and review. Hairlines instead of shadows, like the rest of the survey-map UI.
+- [`supabaseAdapter.ts`](supabaseAdapter.ts): Stories adapter on Supabase: media in the public `stories` bucket, metadata in `stories`; falls back to the l… · exports `supabaseStoriesAdapter`
 - [`types.ts`](types.ts): Story contracts: what a story is, and the adapter boundary a real backend (ADR-0005) will implement.
 
 <!-- AUTO:END -->
