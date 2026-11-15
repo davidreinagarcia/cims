@@ -36,3 +36,5 @@ export const MAP_WALKWAY = "#D49C7F";
 export const MAP_RAIL = "#7D7766";
 /** --map-building-context: off-campus buildings, flat (ours are the extruded, hatched ones). */
 export const MAP_BUILDING_CONTEXT = "#E4DCC8";
+/** --cat-transport: bus routes, stops and live buses. */
+export const SAGE = "#5E7A5A";

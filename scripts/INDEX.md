@@ -10,6 +10,7 @@ Dev tooling run with Node (no deps): index generator, Claude hooks, data fetcher
 - [`claude-hook.mjs`](claude-hook.mjs): Claude Code hook: keeps indexes current and makes the agent fix docs gaps in files it touched.
 - [`data.mjs`](data.mjs): Validate curated GeoJSON, record verification and generate the verification checklist.
 - [`fetch-buildings.mjs`](fetch-buildings.mjs): Fetches Georgia Tech building footprints from OpenStreetMap (Overpass) into src/data/buildings.geojson (T-03).
+- [`fetch-transit.mjs`](fetch-transit.mjs): Fetches Georgia Tech bus routes and stops from the official live tracker (bus.gatech.edu) into src/data/trans…
 - [`gen-index.mjs`](gen-index.mjs): Generates folder INDEX.md files, the global INDEX.md and docs/FUNCTIONS.md from the repo. Zero deps.
 - [`import-research.mjs`](import-research.mjs): Merge Tato's Gemini research into curated draft POIs without replacing curated facts.
 
