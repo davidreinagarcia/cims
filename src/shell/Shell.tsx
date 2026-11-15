@@ -9,6 +9,8 @@ import BuildingCard from "../panels/building-card/BuildingCard";
 import BuildingPreview from "../panels/building-card/BuildingPreview";
 import PlaceCard from "../panels/building-card/PlaceCard";
 import BulletinPanel from "../panels/bulletin/BulletinPanel";
+import StoriesPanel from "../stories/StoriesPanel";
+import { useStories } from "../stories/store";
 import { useAuth } from "../state/auth";
 import { useSelection, type Selection, type SelectionKind } from "../state/selection";
 import BottomSheet, { type SheetSnap } from "./BottomSheet";
@@ -23,7 +25,7 @@ import SearchPill from "./SearchPill";
 import "./shell.css";
 
 const MOBILE = "(max-width: 767.98px)";
-const PANELS: ShellPanel[] = ["explore", "rooms", "report", "bulletin", "route"];
+const PANELS: ShellPanel[] = ["explore", "rooms", "report", "bulletin", "stories", "route"];
 const KINDS: SelectionKind[] = ["building", "place", "room", "report"];
 
 function useIsMobile(): boolean {
@@ -65,6 +67,11 @@ export default function Shell() {
     if (KINDS.includes(kind as SelectionKind) && rest.length) select({ kind: kind as SelectionKind, id: rest.join(":") });
   }, []); // once, on load
 
+  // Clicking the story heat map opens the stories under it; phones show them tall.
+  const { viewer } = useStories();
+  useEffect(() => { if (viewer) setPanel("stories"); }, [viewer]);
+  useEffect(() => { if (panel === "stories" && mobile) setSnap("full"); }, [panel, mobile]);
+
   // Picking something on the map (or from the bulletin) always shows it.
   useEffect(() => { if (selection) setPanel("explore"); }, [selection]);
 
@@ -92,6 +99,7 @@ export default function Shell() {
   if (panel === "bulletin") content = { title: "Bulletin", key: "bulletin", body: <BulletinPanel onShowMap={() => setPanel("explore")} /> };
   else if (panel === "rooms") content = { title: "Rooms", key: "rooms", body: <ComingSoon what="Room finder" hint="You can already search a room number in the search bar." /> };
   else if (panel === "report") content = { title: "Report", key: "report", body: <ComingSoon what="Report an issue" /> };
+  else if (panel === "stories") content = { title: "Stories", key: "stories", body: <StoriesPanel onShowMap={() => setPanel("explore")} /> };
   else if (panel === "route") content = { title: "Route", key: "route", body: <RoutePanel initialSelection={routeTo} onClose={closeContent} /> };
   else if (selection) content = {
     title: selection.kind === "building" ? "Building" : "Place",

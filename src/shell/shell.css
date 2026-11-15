@@ -263,7 +263,7 @@
 
 .shell-tabbar {
   position: absolute; z-index: 9; left: 0; right: 0; bottom: 0; height: var(--bottom); padding-bottom: env(safe-area-inset-bottom, 0px);
-  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); align-items: center;
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: center;
   background: var(--paper); border-top: var(--hairline-muted);
 }
 
