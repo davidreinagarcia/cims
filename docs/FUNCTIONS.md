@@ -54,6 +54,19 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `canDeletePost(session, post, "accountId">)` [src/lib/bulletinPosts.ts:91](../src/lib/bulletinPosts.ts#L91): Whether this account may delete a post: its author, or a moderator (the server enforces the same rule).
 - `deleteUserPost(id)` [src/lib/bulletinPosts.ts:96](../src/lib/bulletinPosts.ts#L96): Deletes a post and drops it from the live store. Rule rejections reach the caller.
 - `userPostFeatures()` [src/lib/bulletinPosts.ts:105](../src/lib/bulletinPosts.ts#L105): Map anchors for the loaded posts: one orgs-layer point per post at its building's centre (none until footprin…
+- `bearingDegrees(a, b)` [src/lib/busMotion.ts:21](../src/lib/busMotion.ts#L21): Compass bearing in degrees (0 = north, clockwise) from `a` to `b`.
+- `recordMotion(buses, now = Date.now()` [src/lib/busMotion.ts:36](../src/lib/busMotion.ts#L36): Records one poll's positions, each with the time of its GPS fix, and returns each bus's motion.
+- `stoppedText(stillFor)` [src/lib/busMotion.ts:57](../src/lib/busMotion.ts#L57): "Stopped for 3 min" once a bus has stood still at least 90 seconds (`stillFor` in ms); null while it moves.
+- `compassWord(bearing)` [src/lib/busMotion.ts:64](../src/lib/busMotion.ts#L64): "north", "northeast", ... for a compass bearing.
+- `MAX_WALK_TO_STOP_M` [src/lib/busPlanner.ts:10](../src/lib/busPlanner.ts#L10): Farthest stop (straight line) we'd ask someone to walk to, at either end: about 10 minutes.
+- `walkSeconds(a, b)` [src/lib/busPlanner.ts:47](../src/lib/busPlanner.ts#L47): Estimated walking seconds between two points (straight line with a street detour factor).
+- `rideSeconds(route, from, to)` [src/lib/busPlanner.ts:52](../src/lib/busPlanner.ts#L52): Scheduled seconds riding from stop index `from` to `to`, going forward around the loop (waits at the stops in…
+- `busLeg(route, stops, TransitStop>, bus, heading)` [src/lib/busPlanner.ts:80](../src/lib/busPlanner.ts#L80): Places a live bus on its route: on the stop-to-stop leg it's closest to, at a stop when near one. Loops pass…
+- `nextStopIndex(route, stops, TransitStop>, bus, heading)` [src/lib/busPlanner.ts:119](../src/lib/busPlanner.ts#L119): The stop a live bus serves next (index), or null if it can't be placed. A bus sitting at a stop is serving th…
+- `busEtaSeconds(route, stops, TransitStop>, bus, target, heading)` [src/lib/busPlanner.ts:125](../src/lib/busPlanner.ts#L125): Seconds until a live bus reaches stop index `target`.
+- `planBusTrips(network, origin, destination, buses)` [src/lib/busPlanner.ts:135](../src/lib/busPlanner.ts#L135): Bus options from `origin` to `destination` ([lng, lat]), best first. Uses live buses for waiting time when gi…
+- `formatMinutes(seconds)` [src/lib/busPlanner.ts:182](../src/lib/busPlanner.ts#L182): "Now", "1 min", "12 min": rounded minutes for people on the move.
+- `routeStatuses(network, buses, here)` [src/lib/busPlanner.ts:202](../src/lib/busPlanner.ts#L202): Every route with a stop sequence, for the "buses near you" list: running routes first, soonest bus at your ne…
 - `campusDateTime(day, clock)` [src/lib/events.ts:36](../src/lib/events.ts#L36): Instant for a campus-time date (YYYY-MM-DD) and clock (HH:MM); null when the input is malformed or the time d…
 - `nextWindow(event, now)` [src/lib/events.ts:43](../src/lib/events.ts#L43): Return the current or next weekly campus occurrence, or an unexpired one-off window.
 - `formatWindow(window)` [src/lib/events.ts:65](../src/lib/events.ts#L65): Format an event window as short English text in campus time.
@@ -136,7 +149,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `rest(path, init)` [src/lib/supabase.ts:88](../src/lib/supabase.ts#L88): PostgREST call. `path` starts with the table or `rpc/<fn>`; returns parsed JSON (or null for empty).
 - `upload(bucket, blob, ext)` [src/lib/supabase.ts:110](../src/lib/supabase.ts#L110): Uploads a blob under `<uid>/<uuid>.<ext>` in a public bucket and returns the object path.
 - `publicUrl(bucket, path)` [src/lib/supabase.ts:123](../src/lib/supabase.ts#L123): Public URL of an uploaded object.
-- `useGpsFix(auto = false)` [src/lib/useGpsFix.ts:15](../src/lib/useGpsFix.ts#L15): GPS fix for forms. Pass `auto` to ask as soon as the form opens. Fresh, high accuracy: these reports depend o…
+- `highlightRoutes(routeIds)` [src/lib/transitHighlight.ts:8](../src/lib/transitHighlight.ts#L8): Spotlights these routes and dims the rest; null (or an empty list) shows every route normally.
+- `onRouteHighlight(listener)` [src/lib/transitHighlight.ts:15](../src/lib/transitHighlight.ts#L15): Calls `listener` now and on every change; returns the unsubscribe function.
+- `loadTransitNetwork()` [src/lib/transitNetwork.ts:19](../src/lib/transitNetwork.ts#L19): Loads the network once; a failed download is forgotten so the next call tries again.
+- `parseNetwork(geojson)` [src/lib/transitNetwork.ts:34](../src/lib/transitNetwork.ts#L34): Turns the generated GeoJSON into routes and a stop index. Routes without a stop sequence are kept (drawn) but…
+- `useGpsFix(auto = false)` [src/lib/useGpsFix.ts:17](../src/lib/useGpsFix.ts#L17): GPS fix for forms. Pass `auto` to ask as soon as the form opens. Fresh, high accuracy: these reports depend o…
+- `useTransitNetwork()` [src/lib/useTransit.ts:10](../src/lib/useTransit.ts#L10): The network once loaded; `failed` when the download failed.
+- `useLiveBuses(network)` [src/lib/useTransit.ts:21](../src/lib/useTransit.ts#L21): Live buses every 10 s while mounted and the tab is visible. `updatedAt` is null until the first good answer;…
 - `useAuth()` [src/state/auth.tsx:63](../src/state/auth.tsx#L63): Reads the demo session and sign-in controls inside AuthProvider.
 - `useLayerFilters()` [src/state/layerFilters.tsx:72](../src/state/layerFilters.tsx#L72): Read and change the layer panel state from any component.
 - `useSelection()` [src/state/selection.tsx:42](../src/state/selection.tsx#L42): Read and change the current selection from any component.
@@ -153,11 +172,11 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PlanRoute` [src/indoor/FloorPlan.tsx:129](../src/indoor/FloorPlan.tsx#L129): Everything the plan needs to draw a route: the route, the legs on this level and which step is highlighted.
 - `RoutableIndoorRoom` [src/indoor/availability.ts:13](../src/indoor/availability.ts#L13): A routable (schematic) entry from `registry.ts#indoorRooms`, narrowed from the `IndoorRoom`
 - `BookableRoom` [src/indoor/availability.ts:21](../src/indoor/availability.ts#L21): A room with bookable demo amenities (T-60 reservations), with a ready-to-render display label.
-- `TimeWindow` [src/indoor/availability.ts:70](../src/indoor/availability.ts#L70): A half-open interval of instants: start is included and end is excluded.
-- `RoomQuery` [src/indoor/availability.ts:73](../src/indoor/availability.ts#L73): Filters for bookable rooms available throughout a time window.
-- `FreeRoom` [src/indoor/availability.ts:81](../src/indoor/availability.ts#L81): A matching room together with its demo amenities, ready for the results list and selection.
-- `AmenitiesById` [src/indoor/availability.ts:84](../src/indoor/availability.ts#L84): Demo amenities keyed by room selection id, e.g. `roomFinderDemo.ts#roomAmenitiesById`.
-- `DemoSlotPattern` [src/indoor/availability.ts:87](../src/indoor/availability.ts#L87): A fictional weekly booking recurring at campus-local HH:MM times.
+- `TimeWindow` [src/indoor/availability.ts:79](../src/indoor/availability.ts#L79): A half-open interval of instants: start is included and end is excluded.
+- `RoomQuery` [src/indoor/availability.ts:82](../src/indoor/availability.ts#L82): Filters for bookable rooms available throughout a time window.
+- `FreeRoom` [src/indoor/availability.ts:90](../src/indoor/availability.ts#L90): A matching room together with its demo amenities, ready for the results list and selection.
+- `AmenitiesById` [src/indoor/availability.ts:93](../src/indoor/availability.ts#L93): Demo amenities keyed by room selection id, e.g. `roomFinderDemo.ts#roomAmenitiesById`.
+- `DemoSlotPattern` [src/indoor/availability.ts:96](../src/indoor/availability.ts#L96): A fictional weekly booking recurring at campus-local HH:MM times.
 - `BookingRequest` [src/indoor/handoff.ts:5](../src/indoor/handoff.ts#L5): A request to open the reservations panel on one building, coming from an indoor room card.
 - `IndoorRoom` [src/indoor/registry.ts:24](../src/indoor/registry.ts#L24): A searchable indoor entry explicitly distinguishes drawn routes from published facts.
 - `Step` [src/indoor/route.ts:5](../src/indoor/route.ts#L5): One accessible instruction and the level on which it happens.
@@ -197,6 +216,12 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PostLocation` [src/lib/bulletinPosts.ts:11](../src/lib/bulletinPosts.ts#L11): A registered place a post is tied to: a building footprint or a room inside an indoor building ("buildingId:s…
 - `UserPost` [src/lib/bulletinPosts.ts:14](../src/lib/bulletinPosts.ts#L14): One saved post. Times are instants; the poster is a downscaled JPEG data URL.
 - `UserPostInput` [src/lib/bulletinPosts.ts:20](../src/lib/bulletinPosts.ts#L20): What the composer hands over; the server (or the local fallback) decides the audience from the account role.
+- `Motion` [src/lib/busMotion.ts:31](../src/lib/busMotion.ts#L31): What we know about a bus's motion: how long (ms) its GPS fixes have shown it in the same spot, and its direct…
+- `LiveBus` [src/lib/busPlanner.ts:17](../src/lib/busPlanner.ts#L17): A live bus as the planner needs it; `stillFor` is how long (ms) it has stood in the same spot, if known.
+- `BusOption` [src/lib/busPlanner.ts:20](../src/lib/busPlanner.ts#L20): One way to get there by bus. Times are seconds. `live` is false when no bus is running on the route right now.
+- `BusPlan` [src/lib/busPlanner.ts:41](../src/lib/busPlanner.ts#L41): The planner's answer: bus options (best first) and the plain walking time to compare against.
+- `BusLeg` [src/lib/busPlanner.ts:76](../src/lib/busPlanner.ts#L76): Where a live bus is on its route: at stop `at`, or driving the leg from `from` to `to` with `left` scheduled…
+- `RouteStatus` [src/lib/busPlanner.ts:188](../src/lib/busPlanner.ts#L188): One route's status for the bus list: is it running, its nearest stop to you, and the next bus there.
 - `GeolocationFailureReason` [src/lib/geolocation.ts:4](../src/lib/geolocation.ts#L4): Every real-world way `getCurrentPosition` can fail, each with its own honest, human message.
 - `Coordinates` [src/lib/geolocation.ts:24](../src/lib/geolocation.ts#L24): A GPS fix: WGS84 degrees plus the device's own reported accuracy radius in meters.
 - `RoomCategory` [src/lib/indoorPlan.ts:93](../src/lib/indoorPlan.ts#L93): Fill category for a space type: the `cims-room--<category>` class and its legend swatch.
@@ -225,10 +250,14 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `SearchMatch` [src/lib/search.ts:10](../src/lib/search.ts#L10): A matching name, alias or category and its highlight ranges.
 - `SearchResult` [src/lib/search.ts:17](../src/lib/search.ts#L17): A ranked place with an extensible group label and matches in displayable fields.
 - `CampusSearchResult` [src/lib/search.ts:137](../src/lib/search.ts#L137): A campus result selects its building, room or place directly.
+- `TransitStop` [src/lib/transitNetwork.ts:5](../src/lib/transitNetwork.ts#L5): One physical bus stop.
+- `RouteStop` [src/lib/transitNetwork.ts:8](../src/lib/transitNetwork.ts#L8): One stop in a route's served order, with the tracker's scheduled seconds to the next stop and at this stop.
+- `TransitRoute` [src/lib/transitNetwork.ts:11](../src/lib/transitNetwork.ts#L11): One bus route: official name, color, service-hours text and its stops in order (routes are loops).
+- `TransitNetwork` [src/lib/transitNetwork.ts:14](../src/lib/transitNetwork.ts#L14): Routes and stops of the network, plus the raw GeoJSON the map draws.
 - `GpsState` [src/lib/useGpsFix.ts:6](../src/lib/useGpsFix.ts#L6): State of the GPS request.
 - `AlertsOverlayOptions` [src/map/alertsOverlay.ts:16](../src/map/alertsOverlay.ts#L16): Options for the overlay.
 - `AlertsOverlayHandle` [src/map/alertsOverlay.ts:32](../src/map/alertsOverlay.ts#L32): Handle returned by the overlay: show/hide it (the layer panel toggle) and remove it.
-- `BusFeature` [src/map/transitLive.ts:21](../src/map/transitLive.ts#L21): One live bus: where it is and which route it is running.
+- `BusFeature` [src/map/transitLive.ts:22](../src/map/transitLive.ts#L22): One live bus: where it is and which route it is running.
 - `LayerContext` [src/map/types.ts:6](../src/map/types.ts#L6): What the host gives a layer so it can talk back to the app.
 - `LayerFilters` [src/map/types.ts:12](../src/map/types.ts#L12): Which categories and sub-types the user has switched off in the layer panel.
 - `LayerHandle` [src/map/types.ts:20](../src/map/types.ts#L20): What a layer returns from addTo so the host can drive it.
@@ -251,12 +280,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PortfolioEntrySeed` [src/portfolio/types.ts:47](../src/portfolio/types.ts#L47): What the Bulletin hook hands the adapter to create one entry; the adapter assigns id/accountId/photos.
 - `PortfolioAdapter` [src/portfolio/types.ts:50](../src/portfolio/types.ts#L50): Storage boundary. The local adapter keeps entries in this browser; a Supabase adapter would sit behind the sa…
 - `SheetSnap` [src/shell/BottomSheet.tsx:6](../src/shell/BottomSheet.tsx#L6): Sheet heights, smallest first.
-- `IconName` [src/shell/icons.tsx:22](../src/shell/icons.tsx#L22): Names of the shell icons.
-- `ShellPanel` [src/shell/icons.tsx:35](../src/shell/icons.tsx#L35): What the floating card / bottom sheet can show besides a map selection.
+- `IconName` [src/shell/icons.tsx:23](../src/shell/icons.tsx#L23): Names of the shell icons.
+- `ShellPanel` [src/shell/icons.tsx:36](../src/shell/icons.tsx#L36): What the floating card / bottom sheet can show besides a map selection.
 - `LayerFiltersApi` [src/state/layerFilters.tsx:20](../src/state/layerFilters.tsx#L20): What useLayerFilters() returns.
 - `SelectionKind` [src/state/selection.tsx:5](../src/state/selection.tsx#L5): Selectable map and search entities; room ids use "buildingId:spaceId".
 - `Selection` [src/state/selection.tsx:8](../src/state/selection.tsx#L8): One selected thing: what kind it is and its id inside that kind's data.
 - `SelectionApi` [src/state/selection.tsx:20](../src/state/selection.tsx#L20): What useSelection() returns.
+- `LocationPermission` [src/stories/LocationGate.tsx:6](../src/stories/LocationGate.tsx#L6): What the browser says about location permission; "unknown" where the Permissions API can't tell (older Safari…
 - `MapFocus` [src/stories/store.ts:9](../src/stories/store.ts#L9): A request to look at one place on the map; `nonce` makes repeats of the same spot count as new requests.
 - `ViewerRequest` [src/stories/store.ts:11](../src/stories/store.ts#L11): A subset of stories to show in the viewer (set when the user clicks the heat map).
 - `StoryKind` [src/stories/types.ts:5](../src/stories/types.ts#L5): A story is either a photo or a short clip, always captured live in the app.
@@ -281,7 +311,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingView()` [src/indoor/BuildingView.tsx:34](../src/indoor/BuildingView.tsx#L34): Opens registered buildings and resolves room selections straight into a routed building screen.
 - `FloorPlan(…)` [src/indoor/FloorPlan.tsx:132](../src/indoor/FloorPlan.tsx#L132): Renders one available level with controls and brings the route or the selected space into view.
 - `RoomSearch({ building, onChoose, onChooseRoom })` [src/indoor/RoomSearch.tsx:6](../src/indoor/RoomSearch.tsx#L6): Browses rooms by level on focus and chooses either a schematic space or published room fact.
-- `StackView(…)` [src/indoor/StackView.tsx:26](../src/indoor/StackView.tsx#L26): Every available level as a plate in one CSS 3D scene; click a plate to make it the active level.
+- `StackView(…)` [src/indoor/StackView.tsx:25](../src/indoor/StackView.tsx#L25): Exploded solid floor slabs; select levels or rooms and open the active level's detailed plan.
 - `AccountChip()` [src/panels/account/AccountChip.tsx:8](../src/panels/account/AccountChip.tsx#L8): Shows sign-in or the selected demo persona with a small sign-out disclosure.
 - `SignInDialog()` [src/panels/account/SignInDialog.tsx:10](../src/panels/account/SignInDialog.tsx#L10): Mounts a fresh theater flow whenever the demo sign-in dialog opens.
 - `BuildingCard()` [src/panels/building-card/BuildingCard.tsx:14](../src/panels/building-card/BuildingCard.tsx#L14): Shows the selected building (kind "building"), or nothing when something else is selected.
@@ -292,6 +322,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `PlaceCard()` [src/panels/building-card/PlaceCard.tsx:18](../src/panels/building-card/PlaceCard.tsx#L18): Shows the selected place's known details and correction link, or nothing without a place selection.
 - `BulletinBoard(…)` [src/panels/bulletin/BulletinBoard.tsx:86](../src/panels/bulletin/BulletinBoard.tsx#L86): Modal cork board with shared interests; the shell owns its URL, type and return focus.
 - `PostComposer(…)` [src/panels/bulletin/PostComposer.tsx:27](../src/panels/bulletin/PostComposer.tsx#L27): Modal form that creates a post for the signed-in account; reports the saved post, or closes without one.
+- `BusList({ here }, number] | null })` [src/panels/buses/BusList.tsx:48](../src/panels/buses/BusList.tsx#L48): Lists every route for the "which buses are around" view; `here` is the From place, else the GPS fix if allowe…
+- `BusOptions({ origin, destination }, number] | null; destination, number] })` [src/panels/buses/BusOptions.tsx:20](../src/panels/buses/BusOptions.tsx#L20): Lists bus options from `origin` (or the user's GPS position when null) to `destination`.
+- `BusesPanel()` [src/panels/buses/BusesPanel.tsx:12](../src/panels/buses/BusesPanel.tsx#L12): The panel body shown in the floating card (desktop) or bottom sheet (phone). The start is always your locatio…
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:68](../src/panels/layers/LayersPanel.tsx#L68): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `DoorStickers()` [src/panels/maintenance/DoorStickers.tsx:33](../src/panels/maintenance/DoorStickers.tsx#L33): Link and QR generator for the entrance stickers, one list per building.
 - `MaintenanceView({ onClose })` [src/panels/maintenance/MaintenanceView.tsx:66](../src/panels/maintenance/MaintenanceView.tsx#L66): Full-screen maintenance dashboard, opened from the menu (and by ?view=maintenance).
@@ -325,12 +358,13 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Rail({ panel, onPanel, onPolice, onMaintenance })` [src/shell/Rail.tsx:8](../src/shell/Rail.tsx#L8): Thin full-height rail. Arrow keys move between items; the active one carries the pill highlight.
 - `RoutePanel({ initialSelection, onClose })` [src/shell/RoutePanel.tsx:10](../src/shell/RoutePanel.tsx#L10): Loads the building index and hosts the directions fields inside the floating card or sheet.
 - `SearchPill(…)` [src/shell/SearchPill.tsx:7](../src/shell/SearchPill.tsx#L7): The pill. SearchPanel is mounted unchanged; CSS grid puts its field in the pill row and its list in the dropd…
-- `Shell()` [src/shell/Shell.tsx:82](../src/shell/Shell.tsx#L82): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
-- `Icon({ name, size = 24 })` [src/shell/icons.tsx:25](../src/shell/icons.tsx#L25): A 24px line icon in currentColor; decorative (aria-hidden).
+- `Shell()` [src/shell/Shell.tsx:83](../src/shell/Shell.tsx#L83): Lays out map surfaces and the full-screen bulletin, including URL navigation and return focus.
+- `Icon({ name, size = 24 })` [src/shell/icons.tsx:26](../src/shell/icons.tsx#L26): A 24px line icon in currentColor; decorative (aria-hidden).
 - `AuthProvider({ children, adapter = supabaseAuthAdapter })` [src/state/auth.tsx:18](../src/state/auth.tsx#L18): Provides demo identity and resumes a requested action after the success screen.
 - `LayerFiltersProvider({ children })` [src/state/layerFilters.tsx:33](../src/state/layerFilters.tsx#L33): Provides the layer filters to the app. Mount once, in App.
 - `SelectionProvider({ children })` [src/state/selection.tsx:29](../src/state/selection.tsx#L29): Provides the selection to the whole app. Mount once, in App.
-- `CameraCapture({ onCapture, onCancel })` [src/stories/CameraCapture.tsx:32](../src/stories/CameraCapture.tsx#L32): Full-height camera view. Calls `onCapture` with the media plus where it was taken; the caller decides what to…
+- `CameraCapture({ onCapture, onCancel })` [src/stories/CameraCapture.tsx:39](../src/stories/CameraCapture.tsx#L39): Full-screen camera view, like the phone's own app. Calls `onCapture` with the media plus where it was taken;…
+- `LocationGate({ gps, permission })` [src/stories/LocationGate.tsx:41](../src/stories/LocationGate.tsx#L41): Card over the camera until a GPS fix exists. Renders nothing once the fix is in.
 - `StoriesPanel({ onShowMap })` [src/stories/StoriesPanel.tsx:115](../src/stories/StoriesPanel.tsx#L115): The Stories tab. `onShowMap` switches the shell back to the map (after "View on map").
 
 ### Other exported functions & constants
@@ -349,16 +383,16 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BASEMAP_TILEJSON` [src/config.ts:21](../src/config.ts#L21): Vector basemap (ADR-0006 step 2): OpenFreeMap, free and keyless, OpenMapTiles schema.
 - `TILE_ATTRIBUTION` [src/config.ts:23](../src/config.ts#L23): Attribution OpenFreeMap and OpenStreetMap require next to the map.
 - `CORRECTION_URL` [src/config.ts:26](../src/config.ts#L26): Base URL for prefilled place correction issues.
-- `STACK_VIEW_ENABLED` [src/indoor/StackView.tsx:23](../src/indoor/StackView.tsx#L23): Shows the Plan | Stack toggle in the building header. Set to false to hide the stack view for a demo.
-- `bookableRoomsFor(rooms, amenitiesById, buildingId)` [src/indoor/availability.ts:24](../src/indoor/availability.ts#L24): Every bookable room in one building (its plain space/room name as the label), sorted alphabetically.
-- `favoriteRoomsFrom(rooms, amenitiesById, roomIds)` [src/indoor/availability.ts:47](../src/indoor/availability.ts#L47): Bookable rooms in `roomIds` across every building, labeled "Building · Room N" using each
-- `crossBuildingBookableRooms(rooms, amenitiesById)` [src/indoor/availability.ts:65](../src/indoor/availability.ts#L65): Every bookable room across every building, labeled "Building · Room" exactly like
-- `isRoomFree(id, slots, window)` [src/indoor/availability.ts:106](../src/indoor/availability.ts#L106): Whether a room has no overlapping valid slot; invalid windows return false.
-- `findFreeRooms(rooms, amenitiesById, slots, query)` [src/indoor/availability.ts:122](../src/indoor/availability.ts#L122): Finds free bookable rooms satisfying every filter, sorted by building title then room name.
-- `freeUntil(id, slots, from)` [src/indoor/availability.ts:139](../src/indoor/availability.ts#L139): Returns the earliest valid slot start strictly after from, ignoring ongoing slots, or null.
-- `nowWindow(now, minutes = 30)` [src/indoor/availability.ts:151](../src/indoor/availability.ts#L151): Creates an elapsed-time availability window without changing the supplied instant.
-- `campusTimeToday(now, time)` [src/indoor/availability.ts:186](../src/indoor/availability.ts#L186): Converts a campus-local "HH:MM" time on the same campus day as `now` to an instant, or null if invalid.
-- `expandDemoSlots(pattern, day)` [src/indoor/availability.ts:192](../src/indoor/availability.ts#L192): Expands weekly patterns for one campus-local day, skipping invalid or nonexistent DST times.
+- `STACK_VIEW_ENABLED` [src/indoor/StackView.tsx:22](../src/indoor/StackView.tsx#L22): Shows the Plan | Stack toggle in the building header. Set to false to hide the stack view for a demo.
+- `bookableRoomsFor(rooms, amenitiesById, buildingId)` [src/indoor/availability.ts:30](../src/indoor/availability.ts#L30): Every bookable room in one building, sorted alphabetically. The label prefers the published
+- `favoriteRoomsFrom(rooms, amenitiesById, roomIds)` [src/indoor/availability.ts:56](../src/indoor/availability.ts#L56): Bookable rooms in `roomIds` across every building, labeled "Building · Room N" using each
+- `crossBuildingBookableRooms(rooms, amenitiesById)` [src/indoor/availability.ts:74](../src/indoor/availability.ts#L74): Every bookable room across every building, labeled "Building · Room" exactly like
+- `isRoomFree(id, slots, window)` [src/indoor/availability.ts:115](../src/indoor/availability.ts#L115): Whether a room has no overlapping valid slot; invalid windows return false.
+- `findFreeRooms(rooms, amenitiesById, slots, query)` [src/indoor/availability.ts:131](../src/indoor/availability.ts#L131): Finds free bookable rooms satisfying every filter, sorted by building title then room name.
+- `freeUntil(id, slots, from)` [src/indoor/availability.ts:148](../src/indoor/availability.ts#L148): Returns the earliest valid slot start strictly after from, ignoring ongoing slots, or null.
+- `nowWindow(now, minutes = 30)` [src/indoor/availability.ts:160](../src/indoor/availability.ts#L160): Creates an elapsed-time availability window without changing the supplied instant.
+- `campusTimeToday(now, time)` [src/indoor/availability.ts:195](../src/indoor/availability.ts#L195): Converts a campus-local "HH:MM" time on the same campus day as `now` to an instant, or null if invalid.
+- `expandDemoSlots(pattern, day)` [src/indoor/availability.ts:201](../src/indoor/availability.ts#L201): Expands weekly patterns for one campus-local day, skipping invalid or nonexistent DST times.
 - `requestBooking(buildingId, roomId)` [src/indoor/handoff.ts:12](../src/indoor/handoff.ts#L12): Asks the shell to open the reservations panel on this building (room id is "buildingId:spaceId").
 - `peekBookingRequest()` [src/indoor/handoff.ts:18](../src/indoor/handoff.ts#L18): The latest booking request, if one has not been handled yet.
 - `clearBookingRequest()` [src/indoor/handoff.ts:21](../src/indoor/handoff.ts#L21): Marks the booking request as handled, so opening the panel later starts at its building picker again.
@@ -411,8 +445,8 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `addHatchPatterns(map)` [src/map/patterns/index.ts:38](../src/map/patterns/index.ts#L38): Registers the wall hatch patterns. Each starts as its flat ground color (so layers can use it right
 - `pinImageId(category, selected = false)` [src/map/pins.ts:16](../src/map/pins.ts#L16): Id of the image used for a category's pin. Base places (landmarks, buildings) use "base".
 - `addPins(map)` [src/map/pins.ts:52](../src/map/pins.ts#L52): Registers one normal and one selected (gold) pin per layer category, plus the navy "base" pin. Returns the id…
-- `TRACKER_URL` [src/map/transitLive.ts:4](../src/map/transitLive.ts#L4): The official tracker page: where "live tracking" links point.
-- `fetchBuses(routeNames, string>, signal?)` [src/map/transitLive.ts:24](../src/map/transitLive.ts#L24): Fetches fresh buses on known routes; throws on a failed tracker or invalid vehicle list.
+- `TRACKER_URL` [src/map/transitLive.ts:5](../src/map/transitLive.ts#L5): The official tracker page: where "live tracking" links point.
+- `fetchBuses(routeNames, string>, signal?)` [src/map/transitLive.ts:25](../src/map/transitLive.ts#L25): Fetches fresh buses on known routes; throws on a failed tracker or invalid vehicle list.
 - `formatWhen(iso)` [src/panels/report/ReportSummary.tsx:7](../src/panels/report/ReportSummary.tsx#L7): Formats an ISO timestamp for display in the viewer's locale.
 - `locationParts(location)` [src/panels/report/location.ts:7](../src/panels/report/location.ts#L7): Breadcrumb parts for a location: building › floor › room, or the outdoor pin coordinates.
 - `locationForId(id, floor, room)` [src/panels/report/location.ts:22](../src/panels/report/location.ts#L22): Builds a prefilled location for a place or building id (checks curated places first, then the OSM
@@ -427,11 +461,12 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `recordPortfolioEntry(session, post)` [src/portfolio/store.ts:56](../src/portfolio/store.ts#L56): Records a BuzzPrint entry from a Bulletin post, snapshotting the fields BulletinPost already has
 - `addPortfolioPhoto(accountId, entryId, photo)` [src/portfolio/store.ts:77](../src/portfolio/store.ts#L77): Attaches a photo to one of this account's entries and shows it immediately.
 - `setAdapter(next)` [src/portfolio/store.ts:84](../src/portfolio/store.ts#L84): Backend hook: replace the storage adapter before the first load.
-- `NAV_ITEMS` [src/shell/icons.tsx:38](../src/shell/icons.tsx#L38): The six destinations of the rail (desktop) and the tab bar (phones), in order.
-- `moveFocus(event, vertical)` [src/shell/icons.tsx:48](../src/shell/icons.tsx#L48): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
-- `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:13](../src/stories/CameraCapture.tsx#L13): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
+- `NAV_ITEMS` [src/shell/icons.tsx:39](../src/shell/icons.tsx#L39): The six destinations of the rail (desktop) and the tab bar (phones), in order.
+- `moveFocus(event, vertical)` [src/shell/icons.tsx:50](../src/shell/icons.tsx#L50): Roving focus for a row/column of nav buttons: arrows, Home and End move focus to the next item.
+- `onCampus(lat, lng)` [src/stories/CameraCapture.tsx:16](../src/stories/CameraCapture.tsx#L16): Is this point on (or right next to) campus? Stories can only be posted from there. `?storiesAnywhere=1` lifts…
+- `useLocationPermission()` [src/stories/LocationGate.tsx:9](../src/stories/LocationGate.tsx#L9): Live location permission. Updates by itself when the person flips the switch in the browser settings and come…
 - `ago(ms, now = Date.now()` [src/stories/StoriesPanel.tsx:13](../src/stories/StoriesPanel.tsx#L13): "now", "12m", "3h": how long ago, short like Instagram.
-- `demoStories(now = Date.now()` [src/stories/demoStories.ts:41](../src/stories/demoStories.ts#L41): Builds the fictional stories (created within the last ~20 h, so they never expire mid-session). Resolves empt…
+- `demoStories(now = Date.now()` [src/stories/demoStories.ts:43](../src/stories/demoStories.ts#L43): Builds the fictional stories (created within the last ~20 h, so they never expire mid-session). Resolves empt…
 - `STORY_TTL_MS` [src/stories/localAdapter.ts:8](../src/stories/localAdapter.ts#L8): Stories live 24 hours, like Instagram.
 - `localAdapter` [src/stories/localAdapter.ts:30](../src/stories/localAdapter.ts#L30): Stories stored on this device only (demo); swap for a backend adapter without touching the UI.
 - `subscribe(listener)` [src/stories/store.ts:32](../src/stories/store.ts#L32): Subscribe to any change (for non-React consumers such as the map layer). Returns the unsubscribe function.

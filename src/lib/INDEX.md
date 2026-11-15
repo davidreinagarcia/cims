@@ -12,6 +12,8 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`bulletin.ts`](bulletin.ts): Pure bulletin posts, campus-time labels, filters, counts and deep links. · exports `POST_TYPES`, `bulletinPosts`, `postsFor`, `filterPosts`, `countByType`, `bulletinUrl`, `readBulletinParams`
 - [`bulletinInterests.ts`](bulletinInterests.ts): Bulletin "Interested" marks on Supabase (shared counts, one mark per account and post); localStorage only whe… · exports `loadInterests`, `setInterest`
 - [`bulletinPosts.ts`](bulletinPosts.ts): User-written bulletin posts (orgs and people): Supabase table with a localStorage fallback, plus a tiny live… · exports `audienceFor`, `subscribeUserPosts`, `getUserPosts`, `refreshUserPosts`, `createUserPost`, `canDeletePost`, `deleteUserPost`, `userPostFeatures`
+- [`busMotion.ts`](busMotion.ts): Remembers where each live bus was between polls, to tell how long it has been standing still and which way it… · exports `bearingDegrees`, `recordMotion`, `stoppedText`, `compassWord`
+- [`busPlanner.ts`](busPlanner.ts): Bus trip planner: which GT routes take you from here to there, in the right direction, ranked by when you'd a… · exports `MAX_WALK_TO_STOP_M`, `walkSeconds`, `rideSeconds`, `busLeg`, `nextStopIndex`, `busEtaSeconds`, `planBusTrips`, `formatMinutes`, `routeStatuses`
 - [`events.ts`](events.ts): Pure event windows and short labels in the America/New_York campus timezone. · exports `campusDateTime`, `nextWindow`, `formatWindow`
 - [`geolocation.ts`](geolocation.ts): Typed wrapper around the browser Geolocation API (T-61) plus haversine distance math, shared by "Rooms near m… · exports `GeolocationError`, `getCurrentPosition`, `haversineMeters`, `formatDistance`
 - [`hours.ts`](hours.ts): Pure opening status and weekday lookup in the campus timezone. · exports `campusDay`, `openStatus`
@@ -37,6 +39,9 @@ Shared, reusable helpers and typed data access. Check `docs/FUNCTIONS.md` before
 - [`search.ts`](search.ts): Ranked building, room and place search with accent folding and original-text match ranges. · exports `searchPlaces`, `searchCampus`
 - [`suggest.ts`](suggest.ts): Search-as-you-type suggestions (short ranked list, nothing until typed) and where a result sits on the map. · exports `suggest`, `locate`, `recents`, `remember`
 - [`supabase.ts`](supabase.ts): Tiny Supabase client (REST + anonymous auth + Storage over fetch, no SDK) shared by the reports and stories a… · exports `SUPABASE_REALTIME`, `BackendDown`, `withFallback`, `signInWithPassword`, `signOutSupabase`, `currentAccount`, `session`, `accountId`, `rest`, `upload`, `publicUrl`
+- [`transitHighlight.ts`](transitHighlight.ts): Which bus routes the map should spotlight (the trip planner's results), as a tiny shared store the transport… · exports `highlightRoutes`, `onRouteHighlight`
+- [`transitNetwork.ts`](transitNetwork.ts): The GT bus network from src/data/transit.geojson as routes with ordered stops, loaded once and shared by the… · exports `loadTransitNetwork`, `parseNetwork`
 - [`useGpsFix.ts`](useGpsFix.ts): React hook around the one-shot GPS fix: request on demand (or on mount), with idle / locating / ok / error st… · exports `useGpsFix`
+- [`useTransit.ts`](useTransit.ts): React hooks for the bus panels: the transit network (loaded once) and live buses polled while the panel is op… · exports `useTransitNetwork`, `useLiveBuses`
 
 <!-- AUTO:END -->
