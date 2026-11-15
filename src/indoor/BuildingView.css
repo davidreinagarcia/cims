@@ -150,7 +150,9 @@
 .building-view[data-phone] .building-view__tools { flex-wrap: wrap; }
 .building-view[data-phone] .building-view__search { width: auto; flex: 1 1 100%; order: 2; }
 .building-view__level-pills { flex: none; display: flex; gap: var(--s2); padding: 0 var(--s3) var(--s2); overflow-x: auto; scrollbar-width: none; }
-.building-view__level-pills button { flex: none; min-width: 52px; height: 36px; border-radius: 8px; font-size: var(--fs-md); }
+.building-view[data-phone] .building-view__view-toggle { flex: none; }
+.building-view[data-phone] .building-view__view-toggle button { min-height: 32px; padding: 0 var(--s2); font-size: var(--fs-xs); }
+.building-view__level-pills > button { flex: none; min-width: 44px; height: 36px; border-radius: 8px; font-size: var(--fs-md); }
 .building-view[data-phone] .building-view__body { display: flex; flex-direction: column; gap: 0; padding: 0; }
 .building-view[data-phone] .building-view__frame { flex: 1; border-width: 1px 0 0; border-color: #CFC6B2; }
 .building-view[data-phone] .floor-plan__zoom { top: var(--s2); right: var(--s2); }

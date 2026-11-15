@@ -79,7 +79,8 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
   const [pickStart, setPickStart] = useState(false);
   const [changeStart, setChangeStart] = useState(false);
   const [activeStep, setActiveStep] = useState<number | null>(null);
-  const [view, setView] = useState<"plan" | "stack">("plan");
+  // ?indoor=stack opens straight in the stack view (demo links and screenshots).
+  const [view, setView] = useState<"plan" | "stack">(() => STACK_VIEW_ENABLED && new URLSearchParams(location.search).get("indoor") === "stack" ? "stack" : "plan");
   const [sheet, setSheet] = useState<"peek" | "open">(initialRoom || initialFact ? "open" : "peek");
   const [walking, setWalking] = useState(false); // phone: step-by-step route mode
   const [facts, setFacts] = useState(() => loadedBuildings()?.byId.get(building.building_id));
@@ -259,12 +260,13 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
             <li aria-current="page">{level?.name ?? "Building"}</li>
           </ol></nav>}
           {phone && <h2 id="indoor-title" className="building-view__title">{name}</h2>}
+          {phone && viewToggle}
         </div>
         {!phone && <h2 id="indoor-title" className="building-view__title">{name}</h2>}
         {!phone && !!facts?.aliases.length && <p className="building-view__alias">{facts.aliases.join(", ")}</p>}
       </div>
       <div className="building-view__tools">
-        {viewToggle}
+        {!phone && viewToggle}
         {(graph || building.rooms?.length) && <RoomSearch building={building} onChoose={chooseDestination}
           onChooseRoom={(room) => { clearRoom(); setFact(room); if (room.level) setLevelId(room.level); setSheet("open"); }} />}
       </div>
