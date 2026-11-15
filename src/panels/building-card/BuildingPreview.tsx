@@ -1,6 +1,7 @@
 /** @file Short card for a building with an indoor map: name, thumbnail of the entrance floor, Open building map, Directions and Report an issue first, then the places inside as pictograms and the plan thumbnail. */
 import { useEffect, useState } from "react";
 import { loadBuildings, loadedBuildings } from "../../lib/buildings";
+import { requestBookingsView } from "../../indoor/handoff";
 import { openIndoor, useOpenIndoor } from "../../indoor/open";
 import { indoorFor } from "../../indoor/registry";
 import { useAuth } from "../../state/auth";
@@ -48,6 +49,7 @@ export default function BuildingPreview() {
         {directions ? <a className="cims-btn" href={directions} target="_blank" rel="noopener noreferrer">Directions</a>
           : <button type="button" className="cims-btn" onClick={() => select(null)}>Close</button>}
         <button type="button" className="cims-btn" onClick={handleReportIssue}>Report an issue</button>
+        <button type="button" className="cims-btn" onClick={requestBookingsView}>Go back to bookings</button>
       </div>
       {!session && <p className="cims-muted"><small>Reporting requires sign-in</small></p>}
       <InsidePlaces buildingId={building.building_id} />

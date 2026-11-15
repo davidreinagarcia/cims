@@ -1,6 +1,7 @@
 /** @file Step 2 of reserving a room (T-60/T-61/T-62): day/time grid of 30-minute slots per bookable room (own building, a cross-building favorites list, or a "rooms near me" list), the booking flow and an optional "only free right now" filter. "My bookings" (check-in, cancel, directions) is a top-level section, `MyBookingsSection.tsx`. */
 import { useCallback, useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent } from "react";
 import { campusTimeToday, expandDemoSlots, isRoomFree, type BookableRoom } from "../../indoor/availability";
+import { requestBookingsView } from "../../indoor/handoff";
 import { demoSlotPatterns } from "../../indoor/roomFinderDemo";
 import type { AvailabilitySlot } from "../../indoor/types";
 import { preferredRoomsService, type PreferredRoom } from "../../lib/preferredRooms";
@@ -383,6 +384,7 @@ export default function ReservationGrid({ rooms, onlyAvailable = false }: { room
               {booking ? "Reserving…" : "Reserve"}
             </button>
             <button type="button" className="cims-btn" onClick={() => setSelection(null)}>Clear</button>
+            <button type="button" className="cims-btn" onClick={requestBookingsView}>My bookings</button>
           </div>
           <p className="cims-muted">
             After reserving, check in within {CHECKIN_WINDOW_MINUTES} minutes of the start time using this device's location

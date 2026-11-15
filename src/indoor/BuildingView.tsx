@@ -7,7 +7,7 @@ import { useSelection } from "../state/selection";
 import { useAuth } from "../state/auth";
 import { expandDemoSlots, freeUntil, isRoomFree, nowWindow } from "./availability";
 import FloorPlan, { type PlanRoute } from "./FloorPlan";
-import { requestBooking } from "./handoff";
+import { requestBooking, requestBookingsView } from "./handoff";
 import RoomSearch from "./RoomSearch";
 import { roomAmenitiesById, demoSlotPatterns } from "./roomFinderDemo";
 import { findRoute, type IndoorRoute } from "./route";
@@ -182,7 +182,7 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
 
   const roomCard = selected ? <RoomCard building={building} space={selected} levelName={selectedLevel?.name}
     onBook={() => requestBooking(building.building_id, `${building.building_id}:${selected.id}`)}
-    onReport={() => report(selected, selectedLevel?.label)} onClose={clearRoom} /> : fact ? <FactCard fact={fact} onReport={() => report(fact, fact.level ?? undefined)} onClose={clearRoom} /> : null;
+    onReport={() => report(selected, selectedLevel?.label)} onBookings={requestBookingsView} onClose={clearRoom} /> : fact ? <FactCard fact={fact} onReport={() => report(fact, fact.level ?? undefined)} onBookings={requestBookingsView} onClose={clearRoom} /> : null;
 
   const directions = route && destination && <section className="building-view__directions" aria-labelledby="steps-title">
     <div className="building-view__directions-head">
@@ -317,8 +317,8 @@ function BuildingScreen({ building, initialRoom, initialFact }: { building: Indo
   </section>;
 }
 
-/** Floating room card: name, real room number and capacity only when published, demo features and availability, Book and Report. */
-function RoomCard({ building, space, levelName, onBook, onReport, onClose }: { building: IndoorBuilding; space: IndoorSpace; levelName?: string; onBook: () => void; onReport: () => void; onClose: () => void }) {
+/** Floating room card: name, real room number and capacity only when published, demo features and availability, Book, Report and Go back to bookings. */
+function RoomCard({ building, space, levelName, onBook, onReport, onBookings, onClose }: { building: IndoorBuilding; space: IndoorSpace; levelName?: string; onBook: () => void; onReport: () => void; onBookings: () => void; onClose: () => void }) {
   const id = `${building.building_id}:${space.id}`;
   const amenities = roomAmenitiesById.get(id);
   const availability = demoAvailability(id);
@@ -343,12 +343,13 @@ function RoomCard({ building, space, levelName, onBook, onReport, onClose }: { b
     <div className="building-view__room-actions">
       {amenities?.bookable && <button type="button" className="cims-btn cims-btn--primary cims-btn--block" onClick={onBook}>Book this room</button>}
       <button type="button" className="cims-btn cims-btn--block" onClick={onReport}>Report an issue</button>
+      <button type="button" className="cims-btn cims-btn--block" onClick={onBookings}>Go back to bookings</button>
     </div>
   </section>;
 }
 
 /** Card for a published room that has no shape on the plan yet. */
-function FactCard({ fact, onReport, onClose }: { fact: RoomFact; onReport: () => void; onClose: () => void }) {
+function FactCard({ fact, onReport, onBookings, onClose }: { fact: RoomFact; onReport: () => void; onBookings: () => void; onClose: () => void }) {
   return <section className="building-view__room" aria-labelledby="room-title">
     <div className="building-view__room-head">
       <span className="cims-caps building-view__eyebrow">Room {fact.room}{fact.level ? ` · Level ${fact.level}` : ""}</span>
@@ -360,7 +361,10 @@ function FactCard({ fact, onReport, onClose }: { fact: RoomFact; onReport: () =>
       <div><dt>Capacity</dt><dd>{fact.capacity != null ? `${fact.capacity} seats` : "Unknown"}</dd></div>
     </dl>
     <p className="building-view__fine">Not drawn on the plan yet, so no directions. <a href={fact.source_url} target="_blank" rel="noopener noreferrer">Source</a></p>
-    <div className="building-view__room-actions"><button type="button" className="cims-btn cims-btn--block" onClick={onReport}>Report an issue</button></div>
+    <div className="building-view__room-actions">
+      <button type="button" className="cims-btn cims-btn--block" onClick={onReport}>Report an issue</button>
+      <button type="button" className="cims-btn cims-btn--block" onClick={onBookings}>Go back to bookings</button>
+    </div>
   </section>;
 }
 
