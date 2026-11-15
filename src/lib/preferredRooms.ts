@@ -1,5 +1,6 @@
 /** @file Preferred ("favorite") rooms contracts (T-60) and the one place that picks the backend adapter. */
 import { createLocalPreferredRoomsService } from "./preferredRooms.mock";
+import { createSupabasePreferredRoomsService } from "./preferredRooms.supabase";
 
 /** One room an account heart-favorited, for the "Preferred rooms" shortcut (T-60). */
 export interface PreferredRoom {
@@ -29,5 +30,5 @@ export interface PreferredRoomsService {
   remove(room: string, accountId: string): Promise<void>;
 }
 
-/** The favorites backend used by the app. Swap the adapter here (and only here) when ADR-0005 is decided. */
-export const preferredRoomsService: PreferredRoomsService = createLocalPreferredRoomsService();
+/** The favorites backend used by the app. Supabase, with the local mock as offline fallback. */
+export const preferredRoomsService: PreferredRoomsService = createSupabasePreferredRoomsService(createLocalPreferredRoomsService());

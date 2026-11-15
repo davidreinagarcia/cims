@@ -1,5 +1,6 @@
 /** @file Staff queue (US-10.4, demo persona): reports for one team, grouped by building, sorted by +1, with a status dropdown. */
 import { useCallback, useEffect, useState } from "react";
+import { staffTeam, type Role } from "../../auth/types";
 import { TEAMS, type Team } from "../../lib/issue-routing";
 import { STATUS_LABEL, reportsService, type IssueReport, type ReportStatus } from "../../lib/reports";
 import ReportSummary from "./ReportSummary";
@@ -20,8 +21,10 @@ function groupByBuilding(reports: IssueReport[]): { name: string; reports: Issue
 }
 
 /** Staff view of the report queue. Unlisted in the MVP: reached with ?panel=staff (optionally &team=IT). */
-export default function StaffQueue() {
+export default function StaffQueue({ role }: { role: Role }) {
+  const own = staffTeam(role); // staff only work their own team; moderators see all
   const [team, setTeam] = useState<Team>(() => {
+    if (own) return own;
     const wanted = new URLSearchParams(window.location.search).get("team")?.toLowerCase();
     return TEAMS.find((t) => t.toLowerCase() === wanted) ?? TEAMS[0];
   });
@@ -33,7 +36,7 @@ export default function StaffQueue() {
       setReports(await reportsService.listByTeam(which));
       setError(null);
     } catch {
-      setError("Couldn't load the queue from this device.");
+      setError("Couldn't load the queue.");
     }
   }, []);
 
@@ -46,8 +49,8 @@ export default function StaffQueue() {
     try {
       await reportsService.setStatus(id, status);
       await load(team);
-    } catch {
-      setError("Couldn't save the new status.");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Couldn't save the new status.");
     }
   }
 
@@ -57,13 +60,13 @@ export default function StaffQueue() {
     <div className="cims-report__body">
       <section className="cims-section">
         <p className="cims-tag cims-tag--alert cims-report__proto">
-          <span aria-hidden="true">⚠</span> Prototype: not sent to Facilities/IT yet
+          <span aria-hidden="true">⚠</span> Demo queue: not connected to real GT systems
         </p>
         <p className="cims-muted cims-report__note">
-          Demo queue stored in this browser. Records tagged “Sample” are made-up examples.
+          Reports are shared through the backend. Records tagged “Sample” are made-up examples.
         </p>
         <div className="cims-report__teams" role="group" aria-label="Team">
-          {TEAMS.map((t) => (
+          {TEAMS.filter((t) => !own || t === own).map((t) => (
             <button key={t} type="button" className="cims-btn" aria-pressed={t === team} onClick={() => setTeam(t)}>
               {t === team && <span aria-hidden="true">✓ </span>}{t}
             </button>

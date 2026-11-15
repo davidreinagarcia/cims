@@ -12,7 +12,11 @@
     "setup:hooks": "git config core.hooksPath .githooks && git config merge.cims-generated.driver true",
     "data:check": "node scripts/data.mjs check",
     "data:verify": "node scripts/data.mjs verify",
-    "data:list": "node scripts/data.mjs list"
+    "data:list": "node scripts/data.mjs list",
+    "db:check": "node scripts/db.mjs check",
+    "db:status": "node scripts/db.mjs status",
+    "db:apply": "node scripts/db.mjs apply",
+    "db:accounts": "node scripts/db.mjs accounts"
   },
   "dependencies": {
     "@fontsource/barlow-condensed": "^5.3.0",

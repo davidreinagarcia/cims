@@ -6,7 +6,10 @@ Replaceable demo sign-in contract, fictional personas and local session persiste
 
 **Files**
 
+- [`accounts.json`](accounts.json): JSON array, 7 items
+- [`accounts.ts`](accounts.ts): The pre-created demo accounts (one per role) that the login button offers. Source of truth: accounts.json (al… · exports `DEMO_PASSWORD`, `DEMO_ACCOUNTS`
 - [`mockAdapter.ts`](mockAdapter.ts): Fictional demo accounts and best-effort local session storage, without authentication. · exports `DEMO_PERSONAS`, `mockAdapter`
-- [`types.ts`](types.ts): Replaceable sign-in contract for the front-end DEMO.
+- [`supabaseAdapter.ts`](supabaseAdapter.ts): Sign-in adapter on Supabase Auth: picks one of the pre-created demo accounts; falls back to the offline mock… · exports `supabaseAuthAdapter`
+- [`types.ts`](types.ts): Replaceable sign-in contract for the front-end DEMO. · exports `STAFF_ROLES`, `staffTeam`
 
 <!-- AUTO:END -->

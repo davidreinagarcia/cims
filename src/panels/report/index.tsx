@@ -1,5 +1,6 @@
 /** @file Report panel root, mounted in Shell's "report" slot: the flow (prefilled from a selection or a shared link) or, at ?staff=1, the staff queue. */
 import { useCallback, useEffect, useState } from "react";
+import { STAFF_ROLES } from "../../auth/types";
 import { useAuth } from "../../state/auth";
 import { useSelection } from "../../state/selection";
 import "./report.css";
@@ -56,14 +57,14 @@ export default function ReportPanel({ onClose }: { onClose: () => void }) {
   return <>{toggle}<ReportFlow location={location} reportId={params.get("report")} navigate={navigate} /></>;
 }
 
-/** Blocks the staff queue (US-10.4) behind the demo "staff" role; the URL itself stays unlisted. */
+/** Blocks the staff queue (US-10.4) behind the staff accounts (maintenance, IT, police, moderator); the URL itself stays unlisted. */
 function StaffGate() {
   const { session, openDialog } = useAuth();
-  if (session?.role === "staff") return <StaffQueue />;
+  if (session && STAFF_ROLES.includes(session.role)) return <StaffQueue role={session.role} />;
   return (
     <div className="cims-report__body">
       <p className="cims-empty" role="status">
-        Staff queue: sign in with the Demo Facilities Staff persona to continue.
+        Staff queue: sign in with a maintenance, IT, police or moderator account to continue.
       </p>
       <div className="cims-actions">
         <button type="button" className="cims-btn cims-btn--primary" onClick={openDialog}>

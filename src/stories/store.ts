@@ -2,7 +2,7 @@
 import { useSyncExternalStore } from "react";
 import type { Session } from "../auth/types";
 import { demoStories } from "./demoStories";
-import { localAdapter } from "./localAdapter";
+import { supabaseStoriesAdapter } from "./supabaseAdapter";
 import type { Capture, Story, StoriesAdapter } from "./types";
 
 /** A request to look at one place on the map; `nonce` makes repeats of the same spot count as new requests. */
@@ -17,7 +17,7 @@ function loadHeat(): boolean {
   try { return localStorage.getItem(HEAT_KEY) !== "off"; } catch { return true; }
 }
 
-let adapter: StoriesAdapter = localAdapter;
+let adapter: StoriesAdapter = supabaseStoriesAdapter;
 let state: State = { stories: [], loaded: false, viewer: null, focus: null, heat: loadHeat() };
 let starting: Promise<void> | null = null;
 let nonce = 0;
