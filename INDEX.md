@@ -25,6 +25,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
     - [`docs/design/references/`](docs/design/references/INDEX.md): Reference images (Gemini mockups). Mood references, not specs; their data is fake.
     - [`docs/design/screenshots/`](docs/design/screenshots/INDEX.md): Before/after screenshots of the real app, taken for PRs (production build, headless Chromium). Named <task-<s…
       - [`docs/design/screenshots/app-shell/`](docs/design/screenshots/app-shell/INDEX.md): Map-first shell (APP-SHELL.md), production build in headless Chromium at 1440, 1280, 390 and 360 px: empty ma…
+      - [`docs/design/screenshots/bulletin/`](docs/design/screenshots/bulletin/INDEX.md): Production screenshots at 1440, 1280, 390 and 360 px: map, full-screen cork board and the empty Lost & Found…
   - [`docs/research/`](docs/research/INDEX.md): Fuentes y dudas pendientes de las investigaciones de datos del campus.
   - [`docs/testing/`](docs/testing/INDEX.md): Test plans with people (hallway tests).
 - [`public/`](public/INDEX.md): Static assets served as-is at the site root.
@@ -44,7 +45,7 @@ Merging: **[MERGING-TO-MAIN](docs/MERGING-TO-MAIN.md)** · How indexes stay curr
   - [`src/panels/`](src/panels/INDEX.md): Panels, one folder per panel, shown in the floating card / bottom sheet. Mount new ones in shell/Shell.tsx.
     - [`src/panels/account/`](src/panels/account/INDEX.md): Account chip and accessible DEMO sign-in theater using the existing survey map design.
     - [`src/panels/building-card/`](src/panels/building-card/INDEX.md): Detail card for the selected place (grows into the building card, T-11).
-    - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Read-only upcoming events in campus time with map selection and explicit fictional demo labels.
+    - [`src/panels/bulletin/`](src/panels/bulletin/INDEX.md): Full-screen cork board with campus-time posts, URL filters, device-local interests and map selection; demo po…
     - [`src/panels/layers/`](src/panels/layers/INDEX.md): Layer toggles and legend (F-02): category switches, sub-type tree, phone chips.
     - [`src/panels/search/`](src/panels/search/INDEX.md): Search box and list of places (rooms and buildings join in T-14).
   - [`src/pwa/`](src/pwa/INDEX.md): Offline support: the service worker template. vite.config.ts fills in the precache list and emits it as /sw.j…
