@@ -17,6 +17,8 @@
 
 .cims-location-marker { width: 128px; height: 128px; pointer-events: none; }
 .cims-location-marker svg { display: block; overflow: visible; }
+.cims-location-pin { pointer-events: none; opacity: 0; transition: opacity .2s; }
+.cims-location-pin svg { display: block; filter: drop-shadow(0 2px 2px rgba(0,30,54,.4)); }
 @media (prefers-reduced-motion: no-preference) {
   .cims-location-marker__rings { animation: cims-location-rings 2.5s ease-in-out infinite; transform-origin: 0 0; }
 }

@@ -16,6 +16,7 @@ export class LocateControl implements IControl {
   private status?: HTMLElement;
   private watch?: number;
   private marker?: Marker;
+  private pin?: Marker;
   private fix?: GeolocationCoordinates;
   private enabled = false;
   private ready = false;
@@ -31,6 +32,7 @@ export class LocateControl implements IControl {
     if (this.watch !== undefined) navigator.geolocation.clearWatch(this.watch);
     this.watch = undefined;
     this.marker?.remove();
+    this.pin?.remove();
     this.fix = undefined;
   };
 
@@ -54,6 +56,8 @@ export class LocateControl implements IControl {
     this.fix = coords;
     this.resize();
     this.marker?.setLngLat([lng, lat]).addTo(map);
+    this.pin?.setLngLat([lng, lat]).addTo(map);
+    this.tilt();
     if (this.firstFix) {
       this.firstFix = false;
       const [[west, south], [east, north]] = CAMPUS.bounds;
@@ -124,19 +128,20 @@ export class LocateControl implements IControl {
 
   private resize = () => {
     if (!this.map || !this.marker || !this.fix) return;
-    // Web Mercator uses 512 CSS pixels per world tile, independent of device pixel ratio.
-    const metersPerPixel = 40_075_016.686 * Math.cos(this.fix.latitude * Math.PI / 180)
-      / (512 * 2 ** this.map.getZoom());
-    const radius = Math.max(34, Math.min(60, this.fix.accuracy / metersPerPixel));
-    const element = this.marker.getElement();
-    element.querySelector("[data-accuracy]")?.setAttribute("r", String(radius));
-    const arrow = element.querySelector<SVGElement>("[data-heading]");
+    // Fixed on-screen size at every zoom: the ring is a "you are here" icon, not a GPS accuracy circle.
+    const arrow = this.marker.getElement().querySelector<SVGElement>("[data-heading]");
     if (arrow) {
       const heading = this.fix.heading;
       const hasHeading = heading !== null && Number.isFinite(heading);
       arrow.style.display = hasHeading ? "" : "none";
-      arrow.setAttribute("transform", `rotate(${hasHeading ? heading : 0}) translate(0 ${-radius})`);
+      arrow.setAttribute("transform", `rotate(${hasHeading ? heading : 0}) translate(0 -34)`);
     }
+  };
+
+  /** Shows the upright pin only while the map is tilted (3D view). */
+  private tilt = () => {
+    const pin = this.pin?.getElement();
+    if (pin) pin.style.opacity = (this.map?.getPitch() ?? 0) > 8 ? "1" : "0";
   };
 
   private loaded = async () => {
@@ -167,7 +172,16 @@ export class LocateControl implements IControl {
         font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="7">CIMS</text>
     </svg>`;
     this.marker = new Marker({ element, anchor: "center", pitchAlignment: "map", rotationAlignment: "map" });
-    map.on("zoom", this.resize);
+    const pin = document.createElement("div");
+    pin.className = "cims-location-pin";
+    pin.setAttribute("aria-hidden", "true");
+    pin.innerHTML = `<svg width="30" height="44" viewBox="0 0 30 44">
+      <ellipse cx="15" cy="40" rx="6" ry="2.5" fill="#001E36" opacity=".35"/>
+      <path d="M15 39 3 18a13 13 0 1 1 24 0Z" fill="#003057" stroke="#B3A369" stroke-width="1.5"/>
+      <circle cx="15" cy="14" r="5" fill="#B3A369"/>
+    </svg>`;
+    this.pin = new Marker({ element: pin, anchor: "bottom", pitchAlignment: "viewport", rotationAlignment: "viewport" });
+    map.on("pitch", this.tilt);
     this.ready = true;
     if (this.button) this.button.disabled = false;
     void this.request(true);
@@ -200,8 +214,9 @@ export class LocateControl implements IControl {
     this.clear();
     document.removeEventListener("visibilitychange", this.visibility);
     this.map?.off("load", this.loaded);
-    this.map?.off("zoom", this.resize);
+    this.map?.off("pitch", this.tilt);
     this.marker = undefined;
+    this.pin = undefined;
     this.button?.removeEventListener("click", this.click);
     this.el?.remove();
     this.map = undefined;
