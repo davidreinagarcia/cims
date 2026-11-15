@@ -2,6 +2,7 @@
 import { useEffect, useRef } from "react";
 import { setCulture, setGuide, setNote, setReader, useCulture } from "../../culture/store";
 import { CULTURE_NOTES, doodleFor } from "../../culture/notes";
+import Glyph from "../../components/Glyph";
 
 /** Shown while the culture layer is on; mount once in the shell. */
 export default function CultureReader() {
@@ -10,7 +11,7 @@ export default function CultureReader() {
   useEffect(() => { card.current?.scrollTo({ top: 0 }); }, [note]);
   if (!on) return null;
   if (!reader) {
-    return <button type="button" className="culture-reader__reopen" onClick={() => setNote(note)}>📝 My notes</button>;
+    return <button type="button" className="culture-reader__reopen" onClick={() => setNote(note)}><Glyph id="culture" size={18} /> My notes</button>;
   }
   const index = CULTURE_NOTES.findIndex((n) => n.id === note);
   const current = index >= 0 ? CULTURE_NOTES[index] : undefined;

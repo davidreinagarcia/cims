@@ -15,6 +15,7 @@ const PATHS: Record<string, string> = {
   health: "M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6Z",
   issues: "M12 3 21.5 20h-19Z M12 9.5v5M12 16.5v1.5",
   free: "M5 3h12v18H5Z M5 21h14 M14 11.5a1 1 0 1 0 0 1 1 1 0 0 0 0-1Z",
+  culture: "M5 4h14v11l-5 5H5Z M14 20v-5h5 M8 9h8 M8 12.5h5",
   building: "M5 3h10v18H5Z M15 9h4v12h-4 M8 7h1M11 7h1M8 11h1M11 11h1M8 15h1M11 15h1",
 };
 

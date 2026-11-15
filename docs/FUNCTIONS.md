@@ -171,7 +171,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `Session` [src/auth/types.ts:15](../src/auth/types.ts#L15): Fictional account selected on this device, with no authentication.
 - `Persona` [src/auth/types.ts:23](../src/auth/types.ts#L23): Fictional identity offered by the demo account picker.
 - `AuthAdapter` [src/auth/types.ts:32](../src/auth/types.ts#L32): Adapter boundary keeps sign-in implementation out of screens.
-- `GlyphId` [src/components/Glyph.tsx:30](../src/components/Glyph.tsx#L30): Known glyph ids: the layer categories plus "building".
+- `GlyphId` [src/components/Glyph.tsx:31](../src/components/Glyph.tsx#L31): Known glyph ids: the layer categories plus "building".
 - `CultureNote` [src/culture/notes.ts:5](../src/culture/notes.ts#L5): One sticky note: a sourced GT tradition pinned where it happens.
 - `PlanRoute` [src/indoor/FloorPlan.tsx:129](../src/indoor/FloorPlan.tsx#L129): Everything the plan needs to draw a route: the route, the legs on this level and which step is highlighted.
 - `RoutableIndoorRoom` [src/indoor/availability.ts:13](../src/indoor/availability.ts#L13): A routable (schematic) entry from `registry.ts#indoorRooms`, narrowed from the `IndoorRoom`
@@ -310,7 +310,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `App()` [src/App.tsx:8](../src/App.tsx#L8): Root component.
 - `AlertBanner({ banners, onDismiss })` [src/alerts/AlertBanner.tsx:14](../src/alerts/AlertBanner.tsx#L14): Stack of banners pinned to the top of the app; publishes its height as `--alert-h` so the shell makes room.
 - `TipNotifier({ onOpen })` [src/alerts/TipNotifier.tsx:21](../src/alerts/TipNotifier.tsx#L21): Props: `onOpen` is called with the tip when the toast is pressed (open the console / select the tip).
-- `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:38](../src/components/Glyph.tsx#L38): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
+- `Glyph({ id, size = 24, style })` [src/components/Glyph.tsx:39](../src/components/Glyph.tsx#L39): Draws a glyph in `currentColor`; set `--cat` or `color` on a parent to tint it.
 - `MapView()` [src/components/MapView.tsx:16](../src/components/MapView.tsx#L16): The interactive map. Knows nothing about what is drawn: layers do that.
 - `OfflineBanner()` [src/components/OfflineBanner.tsx:6](../src/components/OfflineBanner.tsx#L6): Listens to online and offline events and renders a status chip only while offline.
 - `BuildingView()` [src/indoor/BuildingView.tsx:34](../src/indoor/BuildingView.tsx#L34): Opens registered buildings and resolves room selections straight into a routed building screen.
@@ -331,7 +331,7 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BusList({ here }, number] | null })` [src/panels/buses/BusList.tsx:47](../src/panels/buses/BusList.tsx#L47): Lists every route for the "which buses are around" view; `here` is where you are (resolved by the panel), or…
 - `BusOptions({ origin, destination }, number]; destination, number] })` [src/panels/buses/BusOptions.tsx:19](../src/panels/buses/BusOptions.tsx#L19): Lists bus options from `origin` (your location or a picked place; the panel resolves it) to `destination`.
 - `BusesPanel()` [src/panels/buses/BusesPanel.tsx:39](../src/panels/buses/BusesPanel.tsx#L39): The panel body shown in the floating card (desktop) or bottom sheet (phone).
-- `CultureReader()` [src/panels/culture/CultureReader.tsx:7](../src/panels/culture/CultureReader.tsx#L7): Shown while the culture layer is on; mount once in the shell.
+- `CultureReader()` [src/panels/culture/CultureReader.tsx:8](../src/panels/culture/CultureReader.tsx#L8): Shown while the culture layer is on; mount once in the shell.
 - `HousingGuide()` [src/panels/culture/HousingGuide.tsx:8](../src/panels/culture/HousingGuide.tsx#L8): The West vs East dialog. Mount once in the shell; opens from the layers panel or the map's "West campus?" not…
 - `LayersPanel()` [src/panels/layers/LayersPanel.tsx:74](../src/panels/layers/LayersPanel.tsx#L74): The layer panel. Mount inside the sidebar's flex column. On phones the chips row is the quick
 - `DoorStickers()` [src/panels/maintenance/DoorStickers.tsx:33](../src/panels/maintenance/DoorStickers.tsx#L33): Link and QR generator for the entrance stickers, one list per building.
@@ -385,9 +385,9 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `supabaseAuthAdapter` [src/auth/supabaseAdapter.ts:8](../src/auth/supabaseAdapter.ts#L8): Real Supabase sessions for the demo accounts, so every row a person writes belongs to a real account with a s…
 - `STAFF_ROLES` [src/auth/types.ts:7](../src/auth/types.ts#L7): Roles that work the report queue.
 - `staffTeam(role)` [src/auth/types.ts:10](../src/auth/types.ts#L10): The report team a staff role works for; moderators see every team (null).
-- `SUBTYPE_GLYPHS` [src/components/Glyph.tsx:22](../src/components/Glyph.tsx#L22): Sub-types that get their own pictogram instead of their category's.
-- `placeGlyph(category, subtype?)` [src/components/Glyph.tsx:25](../src/components/Glyph.tsx#L25): Glyph id for a place: its sub-type's pictogram when it has one, else its category's.
-- `glyphPath(id)` [src/components/Glyph.tsx:33](../src/components/Glyph.tsx#L33): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
+- `SUBTYPE_GLYPHS` [src/components/Glyph.tsx:23](../src/components/Glyph.tsx#L23): Sub-types that get their own pictogram instead of their category's.
+- `placeGlyph(category, subtype?)` [src/components/Glyph.tsx:26](../src/components/Glyph.tsx#L26): Glyph id for a place: its sub-type's pictogram when it has one, else its category's.
+- `glyphPath(id)` [src/components/Glyph.tsx:34](../src/components/Glyph.tsx#L34): SVG path data of a glyph on the 24px grid (falls back to the building glyph). Used by Glyph and by the map pi…
 - `CAMPUS` [src/config.ts:3](../src/config.ts#L3): Central place for map settings. Change here, not inside components.
 - `MAP_LIGHT` [src/config.ts:18](../src/config.ts#L18): Fixed light for the extruded buildings: anchored to the map so wall shading doesn't change as you rotate.
 - `BASEMAP_TILEJSON` [src/config.ts:21](../src/config.ts#L21): Vector basemap (ADR-0006 step 2): OpenFreeMap, free and keyless, OpenMapTiles schema.
