@@ -23,16 +23,22 @@ async function load() {
   return res.json();
 }
 
-/** Decodes a Google encoded polyline (precision 5) into [lng, lat] pairs. */
+/** Decodes a Google encoded polyline (precision 5) into [lng, lat] pairs. Throws on a truncated string instead of inventing points. */
 function decodePolyline(str) {
   const out = [];
   let i = 0, lat = 0, lng = 0;
   const next = () => {
     let result = 0, shift = 0, b;
-    do { b = str.charCodeAt(i++) - 63; result |= (b & 0x1f) << shift; shift += 5; } while (b >= 0x20);
+    do {
+      if (i >= str.length) throw new Error("truncated polyline");
+      b = str.charCodeAt(i++) - 63;
+      result |= (b & 0x1f) << shift;
+      shift += 5;
+    } while (b >= 0x20);
     return result & 1 ? ~(result >> 1) : result >> 1;
   };
   while (i < str.length) { lat += next(); lng += next(); out.push([lng / 1e5, lat / 1e5]); }
+  if (out.length < 2) throw new Error("polyline has fewer than two points");
   return out;
 }
 
