@@ -6,9 +6,10 @@ Stories (T-70): live camera capture with GPS, the Stories tab viewer, the store 
 
 **Files**
 
-- [`CameraCapture.tsx`](CameraCapture.tsx): Live camera for stories: photo or up-to-15s video straight from getUserMedia, with the GPS fix taken at the m… · exports `onCampus`, `CameraCapture`
+- [`CameraCapture.tsx`](CameraCapture.tsx): Full-screen live camera for stories: photo or up-to-15s video from getUserMedia (zoom, flash, tap to focus),… · exports `onCampus`, `CameraCapture`
+- [`LocationGate.tsx`](LocationGate.tsx): Location step of the story camera: asks for GPS from a real tap (so the browser shows its permission prompt),… · exports `useLocationPermission`, `LocationGate`
 - [`StoriesPanel.tsx`](StoriesPanel.tsx): Stories tab: an Instagram-style viewer (tap through, auto-advance, "View on map"), plus the capture flow for… · exports `ago`, `StoriesPanel`
-- [`demoStories.ts`](demoStories.ts): Fictional seed stories clustered around busy buildings, so the heat map and viewer can be shown before anyone… · exports `demoStories`
+- [`demoStories.ts`](demoStories.ts): Fictional seed stories clustered around the Greek housing area, so the heat map and viewer can be shown befor… · exports `demoStories`
 - [`localAdapter.ts`](localAdapter.ts): Demo storage for stories: metadata and media blobs in this browser's IndexedDB, expired stories purged on rea… · exports `STORY_TTL_MS`, `localAdapter`
 - [`store.ts`](store.ts): Stories state without a provider: a tiny external store (list, viewer subset, map-focus requests) shared by t… · exports `subscribe`, `getState`, `ensureLoaded`, `useStories`, `liveStories`, `postStory`, `openViewer`, `closeViewer`, `focusOnMap`, `setAdapter`, `setHeat`
 - [`stories.css`](stories.css): Stories tab: viewer, camera and review. Hairlines instead of shadows, like the rest of the survey-map UI.

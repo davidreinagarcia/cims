@@ -1,4 +1,4 @@
-/** @file Phone bottom tab bar (replaces the rail under 768px): Explore, Rooms, Report, Bulletin, Stories, BuzzPrint. */
+/** @file Phone bottom tab bar (replaces the rail under 768px): Explore, Buses, Rooms, Report, Bulletin, Stories, BuzzPrint. */
 import { Icon, NAV_ITEMS, moveFocus, type ShellPanel } from "./icons";
 
 /** Fixed bottom bar above the safe-area inset. Left/right arrows move between tabs. */

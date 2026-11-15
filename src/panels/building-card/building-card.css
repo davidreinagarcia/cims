@@ -28,3 +28,6 @@
 .preview__outline { fill: var(--white); stroke: var(--navy); stroke-width: 6; }
 .preview__space { fill: var(--cat, #c9d3c0); stroke: var(--navy); stroke-width: 1.5; opacity: .85; }
 .detail.preview .cims-actions { grid-template-columns: 1fr 1fr; }
+.detail.preview .preview__actions { margin-top: var(--s2); }
+.preview__thumb { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: pointer; }
+.preview__thumb:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
