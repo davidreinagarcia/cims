@@ -38,23 +38,23 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `placeBuilding(place, index, all)` [src/lib/buildingPlaces.ts:11](../src/lib/buildingPlaces.ts#L11): Resolve explicit footprint ids, legacy seed building ids, then exact-point containment.
 - `loadedBuildings()` [src/lib/buildings.ts:84](../src/lib/buildings.ts#L84): The index if it is already loaded, so callers can answer synchronously.
 - `loadBuildings()` [src/lib/buildings.ts:89](../src/lib/buildings.ts#L89): Loads the footprints once; a failed load is forgotten so the next call retries.
-- `POST_TYPES` [src/lib/bulletin.ts:43](../src/lib/bulletin.ts#L43): Bulletin filters in display order, sharing organization labels with the layer catalog.
-- `bulletinPosts(now, written)` [src/lib/bulletin.ts:78](../src/lib/bulletin.ts#L78): Return ongoing and upcoming dated events or org posts (curated plus user-written), with ongoing entries first.
-- `postsFor(posts, audience)` [src/lib/bulletin.ts:128](../src/lib/bulletin.ts#L128): Keep only the posts of one tab (Orgs or People).
-- `filterPosts(posts, type, query?)` [src/lib/bulletin.ts:133](../src/lib/bulletin.ts#L133): Filter posts by type and the shared case/accent-insensitive search, retaining post order.
-- `countByType(posts)` [src/lib/bulletin.ts:158](../src/lib/bulletin.ts#L158): Count every post type and the unfiltered total, including categories with no posts.
-- `bulletinUrl(type)` [src/lib/bulletin.ts:165](../src/lib/bulletin.ts#L165): Build a bulletin deep link, omitting the type parameter for the all filter.
-- `readBulletinParams(search)` [src/lib/bulletin.ts:172](../src/lib/bulletin.ts#L172): Read bulletin visibility and a validated type filter from a query string.
+- `POST_TYPES` [src/lib/bulletin.ts:46](../src/lib/bulletin.ts#L46): Bulletin filters in display order, sharing organization labels with the layer catalog.
+- `bulletinPosts(now, written)` [src/lib/bulletin.ts:104](../src/lib/bulletin.ts#L104): Return ongoing and upcoming dated events or org posts (curated plus user-written), with ongoing entries first.
+- `postsFor(posts, tab)` [src/lib/bulletin.ts:159](../src/lib/bulletin.ts#L159): Keep only the posts of one tab: Alumni shows the alumni section, Orgs and People split the rest by author.
+- `filterPosts(posts, type, query?)` [src/lib/bulletin.ts:164](../src/lib/bulletin.ts#L164): Filter posts by type and the shared case/accent-insensitive search, retaining post order.
+- `countByType(posts)` [src/lib/bulletin.ts:189](../src/lib/bulletin.ts#L189): Count every post type and the unfiltered total, including categories with no posts.
+- `bulletinUrl(type)` [src/lib/bulletin.ts:196](../src/lib/bulletin.ts#L196): Build a bulletin deep link, omitting the type parameter for the all filter.
+- `readBulletinParams(search)` [src/lib/bulletin.ts:203](../src/lib/bulletin.ts#L203): Read bulletin visibility and a validated type filter from a query string.
 - `loadInterests()` [src/lib/bulletinInterests.ts:13](../src/lib/bulletinInterests.ts#L13): Loads every mark (public counts) and this account's own.
 - `setInterest(postId, on)` [src/lib/bulletinInterests.ts:24](../src/lib/bulletinInterests.ts#L24): Marks or unmarks one post as interesting for this account.
-- `audienceFor(role)` [src/lib/bulletinPosts.ts:38](../src/lib/bulletinPosts.ts#L38): Audience an account role posts under, or null when that role may not post (staff, moderators).
-- `subscribeUserPosts(listener)` [src/lib/bulletinPosts.ts:47](../src/lib/bulletinPosts.ts#L47): Subscribe to changes of the loaded posts; returns the unsubscribe function.
-- `getUserPosts()` [src/lib/bulletinPosts.ts:53](../src/lib/bulletinPosts.ts#L53): Current snapshot of the loaded posts (stable between changes).
-- `refreshUserPosts()` [src/lib/bulletinPosts.ts:56](../src/lib/bulletinPosts.ts#L56): Loads posts that have not ended yet and publishes them; failures keep what is already loaded.
-- `createUserPost(session, input)` [src/lib/bulletinPosts.ts:68](../src/lib/bulletinPosts.ts#L68): Saves a post for the signed-in account and adds it to the live store. Rule rejections (wrong role, too fast)…
-- `canDeletePost(session, post, "accountId">)` [src/lib/bulletinPosts.ts:91](../src/lib/bulletinPosts.ts#L91): Whether this account may delete a post: its author, or a moderator (the server enforces the same rule).
-- `deleteUserPost(id)` [src/lib/bulletinPosts.ts:96](../src/lib/bulletinPosts.ts#L96): Deletes a post and drops it from the live store. Rule rejections reach the caller.
-- `userPostFeatures()` [src/lib/bulletinPosts.ts:105](../src/lib/bulletinPosts.ts#L105): Map anchors for the loaded posts: one orgs-layer point per post at its building's centre (none until footprin…
+- `audienceFor(role)` [src/lib/bulletinPosts.ts:41](../src/lib/bulletinPosts.ts#L41): Audience an account role posts under, or null when that role may not post (staff, moderators).
+- `subscribeUserPosts(listener)` [src/lib/bulletinPosts.ts:50](../src/lib/bulletinPosts.ts#L50): Subscribe to changes of the loaded posts; returns the unsubscribe function.
+- `getUserPosts()` [src/lib/bulletinPosts.ts:56](../src/lib/bulletinPosts.ts#L56): Current snapshot of the loaded posts (stable between changes).
+- `refreshUserPosts()` [src/lib/bulletinPosts.ts:59](../src/lib/bulletinPosts.ts#L59): Loads posts that have not ended yet and publishes them; failures keep what is already loaded.
+- `createUserPost(session, input)` [src/lib/bulletinPosts.ts:71](../src/lib/bulletinPosts.ts#L71): Saves a post for the signed-in account and adds it to the live store. Rule rejections (wrong role, too fast)…
+- `canDeletePost(session, post, "accountId">)` [src/lib/bulletinPosts.ts:95](../src/lib/bulletinPosts.ts#L95): Whether this account may delete a post: its author, or a moderator (the server enforces the same rule).
+- `deleteUserPost(id)` [src/lib/bulletinPosts.ts:100](../src/lib/bulletinPosts.ts#L100): Deletes a post and drops it from the live store. Rule rejections reach the caller.
+- `userPostFeatures()` [src/lib/bulletinPosts.ts:109](../src/lib/bulletinPosts.ts#L109): Map anchors for the loaded posts: one orgs-layer point per post at its building's centre (none until footprin…
 - `bearingDegrees(a, b)` [src/lib/busMotion.ts:21](../src/lib/busMotion.ts#L21): Compass bearing in degrees (0 = north, clockwise) from `a` to `b`.
 - `recordMotion(buses, now = Date.now()` [src/lib/busMotion.ts:36](../src/lib/busMotion.ts#L36): Records one poll's positions, each with the time of its GPS fix, and returns each bus's motion.
 - `stoppedText(stillFor)` [src/lib/busMotion.ts:57](../src/lib/busMotion.ts#L57): "Stopped for 3 min" once a bus has stood still at least 90 seconds (`stillFor` in ms); null while it moves.
@@ -226,13 +226,15 @@ This file is regenerated automatically. Edit only the text above the AUTO marker
 - `BuildingPhoto` [src/lib/buildingPhotos.ts:5](../src/lib/buildingPhotos.ts#L5): One building photo and its attribution.
 - `Building` [src/lib/buildings.ts:5](../src/lib/buildings.ts#L5): One building footprint with the facts we know about it. Rings are [lng, lat] lists; ring 0 is the outline, th…
 - `BuildingIndex` [src/lib/buildings.ts:23](../src/lib/buildings.ts#L23): Every building, by id, plus a lookup of the building that contains a point.
-- `PostType` [src/lib/bulletin.ts:12](../src/lib/bulletin.ts#L12): The five supported bulletin filters; unknown source subtypes become community posts.
-- `BulletinPost` [src/lib/bulletin.ts:15](../src/lib/bulletin.ts#L15): A dated bulletin entry with known source facts and a selectable map location.
+- `PostType` [src/lib/bulletin.ts:13](../src/lib/bulletin.ts#L13): The five supported bulletin filters; unknown source subtypes become community posts.
+- `BulletinPost` [src/lib/bulletin.ts:16](../src/lib/bulletin.ts#L16): A dated bulletin entry with known source facts and a selectable map location.
+- `BoardTab` [src/lib/bulletin.ts:156](../src/lib/bulletin.ts#L156): The three bulletin tabs.
 - `InterestState` [src/lib/bulletinInterests.ts:8](../src/lib/bulletinInterests.ts#L8): This browser's marked post ids plus how many people marked each post.
 - `Audience` [src/lib/bulletinPosts.ts:8](../src/lib/bulletinPosts.ts#L8): Who wrote a post: a registered organization account or a person (student account).
-- `PostLocation` [src/lib/bulletinPosts.ts:11](../src/lib/bulletinPosts.ts#L11): A registered place a post is tied to: a building footprint or a room inside an indoor building ("buildingId:s…
-- `UserPost` [src/lib/bulletinPosts.ts:14](../src/lib/bulletinPosts.ts#L14): One saved post. Times are instants; the poster is a downscaled JPEG data URL.
-- `UserPostInput` [src/lib/bulletinPosts.ts:20](../src/lib/bulletinPosts.ts#L20): What the composer hands over; the server (or the local fallback) decides the audience from the account role.
+- `PostSection` [src/lib/bulletinPosts.ts:11](../src/lib/bulletinPosts.ts#L11): Which part of the bulletin a post belongs to: the Orgs and People tabs ("general") or the Alumni tab.
+- `PostLocation` [src/lib/bulletinPosts.ts:14](../src/lib/bulletinPosts.ts#L14): A registered place a post is tied to: a building footprint or a room inside an indoor building ("buildingId:s…
+- `UserPost` [src/lib/bulletinPosts.ts:17](../src/lib/bulletinPosts.ts#L17): One saved post. Times are instants; the poster is a downscaled JPEG data URL.
+- `UserPostInput` [src/lib/bulletinPosts.ts:23](../src/lib/bulletinPosts.ts#L23): What the composer hands over; the server (or the local fallback) decides the audience from the account role.
 - `Motion` [src/lib/busMotion.ts:31](../src/lib/busMotion.ts#L31): What we know about a bus's motion: how long (ms) its GPS fixes have shown it in the same spot, and its direct…
 - `LiveBus` [src/lib/busPlanner.ts:17](../src/lib/busPlanner.ts#L17): A live bus as the planner needs it; `stillFor` is how long (ms) it has stood in the same spot, if known.
 - `BusOption` [src/lib/busPlanner.ts:20](../src/lib/busPlanner.ts#L20): One way to get there by bus. Times are seconds. `live` is false when no bus is running on the route right now.
